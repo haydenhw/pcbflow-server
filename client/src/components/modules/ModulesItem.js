@@ -101,7 +101,7 @@ export default class ModulesItem extends Component {
     const module =  this.refs.moduleGroup;
     console.log(module.getPosition())
         
-    const newPosition = {
+    consnewPosition = {
       x: module.getPosition().x,
       y: module.getPosition().y,
       index: this.props.index
