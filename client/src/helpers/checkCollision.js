@@ -9,7 +9,7 @@ export default function checkCollision(nodeArray) {
     const nodeBottom = nodeBox.y + nodeBox.height;
     
     nodeArray.forEach((otherNode) => {
-       const otherBox = otherNode. attrs ? otherNode.attrs : otherNode;
+       const otherBox = otherNode.attrs ? otherNode.attrs : otherNode;
         if (nodeBox !== otherBox) {
           const otherLeft = otherBox.x;
           const otherRight = otherBox.x + otherBox.width;
@@ -31,6 +31,6 @@ export default function checkCollision(nodeArray) {
        }
      });
   });
-  
+  //console.log('colliding nodes' , collidingNodes)
   return collidingNodes;
 }

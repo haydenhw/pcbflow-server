@@ -31,6 +31,8 @@ export default class ModulesItem extends Component {
         }
       }
     }
+    
+    this.highlightRuleBreakingMoudles();
   }
   
   componentDidMount() {
@@ -48,7 +50,6 @@ export default class ModulesItem extends Component {
   }
   
   highlightRuleBreakingMoudles() {
-    
     const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodes = boardGroup.get(".moduleGroup");
@@ -58,7 +59,6 @@ export default class ModulesItem extends Component {
       node.attrs.name === "moduleGroup" 
         ? node.get(".moduleBorder")[0].attrs.stroke = "red"
         : node.attrs.stroke = "red";
-      
     }
     
     const removeRedStroke = node => {
@@ -79,34 +79,21 @@ export default class ModulesItem extends Component {
     store.dispatch(actions.toggleIsMouseOverModule(false));
   }
   
-  /*const boardGroup = module
-    .getParent()
-    .getParent()
-  const board = boardGroup.get('.board')[0];
-  const topLeftAnchor = boardGroup.get('.topLeft')[0];*/
-  
-  // const newModuleCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
-  
-  // module.attrs.x = newModuleCoordinates.x
-  // module.attrs.y = newModuleCoordinates.y
-  
   handleDragMove() {
     const { boundToSideIndex } = this.props;
     
     if (Number.isInteger(boundToSideIndex)) {
-      
       const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
+      const module =  this.refs.moduleGroup;
+      const newPosition = {
+        x: module.getPosition().x,
+        y: module.getPosition().y,
+        index: this.props.index
+      }
+      
+      store.dispatch(actions.updateModulePosition(newPosition));
     }
-    
     const module =  this.refs.moduleGroup;
-        
-    const newPosition = {
-      x: module.getPosition().x,
-      y: module.getPosition().y,
-      index: this.props.index
-    }
-    
-    store.dispatch(actions.updateModulePosition(newPosition));
     
     this.highlightRuleBreakingMoudles();
   }
@@ -119,14 +106,18 @@ export default class ModulesItem extends Component {
       index: module.index
     }
     store.dispatch(actions.updateModulePosition(newPosition));
+    this.highlightRuleBreakingMoudles();
   }
   
   handleDoubleClick() {
-    store.dispatch(actions.rotateAboutCenterSelectedModule(this.props))
+    this.highlightRuleBreakingMoudles();
+    //store.dispatch(actions.rotateAboutCenterSelectedModule(this.props))
   }
   
   render() {
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
+    const borderNode = this.refs.moduleBorder;
+    const borderStroke = borderNode ? borderNode.attrs.stroke : null;
     const image = (
       <Image
         x={this.props.imageX}
@@ -172,7 +163,7 @@ export default class ModulesItem extends Component {
             x={this.props.innerGroupX}
             y={this.props.innerGroupY}
             rotation={this.props.rotation}
-            // onDblClick={this.handleDoubleClick.bind(this)}
+            onDblClick={this.handleDoubleClick.bind(this)}
           >
               
             <Rect
@@ -188,7 +179,7 @@ export default class ModulesItem extends Component {
               ref="moduleBorder"
               width={this.props.width} 
               height={this.props.height}
-              stroke = {this.props.stroke}
+              stroke = {borderStroke || this.props.stroke}
               strokeWidth = {this.props.strokeWidth}
             />
                
