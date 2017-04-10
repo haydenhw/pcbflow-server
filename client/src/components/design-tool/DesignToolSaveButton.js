@@ -18,10 +18,11 @@ class SaveButton extends Component {
       projectName,
       id
     } = this.props;
-    
+    console.log(modules)
     const updatedModules = modules.map(module => {
       const x = module.x - topLeftAnchorX;
       const y = module.y - topLeftAnchorY;
+      console.log(Object.assign({}, module, {x, y}))
       return Object.assign({}, module, {x, y});
     })
     
@@ -35,9 +36,7 @@ class SaveButton extends Component {
       },
       "modules": updatedModules
     }
-    console.log('update project', updatedProject.boardSpecs.x, updatedProject.boardSpecs.y,
-    updatedProject.boardSpecs.width, updatedProject.boardSpecs.height
-  );
+    
     const url = `${'projects'}/${id}`;
     fetch(url, {
       method: 'put',
