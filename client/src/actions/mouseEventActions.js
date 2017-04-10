@@ -5,8 +5,9 @@ export const mouseDownOnIcon = (bool) => ({
 });
 
 export const TOGGLE_IS_MOUSE_DOWN = 'TOGGLE_IS_MOUSE_DOWN'; 
-export const toggleIsMouseDown = () => ({
-  type: 'TOGGLE_IS_MOUSE_DOWN'
+export const toggleIsMouseDown = (bool) => ({
+  type: 'TOGGLE_IS_MOUSE_DOWN',
+  isDown: bool
 });
 
 export const TOGGLE_IS_MOUSE_OVER_MODULE = 'TOGGLE_IS_MOUSE_OVER_MODULE'; 

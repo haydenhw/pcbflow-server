@@ -55,8 +55,8 @@ export default function bindToPerimeter(selectedModuleProps, anchorPositions, bo
       break;
     default:
       return {
-        x,
-        y
+        x: cd.moduleX,
+        y: cd.moduleY
       }
   }
 }

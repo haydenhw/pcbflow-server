@@ -19,7 +19,7 @@ export const mouseEvents = (state = defaultMouseEvents, action) => {
     case actions.TOGGLE_IS_MOUSE_DOWN:
       return {
         ...state,
-        isMouseDown: !state.isMouseDown
+        isMouseDown: action.isDown
       }
       break;
       

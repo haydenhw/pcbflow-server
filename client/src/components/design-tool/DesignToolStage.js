@@ -14,9 +14,7 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
 
   class DesignToolStage extends Component {
-    
   deleteModule() {
-    
     store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
   }
   
@@ -59,23 +57,16 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
       draggingModule, 
       isMouseDownOnIcon,
       isMouseDown,
-      isMouseOverModule,
-      isContextMenuOpen
+      isMouseOverModule
      } = this.props;
      
-    const contextMenu = (
-      <ContextMenu id={'SIMPLE'}>
-          <MenuItem onClick={this.deleteModule.bind(this)}>delete</MenuItem>
-          <MenuItem onClick={this.rotate.bind(this)}>rotate</MenuItem>
-      </ContextMenu>
-    );
-    
     const stageStyle = { "display": "inline-block"}
     return (
       <div>
         <ContextMenuTrigger
           id={'SIMPLE'} 
           name={'rect'}
+          disable={!(!isMouseDown && isMouseOverModule)}
           holdToDisplay={1000}
           >
             <div style={stageStyle}>
@@ -91,8 +82,11 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
               </Stage>
             </div>
         </ContextMenuTrigger>
-      
-        {(!isMouseDown && isMouseOverModule) || isContextMenuOpen ? contextMenu : ''}
+        
+        <ContextMenu id={'SIMPLE'}>
+            <MenuItem onClick={this.deleteModule.bind(this)}>delete</MenuItem>
+            <MenuItem onClick={this.rotate.bind(this)}>rotate</MenuItem>
+        </ContextMenu>
       </div>
     )
   }
@@ -102,7 +96,6 @@ const mapStateToProps = (state) => ({
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   isMouseDown: state.mouseEvents.isMouseDown,
-  isContextMenuOpen: state.mouseEvents.isContextMenuOpen,
   selectedModuleIndex: state.selectedModule.index,
   selectedModuleProps: state.selectedModule,
   boardSpecs: state.boardSpecs,

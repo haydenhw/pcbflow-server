@@ -99,9 +99,8 @@ export default class ModulesItem extends Component {
     }
     
     const module =  this.refs.moduleGroup;
-    console.log(module.getPosition())
         
-    consnewPosition = {
+    const newPosition = {
       x: module.getPosition().x,
       y: module.getPosition().y,
       index: this.props.index
@@ -173,7 +172,7 @@ export default class ModulesItem extends Component {
             x={this.props.innerGroupX}
             y={this.props.innerGroupY}
             rotation={this.props.rotation}
-            onDblClick={this.handleDoubleClick.bind(this)}
+            // onDblClick={this.handleDoubleClick.bind(this)}
           >
               
             <Rect

@@ -123,33 +123,14 @@ class DesignTool extends Component {
   }
   
   handleMouseDown(evt) {
-    // console.log(evt.which)
-     switch (evt.which){
-        case 3:
-          if (this.props.isMouseOverModule) {
-            store.dispatch(actions.toggleIsContextMenuOpen(true));
-          } else {
-            store.dispatch(actions.toggleIsContextMenuOpen(false));
-          }
-          break;
-        
-        case 1:
-          const contextMenuClass = event.target.getAttribute('class');
-          
-          if (!contextMenuClass) {
-            store.dispatch(actions.toggleIsContextMenuOpen(false));
-            store.dispatch(actions.toggleIsMouseDown())
-          }
-          
-          break;
-     }
-    
-    // store.dispatch(actions.toggleIsMouseDown());
+    if(evt.which === 1) {
+      store.dispatch(actions.toggleIsMouseDown(true))
+    }
   }
   
   handleMouseUp() {
     this.dropDraggingModule();
-    store.dispatch(actions.toggleIsMouseDown());
+    store.dispatch(actions.toggleIsMouseDown(false));
   }
   
   toggleDraggingToBoard() {
