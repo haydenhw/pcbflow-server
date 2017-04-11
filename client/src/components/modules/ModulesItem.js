@@ -23,7 +23,7 @@ export default class ModulesItem extends Component {
       
       if (prevImageSrc !== this.props.imageSrc) {
         const image = new window.Image();
-        image.src = this.props.image;
+        image.src = this.props.imageSrc;
         image.onload = () => {
           this.setState({
             image: image
@@ -31,7 +31,6 @@ export default class ModulesItem extends Component {
         }
       }
     }
-    
     this.highlightRuleBreakingMoudles();
   }
   

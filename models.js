@@ -7,21 +7,34 @@ const moduleSchema = mongoose.Schema({
 });
 
 const projectSchema = mongoose.Schema({
-  name: String,
+  name: {type: String, required: true},
   boardSpecs: {
-    x: Number,
-    y: Number,
-    height: Number,
-    width: Number
+    x: {type: Number, required: true},
+    y: {type: Number, required: true},
+    height: {type: Number, required: true},
+    width: {type: Number, required: true}
   },
   modules: [{  
-    x: Number,
-    y: Number,
-    height: Number,
-    width: Number,
-    image: String,
-    onBoard: Boolean,
-    id: Number
+    x: {type: Number, required: true},
+    y: {type: Number, required: true},
+    height: {type: Number, required: true},
+    width: {type: Number, required: true},
+    rotation: {type: Number, required: true},
+    boundToSideIndex: Number,
+    innerGroupX: Number,
+    innerGroupY: Number,
+    text: String,
+    textX: Number,
+    textY: Number,
+    imageSrc: String,
+    imageX: Number,
+    imageY: Number,
+    imageWidth: Number,
+    imageHeight: Number,
+    iconSrc: {type: String, required: true},
+    iconHeight: String,
+    price: Number,
+    info: String
   }],
   moduleBank: [{
     height: Number,

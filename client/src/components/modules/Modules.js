@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
+
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import ModulesItem from './ModulesItem';
 import { modulesData } from './modulesData'
+import {
+  fontSize,
+  fontFamily,
+  fill,
+  opacity,
+  stroke,
+  strokeWidth,
+} from 'config/moduleConfig'
 
 class MoudleContainer extends Component{
 
   render() {  
     const modules = this.props.modules/*modulesData*/.map((module, index) => {
-      
+    /*  console.log(module.imageSrc)
+      console.log(require(`./modules-images/${module.imageSrc}`))*/
       return <ModulesItem 
           key={index}
           index={index}
@@ -25,12 +35,12 @@ class MoudleContainer extends Component{
           text={module.text}
           textX= {module.textX}
           textY= {module.textY}
-          fontSize= {module.fontSize}
-          fontFamily={module.fontFamily}
-          fill={module.fill}
-          opacity={module.opacity}
-          stroke={module.stroke}
-          strokeWidth={module.strokeWidth}
+          fontSize= {fontSize}
+          fontFamily={fontFamily}
+          fill={fill}
+          opacity={opacity}
+          stroke={stroke}
+          strokeWidth={strokeWidth}
           imageX={module.imageX}
           imageY={module.imageY}
           imageWidth={module.imageWidth}

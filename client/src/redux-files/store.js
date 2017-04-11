@@ -7,5 +7,5 @@ import * as actions from 'actions/indexActions';
 
 export default createStore(
   rootReducer, 
-  applyMiddleware(thunk, logger())
+  applyMiddleware(thunk, /*logger()*/)
 );

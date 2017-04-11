@@ -15,8 +15,8 @@ import './index.css';
 ReactDOM.render(
   <Provider store={ store }>
     <Router history={hashHistory}>
+      <Route path="/" component ={Projects}/> 
       <Route path="/design/:projectId" component={DesignTool}/> 
-      <Route path="/*" component ={Projects}/> 
     </Router>
   </Provider>,
   document.getElementById('root')

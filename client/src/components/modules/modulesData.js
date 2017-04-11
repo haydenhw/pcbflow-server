@@ -1,10 +1,11 @@
-const fontSize = 10;
-const fontFamily = "Calibri";
-const fill = "green";
-const opacity = 0.1;
-const stroke = "black";
-const strokeWidth = 0.6;
-const imageDir = './modules-images';
+import {
+  fontSize,
+  fontFamily,
+  fill,
+  opacity,
+  stroke,
+  strokeWidth,
+} from 'config/moduleConfig';
 
 export const modulesData = [
   {
@@ -27,8 +28,8 @@ export const modulesData = [
     imageY: 10,
     imageWidth: 70,
     imageHeight: 100,
-    imageSrc: require(`${imageDir}/barrel-connector.svg`),
-    iconSrc: require(`${imageDir}/barrel-connector-icon.svg`),
+    imageSrc: 'images/barrel-connector.svg',
+    iconSrc: 'images/barrel-connector-icon.svg',
     iconHeight: "70px",
     price: null,
     info: null
@@ -54,7 +55,7 @@ export const modulesData = [
     imageWidth: null,
     imageHeight: null,
     imageSrc: null,
-    iconSrc: require(`${imageDir}/regulator-icon.svg`),
+    iconSrc: 'images/regulator-icon.svg',
     iconHeight: "55px",
     price: null,
     info: null

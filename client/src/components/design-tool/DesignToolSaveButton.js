@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import projectsUrl from 'config/endpointUrls';
+import { projectsUrl } from 'config/endpointUrls';
 
 class SaveButton extends Component {
   saveProject() {
@@ -18,11 +18,10 @@ class SaveButton extends Component {
       projectName,
       id
     } = this.props;
-    console.log(modules)
+    
     const updatedModules = modules.map(module => {
       const x = module.x - topLeftAnchorX;
       const y = module.y - topLeftAnchorY;
-      console.log(Object.assign({}, module, {x, y}))
       return Object.assign({}, module, {x, y});
     })
     
@@ -37,7 +36,7 @@ class SaveButton extends Component {
       "modules": updatedModules
     }
     
-    const url = `${'projects'}/${id}`;
+    const url = `${projectsUrl}/${id}`;
     fetch(url, {
       method: 'put',
       body: JSON.stringify(updatedProject),
