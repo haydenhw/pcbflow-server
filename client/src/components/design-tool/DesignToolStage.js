@@ -19,7 +19,9 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
   }
   
   rotate() {
-    const { 
+    const {
+      x,
+      y, 
       index,
       innerGroupX,
       innerGroupY,
@@ -35,7 +37,7 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
     
     newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
     newInnerGroupCoordinates = (
-      rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
+    rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
     );
     
     const rotationData = {

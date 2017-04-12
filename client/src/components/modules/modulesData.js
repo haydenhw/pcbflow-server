@@ -29,6 +29,7 @@ export const modulesData = [
     imageWidth: 70,
     imageHeight: 100,
     imageSrc: 'images/barrel-connector.svg',
+    imageNode: null,
     iconSrc: 'images/barrel-connector-icon.svg',
     iconHeight: "70px",
     price: null,
