@@ -7,7 +7,8 @@ export default class SideBarIcon extends Component {
     this.props.toggleDraggingToBoard();
   }
   
-  handleMouseDown(evt) {
+  
+  handleMouseDown() {
     store.dispatch(actions.mouseDownOnIcon(true))
     store.dispatch(actions.changeDraggingModule(this.props.moduleData));
   }
@@ -34,8 +35,6 @@ export default class SideBarIcon extends Component {
           style={style}
         />
       </div>
-          
-    
     );
   }
 }

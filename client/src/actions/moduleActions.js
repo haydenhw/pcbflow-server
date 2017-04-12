@@ -19,6 +19,12 @@ export const updateModulePosition = (modulePosition) => ({
   modulePosition
 });
 
+export const UPDATE_MODULE_IMAGE = 'UPDATE_MODULE_IMAGE'; 
+export const updateModuleImage = (moduleData) => ({
+  type: 'UPDATE_MODULE_IMAGE',
+  moduleData
+});
+
 export const UPDATE_SELECTED_MODULE = 'UPDATE_SELECTED_MODULE'; 
 export const updateSelectedModule = (moduleData) => ({
   type: 'UPDATE_SELECTED_MODULE',

@@ -65,6 +65,27 @@ export const currentProjectModules = (state = [], action) => {
         return i === index ? updatedModuleProps : module;
       });
       break;
+      
+      case actions.UPDATE_MODULE_IMAGE:
+      console.log(state.map((module, i) => {
+        const { imageNode, index } = action.moduleData
+        const updatedModuleProps = { 
+          ...module, 
+          imageNode 
+        } 
+        
+        return i === index ? updatedModuleProps : module;
+      });)
+        return state.map((module, i) => {
+          const { imageNode, index } = action.moduleData;
+          const updatedModuleProps = { 
+            ...module, 
+            imageNode 
+          } 
+          
+          return i === index ? updatedModuleProps : module;
+        });
+        break;
         
     case actions.ROTATE_SELECTED_MODULE:
       
@@ -79,15 +100,6 @@ export const currentProjectModules = (state = [], action) => {
         height,
         index
       } = action.rotationData; 
-      
-      /*console.log({ 
-        boundToSideIndex,
-        innerGroupX,
-        innerGroupY,
-        rotation,
-        x: parentGroupX,
-        y: parentGroupY
-      } )*/
       
       return state.map((module, i) => {
         const updatedModuleProps = { 
