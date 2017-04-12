@@ -46,6 +46,7 @@ class MoudleContainer extends Component{
           imageWidth={module.imageWidth}
           imageHeight={module.imageHeight}
           imageSrc={module.imageSrc} 
+          imageNode={module.imageNode}
           iconSrc={module.iconSrc}
           topLeftAnchor={this.props.topLeftAnchor}
           selectedModuleProps={this.props.selectedModuleProps}

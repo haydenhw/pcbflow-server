@@ -75,7 +75,8 @@ export const currentProjectModules = (state = [], action) => {
         } 
         
         return i === index ? updatedModuleProps : module;
-      });)
+      }))
+      
         return state.map((module, i) => {
           const { imageNode, index } = action.moduleData;
           const updatedModuleProps = { 
