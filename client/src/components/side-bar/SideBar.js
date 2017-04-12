@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import SideBarIconList from './SideBarIconList';
 import SideBarIcon from './SideBarIcon';
 
-
 export default function SideBar(props) {
   const style = {
     "height": "100%",

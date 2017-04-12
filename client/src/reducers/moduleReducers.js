@@ -3,18 +3,26 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
 export const moduleList = (state = [], action) => {
   if (action.type === actions.FETCH_MODULES_SUCCESS) {
-      return {modules: action.modules};
+      return {
+        modules: action.modules
+      };
   }
   
   return state;
 }
 
-export const draggingModule = (state = [], action) => {
+export const draggingModule = (state = {}, action) => {
   switch(action.type) {
     case actions.CHANGE_DRAGGING_MODULE:
        return action.moduleData;
        break;
-      
+       
+    case actions.UPDATE_MODULE_IMAGE:
+      const { imageNode } = action.moduleData;
+      return ({
+        ...state,
+        imageNode
+      });
    default:
      return state;
  }
@@ -23,12 +31,12 @@ export const draggingModule = (state = [], action) => {
 export const selectedModule = (state = {}, action) => {
   switch(action.type) {
     case actions.UPDATE_SELECTED_MODULE:
-       return action.moduleData;
-       break;
+      return action.moduleData;
+      break;
       
-   default:
-     return state;
- }
+    default:
+      return state;
+  }
 }
 
 export const moduleBank = (state = [], action) => {
@@ -67,16 +75,6 @@ export const currentProjectModules = (state = [], action) => {
       break;
       
       case actions.UPDATE_MODULE_IMAGE:
-      console.log(state.map((module, i) => {
-        const { imageNode, index } = action.moduleData
-        const updatedModuleProps = { 
-          ...module, 
-          imageNode 
-        } 
-        
-        return i === index ? updatedModuleProps : module;
-      }))
-      
         return state.map((module, i) => {
           const { imageNode, index } = action.moduleData;
           const updatedModuleProps = { 
