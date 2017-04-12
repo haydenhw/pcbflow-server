@@ -12,7 +12,6 @@ import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
-
   class DesignToolStage extends Component {
   deleteModule() {
     store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
