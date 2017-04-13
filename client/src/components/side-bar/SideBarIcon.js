@@ -16,9 +16,8 @@ export default class SideBarIcon extends Component {
   render() {
     const style = {
       "height": this.props.moduleData.iconHeight,
-      "width": "auto",
+      "width": "50px",
       "margin": "0 auto",
-      "marginLeft": "10px",
       "marginBottom": "10px"
     }
     

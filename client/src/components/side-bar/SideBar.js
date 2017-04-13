@@ -17,7 +17,6 @@ export default function SideBar(props) {
   
   return (
     <div className="sideBar" style={style}>
-      This is a side bar
       <SideBarIconList 
         toggleDraggingToBoard={props.toggleDraggingToBoard} 
         toggleIsClicked={props.toggleIsClicked}
