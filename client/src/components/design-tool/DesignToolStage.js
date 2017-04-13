@@ -61,7 +61,9 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
       isMouseOverModule
      } = this.props;
      
-    const stageStyle = { "display": "inline-block"}
+    const stageStyle = { 
+      "display": "inline-block"
+    }
     return (
       <div>
         <ContextMenuTrigger
@@ -74,8 +76,8 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
               <Stage 
                 style={stageStyle} 
                 ref="stage" 
-                width={750} 
-                height={500}
+                width={1500} 
+                height={1000}
               >
                 <Grid  gridWidth={5000}  cellWidth={20} />
                 {shouldRenderBoard ? <Board /> : <Layer></Layer>}

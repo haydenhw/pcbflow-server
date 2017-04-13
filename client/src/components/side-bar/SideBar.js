@@ -2,25 +2,27 @@ import React, { Component } from 'react';
 
 import SideBarIconList from './SideBarIconList';
 import SideBarIcon from './SideBarIcon';
+import DimensionForm from './SideBarDimensionForm';
+import './side-bar-styles/SideBar.css'
 
 export default function SideBar(props) {
   const style = {
     "height": "100%",
-    "width": "100px",
+    "width": "200px",
     "position": "absolute",
-    "backgroundColor": "white",
     "zIndex": "1", 
     "left": "0px",
     "verticalAlign": "top"
   }
   
   return (
-    <div style={style}>
+    <div className="sideBar" style={style}>
       This is a side bar
       <SideBarIconList 
         toggleDraggingToBoard={props.toggleDraggingToBoard} 
         toggleIsClicked={props.toggleIsClicked}
       />
+      <DimensionForm />
     </div>
   );
 }

@@ -4,18 +4,20 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import SideBarIcon from './SideBarIcon';
+import SideBarIconFrame from './SideBarIconFrame';
 import { modulesData } from 'components/modules/modulesData'
 
 function SideBarIconList(props) {
   const { moduleBank } = props;
   const iconList =  modulesData.map((module, index) => {
     return (
-      <SideBarIcon 
-        key={index} 
-        moduleData = {module}
-        toggleDraggingToBoard = {props.toggleDraggingToBoard}
-        toggleIsClicked={props.toggleIsClicked}
-      /> 
+      <SideBarIconFrame  key={index}>
+        <SideBarIcon 
+          moduleData = {module}
+          toggleDraggingToBoard = {props.toggleDraggingToBoard}
+          toggleIsClicked={props.toggleIsClicked}
+        /> 
+      </SideBarIconFrame>
     )
   });
   

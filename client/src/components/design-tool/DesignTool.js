@@ -9,6 +9,7 @@ import Board from 'components/board/Board';
 import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
 import BoardDimensionInput from 'components/board/BoardDimensionForm';
+import TopNavbar from 'components/top-navbar/TopNavbar';
 import SideBar from 'components/side-bar/SideBar';
 import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
@@ -167,18 +168,19 @@ class DesignTool extends Component {
     );
     
     return (
-      <div onMouseMove={this.handleMouseMove.bind(this)}>
-        <h1>{currentProjectName}</h1>
-        <SaveButton/>
-        <BoardDimensionInput />
-        <div ref={(node) => this.stageContainer = node} >
-          { isDraggingToBoard ? '' : sideBar }
-          <DesignToolStage 
-            shouldRenderBoard = { currentProjectName }
-            draggingModule = { draggingModule }
-          />  
+      
+      <div>
+          <TopNavbar projectName={currentProjectName} />
+          <div onMouseMove={this.handleMouseMove.bind(this)}>
+            <div ref={(node) => this.stageContainer = node} >
+              { isDraggingToBoard ? '' : sideBar }
+              <DesignToolStage 
+                shouldRenderBoard = { currentProjectName }
+                draggingModule = { draggingModule }
+              />  
+            </div>
         </div>
-    </div>
+      </div>
      );
    }
 }
