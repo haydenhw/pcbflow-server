@@ -57,7 +57,7 @@ export const modulesData = [
     imageHeight: null,
     imageSrc: null,
     iconSrc: 'images/regulator-icon.svg',
-    iconHeight: "55px",
+    iconHeight: "70px",
     price: null,
     info: null
   }

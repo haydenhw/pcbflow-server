@@ -8,9 +8,6 @@ import DesignTool from 'components/design-tool/DesignTool';
 import Projects from 'components/projects/Projects';
 import store from 'reduxFiles/store';
 import './index.css';
-// import './index.css';
-// import 'bootstrap/dist/css/bootstrap.css';
-//import 'bootstrap/dist/css/bootstrap-theme.css';
 
 ReactDOM.render(
   <Provider store={ store }>

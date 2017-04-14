@@ -1,0 +1,29 @@
+.thumbnail-row {
+  width: 75%;
+  padding-top: 25px;
+  margin: 0 auto;
+}
+
+.container {
+  margin-top: 55px;
+  width: 280px;
+  border-radius: 4px;
+  box-shadow: 0 4px 25px rgba(0,0,0,.3);
+}
+
+.image-container {
+  width: 200px;
+  height: 210px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  height: 50px;
+  background-color: #ebeced;
+}
+
+.project-thumbnail {
+  height: 200px;
+  width: 200px;
+}

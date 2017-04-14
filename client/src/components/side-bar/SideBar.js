@@ -7,9 +7,9 @@ import './side-bar-styles/SideBar.css'
 
 export default function SideBar(props) {
   const style = {
-    "height": "100%",
+    "height": "100% !important",
     "width": "200px",
-    "position": "absolute",
+    "position": "fixed",
     "zIndex": "1", 
     "left": "0px",
     "verticalAlign": "top"
@@ -17,10 +17,12 @@ export default function SideBar(props) {
   
   return (
     <div className="sideBar" style={style}>
-      <SideBarIconList 
-        toggleDraggingToBoard={props.toggleDraggingToBoard} 
-        toggleIsClicked={props.toggleIsClicked}
-      />
+      <div className="module-container">
+        <SideBarIconList 
+          toggleDraggingToBoard={props.toggleDraggingToBoard} 
+          toggleIsClicked={props.toggleIsClicked}
+        />
+      </div>
       <DimensionForm />
     </div>
   );

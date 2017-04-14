@@ -9,7 +9,7 @@ import { modulesData } from 'components/modules/modulesData'
 
 function SideBarIconList(props) {
   const { moduleBank } = props;
-  const iconList =  modulesData.map((module, index) => {
+  const iconList = [...modulesData, ...modulesData, ...modulesData] /*modulesData*/.map((module, index) => {
     return (
       <SideBarIconFrame  key={index}>
         <SideBarIcon 

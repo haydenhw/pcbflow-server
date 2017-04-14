@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import ProjectsItem from './ProjectsItem';
+import ProjectsItemFrame from './ProjectsItemFrame';
+import './projects-styles/floatGrid.css';
+import './projects-styles/ProjectsItemFrame.css'
 
 class ProjectListContainer extends Component {
   componentDidMount() {
@@ -14,14 +17,21 @@ class ProjectListContainer extends Component {
     const { projects } = this.props;
     
     if (projects) {
-      const projectsList = projects.map((project, index) => {
-        return <ProjectsItem key={index} projectId={ project._id } projectName={project.name} /> 
+      const projectsList = [...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects].map((project, index) => {
+        return (
+          <ProjectsItemFrame key={index}>
+            <ProjectsItem  projectId={ project._id } projectName={project.name} /> 
+          </ProjectsItemFrame>
+        )
       });
       
       return (
-        <div>
-          {projectsList}
+        <div className="thumbnail-row">
+          <div className="row thumbnail-row">
+            {projectsList}
+          </div>
         </div>
+      
       );
     } 
     else {

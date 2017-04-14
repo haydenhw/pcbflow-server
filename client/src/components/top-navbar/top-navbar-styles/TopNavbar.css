@@ -1,13 +1,16 @@
+html, body {height:100%;overflow:auto}
 
 
 .navWide {
   background-color: #3d4752;
   overflow: hidden;
-  position: relative;
+  width: 100%;
+  z-index: 2;
+  position: fixed;
 }
 
 .navWide div {
-  height: 20px;
+  height: 50px;
   float: left;
   color: #f2f2f2;
   text-align: center;
