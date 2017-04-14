@@ -1,5 +1,6 @@
 import React from 'react';
 
+import TopNavbarEditableText from './TopNavbarEditableText';
 import './top-navbar-styles/TopNavbar.css'
 import TopNavbarSaveButton from './TopNavbarSaveButton';
 
@@ -11,9 +12,10 @@ const titleStyle = {
 export default function TopNavbar(props) {
   return (
     <div className="navWide">
-      <div>Icon</div>
-      <h1 style={titleStyle}>Project Name</h1>
+      <div className="iconWrapper">Icon</div>
+    
       <TopNavbarSaveButton />
+      <TopNavbarEditableText />
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+//import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -15,6 +16,7 @@ import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
+import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText'
 
 class DesignTool extends Component {
   constructor(props) {
@@ -161,19 +163,22 @@ class DesignTool extends Component {
       />
     );
       
-    const sideBar = (
-      <SideBar 
-        toggleDraggingToBoard = {this.toggleDraggingToBoard.bind(this)} 
-      /> 
+    let sideBar = (
+        <SideBar 
+          toggleDraggingToBoard = {this.toggleDraggingToBoard.bind(this)} 
+        /> 
     );
+    sideBar = isDraggingToBoard ? '' : sideBar;
     
     return (
-      
       <div>
           <TopNavbar projectName={currentProjectName} />
+          <TopNavbarEditableText/>
           <div onMouseMove={this.handleMouseMove.bind(this)}>
             <div ref={(node) => this.stageContainer = node} >
-              { isDraggingToBoard ? '' : sideBar }
+            
+              {sideBar}
+            
               <DesignToolStage 
                 shouldRenderBoard = { currentProjectName }
                 draggingModule = { draggingModule }

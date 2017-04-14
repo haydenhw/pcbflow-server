@@ -2,6 +2,7 @@ html, body {height:100%;overflow:auto}
 
 
 .navWide {
+  position: relative;
   background-color: #3d4752;
   overflow: hidden;
   width: 100%;
@@ -9,7 +10,7 @@ html, body {height:100%;overflow:auto}
   position: fixed;
 }
 
-.navWide div {
+.iconWrapper {
   height: 50px;
   float: left;
   color: #f2f2f2;
