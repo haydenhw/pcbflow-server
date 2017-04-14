@@ -61,24 +61,30 @@ class SideBarDimensionForm extends React.Component {
 
   render() {
     return (
-      <form>
-        <div className="input-wrap">
-          <input 
-            type="text" 
-            value={ Math.abs(this.props.boardWidth) } 
-            onChange={ this.handleWidthChange.bind(this) } 
-          />
-          <label>Width</label>
-        </div>
-        <div className="input-wrap">
-          <input 
-            type="text" 
-            value={ Math.abs(this.props.boardHeight) } 
-            onChange={ this.handleHeightChange.bind(this) } 
-          />
-          <label>Height</label>
-        </div>
-      </form>
+      <div>
+        <h1>Dimensions</h1>
+        <div className="dimension-input-wrapper">
+          <div className="input-wrapper">
+            <input 
+              type="text" 
+              className="width-input dimension-input"
+              value={ Math.abs(this.props.boardWidth) } 
+              onChange={ this.handleWidthChange.bind(this) } 
+            />
+            <label>Width</label>
+          </div>
+          <div className="input-wrapper">
+            <input 
+              className="height-input dimension-input"
+              type="text" 
+              value={ Math.abs(this.props.boardHeight) } 
+              onChange={ this.handleHeightChange.bind(this) } 
+            />
+            <label>Height</label>
+          </div>
+        </div>  
+      </div>
+      
     );
   }
 }

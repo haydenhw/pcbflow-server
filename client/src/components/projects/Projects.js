@@ -20,7 +20,7 @@ export default function Projects() {
         <div className="navWide">
           <h1 style={titleStyle}>PCB Design</h1>
         </div>
-          {/* <ProjectsSubmitForm /> */}
+          <ProjectsSubmitForm />
           <ProjectsList />
       </div>
     );

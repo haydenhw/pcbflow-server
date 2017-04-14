@@ -31,7 +31,7 @@ const projectSchema = mongoose.Schema({
     imageY: Number,
     imageWidth: Number,
     imageHeight: Number,
-    iconSrc: {type: String, required: true},
+    iconSrc: String,
     iconHeight: String,
     price: Number,
     info: String
