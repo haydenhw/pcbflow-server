@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import SideBarIconList from './SideBarIconList';
 import SideBarIcon from './SideBarIcon';
-import DimensionForm from './SideBarDimensionForm';
+import DimensionForm from './SideBarDimensionInput';
 import './side-bar-styles/SideBar.css'
 
 export default function SideBar(props) {

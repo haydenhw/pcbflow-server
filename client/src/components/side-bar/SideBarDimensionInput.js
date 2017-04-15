@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import './side-bar-styles/SideBarDimensionForm.css'
+import './side-bar-styles/SideBarDimensionInput.css'
 
-class SideBarDimensionForm extends React.Component {
+class SideBarDimensionInput extends React.Component {
 
   handleWidthChange(event) {
     const {
@@ -68,7 +68,7 @@ class SideBarDimensionForm extends React.Component {
             <input 
               type="text" 
               className="width-input dimension-input"
-              value={ Math.abs(this.props.boardWidth) } 
+              value={`${Math.abs(this.props.boardWidth)}cm` } 
               onChange={ this.handleWidthChange.bind(this) } 
             />
             <label>Width</label>
@@ -77,7 +77,7 @@ class SideBarDimensionForm extends React.Component {
             <input 
               className="height-input dimension-input"
               type="text" 
-              value={ Math.abs(this.props.boardHeight) } 
+              value={`${Math.abs(this.props.boardHeight)}cm` } 
               onChange={ this.handleHeightChange.bind(this) } 
             />
             <label>Height</label>
@@ -98,4 +98,4 @@ const mapStateToProps = (state, props) => ({
   bottomRight: state.anchorPositions.bottomRight
 });
 
-export default connect(mapStateToProps)(SideBarDimensionForm);
+export default connect(mapStateToProps)(SideBarDimensionInput);
