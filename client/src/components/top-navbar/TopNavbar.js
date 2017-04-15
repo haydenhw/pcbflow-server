@@ -12,7 +12,7 @@ const titleStyle = {
 export default function TopNavbar(props) {
   return (
     <div className="navWide">
-      <div className="iconWrapper">Icon</div>
+      <div className="iconWrapper" onClick={props.routeToProjects}>Icon</div>
       <TopNavbarSaveButton />
       <TopNavbarEditableText 
         text={props.projectName} 

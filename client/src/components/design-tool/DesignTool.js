@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
@@ -27,6 +28,25 @@ class DesignTool extends Component {
       isSideBarHidden:false,
       isDraggingToBoard: false
     }
+    
+    this.bound_handleMouseDown = this.handleMouseDown.bind(this);
+    this.bound_handleMouseUp = this.handleMouseUp.bind(this);
+    this.bound_handleMouseMove = this.handleMouseMove.bind(this);
+    this.bound_handleKeyUp = this.handleKeyUp.bind(this);
+  }
+  
+  addHanlders() {
+    document.body.addEventListener('mousedown', this.bound_handleMouseDown);
+    document.body.addEventListener('mouseup', this.bound_handleMouseUp);
+    document.body.addEventListener('mousemove', this.bound_handleMouseMove);
+    document.body.addEventListener('keyup', this.bound_handleKeyUp)
+  }
+  
+  removeHanlders() {
+    document.body.removeEventListener('mousedown', this.bound_handleMouseDown);
+    document.body.removeEventListener('mouseup', this.bound_handleMouseUp);
+    document.body.removeEventListener('mousemove', this.bound_handleMouseMove);
+    document.body.removeEventListener('keyup', this.bound_handleKeyUp)
   }
   
   componentDidMount() {
@@ -37,10 +57,12 @@ class DesignTool extends Component {
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
     
-    document.body.addEventListener('mousedown', this.handleMouseDown.bind(this));
-    document.body.addEventListener('mouseup', this.handleMouseUp.bind(this));
-    document.body.addEventListener('mousemove', this.handleMouseMove.bind(this));
-    document.body.addEventListener('keyup', this.handleKeyUp.bind(this))
+    this.addHanlders(); 
+  }
+  
+  componentWillUnmount() {
+
+    this.removeHanlders(); 
   }
   
   calculateNewModuleCoordinates(coordinateData) {
@@ -183,6 +205,7 @@ class DesignTool extends Component {
           <TopNavbar 
             projectName={currentProjectName} 
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
+            routeToProjects={() => hashHistory.push('/')}
           />
           <div onMouseMove={this.handleMouseMove.bind(this)}>
             <div ref={(node) => this.stageContainer = node} >

@@ -10,14 +10,11 @@ import 'components/top-navbar/top-navbar-styles/TopNavbar.css'
 import './projects-styles/floatGrid.css' 
 import './projects-styles/Projects.css' 
 
-
-
 const titleStyle = {
   color: "white",
   fontSize: "20px", 
   marginLeft: "10px"
 }
-
 
 export default function Projects() {
     return (
