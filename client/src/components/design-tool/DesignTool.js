@@ -3,7 +3,7 @@ import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-//import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -26,7 +26,8 @@ class DesignTool extends Component {
       x: 0,
       y: 0,
       isSideBarHidden:false,
-      isDraggingToBoard: false
+      isDraggingToBoard: false,
+      shouldRender: false,
     }
     
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
@@ -154,6 +155,8 @@ class DesignTool extends Component {
   }
   
   handleMouseUp() {
+    //this.setState({isDraggingToBoard: false});
+    console.log(this.state.isDraggingToBoard)
     this.dropDraggingModule();
     store.dispatch(actions.toggleIsMouseDown(false));
   }
@@ -170,6 +173,13 @@ class DesignTool extends Component {
       name: newName.message
     }
     store.dispatch(actions.updateProject(nameObject, projectId))
+  }
+  
+  toggleRender() {
+    this.setState({
+      shouldRender: !this.state.shouldRender
+    })
+    console.log(this.state.shouldRender)
   }
   
   render () {
@@ -198,19 +208,27 @@ class DesignTool extends Component {
           toggleDraggingToBoard = {this.toggleDraggingToBoard.bind(this)} 
         /> 
     );
-    sideBar = isDraggingToBoard ? '' : sideBar;
+    sideBar = this.state.isDraggingToBoard ? '' : sideBar;
 
     return (
       <div>
+        <button onClick={this.toggleRender.bind(this)}>Toggle</button>
           <TopNavbar 
+            style={{top: "20px"}}
             projectName={currentProjectName} 
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
             routeToProjects={() => hashHistory.push('/')}
           />
           <div onMouseMove={this.handleMouseMove.bind(this)}>
             <div ref={(node) => this.stageContainer = node} >
-            
-              {sideBar}
+              <ReactCSSTransitionGroup 
+                transitionName="example"
+                transitionEnterTimeout={600}
+                transitionLeaveTimeout={600}
+                >
+                
+                {sideBar}
+              </ReactCSSTransitionGroup>
             
               <DesignToolStage 
                 shouldRenderBoard = { currentProjectName }

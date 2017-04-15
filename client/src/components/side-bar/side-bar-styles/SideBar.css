@@ -10,32 +10,17 @@
   overflow-y: scroll;
 }
 
-.sideBarTransition-enter {
-  opacity: 0.01;
-  //position: absolute;
-  //top: -2em;
+.example-enter {
+  transform: translate(-100%);
 }
-
-.sideBarTransition-enter.sideBarTransition-enter-active {
-  //top: 10em;
-  opacity: 1;
-  transition: opacity 0.5s ease;
+.example-enter.example-enter-active {
+  transform: translate(0%);
+  transition: transform 600ms ease-in-out;
 }
-
-.sideBarTransition-leave {
-  opacity: 1;
+.example-leave {
+  transform: translate(0%);
 }
-
-.sideBarTransition-leave.sideBarTransition-leave-active {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
-}
-
-.sideBarTransition-appear {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
-}
-
-.sideBarTransition-appear.sideBarTransition-appear-active {
-  opacity: 1;
+.example-leave.example-leave-active {
+  transform: translate(-100%);
+  transition: transform 600ms ease-in-out;
 }
