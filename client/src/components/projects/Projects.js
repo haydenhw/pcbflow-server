@@ -8,6 +8,8 @@ import ProjectsAddButton from './ProjectsAddButton'
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import 'components/top-navbar/top-navbar-styles/TopNavbar.css' 
 import './projects-styles/floatGrid.css' 
+import './projects-styles/Projects.css' 
+
 
 
 const titleStyle = {
@@ -16,13 +18,16 @@ const titleStyle = {
   marginLeft: "10px"
 }
 
+
 export default function Projects() {
     return (
       <div>
         <div className="navWide">
-          <h1 style={titleStyle}>PCB Design</h1>
+          <h1  className="logo-text" >PCB Design</h1>
         </div>
+        <div className="button-bar">
           <ProjectsAddButton />
+        </div>
           <ProjectsList />
       </div>
     );
