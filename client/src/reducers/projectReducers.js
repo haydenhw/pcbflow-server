@@ -9,14 +9,22 @@ export const projectList = (state = [], action) => {
 }
 
 export const currentProjectInfo = (state = {}, action) => {
-  if (action.type === actions.FECTCH_PROJECT_BY_ID_SUCCESS) {
+  switch(action.type){
+    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
       return {
         name: action.project.name,
         id: action.project._id
       }
+      break;
+      case actions.UPDATE_PROJECT_SUCCESS:
+        return {
+          ...state,
+          name: action.project.name
+        }
+        break;
+    default:
+      return state;
   }
-  
-  return state;
 }
 
 /*

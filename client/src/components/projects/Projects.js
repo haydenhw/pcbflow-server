@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import ProjectsList from './ProjectsList';
-import ProjectsSubmitForm from './ProjectsSubmitForm'
+import ProjectsAddButton from './ProjectsAddButton'
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import 'components/top-navbar/top-navbar-styles/TopNavbar.css' 
+import './projects-styles/floatGrid.css' 
+
 
 const titleStyle = {
   color: "white",
@@ -20,7 +22,7 @@ export default function Projects() {
         <div className="navWide">
           <h1 style={titleStyle}>PCB Design</h1>
         </div>
-          <ProjectsSubmitForm />
+          <ProjectsAddButton />
           <ProjectsList />
       </div>
     );

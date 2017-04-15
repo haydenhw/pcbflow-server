@@ -1,6 +1,6 @@
-import { projectsUrl } from '../config/endpointUrls';
 import { Route, hashHistory } from 'react-router';
 import store from 'reduxFiles/store';
+import { projectsUrl } from '../config/endpointUrls';
 
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
 export const fetchProjectsSuccess = (projects) => ({
@@ -83,14 +83,15 @@ export function postNewProject(newProject) {
 }
 
 export const UPDATE_PROJECT_SUCCESS = 'UPDATE_PROJECT_SUCCESS'; 
-export const updateProjectSuccess = (modules) => ({
+export const updateProjectSuccess = (project) => ({
   type: 'UPDATE_PROJECT_SUCCESS',
-  modules
+  project
 });
 
 export function updateProject(data, projectId) {
   return (dispatch) => {
-    fetch(projectsUrl + projectId, {
+    const projectUrl = `${projectsUrl}/${projectId}`
+    fetch(projectUrl, {
         method: 'put',
         body: JSON.stringify(data),
         headers: {
@@ -102,7 +103,8 @@ export function updateProject(data, projectId) {
         return res.json();
       })
       .then(data => {
-        alert(JSON.stringify(data));
+        console.log(data)
+        dispatch(updateProjectSuccess(data))
       })
       .catch(err => {
         console.error(err)

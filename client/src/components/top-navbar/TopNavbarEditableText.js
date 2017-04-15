@@ -1,6 +1,8 @@
 import React from 'react';
 import InlineEdit from 'react-edit-inline';
 
+import './top-navbar-styles/TopNavbarEditableText.css'
+
 export default class TopNavbarEditableText extends React.Component {
     constructor(props){
       super(props);
@@ -11,27 +13,24 @@ export default class TopNavbarEditableText extends React.Component {
     }
  
     dataChanged(data) {
-        // data = { description: "New validated text comes here" } 
-        // Update your model from here 
-        console.log(data)
+        this.props.handleNameChange(data)
         this.setState({...data})
     }
  
     customValidateText(text) {
       return (text.length > 0 && text.length < 64);
     }
- 
+    
     render() {
         return (<div>
             <InlineEdit
               validate={this.customValidateText}
               className="editable-project-title"
               activeClassName="editing"
-              text={this.state.message}
+              text={this.props.text || ''}
               paramName="message"
               change={this.dataChanged}
               style={{
-                color: "white",
                 minWidth: 150,
                 display: "inline-block",
                 margin: "13px 10px",

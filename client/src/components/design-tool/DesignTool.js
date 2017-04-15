@@ -142,8 +142,16 @@ class DesignTool extends Component {
     } 
   }
   
+  handleNameChange(projectId, newName) {
+    
+    const nameObject = {
+      name: newName.message
+    }
+    store.dispatch(actions.updateProject(nameObject, projectId))
+  }
+  
   render () {
-    const { currentProjectName, draggingModuleData , isMouseDownOnIcon } = this.props;
+    const { currentProjectName, currentProjectId, draggingModuleData , isMouseDownOnIcon } = this.props;
     const {height, width, image } = draggingModuleData;
     const { x, y, isDraggingToBoard } = this.state;
     const draggingModule = ( 
@@ -169,11 +177,13 @@ class DesignTool extends Component {
         /> 
     );
     sideBar = isDraggingToBoard ? '' : sideBar;
-    
+
     return (
       <div>
-          <TopNavbar projectName={currentProjectName} />
-          <TopNavbarEditableText/>
+          <TopNavbar 
+            projectName={currentProjectName} 
+            handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
+          />
           <div onMouseMove={this.handleMouseMove.bind(this)}>
             <div ref={(node) => this.stageContainer = node} >
             
@@ -192,6 +202,7 @@ class DesignTool extends Component {
 
 const mapStateToProps = (state) => ({
   currentProjectName: state.currentProjectInfo.name,
+  currentProjectId: state.currentProjectInfo.id,
   currentProjectModules: state.currentProjectModules,
   boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,

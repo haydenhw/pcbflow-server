@@ -13,9 +13,11 @@ export default function TopNavbar(props) {
   return (
     <div className="navWide">
       <div className="iconWrapper">Icon</div>
-    
       <TopNavbarSaveButton />
-      <TopNavbarEditableText />
+      <TopNavbarEditableText 
+        text={props.projectName} 
+        handleNameChange={props.handleNameChange}
+      />
     </div>
   )
 }

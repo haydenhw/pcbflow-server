@@ -34,7 +34,7 @@ projectRouter.get('/:projectId', (req, res) => {
 });
 
 projectRouter.post('/', (req, res) => {
-  console.log(req.body)
+  console.log('post req body',req.body)
   Projects
     .create({
       name: req.body.name,
@@ -50,18 +50,28 @@ projectRouter.post('/', (req, res) => {
 });
 
 projectRouter.put('/:projectId', (req, res) => {
-  console.log(req.body)
-  const toUpdate = {
+  console.log('put req body', req.body)
+  
+  const toUpdate = {};
+  const updateableFields = ['name', 'boardSpecs', 'modules', 'boardModules'];
+
+   updateableFields.forEach(field => {
+     if (field in req.body) {
+       console.log(field)
+       toUpdate[field] = req.body[field];
+     }
+   });
+  /*const toUpdate = {
     name: req.body.projectName,
     boardSpecs: req.body.boardSpecs,
     modules: req.body.modules,
     boardModules: req.body.boardModules
-  }
-  console.log(toUpdate)
+  }*/
+  console.log('toUpdate object', toUpdate)
   Projects
-    .findByIdAndUpdate(req.params.projectId, {$set: toUpdate})
+    .findByIdAndUpdate(req.params.projectId, {$set: toUpdate}, {new: true})
     .exec()
-    .then(project => res.status(204).end())
+    .then(project => res.status(201).json(project))
     .catch(err => 
       res.status(500).json({message: 'Internal server error'})
     );
