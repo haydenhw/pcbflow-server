@@ -3,7 +3,6 @@ import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -212,24 +211,14 @@ class DesignTool extends Component {
 
     return (
       <div>
-        <button onClick={this.toggleRender.bind(this)}>Toggle</button>
           <TopNavbar 
-            style={{top: "20px"}}
             projectName={currentProjectName} 
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
             routeToProjects={() => hashHistory.push('/')}
           />
           <div onMouseMove={this.handleMouseMove.bind(this)}>
             <div ref={(node) => this.stageContainer = node} >
-              <ReactCSSTransitionGroup 
-                transitionName="example"
-                transitionEnterTimeout={600}
-                transitionLeaveTimeout={600}
-                >
-                
-                {sideBar}
-              </ReactCSSTransitionGroup>
-            
+              {sideBar}
               <DesignToolStage 
                 shouldRenderBoard = { currentProjectName }
                 draggingModule = { draggingModule }
