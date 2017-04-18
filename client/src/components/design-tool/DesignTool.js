@@ -27,6 +27,7 @@ class DesignTool extends Component {
       isSideBarHidden:false,
       isDraggingToBoard: false,
       shouldRender: false,
+      image:null
     }
     
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
@@ -58,6 +59,8 @@ class DesignTool extends Component {
     }
     
     this.addHanlders(); 
+    
+    
   }
   
   componentWillUnmount() {
@@ -174,12 +177,12 @@ class DesignTool extends Component {
     store.dispatch(actions.updateProject(nameObject, projectId))
   }
   
-  toggleRender() {
+  updateState(url) {
+    console.log('hola')
     this.setState({
-      shouldRender: !this.state.shouldRender
+      image: url
     })
-    console.log(this.state.shouldRender)
-  }
+  } 
   
   render () {
     const { currentProjectName, currentProjectId, draggingModuleData , isMouseDownOnIcon } = this.props;
@@ -211,6 +214,7 @@ class DesignTool extends Component {
 
     return (
       <div>
+          {this.state.image ? <img src={this.state.image} /> : <div></div>}
           <TopNavbar 
             projectName={currentProjectName} 
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
@@ -219,7 +223,8 @@ class DesignTool extends Component {
           <div onMouseMove={this.handleMouseMove.bind(this)}>
             <div ref={(node) => this.stageContainer = node} >
               {sideBar}
-              <DesignToolStage 
+              <DesignToolStage
+                updateState = {this.updateState.bind(this)}
                 shouldRenderBoard = { currentProjectName }
                 draggingModule = { draggingModule }
               />  

@@ -2,6 +2,8 @@ import React from 'react';
 import './projects-styles/ProjectsItemFrame.css'
 import './projects-styles/floatGrid.css';
 
+
+
 export default function ProjectsItemFrame(props) {
   return (
     <div className="col3">
