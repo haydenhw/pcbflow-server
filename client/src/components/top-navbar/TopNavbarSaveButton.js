@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
 import { projectsUrl } from 'config/endpointUrls';
 import './top-navbar-styles/TopNavbarSaveButton.css'
 
-class SaveButton extends Component {
+export class SaveButton extends Component {
   saveProject() {
     const {
       width,
