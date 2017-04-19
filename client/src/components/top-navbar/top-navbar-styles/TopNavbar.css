@@ -21,7 +21,10 @@ html, body {height:100%;overflow:auto}
   background-color: #fc8d2a;
 }
 
-
+.iconWrapper:hover {
+  cursor: pointer;
+  background-color:#f99c46;
+}
   
 // Adjust breakpoint as desired to select when the "hamburger" menu is
 // replaced by just the links.

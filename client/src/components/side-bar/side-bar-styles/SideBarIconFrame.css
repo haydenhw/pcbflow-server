@@ -4,21 +4,31 @@
   background-color: white;
   width: 120px;
   margin: 10px auto;
-  
 }
 
+
 .icon-frame-title {
-  border: 1px solid #cdced1;
+  width: 120px;
   background-color: #cdced1;
   font-size: 15px;
   color: black;
   text-align: center;
   height: 20px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon-frame-title:hover {
+  height: 40px;
+  white-space: normal;
 }
 
 .icon-frame-body {
   margin-top: 5px;
 }
+
 .icon-frame-price {
   
   padding-bottom: 5px;

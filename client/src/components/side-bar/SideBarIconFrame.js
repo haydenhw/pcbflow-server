@@ -5,7 +5,7 @@ export default function IconFrame(props) {
   return (
     <div className="icon-frame-container">
       <div className="icon-frame-title">
-        Standard-A Jack
+        Standard-A Jack and extra letters
       </div>
       <div className="icon-frame-body">
         {props.children}

@@ -1,4 +1,5 @@
 import React from 'react';
+import FontAwesome from 'react-fontawesome';
 
 import TopNavbarEditableText from './TopNavbarEditableText';
 import './top-navbar-styles/TopNavbar.css'
@@ -12,7 +13,11 @@ const titleStyle = {
 export default function TopNavbar(props) {
   return (
     <div className="navWide">
-      <div className="iconWrapper" onClick={props.routeToProjects}>Icon</div>
+      <div className="iconWrapper" onClick={props.routeToProjects}>
+        <FontAwesome className='fa-folder-open'
+        name='fa-folder-open'
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
+      </div>
       <TopNavbarSaveButton />
       <TopNavbarEditableText 
         text={props.projectName} 

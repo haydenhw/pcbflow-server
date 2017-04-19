@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import FontAwesome from 'react-fontawesome';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';

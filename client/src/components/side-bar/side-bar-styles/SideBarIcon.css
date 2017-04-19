@@ -1,0 +1,16 @@
+.module-icon {
+  height: 70px; 
+  width: 50px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  
+}
+
+.module-icon-image {
+  height: 70px; 
+  width: 50px;
+}
+
+.module-icon-image:hover {
+  cursor: grab; 
+}
