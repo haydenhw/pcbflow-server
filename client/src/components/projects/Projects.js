@@ -19,8 +19,9 @@ const titleStyle = {
 export default function Projects() {
     return (
       <div>
-        <div className="navWide">
-          <h1  className="logo-text" >PCB Design</h1>
+        <div className="navWide project-navbar">
+          <img className="logo-image" src="images/logo4.png" alt=""/>
+          <span  className="logo-text" >PCB Design</span>
         </div>
         <div className="button-bar">
           <div className="button-wrapper">

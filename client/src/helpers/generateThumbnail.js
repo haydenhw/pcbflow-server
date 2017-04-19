@@ -1,3 +1,5 @@
+import Konva from 'konva';
+
 export default function generateThumbnail(boardLayer) {
   const boardClone = boardLayer.clone()
   const boardCloneAttrs = boardClone.get(".boardGroup")[0].attrs;
