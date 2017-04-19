@@ -61,14 +61,14 @@ class SideBarDimensionInput extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Dimensions</h1>
+      <form>
+        <div className="dimension-bar">Dimensions</div>
         <div className="dimension-input-wrapper">
           <div className="input-wrapper">
             <input 
               type="text" 
               className="width-input dimension-input"
-              value={`${Math.abs(this.props.boardWidth)}cm` } 
+              value={this.props.boardWidth/*`${Math.abs()}cm`*/ } 
               onChange={ this.handleWidthChange.bind(this) } 
             />
             <label>Width</label>
@@ -77,13 +77,13 @@ class SideBarDimensionInput extends React.Component {
             <input 
               className="height-input dimension-input"
               type="text" 
-              value={`${Math.abs(this.props.boardHeight)}cm` } 
+              value={this.props.boardHeight/*`${Math.abs()}cm` */} 
               onChange={ this.handleHeightChange.bind(this) } 
             />
             <label>Height</label>
           </div>
         </div>  
-      </div>
+      </form>
       
     );
   }
