@@ -2,8 +2,8 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
 import TopNavbarEditableText from './TopNavbarEditableText';
-import './top-navbar-styles/TopNavbar.css'
 import TopNavbarSaveButton from './TopNavbarSaveButton';
+import './top-navbar-styles/TopNavbar.css';
 
 const titleStyle = {
   color: "white",

@@ -74,7 +74,9 @@ import generateThumbnail from 'helpers/generateThumbnail'
      } = this.props;
      
     const stageStyle = { 
-      "display": "inline-block"
+      display: "inline-block",
+      zIndex: "-2",
+      marginTop: "50px"
     }
     return (
       <div>
@@ -86,9 +88,8 @@ import generateThumbnail from 'helpers/generateThumbnail'
           >
             <div style={stageStyle}>
               <Stage 
-                style={stageStyle} 
                 ref="stage" 
-                width={1500} 
+                width={2000} 
                 height={1000}
               >
                 <Grid  gridWidth={5000}  cellWidth={20} />
