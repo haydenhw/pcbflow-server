@@ -11,10 +11,21 @@ import Grid from './DesignToolGrid';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import rotateAboutCenter from 'helpers/rotateAboutCenter';
+import generateThumbnail from 'helpers/generateThumbnail'
 
   class DesignToolStage extends Component {
+    
+  updateThumbnail() {
+    const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
+    const thumbnail = generateThumbnail(boardLayer);
+    
+    store.dispatch(actions.updateBoardThumbnail(thumbnail));
+
+  }
+    
   deleteModule() {
     store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
+    this.updateThumbnail();
   }
   
   rotate() {
@@ -50,6 +61,7 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
     }
      
   store.dispatch(actions.rotateSelectedModule(rotationData));
+  this.updateThumbnail();
   }
     
   render() {

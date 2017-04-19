@@ -35,6 +35,7 @@ export default class ModulesItem extends Component {
         }
       }
     }*/
+      
     this.highlightRuleBreakingMoudles();
   }
   
@@ -73,6 +74,14 @@ export default class ModulesItem extends Component {
     enforceRules(moduleNodes, boardNode, addRedStroke, removeRedStroke);
   }
   
+  updateThumbnail()  {
+    const module = this.refs.moduleGroup;
+    const boardLayer = module.getParent().getParent().getParent();
+    const thumbnail = generateThumbnail(boardLayer);
+    
+    store.dispatch(actions.updateBoardThumbnail(thumbnail));
+  }
+  
   handleMouseOver() {
     store.dispatch(actions.updateSelectedModule(this.props));
     store.dispatch(actions.toggleIsMouseOverModule(true));
@@ -103,9 +112,6 @@ export default class ModulesItem extends Component {
   
   handleDragEnd() {
     const module = this.refs.moduleGroup;
-    const boardLayer = module.getParent().getParent().getParent();
-    
-    const thumbnail = generateThumbnail(boardLayer);
     
     const newPosition = {
       x: module.getX(),
@@ -113,12 +119,9 @@ export default class ModulesItem extends Component {
       index: module.index
     }
     store.dispatch(actions.updateModulePosition(newPosition));
+    
+    this.updateThumbnail();
     this.highlightRuleBreakingMoudles();
-    
-    
-  store.dispatch(actions.updateBoardThumbnail({
-        thumbnail
-      }))
   }
   
   handleDoubleClick() {

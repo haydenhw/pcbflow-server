@@ -8,7 +8,12 @@ import Modules from 'components/modules/Modules';
 import ModulesItem from 'components/modules/ModulesItem';
 import Anchor from './BoardAnchor';
 import generateThumbnail from 'helpers/generateThumbnail'
+
 class Board extends Component {
+  
+  componentDidMount() {
+    this.updateThumbnail()
+  }
   
   // improves performance
   reRender() {
@@ -16,21 +21,24 @@ class Board extends Component {
     layer.draw();
   }
   
-  updatePosition() {
+  updateThumbnail() {
     const boardLayer = this.refs.boardLayer;
+    const thumbnail = generateThumbnail(boardLayer);
+    
+    store.dispatch(actions.updateBoardThumbnail(thumbnail));
+  }
+  
+  updatePosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
-    const thumbnail = generateThumbnail(boardLayer);
     
     store.dispatch(actions.updateBoardPosition({
       x: x, 
       y: y
     }))
     
-    store.dispatch(actions.updateBoardThumbnail({
-      thumbnail
-    }))
+    this.updateThumbnail();
   }
   
   handleDragEnd() {
@@ -51,7 +59,10 @@ class Board extends Component {
      = this.props;
      
     return (
-      <Layer ref="boardLayer">
+      <Layer 
+        ref="boardLayer"
+        name="boardLayer"
+      >
         <Group
           ref="boardGroup"
           name="boardGroup"

@@ -5,11 +5,12 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import DeleteButton from './ProjectsDeleteButton';
 
-const style = {
-  "cursor": "pointer",
-  "width": "125px",
-  "marginBottom": "5px",
-  "marginTop": "20px"
+const style = { 
+  cursor: "pointer",
+  width: "125px",
+  marginBottom: "5px",
+  marginTop: "15px",
+  display: "inline-block"
 }
 
 function fectchProject(projectId) {

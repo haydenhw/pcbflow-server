@@ -24,6 +24,7 @@
 }
 
 .project-thumbnail {
-  height: 200px;
+  margin-top: 50px;
+  height: 125px;
   width: 200px;
 }

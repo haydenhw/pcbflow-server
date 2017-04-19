@@ -11,6 +11,7 @@ export class SaveButton extends Component {
       height,
       x,
       y,
+      thumbnail,
       topLeftAnchorX,
       topLeftAnchorY,
       modules,
@@ -29,12 +30,13 @@ export class SaveButton extends Component {
       "boardSpecs": {
         width,
         height,
+        thumbnail,
         x: x + topLeftAnchorX,
         y: y + topLeftAnchorY
       },
       "modules": updatedModules
     }
-    
+    console.log(updatedProject)
     const url = `${projectsUrl}/${id}`;
     fetch(url, {
       method: 'put',
@@ -66,6 +68,7 @@ const mapStateToProps = (state) => ({
   height: state.boardSpecs.height,
   x: state.boardSpecs.x,
   y: state.boardSpecs.y,
+  thumbnail: state.boardSpecs.thumbnail,
   topLeftAnchorX: state.anchorPositions.topLeft.x,
   topLeftAnchorY: state.anchorPositions.topLeft.y,
   modules: state.currentProjectModules,

@@ -19,8 +19,14 @@ class ProjectListContainer extends Component {
     if (projects) {
       const projectsList = [...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects].map((project, index) => {
         return (
-          <ProjectsItemFrame key={index}>
-            <ProjectsItem  projectId={ project._id } projectName={project.name} /> 
+          <ProjectsItemFrame 
+            key={index}
+            thumbnailSrc={project.boardSpecs.thumbnail}
+            >
+            <ProjectsItem  
+              projectId={ project._id } 
+              projectName={project.name} 
+            /> 
           </ProjectsItemFrame>
         )
       });
