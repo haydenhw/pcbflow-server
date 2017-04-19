@@ -80,7 +80,7 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
                 height={1000}
               >
                 <Grid  gridWidth={5000}  cellWidth={20} />
-                {shouldRenderBoard ? <Board updateState={this.props.updateState} /> : <Layer></Layer>}
+                {shouldRenderBoard ? <Board /> : <Layer></Layer>}
                 {isMouseDownOnIcon ? <Layer>{ draggingModule }</Layer> : <Layer></Layer> }
               </Stage>
             </div>

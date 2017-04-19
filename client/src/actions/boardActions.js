@@ -15,3 +15,10 @@ export const updateBoardDimensions = (dimensions) => ({
   type: 'UPDATE_BOARD_DIMENSIONS',
   dimensions
 });
+
+export const UPDATE_BOARD_THUMBNAIL = 'UPDATE_BOARD_THUMBNAIL'; 
+export const updateBoardThumbnail = (thumbnail) => ({
+  type: 'UPDATE_BOARD_THUMBNAIL',
+  thumbnail
+});
+

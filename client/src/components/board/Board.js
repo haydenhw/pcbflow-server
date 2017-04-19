@@ -7,23 +7,9 @@ import store from 'reduxFiles/store';
 import Modules from 'components/modules/Modules';
 import ModulesItem from 'components/modules/ModulesItem';
 import Anchor from './BoardAnchor';
-
+import generateThumbnail from 'helpers/generateThumbnail'
 class Board extends Component {
   
-  componentDidMount() {
-  /*  console.log(this.props)
-    const stage = new Konva.Stage({
-      width: this.props.width + 20,
-      height: this.props.height + 20
-    });
-    
-    const boardLayer = this.refs.boardLayer;
-    console.log(boardLayer)
-    stage.add(boardLayer);
-    console.log(stage)
-    const url = boardLayer.toDataURL();
-    this.props.updateState(url);*/
-  }
   // improves performance
   reRender() {
     const layer = this.refs.boardGroup.getLayer();
@@ -31,13 +17,19 @@ class Board extends Component {
   }
   
   updatePosition() {
+    const boardLayer = this.refs.boardLayer;
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
-  
+    const thumbnail = generateThumbnail(boardLayer);
+    
     store.dispatch(actions.updateBoardPosition({
       x: x, 
       y: y
+    }))
+    
+    store.dispatch(actions.updateBoardThumbnail({
+      thumbnail
     }))
   }
   
@@ -62,12 +54,12 @@ class Board extends Component {
       <Layer ref="boardLayer">
         <Group
           ref="boardGroup"
+          name="boardGroup"
           x={x}
           y={y}
           width={width}
           height={height}
           draggable="true" 
-        
           onDragMove={this.reRender.bind(this)}
           onDragEnd={this.handleDragEnd.bind(this)}
           >

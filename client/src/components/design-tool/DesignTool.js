@@ -158,7 +158,6 @@ class DesignTool extends Component {
   
   handleMouseUp() {
     //this.setState({isDraggingToBoard: false});
-    console.log(this.state.isDraggingToBoard)
     this.dropDraggingModule();
     store.dispatch(actions.toggleIsMouseDown(false));
   }
@@ -178,7 +177,6 @@ class DesignTool extends Component {
   }
   
   updateState(url) {
-    console.log('hola')
     this.setState({
       image: url
     })
@@ -211,10 +209,13 @@ class DesignTool extends Component {
         /> 
     );
     sideBar = this.state.isDraggingToBoard ? '' : sideBar;
-
+    const imageStyle = {
+      height: '150px',
+      width: '200px'
+    }
     return (
       <div>
-          {this.state.image ? <img src={this.state.image} /> : <div></div>}
+          {this.state.image ? <img style={imageStyle} src={this.state.image} /> : <div></div>}
           <TopNavbar 
             projectName={currentProjectName} 
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}

@@ -7,6 +7,8 @@ import store from 'reduxFiles/store';
 import enforceRules from 'helpers/enforceRules';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
+import generateThumbnail from 'helpers/generateThumbnail';
+
 
 export default class ModulesItem extends Component {
   constructor(props) {
@@ -101,6 +103,10 @@ export default class ModulesItem extends Component {
   
   handleDragEnd() {
     const module = this.refs.moduleGroup;
+    const boardLayer = module.getParent().getParent().getParent();
+    
+    const thumbnail = generateThumbnail(boardLayer);
+    
     const newPosition = {
       x: module.getX(),
       y: module.getY(),
@@ -108,6 +114,11 @@ export default class ModulesItem extends Component {
     }
     store.dispatch(actions.updateModulePosition(newPosition));
     this.highlightRuleBreakingMoudles();
+    
+    
+  store.dispatch(actions.updateBoardThumbnail({
+        thumbnail
+      }))
   }
   
   handleDoubleClick() {

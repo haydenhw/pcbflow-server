@@ -12,7 +12,8 @@ const projectSchema = mongoose.Schema({
     x: {type: Number, required: true},
     y: {type: Number, required: true},
     height: {type: Number, required: true},
-    width: {type: Number, required: true}
+    width: {type: Number, required: true},
+    thumbnail: {type: String, required: true} 
   },
   modules: [{  
     x: {type: Number, required: true},
