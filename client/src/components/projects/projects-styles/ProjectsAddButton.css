@@ -1,3 +1,15 @@
+.button-bar {
+  position: fixed;
+  top: 48px;
+  width: 100%;
+  background: white;
+}
+
+.button-wrapper {
+  width: 75%;
+  margin: 0 auto;
+}
+
 .project-add-button {
   background-color: #fa8d28;
   display: inline-block;
@@ -5,7 +17,8 @@
   font-size: 17px;
   padding: 7px 17px;
   border-radius: 4px;
-  margin-left: 245px;
+  margin-top: 25px;
+  margin-left: 20px;
 }
 
 .project-add-button:hover {

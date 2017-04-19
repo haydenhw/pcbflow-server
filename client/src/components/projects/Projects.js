@@ -23,7 +23,9 @@ export default function Projects() {
           <h1  className="logo-text" >PCB Design</h1>
         </div>
         <div className="button-bar">
-          <ProjectsAddButton />
+          <div className="button-wrapper">
+            <ProjectsAddButton />
+          </div>  
         </div>
           <ProjectsList />
       </div>
