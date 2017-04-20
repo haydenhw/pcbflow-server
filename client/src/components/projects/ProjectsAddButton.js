@@ -25,11 +25,14 @@ export default class ProjectsAddButton extends Component {
   render() {
     
   
-    
+    /*<div className="icono-plus"></div>*/
     return (
       <div className="project-add-button" onClick={this.handleClick}>
-        <span className="icono-plus"></span>
-        <div className="project-add-button-text">Project</div>
+        <FontAwesome 
+          name="fa-plus"
+          className="fa-plus"
+        /> 
+        <span className="project-add-button-text">Project</span>
       </div>
     );
   }
