@@ -34,6 +34,7 @@
     "http-proxy-middleware": "0.17.2",
     "jest": "17.0.2",
     "json-loader": "0.5.4",
+    "mocha-loader": "^1.1.1",
     "object-assign": "4.1.0",
     "path-exists": "2.1.0",
     "postcss-loader": "1.0.0",
@@ -65,8 +66,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "clean": "rimraf ./build/static/js/*",
-    "pretest": "npm run clean && cross-env NODE_ENV=test && webpack test/tests.mocha.js --config ./config/webpack.config.dev.js --output-filename tmpTestBundle.js --target node",
-    "test": "mocha ./build/static/js/tmpTestBundle.js || exit 0"
+    "test:browser": "npm run clean && cross-env NODE_ENV=testing webpack-dev-server -d --config ./config/webpack.config.dev  --progress mocha!./test/tests.mocha.js --output-filename testBundle.js --colors"
   },
   "jest": {
     "collectCoverageFrom": [
