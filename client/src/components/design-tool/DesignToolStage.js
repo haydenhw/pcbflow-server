@@ -74,9 +74,8 @@ import generateThumbnail from 'helpers/generateThumbnail'
      } = this.props;
      
     const stageStyle = { 
-      display: "inline-block",
       zIndex: "-2",
-      marginTop: "50px"
+      //marginTop: "50px"
     }
     return (
       <div>

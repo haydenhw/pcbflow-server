@@ -16,11 +16,29 @@
   height: 210px;
   margin: 0 auto;
 }
-
-.title {
+.title-bar {
+  position: relative;
+  color: #5a5a5a;
   text-align: center;
+  font-size: 21px;
   height: 50px;
   background-color: #ebeced;
+}
+
+.title {
+  display: inline-block;
+}
+
+.project-delete-button {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  opacity: .5;
+}
+
+.project-delete-button:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .project-thumbnail {

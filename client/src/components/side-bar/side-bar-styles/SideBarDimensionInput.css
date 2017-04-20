@@ -6,7 +6,9 @@
     border-bottom: 1px solid #adaeb3;
     background-color: #cdced1;
     padding: 10px;
-
+    padding-left: 26px;
+    color: #5a5a5a;
+    letter-spacing: .5px;
 }
 
 .dimension-input-wrapper {
@@ -21,6 +23,7 @@
 }
 
 .dimension-input {
+  font-family: sans-serif;
   width: 55px;
   box-shadow: inset 2px 2px 2px rgba(40,40,40,0.08);
   padding: 5px 10px;

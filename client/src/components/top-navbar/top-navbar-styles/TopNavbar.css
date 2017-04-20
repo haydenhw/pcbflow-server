@@ -6,7 +6,7 @@ html, body {height:100%;overflow:auto}
   background-color: #3d4752;
   overflow: hidden;
   width: 100%;
-  z-index: -1;
+  z-index: 1 ;
   position: fixed;
 }
 

@@ -22,6 +22,7 @@ class ProjectListContainer extends Component {
           <ProjectsItemFrame 
             key={index}
             thumbnailSrc={project.boardSpecs.thumbnail}
+            projectId={ project._id } 
             >
             <ProjectsItem  
               projectId={ project._id } 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Link, hashHistory } from 'react-router';
+import FontAwesome from 'react-fontawesome';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -26,7 +27,10 @@ export default class ProjectsAddButton extends Component {
   
     
     return (
-      <div className="project-add-button" onClick={this.handleClick}>New Project</div>
+      <div className="project-add-button" onClick={this.handleClick}>
+        <span className="icono-plus"></span>
+        <div className="project-add-button-text">Project</div>
+      </div>
     );
   }
 };

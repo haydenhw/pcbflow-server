@@ -3,7 +3,6 @@ import { Link, Route } from 'react-router';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import DeleteButton from './ProjectsDeleteButton';
 
 const style = { 
   cursor: "pointer",
@@ -23,7 +22,6 @@ export default function ProjectLink(props) {
     <span onClick={() => fectchProject(props.projectId)} >
     {props.projectName}
     </span>
-    <DeleteButton projectId={props.projectId} />
   </div>
   );
 }
