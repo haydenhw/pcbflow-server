@@ -16,6 +16,14 @@
   height: 210px;
   margin: 0 auto;
 }
+
+.container:hover {
+  transform: scale(1.1);
+  transition-duration: .3s;
+  cursor: pointer;
+}
+
+
 .title-bar {
   position: relative;
   color: #5a5a5a;

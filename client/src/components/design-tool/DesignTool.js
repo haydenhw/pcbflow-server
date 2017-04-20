@@ -64,7 +64,7 @@ class DesignTool extends Component {
   }
   
   componentWillUnmount() {
-
+    clearTimeout(this.timeOut);
     this.removeHanlders(); 
   }
   
@@ -129,8 +129,9 @@ class DesignTool extends Component {
       store.dispatch(actions.pushToCurrentProjectModules(newModule));
     }
     
-    setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1 )
-    this.setState({isDraggingToBoard: false});
+    this.timeOut = setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1 )
+      this.setState({isDraggingToBoard: false});
+      
   }
   
   handleKeyUp(evt) {

@@ -25,10 +25,10 @@
 .dimension-input {
   font-family: sans-serif;
   width: 55px;
-  box-shadow: inset 2px 2px 2px rgba(40,40,40,0.08);
+  box-shadow: inset 2px 2px 2px rgba(40,40,40,0.1);
   padding: 5px 10px;
   border: 1px solid #b3b3b3;
-  border-radius: 2px;
+  border-radius: 5px;
   line-height: 17px;
 }
 

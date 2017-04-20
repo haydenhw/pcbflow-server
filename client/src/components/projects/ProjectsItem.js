@@ -12,14 +12,12 @@ const style = {
   display: "inline-block"
 }
 
-function fectchProject(projectId) {
-  store.dispatch(actions.fetchProjectById(projectId))
-}
+
 
 export default function ProjectLink(props) {
   return (
   <div style={style} >
-    <span onClick={() => fectchProject(props.projectId)} >
+    <span  >
     {props.projectName}
     </span>
   </div>

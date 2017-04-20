@@ -6,10 +6,17 @@ import DeleteButton from './ProjectsDeleteButton';
 import './projects-styles/ProjectsItemFrame.css'
 import './projects-styles/floatGrid.css';
 
+function fectchProject(projectId) {
+  store.dispatch(actions.fetchProjectById(projectId))
+}
+
 export default function ProjectsItemFrame(props) {
   return (
     <div className="col3">
-      <div className="container">
+      <div 
+        className="container"
+        onClick={() => fectchProject(props.projectId)}
+        >
           <div className="image-container">
             <img className="project-thumbnail" src={props.thumbnailSrc} alt="project-thumbnail" />
           </div>

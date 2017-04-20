@@ -25,7 +25,6 @@ export default class ProjectsAddButton extends Component {
   render() {
     
   
-    /*<div className="icono-plus"></div>*/
     return (
       <div className="project-add-button" onClick={this.handleClick}>
         <FontAwesome 

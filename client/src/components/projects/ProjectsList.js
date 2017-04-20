@@ -17,7 +17,7 @@ class ProjectListContainer extends Component {
     const { projects } = this.props;
     
     if (projects) {
-      const projectsList = [...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects].map((project, index) => {
+      const projectsList = [/*...projects, ...projects, ...projects, ...projects,...projects, ...projects,*/ ...projects].map((project, index) => {
         return (
           <ProjectsItemFrame 
             key={index}
