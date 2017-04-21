@@ -15,7 +15,7 @@ export default function ProjectsItemFrame(props) {
     <div className="col3">
       <div 
         className="container"
-        onClick={() => fectchProject(props.projectId)}
+        // onClick={() => fectchProject(props.projectId)}
         >
           <div className="image-container">
             <img className="project-thumbnail" src={props.thumbnailSrc} alt="project-thumbnail" />
@@ -24,7 +24,7 @@ export default function ProjectsItemFrame(props) {
           <div className="title">
             {props.children}
           </div>
-            <DeleteButton projectId={props.projectId} />
+            <DeleteButton projectId={props.projectId} confirmDelete={props.confirmDelete} />
         </div>
         
       </div>

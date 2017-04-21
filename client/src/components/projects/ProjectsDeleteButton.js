@@ -6,10 +6,8 @@ import FontAwesome from 'react-fontawesome';
 
 export default function ProjectsDeleteButton(props){
   function handleClick() {
-    console.log(props)
-    store.dispatch(actions.deleteProject(props.projectId));
+    props.confirmDelete(props.projectId)
   }
-  
   return (
     <div>
       <FontAwesome 

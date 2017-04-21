@@ -7,10 +7,19 @@ import ProjectsItem from './ProjectsItem';
 import ProjectsItemFrame from './ProjectsItemFrame';
 import './projects-styles/floatGrid.css';
 import './projects-styles/ProjectsItemFrame.css'
+import confirm from 'helpers/confirm';
 
 class ProjectListContainer extends Component {
   componentDidMount() {
     store.dispatch(actions.fetchProjects());
+  }
+  
+  confirmDelete(projectId) {
+    confirm('Are you sure?').then(() => {
+      store.dispatch(actions.deleteProject(projectId));
+   }, () => {
+     
+ });
   }
 
   render() {
@@ -23,6 +32,7 @@ class ProjectListContainer extends Component {
             key={index}
             thumbnailSrc={project.boardSpecs.thumbnail}
             projectId={ project._id } 
+            confirmDelete={this.confirmDelete}
             >
             <ProjectsItem  
               projectId={ project._id } 

@@ -12,8 +12,6 @@ const style = {
   display: "inline-block"
 }
 
-
-
 export default function ProjectLink(props) {
   return (
   <div style={style} >
