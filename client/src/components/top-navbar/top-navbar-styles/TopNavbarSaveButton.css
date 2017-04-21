@@ -1,5 +1,26 @@
-.save {
+.save-button {
   position: absolute;
   right: 160px;
-  top: 15px;
+  top: 4px;
+  background-color: #585861;
+  display: inline-block;
+  color: white;
+  font-size: 17px;
+  padding: 10px 17px;
+  border-radius: 4px;
+  border:none;
+}
+
+.save-button:hover {
+  cursor: pointer;
+  background-color:#73737b;
+}
+
+.save-button:focus {
+  outline: 0;
+}
+
+.fa-cloud {
+  font-size: 15px;
+  margin-right: 6px;
 }

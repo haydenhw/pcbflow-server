@@ -3,6 +3,7 @@
   top: 63px;
   width: 100%;
   background: white;
+  z-index: 100;
 }
 
 .button-wrapper {
@@ -25,6 +26,7 @@
   cursor: pointer;
   background-color:#f99c46;
 }
+
 
 .fa-plus {
   margin-right: 10px;

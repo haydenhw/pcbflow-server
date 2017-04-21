@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import { projectsUrl } from 'config/endpointUrls';
+import './design-tool-styles/DesignToolSaveButton.css'
 
 class SaveButton extends Component {
   saveProject() {
@@ -55,7 +56,7 @@ class SaveButton extends Component {
       "marginBottom": "13px"
     }
     return (
-      <button style={style} onClick={this.saveProject.bind(this)}>
+      <button className="save-button" style={style} onClick={this.saveProject.bind(this)}>
         Save
       </button>
     );

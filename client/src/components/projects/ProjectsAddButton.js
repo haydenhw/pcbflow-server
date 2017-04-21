@@ -26,7 +26,7 @@ export default class ProjectsAddButton extends Component {
     
   
     return (
-      <div className="project-add-button" onClick={this.handleClick}>
+      <div className="project-add-button button" onClick={this.handleClick}>
         <FontAwesome 
           name="fa-plus"
           className="fa-plus"

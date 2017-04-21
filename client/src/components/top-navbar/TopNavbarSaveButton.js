@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import FontAwesome from 'react-fontawesome';
 
 import { projectsUrl } from 'config/endpointUrls';
 import './top-navbar-styles/TopNavbarSaveButton.css'
@@ -56,8 +57,9 @@ export class SaveButton extends Component {
       "marginBottom": "13px"
     }
     return (
-      <button className="save" style={style} onClick={this.saveProject.bind(this)}>
-        Save
+      <button className="save-button" style={style} onClick={this.saveProject.bind(this)}>
+        <FontAwesome name="fa-cloud" className="fa-cloud" />
+        <span>Save</span>
       </button>
     );
   }
