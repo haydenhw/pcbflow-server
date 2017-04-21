@@ -15,9 +15,10 @@ export default function ProjectsItemFrame(props) {
     <div className="col3">
       <div 
         className="container"
-        // onClick={() => fectchProject(props.projectId)}
         >
-          <div className="image-container">
+          <div className="image-container"
+            onClick={() => fectchProject(props.projectId)}
+          >
             <img className="project-thumbnail" src={props.thumbnailSrc} alt="project-thumbnail" />
           </div>
         <div className="title-bar">

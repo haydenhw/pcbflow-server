@@ -15,10 +15,11 @@ import {
   strokeWidth,
 } from 'config/moduleConfig'
 
-class MoudleContainer extends Component{
+class Modules extends Component{
 
   render() {  
-    const modules = this.props.modules/*modulesData*/.map((module, index) => {
+  
+    const modules = this.props.modules/*[modulesData[0]].*/.map((module, index) => {
     /*  console.log(module.imageSrc)
       console.log(require(`./modules-images/${module.imageSrc}`))*/
       return <ModulesItem 
@@ -71,4 +72,4 @@ const mapStateToProps = (state) => ({
    anchorPositions: state.anchorPositions
 });
 
-export default connect(mapStateToProps)(MoudleContainer);
+export default connect(mapStateToProps)(Modules);
