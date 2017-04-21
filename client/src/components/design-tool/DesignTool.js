@@ -60,7 +60,6 @@ class DesignTool extends Component {
     
     this.addHanlders(); 
     
-    
   }
   
   componentWillUnmount() {
@@ -187,6 +186,7 @@ class DesignTool extends Component {
     const { currentProjectName, currentProjectId, draggingModuleData , isMouseDownOnIcon } = this.props;
     const {height, width, image } = draggingModuleData;
     const { x, y, isDraggingToBoard } = this.state;
+    
     const draggingModule = ( 
       <Module
         x={x - width/2} 
@@ -201,6 +201,7 @@ class DesignTool extends Component {
         imageHeight={draggingModuleData.imageHeight}
         imageSrc={draggingModuleData.imageSrc} 
         imageNode={draggingModuleData.imageNode}
+        isDraggingToBoard={true}
       />
     );
       

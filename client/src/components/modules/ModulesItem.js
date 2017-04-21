@@ -35,7 +35,6 @@ export default class ModulesItem extends Component {
         }
       }
     }*/
-      
     this.highlightRuleBreakingMoudles();
   }
   
@@ -50,7 +49,7 @@ export default class ModulesItem extends Component {
       }))
     }
     
-  this.highlightRuleBreakingMoudles();
+      this.highlightRuleBreakingMoudles();
   }
   
   highlightRuleBreakingMoudles() {
@@ -70,8 +69,9 @@ export default class ModulesItem extends Component {
         ? node.get(".moduleBorder")[0].attrs.stroke = "black"
         : node.attrs.stroke = null
     }
-    
-    enforceRules(moduleNodes, boardNode, addRedStroke, removeRedStroke);
+    if(!this.props.isDraggingToBoard) {
+      enforceRules(moduleNodes, boardNode, addRedStroke, removeRedStroke);
+    }
   }
   
   updateThumbnail()  {
