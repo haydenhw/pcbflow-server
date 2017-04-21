@@ -139,7 +139,7 @@ export default class ModulesItem extends Component {
         y={this.props.imageY}
         height={this.props.imageHeight}
         width={this.props.imageWidth}
-        image={this.props.imageNode} 
+        image={this.props.imageNode}
       />
     );
     
