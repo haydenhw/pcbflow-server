@@ -175,6 +175,7 @@ export default class ModulesItem extends Component {
           
           <Group
             ref="innerGroup"
+            name="innerGroup"
             x={this.props.innerGroupX}
             y={this.props.innerGroupY}
             rotation={this.props.rotation}
