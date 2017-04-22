@@ -5,19 +5,26 @@ Array.prototype.diff = function(a) {
     return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
 
-function adjustDimesionForsRotation(node, dimension){
+function adjustDimesionsForsRotation(node){
   //console.log(node.get('.innerGroup')[0].attrs.rotation)
-  /*const rotation = node.get('.innerGroup')[0].attrs.rotation
+  const rotation = node.get('.innerGroup')[0].attrs.rotation;
+  const adjustedObj = {};
+  
   if (rotation === 90 || rotation === 270) {
-    const { width, height } = node.attrs;
+    const { x, y, width, height } = node.attrs;
     const halfDiff = (height-width)/2;
-    return 2 * height -  node.attrs.x; 
-  }*/
-  return dimension; 
+    adjustedObj.x = x - halfDiff;
+    adjustedObj.y = y + halfDiff;
+    adjustedObj.width = height;
+    adjustedObj.height = width;
+    
+    return adjustedObj;
+  }
+  return node.attrs; 
 }
 
 export default function enforceRules(nodeArray, perimeterNode, ruleBreakingAction, ruleFollowingAction) {
-  const collidingNodes = checkCollision(nodeArray,adjustDimesionForsRotation);
+  const collidingNodes = checkCollision(nodeArray,adjustDimesionsForsRotation);
   const outOfBoundsNodes = checkExceedsPerimter(nodeArray, perimeterNode);
   const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes]
   const ruleFollowingNodes = nodeArray.diff(ruleBreakingNodes);
