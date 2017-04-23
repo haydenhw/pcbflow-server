@@ -15,7 +15,7 @@ class ProjectListContainer extends Component {
   }
   
   confirmDelete(projectId) {
-    confirm('Are you sure?').then(() => {
+    confirm(`Are you sure you want to delete this project?`).then(() => {
       store.dispatch(actions.deleteProject(projectId));
    }, () => {
      
@@ -23,6 +23,7 @@ class ProjectListContainer extends Component {
   }
 
   render() {
+    console.log(this.props.thumbnail)
     const { projects } = this.props;
     
     if (projects) {
@@ -30,7 +31,7 @@ class ProjectListContainer extends Component {
         return (
           <ProjectsItemFrame 
             key={index}
-            thumbnailSrc={project.boardSpecs.thumbnail}
+            thumbnailSrc={this.props.thumbnail || project.boardSpecs.thumbnail}
             projectId={ project._id } 
             confirmDelete={this.confirmDelete}
             >
@@ -58,7 +59,8 @@ class ProjectListContainer extends Component {
 };
 
 const mapStateToProps = (state, props) => ({
-  projects: state.projectList
+  projects: state.projectList,
+  thumbnail: state.boardSpecs.thumbnail
 });
 
 export default connect(mapStateToProps)(ProjectListContainer);

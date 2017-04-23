@@ -27,6 +27,7 @@ class DesignTool extends Component {
       isSideBarHidden:false,
       isDraggingToBoard: false,
       shouldRender: false,
+      shouldUpdateThumbnail: false,
       image:null
     }
     
@@ -41,13 +42,29 @@ class DesignTool extends Component {
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp)
+    //window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
+  }
+  
+  
+  
+  hola() {
+    console.log('hello')
+    console.log(this.state)
+    console.log(this.toggleShouldUpadateThumbnail)
+  /*  this.setState({
+      shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail
+    })*/
+  /*  if(this.toggleShouldUpadateThumbnail) {
+      this.toggleShouldUpadateThumbnail()
+    }*/
   }
   
   removeHanlders() {
     document.body.removeEventListener('mousedown', this.bound_handleMouseDown);
     document.body.removeEventListener('mouseup', this.bound_handleMouseUp);
     document.body.removeEventListener('mousemove', this.bound_handleMouseMove);
-    document.body.removeEventListener('keyup', this.bound_handleKeyUp)
+    document.body.removeEventListener('keyup', this.bound_handleKeyUp);
+    
   }
   
   componentDidMount() {
@@ -57,9 +74,8 @@ class DesignTool extends Component {
       
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
-    
+  
     this.addHanlders(); 
-    
   }
   
   componentWillUnmount() {
@@ -130,7 +146,6 @@ class DesignTool extends Component {
     
     this.timeOut = setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1 )
       this.setState({isDraggingToBoard: false});
-      
   }
   
   handleKeyUp(evt) {
@@ -168,6 +183,14 @@ class DesignTool extends Component {
     } 
   }
   
+  toggleShouldUpadateThumbnail() {
+    console.log('hello from toggler')
+    console.log('toggling', !this.state.shouldUpdateThumbnail)
+    this.setState({
+      shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail
+    })
+  }
+  
   handleNameChange(projectId, newName) {
     
     const nameObject = {
@@ -180,12 +203,18 @@ class DesignTool extends Component {
     this.setState({
       image: url
     })
-  } 
+  }
+  
   
   render () {
-    const { currentProjectName, currentProjectId, draggingModuleData , isMouseDownOnIcon } = this.props;
+    const { 
+      currentProjectName,
+      currentProjectId,
+      draggingModuleData ,
+      isMouseDownOnIcon,
+    } = this.props;
     const {height, width, image } = draggingModuleData;
-    const { x, y, isDraggingToBoard } = this.state;
+    const { x, y, isDraggingToBoard, shouldUpdateThumbnail } = this.state;
     
     const draggingModule = ( 
       <Module
@@ -215,20 +244,24 @@ class DesignTool extends Component {
       height: '150px',
       width: '200px'
     }
+    
     return (
       <div>
-          {this.state.image ? <img style={imageStyle} src={this.state.image} /> : <div></div>}
+          {true? <img style={imageStyle} src={this.props.boardSpecs.thumbnail} /> : <div></div>}
           <TopNavbar 
             projectName={currentProjectName} 
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
             routeToProjects={() => hashHistory.push('/')}
+            updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
           />
           <div onMouseMove={this.handleMouseMove.bind(this)}>
-            <div ref={(node) => this.stageContainer = node} >
+            <div ref={(node) => this.stageContainer = node}>
               {sideBar}
               <DesignToolStage
                 updateState = {this.updateState.bind(this)}
                 shouldRenderBoard = { currentProjectName }
+                shouldUpdateThumbnail={ shouldUpdateThumbnail }
+                toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
                 draggingModule = { draggingModule }
               />  
             </div>

@@ -33,6 +33,8 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
       };
       break;
       case actions.UPDATE_BOARD_THUMBNAIL:
+         console.log(action.thumbnail)
+         console.log(state.thumbnail)
          return {
           ...state,
           thumbnail: action.thumbnail

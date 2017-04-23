@@ -37,7 +37,7 @@ export class SaveButton extends Component {
       },
       "modules": updatedModules
     }
-    console.log(updatedProject)
+    
     const url = `${projectsUrl}/${id}`;
     fetch(url, {
       method: 'put',
@@ -50,6 +50,8 @@ export class SaveButton extends Component {
     .catch(err => {
       console.error(err)
     })
+    
+    this.props.updateThumbnail();
   }
 
   render() {

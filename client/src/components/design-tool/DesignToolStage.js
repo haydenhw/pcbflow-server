@@ -13,53 +13,64 @@ import bindToPerimeter from 'helpers/bindToPerimeter';
 import rotateAboutCenter from 'helpers/rotateAboutCenter';
 import generateThumbnail from 'helpers/generateThumbnail'
 
-  class DesignToolStage extends Component {
+class DesignToolStage extends Component {
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
+      console.log('updating thumbnail')
+      this.updateThumbnail();
+      this.props.toggleShouldUpadateThumbnail();
+    }
     
+    if (this.props.toggleShouldUpadateThumbnail) {
+      
+    }
+  }
+
   updateThumbnail() {
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
     
     store.dispatch(actions.updateBoardThumbnail(thumbnail));
-
-  }
-    
-  deleteModule() {
-    store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
-    this.updateThumbnail();
   }
   
-  rotate() {
-    const {
-      x,
-      y, 
-      index,
-      innerGroupX,
-      innerGroupY,
-      rotation,
-      width,
-      height
-    } = this.props.selectedModuleProps;
-    const { topLeft } = this.props.anchorPositions;
-    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-    let { boundToSideIndex } = this.props.selectedModuleProps;
-    let newParentGroupCoordinates;
-    let newInnerGroupCoordinates;
-    
-    newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
-    newInnerGroupCoordinates = (
-    rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
-    );
-    
-    const rotationData = {
-      index,
-      boundToSideIndex: newInnerGroupCoordinates.boundToSideIndex, 
-      rotation: newInnerGroupCoordinates.rotation,
-      innerGroupX: newInnerGroupCoordinates.x,
-      innerGroupY: newInnerGroupCoordinates.y,
-      parentGroupX: newParentGroupCoordinates ? newParentGroupCoordinates.x : x,
-      parentGroupY: newParentGroupCoordinates ? newParentGroupCoordinates.y : y
-    }
-     
+deleteModule() {
+  store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
+  this.updateThumbnail();
+}
+
+rotate() {
+  const {
+    x,
+    y, 
+    index,
+    innerGroupX,
+    innerGroupY,
+    rotation,
+    width,
+    height
+  } = this.props.selectedModuleProps;
+  const { topLeft } = this.props.anchorPositions;
+  const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
+  let { boundToSideIndex } = this.props.selectedModuleProps;
+  let newParentGroupCoordinates;
+  let newInnerGroupCoordinates;
+  
+  newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
+  newInnerGroupCoordinates = (
+  rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
+  );
+  
+  const rotationData = {
+    index,
+    boundToSideIndex: newInnerGroupCoordinates.boundToSideIndex, 
+    rotation: newInnerGroupCoordinates.rotation,
+    innerGroupX: newInnerGroupCoordinates.x,
+    innerGroupY: newInnerGroupCoordinates.y,
+    parentGroupX: newParentGroupCoordinates ? newParentGroupCoordinates.x : x,
+    parentGroupY: newParentGroupCoordinates ? newParentGroupCoordinates.y : y
+  }
+   
   store.dispatch(actions.rotateSelectedModule(rotationData));
   this.updateThumbnail();
   }
@@ -73,11 +84,9 @@ import generateThumbnail from 'helpers/generateThumbnail'
       isMouseOverModule
      } = this.props;
      
-    const stageStyle = { 
-      zIndex: "-2",
-      //marginTop: "50px"
-    }
+    
     return (
+      
       <div>
         <ContextMenuTrigger
           id={'SIMPLE'} 
@@ -85,7 +94,7 @@ import generateThumbnail from 'helpers/generateThumbnail'
           disable={!(!isMouseDown && isMouseOverModule)}
           holdToDisplay={1000}
           >
-            <div style={stageStyle}>
+            <div>
               <Stage 
                 ref="stage" 
                 width={2000} 
