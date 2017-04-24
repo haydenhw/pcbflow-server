@@ -66,7 +66,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "clean": "rimraf ./build/static/js/*",
-    "test:browser": "npm run clean && cross-env NODE_ENV=testing webpack-dev-server -d --config ./config/webpack.config.dev  --progress mocha!./test/tests.mocha.js --output-filename testBundle.js --colors"
+    "test:browser": "npm run clean && cross-env NODE_ENV=testing webpack-dev-server -d --config ./config/webpack.config.dev  --progress mocha!./test/tests.mocha.js --output-filename testBundle.js --colors",
+    "change-test": "node server.js"
   },
   "jest": {
     "collectCoverageFrom": [
