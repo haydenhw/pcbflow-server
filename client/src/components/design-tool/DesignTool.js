@@ -184,8 +184,8 @@ class DesignTool extends Component {
   }
   
   toggleShouldUpadateThumbnail() {
-    console.log('hello from toggler')
-    console.log('toggling', !this.state.shouldUpdateThumbnail)
+    // console.log('hello from toggler')
+    // console.log('toggling', !this.state.shouldUpdateThumbnail)
     this.setState({
       shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail
     })

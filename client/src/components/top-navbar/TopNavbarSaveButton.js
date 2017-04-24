@@ -7,6 +7,8 @@ import './top-navbar-styles/TopNavbarSaveButton.css'
 
 export class SaveButton extends Component {
   saveProject() {
+    this.props.updateThumbnail();
+    
     const {
       width,
       height,
@@ -19,6 +21,8 @@ export class SaveButton extends Component {
       projectName,
       id
     } = this.props;
+    
+    console.log(thumbnail)
     
     const updatedModules = modules.map(module => {
       const x = module.x - topLeftAnchorX;
@@ -51,7 +55,6 @@ export class SaveButton extends Component {
       console.error(err)
     })
     
-    this.props.updateThumbnail();
   }
 
   render() {

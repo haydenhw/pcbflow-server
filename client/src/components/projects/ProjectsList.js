@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import  Konva  from 'konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -9,29 +10,38 @@ import './projects-styles/floatGrid.css';
 import './projects-styles/ProjectsItemFrame.css'
 import confirm from 'helpers/confirm';
 
+function convertToUrl(json) {
+  // console.log(Konva.Node.create(json))
+  return Konva.Node.create(json).toDataURL();
+}
+
 class ProjectListContainer extends Component {
   componentDidMount() {
     store.dispatch(actions.fetchProjects());
+    
   }
   
   confirmDelete(projectId) {
     confirm(`Are you sure you want to delete this project?`).then(() => {
       store.dispatch(actions.deleteProject(projectId));
-   }, () => {
+    }, () => {});
      
- });
   }
 
   render() {
-    console.log(this.props.thumbnail)
-    const { projects } = this.props;
+  
+    const { projects, thumbnail } = this.props;
     
-    if (projects) {
+    if (projects && projects.length > 0) {
+    
+        
       const projectsList = [...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects].map((project, index) => {
+        const thumbnailSrc = thumbnail ? thumbnail.toDataURL() : convertToUrl(project.boardSpecs.thumbnail);
+        // console.log(thumbnailSrc)
         return (
           <ProjectsItemFrame 
             key={index}
-            thumbnailSrc={this.props.thumbnail || project.boardSpecs.thumbnail}
+            thumbnailSrc={thumbnailSrc}
             projectId={ project._id } 
             confirmDelete={this.confirmDelete}
             >
