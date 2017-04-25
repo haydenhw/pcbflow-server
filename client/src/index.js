@@ -7,6 +7,8 @@ import DesignTool from 'components/design-tool/DesignTool';
 import Projects from 'components/projects/Projects';
 import store from 'reduxFiles/store';
 import './index.css';
+import './reset.css';
+
 
 ReactDOM.render(
   <Provider store={ store }>

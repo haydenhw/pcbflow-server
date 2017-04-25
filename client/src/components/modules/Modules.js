@@ -18,7 +18,6 @@ import {
 class Modules extends Component{
 
   render() {  
-  
     const modules = this.props.modules/*[modulesData[0]].*/.map((module, index) => {
     /*  console.log(module.imageSrc)
       console.log(require(`./modules-images/${module.imageSrc}`))*/
@@ -53,6 +52,7 @@ class Modules extends Component{
           selectedModuleProps={this.props.selectedModuleProps}
           anchorPositions={this.props.anchorPositions}
           boardSpecs={this.props.boardSpecs}
+          isDraggingToBoard={false}
         />
     });
     return (

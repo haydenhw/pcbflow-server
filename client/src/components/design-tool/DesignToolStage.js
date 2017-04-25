@@ -28,48 +28,46 @@ class DesignToolStage extends Component {
       this.props.toggleShouldUpadateThumbnail();
     }
   }
-
   
-  
-deleteModule() {
-  store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
-  this.updateThumbnail();
-}
-
-rotate() {
-  const {
-    x,
-    y, 
-    index,
-    innerGroupX,
-    innerGroupY,
-    rotation,
-    width,
-    height
-  } = this.props.selectedModuleProps;
-  const { topLeft } = this.props.anchorPositions;
-  const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-  let { boundToSideIndex } = this.props.selectedModuleProps;
-  let newParentGroupCoordinates;
-  let newInnerGroupCoordinates;
-  
-  newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
-  newInnerGroupCoordinates = (
-  rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
-  );
-  
-  const rotationData = {
-    index,
-    boundToSideIndex: newInnerGroupCoordinates.boundToSideIndex, 
-    rotation: newInnerGroupCoordinates.rotation,
-    innerGroupX: newInnerGroupCoordinates.x,
-    innerGroupY: newInnerGroupCoordinates.y,
-    parentGroupX: newParentGroupCoordinates ? newParentGroupCoordinates.x : x,
-    parentGroupY: newParentGroupCoordinates ? newParentGroupCoordinates.y : y
+  deleteModule() {
+    store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
+    this.updateThumbnail();
   }
-   
-  store.dispatch(actions.rotateSelectedModule(rotationData));
-  this.updateThumbnail();
+
+  rotate() {
+    const {
+      x,
+      y, 
+      index,
+      innerGroupX,
+      innerGroupY,
+      rotation,
+      width,
+      height
+    } = this.props.selectedModuleProps;
+    const { topLeft } = this.props.anchorPositions;
+    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
+    let { boundToSideIndex } = this.props.selectedModuleProps;
+    let newParentGroupCoordinates;
+    let newInnerGroupCoordinates;
+    
+    newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
+    newInnerGroupCoordinates = (
+    rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
+    );
+    
+    const rotationData = {
+      index,
+      boundToSideIndex: newInnerGroupCoordinates.boundToSideIndex, 
+      rotation: newInnerGroupCoordinates.rotation,
+      innerGroupX: newInnerGroupCoordinates.x,
+      innerGroupY: newInnerGroupCoordinates.y,
+      parentGroupX: newParentGroupCoordinates ? newParentGroupCoordinates.x : x,
+      parentGroupY: newParentGroupCoordinates ? newParentGroupCoordinates.y : y
+    }
+     
+    store.dispatch(actions.rotateSelectedModule(rotationData));
+    this.updateThumbnail();
   }
     
   render() {

@@ -20,21 +20,6 @@ export default class ModulesItem extends Component {
   }
   
   componentDidUpdate(prevProps, prevState) {
-    // forces module image to update after a module is deleted
-  /*  if (prevState.image) {
-    
-      
-      const prevImageSrc = prevState.image.getAttribute("src");
-      if (prevImageSrc !== this.props.imageSrc) {
-        const image = new window.Image();
-        image.src = this.props.imageSrc;
-        console.log(this.props.imageSrc, this.props.index)
-        console.log(image.src)
-        image.onload = () => {
-          store.dispatch(actions.updateModuleImage())
-        }
-      }
-    }*/
     this.highlightRuleBreakingMoudles();
   }
   
