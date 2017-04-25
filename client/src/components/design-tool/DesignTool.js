@@ -247,7 +247,7 @@ class DesignTool extends Component {
     
     return (
       <div>
-          {true? <img style={imageStyle} src={this.props.boardSpecs.thumbnail} /> : <div></div>}
+          {/* {true? <img style={imageStyle} src={this.props.boardSpecs.thumbnail} /> : <div></div>} */}
           <TopNavbar 
             projectName={currentProjectName} 
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
