@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
+import { withRouter, hashHistory } from 'react-router';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 import * as actions from 'actions/indexActions';
@@ -53,6 +53,13 @@ class DesignTool extends Component {
     
   }
   
+  setRouteHook() {
+    this.props.router.setRouteLeaveHook(this.props.route, () => {
+      if (true/*this.state.unsaved*/)
+        return 'You have unsaved changes, are you sure you want to leave the page?'
+    })
+  }
+  
   componentDidMount() {
     if(!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;
@@ -60,7 +67,8 @@ class DesignTool extends Component {
       
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
-  
+    
+    this.setRouteHook();
     this.addHanlders(); 
   }
   
@@ -271,4 +279,5 @@ const mapStateToProps = (state) => ({
   
 });
 
+DesignTool = withRouter(DesignTool);
 export default connect(mapStateToProps)(DesignTool);
