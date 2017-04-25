@@ -11,14 +11,13 @@ import { projectList} from './projectReducers';
 describe('project redcuer', () => {
     // Fetch Basic Info about User
     it('It should set basic info about user', () => {
-      console.log(projectList)
         const initialState = [];
 
         const expectedState = [1, 2, 3]
 
         const resultState = projectList(deepFreeze(initialState), {
             type: 'FETCH_PROJECTS_SUCCESS',
-            response: [1, 2, 3],
+            projects: [1, 2, 3],
 
         });
 
