@@ -32,7 +32,7 @@ class ProjectListContainer extends Component {
     
     if (projects && projects.length > 0) {
       const projectsList = [...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects].map((project, index) => {
-        console.log(thumbnail)
+        // console.log(thumbnail)
         const thumbnailSrc = thumbnail ? convertToUrl(thumbnail) : convertToUrl(project.boardSpecs.thumbnail);
         return (
           <ProjectsItemFrame 

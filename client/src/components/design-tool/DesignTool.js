@@ -42,21 +42,7 @@ class DesignTool extends Component {
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp)
-    //window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
-  }
-  
-  
-  
-  hola() {
-    console.log('hello')
-    console.log(this.state)
-    console.log(this.toggleShouldUpadateThumbnail)
-  /*  this.setState({
-      shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail
-    })*/
-  /*  if(this.toggleShouldUpadateThumbnail) {
-      this.toggleShouldUpadateThumbnail()
-    }*/
+    window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
   }
   
   removeHanlders() {

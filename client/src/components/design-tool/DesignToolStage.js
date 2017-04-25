@@ -15,23 +15,21 @@ import generateThumbnail from 'helpers/generateThumbnail'
 
 class DesignToolStage extends Component {
   
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
-      this.updateThumbnail();
-      this.props.toggleShouldUpadateThumbnail();
-    }
-    
-    if (this.props.toggleShouldUpadateThumbnail) {
-      
-    }
-  }
-
   updateThumbnail() {
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
     
     store.dispatch(actions.updateBoardThumbnail(thumbnail));
   }
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
+      this.updateThumbnail();
+      this.props.toggleShouldUpadateThumbnail();
+    }
+  }
+
+  
   
 deleteModule() {
   store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
