@@ -3,7 +3,8 @@ html, body {height:100%;overflow:auto}
 
 .navWide {
   position: relative;
-  background-color: #3d4752;
+  background-color: purple;
+  /*background-color: #3d4752;*/
   overflow: hidden;
   width: 100%;
   z-index: 1 ;
