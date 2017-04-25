@@ -103,7 +103,6 @@ export function updateProject(data, projectId) {
         return res.json();
       })
       .then(data => {
-        console.log(data)
         dispatch(updateProjectSuccess(data))
       })
       .catch(err => {
