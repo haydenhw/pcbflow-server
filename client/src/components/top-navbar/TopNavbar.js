@@ -11,9 +11,16 @@ const titleStyle = {
 }
 
 export default function TopNavbar(props) {
+  
+  const handleFolderIconClick = () => {
+    console.log('clicked', props)
+    props.updateThumbnail();
+    props.routeToProjects();
+  }
+  
   return (
     <div className="navWide">
-      <div className="iconWrapper" onClick={props.routeToProjects}>
+      <div className="iconWrapper" onClick={handleFolderIconClick}>
         <FontAwesome className='fa-folder-open'
         name='fa-folder-open'
         style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
