@@ -196,7 +196,7 @@ class DesignTool extends Component {
     const nameObject = {
       name: newName.message
     }
-    store.dispatch(actions.updateProject(nameObject, projectId))
+    store.dispatch(actions.updateProject(nameObject, projectId));
   }
   
   updateState(url) {
