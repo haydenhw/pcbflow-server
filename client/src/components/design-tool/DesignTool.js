@@ -167,7 +167,7 @@ class DesignTool extends Component {
   
   handleMouseDown(evt) {
     if(evt.which === 1) {
-      store.dispatch(actions.toggleIsMouseDown(true))
+      store.dispatch(actions.toggleIsMouseDown(true));
     }
   }
   
@@ -196,6 +196,7 @@ class DesignTool extends Component {
     const nameObject = {
       name: newName.message
     }
+    
     store.dispatch(actions.updateProject(nameObject, projectId));
   }
   
