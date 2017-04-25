@@ -17,7 +17,6 @@ class DesignToolStage extends Component {
   
   componentWillReceiveProps(nextProps) {
     if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
-      console.log('updating thumbnail')
       this.updateThumbnail();
       this.props.toggleShouldUpadateThumbnail();
     }
