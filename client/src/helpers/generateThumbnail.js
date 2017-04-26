@@ -13,5 +13,5 @@ export default function generateThumbnail(boardLayer) {
   boardCloneAttrs.y = 10;
   croppedStage.add(boardClone);
   
-  return croppedStage;
+  return croppedStage.toJSON();
 }

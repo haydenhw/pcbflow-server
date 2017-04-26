@@ -24,18 +24,22 @@
   cursor: pointer;
 }
 
-
 .title-bar {
   position: relative;
   color: #5a5a5a;
-  text-align: center;
+  
   font-size: 21px;
   height: 50px;
   background-color: #ebeced;
 }
 
 .title {
-  display: inline-block;
+  margin: 11px auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 170px;
+  display: block;
+  overflow: hidden
 }
 
 .project-delete-button {

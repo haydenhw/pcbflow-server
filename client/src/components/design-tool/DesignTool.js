@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
+import { withRouter, hashHistory } from 'react-router';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import getTimeStamp from 'helpers/getTimeStamp';
 import Board from 'components/board/Board';
 import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
 import BoardDimensionInput from 'components/board/BoardDimensionForm';
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import SideBar from 'components/side-bar/SideBar';
+import Footer from 'components/footer/Footer';
 import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
 import checkCollision from 'helpers/checkCollision';
@@ -42,21 +44,7 @@ class DesignTool extends Component {
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp)
-    //window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
-  }
-  
-  
-  
-  hola() {
-    console.log('hello')
-    console.log(this.state)
-    console.log(this.toggleShouldUpadateThumbnail)
-  /*  this.setState({
-      shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail
-    })*/
-  /*  if(this.toggleShouldUpadateThumbnail) {
-      this.toggleShouldUpadateThumbnail()
-    }*/
+    window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
   }
   
   removeHanlders() {
@@ -67,6 +55,14 @@ class DesignTool extends Component {
     
   }
   
+  setRouteHook() {
+    this.props.router.setRouteLeaveHook(this.props.route, () => {
+      if (true/*this.state.unsaved*/)
+        return 'You have unsaved changes, are you sure you want to leave the page?'
+    })
+  }
+  
+  
   componentDidMount() {
     if(!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;
@@ -74,7 +70,8 @@ class DesignTool extends Component {
       
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
-  
+    
+    this.setRouteHook();
     this.addHanlders(); 
   }
   
@@ -206,11 +203,18 @@ class DesignTool extends Component {
     })
   }
   
+  updateLastSaved() {
+    const lastSaved = getTimeStamp();
+    store.dispatch(actions.updateLastSavedTime(lastSaved));
+  }
+
   
   render () {
     const { 
       currentProjectName,
       currentProjectId,
+      currentProjectPrice,
+      timeLastSaved,
       draggingModuleData ,
       isMouseDownOnIcon,
     } = this.props;
@@ -254,6 +258,7 @@ class DesignTool extends Component {
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
             routeToProjects={() => hashHistory.push('/')}
             updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
+            updateLastSaved={this.updateLastSaved}
           />
           <div onMouseMove={this.handleMouseMove.bind(this)}>
             <div ref={(node) => this.stageContainer = node}>
@@ -267,14 +272,18 @@ class DesignTool extends Component {
               />  
             </div>
         </div>
+        <Footer price={currentProjectPrice} timeLastSaved={timeLastSaved}/>
       </div>
      );
    }
 }
 
 const mapStateToProps = (state) => ({
+  
   currentProjectName: state.currentProjectInfo.name,
   currentProjectId: state.currentProjectInfo.id,
+  currentProjectPrice: state.currentProjectInfo.price,
+  timeLastSaved: state.currentProjectInfo.timeLastSaved,
   currentProjectModules: state.currentProjectModules,
   boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
@@ -286,4 +295,5 @@ const mapStateToProps = (state) => ({
   
 });
 
+DesignTool = withRouter(DesignTool);
 export default connect(mapStateToProps)(DesignTool);

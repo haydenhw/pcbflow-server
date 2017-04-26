@@ -11,7 +11,6 @@ import './projects-styles/ProjectsItemFrame.css'
 import confirm from 'helpers/confirm';
 
 function convertToUrl(json) {
-  // console.log(Konva.Node.create(json))
   return Konva.Node.create(json).toDataURL();
 }
 
@@ -29,15 +28,12 @@ class ProjectListContainer extends Component {
   }
 
   render() {
-  
     const { projects, thumbnail } = this.props;
     
     if (projects && projects.length > 0) {
-    
-        
-      const projectsList = [...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects].map((project, index) => {
-        const thumbnailSrc = thumbnail ? thumbnail.toDataURL() : convertToUrl(project.boardSpecs.thumbnail);
-        // console.log(thumbnailSrc)
+      const projectsList = [...projects/*...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects*/].map((project, index) => {
+        // console.log(thumbnail)
+        const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
         return (
           <ProjectsItemFrame 
             key={index}

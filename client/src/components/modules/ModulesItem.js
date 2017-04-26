@@ -15,26 +15,13 @@ export default class ModulesItem extends Component {
     super(props);
     
     this.state = {
-      image: null
+      image: null,
+      strokeWidth: 1
     }
   }
   
+  
   componentDidUpdate(prevProps, prevState) {
-    // forces module image to update after a module is deleted
-  /*  if (prevState.image) {
-    
-      
-      const prevImageSrc = prevState.image.getAttribute("src");
-      if (prevImageSrc !== this.props.imageSrc) {
-        const image = new window.Image();
-        image.src = this.props.imageSrc;
-        console.log(this.props.imageSrc, this.props.index)
-        console.log(image.src)
-        image.onload = () => {
-          store.dispatch(actions.updateModuleImage())
-        }
-      }
-    }*/
     this.highlightRuleBreakingMoudles();
   }
   
@@ -66,7 +53,7 @@ export default class ModulesItem extends Component {
     
     const removeRedStroke = node => {
       node.attrs.name === "moduleGroup" 
-        ? node.get(".moduleBorder")[0].attrs.stroke = "black"
+        ? node.get(".moduleBorder")[0].attrs.stroke = this.props.stroke
         : node.attrs.stroke = null
     }
     if(!this.props.isDraggingToBoard) {
@@ -83,11 +70,21 @@ export default class ModulesItem extends Component {
   }
   
   handleMouseOver() {
+    this.setState({
+      strokeWidth: 2
+    });
+    document.body.style.cursor = 'move';
+    
     store.dispatch(actions.updateSelectedModule(this.props));
     store.dispatch(actions.toggleIsMouseOverModule(true));
   }
   
   handleMouseOut() {
+    this.setState({
+      strokeWidth: 1
+    });
+    document.body.style.cursor = 'default';
+    
     store.dispatch(actions.toggleIsMouseOverModule(false));
   }
   
@@ -195,8 +192,8 @@ export default class ModulesItem extends Component {
               ref="moduleBorder"
               width={this.props.width} 
               height={this.props.height}
-              stroke = {borderStroke || this.props.stroke}
-              strokeWidth = {this.props.strokeWidth}
+              stroke = {/*borderStroke || */this.props.stroke}
+              strokeWidth = {this.state.strokeWidth}
             />
                
             {this.props.imageSrc ? image: <Group></Group>}

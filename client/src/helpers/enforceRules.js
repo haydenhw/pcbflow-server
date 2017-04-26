@@ -5,8 +5,7 @@ Array.prototype.diff = function(a) {
     return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
 
-function adjustDimesionsForsRotation(node){
-  //console.log(node.get('.innerGroup')[0].attrs.rotation)
+function adjustDimesionsForRotation(node){
   const rotation = node.get('.innerGroup')[0].attrs.rotation;
   const adjustedObj = {};
   
@@ -24,8 +23,8 @@ function adjustDimesionsForsRotation(node){
 }
 
 export default function enforceRules(nodeArray, perimeterNode, ruleBreakingAction, ruleFollowingAction) {
-  const collidingNodes = checkCollision(nodeArray,adjustDimesionsForsRotation);
-  const outOfBoundsNodes = checkExceedsPerimter(nodeArray, perimeterNode);
+  const collidingNodes = checkCollision(nodeArray,adjustDimesionsForRotation);
+  const outOfBoundsNodes = checkExceedsPerimter(nodeArray, perimeterNode, adjustDimesionsForRotation);
   const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes]
   const ruleFollowingNodes = nodeArray.diff(ruleBreakingNodes);
   

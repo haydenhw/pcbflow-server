@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
+import Konva from 'konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import generatePriceString from 'helpers/generatePriceString';
 import ModulesItem from './ModulesItem';
 import { modulesData } from './modulesData'
 import {
@@ -16,12 +18,21 @@ import {
 } from 'config/moduleConfig'
 
 class Modules extends Component{
-
-  render() {  
   
+  componentDidUpdate() {
+    const modulePriceSum = this.props.modules
+      .map((module) => module.price)
+      .reduce((a, b) => a + b);
+    const basePrice = 15
+    const totalPriceString = generatePriceString(basePrice + modulePriceSum)
+    
+    store.dispatch(actions.updateProjectPrice(totalPriceString));
+  }
+  render() {  
     const modules = this.props.modules/*[modulesData[0]].*/.map((module, index) => {
     /*  console.log(module.imageSrc)
       console.log(require(`./modules-images/${module.imageSrc}`))*/
+    //  console.log(module.stroke)
       return <ModulesItem 
           key={index}
           index={index}
@@ -40,7 +51,7 @@ class Modules extends Component{
           fontFamily={fontFamily}
           fill={fill}
           opacity={opacity}
-          stroke={stroke}
+          stroke={module.stroke}
           strokeWidth={strokeWidth}
           imageX={module.imageX}
           imageY={module.imageY}
@@ -53,6 +64,7 @@ class Modules extends Component{
           selectedModuleProps={this.props.selectedModuleProps}
           anchorPositions={this.props.anchorPositions}
           boardSpecs={this.props.boardSpecs}
+          isDraggingToBoard={false}
         />
     });
     return (

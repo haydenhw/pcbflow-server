@@ -79,7 +79,8 @@ module.exports = {
       reduxFiles: path.join(__dirname, '../src', 'redux-files'),
       config: path.join(__dirname, '../src', 'config'),
       helpers: path.join(__dirname, '../src', 'helpers'),
-     'react-native': 'react-native-web',
+      'react': path.resolve(__dirname, '../node_modules', 'react'),
+      'react-native': 'react-native-web',
     },
     extensions: ['', '.js', '.jsx']
   },

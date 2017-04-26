@@ -1,0 +1,58 @@
+.landing-navbar {
+  position: relative;
+  background-color: #f78d1e;
+  overflow: hidden;
+  width: 100%;
+  z-index: 1 ;
+  position: fixed;
+  height: 65px;
+  padding-left: 15px
+}
+
+.white-logo-image {
+  position: absolute;
+  top: 10px;
+  height: 40px;
+}
+
+.landing-logo-text {
+  position: absolute;
+  top: 12px;
+  left: 60px;
+  color: white;
+  font-size: 27px;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.landing-page-body-wrapper {
+  margin: 0 auto;
+}
+
+
+.landing-page-body {
+  margin: 0 auto;
+  max-width: 100%;
+  position: relative;
+}
+
+.landing-page-background-image {
+  position: relative;
+  float: left;
+  width: 100%;
+}
+
+.text {
+  padding: 14% 0 0 44%;
+  position: absolute;
+  max-width: 100%;
+  font-family: 'Dancing Script', cursive;
+  color: #fff;
+  font-size: 2em;
+  text-align: center;
+}
+
+.cover-image-wrapper {
+  
+}
