@@ -3,8 +3,8 @@ html, body {height:100%;overflow:auto}
 
 .navWide {
   position: relative;
-  background-color: purple;
-  /*background-color: #3d4752;*/
+  /*background-color: purple;*/
+  background-color: #3d4752;
   overflow: hidden;
   width: 100%;
   z-index: 1 ;
@@ -26,14 +26,4 @@ html, body {height:100%;overflow:auto}
   cursor: pointer;
   background-color:#f99c46;
 }
-  
-// Adjust breakpoint as desired to select when the "hamburger" menu is
-// replaced by just the links.
-@media (min-width: 480px) {
-  
-  .navWide {
-    .navWide {
-      display: block;
-    }
-  }
-}
+
