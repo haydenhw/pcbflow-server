@@ -5,6 +5,7 @@ import Konva from 'konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import generatePriceString from 'helpers/generatePriceString';
 import ModulesItem from './ModulesItem';
 import { modulesData } from './modulesData'
 import {
@@ -17,7 +18,16 @@ import {
 } from 'config/moduleConfig'
 
 class Modules extends Component{
-
+  
+  componentDidMount() {
+    
+    const modulePriceSum = this.props.modules
+      .map((module) => module.price)
+      .reduce((a, b) => a + b);
+    const basePrice = 15
+    const totalPriceString = generatePriceString(basePrice + modulePriceSum)
+    
+  }
   render() {  
     const modules = this.props.modules/*[modulesData[0]].*/.map((module, index) => {
     /*  console.log(module.imageSrc)

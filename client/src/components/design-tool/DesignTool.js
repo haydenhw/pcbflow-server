@@ -61,6 +61,7 @@ class DesignTool extends Component {
     })
   }
   
+  
   componentDidMount() {
     if(!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;

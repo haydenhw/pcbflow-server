@@ -2,6 +2,12 @@ import { Route, hashHistory } from 'react-router';
 import store from 'reduxFiles/store';
 import { projectsUrl } from '../config/endpointUrls';
 
+export const UPDATE_PROJECT_PRICE = 'UPDATE_PROJECT_PRICE'; 
+export const updateProjectPrice = (price) => ({
+  type: 'UPDATE_PROJECT_PRICE',
+  price
+});
+
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
 export const fetchProjectsSuccess = (projects) => ({
   type: 'FETCH_PROJECTS_SUCCESS',

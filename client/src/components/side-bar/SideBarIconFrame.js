@@ -1,11 +1,10 @@
 import React from 'react';
+
+import generatePriceString from 'helpers/generatePriceString';
 import './side-bar-styles/SideBarIconFrame.css'
 
 export default function IconFrame(props) {
-  const generatePriceString = (price) => {
-    const twoDecimalString = price.toFixed(2);
-    return `$${twoDecimalString}`
-  }
+  
   return (
     <div className="icon-frame-container">
       <div className="icon-frame-title">

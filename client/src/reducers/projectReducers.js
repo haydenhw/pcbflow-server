@@ -7,6 +7,10 @@ export const projectList = (state = [], action) => {
   return state;
 }
 
+defaultProjectInfo = {
+  price: "$15.00"
+}
+
 export const currentProjectInfo = (state = {}, action) => {
   switch(action.type){
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
@@ -21,11 +25,20 @@ export const currentProjectInfo = (state = {}, action) => {
           name: action.project.name
         }
         break;
+      case actions.UPDATE_PROJECT_SUCCESS:
+        console.log( {
+          ...state,
+          price: action.price
+        })
+        return {
+          ...state,
+          price: action.price
+        }
+        break;
     default:
       return state;
   }
 }
-
 /*
 export const projectList = (state = [], action) => {
   switch(action.type){
