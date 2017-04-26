@@ -1,0 +1,12 @@
+.footer {
+  background-color: #e6e6e6;
+  overflow: hidden;
+  width: 100%;
+  z-index: 1 ;
+  position: fixed;
+  height: 35px;
+  padding-left: 15px;
+  bottom: 0px;
+  left: 0px;
+  border-top: 1px solid #adaeb3;
+}

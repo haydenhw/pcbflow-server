@@ -12,6 +12,7 @@ import ModuleContainer from 'components/modules/Modules';
 import BoardDimensionInput from 'components/board/BoardDimensionForm';
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import SideBar from 'components/side-bar/SideBar';
+import Footer from 'components/footer/Footer';
 import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
 import checkCollision from 'helpers/checkCollision';
@@ -260,6 +261,7 @@ class DesignTool extends Component {
               />  
             </div>
         </div>
+        <Footer/>
       </div>
      );
    }
