@@ -1,9 +1,10 @@
-export default function checkExceedsPerimeter (nodeArray, perimeterNode) {
+export default function checkExceedsPerimeter (nodeArray, perimeterNode, callback) {
   const perimeterBox = perimeterNode.attrs || perimeterNode;
   const outOfBoundsNodes = [];
   
   nodeArray.forEach((moduleNode, index) => {
-    const moduleBox = moduleNode.attrs ? moduleNode.attrs : moduleNode;
+    let moduleBox = moduleNode.attrs ? moduleNode.attrs : moduleNode;
+    moduleBox = callback ? callback(moduleNode) : moduleBox;
     
     const exceedsLeft = moduleBox.x < perimeterBox.x;
     const exceedsRight = moduleBox.x + moduleBox.width > perimeterBox.x + perimeterBox.width; 

@@ -40,7 +40,6 @@ export default class ModulesItem extends Component {
   }
   
   highlightRuleBreakingMoudles() {
-    console.log(this.props.stroke)
     const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodes = boardGroup.get(".moduleGroup");
@@ -81,7 +80,6 @@ export default class ModulesItem extends Component {
   }
   
   handleMouseOut() {
-    console.log('hola')
     this.setState({
       strokeWidth: 1
     });

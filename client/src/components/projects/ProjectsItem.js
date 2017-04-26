@@ -14,10 +14,8 @@ const style = {
 
 export default function ProjectLink(props) {
   return (
-  <div style={style} >
-    <span  >
+  <div className="title" >
     {props.projectName}
-    </span>
   </div>
   );
 }

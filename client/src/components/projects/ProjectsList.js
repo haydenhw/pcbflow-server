@@ -31,9 +31,9 @@ class ProjectListContainer extends Component {
     const { projects, thumbnail } = this.props;
     
     if (projects && projects.length > 0) {
-      const projectsList = [...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects].map((project, index) => {
+      const projectsList = [...projects/*...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects*/].map((project, index) => {
         // console.log(thumbnail)
-        const thumbnailSrc = thumbnail ? convertToUrl(thumbnail) : convertToUrl(project.boardSpecs.thumbnail);
+        const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
         return (
           <ProjectsItemFrame 
             key={index}
