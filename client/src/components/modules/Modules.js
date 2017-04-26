@@ -26,7 +26,7 @@ class Modules extends Component{
       .reduce((a, b) => a + b);
     const basePrice = 15
     const totalPriceString = generatePriceString(basePrice + modulePriceSum)
-    
+    store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
   render() {  
     const modules = this.props.modules/*[modulesData[0]].*/.map((module, index) => {

@@ -206,8 +206,10 @@ class DesignTool extends Component {
     const { 
       currentProjectName,
       currentProjectId,
+      currentProjectPrice,
       draggingModuleData ,
       isMouseDownOnIcon,
+      
     } = this.props;
     const {height, width, image } = draggingModuleData;
     const { x, y, isDraggingToBoard, shouldUpdateThumbnail } = this.state;
@@ -262,7 +264,7 @@ class DesignTool extends Component {
               />  
             </div>
         </div>
-        <Footer/>
+        <Footer price={currentProjectPrice}/>
       </div>
      );
    }
@@ -271,6 +273,7 @@ class DesignTool extends Component {
 const mapStateToProps = (state) => ({
   currentProjectName: state.currentProjectInfo.name,
   currentProjectId: state.currentProjectInfo.id,
+  currentProjectPrice: state.currentProjectInfo.price,
   currentProjectModules: state.currentProjectModules,
   boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
