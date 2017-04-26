@@ -238,7 +238,7 @@ export const modulesData = [
     imageNode: null,
     iconSrc: 'images/regulator-5V5A-icon.svg',
     iconHeight: "70px",
-    price: "$9.75",
+    price: 9.75,
     info: null
   },
   {

@@ -1,4 +1,5 @@
 .landing-navbar {
+  position: relative;
   background-color: #f78d1e;
   overflow: hidden;
   width: 100%;

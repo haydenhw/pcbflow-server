@@ -9,9 +9,12 @@ import { modulesData } from 'components/modules/modulesData'
 
 function SideBarIconList(props) {
   const { moduleBank } = props;
-  const iconList = [...modulesData, ...modulesData, ...modulesData] /*modulesData*/.map((module, index) => {
+  const iconList = modulesData /*modulesData*/.map((module, index) => {
     return (
-      <SideBarIconFrame  key={index}>
+      <SideBarIconFrame  key={index} 
+        moduleName={module.text} 
+        modulePrice={module.price}
+      >
         <SideBarIcon 
           moduleData = {module}
           toggleDraggingToBoard = {props.toggleDraggingToBoard}
