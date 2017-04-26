@@ -31,6 +31,12 @@ export const currentProjectInfo = (state = defaultProjectInfo, action) => {
           price: action.price
         }
         break;
+      case actions.UPDATE_LAST_SAVED_TIME:
+        return {
+          ...state,
+          timeLastSaved: action.time
+        }
+        break;
     default:
       return state;
   }

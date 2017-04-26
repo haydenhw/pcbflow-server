@@ -11,9 +11,24 @@
   border-top: 1px solid #adaeb3;
 }
 
-.project-price-wrapper {
+.footer-wrapper {
   font-size: 13px;
-  margin-top: 10px;
+}
+
+.project-price {
   margin-left: 11px;
+  margin-top: 10px;
+}
+
+.time-last-saved {
+  position: absolute;
+  right: 108px;
+  bottom: 10px;
+}
+
+@media only screen and (max-width: 1175px) {
+  .time-last-saved {
+    right: 20px;
+  }
 }
 

@@ -204,17 +204,18 @@ class DesignTool extends Component {
   
   updateLastSaved() {
     const lastSaved = getTimeStamp();
-    console.log(lastSaved)
+    store.dispatch(actions.updateLastSavedTime(lastSaved));
   }
+
   
   render () {
     const { 
       currentProjectName,
       currentProjectId,
       currentProjectPrice,
+      timeLastSaved,
       draggingModuleData ,
       isMouseDownOnIcon,
-      
     } = this.props;
     const {height, width, image } = draggingModuleData;
     const { x, y, isDraggingToBoard, shouldUpdateThumbnail } = this.state;
@@ -270,16 +271,18 @@ class DesignTool extends Component {
               />  
             </div>
         </div>
-        <Footer price={currentProjectPrice}/>
+        <Footer price={currentProjectPrice} timeLastSaved={timeLastSaved}/>
       </div>
      );
    }
 }
 
 const mapStateToProps = (state) => ({
+  
   currentProjectName: state.currentProjectInfo.name,
   currentProjectId: state.currentProjectInfo.id,
   currentProjectPrice: state.currentProjectInfo.price,
+  timeLastSaved: state.currentProjectInfo.timeLastSaved,
   currentProjectModules: state.currentProjectModules,
   boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,

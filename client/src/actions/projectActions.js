@@ -8,6 +8,12 @@ export const updateProjectPrice = (price) => ({
   price
 });
 
+export const UPDATE_LAST_SAVED_TIME = 'UPDATE_LAST_SAVED_TIME'; 
+export const updateLastSavedTime = (time) => ({
+  type: 'UPDATE_LAST_SAVED_TIME',
+  time
+});
+
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
 export const fetchProjectsSuccess = (projects) => ({
   type: 'FETCH_PROJECTS_SUCCESS',
