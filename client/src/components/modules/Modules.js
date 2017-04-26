@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
+import Konva from 'konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -21,6 +22,7 @@ class Modules extends Component{
     const modules = this.props.modules/*[modulesData[0]].*/.map((module, index) => {
     /*  console.log(module.imageSrc)
       console.log(require(`./modules-images/${module.imageSrc}`))*/
+    //  console.log(module.stroke)
       return <ModulesItem 
           key={index}
           index={index}
@@ -39,7 +41,7 @@ class Modules extends Component{
           fontFamily={fontFamily}
           fill={fill}
           opacity={opacity}
-          stroke={stroke}
+          stroke={module.stroke}
           strokeWidth={strokeWidth}
           imageX={module.imageX}
           imageY={module.imageY}
