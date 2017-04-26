@@ -6,6 +6,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import getTimeStamp from 'helpers/getTimeStamp';
 import Board from 'components/board/Board';
 import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
@@ -201,6 +202,10 @@ class DesignTool extends Component {
     })
   }
   
+  updateLastSaved() {
+    const lastSaved = getTimeStamp();
+    console.log(lastSaved)
+  }
   
   render () {
     const { 
@@ -251,6 +256,7 @@ class DesignTool extends Component {
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
             routeToProjects={() => hashHistory.push('/')}
             updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
+            updateLastSaved={this.updateLastSaved}
           />
           <div onMouseMove={this.handleMouseMove.bind(this)}>
             <div ref={(node) => this.stageContainer = node}>

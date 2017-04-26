@@ -15,10 +15,6 @@ class Board extends Component {
     this.updateThumbnail()
   }
   
-  componentDidUpdate() {
-    console.log('updated board')
-  }
-  
   // improves performance
   reRender() {
     const layer = this.refs.boardGroup.getLayer();

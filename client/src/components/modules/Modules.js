@@ -19,13 +19,13 @@ import {
 
 class Modules extends Component{
   
-  componentDidMount() {
-    
+  componentDidUpdate() {
     const modulePriceSum = this.props.modules
       .map((module) => module.price)
       .reduce((a, b) => a + b);
     const basePrice = 15
     const totalPriceString = generatePriceString(basePrice + modulePriceSum)
+    
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
   render() {  

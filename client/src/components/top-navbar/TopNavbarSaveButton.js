@@ -7,8 +7,6 @@ import './top-navbar-styles/TopNavbarSaveButton.css'
 
 export class SaveButton extends Component {
   saveProject() {
-    this.props.updateThumbnail();
-    
     const {
       width,
       height,
@@ -54,13 +52,19 @@ export class SaveButton extends Component {
     })
     
   }
+  
+  handleClick() {
+    this.props.updateLastSaved();
+    this.props.updateThumbnail();
+    this.saveProject();
+  }
 
   render() {
     const style = {
       "marginBottom": "13px"
     }
     return (
-      <button className="save-button" style={style} onClick={this.saveProject.bind(this)}>
+      <button className="save-button" style={style} onClick={this.handleClick.bind(this)}>
         <FontAwesome name="fa-cloud" className="fa-cloud" />
         <span>Save</span>
       </button>

@@ -25,7 +25,10 @@ export default function TopNavbar(props) {
         name='fa-folder-open'
         style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }} />
       </div>
-      <TopNavbarSaveButton updateThumbnail={props.updateThumbnail} />
+      <TopNavbarSaveButton 
+        updateThumbnail={props.updateThumbnail} 
+        updateLastSaved={props.updateLastSaved}
+      />
       <TopNavbarEditableText 
         text={props.projectName} 
         handleNameChange={props.handleNameChange}
