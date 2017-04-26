@@ -15,9 +15,11 @@ export default class ModulesItem extends Component {
     super(props);
     
     this.state = {
-      image: null
+      image: null,
+      strokeWidth: 1
     }
   }
+  
   
   componentDidUpdate(prevProps, prevState) {
     this.highlightRuleBreakingMoudles();
@@ -69,11 +71,22 @@ export default class ModulesItem extends Component {
   }
   
   handleMouseOver() {
+    this.setState({
+      strokeWidth: 2
+    });
+    document.body.style.cursor = 'move';
+    
     store.dispatch(actions.updateSelectedModule(this.props));
     store.dispatch(actions.toggleIsMouseOverModule(true));
   }
   
   handleMouseOut() {
+    console.log('hola')
+    this.setState({
+      strokeWidth: 1
+    });
+    document.body.style.cursor = 'default';
+    
     store.dispatch(actions.toggleIsMouseOverModule(false));
   }
   
@@ -182,7 +195,7 @@ export default class ModulesItem extends Component {
               width={this.props.width} 
               height={this.props.height}
               stroke = {/*borderStroke || */this.props.stroke}
-              strokeWidth = {this.props.strokeWidth}
+              strokeWidth = {this.state.strokeWidth}
             />
                
             {this.props.imageSrc ? image: <Group></Group>}

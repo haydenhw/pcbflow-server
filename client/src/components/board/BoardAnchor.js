@@ -7,6 +7,12 @@ import store from 'reduxFiles/store';
 
 
 class Anchor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      strokeWidth: 2
+    }
+  }
   update () {
     const activeAnchor = this.refs.anchor
     const group = this.refs.anchor.getParent();
@@ -59,7 +65,6 @@ class Anchor extends Component {
       store.dispatch(actions.updateBoardDimensions(boardDimensions));
     }
   
-    //layer.draw();
   }
   
   moveToTop() {
@@ -68,14 +73,26 @@ class Anchor extends Component {
     
     group.setDraggable(false);
     this.refs.anchor.moveToTop();
-    //layer.draw();
   }
   
   draggableOn() {
     const group = this.refs.anchor.getParent();
     const layer = group.getLayer();
     group.setDraggable(true);
-    //layer.draw();
+  }
+  
+  handleMouseOver() {
+    document.body.style.cursor = 'pointer';
+    this.setState({
+      strokeWidth: 4
+    });
+  }
+  
+  handleMouseOut() {
+    document.body.style.cursor = 'default';
+    this.setState({
+      strokeWidth: 2
+    });
   }
   
   render() {
@@ -85,11 +102,13 @@ class Anchor extends Component {
       y={this.props.y}
       stroke='#666'
       fill='#ddd'
-      strokeWidth="2"
+      strokeWidth={this.state.strokeWidth}
       radius="8"
       name={this.props.name}
       draggable="true"
       dragOnTop="false"
+      onMouseOver={this.handleMouseOver.bind(this)}
+      onMouseOut={this.handleMouseOut.bind(this)}
       onMouseDown={this.moveToTop.bind(this)}
       onDragMove={this.update.bind(this)}
       onDragEnd={this.draggableOn.bind(this)} 

@@ -38,7 +38,7 @@ export const modulesData = [
     fontFamily,
     fill,
     strokeWidth,
-    stroke: "#fd8a84", 
+    stroke: "#551A8B", 
     width: 175,
     height: 225,
     rotation: 0,
