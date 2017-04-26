@@ -1,3 +1,9 @@
 language: node_js
 node_js: node
-
+deploy:
+  provider: heroku
+  api_key:
+    secure: sCS0oraQolHbGdocWgi0J0yyjQVWzbIXojliDHpq09zHJzG0czo2XDSXYo6R3F4rIjcJRam7DwkkJjqXDOWJqqUYm9HnhdT675seUowM1z/Z9LSRZk5NoBXFfBnArEiFAdxXH88zDnfI8kM0JdVInxYdSzPaQZnvGmJuGfjb2Xg2qo9dhlwbupoILL+MfwyJI6MiKCA/dOzLn4k9UrjuBZY4LYnCdsmAlY3bidaWY3fmQOiqlUi7yV6os7od2DzxGzu9Mp+t56kYpkUn1ZAVeFMrvpiLSLRDQv1D2rzIbnBPdmqIA+supMoTR0Qu/kMyk5Q29pDKESLzNBxjiD9/fzeTpuarzp9nWSmC3pduwCDsGnFhv6gZBSpds7lRX+yV0qM9zLnBkV+yQh3EBVx9Ut+GJ5OAUKTCR4W99o7m8UMc7WrnwIFXwgwZOXWsovHmY4/HZqBfR5Z+xmr7WJevXmezLOBswjF2iRAhesFMYFEa+m53QtFeV6kD7MK110/JNEpIStFccIkX2+v+56XeuQ5FVIJnstiPbE4cd86Jc4Fs7FJWTg+ERAKn2cDUv36fToLa3ZPljmD74hYtF5eJk5EVhEK7e3sb+8SAwhOo3I3W09HCcgFOz5FWcsKbiIOAnxXlsvKDhG/8X5+doGnLl/s6RAiCw9RUd0zoBRe+w1E=
+  app: bread-pcb-tool
+  on:
+    repo: hayden7913/bread-pcb-tool
