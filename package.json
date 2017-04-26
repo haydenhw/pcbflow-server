@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
     "react-edit-inline": "^1.0.8",
     "react-scripts": "0.8.5"
   },
@@ -39,8 +41,6 @@
   "scripts": {
     "start": "concurrently \"node server.js\"  \"cd client && npm start\"",
     "server": "babel-node server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "mocha"
   }
 }
