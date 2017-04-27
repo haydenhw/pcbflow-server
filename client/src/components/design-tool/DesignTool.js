@@ -23,6 +23,8 @@ import getPerimeterSide from 'helpers/getPerimeterSide';
 import getTimeStamp from 'helpers/getTimeStamp';
 
 import './design-tool-styles/DesignToolToggleInfoButton.css'
+import './design-tool-styles/DesignToolDocumentationCard.css'
+
 
 class DesignTool extends Component {
   constructor(props) {
