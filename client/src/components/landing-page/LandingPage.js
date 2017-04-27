@@ -5,7 +5,12 @@ import './landing-page-styles/LandingPage.css'
 export default function LandingPage(props) {
   const imgUrl ='images/landing-background.jpg'
   const backgroundStyle = {
-    backgroundImage: `url(${imgUrl})`
+    backgroundImage: 
+      `linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+      url(${imgUrl})`
   }
   
   return (
