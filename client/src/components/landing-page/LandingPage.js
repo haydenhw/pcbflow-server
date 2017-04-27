@@ -35,7 +35,6 @@ export default function LandingPage(props) {
               <img className="design-tool-screenshot" src="images/design-tool-screenshot.png" alt=""/>
               <img className="computer-image" src="images/computer.png" alt="computer image"/>
           </div>
-        
         </section>
     </div>
   );

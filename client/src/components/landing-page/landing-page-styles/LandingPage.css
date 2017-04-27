@@ -48,7 +48,7 @@
 }
 
 .landing-page-button {
-  margin: 45px auto;
+  margin: 105px auto;
   background-color: #1fabfb;
   border-radius: 4px;
   padding: 15px 30px;
@@ -59,12 +59,16 @@
   cursor: pointer;
 }
 
+.landing-page-screenshot {
+  background-color: #e6e6e6;
+  padding-top: 40px;
+}
+
 .computer-wrapper {
   position: relative;
   width: 480px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 40px;
 }
 
 .design-tool-screenshot {
