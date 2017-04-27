@@ -36,7 +36,7 @@ class DesignTool extends Component {
       isDraggingToBoard: false,
       shouldRender: false,
       shouldUpdateThumbnail: false,
-      shouldRenderDocumentation: false, 
+      shouldRenderDocumentation: true, 
       image:null
     }
     
