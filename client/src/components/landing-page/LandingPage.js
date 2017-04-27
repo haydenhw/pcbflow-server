@@ -14,7 +14,7 @@ export default function LandingPage(props) {
         <img className="white-logo-image" src="images/white-logo.png" alt=""/>
         <span  className="landing-logo-text" >PCB Design</span>
       </div>
-        <div style={backgroundStyle} className="landing-page-content">
+        <section style={backgroundStyle} className="landing-page-content">
           <div className="landing-page-text">
             <div>Design Production Ready Printed Circuit Boards</div>
             <div>in Record Time</div>
@@ -25,8 +25,13 @@ export default function LandingPage(props) {
                 Get Started
             </div>
           </div>
-        </div>
+        </section>
+        <section className="landing-page-screenshot">
+          <div className="computer-wrapper">
+              <img className="computer-image" src="images/computer.png" alt="computer image"/>
+          </div>
+        
+        </section>
     </div>
   );
 }
-
