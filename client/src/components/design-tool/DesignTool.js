@@ -224,7 +224,6 @@ class DesignTool extends Component {
   recordSavedChanges() {
     store.dispatch(actions.toggleHasUnsavedChanges());
   }
-
   
   render () {
     const { 
@@ -237,7 +236,6 @@ class DesignTool extends Component {
     } = this.props;
     const {height, width, image } = draggingModuleData;
     const { x, y, isDraggingToBoard, shouldUpdateThumbnail } = this.state;
-    
     const draggingModule = ( 
       <Module
         x={x - width/2} 

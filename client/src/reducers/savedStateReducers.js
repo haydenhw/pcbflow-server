@@ -12,7 +12,6 @@ export const hasUnsavedChanges = (state = defaultState, action) => {
     case actions.UPDATE_ANCHOR_POSITIONS:
     case actions.UPDATE_BOARD_POSITION:
     case actions.UPDATE_BOARD_DIMENSIONS:
-    console.log('setting to true')
       return {
         bool: true
       };

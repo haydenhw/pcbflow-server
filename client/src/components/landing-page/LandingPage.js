@@ -16,8 +16,7 @@ export default function LandingPage(props) {
       </div>
         <section style={backgroundStyle} className="landing-page-content">
           <div className="landing-page-text">
-            <div>Design Production Ready Printed Circuit Boards</div>
-            <div>in Record Time</div>
+            <div>Design production ready Printed Circuit Boards in record time</div>
             <div 
               className="landing-page-button" 
               onClick={() => hashHistory.push('/projects')}
@@ -28,6 +27,7 @@ export default function LandingPage(props) {
         </section>
         <section className="landing-page-screenshot">
           <div className="computer-wrapper">
+              <img className="design-tool-screenshot" src="images/design-tool-screenshot.png" alt=""/>
               <img className="computer-image" src="images/computer.png" alt="computer image"/>
           </div>
         

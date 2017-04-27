@@ -60,6 +60,7 @@ export default class ModulesItem extends Component {
     }*/
   }
   
+  
   updateThumbnail()  {
     const module = this.refs.moduleGroup;
     const boardLayer = module.getParent().getParent().getParent();

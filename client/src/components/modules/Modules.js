@@ -32,7 +32,7 @@ class Modules extends Component{
     const modules = this.props.modules/*[modulesData[0]].*/.map((module, index) => {
     /*  console.log(module.imageSrc)
       console.log(require(`./modules-images/${module.imageSrc}`))*/
-    //  console.log(module.stroke)
+    // console.log(module.stroke)
       return <ModulesItem 
           key={index}
           index={index}

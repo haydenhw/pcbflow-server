@@ -20,6 +20,7 @@ const projectSchema = mongoose.Schema({
     y: {type: Number, required: true},
     height: {type: Number, required: true},
     width: {type: Number, required: true},
+    stroke: String,
     rotation: {type: Number, required: true},
     boundToSideIndex: Number,
     innerGroupX: Number,

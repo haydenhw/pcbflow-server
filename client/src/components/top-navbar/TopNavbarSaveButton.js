@@ -19,7 +19,7 @@ export class SaveButton extends Component {
       projectName,
       id
     } = this.props;
-    
+    // console.log(modules)
     const updatedModules = modules.map(module => {
       const x = module.x - topLeftAnchorX;
       const y = module.y - topLeftAnchorY;
