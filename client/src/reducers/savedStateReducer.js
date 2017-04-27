@@ -1,3 +1,5 @@
+import * as actions from '../actions/indexActions';
+
 const shouldUpdate = (
   actions.UPDATE_SELECTED_MODULE ||
   actions.PUSH_TO_CURRENT_PROJECT_MODULES ||
@@ -5,17 +7,28 @@ const shouldUpdate = (
   actions.ROTATE_SELECTED_MODULE
 );
 
+
+
+
 const defaultState = {
   hasUnsavedChanges: false
 }
 
-export const moduleBank = (state = defaultState, action) => {
+export const testReducer = (state = defaultState, action) => {
   switch(action.type) {
-    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+    case actions.UPDATE_SELECTED_MODULE:
+    case actions.PUSH_TO_CURRENT_PROJECT_MODULES:
+    case actions.PUSH_TO_CURRENT_PROJECT_MODULES:
+    case actions.PUSH_TO_CURRENT_PROJECT_MODULES:
+    
+        
        return action.project.moduleBank;
        break;
+       
       
    default:
      return state;
  }
 }
+
+documn
