@@ -6,19 +6,23 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import getTimeStamp from 'helpers/getTimeStamp';
 import Board from 'components/board/Board';
 import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
 import BoardDimensionInput from 'components/board/BoardDimensionForm';
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import SideBar from 'components/side-bar/SideBar';
+import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText'
 import Footer from 'components/footer/Footer';
 import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
+import DocumentationCard from './DesignToolDocumentationCard';
+
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
-import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText'
+import getTimeStamp from 'helpers/getTimeStamp';
+
+import './design-tool-styles/DesignToolToggleInfoButton.css'
 
 class DesignTool extends Component {
   constructor(props) {
@@ -30,6 +34,7 @@ class DesignTool extends Component {
       isDraggingToBoard: false,
       shouldRender: false,
       shouldUpdateThumbnail: false,
+      shouldRenderDocumentation: false, 
       image:null
     }
     
@@ -57,9 +62,10 @@ class DesignTool extends Component {
   
   setRouteHook() {
     this.props.router.setRouteLeaveHook(this.props.route, () => {
-      if (true/*this.state.unsaved*/)
-        return 'You have unsaved changes, are you sure you want to leave the page?'
-    })
+      console.log(this.props.hasUnsavedChanges)
+      if (this.props.hasUnsavedChanges)
+        return 'Changes you made will not be saved. Are you sure you want to leave?'
+    });
   }
   
   
@@ -207,6 +213,17 @@ class DesignTool extends Component {
     const lastSaved = getTimeStamp();
     store.dispatch(actions.updateLastSavedTime(lastSaved));
   }
+  
+  toggleDocumentationCard() {
+    this.setState({
+      shouldRenderDocumentation: !this.state.shouldRenderDocumentation
+    })
+    console.log(this.state.shouldRenderDocumentation)
+  }
+  
+  recordSavedChanges() {
+    store.dispatch(actions.toggleHasUnsavedChanges());
+  }
 
   
   render () {
@@ -256,30 +273,32 @@ class DesignTool extends Component {
           <TopNavbar 
             projectName={currentProjectName} 
             handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
-            routeToProjects={() => hashHistory.push('/')}
+            routeToProjects={() => hashHistory.push('/projects')}
             updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
             updateLastSaved={this.updateLastSaved}
+            recordSavedChanges={this.recordSavedChanges}
           />
           <div onMouseMove={this.handleMouseMove.bind(this)}>
             <div ref={(node) => this.stageContainer = node}>
               {sideBar}
               <DesignToolStage
                 updateState = {this.updateState.bind(this)}
+                toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
                 shouldRenderBoard = { currentProjectName }
                 shouldUpdateThumbnail={ shouldUpdateThumbnail }
-                toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
                 draggingModule = { draggingModule }
               />  
             </div>
         </div>
         <Footer price={currentProjectPrice} timeLastSaved={timeLastSaved}/>
+        {this.state.shouldRenderDocumentation && <DocumentationCard /> }
+        <button className="toggle-info-button" onClick={this.toggleDocumentationCard.bind(this)}>Info</button>
       </div>
      );
    }
 }
 
 const mapStateToProps = (state) => ({
-  
   currentProjectName: state.currentProjectInfo.name,
   currentProjectId: state.currentProjectInfo.id,
   currentProjectPrice: state.currentProjectInfo.price,
@@ -291,8 +310,7 @@ const mapStateToProps = (state) => ({
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   draggingModuleData: state.draggingModule,
   selectedModuleIndex: state.selectedModule.index,
-  
-  
+  hasUnsavedChanges: state.hasUnsavedChanges.bool
 });
 
 DesignTool = withRouter(DesignTool);
