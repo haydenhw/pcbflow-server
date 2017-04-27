@@ -20,7 +20,6 @@ export default class ModulesItem extends Component {
     }
   }
   
-  
   componentDidUpdate(prevProps, prevState) {
     this.highlightRuleBreakingMoudles();
   }
@@ -40,7 +39,7 @@ export default class ModulesItem extends Component {
   }
   
   highlightRuleBreakingMoudles() {
-    const draggingModuleNode = this.refs.moduleGroup;
+  /*const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodes = boardGroup.get(".moduleGroup");
     const boardNode = boardGroup.getParent().get(".board")[0];
@@ -58,7 +57,7 @@ export default class ModulesItem extends Component {
     }
     if(!this.props.isDraggingToBoard) {
       enforceRules(moduleNodes, boardNode, addRedStroke, removeRedStroke);
-    }
+    }*/
   }
   
   updateThumbnail()  {
