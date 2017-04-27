@@ -1,4 +1,5 @@
 import React from 'react';
+import { hashHistory } from 'react-router';
 import './landing-page-styles/LandingPage.css'
 
 export default function LandingPage(props) {
@@ -6,6 +7,7 @@ export default function LandingPage(props) {
   const backgroundStyle = {
     backgroundImage: `url(${imgUrl})`
   }
+  
   return (
     <div>
       <div className="landing-navbar">
@@ -16,7 +18,12 @@ export default function LandingPage(props) {
           <div className="landing-page-text">
             <div>Design Production Ready Printed Circuit Boards</div>
             <div>in Record Time</div>
-            <div className="landing-page-button">Get Started</div>
+            <div 
+              className="landing-page-button" 
+              onClick={() => hashHistory.push('/projects')}
+              >
+                Get Started
+            </div>
           </div>
         </div>
     </div>

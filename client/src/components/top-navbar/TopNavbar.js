@@ -13,7 +13,6 @@ const titleStyle = {
 export default function TopNavbar(props) {
   
   const handleFolderIconClick = () => {
-    console.log('clicked', props)
     props.updateThumbnail();
     props.routeToProjects();
   }
@@ -28,6 +27,8 @@ export default function TopNavbar(props) {
       <TopNavbarSaveButton 
         updateThumbnail={props.updateThumbnail} 
         updateLastSaved={props.updateLastSaved}
+        recordSavedChanges={props.recordSavedChanges}
+        
       />
       <TopNavbarEditableText 
         text={props.projectName} 

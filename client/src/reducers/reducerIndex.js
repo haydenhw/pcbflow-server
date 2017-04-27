@@ -3,6 +3,7 @@ import {currentProjectModules, moduleBank , draggingModule, selectedModule } fro
 import { projectList, currentProjectInfo } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
+import { hasUnsavedChanges } from './savedStateReducers';
 
 export default combineReducers({
     projectList,
@@ -13,5 +14,6 @@ export default combineReducers({
     selectedModule,
     boardSpecs,
     anchorPositions,
-    mouseEvents
+    mouseEvents,
+    hasUnsavedChanges
 });

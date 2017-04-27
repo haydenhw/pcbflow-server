@@ -57,6 +57,7 @@ export class SaveButton extends Component {
     this.props.updateLastSaved();
     this.props.updateThumbnail();
     this.saveProject();
+    this.props.recordSavedChanges();
   }
 
   render() {

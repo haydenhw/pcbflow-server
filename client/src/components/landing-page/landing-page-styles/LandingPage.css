@@ -31,28 +31,32 @@
 }
 
 
-.landing-page-body {
+.landing-page-content {
+  height: 500px;
   margin: 0 auto;
   max-width: 100%;
+  background-size: cover;
   position: relative;
+  padding-top: 200px;
 }
 
-.landing-page-background-image {
-  position: relative;
-  float: left;
-  width: 100%;
-}
 
-.text {
-  padding: 14% 0 0 44%;
-  position: absolute;
-  max-width: 100%;
-  font-family: 'Dancing Script', cursive;
-  color: #fff;
-  font-size: 2em;
+.landing-page-text {
+  font-size: 30px;
+  color: white;
+  width: 50%;
+  margin: 0 auto;
   text-align: center;
 }
 
-.cover-image-wrapper {
-  
+.landing-page-button {
+  margin: 20px auto;
+  background-color: #1fabfb;
+  border-radius: 4px;
+  padding: 15px 30px;
+  width: 320px;
+}
+
+.landing-page-button:hover {
+  cursor: pointer;
 }
