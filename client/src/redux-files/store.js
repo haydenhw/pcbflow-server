@@ -6,6 +6,6 @@ import rootReducer from 'reducers/reducerIndex';
 import * as actions from 'actions/indexActions';
 
 export default createStore(
-  rootReducer, 
-  applyMiddleware(thunk, /*logger()*/)
+  rootReducer,
+  applyMiddleware(thunk /* logger()*/),
 );

@@ -1,10 +1,9 @@
 import React from 'react';
 
 import generatePriceString from 'helpers/generatePriceString';
-import './side-bar-styles/SideBarIconFrame.css'
+import './side-bar-styles/SideBarIconFrame.css';
 
 export default function IconFrame(props) {
-  
   return (
     <div className="icon-frame-container">
       <div className="icon-frame-title">
@@ -17,5 +16,5 @@ export default function IconFrame(props) {
         {generatePriceString(props.modulePrice)}
       </div>
     </div>
-  )
-} 
+  );
+}

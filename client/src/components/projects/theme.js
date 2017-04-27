@@ -7,7 +7,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-const Theme = (props) => (
+const Theme = props => (
   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
     { props.children }
   </MuiThemeProvider>

@@ -5,38 +5,32 @@ import * as actions from 'actions/indexActions';
 import { getModulesUrl } from 'config/endpointUrls.js';
 
 class SelectMoudles extends Component {
-  
+
   componentDidMount() {
     this.props.getData(getModulesUrl);
   }
 
   render() {
     if (this.props.modules) {
-      
-      const moduleList = this.props.modules.map((module, index) => {
-        return <li key={index}> {module.function} </li> 
-      });
-      
+      const moduleList = this.props.modules.map((module, index) => <li key={index}> {module.function} </li>);
+
       return (
-          <ul>
-              {moduleList}
-          </ul>
+        <ul>
+          {moduleList}
+        </ul>
       );
-    } 
-    else {
-      return <div></div>
     }
+
+    return <div />;
   }
-};
+}
 
 const mapStateToProps = (state, props) => ({
-  modules: state.modules
+  modules: state.modules,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-      getData: (url) => dispatch(actions.fetchModules(url))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  getData: url => dispatch(actions.fetchModules(url)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectMoudles);

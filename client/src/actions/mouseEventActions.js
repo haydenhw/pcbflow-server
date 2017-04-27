@@ -1,23 +1,23 @@
-export const MOUSE_DOWN_ON_ICON = 'MOUSE_DOWN_ON_ICON'; 
-export const mouseDownOnIcon = (bool) => ({
+export const MOUSE_DOWN_ON_ICON = 'MOUSE_DOWN_ON_ICON';
+export const mouseDownOnIcon = bool => ({
   type: 'MOUSE_DOWN_ON_ICON',
-  isDown: bool
+  isDown: bool,
 });
 
-export const TOGGLE_IS_MOUSE_DOWN = 'TOGGLE_IS_MOUSE_DOWN'; 
-export const toggleIsMouseDown = (bool) => ({
+export const TOGGLE_IS_MOUSE_DOWN = 'TOGGLE_IS_MOUSE_DOWN';
+export const toggleIsMouseDown = bool => ({
   type: 'TOGGLE_IS_MOUSE_DOWN',
-  isDown: bool
+  isDown: bool,
 });
 
-export const TOGGLE_IS_MOUSE_OVER_MODULE = 'TOGGLE_IS_MOUSE_OVER_MODULE'; 
-export const toggleIsMouseOverModule = (bool) => ({
+export const TOGGLE_IS_MOUSE_OVER_MODULE = 'TOGGLE_IS_MOUSE_OVER_MODULE';
+export const toggleIsMouseOverModule = bool => ({
   type: 'TOGGLE_IS_MOUSE_OVER_MODULE',
-  isOver: bool
+  isOver: bool,
 });
 
-export const TOGGLE_IS_CONTEXT_MENU_OPEN = 'TOGGLE_IS_CONTEXT_MENU_OPEN'; 
-export const toggleIsContextMenuOpen = (bool) => ({
+export const TOGGLE_IS_CONTEXT_MENU_OPEN = 'TOGGLE_IS_CONTEXT_MENU_OPEN';
+export const toggleIsContextMenuOpen = bool => ({
   type: 'TOGGLE_IS_CONTEXT_MENU_OPEN',
-  isOpen: bool
+  isOpen: bool,
 });

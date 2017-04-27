@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import DesignTool from 'components/design-tool/DesignTool';
@@ -12,12 +12,12 @@ import './reset.css';
 
 
 ReactDOM.render(
-  <Provider store={ store }>
+  <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component ={LandingPage}/> 
-      <Route path="/projects" component ={Projects}/> 
-      <Route path="/design/:projectId" component={DesignTool}/> 
+      <Route path="/" component={LandingPage} />
+      <Route path="/projects" component={Projects} />
+      <Route path="/design/:projectId" component={DesignTool} />
     </Router>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

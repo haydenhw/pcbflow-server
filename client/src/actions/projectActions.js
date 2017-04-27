@@ -2,70 +2,66 @@ import { Route, hashHistory } from 'react-router';
 import store from 'reduxFiles/store';
 import { projectsUrl } from '../config/endpointUrls';
 
-export const UPDATE_PROJECT_PRICE = 'UPDATE_PROJECT_PRICE'; 
-export const updateProjectPrice = (price) => ({
+export const UPDATE_PROJECT_PRICE = 'UPDATE_PROJECT_PRICE';
+export const updateProjectPrice = price => ({
   type: 'UPDATE_PROJECT_PRICE',
-  price
+  price,
 });
 
-export const UPDATE_LAST_SAVED_TIME = 'UPDATE_LAST_SAVED_TIME'; 
-export const updateLastSavedTime = (time) => ({
+export const UPDATE_LAST_SAVED_TIME = 'UPDATE_LAST_SAVED_TIME';
+export const updateLastSavedTime = time => ({
   type: 'UPDATE_LAST_SAVED_TIME',
-  time
+  time,
 });
 
-export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS'; 
-export const fetchProjectsSuccess = (projects) => ({
+export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
+export const fetchProjectsSuccess = projects => ({
   type: 'FETCH_PROJECTS_SUCCESS',
-  projects
+  projects,
 });
 
 export function fetchProjects() {
   return (dispatch) => {
     fetch(projectsUrl)
-    .then((res) => {
-      return res.json();
-    })
-    .then(data => {
+    .then(res => res.json())
+    .then((data) => {
       dispatch(fetchProjectsSuccess(data));
     })
-    .catch(err => {
-      console.error(err)
-    })
-  }
+    .catch((err) => {
+      console.error(err);
+    });
+  };
 }
 
-export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS'; 
-export const fetchProjectByIdSuccess = (project) => ({
+export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
+export const fetchProjectByIdSuccess = project => ({
   type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
-  project
+  project,
 });
 
 export function fetchProjectById(projectId, currentRoute) {
-  const projectUrl = `${projectsUrl}/${projectId}`
+  const projectUrl = `${projectsUrl}/${projectId}`;
   return (dispatch) => {
     fetch(projectUrl)
-    .then((res) => {
-      return res.json();
-    })
-    .then(data => {
+    .then(res => res.json())
+    .then((data) => {
       dispatch(fetchProjectByIdSuccess(data));
-      const designRoute =`/design/${projectId}`;
-      
-      if(currentRoute !== designRoute){
-        hashHistory.push(designRoute)
+      const designRoute = `/design/${projectId}`;
+
+      if (currentRoute !== designRoute) {
+        hashHistory.push(designRoute);
       }
     })
-    .catch(err => {
-      console.error(err)
-    })
-  }
+    .catch((err) => {
+      console.error(err);
+    });
+  };
 }
 
-export const POST_NEW_PROJECT_SUCCESS = 'POST_NEW_PROJECT_SUCCESS'; 
-export const postNewProjectSuccess = (modules) => ({
+export const POST_NEW_PROJECT_SUCCESS = 'POST_NEW_PROJECT_SUCCESS';
+export const postNewProjectSuccess = modules => ({
   type: 'POST_NEW_PROJECT_SUCCESS',
-  modules
+  modules,
 });
 
 export function postNewProject(newProject) {
@@ -73,80 +69,76 @@ export function postNewProject(newProject) {
     fetch(
       projectsUrl,
       {
-          method: "POST",
-          body: JSON.stringify(newProject),
-          headers: new Headers({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        })
+        method: 'POST',
+        body: JSON.stringify(newProject),
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
       })
-      .then((res) => {
-        return res.json();
-      })
-      .then(data => {
+      .then(res => res.json())
+      .then((data) => {
         const projectId = data._id;
         console.log('New project saved');
         dispatch(fetchProjectById(projectId));
       })
-      .catch(err => {
-        console.error(err)
-      })
-  }
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 }
 
-export const UPDATE_PROJECT_SUCCESS = 'UPDATE_PROJECT_SUCCESS'; 
-export const updateProjectSuccess = (project) => ({
+export const UPDATE_PROJECT_SUCCESS = 'UPDATE_PROJECT_SUCCESS';
+export const updateProjectSuccess = project => ({
   type: 'UPDATE_PROJECT_SUCCESS',
-  project
+  project,
 });
 
 export function updateProject(data, projectId) {
   return (dispatch) => {
-    const projectUrl = `${projectsUrl}/${projectId}`
+    const projectUrl = `${projectsUrl}/${projectId}`;
     fetch(projectUrl, {
-        method: 'put',
-        body: JSON.stringify(data),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
+      method: 'put',
+      body: JSON.stringify(data),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then((data) => {
+        dispatch(updateProjectSuccess(data));
       })
-      .then((res) => {
-        return res.json();
-      })
-      .then(data => {
-        dispatch(updateProjectSuccess(data))
-      })
-      .catch(err => {
-        console.error(err)
-      })
-  }
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 }
 
-export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS'; 
+export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS';
 export const deleteProjectSuccess = (projectId, projects) => ({
   type: 'DELETE_PROJECT_SUCCESS',
-  projectId
+  projectId,
 });
 
 export function deleteProject(projectId, projects) {
-  const url = `${projectsUrl}/${projectId}`
+  const url = `${projectsUrl}/${projectId}`;
   return (dispatch) => {
     fetch(
       url,
       {
-          method: "DELETE",
-          headers: new Headers({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        })
+        method: 'DELETE',
+        headers: new Headers({
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        }),
       })
       .then((res) => {
-        console.log('delete successful')
+        console.log('delete successful');
         dispatch(fetchProjects());
       })
-      .catch(err => {
-        console.error(err)
-      })
-  }
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 }

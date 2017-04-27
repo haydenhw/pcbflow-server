@@ -1,62 +1,61 @@
-import getPerimeterSide from 'helpers/getPerimeterSide'
+import getPerimeterSide from 'helpers/getPerimeterSide';
 
 function buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs) {
-  const { 
+  const {
     x,
     y,
     width,
-    height
+    height,
   } = selectedModuleProps;
   const { topLeft } = anchorPositions;
-  let { boundToSideIndex } = selectedModuleProps;
-  if (true/*Number.isInteger(boundToSideIndex)*/) {
-    
+  const { boundToSideIndex } = selectedModuleProps;
+  if (true/* Number.isInteger(boundToSideIndex)*/) {
     const coordinateData = {
       boundToSide: getPerimeterSide(boundToSideIndex),
       moduleX: x,
       moduleY: y,
       moduleWidth: width,
-      moduleHeight: height, 
+      moduleHeight: height,
       topLeftAnchorX: topLeft.x,
       topLeftAnchorY: topLeft.y,
       boardWidth: boardSpecs.width,
-      boardHeight: boardSpecs.height
-    }
+      boardHeight: boardSpecs.height,
+    };
     return coordinateData;
   }
 }
 
 export default function bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs) {
   const cd = buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs);
-  switch(cd.boundToSide) {
-    case "bottom":
+  switch (cd.boundToSide) {
+    case 'bottom':
       return {
         x: cd.moduleX,
-        y: cd.topLeftAnchorY + cd.boardHeight - cd.moduleHeight
-      }
+        y: cd.topLeftAnchorY + cd.boardHeight - cd.moduleHeight,
+      };
       break;
-    case "left":
+    case 'left':
       return {
         x: cd.topLeftAnchorX + 0.5 * (cd.moduleHeight - cd.moduleWidth),
-        y: cd.moduleY
-      }
+        y: cd.moduleY,
+      };
       break;
-    case "top":
+    case 'top':
       return {
         x: cd.moduleX,
-        y: cd.topLeftAnchorY
-      }
+        y: cd.topLeftAnchorY,
+      };
       break;
-    case "right":
+    case 'right':
       return {
-         x: cd.topLeftAnchorX + cd.boardWidth - 0.5 * (cd.moduleHeight + cd.moduleWidth),
-         y: cd.moduleY
-      }
+        x: cd.topLeftAnchorX + cd.boardWidth - 0.5 * (cd.moduleHeight + cd.moduleWidth),
+        y: cd.moduleY,
+      };
       break;
     default:
       return {
         x: cd.moduleX,
-        y: cd.moduleY
-      }
+        y: cd.moduleY,
+      };
   }
 }

@@ -1,2 +1,2 @@
 export const getModulesUrl = 'modules';
-export const projectsUrl = 'projects'; 
+export const projectsUrl = 'projects';

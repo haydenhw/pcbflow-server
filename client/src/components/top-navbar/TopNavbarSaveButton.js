@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
 
 import { projectsUrl } from 'config/endpointUrls';
-import './top-navbar-styles/TopNavbarSaveButton.css'
+import './top-navbar-styles/TopNavbarSaveButton.css';
 
 export class SaveButton extends Component {
   saveProject() {
@@ -17,42 +17,41 @@ export class SaveButton extends Component {
       topLeftAnchorY,
       modules,
       projectName,
-      id
+      id,
     } = this.props;
     // console.log(modules)
-    const updatedModules = modules.map(module => {
+    const updatedModules = modules.map((module) => {
       const x = module.x - topLeftAnchorX;
       const y = module.y - topLeftAnchorY;
-      return Object.assign({}, module, {x, y});
-    })
-    
+      return Object.assign({}, module, { x, y });
+    });
+
     const updatedProject = {
       projectName,
-      "boardSpecs": {
+      boardSpecs: {
         width,
         height,
         thumbnail,
         x: x + topLeftAnchorX,
-        y: y + topLeftAnchorY
+        y: y + topLeftAnchorY,
       },
-      "modules": updatedModules
-    }
-    
+      modules: updatedModules,
+    };
+
     const url = `${projectsUrl}/${id}`;
     fetch(url, {
       method: 'put',
       body: JSON.stringify(updatedProject),
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     })
-    .catch(err => {
-      console.error(err)
-    })
-    
+    .catch((err) => {
+      console.error(err);
+    });
   }
-  
+
   handleClick() {
     this.props.updateLastSaved();
     this.props.updateThumbnail();
@@ -62,8 +61,8 @@ export class SaveButton extends Component {
 
   render() {
     const style = {
-      "marginBottom": "13px"
-    }
+      marginBottom: '13px',
+    };
     return (
       <button className="save-button" style={style} onClick={this.handleClick.bind(this)}>
         <FontAwesome name="fa-cloud" className="fa-cloud" />
@@ -73,7 +72,7 @@ export class SaveButton extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   width: state.boardSpecs.width,
   height: state.boardSpecs.height,
   x: state.boardSpecs.x,
@@ -83,7 +82,7 @@ const mapStateToProps = (state) => ({
   topLeftAnchorY: state.anchorPositions.topLeft.y,
   modules: state.currentProjectModules,
   projectName: state.currentProjectInfo.name,
-  id: state.currentProjectInfo.id
+  id: state.currentProjectInfo.id,
 });
 
 export default connect(mapStateToProps)(SaveButton);
