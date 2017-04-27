@@ -30,7 +30,7 @@ export const modulesData = [
     imageNode: null,
     iconSrc: 'images/microsd-slot-icon.svg',
     iconHeight: "70px",
-    price: 13.5,
+    price: 5,
     info: null
   },
   {
@@ -56,7 +56,7 @@ export const modulesData = [
     imageNode: null,
     iconSrc: 'images/usb-ethernet-module-icon.svg',
     iconHeight: "70px",
-    price: 13.5,
+    price: 12,
     info: null
   },
   {
@@ -71,7 +71,7 @@ export const modulesData = [
     boundToSideIndex: null,
     innerGroupX: 0,
     innerGroupY: 0,
-    text: "Micro-B Jack",
+    text: "USB Hub 4 Port",
     textX: 5,
     textY: 12.5,
     imageX: 20,
@@ -82,7 +82,7 @@ export const modulesData = [
     imageNode: null,
     iconSrc: 'images/USB-hub-4-port-icon.svg',
     iconHeight: "70px",
-    price: 13.5,
+    price: 2.25,
     info: null
   },
   {
@@ -108,7 +108,7 @@ export const modulesData = [
     imageNode: null,
     iconSrc: 'images/micro-b-jack-icon.svg',
     iconHeight: "70px",
-    price: 13.5,
+    price: 2.25,
     info: null
   },
   {
@@ -134,7 +134,7 @@ export const modulesData = [
     imageNode: null,
     iconSrc: 'images/COM-connector.svg',
     iconHeight: "70px",
-    price: 13.5,
+    price: 15,
     info: null
   },
   {
