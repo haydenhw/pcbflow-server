@@ -75,12 +75,12 @@ export class SaveButton extends Component {
 const mapStateToProps = state => ({
   width: state.boardSpecs.width,
   height: state.boardSpecs.height,
-  x: state.boardSpecs.x,
-  y: state.boardSpecs.y,
+  x: state.boardSpecs.present.x,
+  y: state.boardSpecs.present.y,
   thumbnail: state.boardSpecs.thumbnail,
   topLeftAnchorX: state.anchorPositions.topLeft.x,
   topLeftAnchorY: state.anchorPositions.topLeft.y,
-  modules: state.currentProjectModules,
+  modules: state.currentProjectModules.present,
   projectName: state.currentProjectInfo.name,
   id: state.currentProjectInfo.id,
 });

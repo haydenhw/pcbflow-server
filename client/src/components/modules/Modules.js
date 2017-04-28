@@ -20,13 +20,17 @@ import {
 class Modules extends Component {
 
   componentDidUpdate() {
-    const modulePriceSum = this.props.modules
-      .map(module => module.price)
-      .reduce((a, b) => a + b);
-    const basePrice = 15;
-    const totalPriceString = generatePriceString(basePrice + modulePriceSum);
+    if (this.props.modules.length > 0) {
+      const modulePriceSum = this.props.modules
+        .map(module => module.price)
+        .reduce((a, b) => a + b);
+      const basePrice = 15;
+      const totalPriceString = generatePriceString(basePrice + modulePriceSum);
 
-    store.dispatch(actions.updateProjectPrice(totalPriceString));
+      //store.dispatch(actions.updateProjectPrice(totalPriceString));
+    }
+    
+    
   }
   render() {
     const modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
@@ -76,10 +80,10 @@ class Modules extends Component {
 }
 
 const mapStateToProps = state => ({
-  modules: state.currentProjectModules,
+  modules: state.currentProjectModules.present,
   topLeftAnchor: state.anchorPositions.topLeft,
   selectedModuleProps: state.selectedModule,
-  boardSpecs: state.boardSpecs,
+  boardSpecs: state.boardSpecs.present,
   anchorPositions: state.anchorPositions,
 });
 

@@ -300,7 +300,7 @@ const mapStateToProps = state => ({
   currentProjectId: state.currentProjectInfo.id,
   currentProjectPrice: state.currentProjectInfo.price,
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
-  currentProjectModules: state.currentProjectModules,
+  currentProjectModules: state.currentProjectModules.present,
   boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   isMouseDown: state.mouseEvents.isMouseDown,

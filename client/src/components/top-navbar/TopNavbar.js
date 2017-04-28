@@ -3,6 +3,8 @@ import FontAwesome from 'react-fontawesome';
 
 import TopNavbarEditableText from './TopNavbarEditableText';
 import TopNavbarSaveButton from './TopNavbarSaveButton';
+import TopNavbarUndoButton from './TopNavbarUndoButton';
+
 import './top-navbar-styles/TopNavbar.css';
 
 const titleStyle = {
@@ -25,16 +27,16 @@ export default function TopNavbar(props) {
           style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
         />
       </div>
-      <TopNavbarSaveButton
-        updateThumbnail={props.updateThumbnail}
-        updateLastSaved={props.updateLastSaved}
-        recordSavedChanges={props.recordSavedChanges}
-
-      />
       <TopNavbarEditableText
         text={props.projectName}
         handleNameChange={props.handleNameChange}
       />
+      <TopNavbarSaveButton
+        updateThumbnail={props.updateThumbnail}
+        updateLastSaved={props.updateLastSaved}
+        recordSavedChanges={props.recordSavedChanges}
+      />
+      <TopNavbarUndoButton />
     </div>
   );
 }
