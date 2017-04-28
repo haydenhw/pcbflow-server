@@ -14,7 +14,7 @@ export default combineReducers({
   moduleBank,
   draggingModule,
   selectedModule,
-  boardSpecs: undoable(boardSpecs),
+  boardSpecs,
   anchorPositions,
   mouseEvents,
   hasUnsavedChanges,

@@ -75,8 +75,8 @@ export class SaveButton extends Component {
 const mapStateToProps = state => ({
   width: state.boardSpecs.width,
   height: state.boardSpecs.height,
-  x: state.boardSpecs.present.x,
-  y: state.boardSpecs.present.y,
+  x: state.boardSpecs.x,
+  y: state.boardSpecs.y,
   thumbnail: state.boardSpecs.thumbnail,
   topLeftAnchorX: state.anchorPositions.topLeft.x,
   topLeftAnchorY: state.anchorPositions.topLeft.y,

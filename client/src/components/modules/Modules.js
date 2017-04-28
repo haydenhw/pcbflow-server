@@ -83,7 +83,7 @@ const mapStateToProps = state => ({
   modules: state.currentProjectModules.present,
   topLeftAnchor: state.anchorPositions.topLeft,
   selectedModuleProps: state.selectedModule,
-  boardSpecs: state.boardSpecs.present,
+  boardSpecs: state.boardSpecs,
   anchorPositions: state.anchorPositions,
 });
 
