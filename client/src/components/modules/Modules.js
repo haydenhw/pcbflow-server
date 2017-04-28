@@ -27,7 +27,7 @@ class Modules extends Component {
       const basePrice = 15;
       const totalPriceString = generatePriceString(basePrice + modulePriceSum);
 
-      //store.dispatch(actions.updateProjectPrice(totalPriceString));
+      store.dispatch(actions.updateProjectPrice(totalPriceString));
     }
     
     
@@ -80,7 +80,7 @@ class Modules extends Component {
 }
 
 const mapStateToProps = state => ({
-  modules: state.currentProjectModules.present,
+  modules: state.currentProjectModules,
   topLeftAnchor: state.anchorPositions.topLeft,
   selectedModuleProps: state.selectedModule,
   boardSpecs: state.boardSpecs,

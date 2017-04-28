@@ -18,7 +18,7 @@ export const hasUnsavedChanges = (state = defaultState, action) => {
       break;
     case actions.TOGGLE_HAS_UNSAVED_CHANGES:
       return {
-        bool: false,
+        bool: !state.bool,
       };
     default:
       return state;

@@ -263,7 +263,6 @@ class DesignTool extends Component {
       height: '150px',
       width: '200px',
     };
-
     return (
       <div>
         {/* {true? <img style={imageStyle} src={this.props.boardSpecs.thumbnail} /> : <div></div>} */}
@@ -300,14 +299,14 @@ const mapStateToProps = state => ({
   currentProjectId: state.currentProjectInfo.id,
   currentProjectPrice: state.currentProjectInfo.price,
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
-  currentProjectModules: state.currentProjectModules.present,
+  currentProjectModules: state.currentProjectModules,
   boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   isMouseDown: state.mouseEvents.isMouseDown,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   draggingModuleData: state.draggingModule,
   selectedModuleIndex: state.selectedModule.index,
-  hasUnsavedChanges: state.hasUnsavedChanges.bool,
+/*  hasUnsavedChanges: state.hasUnsavedChanges.bool*/
 });
 
 DesignTool = withRouter(DesignTool);
