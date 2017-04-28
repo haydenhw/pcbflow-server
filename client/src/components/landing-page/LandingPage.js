@@ -1,6 +1,10 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
+
+import LandingPageCard from './LandingPageCard'
+
 import './landing-page-styles/LandingPage.css';
+import './landing-page-styles/floatGrid.css';
 
 export default function LandingPage(props) {
   const imgUrl = 'images/landing-background.jpg';
@@ -14,7 +18,7 @@ export default function LandingPage(props) {
   };
 
   return (
-    <div>
+    <div className="landing-page-body">
       <div className="landing-navbar">
         <img className="white-logo-image" src="images/white-logo.png" alt="" />
         <span className="landing-logo-text" >PCB Design</span>
@@ -35,6 +39,31 @@ export default function LandingPage(props) {
           <img className="design-tool-screenshot" src="images/design-tool-screenshot.png" alt="" />
           <img className="computer-image" src="images/computer.png" alt="computer image" />
         </div>
+        <section className="row">
+          <div className="landing-page-card-wrapper">
+            <div className="col4">
+              <LandingPageCard 
+                className="landing-page-card "
+                title="Easy to Use Interface"
+                content="Lorem ipsum ispusm lorem"
+              />
+            </div>
+            <div className="col4">
+              <LandingPageCard 
+                className="landing-page-card "
+                title="Easy to Use Interface"
+                content="Lorem ipsum ispusm lorem"
+              />
+            </div>
+            <div className="col4">
+              <LandingPageCard 
+                className="landing-page-card "
+                title="Easy to Use Interface"
+                content="Lorem ipsum ispusm lorem"
+              />
+            </div>
+          </div>
+        </section>
       </section>
     </div>
   );

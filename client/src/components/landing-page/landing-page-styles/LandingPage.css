@@ -1,3 +1,7 @@
+.landing-page-body {
+  padding-bottom: 20px;
+}
+
 .landing-navbar {
   position: relative;
   background-color: #f78d1e;
@@ -60,7 +64,7 @@
 }
 
 .landing-page-screenshot {
-  background-color: #e6e6e6;
+  background-color: #f7f9fb;
   padding-top: 40px;
 }
 
@@ -77,4 +81,11 @@
   right: 3px;
   height: 254px;
   width: 442px;
+}
+
+.landing-page-card-wrapper {
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
 }

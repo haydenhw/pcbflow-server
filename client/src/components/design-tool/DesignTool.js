@@ -26,7 +26,6 @@ import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
 
 
-
 class DesignTool extends Component {
   constructor(props) {
     super(props);
