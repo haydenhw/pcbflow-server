@@ -6,7 +6,7 @@ import { projectList, currentProjectInfo } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { hasUnsavedChanges } from './savedStateReducers';
-import {todos} from './todos';
+import todos from './todos';
 
 export default combineReducers({
   projectList,
@@ -19,5 +19,5 @@ export default combineReducers({
   anchorPositions,
   mouseEvents,
   hasUnsavedChanges,
-  todos: undoable(todos)
+  todos
 });

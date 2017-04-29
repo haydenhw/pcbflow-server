@@ -12,7 +12,7 @@ export function TopNavbarUndoButton(props) {
   return (
     <div className="undo-button">
         <TodoList />
-        <button onClick={() => store.dispatch(ActionCreators.undo())}>
+        <button onClick={() => store.dispatch(actions.undo())}>
           Undo
         </button>
       
