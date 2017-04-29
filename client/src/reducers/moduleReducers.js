@@ -68,7 +68,6 @@ export const currentProjectModules = (state = [], action) => {
           x,
           y,
         };
-
         return i === index ? updatedModuleProps : module;
       });
       break;

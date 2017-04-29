@@ -117,7 +117,7 @@ const mapStateToProps = state => ({
   isMouseDown: state.mouseEvents.isMouseDown,
   selectedModuleIndex: state.selectedModule.index,
   selectedModuleProps: state.selectedModule,
-  boardSpecs: state.boardSpecs,
+  boardSpecs: state.boardSpecs.present,
   anchorPositions: state.anchorPositions,
 });
 

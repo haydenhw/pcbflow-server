@@ -80,7 +80,7 @@ const mapStateToProps = state => ({
   thumbnail: state.boardSpecs.thumbnail,
   topLeftAnchorX: state.anchorPositions.topLeft.x,
   topLeftAnchorY: state.anchorPositions.topLeft.y,
-  modules: state.currentProjectModules,
+  modules: state.currentProjectModules.present,
   projectName: state.currentProjectInfo.name,
   id: state.currentProjectInfo.id,
 });
