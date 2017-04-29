@@ -38,12 +38,15 @@ export default function LandingPage(props) {
         <div className="computer-wrapper">
           <img className="design-tool-screenshot" src="images/design-tool-screenshot.png" alt="" />
           <img className="computer-image" src="images/computer.png" alt="computer image" />
+          <img src="images/dots.svg" alt=""/>
+          <img className="circuit-board-image" src="https://easyeda.com/assets/static/images/v4/Sample-Projects-developed-on-EasyEDA-2.jpg" alt="circuit board"/>
         </div>
         <section className="row">
           <div className="landing-page-card-wrapper">
             <div className="col4">
               <LandingPageCard 
                 className="landing-page-card "
+                icon="https://easyeda.com/assets/static/images/v4/tb3.png"
                 title="Easy to Use Interface"
                 content="Lorem ipsum ispusm lorem"
               />
@@ -51,6 +54,7 @@ export default function LandingPage(props) {
             <div className="col4">
               <LandingPageCard 
                 className="landing-page-card "
+                icon="https://easyeda.com/assets/static/images/v4/tb3.png"
                 title="Easy to Use Interface"
                 content="Lorem ipsum ispusm lorem"
               />
@@ -58,10 +62,12 @@ export default function LandingPage(props) {
             <div className="col4">
               <LandingPageCard 
                 className="landing-page-card "
+                icon="https://easyeda.com/assets/static/images/v4/tb3.png"
                 title="Easy to Use Interface"
                 content="Lorem ipsum ispusm lorem"
               />
             </div>
+          
           </div>
         </section>
       </section>
