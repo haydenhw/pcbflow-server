@@ -68,19 +68,45 @@
   padding-top: 40px;
 }
 
-.computer-wrapper {
-  position: relative;
-  width: 480px;
+.design-to-pcb-visual {
+  width: 80%;
   margin: 0 auto;
   text-align: center;
 }
 
+.design-to-pcb-visual:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.computer-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-right: 36px;
+}
+
+.inline-image {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.computer-image {
+  width: 380px;
+  
+}
+
+.dots {
+  margin-right: 36px;
+}
+
 .design-tool-screenshot {
   position: absolute;
-  top: 34px;
-  right: 3px;
-  height: 254px;
-  width: 442px;
+  top: 25px;
+  left: 27px;
+  height: 188px;
+  width: 326px;
 }
 
 .landing-page-card-wrapper {

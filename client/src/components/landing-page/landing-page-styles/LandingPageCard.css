@@ -3,3 +3,7 @@
   height: 350px;
   background-color: white;
 }
+
+.inline-image {
+  display: inline-block;
+}
