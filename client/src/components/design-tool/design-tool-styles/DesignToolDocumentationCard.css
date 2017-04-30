@@ -9,7 +9,25 @@
   width: 200px;
   border: 1px solid #adaeb3;
   font-size: .7em;
-  background-color: white
+  background-color: white;
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.list {
+  padding: 0;
+}
+
+.or {
+  font-weight: bold;
+  font-size: 8px;
+}
+
+.item {
+  list-style-type: none;
+  list-style-position:inside;
+  margin:5px;
+  padding:0;
 }
 
 .heading {
@@ -17,5 +35,21 @@
 }
 
 .sub-heading {
-  
+  font-size: 12px;
 }
+
+.menu-item {
+  display: inline-block;
+  background-color: #e5e5e5;
+  border-radius: 4px;
+  padding: 3px;
+  font-family:"Ubuntu Mono"; 
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 3px;
+  height: 10px;
+}
+

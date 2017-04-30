@@ -1,0 +1,32 @@
+.round-button {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  width: 40px; 
+  height: 40px;
+}
+.round-button-circle {
+  position: relative;
+  width: 100%;
+  height:0;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  overflow:hidden;
+  background: #fc8d2a; 
+  box-shadow: 0 0 3px gray;
+
+}
+.round-button-circle:hover {
+  background: #f99c46;
+  cursor: pointer;
+}
+
+.fa-question {
+  position: absolute;
+  z-index: 100;
+  top: 7px;
+  left: 12px;
+  color: white;
+  font-size: 24px;
+}
+
