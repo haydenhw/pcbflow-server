@@ -33,6 +33,7 @@ class Modules extends Component {
     
   }
   render() {
+    console.log(this.props.modules)
     const modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
     /*  console.log(module.imageSrc)
       console.log(require(`./modules-images/${module.imageSrc}`))*/
@@ -80,7 +81,7 @@ class Modules extends Component {
 }
 
 const mapStateToProps = state => ({
-  modules: state.currentProjectModules,
+  modules: state.currentProjectModules.present,
   topLeftAnchor: state.anchorPositions.topLeft,
   selectedModuleProps: state.selectedModule,
   boardSpecs: state.boardSpecs,
