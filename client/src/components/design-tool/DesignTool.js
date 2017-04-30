@@ -47,12 +47,21 @@ class DesignTool extends Component {
     this.bound_handleMouseMove = this.handleMouseMove.bind(this);
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
+  
+  keyPress(e) {
+    const evtobj = window.event? event : e;
+    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+      store.dispatch(actions.undo());
+    }
+  }
+  
 
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
+    document.onkeydown = this.keyPress;
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
   }
 
