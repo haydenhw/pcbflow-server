@@ -41,7 +41,7 @@ export default function LandingPage(props) {
             <img className="design-tool-screenshot" src="images/design-tool-screenshot.png" alt="" />
           </div>
           <img className="dots inline-image" src="images/dots.svg" alt=""/>
-          <img className="circuit-board-image inline-image" src="https://easyeda.com/assets/static/images/v4/Sample-Projects-developed-on-EasyEDA-2.jpg" alt="circuit board"/>
+          <img className="circuit-board-image inline-image" src="images/real-pcb.jpg" alt="circuit board"/>
         </section>
         
         <section className="row">
@@ -49,7 +49,7 @@ export default function LandingPage(props) {
             <div className="col4">
               <LandingPageCard 
                 className="landing-page-card "
-                icon="https://easyeda.com/assets/static/images/v4/tb3.png"
+                icon="images/info-card-test-icon.png"
                 title="Easy to Use Interface"
                 content="Complete your desgin in no time with PCBDesign's user friendly drag and drop interface. No engineers required"
               />
@@ -57,7 +57,7 @@ export default function LandingPage(props) {
             <div className="col4">
               <LandingPageCard 
                 className="landing-page-card "
-                icon="https://easyeda.com/assets/static/images/v4/tb3.png"
+                icon="images/info-card-test-icon.png"
                 title="Instant Price Estimates"
                 content="Get a price estimate that updates automatically as you add and remove modules so you can keeep you design under budget"
               />
@@ -65,7 +65,7 @@ export default function LandingPage(props) {
             <div className="col4">
               <LandingPageCard 
                 className="landing-page-card "
-                icon="https://easyeda.com/assets/static/images/v4/tb3.png"
+                icon="images/info-card-test-icon.png"
                 title="From Design to Production"
                 content="You only need to focus on the design. We'll take care of the production logistics for you"
               />
