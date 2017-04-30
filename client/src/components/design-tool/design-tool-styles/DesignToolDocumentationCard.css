@@ -1,17 +1,27 @@
 .documentation-card {
   margin-top: 55px;
   box-shadow: 0 4px 25px rgba(0,0,0,.3);
+  padding-top: 12px;
   padding-left: 10px;
   position: absolute;
   bottom: 55px;
   right: 45px;
   height: 300px;
-  width: 200px;
+  width: 208px;
   border: 1px solid #adaeb3;
   font-size: .7em;
   background-color: white;
-  text-align: center;
+  text-align: left;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+.doc-wrapper {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.sub-doc {
+  padding-bottom: 5px;
 }
 
 .list {
@@ -19,6 +29,7 @@
 }
 
 .or {
+  margin-left: 0px;
   font-weight: bold;
   font-size: 8px;
 }
@@ -26,16 +37,23 @@
 .item {
   list-style-type: none;
   list-style-position:inside;
-  margin:5px;
+  margin: 5px 0;
   padding:0;
+  line-height: 9px;
+  font-size: 12px
 }
 
 .heading {
-  font-size: 15px;
+  line-height: 9px;
+}
+
+.sub-doc:nth-child(n+2) h2{
+  margin-bottom: 14px;
 }
 
 .sub-heading {
   font-size: 12px;
+  line-height: 4px;
 }
 
 .menu-item {
