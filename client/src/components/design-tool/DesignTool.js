@@ -243,7 +243,7 @@ class DesignTool extends Component {
       ? ''
       : sideBar;
       
-    const infoButtonIconClass = shouldRenderDocumentation ? "fa-question" : "fa-close";
+    const infoButtonIconClass = shouldRenderDocumentation ? "fa-close" : "fa-question";
       
     const infoButtonIcon = (
       <FontAwesome
