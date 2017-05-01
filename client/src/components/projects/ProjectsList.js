@@ -26,7 +26,7 @@ class ProjectListContainer extends Component {
   }
 
   render() {
-    const { projects, thumbnail } = this.props;
+    const { projects } = this.props;
 
     if (projects && projects.length > 0) {
       const projectsList = [...projects/* ...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects*/].map((project, index) => {

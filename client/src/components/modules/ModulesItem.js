@@ -37,11 +37,12 @@ export default class ModulesItem extends Component {
   }
 
   highlightRuleBreakingMoudles() {
-  /* const draggingModuleNode = this.refs.moduleGroup;
+   const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodes = boardGroup.get(".moduleGroup");
     const boardNode = boardGroup.getParent().get(".board")[0];
-
+    moduleNodes[0].attrs.test = this.props.stroke;
+    console.log(moduleNodes[0].attrs.test);
     const addRedStroke = node => {
       node.attrs.name === "moduleGroup"
         ? node.get(".moduleBorder")[0].attrs.stroke = "red"
@@ -50,12 +51,12 @@ export default class ModulesItem extends Component {
 
     const removeRedStroke = node => {
       node.attrs.name === "moduleGroup"
-        ? node.get(".moduleBorder")[0].attrs.stroke = this.props.stroke
+        ? node.get(".moduleBorder")[0].attrs.stroke = "black"
         : node.attrs.stroke = null
     }
     if(!this.props.isDraggingToBoard) {
       enforceRules(moduleNodes, boardNode, addRedStroke, removeRedStroke);
-    }*/
+    }
   }
 
   updateThumbnail() {
