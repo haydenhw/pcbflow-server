@@ -172,7 +172,7 @@ class DesignTool extends Component {
     const evtobj = window.event ? event : evt;
     const {isMouseOverModule, selectedModuleIndex} = this.props;
 
-    if (isMouseOverModule && evtobj.code === "Delete") {
+    if (isMouseOverModule && evtobj.code === 'Delete') {
       store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
     }
   }
@@ -258,7 +258,7 @@ class DesignTool extends Component {
       ? ''
       : sideBar;
       
-    const infoButtonIconClass = shouldRenderDocumentation ? "fa-close" : "fa-question";
+    const infoButtonIconClass = shouldRenderDocumentation ? 'fa-close' : 'fa-question';
       
     const infoButtonIcon = (
       <FontAwesome

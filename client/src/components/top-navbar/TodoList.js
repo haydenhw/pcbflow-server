@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 const TodoList = (props) => {
-  let todos = "hello";
+  let todos = 'hello';
   
   if(props.todos) {
     todos = props.todos.map((todo, index) => {
@@ -11,7 +11,7 @@ const TodoList = (props) => {
     }); 
   }
   
-  return <div style={{display: "inline-block"}}>{todos}</div>
+  return <div style={{display: 'inline-block'}}>{todos}</div>
   
 }
 

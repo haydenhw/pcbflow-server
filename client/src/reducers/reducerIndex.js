@@ -1,17 +1,18 @@
 import { combineReducers } from 'redux';
-import undoable from 'redux-undo';
+import undoable from 'helpers/undoable';
 
 import { currentProjectModules, moduleBank, draggingModule, selectedModule } from './moduleReducers';
 import { projectList, currentProjectInfo } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { hasUnsavedChanges } from './savedStateReducers';
-import todos from './todos';
+import { todos } from './todos';
+
 
 export default combineReducers({
   projectList,
   currentProjectInfo,
-  currentProjectModules,
+  currentProjectModules: undoable(currentProjectModules),
   moduleBank,
   draggingModule,
   selectedModule,
@@ -19,5 +20,5 @@ export default combineReducers({
   anchorPositions,
   mouseEvents,
   hasUnsavedChanges,
-  todos
+  todos: undoable(todos)
 });

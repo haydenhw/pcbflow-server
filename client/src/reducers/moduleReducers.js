@@ -7,7 +7,7 @@ export const moduleList = (state = [], action) => {
       modules: action.modules,
     };
   }
-
+  
   return state;
 };
 
@@ -51,76 +51,82 @@ export const moduleBank = (state = [], action) => {
 };
 
 export const currentProjectModules = (state = [], action) => {
-  switch (action.type) {
-    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
-      return action.project.modules;
-      break;
+  if (action.type) {
+    switch (action.type) {
+      case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+        return action.project.modules;
+        break;
 
-    case actions.PUSH_TO_CURRENT_PROJECT_MODULES:
-      return [...state, action.module];
-      break;
+      case actions.PUSH_TO_CURRENT_PROJECT_MODULES:
+        console.log(action)
+        return [...state, action.module];
+        break;
 
-    case actions.UPDATE_MODULE_POSITION:
-      return state.map((module, i) => {
-        const { x, y, index } = action.modulePosition;
-        const updatedModuleProps = {
-          ...module,
-          x,
-          y,
-        };
-        return i === index ? updatedModuleProps : module;
-      });
-      break;
+      case actions.UPDATE_MODULE_POSITION:
+        console.log(action)
+        return state.map((module, i) => {
+          const { x, y, index } = action.modulePosition;
+          const updatedModuleProps = {
+            ...module,
+            x,
+            y,
+          };
+          return i === index ? updatedModuleProps : module;
+        });
+        break;
 
-    case actions.UPDATE_MODULE_IMAGE:
-      return state.map((module, i) => {
-        const { imageNode, index } = action.moduleData;
-        const updatedModuleProps = {
-          ...module,
-          imageNode,
-        };
+      case actions.UPDATE_MODULE_IMAGE:
+        console.log(action)
+        return state.map((module, i) => {
+          const { imageNode, index } = action.moduleData;
+          const updatedModuleProps = {
+            ...module,
+            imageNode,
+          };
 
-        return i === index ? updatedModuleProps : module;
-      });
-      break;
+          return i === index ? updatedModuleProps : module;
+        });
+        break;
 
-    case actions.ROTATE_SELECTED_MODULE:
+      case actions.ROTATE_SELECTED_MODULE:
 
-      const {
-        rotation,
-        boundToSideIndex,
-        parentGroupX,
-        parentGroupY,
-        innerGroupX,
-        innerGroupY,
-        width,
-        height,
-        index,
-      } = action.rotationData;
-
-      return state.map((module, i) => {
-        const updatedModuleProps = {
-          ...module,
+        const {
+          rotation,
           boundToSideIndex,
+          parentGroupX,
+          parentGroupY,
           innerGroupX,
           innerGroupY,
-          rotation,
-          x: parentGroupX,
-          y: parentGroupY,
-        };
+          width,
+          height,
+          index,
+        } = action.rotationData;
 
-        return i === index ? updatedModuleProps : module;
-      });
+        return state.map((module, i) => {
+          const updatedModuleProps = {
+            ...module,
+            boundToSideIndex,
+            innerGroupX,
+            innerGroupY,
+            rotation,
+            x: parentGroupX,
+            y: parentGroupY,
+          };
 
-    case actions.DELETE_SELECTED_MODULE:
-      const newState = [
-        ...state.slice(0, action.moduleIndex),
-        ...state.slice(action.moduleIndex + 1),
-      ];
-      return newState;
-      break;
+          return i === index ? updatedModuleProps : module;
+        });
 
-    default:
-      return state;
+      case actions.DELETE_SELECTED_MODULE:
+      console.log(action)
+        const newState = [
+          ...state.slice(0, action.moduleIndex),
+          ...state.slice(action.moduleIndex + 1),
+        ];
+        return newState;
+        break;
+
+      default:
+        return state;
+    }
   }
 };
