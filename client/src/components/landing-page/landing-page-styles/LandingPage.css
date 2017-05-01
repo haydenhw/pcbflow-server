@@ -1,5 +1,8 @@
+
+
 .landing-page-body {
   padding-bottom: 20px;
+  font-family: Lato;
 }
 
 .landing-navbar {
@@ -34,6 +37,14 @@
   margin: 0 auto;
 }
 
+.landing-page-main {
+  padding-top: 50px;
+}
+
+.landing-page-card-section {
+  padding-top: 30px;
+}
+
 .landing-page-content {
   height: 500px;
   margin: 0 auto;
@@ -41,6 +52,19 @@
   background-size: cover;
   position: relative;
   padding-top: 200px;
+}
+
+.landing-page-section-heading {
+  text-align: center;
+}
+
+.landing-page-section-heading h2 {
+  font-weight: lighter;
+}
+
+.landing-page-section-heading p {
+  text-align: center;
+  font-weight: lighter;
 }
 
 .landing-page-text {
@@ -63,14 +87,11 @@
   cursor: pointer;
 }
 
-.landing-page-screenshot {
-  background-color: #f7f9fb;
-  padding-top: 40px;
-}
-
 .design-to-pcb-visual {
   margin: 0 auto;
+  padding-top: 25px;
   text-align: center;
+  
 }
 
 .design-to-pcb-visual:before {
@@ -109,6 +130,11 @@
   left: 27px;
   height: 188px;
   width: 326px;
+  
+}
+
+.landing-page-card-section {
+  background-color: #f7f9fb
 }
 
 .landing-page-card-wrapper {
@@ -117,9 +143,7 @@
   text-align: center;
 }
 
-
-
-@media only screen and (max-width: 1125px) {
+@media only screen and (max-width: 1175px) {
   .dots {
     display: none;
   }
@@ -129,17 +153,6 @@
     margin-right: 36px;
   }
   
-  .col2 {
-    width: 16.66%;
-  }
-  .col3 {
-    width: 33.33%;
-  }
-
-  .col12 {
-    width: 100%;
-    text-align: left;
-  }
 }
 
 @media only screen and (max-width: 1175px) {

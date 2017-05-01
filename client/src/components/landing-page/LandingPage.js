@@ -25,7 +25,7 @@ export default function LandingPage(props) {
       </div>
       <section style={backgroundStyle} className="landing-page-content">
         <div className="landing-page-text">
-          <div>Design production ready Printed Circuit Boards in record time</div>
+          <span>Design production ready Printed Circuit Boards in record time</span>
           <div
             className="landing-page-button"
             onClick={() => hashHistory.push('/projects')}
@@ -34,7 +34,11 @@ export default function LandingPage(props) {
             </div>
           </div>
         </section>
-        <section className="landing-page-screenshot">
+        <main className="landing-page-main">
+          <div className="landing-page-section-heading">
+            <h2>This is a heading</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lacinia ac magna id pellentesque. Donec.</p>
+          </div>
           <section className="design-to-pcb-visual">
             <div className="computer-wrapper">
               <img className="computer-image inline-image" src="images/computer.png" alt="computer image" />
@@ -45,11 +49,15 @@ export default function LandingPage(props) {
             <img className="circuit-board-image inline-image" src="images/real-pcb.jpg" alt="circuit board"/>
           </section>
           
-          <section className="row">
+          <section className="landing-page-card-section row">
+            <div className="landing-page-section-heading">
+              <h2>This is a heading</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lacinia ac magna id pellentesque. Donec.</p>
+            </div>
             <div className="landing-page-card-wrapper">
               <div className="col4">
                 <LandingPageCard 
-                  className="landing-page-card "
+                  className="landing-page-card"
                   icon="images/info-card-test-icon.png"
                   title="Easy to Use Interface"
                   content="Complete your desgin in no time with PCBDesign's user friendly drag and drop interface. No engineers required"
@@ -74,7 +82,7 @@ export default function LandingPage(props) {
               
             </div>
           </section>
-        </section>
+        </main>
       </div>
     );
   }

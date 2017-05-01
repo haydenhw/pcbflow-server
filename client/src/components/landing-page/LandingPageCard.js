@@ -8,8 +8,8 @@ export default function LandingPageCard(props) {
       <div className="card-icon-frame">
         <img src={props.icon} alt="info card icon"/>
       </div>
-      <h1>{props.title}</h1>
-      <p>{props.content}</p>
+      <h1 className>{props.title}</h1>
+      <p className>{props.content}</p>
     </div>
   );
 }
