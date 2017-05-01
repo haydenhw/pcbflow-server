@@ -58,12 +58,10 @@ export const currentProjectModules = (state = [], action) => {
         break;
 
       case actions.PUSH_TO_CURRENT_PROJECT_MODULES:
-        console.log(action)
         return [...state, action.module];
         break;
 
       case actions.UPDATE_MODULE_POSITION:
-        console.log(action)
         return state.map((module, i) => {
           const { x, y, index } = action.modulePosition;
           const updatedModuleProps = {
@@ -76,7 +74,6 @@ export const currentProjectModules = (state = [], action) => {
         break;
 
       case actions.UPDATE_MODULE_IMAGE:
-        console.log(action)
         return state.map((module, i) => {
           const { imageNode, index } = action.moduleData;
           const updatedModuleProps = {
@@ -117,7 +114,6 @@ export const currentProjectModules = (state = [], action) => {
         });
 
       case actions.DELETE_SELECTED_MODULE:
-      console.log(action)
         const newState = [
           ...state.slice(0, action.moduleIndex),
           ...state.slice(action.moduleIndex + 1),

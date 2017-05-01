@@ -3,6 +3,10 @@ import DesignToolDocumentationCardKey from './DesignToolDocumentationCardKey';
 
 export default function DesignToolDocumentationCard(props) {
   const deleteKey =  <DesignToolDocumentationCardKey text="del" />
+  const ctrlKey =  <DesignToolDocumentationCardKey text="ctrl" />
+  const zKey =  <DesignToolDocumentationCardKey text="z" />
+  const yKey =  <DesignToolDocumentationCardKey text="y" />
+  
   return (
     <div className="documentation-card" >
       <div className="doc-wrapper">
@@ -27,6 +31,14 @@ export default function DesignToolDocumentationCard(props) {
               <div className="menu-item">rotate</div>
             </li>
           </ul>
+        </div>
+        <div className="sub-doc">
+          <h2 className="sub-heading">History</h2>
+          <ul className="list">
+            <li className="item">Undo: {ctrlKey} + {zKey} </li>
+            <li className="item">Redo: {ctrlKey} + {yKey} </li>
+          </ul>
+            <p>Note: changes to the board dimensions cannot be undone</p>
         </div>
       </div>
     </div>

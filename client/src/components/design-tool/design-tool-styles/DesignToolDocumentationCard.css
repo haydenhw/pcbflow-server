@@ -6,7 +6,7 @@
   position: absolute;
   bottom: 55px;
   right: 45px;
-  height: 300px;
+  height: 350px;
   width: 208px;
   border: 1px solid #adaeb3;
   font-size: .7em;
@@ -21,7 +21,7 @@
 }
 
 .sub-doc {
-  padding-bottom: 5px;
+  margin-bottom: 25px;
 }
 
 .list {
@@ -44,7 +44,7 @@
 }
 
 .heading {
-  line-height: 9px;
+  line-height: 10px;
 }
 
 .sub-doc:nth-child(n+2) h2{
@@ -69,5 +69,12 @@
   vertical-align: middle;
   margin: 0 3px;
   height: 10px;
+}
+
+.doc-wrapper p {
+  font-style: italic;
+  margin-top: 5px;
+  color: #464a4e;
+
 }
 
