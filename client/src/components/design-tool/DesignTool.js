@@ -3,6 +3,8 @@ import {Layer, Rect, Stage, Group} from 'react-konva';
 import {connect} from 'react-redux';
 import {withRouter, hashHistory} from 'react-router';
 import {ContextMenu, MenuItem, ContextMenuTrigger} from 'react-contextmenu';
+import FontAwesome from 'react-fontawesome';
+
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -16,6 +18,7 @@ import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText';
 import Footer from 'components/footer/Footer';
 import DesignToolStage from './DesignToolStage';
 import SaveButton from './DesignToolSaveButton';
+import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
 
 import checkCollision from 'helpers/checkCollision';
@@ -36,7 +39,7 @@ class DesignTool extends Component {
       shouldRender: false,
       shouldUpdateThumbnail: false,
       shouldRenderDocumentation: true,
-      image: null
+      image: null,
     };
 
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
@@ -44,12 +47,26 @@ class DesignTool extends Component {
     this.bound_handleMouseMove = this.handleMouseMove.bind(this);
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
+  
+  keyPress(evt) {
+    const evtobj = window.event ? event : evt;
+    
+    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+      store.dispatch(actions.undo());
+    }
+    
+    if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
+      store.dispatch(actions.redo());
+    }
+  }
+  
 
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
+    document.onkeydown = this.keyPress;
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
   }
 
@@ -152,9 +169,10 @@ class DesignTool extends Component {
   }
 
   handleKeyUp(evt) {
+    const evtobj = window.event ? event : evt;
     const {isMouseOverModule, selectedModuleIndex} = this.props;
 
-    if (isMouseOverModule) {
+    if (isMouseOverModule && evtobj.code === "Delete") {
       store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
     }
   }
@@ -232,13 +250,27 @@ class DesignTool extends Component {
       isMouseDownOnIcon
     } = this.props;
     const {height, width, image} = draggingModuleData;
-    const {x, y, isDraggingToBoard, shouldUpdateThumbnail} = this.state;
+    const {x, y, isDraggingToBoard, shouldUpdateThumbnail, shouldRenderDocumentation} = this.state;
     const draggingModule = (<Module x={x - width / 2} y={y - height / 2} width={draggingModuleData.width} height={draggingModuleData.height} stroke={draggingModuleData.stroke} strokeWidth={draggingModuleData.strokeWidth} imageX={draggingModuleData.imageX} imageY={draggingModuleData.imageY} imageWidth={draggingModuleData.imageWidth} imageHeight={draggingModuleData.imageHeight} imageSrc={draggingModuleData.imageSrc} imageNode={draggingModuleData.imageNode} isDraggingToBoard/>);
 
     let sideBar = (<SideBar toggleDraggingToBoard={this.toggleDraggingToBoard.bind(this)}/>);
     sideBar = this.state.isDraggingToBoard
       ? ''
       : sideBar;
+      
+    const infoButtonIconClass = shouldRenderDocumentation ? "fa-close" : "fa-question";
+      
+    const infoButtonIcon = (
+      <FontAwesome
+         className={infoButtonIconClass}
+         name={infoButtonIconClass}
+         style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+       /> 
+    )
+     
+    
+      
+      
     const imageStyle = {
       height: '150px',
       width: '200px'
@@ -254,7 +286,10 @@ class DesignTool extends Component {
           </div>
         </div>
         <Footer price={currentProjectPrice} timeLastSaved={timeLastSaved}/> {this.state.shouldRenderDocumentation && <DocumentationCard/>}
-        <button className="toggle-info-button" onClick={this.toggleDocumentationCard.bind(this)}>Info</button>
+        <DesignToolInfoButton 
+          clickHandler = {this.toggleDocumentationCard.bind(this)} 
+          icon={infoButtonIcon}
+        />
       </div>
     );
   }
