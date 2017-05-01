@@ -48,11 +48,24 @@ class DesignTool extends Component {
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
   
+<<<<<<< HEAD
   keyPress(e) {
     const evtobj = window.event? event : e;
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
       store.dispatch(actions.undo());
     }
+=======
+  keyPress(evt) {
+    const evtobj = window.event ? event : evt;
+    
+    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+      store.dispatch(actions.undo());
+    }
+    
+    if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
+      store.dispatch(actions.redo());
+    }
+>>>>>>> documentation-style
   }
   
 
@@ -61,6 +74,10 @@ class DesignTool extends Component {
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
+<<<<<<< HEAD
+=======
+    document.body.addEventListener('scroll', function() {console.log('hh')});
+>>>>>>> documentation-style
     document.onkeydown = this.keyPress;
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
   }
@@ -164,9 +181,10 @@ class DesignTool extends Component {
   }
 
   handleKeyUp(evt) {
+    const evtobj = window.event ? event : evt;
     const {isMouseOverModule, selectedModuleIndex} = this.props;
 
-    if (isMouseOverModule) {
+    if (isMouseOverModule && evtobj.code === "Delete") {
       store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
     }
   }

@@ -9,7 +9,6 @@ import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail from 'helpers/generateThumbnail';
 
-
 export default class ModulesItem extends Component {
   constructor(props) {
     super(props);

@@ -18,25 +18,27 @@ import {
 } from 'config/moduleConfig';
 
 class Modules extends Component {
-
+  
   componentDidUpdate() {
-    if (this.props.modules.length > 0) {
+    const { modules } = this.props;
+    if (modules && modules.length > 0) {
       const modulePriceSum = this.props.modules
-        .map(module => module.price)
-        .reduce((a, b) => a + b);
+      .map(module => module.price)
+      .reduce((a, b) => a + b);
       const basePrice = 15;
       const totalPriceString = generatePriceString(basePrice + modulePriceSum);
-
+      
       store.dispatch(actions.updateProjectPrice(totalPriceString));
     }
     
     
   }
   render() {
-    const modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
-    /*  console.log(module.imageSrc)
-      console.log(require(`./modules-images/${module.imageSrc}`))*/
-    // console.log(module.stroke)
+    let modules = [];
+    
+    if (this.props.modules) {
+      modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
+  
       <ModulesItem
         key={index}
         index={index}
@@ -70,13 +72,14 @@ class Modules extends Component {
         boardSpecs={this.props.boardSpecs}
         isDraggingToBoard={false}
       />);
+    }
     return (
       <Group>
         {modules}
       </Group>
     );
   }
-
+  
 }
 
 const mapStateToProps = state => ({

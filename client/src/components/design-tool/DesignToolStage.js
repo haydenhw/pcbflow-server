@@ -50,7 +50,7 @@ class DesignToolStage extends Component {
     const { boundToSideIndex } = this.props.selectedModuleProps;
     let newParentGroupCoordinates;
     let newInnerGroupCoordinates;
-
+    
     newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
     newInnerGroupCoordinates = (
     rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
@@ -117,7 +117,7 @@ const mapStateToProps = state => ({
   isMouseDown: state.mouseEvents.isMouseDown,
   selectedModuleIndex: state.selectedModule.index,
   selectedModuleProps: state.selectedModule,
-  boardSpecs: state.boardSpecs.present,
+  boardSpecs: state.boardSpecs,
   anchorPositions: state.anchorPositions,
 });
 
