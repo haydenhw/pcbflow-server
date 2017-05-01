@@ -1,5 +1,3 @@
-
-
 .landing-page-body {
   padding-bottom: 20px;
   font-family: Lato;
@@ -33,6 +31,15 @@
   vertical-align: middle;
 }
 
+.landing-page-text {
+  font-size: 30px;
+  color: white;
+  width: 50%;
+  margin: 0 auto;
+  font-weight: 400;
+  text-align: center;
+}
+
 .landing-page-body-wrapper {
   margin: 0 auto;
 }
@@ -52,9 +59,11 @@
   background-size: cover;
   position: relative;
   padding-top: 200px;
+  
 }
 
 .landing-page-section-heading {
+  padding: 0 20px;
   text-align: center;
 }
 
@@ -63,16 +72,9 @@
 }
 
 .landing-page-section-heading p {
+  color: #6d7784;
   text-align: center;
   font-weight: lighter;
-}
-
-.landing-page-text {
-  font-size: 30px;
-  color: white;
-  width: 50%;
-  margin: 0 auto;
-  text-align: center;
 }
 
 .landing-page-button {
@@ -89,7 +91,8 @@
 
 .design-to-pcb-visual {
   margin: 0 auto;
-  padding-top: 25px;
+  padding-top: 50px;
+  padding-bottom: 85px;
   text-align: center;
   
 }
@@ -139,6 +142,7 @@
 
 .landing-page-card-wrapper {
   margin: 0 auto;
+  margin-top: 40px;
   margin-bottom: 20px;
   text-align: center;
 }

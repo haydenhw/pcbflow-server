@@ -66,6 +66,7 @@ class DesignTool extends Component {
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
+    document.body.addEventListener('scroll', function() {console.log('hh')});
     document.onkeydown = this.keyPress;
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
   }
