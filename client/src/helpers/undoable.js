@@ -9,22 +9,19 @@ export default function undoable(reducer) {
 
   // Return a reducer that handles undo and redo
   return function (state = initialState, action) {
-    const { past, present, future } = state
-
+    const { past, present, future } = state;
+    
     switch (action.type) {
       case 'UNDO':
-        const previous = past[past.length - 1]
-        if (previous && previous[previous.length - 1]) {
-          console.log(previous[previous.length - 1].imageNode)
-          console.log(past)
-          console.log(present)
-        }
-        const newPast = past.slice(0, past.length - 1)
+        const shouldSkipElement = callback && callback(past);
+        const element = shouldSkipElement ? 2 : 1;
+        const previous = past[past.length - element]
+        const newPast = past.slice(0, past.length - element)
         return {
           past: newPast,
-          present: previous,
-          future: [ present, ...future ]
-        }
+            present: previous,
+            future: [ present, ...future ]
+          }
       case 'REDO':
         const next = future[0]
         const newFuture = future.slice(1)
@@ -36,8 +33,7 @@ export default function undoable(reducer) {
       default:
         // Delegate handling the action to the passed reducer
         const newPresent = reducer(present, action)
-        console.log(present === newPresent, JSON.stringify(present) === JSON.stringify(newPresent), present, newPresent)
-        // console.log(present === newPresent, present, newPresent)
+  
         if (JSON.stringify(present) === JSON.stringify(newPresent)) {
           return state
         }
