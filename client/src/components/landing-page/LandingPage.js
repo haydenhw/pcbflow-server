@@ -38,9 +38,10 @@ export default function LandingPage(props) {
           <section className="design-to-pcb-visual">
             <div className="computer-wrapper">
               <img className="computer-image inline-image" src="images/computer.png" alt="computer image" />
-              <img className="design-tool-screenshot" src="images/design-tool-screenshot.png" alt="" />
+              <img className="design-tool-screenshot" src="images/design-tool-screenshot.png" alt="app screenshot" />
             </div>
-            <img className="dots inline-image" src="images/dots.svg" alt=""/>
+            <img className="dots inline-image" src="images/dots.svg" alt="dots"/>
+            <img className="less-dots inline-image" src="images/less-dots.svg" alt="dots"/>
             <img className="circuit-board-image inline-image" src="images/real-pcb.jpg" alt="circuit board"/>
           </section>
           
