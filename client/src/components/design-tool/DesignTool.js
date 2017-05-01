@@ -79,7 +79,6 @@ class DesignTool extends Component {
 
   setRouteHook() {
     this.props.router.setRouteLeaveHook(this.props.route, () => {
-      console.log(this.props.hasUnsavedChanges);
       if (this.props.hasUnsavedChanges) {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }

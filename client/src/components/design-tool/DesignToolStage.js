@@ -18,7 +18,7 @@ class DesignToolStage extends Component {
   updateThumbnail() {
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
-
+    
     store.dispatch(actions.updateBoardThumbnail(thumbnail));
   }
 
@@ -118,7 +118,7 @@ const mapStateToProps = state => ({
   selectedModuleIndex: state.selectedModule.index,
   selectedModuleProps: state.selectedModule,
   boardSpecs: state.boardSpecs,
-  anchorPositions: state.anchorPositions,
+  anchorPositions: state.anchorPositions
 });
 
 export default connect(mapStateToProps)(DesignToolStage);

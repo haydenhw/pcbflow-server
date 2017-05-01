@@ -19,7 +19,8 @@ export class SaveButton extends Component {
       projectName,
       id,
     } = this.props;
-    // console.log(modules)
+    console.log(this.props.projects[0].boardSpecs.thumbnail === thumbnail)
+    
     const updatedModules = modules.map((module) => {
       const x = module.x - topLeftAnchorX;
       const y = module.y - topLeftAnchorY;
@@ -83,6 +84,7 @@ const mapStateToProps = state => ({
   modules: state.currentProjectModules.present,
   projectName: state.currentProjectInfo.name,
   id: state.currentProjectInfo.id,
+  projects: state.projectList
 });
 
 export default connect(mapStateToProps)(SaveButton);
