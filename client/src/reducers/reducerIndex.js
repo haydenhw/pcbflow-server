@@ -13,7 +13,7 @@ import { todos } from './todos';
 export default combineReducers({
   projectList,
   currentProjectInfo,
-  currentProjectModules: undoable(currentProjectModules),
+  currentProjectModules: undoable(currentProjectModules, skipIfImageNodeNull),
   moduleBank,
   draggingModule,
   selectedModule,

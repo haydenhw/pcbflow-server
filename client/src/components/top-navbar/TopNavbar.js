@@ -36,7 +36,6 @@ export default function TopNavbar(props) {
         updateLastSaved={props.updateLastSaved}
         recordSavedChanges={props.recordSavedChanges}
       />
-      <TopNavbarUndoButton />
     </div>
   );
 }

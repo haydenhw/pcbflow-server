@@ -1,4 +1,4 @@
-export default function undoable(reducer) {
+export default function undoable(reducer, callback) {
   // Call the reducer with empty action to populate the initial state
   
   const initialState = {

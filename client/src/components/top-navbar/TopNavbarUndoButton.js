@@ -2,7 +2,7 @@ import React from 'react';
 import { ActionCreators } from 'redux-undo';
 import { connect } from 'react-redux';
 
-import TodoList from './TodoList'
+
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
@@ -11,7 +11,7 @@ import './top-navbar-styles/TopNavbarUndoButton.css';
 export function TopNavbarUndoButton(props) {
   return (
     <div className="undo-button">
-        <TodoList />
+
         <button onClick={() => store.dispatch(actions.undo())}>
           Undo
         </button>
