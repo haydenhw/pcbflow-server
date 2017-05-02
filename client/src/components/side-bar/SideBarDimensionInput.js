@@ -59,6 +59,7 @@ class SideBarDimensionInput extends React.Component {
   }
 
   render() {
+    const { boardWidth, boardHeight } = this.props;
     return (
       <form>
         <div className="dimension-bar">Dimensions</div>
@@ -67,7 +68,7 @@ class SideBarDimensionInput extends React.Component {
             <input
               type="text"
               className="width-input dimension-input"
-              value={this.props.boardWidth}
+              value={boardWidth === 0 ? '' : boardWidth}
               onChange={this.handleWidthChange.bind(this)}
             />
             <label>Width</label>
@@ -76,7 +77,7 @@ class SideBarDimensionInput extends React.Component {
             <input
               className="height-input dimension-input"
               type="text"
-              value={this.props.boardHeight/* `${Math.abs()}cm` */}
+              value={boardHeight === 0 ? '' : boardHeight}
               onChange={this.handleHeightChange.bind(this)}
             />
             <label>Height</label>
