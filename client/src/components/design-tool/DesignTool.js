@@ -198,14 +198,10 @@ class DesignTool extends Component {
   }
 
   toggleDraggingToBoard() {
-    if (this.props.isMouseDownOnIcon) {
-      this.setState({isDraggingToBoard: true});
-    }
+    this.setState({isDraggingToBoard: true});
   }
 
   toggleShouldUpadateThumbnail() {
-    // console.log('hello from toggler')
-    // console.log('toggling', !this.state.shouldUpdateThumbnail)
     this.setState({
       shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail
     });

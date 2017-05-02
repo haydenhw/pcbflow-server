@@ -6,11 +6,8 @@ import './side-bar-styles/SideBarIcon.css';
 
 export default class SideBarIcon extends Component {
 
-  handleMouseMovement() {
-    this.props.toggleDraggingToBoard();
-  }
-
   handleMouseDown() {
+    this.props.toggleDraggingToBoard();
     store.dispatch(actions.mouseDownOnIcon(true));
     store.dispatch(actions.changeDraggingModule(this.props.moduleData));
   }
@@ -27,7 +24,6 @@ export default class SideBarIcon extends Component {
       <div
         className="module-icon"
         ref={(module) => { this.selectedModule = module; }}
-        onMouseMove={this.handleMouseMovement.bind(this)}
         onMouseDown={this.handleMouseDown.bind(this)}
         onMouseOut={() => store.dispatch(actions.mouseDownOnIcon(false))}
       >
