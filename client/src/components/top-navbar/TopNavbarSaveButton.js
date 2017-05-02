@@ -19,7 +19,7 @@ export class SaveButton extends Component {
       projectName,
       id,
     } = this.props;
-    
+
     const updatedModules = modules.map((module) => {
       const x = module.x - topLeftAnchorX;
       const y = module.y - topLeftAnchorY;
@@ -57,11 +57,11 @@ export class SaveButton extends Component {
       this.props.updateThumbnail();
       resolve();
     });
-    
+
     updateThenSave.then(() => {
       this.saveProject();
     });
-    
+
     this.props.updateLastSaved();
     this.props.recordSavedChanges();
   }
@@ -90,7 +90,7 @@ const mapStateToProps = state => ({
   modules: state.currentProjectModules.present,
   projectName: state.currentProjectInfo.name,
   id: state.currentProjectInfo.id,
-  projects: state.projectList
+  projects: state.projectList,
 });
 
 export default connect(mapStateToProps)(SaveButton);

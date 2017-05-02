@@ -12,20 +12,20 @@ export function TopNavbarUndoButton(props) {
   return (
     <div className="undo-button">
 
-        <button onClick={() => store.dispatch(actions.undo())}>
+      <button onClick={() => store.dispatch(actions.undo())}>
           Undo
         </button>
-      
+
       <button onClick={() => store.dispatch(actions.addTodo('hola'))}>Change</button>
-      
-      
+
+
     </div>
-  
-  )
+
+  );
 }
 
 const mapStateToProps = state => ({
-    hasUnsavedChanges: state.hasUnsavedChanges.bool
+  hasUnsavedChanges: state.hasUnsavedChanges.bool,
 });
 
 export default connect(mapStateToProps)(TopNavbarUndoButton);

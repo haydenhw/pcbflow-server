@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Layer, Rect, Stage, Group} from 'react-konva';
-import {connect} from 'react-redux';
-import {withRouter, hashHistory} from 'react-router';
-import {ContextMenu, MenuItem, ContextMenuTrigger} from 'react-contextmenu';
+import React, { Component } from 'react';
+import { Layer, Rect, Stage, Group } from 'react-konva';
+import { connect } from 'react-redux';
+import { withRouter, hashHistory } from 'react-router';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import FontAwesome from 'react-fontawesome';
 
 
@@ -47,19 +47,19 @@ class DesignTool extends Component {
     this.bound_handleMouseMove = this.handleMouseMove.bind(this);
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
-  
+
   keyPress(evt) {
     const evtobj = window.event ? event : evt;
-    
+
     if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
       store.dispatch(actions.undo());
     }
-    
+
     if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
       store.dispatch(actions.redo());
     }
   }
-  
+
 
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
@@ -111,28 +111,28 @@ class DesignTool extends Component {
       case 'top':
         return {
           x: cd.moduleX - cd.boardX - cd.width / 2,
-          y: 0
+          y: 0,
         };
         break;
       case 'bottom':
         return {
           x: cd.moduleX - cd.boardX - cd.width / 2,
-          y: cd.boardHeight - cd.height
+          y: cd.boardHeight - cd.height,
         };
         break;
       default:
         return {
           x: cd.moduleX - cd.boardX - cd.width / 2,
-          y: cd.moduleY - cd.boardY - cd.height / 2
+          y: cd.moduleY - cd.boardY - cd.height / 2,
         };
         break;
     }
   }
 
   dropDraggingModule() {
-    const {draggingModuleData, boardSpecs} = this.props;
-    const {width, height, boundToSideIndex} = draggingModuleData;
-    const {x, y} = this.state;
+    const { draggingModuleData, boardSpecs } = this.props;
+    const { width, height, boundToSideIndex } = draggingModuleData;
+    const { x, y } = this.state;
 
     const coordinateData = {
       width,
@@ -142,12 +142,12 @@ class DesignTool extends Component {
       moduleY: y,
       boardX: boardSpecs.x,
       boardY: boardSpecs.y,
-      boardHeight: boardSpecs.height
+      boardHeight: boardSpecs.height,
     };
 
     const testModuleCoordinates = {
       x: x - width / 2,
-      y: y - height / 2
+      y: y - height / 2,
     };
 
     const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
@@ -164,12 +164,12 @@ class DesignTool extends Component {
     }
 
     this.timeOut = setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1);
-    this.setState({isDraggingToBoard: false});
+    this.setState({ isDraggingToBoard: false });
   }
 
   handleKeyUp(evt) {
     const evtobj = window.event ? event : evt;
-    const {isMouseOverModule, selectedModuleIndex} = this.props;
+    const { isMouseOverModule, selectedModuleIndex } = this.props;
 
     if (isMouseOverModule && evtobj.code === 'Delete') {
       store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
@@ -182,7 +182,7 @@ class DesignTool extends Component {
     const x = Number(evt.clientX) - stageOffsetX;
     const y = Number(evt.clientY) - stageOffsetY;
 
-    this.setState({x, y});
+    this.setState({ x, y });
   }
 
   handleMouseDown(evt) {
@@ -198,25 +198,25 @@ class DesignTool extends Component {
   }
 
   toggleDraggingToBoard() {
-    this.setState({isDraggingToBoard: true});
+    this.setState({ isDraggingToBoard: true });
   }
 
   toggleShouldUpadateThumbnail() {
     this.setState({
-      shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail
+      shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail,
     });
   }
 
   handleNameChange(projectId, newName) {
     const nameObject = {
-      name: newName.message
+      name: newName.message,
     };
 
     store.dispatch(actions.updateProject(nameObject, projectId));
   }
 
   updateState(url) {
-    this.setState({image: url});
+    this.setState({ image: url });
   }
 
   updateLastSaved() {
@@ -226,7 +226,7 @@ class DesignTool extends Component {
 
   toggleDocumentationCard() {
     this.setState({
-      shouldRenderDocumentation: !this.state.shouldRenderDocumentation
+      shouldRenderDocumentation: !this.state.shouldRenderDocumentation,
     });
   }
 
@@ -241,47 +241,45 @@ class DesignTool extends Component {
       currentProjectPrice,
       timeLastSaved,
       draggingModuleData,
-      isMouseDownOnIcon
+      isMouseDownOnIcon,
     } = this.props;
-    const {height, width, image} = draggingModuleData;
-    const {x, y, isDraggingToBoard, shouldUpdateThumbnail, shouldRenderDocumentation} = this.state;
-    const draggingModule = (<Module x={x - width / 2} y={y - height / 2} width={draggingModuleData.width} height={draggingModuleData.height} stroke={draggingModuleData.stroke} strokeWidth={draggingModuleData.strokeWidth} imageX={draggingModuleData.imageX} imageY={draggingModuleData.imageY} imageWidth={draggingModuleData.imageWidth} imageHeight={draggingModuleData.imageHeight} imageSrc={draggingModuleData.imageSrc} imageNode={draggingModuleData.imageNode} isDraggingToBoard/>);
+    const { height, width, image } = draggingModuleData;
+    const { x, y, isDraggingToBoard, shouldUpdateThumbnail, shouldRenderDocumentation } = this.state;
+    const draggingModule = (<Module x={x - width / 2} y={y - height / 2} width={draggingModuleData.width} height={draggingModuleData.height} stroke={draggingModuleData.stroke} strokeWidth={draggingModuleData.strokeWidth} imageX={draggingModuleData.imageX} imageY={draggingModuleData.imageY} imageWidth={draggingModuleData.imageWidth} imageHeight={draggingModuleData.imageHeight} imageSrc={draggingModuleData.imageSrc} imageNode={draggingModuleData.imageNode} isDraggingToBoard />);
 
-    let sideBar = (<SideBar toggleDraggingToBoard={this.toggleDraggingToBoard.bind(this)}/>);
+    let sideBar = (<SideBar toggleDraggingToBoard={this.toggleDraggingToBoard.bind(this)} />);
     sideBar = this.state.isDraggingToBoard
       ? ''
       : sideBar;
-      
+
     const infoButtonIconClass = shouldRenderDocumentation ? 'fa-close' : 'fa-question';
-      
+
     const infoButtonIcon = (
       <FontAwesome
-         className={infoButtonIconClass}
-         name={infoButtonIconClass}
-         style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-       /> 
-    )
-     
-    
-      
-      
+        className={infoButtonIconClass}
+        name={infoButtonIconClass}
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+      />
+    );
+
+
     const imageStyle = {
       height: '150px',
-      width: '200px'
+      width: '200px',
     };
     return (
       <div>
         {/* {true? <img style={imageStyle} src={this.props.boardSpecs.thumbnail} /> : <div></div>} */}
-        <TopNavbar projectName={currentProjectName} handleNameChange={this.handleNameChange.bind(null, currentProjectId)} routeToProjects={() => hashHistory.push('/projects')} updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} updateLastSaved={this.updateLastSaved} recordSavedChanges={this.recordSavedChanges}/>
+        <TopNavbar projectName={currentProjectName} handleNameChange={this.handleNameChange.bind(null, currentProjectId)} routeToProjects={() => hashHistory.push('/projects')} updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} updateLastSaved={this.updateLastSaved} recordSavedChanges={this.recordSavedChanges} />
         <div onMouseMove={this.handleMouseMove.bind(this)}>
           <div ref={node => this.stageContainer = node}>
             {sideBar}
-            <DesignToolStage updateState={this.updateState.bind(this)} toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} shouldRenderBoard={currentProjectName} shouldUpdateThumbnail={shouldUpdateThumbnail} draggingModule={draggingModule}/>
+            <DesignToolStage updateState={this.updateState.bind(this)} toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} shouldRenderBoard={currentProjectName} shouldUpdateThumbnail={shouldUpdateThumbnail} draggingModule={draggingModule} />
           </div>
         </div>
-        <Footer price={currentProjectPrice} timeLastSaved={timeLastSaved}/> {this.state.shouldRenderDocumentation && <DocumentationCard/>}
-        <DesignToolInfoButton 
-          clickHandler = {this.toggleDocumentationCard.bind(this)} 
+        <Footer price={currentProjectPrice} timeLastSaved={timeLastSaved} /> {this.state.shouldRenderDocumentation && <DocumentationCard />}
+        <DesignToolInfoButton
+          clickHandler={this.toggleDocumentationCard.bind(this)}
           icon={infoButtonIcon}
         />
       </div>

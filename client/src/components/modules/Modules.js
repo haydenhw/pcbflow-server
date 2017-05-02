@@ -18,7 +18,7 @@ import {
 } from 'config/moduleConfig';
 
 class Modules extends Component {
-  
+
   componentDidUpdate() {
     const { modules } = this.props;
     if (modules && modules.length > 0) {
@@ -27,51 +27,49 @@ class Modules extends Component {
       .reduce((a, b) => a + b);
       const basePrice = 15;
       const totalPriceString = generatePriceString(basePrice + modulePriceSum);
-      
+
       store.dispatch(actions.updateProjectPrice(totalPriceString));
     }
-    
-    
   }
   render() {
     let modules = [];
-    
+
     if (this.props.modules) {
       modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
-  
-      <ModulesItem
-        key={index}
-        index={index}
-        x={module.x}
-        y={module.y}
-        width={module.width}
-        height={module.height}
-        boundToSideIndex={module.boundToSideIndex}
-        innerGroupX={module.innerGroupX}
-        innerGroupY={module.innerGroupY}
-        rotation={module.rotation}
-        text={module.text}
-        textX={module.textX}
-        textY={module.textY}
-        fontSize={fontSize}
-        fontFamily={fontFamily}
-        fill={fill}
-        opacity={opacity}
-        stroke={module.stroke}
-        strokeWidth={strokeWidth}
-        imageX={module.imageX}
-        imageY={module.imageY}
-        imageWidth={module.imageWidth}
-        imageHeight={module.imageHeight}
-        imageSrc={module.imageSrc}
-        imageNode={module.imageNode}
-        iconSrc={module.iconSrc}
-        topLeftAnchor={this.props.topLeftAnchor}
-        selectedModuleProps={this.props.selectedModuleProps}
-        anchorPositions={this.props.anchorPositions}
-        boardSpecs={this.props.boardSpecs}
-        isDraggingToBoard={false}
-      />);
+
+        <ModulesItem
+          key={index}
+          index={index}
+          x={module.x}
+          y={module.y}
+          width={module.width}
+          height={module.height}
+          boundToSideIndex={module.boundToSideIndex}
+          innerGroupX={module.innerGroupX}
+          innerGroupY={module.innerGroupY}
+          rotation={module.rotation}
+          text={module.text}
+          textX={module.textX}
+          textY={module.textY}
+          fontSize={fontSize}
+          fontFamily={fontFamily}
+          fill={fill}
+          opacity={opacity}
+          stroke={module.stroke}
+          strokeWidth={strokeWidth}
+          imageX={module.imageX}
+          imageY={module.imageY}
+          imageWidth={module.imageWidth}
+          imageHeight={module.imageHeight}
+          imageSrc={module.imageSrc}
+          imageNode={module.imageNode}
+          iconSrc={module.iconSrc}
+          topLeftAnchor={this.props.topLeftAnchor}
+          selectedModuleProps={this.props.selectedModuleProps}
+          anchorPositions={this.props.anchorPositions}
+          boardSpecs={this.props.boardSpecs}
+          isDraggingToBoard={false}
+        />);
     }
     return (
       <Group>
@@ -79,7 +77,7 @@ class Modules extends Component {
       </Group>
     );
   }
-  
+
 }
 
 const mapStateToProps = state => ({

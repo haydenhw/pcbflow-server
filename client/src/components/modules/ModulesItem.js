@@ -17,7 +17,7 @@ export default class ModulesItem extends Component {
       strokeWidth: 1,
     };
   }
-  
+
   setImage() {
     if (this.props.imageSrc) {
       const image = new window.Image();
@@ -29,36 +29,36 @@ export default class ModulesItem extends Component {
       }));
     }
   }
-  
+
   setDefaultStroke() {
     const module = this.refs.moduleGroup;
     module.attrs.defaultStroke = this.props.stroke;
-  } 
-  
+  }
+
   highlightRuleBreakingMoudles() {
     const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodeArray = boardGroup.get('.moduleGroup');
     const boardNode = boardGroup.getParent().get('.board')[0];
-    
-    const addRedStroke = node => {
+
+    const addRedStroke = (node) => {
       const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
-      
+
       node.attrs.name === 'moduleGroup'
         ? getBorderStroke(node).stroke = 'red'
         : node.attrs.stroke = 'red';
-    }
+    };
 
-    const removeRedStroke = node => {
+    const removeRedStroke = (node) => {
       const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
-      const defaultStroke = node.attrs.defaultStroke; 
-      
+      const defaultStroke = node.attrs.defaultStroke;
+
       node.attrs.name === 'moduleGroup'
         ? getBorderStroke(node).stroke = defaultStroke
-        : node.attrs.stroke = null
-    }
-    
-    if(!this.props.isDraggingToBoard) {
+        : node.attrs.stroke = null;
+    };
+
+    if (!this.props.isDraggingToBoard) {
       enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
   }
@@ -68,7 +68,7 @@ export default class ModulesItem extends Component {
   }
 
   componentDidMount() {
-    this.setImage(); 
+    this.setImage();
     this.setDefaultStroke();
     this.highlightRuleBreakingMoudles();
   }

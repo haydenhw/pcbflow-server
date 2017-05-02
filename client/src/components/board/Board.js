@@ -91,7 +91,7 @@ class Board extends Component {
           <Anchor x={topRight.x || width} y={topRight.y} name={'topRight'} />
           <Anchor x={bottomLeft.x} y={bottomLeft.y || height} name={'bottomLeft'} />
           <Anchor x={bottomRight.x || width} y={bottomRight.y || height} name={'bottomRight'} />
-          
+
           <Modules />
         </Group>
       </Layer>

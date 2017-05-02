@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import undoable from 'helpers/undoable';
-import skipIfImageNodeNull  from 'helpers/skipIfImageNodeNull';
+import skipIfImageNodeNull from 'helpers/skipIfImageNodeNull';
 
 import { currentProjectModules, moduleBank, draggingModule, selectedModule } from './moduleReducers';
 import { projectList, currentProjectInfo } from './projectReducers';
@@ -20,5 +20,5 @@ export default combineReducers({
   boardSpecs,
   anchorPositions,
   mouseEvents,
-  hasUnsavedChanges
+  hasUnsavedChanges,
 });

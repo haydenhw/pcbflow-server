@@ -4,13 +4,12 @@ import './design-tool-styles/DesignToolInfoButton.css';
 
 export default function DesignToolInfoButton(props) {
   return (
-    <div 
+    <div
       onClick={props.clickHandler}
       className="round-button"
     >
       <div className="round-button-icon">{props.icon}</div>
-      <div className="round-button-circle"></div>
+      <div className="round-button-circle" />
     </div>
   );
 }
-  

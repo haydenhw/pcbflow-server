@@ -1,7 +1,7 @@
 export const undo = () => ({
-  type: 'UNDO'
-})
+  type: 'UNDO',
+});
 
 export const redo = () => ({
-  type: 'REDO'
-})
+  type: 'REDO',
+});

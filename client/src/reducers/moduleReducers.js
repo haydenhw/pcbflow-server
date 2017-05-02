@@ -7,7 +7,7 @@ export const moduleList = (state = [], action) => {
       modules: action.modules,
     };
   }
-  
+
   return state;
 };
 
@@ -38,7 +38,7 @@ export const selectedModule = (state = {}, action) => {
       return {
         ...state,
         x,
-        y
+        y,
       };
       break;
 
