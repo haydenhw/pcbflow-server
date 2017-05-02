@@ -38,22 +38,22 @@ export default class ModulesItem extends Component {
   highlightRuleBreakingMoudles() {
     const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
-    const moduleNodeArray = boardGroup.get(".moduleGroup");
-    const boardNode = boardGroup.getParent().get(".board")[0];
+    const moduleNodeArray = boardGroup.get('.moduleGroup');
+    const boardNode = boardGroup.getParent().get('.board')[0];
     
     const addRedStroke = node => {
-      const getBorderStroke = node => node.get(".moduleBorder")[0].attrs;
+      const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
       
-      node.attrs.name === "moduleGroup"
-        ? getBorderStroke(node).stroke = "red"
-        : node.attrs.stroke = "red";
+      node.attrs.name === 'moduleGroup'
+        ? getBorderStroke(node).stroke = 'red'
+        : node.attrs.stroke = 'red';
     }
 
     const removeRedStroke = node => {
-      const getBorderStroke = node => node.get(".moduleBorder")[0].attrs;
+      const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
       const defaultStroke = node.attrs.defaultStroke; 
       
-      node.attrs.name === "moduleGroup"
+      node.attrs.name === 'moduleGroup'
         ? getBorderStroke(node).stroke = defaultStroke
         : node.attrs.stroke = null
     }
