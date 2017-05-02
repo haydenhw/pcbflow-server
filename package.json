@@ -43,7 +43,7 @@
     "server": "babel-node server.js",
     "test": "mocha",
     "build:client": "cd client && npm run build",
-    "postinstall": "npm run build:client",
+    "postinstall": "cd client && npm install && npm run build",
     "push:git": "git add . && git commit -m \"build\" && git push origin master || exit 0",
     "push:heroku": "git push heroku master",
     "deploy": "npm run build:client && npm run push:git && npm run push:heroku"
