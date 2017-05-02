@@ -232,7 +232,6 @@ class DesignTool extends Component {
     this.setState({
       shouldRenderDocumentation: !this.state.shouldRenderDocumentation
     });
-    console.log(this.state.shouldRenderDocumentation);
   }
 
   recordSavedChanges() {
