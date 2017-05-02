@@ -5,12 +5,6 @@ import FontAwesome from 'react-fontawesome';
 import { projectsUrl } from 'config/endpointUrls';
 import './top-navbar-styles/TopNavbarSaveButton.css';
 
-function convertToUrl(json) {
-  return Konva.Node.create(json);
-}
-
-
-
 export class SaveButton extends Component {
   saveProject() {
     const {
@@ -25,9 +19,6 @@ export class SaveButton extends Component {
       projectName,
       id,
     } = this.props;
-    
-    console.log(JSON.parse(thumbnail).children[0].children[0].children[5])
-    //console.log(convertToUrl(thumbnail2))
     
     const updatedModules = modules.map((module) => {
       const x = module.x - topLeftAnchorX;
@@ -68,7 +59,6 @@ export class SaveButton extends Component {
     });
     
     updateThenSave.then(() => {
-      console.log('saving')
       this.saveProject();
     });
     

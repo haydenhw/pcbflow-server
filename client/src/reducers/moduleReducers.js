@@ -34,11 +34,11 @@ export const selectedModule = (state = {}, action) => {
       return action.moduleData;
       break;
     case actions.UPDATE_MODULE_POSITION:
-      console.log(state.x, state.y)
+      const { x, y } = action.modulePosition;
       return {
         ...state,
-        x: action.x,
-        y: action.y
+        x,
+        y
       };
       break;
 

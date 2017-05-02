@@ -16,7 +16,6 @@ import generateThumbnail from 'helpers/generateThumbnail';
 class DesignToolStage extends Component {
 
   updateThumbnail() {
-    console.log('updating')
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
     
@@ -79,7 +78,6 @@ class DesignToolStage extends Component {
       isMouseDown,
       isMouseOverModule,
      } = this.props;
-
 
     return (
       <div>
