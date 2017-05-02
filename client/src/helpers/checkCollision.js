@@ -4,25 +4,26 @@ export default function checkCollision(nodeArray, callback) {
   nodeArray.forEach((node) => {
     let nodeBox = node.attrs ? node.attrs : node;
     nodeBox = callback ? callback(node) : nodeBox;
-
-    const nodeLeft = nodeBox.x;
-    const nodeRight = nodeBox.x + nodeBox.width;
-    const nodeTop = nodeBox.y;
-    const nodeBottom = nodeBox.y + nodeBox.height;
-
+    const { x , y , width, height } = nodeBox;
+    const nodeLeft = x;
+    const nodeRight = x + width;
+    const nodeTop = y;
+    const nodeBottom = y + height;
+    
     nodeArray.forEach((otherNode) => {
       let otherBox = otherNode.attrs ? otherNode.attrs : otherNode;
       otherBox = callback ? callback(otherNode) : otherBox;
-
-      if (nodeBox !== otherBox) {
-        const otherLeft = otherBox.x;
-        const otherRight = otherBox.x + otherBox.width;
-        const otherTop = otherBox.y;
-        const otherBottom = otherBox.y + otherBox.height;
+      
+      if (JSON.stringify(nodeBox) !== JSON.stringify(otherBox)) {
+        const { x , y , width, height } = otherBox;
+        const otherLeft = x;
+        const otherRight = x + width;
+        const otherTop = y;
+        const otherBottom = y + height;
 
         const collideHoriz = nodeLeft < otherRight && nodeRight > otherLeft;
         const collideVert = nodeTop < otherBottom && nodeBottom > otherTop;
-
+        
         if (collideHoriz && collideVert) {
           collidingNodes.push(otherNode);
 
@@ -34,6 +35,6 @@ export default function checkCollision(nodeArray, callback) {
       }
     });
   });
-
+  
   return collidingNodes.length > 1 ? collidingNodes : [];
 }
