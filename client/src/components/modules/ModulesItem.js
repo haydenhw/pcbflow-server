@@ -42,14 +42,17 @@ export default class ModulesItem extends Component {
     const boardNode = boardGroup.getParent().get(".board")[0];
     
     const addRedStroke = node => {
+      const getBorderStroke = node => node.get(".moduleBorder")[0].attrs;
+      
       node.attrs.name === "moduleGroup"
-        ? node.get(".moduleBorder")[0].attrs.stroke = "red"
+        ? getBorderStroke(node).stroke = "red"
         : node.attrs.stroke = "red";
     }
 
     const removeRedStroke = node => {
       const getBorderStroke = node => node.get(".moduleBorder")[0].attrs;
       const defaultStroke = node.attrs.defaultStroke; 
+      
       node.attrs.name === "moduleGroup"
         ? getBorderStroke(node).stroke = defaultStroke
         : node.attrs.stroke = null
