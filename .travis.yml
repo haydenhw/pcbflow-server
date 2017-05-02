@@ -7,3 +7,5 @@ deploy:
   app: bread-pcb-tool
   on:
     repo: hayden7913/bread-pcb-tool
+before_install:
+- gem update --system 1.8.30
