@@ -17,12 +17,8 @@ export default class ModulesItem extends Component {
       strokeWidth: 1,
     };
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    this.highlightRuleBreakingMoudles();
-  }
-
-  componentDidMount() {
+  
+  setImage() {
     if (this.props.imageSrc) {
       const image = new window.Image();
       image.src = this.props.imageSrc;
@@ -32,17 +28,19 @@ export default class ModulesItem extends Component {
         imageNode: image,
       }));
     }
-
-    this.highlightRuleBreakingMoudles();
   }
-
+  
+  setDefaultStroke() {
+    const module = this.refs.moduleGroup;
+    module.attrs.defaultStroke = this.props.stroke;
+  } 
+  
   highlightRuleBreakingMoudles() {
    const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodes = boardGroup.get(".moduleGroup");
     const boardNode = boardGroup.getParent().get(".board")[0];
-    moduleNodes[0].attrs.test = this.props.stroke;
-    console.log(moduleNodes[0].attrs.test);
+    
     const addRedStroke = node => {
       node.attrs.name === "moduleGroup"
         ? node.get(".moduleBorder")[0].attrs.stroke = "red"
@@ -57,6 +55,16 @@ export default class ModulesItem extends Component {
     if(!this.props.isDraggingToBoard) {
       enforceRules(moduleNodes, boardNode, addRedStroke, removeRedStroke);
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.highlightRuleBreakingMoudles();
+  }
+
+  componentDidMount() {
+    this.setImage(); 
+    this.setDefaultStroke();
+    this.highlightRuleBreakingMoudles();
   }
 
   updateThumbnail() {
@@ -100,7 +108,6 @@ export default class ModulesItem extends Component {
 
       store.dispatch(actions.updateModulePosition(newPosition));
     }
-    const module = this.refs.moduleGroup;
 
     this.highlightRuleBreakingMoudles();
   }
