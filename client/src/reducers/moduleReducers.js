@@ -33,6 +33,14 @@ export const selectedModule = (state = {}, action) => {
     case actions.UPDATE_SELECTED_MODULE:
       return action.moduleData;
       break;
+    case actions.UPDATE_MODULE_POSITION:
+      console.log(state.x, state.y)
+      return {
+        ...state,
+        x: action.x,
+        y: action.y
+      };
+      break;
 
     default:
       return state;
