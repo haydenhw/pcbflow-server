@@ -5,18 +5,33 @@ import store from 'reduxFiles/store';
 import './side-bar-styles/SideBarDimensionInput.css';
 
 class SideBarDimensionInput extends React.Component {
-
+  validate(value) {
+    if (isNaN(value)) {
+      return '';
+    }
+    
+    if (Number(value) > 1000) {
+      return 1000;
+    }
+    
+    return Number(value); 
+  }
+  
   handleWidthChange(event) {
+    const targetValue = event.target.value;
+    const newBoardWidth = this.validate(targetValue);
+    
     const {
       topLeft,
       topRight,
       bottomLeft,
       bottomRight,
+      boardWidth
      }
      = this.props;
 
     const boardDimensions = {
-      width: Number(event.target.value),
+      width: newBoardWidth,
       height: this.props.boardHeight,
     };
 
@@ -32,6 +47,8 @@ class SideBarDimensionInput extends React.Component {
   }
 
   handleHeightChange(event) {
+    const targetValue = event.target.value;
+    const newBoardHeight = this.validate(targetValue);
     const {
       width,
       height,
@@ -44,7 +61,7 @@ class SideBarDimensionInput extends React.Component {
 
     const boardDimensions = {
       width: this.props.boardWidth,
-      height: Number(event.target.value),
+      height: newBoardHeight
     };
 
     const anchorPositions = {
