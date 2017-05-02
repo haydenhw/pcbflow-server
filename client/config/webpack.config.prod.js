@@ -9,6 +9,7 @@ var paths = require('./paths');
 var getClientEnvironment = require('./env');
 var path = require('path');
 
+console.log('#############################production config runing ....')
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
