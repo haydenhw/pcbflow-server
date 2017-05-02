@@ -127,6 +127,7 @@ class DesignTool extends Component {
         };
         break;
     }
+    
   }
 
   dropDraggingModule() {
