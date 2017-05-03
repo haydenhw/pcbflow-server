@@ -5,7 +5,6 @@ import { withRouter, hashHistory } from 'react-router';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import FontAwesome from 'react-fontawesome';
 
-
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import Board from 'components/board/Board';
@@ -24,6 +23,8 @@ import DocumentationCard from './DesignToolDocumentationCard';
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import getTimeStamp from 'helpers/getTimeStamp';
+import rotate from 'helpers/rotate';
+
 
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
@@ -234,6 +235,12 @@ class DesignTool extends Component {
   recordSavedChanges() {
     store.dispatch(actions.toggleHasUnsavedChanges());
   }
+  
+  rotate() {
+    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
+    const rotationData = rotate(selectedModuleProps, anchorPositions, boardSpecs);
+    store.dispatch(actions.rotateSelectedModule(rotationData));
+  }
 
   render() {
     const {
@@ -275,7 +282,7 @@ class DesignTool extends Component {
         <div onMouseMove={this.handleMouseMove.bind(this)}>
           <div ref={node => this.stageContainer = node}>
             {sideBar}
-            <DesignToolStage updateState={this.updateState.bind(this)} toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} shouldRenderBoard={currentProjectName} shouldUpdateThumbnail={shouldUpdateThumbnail} draggingModule={draggingModule} />
+            <DesignToolStage updateState={this.updateState.bind(this)} rotate={this.rotate.bind(this)} toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} shouldRenderBoard={currentProjectName} shouldUpdateThumbnail={shouldUpdateThumbnail} draggingModule={draggingModule}  />
           </div>
         </div>
         <Footer price={currentProjectPrice} timeLastSaved={timeLastSaved} /> {this.state.shouldRenderDocumentation && <DocumentationCard />}
@@ -294,12 +301,15 @@ const mapStateToProps = state => ({
   currentProjectPrice: state.currentProjectInfo.price,
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
   currentProjectModules: state.currentProjectModules,
-  boardSpecs: state.boardSpecs,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   isMouseDown: state.mouseEvents.isMouseDown,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   draggingModuleData: state.draggingModule,
   selectedModuleIndex: state.selectedModule.index,
+  boardSpecs: state.boardSpecs,
+  selectedModuleProps: state.selectedModule,
+  anchorPositions: state.anchorPositions,
+  
   /*  hasUnsavedChanges: state.hasUnsavedChanges.bool*/
 });
 

@@ -11,7 +11,6 @@ import Grid from './DesignToolGrid';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail from 'helpers/generateThumbnail';
-import rotate from 'helpers/rotate';
 
 class DesignToolStage extends Component {
 
@@ -31,7 +30,6 @@ class DesignToolStage extends Component {
 
   deleteModule() {
     store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
-    this.updateThumbnail();
   }
 
   /*rotate(selectedModuleProps, anchorPositions, boardSpecs) {
@@ -67,22 +65,18 @@ class DesignToolStage extends Component {
     };
 
     store.dispatch(actions.rotateSelectedModule(rotationData));
-    this.updateThumbnail();
-  }*/
-
+  }
+*/
   render(test) {
-    
-    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const {
       shouldRenderBoard,
       draggingModule,
       isMouseDownOnIcon,
       isMouseDown,
       isMouseOverModule,
+      rotate
      } = this.props;
      
-    //const rotate = rotate(selectedModuleProps, anchorPositions, boardSpecs);
-    
     return (
       <div>
         <ContextMenuTrigger

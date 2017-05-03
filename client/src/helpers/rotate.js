@@ -35,8 +35,7 @@ export default function rotate(selectedModuleProps, anchorPositions, boardSpecs)
     parentGroupY: newParentGroupCoordinates ? newParentGroupCoordinates.y : y,
   };
 
-  store.dispatch(actions.rotateSelectedModule(rotationData));
-  this.updateThumbnail();
+  return rotationData;
 }
   
   
