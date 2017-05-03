@@ -83,7 +83,7 @@ export default class ModulesItem extends Component {
 
   handleMouseOver() {
     this.setState({
-      strokeWidth: 2,
+      strokeWidth: 1.5,
     });
     document.body.style.cursor = 'move';
 
@@ -95,12 +95,14 @@ export default class ModulesItem extends Component {
     this.setState({
       strokeWidth: 1,
     });
-    document.body.style.cursor = 'default';
 
     store.dispatch(actions.toggleIsMouseOverModule(false));
   }
 
   handleDragMove() {
+    
+    
+    document.body.style.cursor = 'default';
     const { boundToSideIndex } = this.props;
 
     if (Number.isInteger(boundToSideIndex)) {
