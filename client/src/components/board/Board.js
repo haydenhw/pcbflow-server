@@ -55,6 +55,7 @@ class Board extends Component {
       topRight,
       bottomLeft,
       bottomRight,
+      rotate
      }
      = this.props;
 
@@ -92,7 +93,7 @@ class Board extends Component {
           <Anchor x={bottomLeft.x} y={bottomLeft.y || height} name={'bottomLeft'} />
           <Anchor x={bottomRight.x || width} y={bottomRight.y || height} name={'bottomRight'} />
 
-          <Modules />
+          <Modules rotate={rotate} />
         </Group>
       </Layer>
     );

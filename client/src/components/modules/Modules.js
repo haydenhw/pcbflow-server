@@ -69,6 +69,7 @@ class Modules extends Component {
           anchorPositions={this.props.anchorPositions}
           boardSpecs={this.props.boardSpecs}
           isDraggingToBoard={false}
+          rotate={this.props.rotate}
         />);
     }
     return (

@@ -135,8 +135,7 @@ export default class ModulesItem extends Component {
   }
 
   handleDoubleClick() {
-    this.highlightRuleBreakingMoudles();
-    // store.dispatch(actions.rotateAboutCenterSelectedModule(this.props))
+    this.props.rotate();
   }
 
   render() {
