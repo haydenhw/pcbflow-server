@@ -36,6 +36,7 @@ export default class ModulesItem extends Component {
   }
 
   highlightRuleBreakingMoudles() {
+    console.log('hola')
     const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodeArray = boardGroup.get('.moduleGroup');
@@ -64,7 +65,6 @@ export default class ModulesItem extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.highlightRuleBreakingMoudles();
   }
 
   componentDidMount() {
@@ -116,7 +116,6 @@ export default class ModulesItem extends Component {
   handleDragMove() {
     const newPosition = this.getNewPosition();
     store.dispatch(actions.updateModulePosition(newPosition));
-    this.highlightRuleBreakingMoudles();
   }
 
   handleDragEnd() {
