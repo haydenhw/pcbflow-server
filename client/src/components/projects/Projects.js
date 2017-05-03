@@ -28,7 +28,7 @@ export default function Projects() {
         <div className="button-bar">
           <div className="row-project">
             <div className="col-wrapper">
-              <div /*className="col3-project"*/>
+              <div>
                 <ProjectsAddButton />
               </div>
             </div>

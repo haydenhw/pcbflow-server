@@ -19,7 +19,8 @@
   padding: 5px 17px;
   border-radius: 4px;
   margin-top: 25px;
-  margin-left: 20px;
+  margin-left: 32px;
+  width: 121px;
 }
 
 .project-add-button:hover {
@@ -43,4 +44,11 @@
   display: inline-block;
   font-size: 20px;
   letter-spacing: 0.2px;
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+  .project-add-button {
+    position: absolute;
+    right: 57%;
+  }
 }
