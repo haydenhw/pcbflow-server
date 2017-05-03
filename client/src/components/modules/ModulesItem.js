@@ -121,14 +121,6 @@ export default class ModulesItem extends Component {
 
   handleDragEnd() {
     const module = this.refs.moduleGroup;
-
-    const newPosition = {
-      x: module.getX(),
-      y: module.getY(),
-      index: module.index,
-    };
-    store.dispatch(actions.updateModulePosition(newPosition));
-
     this.updateThumbnail();
     this.highlightRuleBreakingMoudles();
   }
