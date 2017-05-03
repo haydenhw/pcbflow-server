@@ -1,8 +1,11 @@
-.thumbnail-row {
-  padding-top: 50px;
-  padding-bottom: 10px;
+.col-wrapper {
+  width:  1400px;
   margin: 0 auto;
-  width: 90%;
+}
+
+.thumbnail-row {
+  padding-top: 100px;
+  padding-bottom: 10px;
 }
 
 .container {
@@ -60,4 +63,31 @@
   height: 125px;
   width: 200px;
 }
+
+@media only screen and (max-width: 1425px) {
+  .col-wrapper {
+    width: 1050px
+  }
+}
+
+@media only screen and (max-width: 1075px) {
+  .col-wrapper {
+    width: 700px
+  }
+}
+
+@media only screen and (max-width: 725px) {
+  .col-wrapper .card {
+    width: 450px;
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+  .col-wrapper .card {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 
