@@ -1,8 +1,8 @@
 .thumbnail-row {
-  width: 75%;
   padding-top: 50px;
   padding-bottom: 10px;
   margin: 0 auto;
+  width: 90%;
 }
 
 .container {
@@ -10,6 +10,7 @@
   width: 280px;
   border-radius: 4px;
   box-shadow: 0 4px 25px rgba(0,0,0,.3);
+  display: inline-block;
 }
 
 .image-container {

@@ -48,11 +48,11 @@ class ProjectListContainer extends Component {
       });
 
       return (
-        <div className="thumbnail-row">
+        
           <div className="row thumbnail-row">
             {projectsList}
           </div>
-        </div>
+      
 
       );
     }
