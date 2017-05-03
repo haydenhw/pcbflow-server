@@ -9,7 +9,6 @@
   overflow: hidden;
   width: 100%;
   z-index: 1;
-  position: fixed;
   height: 65px;
   padding-left: 15px
 }
@@ -107,7 +106,8 @@
 .computer-wrapper {
   position: relative;
   display: inline-block;
-  margin-right: 36px;
+  width: 41%;
+  margin-right: -3%;
 }
 
 .inline-image {
@@ -116,7 +116,12 @@
 }
 
 .computer-image {
-  width: 380px;
+  width: 75%;
+  text-align: left;
+}
+
+.circuit-board-image {
+  width: 20%;
 }
 
 .dots {
@@ -129,10 +134,10 @@
 
 .design-tool-screenshot {
   position: absolute;
-  top: 25px;
-  left: 27px;
-  height: 188px;
-  width: 326px;
+  top: 8%;
+  left: 17.6%;
+  height: 62.5%;
+  width: 64.5%;
   
 }
 
