@@ -95,28 +95,27 @@ export default class ModulesItem extends Component {
     this.setState({
       strokeWidth: 1,
     });
-
+    
+    document.body.style.cursor = 'default';
     store.dispatch(actions.toggleIsMouseOverModule(false));
+  }
+  
+  getNewPosition() {
+    const { boundToSideIndex } = this.props;
+    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
+    const module = this.refs.moduleGroup;
+    const newPosition = {
+      x: module.getPosition().x,
+      y: module.getPosition().y,
+      index: this.props.index,
+    };
+    
+    return newPosition;
   }
 
   handleDragMove() {
-    
-    
-    document.body.style.cursor = 'default';
-    const { boundToSideIndex } = this.props;
-
-    if (Number.isInteger(boundToSideIndex)) {
-      const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-      const module = this.refs.moduleGroup;
-      const newPosition = {
-        x: module.getPosition().x,
-        y: module.getPosition().y,
-        index: this.props.index,
-      };
-
-      store.dispatch(actions.updateModulePosition(newPosition));
-    }
-
+    const newPosition = this.getNewPosition();
+    store.dispatch(actions.updateModulePosition(newPosition));
     this.highlightRuleBreakingMoudles();
   }
 
