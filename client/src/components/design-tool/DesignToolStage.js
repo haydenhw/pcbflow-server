@@ -10,8 +10,8 @@ import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
-import rotateAboutCenter from 'helpers/rotateAboutCenter';
 import generateThumbnail from 'helpers/generateThumbnail';
+import rotate from 'helpers/rotate';
 
 class DesignToolStage extends Component {
 
@@ -34,7 +34,8 @@ class DesignToolStage extends Component {
     this.updateThumbnail();
   }
 
-  rotate() {
+  /*rotate(selectedModuleProps, anchorPositions, boardSpecs) {
+    
     const {
       x,
       y,
@@ -44,10 +45,9 @@ class DesignToolStage extends Component {
       rotation,
       width,
       height,
-    } = this.props.selectedModuleProps;
-    const { topLeft } = this.props.anchorPositions;
-    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-    const { boundToSideIndex } = this.props.selectedModuleProps;
+      boundToSideIndex
+    } = selectedModuleProps;
+    const { topLeft } = anchorPositions;
     let newParentGroupCoordinates;
     let newInnerGroupCoordinates;
 
@@ -68,9 +68,11 @@ class DesignToolStage extends Component {
 
     store.dispatch(actions.rotateSelectedModule(rotationData));
     this.updateThumbnail();
-  }
+  }*/
 
-  render() {
+  render(test) {
+    
+    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const {
       shouldRenderBoard,
       draggingModule,
@@ -78,7 +80,9 @@ class DesignToolStage extends Component {
       isMouseDown,
       isMouseOverModule,
      } = this.props;
-
+     
+    //const rotate = rotate(selectedModuleProps, anchorPositions, boardSpecs);
+    
     return (
       <div>
         <ContextMenuTrigger
@@ -102,7 +106,7 @@ class DesignToolStage extends Component {
 
         <ContextMenu id={'SIMPLE'}>
           <MenuItem onClick={this.deleteModule.bind(this)}>delete</MenuItem>
-          <MenuItem onClick={this.rotate.bind(this)}>rotate</MenuItem>
+          <MenuItem onClick={rotate}>rotate</MenuItem>
         </ContextMenu>
       </div>
     );
