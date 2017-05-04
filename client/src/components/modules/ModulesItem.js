@@ -15,6 +15,7 @@ export default class ModulesItem extends Component {
     this.state = {
       image: null,
       strokeWidth: 1,
+      stroke: this.props.stroke
     };
   }
 
@@ -36,7 +37,6 @@ export default class ModulesItem extends Component {
   }
 
   highlightRuleBreakingMoudles() {
-    console.log('hola')
     const draggingModuleNode = this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodeArray = boardGroup.get('.moduleGroup');
@@ -44,19 +44,25 @@ export default class ModulesItem extends Component {
 
     const addRedStroke = (node) => {
       const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
-
+    
+    
       node.attrs.name === 'moduleGroup'
         ? getBorderStroke(node).stroke = 'red'
         : node.attrs.stroke = 'red';
+        
+        if (node.attrs.name === 'moduleGroup') {
+          console.log(getBorderStroke(node))
+        }
+      
     };
 
     const removeRedStroke = (node) => {
-      const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
+      /*const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
       const defaultStroke = node.attrs.defaultStroke;
 
       node.attrs.name === 'moduleGroup'
         ? getBorderStroke(node).stroke = defaultStroke
-        : node.attrs.stroke = null;
+        : node.attrs.stroke = null;*/
     };
 
     if (!this.props.isDraggingToBoard) {

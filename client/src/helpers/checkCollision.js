@@ -1,6 +1,6 @@
 export default function checkCollision(nodeArray, callback) {
   const collidingNodes = [];
-
+  
   nodeArray.forEach((node) => {
     let nodeBox = node.attrs ? node.attrs : node;
     nodeBox = callback ? callback(node) : nodeBox;
@@ -35,6 +35,6 @@ export default function checkCollision(nodeArray, callback) {
       }
     });
   });
-
+  
   return collidingNodes.length > 1 ? collidingNodes : [];
 }
