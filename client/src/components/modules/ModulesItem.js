@@ -41,7 +41,6 @@ export default class ModulesItem extends Component {
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodeArray = boardGroup.get('.moduleGroup');
     const boardNode = boardGroup.getParent().get('.board')[0];
-    console.log(moduleNodeArray)
     
     const addRedStroke = (node) => {
       const newStroke = {
@@ -60,13 +59,6 @@ export default class ModulesItem extends Component {
       }
       
       store.dispatch(actions.updateModuleStroke(newStroke));
-      
-      /*const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
-      const defaultStroke = node.attrs.defaultStroke;
-
-      node.attrs.name === 'moduleGroup'
-        ? getBorderStroke(node).stroke = defaultStroke
-        : node.attrs.stroke = null;*/
     };
 
     if (!this.props.isDraggingToBoard) {
@@ -74,13 +66,11 @@ export default class ModulesItem extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-  }
 
   componentDidMount() {
     this.setImage();
     this.setDefaultStroke();
-    //this.highlightRuleBreakingMoudles();
+    setTimeout(() => this.highlightRuleBreakingMoudles(), 1);
   }
 
   updateThumbnail() {
