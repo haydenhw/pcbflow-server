@@ -10,6 +10,14 @@ import Anchor from './BoardAnchor';
 import generateThumbnail from 'helpers/generateThumbnail';
 
 class Board extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      x: null,
+      y: null
+    }
+      
+  }
 
   componentDidMount() {
     this.updateThumbnail();
@@ -17,15 +25,17 @@ class Board extends Component {
 
   // improves performance
   reRender() {
+    const boardGroup = this.refs.boardGroup;
+    const x = boardGroup.getX();
+    const y = boardGroup.getY();
+    
+    this.setState({
+      x,
+      y
+    });
+    console.log(this.state)
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
-  }
-
-  updateThumbnail() {
-    const boardLayer = this.refs.boardLayer;
-    const thumbnail = generateThumbnail(boardLayer);
-
-    store.dispatch(actions.updateBoardThumbnail(thumbnail));
   }
 
   updatePosition() {
@@ -67,8 +77,8 @@ class Board extends Component {
         <Group
           ref="boardGroup"
           name="boardGroup"
-          x={x}
-          y={y}
+          x={this.state.x || x}
+          y={this.state.y || y}
           width={width}
           height={height}
           draggable="true"
