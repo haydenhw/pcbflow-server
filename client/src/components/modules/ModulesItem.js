@@ -43,6 +43,7 @@ export default class ModulesItem extends Component {
     const boardNode = boardGroup.getParent().get('.board')[0];
     
     const addRedStroke = (node) => {
+      console.log(node.attrs.name === "board")
       const newStroke = {
         index: node.index,
         stroke: "red"
@@ -71,6 +72,12 @@ export default class ModulesItem extends Component {
     this.setImage();
     this.setDefaultStroke();
     setTimeout(() => this.highlightRuleBreakingMoudles(), 1);
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    if(this.props.rotation !== prevProps.rotation) {
+      this.highlightRuleBreakingMoudles();
+    }
   }
 
   updateThumbnail() {
