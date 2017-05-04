@@ -25,7 +25,6 @@ import getPerimeterSide from 'helpers/getPerimeterSide';
 import getTimeStamp from 'helpers/getTimeStamp';
 import rotate from 'helpers/rotate';
 
-
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
 

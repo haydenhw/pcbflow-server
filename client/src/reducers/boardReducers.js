@@ -29,6 +29,12 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         stroke: action.boardStroke
       };
       break;
+    case actions.UPDATE_BOARD_THUMBNAIL:
+      return {
+        ...state,
+        thumbnail: action.thumbnail,
+      };
+      break;
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
       const boardSpecs = action.project.boardSpecs;
       return {
@@ -36,14 +42,6 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         y: boardSpecs.y,
         width: boardSpecs.width,
         height: boardSpecs.height,
-      };
-      break;
-    case actions.UPDATE_BOARD_THUMBNAIL:
-        //  console.log(action.thumbnail)
-        //  console.log(state.thumbnail)
-      return {
-        ...state,
-        thumbnail: action.thumbnail,
       };
       break;
 

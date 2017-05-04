@@ -44,7 +44,6 @@ describe('currentProjectInfo redcuers', () => {
         _id: 1234321,
       },
     });
-    console.log(resultState);
 
     assert.deepEqual(resultState, expectedState);
   });
