@@ -29,14 +29,21 @@ class Modules extends Component {
       
       return totalPriceString;
     }
+    
+    return generatePriceString(15);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.modules.length !== this.props.modules.length) {
-      console.log('holala')
       const totalPriceString = this.calculatePrice(this.props.modules)
       store.dispatch(actions.updateProjectPrice(totalPriceString));
     }
+  }
+  
+  componentDidMount() {
+    console.log('mounted')
+    const totalPriceString = this.calculatePrice(this.props.modules);
+    store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
   
   render() {
