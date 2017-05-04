@@ -68,6 +68,9 @@ class DesignTool extends Component {
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
     document.onkeydown = this.keyPress;
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
+    
+    const shouldConfirmOnReload = false;
+   window.onbeforeunload = () => shouldConfirmOnReload ? '' : null;
   }
 
   removeHanlders() {
@@ -79,7 +82,7 @@ class DesignTool extends Component {
 
   setRouteHook() {
     this.props.router.setRouteLeaveHook(this.props.route, () => {
-      if (true || this.props.hasUnsavedChanges) {
+      if (/*true ||*/ this.props.hasUnsavedChanges) {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }
     });
@@ -92,6 +95,7 @@ class DesignTool extends Component {
 
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
+    
 
     this.setRouteHook();
     this.addHanlders();
@@ -252,7 +256,23 @@ class DesignTool extends Component {
     } = this.props;
     const { height, width, image } = draggingModuleData;
     const { x, y, isDraggingToBoard, shouldUpdateThumbnail, shouldRenderDocumentation } = this.state;
-    const draggingModule = (<Module x={x - width / 2} y={y - height / 2} width={draggingModuleData.width} height={draggingModuleData.height} stroke={draggingModuleData.stroke} strokeWidth={draggingModuleData.strokeWidth} imageX={draggingModuleData.imageX} imageY={draggingModuleData.imageY} imageWidth={draggingModuleData.imageWidth} imageHeight={draggingModuleData.imageHeight} imageSrc={draggingModuleData.imageSrc} imageNode={draggingModuleData.imageNode} isDraggingToBoard />);
+    const draggingModule = (
+      <Module 
+        x={x - width / 2} 
+        y={y - height / 2} 
+        width={draggingModuleData.width}
+        height={draggingModuleData.height} 
+        stroke={draggingModuleData.stroke} 
+        strokeWidth={draggingModuleData.strokeWidth} 
+        imageX={draggingModuleData.imageX} 
+        imageY={draggingModuleData.imageY} 
+        imageWidth={draggingModuleData.imageWidth} 
+        imageHeight={draggingModuleData.imageHeight} 
+        imageSrc={draggingModuleData.imageSrc} 
+        imageNode={draggingModuleData.imageNode} 
+        isDraggingToBoard 
+      />
+    );
 
     let sideBar = (<SideBar toggleDraggingToBoard={this.toggleDraggingToBoard.bind(this)} />);
     sideBar = this.state.isDraggingToBoard

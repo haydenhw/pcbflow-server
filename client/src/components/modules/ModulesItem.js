@@ -33,6 +33,7 @@ export default class ModulesItem extends Component {
   setDefaultStroke() {
     const module = this.refs.moduleGroup;
     module.attrs.defaultStroke = this.props.stroke;
+    module.attrs.isStrokeRed = false;
   }
 
   highlightRuleBreakingMoudles() {
@@ -42,26 +43,19 @@ export default class ModulesItem extends Component {
     const boardNode = boardGroup.getParent().get('.board')[0];
     
     const addRedStroke = (node) => {
-      const newStroke = {
-        index: node.index,
-        stroke: "red"
-      }
+      node.attrs.isStrokeRed = true;
       
       node.attrs.name === "board" ?
         store.dispatch(actions.updateBoardStroke("red")) :
-        store.dispatch(actions.updateModuleStroke(newStroke));
+        node.attrs.isStrokeRed = true;
     };
 
     const removeRedStroke = (node) => {
-      const defaultStroke = node.attrs.defaultStroke;
-      const newStroke = {
-        index: node.index,
-        stroke: defaultStroke
-      }
+      node.attrs.isStrokeRed = false;
       
       node.attrs.name === "board" ?
         store.dispatch(actions.updateBoardStroke(null)) :
-        store.dispatch(actions.updateModuleStroke(newStroke));
+        node.attrs.isStrokeRed = false;
     };
 
     if (!this.props.isDraggingToBoard) {
@@ -137,9 +131,17 @@ export default class ModulesItem extends Component {
   }
 
   render() {
+    let isStrokeRed;
+    let defaultStroke;
+    if (this.refs.moduleGroup) {
+      isStrokeRed = this.refs.moduleGroup.attrs.isStrokeRed;
+      defaultStroke = this.refs.moduleGroup.attrs.defaultStroke;
+      //console.log(this.refs.moduleGroup.attrs.isStrokeRed)
+    }
+
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const borderNode = this.refs.moduleBorder;
-    const borderStroke = borderNode ? borderNode.attrs.stroke : null;
+    //const borderStroke = borderNode ? borderNode.attrs.stroke : null;
     const image = (
       <Image
         x={this.props.imageX}
@@ -202,7 +204,7 @@ export default class ModulesItem extends Component {
             ref="moduleBorder"
             width={this.props.width}
             height={this.props.height}
-            stroke={this.props.stroke}
+            stroke={isStrokeRed ? "red" : this.props.stroke}
             strokeWidth={this.state.strokeWidth}
           />
 
