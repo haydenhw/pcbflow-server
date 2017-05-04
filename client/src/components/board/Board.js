@@ -19,10 +19,6 @@ class Board extends Component {
       
   }
 
-  componentDidMount() {
-    this.updateThumbnail();
-  }
-
   // improves performance
   reRender() {
     const boardGroup = this.refs.boardGroup;
@@ -33,7 +29,7 @@ class Board extends Component {
       x,
       y
     });
-    console.log(this.state)
+    
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
   }
@@ -47,8 +43,6 @@ class Board extends Component {
       x,
       y,
     }));
-
-    this.updateThumbnail();
   }
 
   handleDragEnd() {
