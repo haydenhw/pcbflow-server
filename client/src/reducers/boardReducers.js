@@ -24,10 +24,6 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
       };
       break;
     case actions.UPDATE_BOARD_STROKE:
-    console.log({
-      ...state,
-      stroke: action.boardStroke
-    })
       return {
         ...state,
         stroke: action.boardStroke

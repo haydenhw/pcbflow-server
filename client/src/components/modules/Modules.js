@@ -18,19 +18,27 @@ import {
 } from 'config/moduleConfig';
 
 class Modules extends Component {
-
-  componentDidUpdate() {
-    const { modules } = this.props;
+  
+  calculatePrice(modules) {
     if (modules && modules.length > 0) {
       const modulePriceSum = this.props.modules
       .map(module => module.price)
       .reduce((a, b) => a + b);
       const basePrice = 15;
       const totalPriceString = generatePriceString(basePrice + modulePriceSum);
+      
+      return totalPriceString;
+    }
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.modules.length !== this.props.modules.length) {
+      console.log('holala')
+      const totalPriceString = this.calculatePrice(this.props.modules)
       store.dispatch(actions.updateProjectPrice(totalPriceString));
     }
   }
+  
   render() {
     let modules = [];
 

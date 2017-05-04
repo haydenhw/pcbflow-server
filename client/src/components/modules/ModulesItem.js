@@ -15,7 +15,6 @@ export default class ModulesItem extends Component {
     this.state = {
       image: null,
       strokeWidth: 1
-    
     };
   }
 
@@ -51,8 +50,6 @@ export default class ModulesItem extends Component {
       node.attrs.name === "board" ?
         store.dispatch(actions.updateBoardStroke("red")) :
         store.dispatch(actions.updateModuleStroke(newStroke));
-      
-    
     };
 
     const removeRedStroke = (node) => {
