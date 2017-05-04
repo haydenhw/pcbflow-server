@@ -79,7 +79,7 @@ class DesignTool extends Component {
 
   setRouteHook() {
     this.props.router.setRouteLeaveHook(this.props.route, () => {
-      if (this.props.hasUnsavedChanges) {
+      if (true || this.props.hasUnsavedChanges) {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }
     });
@@ -277,14 +277,32 @@ class DesignTool extends Component {
     return (
       <div>
         {/* {true? <img style={imageStyle} src={this.props.boardSpecs.thumbnail} /> : <div></div>} */}
-        <TopNavbar projectName={currentProjectName} handleNameChange={this.handleNameChange.bind(null, currentProjectId)} routeToProjects={() => hashHistory.push('/projects')} updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} updateLastSaved={this.updateLastSaved} recordSavedChanges={this.recordSavedChanges} />
+        <TopNavbar 
+          projectName={currentProjectName} 
+          handleNameChange={this.handleNameChange.bind(null, currentProjectId)} 
+          routeToProjects={() => hashHistory.push('/projects')} 
+          updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} 
+          updateLastSaved={this.updateLastSaved} 
+          recordSavedChanges={this.recordSavedChanges} />
+          
         <div onMouseMove={this.handleMouseMove.bind(this)}>
           <div ref={node => this.stageContainer = node}>
             {sideBar}
-            <DesignToolStage updateState={this.updateState.bind(this)} rotate={this.rotate.bind(this)} toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} shouldRenderBoard={currentProjectName} shouldUpdateThumbnail={shouldUpdateThumbnail} draggingModule={draggingModule}  />
+            <DesignToolStage 
+              updateState={this.updateState.bind(this)} 
+              rotate={this.rotate.bind(this)} 
+              toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} 
+              shouldRenderBoard={currentProjectName} 
+              shouldUpdateThumbnail={shouldUpdateThumbnail} 
+              draggingModule={draggingModule}  
+            />
           </div>
         </div>
-        <Footer price={currentProjectPrice} timeLastSaved={timeLastSaved} /> {this.state.shouldRenderDocumentation && <DocumentationCard />}
+        <Footer 
+          price={currentProjectPrice} 
+          timeLastSaved={timeLastSaved} 
+        /> 
+        {this.state.shouldRenderDocumentation && <DocumentationCard />}
         <DesignToolInfoButton
           clickHandler={this.toggleDocumentationCard.bind(this)}
           icon={infoButtonIcon}
