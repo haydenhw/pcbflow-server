@@ -14,8 +14,8 @@ export default class ModulesItem extends Component {
 
     this.state = {
       image: null,
-      strokeWidth: 1,
-      stroke: this.props.stroke
+      strokeWidth: 1
+    
     };
   }
 
@@ -41,22 +41,26 @@ export default class ModulesItem extends Component {
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodeArray = boardGroup.get('.moduleGroup');
     const boardNode = boardGroup.getParent().get('.board')[0];
-
+    console.log(moduleNodeArray)
+    
     const addRedStroke = (node) => {
-      const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
-    
-    
-      node.attrs.name === 'moduleGroup'
-        ? getBorderStroke(node).stroke = 'red'
-        : node.attrs.stroke = 'red';
-        
-        if (node.attrs.name === 'moduleGroup') {
-          console.log(getBorderStroke(node))
-        }
+      const newStroke = {
+        index: node.index,
+        stroke: "red"
+      }
       
+      store.dispatch(actions.updateModuleStroke(newStroke));
     };
 
     const removeRedStroke = (node) => {
+      const defaultStroke = node.attrs.defaultStroke;
+      const newStroke = {
+        index: node.index,
+        stroke: defaultStroke
+      }
+      
+      store.dispatch(actions.updateModuleStroke(newStroke));
+      
       /*const getBorderStroke = node => node.get('.moduleBorder')[0].attrs;
       const defaultStroke = node.attrs.defaultStroke;
 
@@ -76,7 +80,7 @@ export default class ModulesItem extends Component {
   componentDidMount() {
     this.setImage();
     this.setDefaultStroke();
-    this.highlightRuleBreakingMoudles();
+    //this.highlightRuleBreakingMoudles();
   }
 
   updateThumbnail() {
@@ -200,7 +204,7 @@ export default class ModulesItem extends Component {
             ref="moduleBorder"
             width={this.props.width}
             height={this.props.height}
-            stroke={/* borderStroke || */this.props.stroke}
+            stroke={this.props.stroke}
             strokeWidth={this.state.strokeWidth}
           />
 

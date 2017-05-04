@@ -18,6 +18,12 @@ export const updateModulePosition = modulePosition => ({
   modulePosition,
 });
 
+export const UPDATE_MODULE_STROKE = 'UPDATE_MODULE_STROKE';
+export const updateModuleStroke = moduleStroke => ({
+  type: 'UPDATE_MODULE_STROKE',
+  moduleStroke,
+});
+
 export const UPDATE_MODULE_IMAGE = 'UPDATE_MODULE_IMAGE';
 export const updateModuleImage = moduleData => ({
   type: 'UPDATE_MODULE_IMAGE',
