@@ -16,6 +16,12 @@ export const updateBoardDimensions = dimensions => ({
   dimensions,
 });
 
+export const UPDATE_BOARD_STROKE = 'UPDATE_BOARD_STROKE';
+export const updateBoardStroke = boardStroke => ({
+  type: 'UPDATE_BOARD_STROKE',
+  boardStroke,
+});
+
 export const UPDATE_BOARD_THUMBNAIL = 'UPDATE_BOARD_THUMBNAIL';
 export const updateBoardThumbnail = thumbnail => ({
   type: 'UPDATE_BOARD_THUMBNAIL',

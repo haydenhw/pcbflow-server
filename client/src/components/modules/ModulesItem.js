@@ -43,13 +43,16 @@ export default class ModulesItem extends Component {
     const boardNode = boardGroup.getParent().get('.board')[0];
     
     const addRedStroke = (node) => {
-      console.log(node.attrs.name === "board")
       const newStroke = {
         index: node.index,
         stroke: "red"
       }
       
-      store.dispatch(actions.updateModuleStroke(newStroke));
+      node.attrs.name === "board" ?
+        store.dispatch(actions.updateBoardStroke("red")) :
+        store.dispatch(actions.updateModuleStroke(newStroke));
+      
+    
     };
 
     const removeRedStroke = (node) => {
@@ -59,14 +62,15 @@ export default class ModulesItem extends Component {
         stroke: defaultStroke
       }
       
-      store.dispatch(actions.updateModuleStroke(newStroke));
+      node.attrs.name === "board" ?
+        store.dispatch(actions.updateBoardStroke(null)) :
+        store.dispatch(actions.updateModuleStroke(newStroke));
     };
 
     if (!this.props.isDraggingToBoard) {
       enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
   }
-
 
   componentDidMount() {
     this.setImage();

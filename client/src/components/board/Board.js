@@ -85,7 +85,7 @@ class Board extends Component {
             height={bottomLeft.y - topLeft.y || height}
             fill="#e3e3e5"
             opacity="0.5"
-            stroke="#ccc"
+            stroke={this.props.stroke || "#ccc"}
           />
 
           <Anchor x={topLeft.x} y={topLeft.y} name={'topLeft'} />
@@ -103,6 +103,7 @@ class Board extends Component {
 const mapStateToProps = state => ({
   width: state.boardSpecs.width,
   height: state.boardSpecs.height,
+  stroke: state.boardSpecs.stroke,
   x: state.boardSpecs.x,
   y: state.boardSpecs.y,
   topLeft: state.anchorPositions.topLeft,

@@ -4,7 +4,7 @@ const defaultboardSpecs = {
   x: 10,
   y: 10,
   width: 600,
-  height: 300,
+  height: 300
 };
 
 export const boardSpecs = (state = defaultboardSpecs, action) => {
@@ -21,6 +21,16 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         ...state,
         x: action.position.x,
         y: action.position.y,
+      };
+      break;
+    case actions.UPDATE_BOARD_STROKE:
+    console.log({
+      ...state,
+      stroke: action.boardStroke
+    })
+      return {
+        ...state,
+        stroke: action.boardStroke
       };
       break;
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
