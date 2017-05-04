@@ -131,17 +131,8 @@ export default class ModulesItem extends Component {
   }
 
   render() {
-    let isStrokeRed;
-    let defaultStroke;
-    if (this.refs.moduleGroup) {
-      isStrokeRed = this.refs.moduleGroup.attrs.isStrokeRed;
-      defaultStroke = this.refs.moduleGroup.attrs.defaultStroke;
-      //console.log(this.refs.moduleGroup.attrs.isStrokeRed)
-    }
-
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const borderNode = this.refs.moduleBorder;
-    //const borderStroke = borderNode ? borderNode.attrs.stroke : null;
     const image = (
       <Image
         x={this.props.imageX}
@@ -151,6 +142,13 @@ export default class ModulesItem extends Component {
         image={this.props.imageNode}
       />
     );
+    let isStrokeRed;
+    let defaultStroke;
+    
+    if (this.refs.moduleGroup) {
+      isStrokeRed = this.refs.moduleGroup.attrs.isStrokeRed;
+      defaultStroke = this.refs.moduleGroup.attrs.defaultStroke;
+    }
 
     return (
       <Group
