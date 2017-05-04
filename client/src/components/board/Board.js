@@ -19,8 +19,7 @@ class Board extends Component {
       
   }
 
-  // improves performance
-  reRender() {
+  updateLocalStatePosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
@@ -29,12 +28,11 @@ class Board extends Component {
       x,
       y
     });
-    
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
   }
-
-  updatePosition() {
+  
+  updateReduxPosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
@@ -45,8 +43,15 @@ class Board extends Component {
     }));
   }
 
+  handleDragMove() {
+    this.updateLocalStatePosition();
+      // improves performance
+    const layer = this.refs.boardGroup.getLayer();
+    layer.draw();
+  }
+
   handleDragEnd() {
-    this.updatePosition();
+    this.updateReduxPosition();
   }
 
   render() {
@@ -76,7 +81,7 @@ class Board extends Component {
           width={width}
           height={height}
           draggable="true"
-          onDragMove={this.reRender.bind(this)}
+          onDragMove={this.handleDragMove.bind(this)}
           onDragEnd={this.handleDragEnd.bind(this)}
         >
 

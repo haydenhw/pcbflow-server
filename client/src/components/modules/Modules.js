@@ -41,7 +41,6 @@ class Modules extends Component {
   }
   
   componentDidMount() {
-    console.log('mounted')
     const totalPriceString = this.calculatePrice(this.props.modules);
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
