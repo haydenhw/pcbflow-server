@@ -16,6 +16,7 @@ export default class ModulesItem extends Component {
       image: null,
       strokeWidth: 1
     };
+    
   }
 
   setImage() {
@@ -161,7 +162,8 @@ export default class ModulesItem extends Component {
         }
         y={anchorPositions
           ? bindToPerimeter(this.props, anchorPositions, boardSpecs).y
-          : this.props.y}
+          : this.props.y
+        }
         height={this.props.height}
         width={this.props.width}
         onDragEnd={this.handleDragEnd.bind(this)}

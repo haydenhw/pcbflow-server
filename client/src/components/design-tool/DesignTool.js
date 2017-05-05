@@ -303,7 +303,8 @@ class DesignTool extends Component {
           routeToProjects={() => hashHistory.push('/projects')} 
           updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)} 
           updateLastSaved={this.updateLastSaved} 
-          recordSavedChanges={this.recordSavedChanges} />
+          recordSavedChanges={this.recordSavedChanges} 
+        />
           
         <div onMouseMove={this.handleMouseMove.bind(this)}>
           <div ref={node => this.stageContainer = node}>
