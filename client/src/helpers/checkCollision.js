@@ -35,6 +35,6 @@ export default function checkCollision(nodeArray, callback) {
       }
     });
   });
-  
+
   return collidingNodes.length > 1 ? collidingNodes : [];
 }

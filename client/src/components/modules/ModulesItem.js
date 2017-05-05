@@ -36,15 +36,20 @@ export default class ModulesItem extends Component {
     module.attrs.isStrokeRed = false;
   }
 
-  highlightRuleBreakingModules(module) {
+  highlightRuleBreakingModules(module, index) {
     const draggingModuleNode = module || this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodeArray = boardGroup.get('.moduleGroup');
     const boardNode = boardGroup.getParent().get('.board')[0];
     
+    if(index) {
+      moduleNodeArray.splice(index, 1)
+    }
+
+    // console.log(moduleNodeArray)
     const addRedStroke = (node) => {
       node.attrs.isStrokeRed = true;
-      
+      // console.log(node)
       node.attrs.name === "board" 
         ? store.dispatch(actions.updateBoardStroke("red")) 
         : node.attrs.isStrokeRed = true;
@@ -52,13 +57,15 @@ export default class ModulesItem extends Component {
 
     const removeRedStroke = (node) => {
       node.attrs.isStrokeRed = false;
+      console.log(node.attrs)
       
       node.attrs.name === "board" 
         ? store.dispatch(actions.updateBoardStroke(null)) 
         : node.attrs.isStrokeRed = false;
+        
     };
-
-    if (this.props && !this.props.isDraggingToBoard) {
+    
+    if (!this.props || !this.props.isDraggingToBoard) {
       enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
   }
@@ -76,10 +83,6 @@ export default class ModulesItem extends Component {
     }
   }
   
-  componentWillUnmount() {
-    this.highlightRuleBreakingModules();
-  }
-
   updateThumbnail() {
     const module = this.refs.moduleGroup;
     const boardLayer = module.getParent().getParent().getParent();
@@ -153,6 +156,8 @@ export default class ModulesItem extends Component {
       isStrokeRed = this.refs.moduleGroup.attrs.isStrokeRed;
       defaultStroke = this.refs.moduleGroup.attrs.defaultStroke;
     }
+    
+    console.log(isStrokeRed)
 
     return (
       <Group

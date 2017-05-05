@@ -41,9 +41,8 @@ class DesignToolStage extends Component {
       const moduleArray = this.refs.stage.getStage().get('.moduleGroup')
       if (moduleArray.length) {
         moduleArray.splice(this.props.selectedModuleIndex, 1)
-        console.log(moduleArray)
         const module = moduleArray[0];
-        module.attrs.highlightRuleBreakingModules(moduleArray);
+        module.attrs.highlightRuleBreakingModules(moduleArray, this.props.selectedModuleIndex);
       }
     })
   }
