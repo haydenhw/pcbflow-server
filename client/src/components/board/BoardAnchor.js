@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-
 class Anchor extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +12,8 @@ class Anchor extends Component {
       strokeWidth: 2,
     };
   }
-  update() {
+  
+  updatePosition() {
     const activeAnchor = this.refs.anchor;
     const group = this.refs.anchor.getParent();
     const board = group.get('.board')[0];
@@ -62,6 +62,7 @@ class Anchor extends Component {
         width,
         height,
       };
+      
       store.dispatch(actions.updateBoardDimensions(boardDimensions));
     }
   }
@@ -86,6 +87,16 @@ class Anchor extends Component {
       strokeWidth: 4,
     });
   }
+  
+  handleDragMove() {
+    this.updatePosition();
+    this.props.hideDocumentation();
+  }
+  
+  handleDragEnd() {
+    this.props.unhideDocumentation();
+    this.draggableOn();
+  }
 
   handleMouseOut() {
     document.body.style.cursor = 'default';
@@ -109,8 +120,8 @@ class Anchor extends Component {
       onMouseOver={this.handleMouseOver.bind(this)}
       onMouseOut={this.handleMouseOut.bind(this)}
       onMouseDown={this.moveToTop.bind(this)}
-      onDragMove={this.update.bind(this)}
-      onDragEnd={this.draggableOn.bind(this)}
+      onDragMove={this.handleDragMove.bind(this)}
+      onDragEnd={this.handleDragEnd.bind(this)}
     />);
   }
 }

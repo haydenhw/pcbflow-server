@@ -70,6 +70,8 @@ export default class ModulesItem extends Component {
     setTimeout(() => this.highlightRuleBreakingMoudles(), 1);
   }
   
+
+  
   componentDidUpdate(prevProps, prevState) {
     if(this.props.rotation !== prevProps.rotation) {
       this.highlightRuleBreakingMoudles();
@@ -133,7 +135,6 @@ export default class ModulesItem extends Component {
 
   render() {
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-    const borderNode = this.refs.moduleBorder;
     const image = (
       <Image
         x={this.props.imageX}

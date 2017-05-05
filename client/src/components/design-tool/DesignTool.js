@@ -38,7 +38,9 @@ class DesignTool extends Component {
       isDraggingToBoard: false,
       shouldRender: false,
       shouldUpdateThumbnail: false,
+      wasDocumentationOpen: true,
       shouldRenderDocumentation: true,
+      shouldRenderDocumentationButton: true,
       image: null,
     };
 
@@ -70,7 +72,7 @@ class DesignTool extends Component {
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
     
     const shouldConfirmOnReload = false;
-   window.onbeforeunload = () => shouldConfirmOnReload ? '' : null;
+    window.onbeforeunload = () => shouldConfirmOnReload ? '' : null;
   }
 
   removeHanlders() {
@@ -95,7 +97,6 @@ class DesignTool extends Component {
 
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
-    
 
     this.setRouteHook();
     this.addHanlders();
@@ -182,12 +183,17 @@ class DesignTool extends Component {
   }
 
   handleMouseMove(evt) {
-    const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
-    const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
-    const x = Number(evt.clientX) - stageOffsetX;
-    const y = Number(evt.clientY) - stageOffsetY;
+    if (this.state.isDraggingToBoard) {
+      const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
+      const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
+      const x = Number(evt.clientX) - stageOffsetX;
+      const y = Number(evt.clientY) - stageOffsetY;
 
-    this.setState({ x, y });
+      this.setState({ 
+        x, 
+        y 
+      });
+    }
   }
 
   handleMouseDown(evt) {
@@ -230,8 +236,26 @@ class DesignTool extends Component {
   }
 
   toggleDocumentationCard() {
+    const { shouldRenderDocumentation, wasDocumentationOpen } = this.state;
     this.setState({
-      shouldRenderDocumentation: !this.state.shouldRenderDocumentation,
+      shouldRenderDocumentation: !shouldRenderDocumentation,
+      wasDocumentationOpen: !wasDocumentationOpen,
+    });
+  }
+  
+  hideDocumentation() {
+    this.setState({
+      shouldRenderDocumentation: false,
+      shouldRenderDocumentationButton: false
+    })
+  }
+  
+  unhideDocumentation() {
+    const { wasDocumentationOpen } = this.state;
+    
+    this.setState({
+      shouldRenderDocumentation: wasDocumentationOpen ? true : false,
+      shouldRenderDocumentationButton: true
     });
   }
 
@@ -254,8 +278,16 @@ class DesignTool extends Component {
       draggingModuleData,
       isMouseDownOnIcon,
     } = this.props;
+    const { 
+      x,
+      y, 
+      isDraggingToBoard, 
+      shouldUpdateThumbnail, 
+      shouldRenderDocumentation,
+      shouldRenderDocumentationButton 
+    } = this.state;
     const { height, width, image } = draggingModuleData;
-    const { x, y, isDraggingToBoard, shouldUpdateThumbnail, shouldRenderDocumentation } = this.state;
+    
     const draggingModule = (
       <Module 
         x={x - width / 2} 
@@ -288,6 +320,13 @@ class DesignTool extends Component {
         style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
       />
     );
+    
+    const infoButton = (
+      <DesignToolInfoButton
+        clickHandler={this.toggleDocumentationCard.bind(this)}
+        icon={infoButtonIcon}
+      />
+    );
 
 
     const imageStyle = {
@@ -316,6 +355,8 @@ class DesignTool extends Component {
               shouldRenderBoard={currentProjectName} 
               shouldUpdateThumbnail={shouldUpdateThumbnail} 
               draggingModule={draggingModule}  
+              hideDocumentation={this.hideDocumentation.bind(this)}
+              unhideDocumentation={this.unhideDocumentation.bind(this)}
             />
           </div>
         </div>
@@ -323,11 +364,8 @@ class DesignTool extends Component {
           price={currentProjectPrice} 
           timeLastSaved={timeLastSaved} 
         /> 
-        {this.state.shouldRenderDocumentation && <DocumentationCard />}
-        <DesignToolInfoButton
-          clickHandler={this.toggleDocumentationCard.bind(this)}
-          icon={infoButtonIcon}
-        />
+        {shouldRenderDocumentation && <DocumentationCard />}
+        {shouldRenderDocumentationButton && infoButton}
       </div>
     );
   }
