@@ -46,10 +46,8 @@ export default class ModulesItem extends Component {
       moduleNodeArray.splice(index, 1)
     }
 
-    // console.log(moduleNodeArray)
     const addRedStroke = (node) => {
       node.attrs.isStrokeRed = true;
-      // console.log(node)
       node.attrs.name === "board" 
         ? store.dispatch(actions.updateBoardStroke("red")) 
         : node.attrs.isStrokeRed = true;
@@ -57,7 +55,6 @@ export default class ModulesItem extends Component {
 
     const removeRedStroke = (node) => {
       node.attrs.isStrokeRed = false;
-      console.log(node.attrs)
       
       node.attrs.name === "board" 
         ? store.dispatch(actions.updateBoardStroke(null)) 
@@ -80,6 +77,11 @@ export default class ModulesItem extends Component {
   componentDidUpdate(prevProps, prevState) {
     if(this.props.rotation !== prevProps.rotation) {
       this.highlightRuleBreakingModules();
+    }
+    
+    if (this.props.shouldCheckCollission === true) {
+      this.highlightRuleBreakingModules();
+      this.props.toggleShouldCheckCollission();
     }
   }
   
@@ -157,8 +159,6 @@ export default class ModulesItem extends Component {
       defaultStroke = this.refs.moduleGroup.attrs.defaultStroke;
     }
     
-    console.log(isStrokeRed)
-
     return (
       <Group
         draggable="true"

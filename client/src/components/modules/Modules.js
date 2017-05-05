@@ -19,6 +19,13 @@ import {
 
 class Modules extends Component {
   
+  constructor(props) {
+    super(props);
+    this.state = {
+      shouldCheckCollission: false
+    };
+  }
+  
   calculatePrice(modules) {
     if (modules && modules.length > 0) {
       const modulePriceSum = this.props.modules
@@ -37,12 +44,23 @@ class Modules extends Component {
     if (prevProps.modules.length !== this.props.modules.length) {
       const totalPriceString = this.calculatePrice(this.props.modules)
       store.dispatch(actions.updateProjectPrice(totalPriceString));
+      
+      this.setState({
+        shouldCheckCollission: !this.state.shouldCheckCollission
+      })
     }
   }
   
   componentDidMount() {
     const totalPriceString = this.calculatePrice(this.props.modules);
     store.dispatch(actions.updateProjectPrice(totalPriceString));
+  }
+  
+  toggleShouldCheckCollission() {
+    console.log('toggling')
+    this.setState({
+      shouldCheckCollission: !this.state.shouldCheckCollission
+    });
   }
   
   render() {
@@ -85,6 +103,8 @@ class Modules extends Component {
           boardSpecs={this.props.boardSpecs}
           isDraggingToBoard={false}
           rotate={this.props.rotate}
+          shouldCheckCollission={this.state.shouldCheckCollission}
+          toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
         />);
     }
     return (
