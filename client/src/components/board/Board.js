@@ -9,6 +9,8 @@ import ModulesItem from 'components/modules/ModulesItem';
 import Anchor from './BoardAnchor';
 import generateThumbnail from 'helpers/generateThumbnail';
 
+
+
 class Board extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,10 @@ class Board extends Component {
       x: null,
       y: null
     }
-      
+  }
+  
+  componentWillReceiveProps(newProps) {
+    //console.log(newProps, this.props)
   }
 
   updateLocalStatePosition() {

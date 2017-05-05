@@ -12,6 +12,8 @@ import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail from 'helpers/generateThumbnail';
 
+import assert from 'assert';
+
 class DesignToolStage extends Component {
 
   updateThumbnail() {
@@ -22,6 +24,7 @@ class DesignToolStage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
       this.updateThumbnail();
       this.props.toggleShouldUpadateThumbnail();
@@ -33,7 +36,7 @@ class DesignToolStage extends Component {
   }
 
   
-  render(test) {
+  render() {
     const {
       shouldRenderBoard,
       draggingModule,
