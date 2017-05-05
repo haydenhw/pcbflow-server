@@ -32,11 +32,25 @@ class DesignToolStage extends Component {
   }
 
   deleteModule() {
-    store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
+    const promise = new Promise((resolve, reject) => {
+      store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
+      resolve();
+    });
+    
+    promise.then(() => {
+      const moduleArray = this.refs.stage.getStage().get('.moduleGroup')
+      if (moduleArray.length) {
+        moduleArray.splice(this.props.selectedModuleIndex, 1)
+        console.log(moduleArray)
+        const module = moduleArray[0];
+        module.attrs.highlightRuleBreakingModules(moduleArray);
+      }
+    })
   }
 
   
   render() {
+    
     const {
       shouldRenderBoard,
       draggingModule,
@@ -48,11 +62,13 @@ class DesignToolStage extends Component {
       unhideDocumentation,
      } = this.props;
      
-    const board = <Board 
-      rotate={rotate} 
-      hideDocumentation={hideDocumentation}
-      unhideDocumentation={unhideDocumentation}
-    />
+    const board = (
+        <Board 
+        rotate={rotate} 
+        hideDocumentation={hideDocumentation}
+        unhideDocumentation={unhideDocumentation}
+      />
+    )
      
     return (
       <div>

@@ -52,6 +52,7 @@ class Modules extends Component {
       modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
 
         <ModulesItem
+          ref = "module"
           key={index}
           index={index}
           x={module.x}

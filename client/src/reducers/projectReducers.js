@@ -24,7 +24,7 @@ export const currentProjectInfo = (state = defaultProjectInfo, action) => {
       return {
         ...state,
         name: action.project.name,
-      };
+g      };
       break;
     case actions.UPDATE_PROJECT_PRICE:
       return {

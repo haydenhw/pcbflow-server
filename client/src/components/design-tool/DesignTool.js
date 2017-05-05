@@ -244,10 +244,12 @@ class DesignTool extends Component {
   }
   
   hideDocumentation() {
-    this.setState({
-      shouldRenderDocumentation: false,
-      shouldRenderDocumentationButton: false
-    })
+    if (!this.props.isMouseOverModule) {
+      this.setState({
+        shouldRenderDocumentation: false,
+        shouldRenderDocumentationButton: false
+      })
+    }
   }
   
   unhideDocumentation() {

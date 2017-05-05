@@ -16,7 +16,6 @@ export default class ModulesItem extends Component {
       image: null,
       strokeWidth: 1
     };
-    
   }
 
   setImage() {
@@ -37,8 +36,8 @@ export default class ModulesItem extends Component {
     module.attrs.isStrokeRed = false;
   }
 
-  highlightRuleBreakingMoudles() {
-    const draggingModuleNode = this.refs.moduleGroup;
+  highlightRuleBreakingModules(module) {
+    const draggingModuleNode = module || this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodeArray = boardGroup.get('.moduleGroup');
     const boardNode = boardGroup.getParent().get('.board')[0];
@@ -46,36 +45,39 @@ export default class ModulesItem extends Component {
     const addRedStroke = (node) => {
       node.attrs.isStrokeRed = true;
       
-      node.attrs.name === "board" ?
-        store.dispatch(actions.updateBoardStroke("red")) :
-        node.attrs.isStrokeRed = true;
+      node.attrs.name === "board" 
+        ? store.dispatch(actions.updateBoardStroke("red")) 
+        : node.attrs.isStrokeRed = true;
     };
 
     const removeRedStroke = (node) => {
       node.attrs.isStrokeRed = false;
       
-      node.attrs.name === "board" ?
-        store.dispatch(actions.updateBoardStroke(null)) :
-        node.attrs.isStrokeRed = false;
+      node.attrs.name === "board" 
+        ? store.dispatch(actions.updateBoardStroke(null)) 
+        : node.attrs.isStrokeRed = false;
     };
 
-    if (!this.props.isDraggingToBoard) {
+    if (this.props && !this.props.isDraggingToBoard) {
       enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
   }
 
   componentDidMount() {
+    this.refs.moduleGroup.attrs.highlightRuleBreakingModules = this.highlightRuleBreakingModules;
     this.setImage();
     this.setDefaultStroke();
-    setTimeout(() => this.highlightRuleBreakingMoudles(), 1);
+    setTimeout(() => this.highlightRuleBreakingModules(), 1);
   }
-  
-
   
   componentDidUpdate(prevProps, prevState) {
     if(this.props.rotation !== prevProps.rotation) {
-      this.highlightRuleBreakingMoudles();
+      this.highlightRuleBreakingModules();
     }
+  }
+  
+  componentWillUnmount() {
+    this.highlightRuleBreakingModules();
   }
 
   updateThumbnail() {
@@ -126,7 +128,7 @@ export default class ModulesItem extends Component {
   handleDragEnd() {
     const module = this.refs.moduleGroup;
     this.updateThumbnail();
-    this.highlightRuleBreakingMoudles();
+    this.highlightRuleBreakingModules();
   }
 
   handleDoubleClick() {
