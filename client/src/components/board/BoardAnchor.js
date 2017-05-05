@@ -50,6 +50,16 @@ class Anchor extends Component {
       bottomLeft: { x: bottomLeft.getX(), y: bottomLeft.getY() },
       bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() },
     };
+    
+    anchorPositions.bottomRight.y = 
+      anchorPositions.bottomRight.y < 0
+      ? this.props.anchorPositions.bottomRight.y
+      : anchorPositions.bottomRight.y;
+      
+    anchorPositions.bottomLeft.y = 
+      anchorPositions.bottomLeft.y < 0
+      ? this.props.anchorPositions.bottomLeft.y
+      : anchorPositions.bottomLeft.y;
 
     store.dispatch(actions.updateAnchorPositions(anchorPositions));
     board.position(topLeft.position());
@@ -131,6 +141,7 @@ const mapStateToProps = state => ({
   height: state.boardSpecs.height,
   boardX: state.boardSpecs.x,
   boardY: state.boardSpecs.y,
+  anchorPositions: state.anchorPositions
 });
 
 export default connect(mapStateToProps)(Anchor);
