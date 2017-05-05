@@ -5,7 +5,44 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { currentProjectModules } from './moduleReducers';
+import { draggingModule, currentProjectModules } from './moduleReducers';
+
+describe('draggingModule reducer', () => {
+  
+  it('It should return update draggingModule data', () => {
+    const initialState = {
+      x: 10,
+      y: 10,
+      width: 50,
+      height: 50,
+      stroke: 'black',
+      rotation: 0
+    };
+      
+    const expectedState = {
+      x: 5,
+      y: 5,
+      width: 75,
+      height: 75,
+      stroke: 'blue',
+      rotation: 90
+    };
+    
+    const resultState = draggingModule(deepFreeze(initialState), {
+      type: 'CHANGE_DRAGGING_MODULE',
+      moduleData: {
+        x: 5,
+        y: 5,
+        width: 75,
+        height: 75,
+        stroke: 'blue',
+        rotation: 90
+      }
+    });
+    console.log(resultState)
+    assert.deepEqual(resultState, expectedState);
+  });
+});
 
 describe('currentProjectModules reducer', () => {
 
@@ -56,7 +93,7 @@ describe('currentProjectModules reducer', () => {
         y: 50,
       },
     });
-    console.log(resultState)
+    
     assert.deepEqual(resultState, expectedState);
   });
 });
