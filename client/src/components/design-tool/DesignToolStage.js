@@ -43,8 +43,16 @@ class DesignToolStage extends Component {
       isMouseDownOnIcon,
       isMouseDown,
       isMouseOverModule,
-      rotate
+      rotate,
+      hideDocumentation,
+      unhideDocumentation,
      } = this.props;
+     
+    const board = <Board 
+      rotate={rotate} 
+      hideDocumentation={hideDocumentation}
+      unhideDocumentation={unhideDocumentation}
+    />
      
     return (
       <div>
@@ -61,7 +69,7 @@ class DesignToolStage extends Component {
               height={1000}
             >
               <Grid gridWidth={5000} cellWidth={20} />
-              {shouldRenderBoard ? <Board rotate={rotate} /> : <Layer />}
+              {shouldRenderBoard ? board  : <Layer />}
               {isMouseDownOnIcon ? <Layer>{ draggingModule }</Layer> : <Layer /> }
             </Stage>
           </div>

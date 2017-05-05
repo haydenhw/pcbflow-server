@@ -90,7 +90,12 @@ class Anchor extends Component {
   
   handleDragMove() {
     this.updatePosition();
-    
+    this.props.hideDocumentation();
+  }
+  
+  handleDragEnd() {
+    this.props.unhideDocumentation();
+    this.draggableOn();
   }
 
   handleMouseOut() {
@@ -116,7 +121,7 @@ class Anchor extends Component {
       onMouseOut={this.handleMouseOut.bind(this)}
       onMouseDown={this.moveToTop.bind(this)}
       onDragMove={this.handleDragMove.bind(this)}
-      onDragEnd={this.draggableOn.bind(this)}
+      onDragEnd={this.handleDragEnd.bind(this)}
     />);
   }
 }

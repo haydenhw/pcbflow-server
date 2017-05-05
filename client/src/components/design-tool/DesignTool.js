@@ -38,7 +38,7 @@ class DesignTool extends Component {
       isDraggingToBoard: false,
       shouldRender: false,
       shouldUpdateThumbnail: false,
-      wasDocumentationOpen: true;
+      wasDocumentationOpen: true,
       shouldRenderDocumentation: true,
       shouldRenderDocumentationButton: true,
       image: null,
@@ -184,7 +184,6 @@ class DesignTool extends Component {
 
   handleMouseMove(evt) {
     if (this.state.isDraggingToBoard) {
-      console.log('hola')
       const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
       const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
       const x = Number(evt.clientX) - stageOffsetX;
@@ -279,14 +278,15 @@ class DesignTool extends Component {
       draggingModuleData,
       isMouseDownOnIcon,
     } = this.props;
-    const { height, width, image } = draggingModuleData;
     const { 
       x,
       y, 
       isDraggingToBoard, 
       shouldUpdateThumbnail, 
-      shouldRenderDocumentation 
+      shouldRenderDocumentation,
+      shouldRenderDocumentationButton 
     } = this.state;
+    const { height, width, image } = draggingModuleData;
     
     const draggingModule = (
       <Module 
@@ -354,6 +354,8 @@ class DesignTool extends Component {
               shouldRenderBoard={currentProjectName} 
               shouldUpdateThumbnail={shouldUpdateThumbnail} 
               draggingModule={draggingModule}  
+              hideDocumentation={this.hideDocumentation.bind(this)}
+              unhideDocumentation={this.unhideDocumentation.bind(this)}
             />
           </div>
         </div>
@@ -361,8 +363,8 @@ class DesignTool extends Component {
           price={currentProjectPrice} 
           timeLastSaved={timeLastSaved} 
         /> 
-        {this.state.shouldRenderDocumentation && <DocumentationCard />}
-        
+        {shouldRenderDocumentation && <DocumentationCard />}
+        {shouldRenderDocumentationButton && infoButton}
       </div>
     );
   }
