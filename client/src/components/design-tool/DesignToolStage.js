@@ -15,7 +15,6 @@ import generateThumbnail from 'helpers/generateThumbnail';
 import assert from 'assert';
 
 class DesignToolStage extends Component {
-
   updateThumbnail() {
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
@@ -32,22 +31,9 @@ class DesignToolStage extends Component {
   }
 
   deleteModule() {
-    const promise = new Promise((resolve, reject) => {
-      store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
-      resolve();
-    });
-    
-    promise.then(() => {
-      const moduleArray = this.refs.stage.getStage().get('.moduleGroup')
-      if (moduleArray.length) {
-        moduleArray.splice(this.props.selectedModuleIndex, 1)
-        const module = moduleArray[0];
-        module.attrs.highlightRuleBreakingModules(moduleArray, this.props.selectedModuleIndex);
-      }
-    })
+    store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
   }
 
-  
   render() {
     
     const {
@@ -59,23 +45,25 @@ class DesignToolStage extends Component {
       rotate,
       hideDocumentation,
       unhideDocumentation,
+      shouldHideContextMenu
      } = this.props;
      
+    const contextMenuClass =  shouldHideContextMenu ? "hideContextMenu" : "react-contextmenu";
+    
     const board = (
         <Board 
         rotate={rotate} 
         hideDocumentation={hideDocumentation}
         unhideDocumentation={unhideDocumentation}
       />
-    )
-     
+    );
+    
     return (
       <div>
         <ContextMenuTrigger
           id={'SIMPLE'}
           name={'rect'}
-          disable={!(!isMouseDown && isMouseOverModule)}
-          holdToDisplay={1000}
+          disable={isMouseDown || !isMouseOverModule}
         >
           <div>
             <Stage
@@ -89,8 +77,11 @@ class DesignToolStage extends Component {
             </Stage>
           </div>
         </ContextMenuTrigger>
-
-        <ContextMenu id={'SIMPLE'}>
+        
+        <ContextMenu 
+          id={'SIMPLE'}
+          className= {contextMenuClass}
+        >
           <MenuItem onClick={this.deleteModule.bind(this)}>delete</MenuItem>
           <MenuItem onClick={rotate}>rotate</MenuItem>
         </ContextMenu>
@@ -110,4 +101,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(DesignToolStage);
-

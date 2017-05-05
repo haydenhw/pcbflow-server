@@ -41,6 +41,7 @@ class DesignTool extends Component {
       wasDocumentationOpen: true,
       shouldRenderDocumentation: true,
       shouldRenderDocumentationButton: true,
+      shouldHideContextMenu: false,
       image: null,
     };
 
@@ -201,8 +202,22 @@ class DesignTool extends Component {
       store.dispatch(actions.toggleIsMouseDown(true));
     }
   }
-
-  handleMouseUp() {
+  
+  toggleShouldHideContextMenu(boolean) {
+    this.setState({
+      shouldHideContextMenu: boolean
+    })
+  }
+  
+  handleMouseUp(evt) {
+    if (evt.which === 1 && !this.state.shouldHideContextMenu) {
+      console.log('hola')
+      this.toggleShouldHideContextMenu(true);
+    }
+    
+    if (evt.which === 3 && this.props.isMouseOverModule) {
+      this.toggleShouldHideContextMenu(false);
+    }
     // this.setState({isDraggingToBoard: false});
     this.dropDraggingModule();
     store.dispatch(actions.toggleIsMouseDown(false));
@@ -286,7 +301,8 @@ class DesignTool extends Component {
       isDraggingToBoard, 
       shouldUpdateThumbnail, 
       shouldRenderDocumentation,
-      shouldRenderDocumentationButton 
+      shouldRenderDocumentationButton,
+      shouldHideContextMenu
     } = this.state;
     const { height, width, image } = draggingModuleData;
     
@@ -357,6 +373,7 @@ class DesignTool extends Component {
               shouldRenderBoard={currentProjectName} 
               shouldUpdateThumbnail={shouldUpdateThumbnail} 
               draggingModule={draggingModule}  
+              shouldHideContextMenu={shouldHideContextMenu}
               hideDocumentation={this.hideDocumentation.bind(this)}
               unhideDocumentation={this.unhideDocumentation.bind(this)}
             />

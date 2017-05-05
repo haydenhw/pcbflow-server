@@ -20,6 +20,12 @@ body {
   pointer-events: none;
 }
 
+.hideContextMenu {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;; 
+}
+
 .react-contextmenu.react-contextmenu--visible {
   opacity: 1;
   pointer-events: auto;

@@ -57,7 +57,6 @@ class Modules extends Component {
   }
   
   toggleShouldCheckCollission() {
-    console.log('toggling')
     this.setState({
       shouldCheckCollission: !this.state.shouldCheckCollission
     });
