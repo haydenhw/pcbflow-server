@@ -258,5 +258,146 @@ describe('currentProjectModules reducer', () => {
     
     assert.deepEqual(resultState, expectedState);
   });
+  
+  it('It should push a new module to the array', () => {
+    const initialState = [
+      {
+        x: 10,
+        y: 10,
+        width: 50,
+        height: 50,
+        stroke: 'black',
+        rotation: 0
+      }
+    ];
+
+    const expectedState = [
+      {
+        x: 10,
+        y: 10,
+        width: 50,
+        height: 50,
+        stroke: 'black',
+        rotation: 0
+      },
+      {
+        x: 50,
+        y: 50,
+        width: 100,
+        height: 100,
+        stroke: 'black',
+        rotation: 0
+      }
+    ];
+
+    const resultState = currentProjectModules(deepFreeze(initialState), {
+      type: 'PUSH_TO_CURRENT_PROJECT_MODULES',
+      module: {
+        x: 50,
+        y: 50,
+        width: 100,
+        height: 100,
+        stroke: 'black',
+        rotation: 0
+      }
+    });
+  
+    assert.deepEqual(resultState, expectedState);
+  });
+  
+  it('It should rotate specified module', () => {
+    const initialState = [
+      {
+        x: 10,
+        y: 10,
+        width: 50,
+        height: 50,
+        stroke: 'black',
+        rotation: 0,
+        boundToSideIndex: 1,
+        parentGroupX: 90,
+        parentGroupY: 90,
+        innerGroupX: 90,
+        innerGroupY: 90,
+      }
+    ];
+
+    const expectedState = [
+      {
+        x: 90,
+        y: 90,
+        width: 50,
+        height: 50,
+        stroke: 'black',
+        rotation: 180,
+        boundToSideIndex: 1,
+        parentGroupX: 90,
+        parentGroupY: 90,
+        innerGroupX: 90,
+        innerGroupY: 90,
+      }
+    ];
+
+    const resultState = currentProjectModules(deepFreeze(initialState), {
+      type: 'ROTATE_SELECTED_MODULE',
+      rotationData: {
+          index: 0,
+          x: 10,
+          y: 10,
+          width: 50,
+          height: 50,
+          stroke: 'black',
+          rotation: 180,
+          boundToSideIndex: 1,
+          parentGroupX: 90,
+          parentGroupY: 90,
+          innerGroupX: 90,
+          innerGroupY: 90,
+      }
+    });
+  
+    assert.deepEqual(resultState, expectedState);
+  });
+  
+  
+  it('It should delete specified module', () => {
+    const initialState = [
+      {
+        x: 10,
+        y: 10,
+        width: 50,
+        height: 50,
+        stroke: 'black',
+        rotation: 0
+      },
+      {
+        x: 50,
+        y: 50,
+        width: 100,
+        height: 100,
+        stroke: 'black',
+        rotation: 0
+      }
+    ];
+
+    const expectedState = [
+      {
+        x: 10,
+        y: 10,
+        width: 50,
+        height: 50,
+        stroke: 'black',
+        rotation: 0
+      }
+    ];
+
+    const resultState = currentProjectModules(deepFreeze(initialState), {
+      type: 'DELETE_SELECTED_MODULE',
+      moduleIndex: 1
+    });
+    console.log(resultState, expectedState)
+    
+    assert.deepEqual(resultState, expectedState);
+  });
 });
 

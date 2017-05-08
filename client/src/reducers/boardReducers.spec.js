@@ -5,7 +5,7 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { boardSpecs } from './boardReducers';
+import { boardSpecs, anchorPositions } from './boardReducers';
 
 describe('boardSpecs reducer', () => {
     // Fetch Basic Info about User
@@ -140,7 +140,35 @@ describe('boardSpecs reducer', () => {
 
     assert.deepEqual(resultState, expectedState);
   });
-  
-  
 });
 
+describe('anchorPositions reducer', () => {
+    // Fetch Basic Info about User
+  it('It should return correct height and width', () => {
+    const initialState = {
+      topLeft: { x: 0, y: 0 },
+      topRight: { x: null, y: 0 },
+      bottomLeft: { x: 0, y: null },
+      bottomRight: { x: null, y: null }
+    };
+
+    const expectedState = {
+      topLeft: { x: 0, y: 0 },
+      topRight: { x: 15, y: 15 },
+      bottomLeft: { x: 50, y: 50 },
+      bottomRight: { x: 20, y: 20 }
+    };
+
+    const resultState = anchorPositions(deepFreeze(initialState), {
+      type: 'UPDATE_ANCHOR_POSITIONS',
+      positions: {
+        topLeft: { x: 0, y: 0 },
+        topRight: { x: 15, y: 15 },
+        bottomLeft: { x: 50, y: 50 },
+        bottomRight: { x: 20, y: 20 }
+      }
+    });
+
+    assert.deepEqual(resultState, expectedState);
+  });
+});

@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "assert": "^1.4.1",
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "faker": "^4.1.0",
     "mocha": "^3.3.0",
     "react-edit-inline": "^1.0.8",
     "react-scripts": "0.8.5"
@@ -43,7 +46,6 @@
     "server": "babel-node server.js",
     "test": "mocha",
     "build:client": "cd client && npm run build",
-  
     "push:git": "git add . && git commit -m \"build\" && git push origin master || exit 0",
     "push:heroku": "git push heroku master",
     "deploy": "npm run build:client && npm run push:git && npm run push:heroku"

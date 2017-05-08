@@ -35,8 +35,8 @@ const projectSchema = mongoose.Schema({
     imageHeight: Number,
     iconSrc: String,
     iconHeight: String,
-    price: Number,
-    info: String
+    price: Number
+
   }],
   moduleBank: [{
     height: Number,
