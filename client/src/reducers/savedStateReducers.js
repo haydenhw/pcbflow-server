@@ -13,12 +13,12 @@ export const hasUnsavedChanges = (state = defaultState, action) => {
     case actions.UPDATE_BOARD_POSITION:
     case actions.UPDATE_BOARD_DIMENSIONS:
       return {
-        bool: true,
+        hasUnsavedChanges: true,
       };
       break;
     case actions.TOGGLE_HAS_UNSAVED_CHANGES:
       return {
-        bool: !state.bool,
+        hasUnsavedChanges: !state.hasUnsavedChanges,
       };
     default:
       return state;

@@ -24,7 +24,7 @@ export const currentProjectInfo = (state = defaultProjectInfo, action) => {
       return {
         ...state,
         name: action.project.name,
-g      };
+      };
       break;
     case actions.UPDATE_PROJECT_PRICE:
       return {
@@ -42,6 +42,7 @@ g      };
       return state;
   }
 };
+
 /*
 export const projectList = (state = [], action) => {
   switch(action.type){
@@ -49,6 +50,5 @@ export const projectList = (state = [], action) => {
       return action.projects;
       break;
     case(actions.DELETE_PROJECT_SUCCESS):
-
   }
 }*/

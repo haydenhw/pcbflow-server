@@ -395,7 +395,6 @@ describe('currentProjectModules reducer', () => {
       type: 'DELETE_SELECTED_MODULE',
       moduleIndex: 1
     });
-    console.log(resultState, expectedState)
     
     assert.deepEqual(resultState, expectedState);
   });
