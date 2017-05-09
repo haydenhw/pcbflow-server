@@ -26,7 +26,7 @@ import DocumentationCard from './DesignToolDocumentationCard';
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
 
-class DesignTool extends Component {
+let DesignTool = class extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -394,32 +394,28 @@ const mapStateToProps = state => ({
   currentProjectId: state.currentProjectInfo.id,
   currentProjectPrice: state.currentProjectInfo.price,
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
-  currentProjectModules: state.currentProjectModules,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
-  isMouseDown: state.mouseEvents.isMouseDown,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   draggingModuleData: state.draggingModule,
   selectedModuleIndex: state.selectedModule.index,
   boardSpecs: state.boardSpecs,
   selectedModuleProps: state.selectedModule,
-  anchorPositions: state.anchorPositions
+  anchorPositions: state.anchorPositions,
 });
 
 DesignTool = withRouter(DesignTool);
 export default connect(mapStateToProps)(DesignTool);
 
 DesignTool.propTypes = {
-  currentProjectName: state.currentProjectInfo.name,
-  currentProjectId: state.currentProjectInfo.id,
-  currentProjectPrice: state.currentProjectInfo.price,
-  timeLastSaved: state.currentProjectInfo.timeLastSaved,
-  currentProjectModules: state.currentProjectModules,
-  isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
-  isMouseDown: state.mouseEvents.isMouseDown,
-  isMouseOverModule: state.mouseEvents.isMouseOverModule,
-  draggingModuleData: state.draggingModule,
-  selectedModuleIndex: state.selectedModule.index,
-  boardSpecs: state.boardSpecs,
-  selectedModuleProps: state.selectedModule,
-  anchorPositions: state.anchorPositions
+  currentProjectName: PropTypes.string.isRequired,
+  currentProjectId: PropTypes.string.isRequired,
+  currentProjectPrice: PropTypes.string.isRequired,
+  timeLastSaved: PropTypes.string.isRequired,
+  isMouseDownOnIcon: PropTypes.bool.isRequired,
+  isMouseOverModule: PropTypes.bool.isRequired,
+  draggingModuleData: PropTypes.object.isRequired,
+  selectedModuleIndex: PropTypes.number.isRequired,
+  boardSpecs: PropTypes.object.isRequired,
+  selectedModuleProps: PropTypes.object.isRequired,
+  anchorPositions: PropTypes.object.isRequired,
 };
