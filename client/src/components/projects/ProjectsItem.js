@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router';
+import PropTypes from 'prop-types';
+
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -19,3 +21,9 @@ export default function ProjectLink(props) {
     </div>
   );
 }
+
+ProjectLink.propTypes = {
+  projectId: PropTypes.string.isRequired,
+  projectName: PropTypes.string.isRequired
+};
+

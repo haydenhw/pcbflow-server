@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Konva from 'konva';
 import shortid from 'shortid';
+import PropTypes from 'prop-types';
 
 import * as actions from 'actions/indexActions';
 import confirm from 'helpers/confirm';
@@ -30,17 +31,15 @@ class ProjectList extends Component {
 
   render() {
     const { projects } = this.props;
-
     if (projects && projects.length > 0) {
-      const projectsList = projects.map((project, index) => {
-        // console.log(thumbnail)
+      const projectsList = projects.map((project) => {
         const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
         return (
           <ProjectsItemFrame
             key={shortid.generate()}
             thumbnailSrc={thumbnailSrc}
             projectId={project._id}
-            confirmDelete={this.confirmDelete}
+            confirmDelete={ProjectList.confirmDelete}
           >
             <ProjectsItem
               projectId={project._id}
@@ -65,7 +64,7 @@ class ProjectList extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   projects: state.projectList,
   thumbnail: state.boardSpecs.thumbnail,
 });

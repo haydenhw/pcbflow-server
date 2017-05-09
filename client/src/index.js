@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
+
+import store from 'reduxFiles/store';
 
 import DesignTool from 'components/design-tool/DesignTool';
 import Projects from 'components/projects/Projects';
 import LandingPage from 'components/landing-page/LandingPage';
-import store from 'reduxFiles/store';
+
 import './index.css';
 import './reset.css';
 

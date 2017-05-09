@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import DeleteButton from './ProjectsDeleteButton';
+
 import './projects-styles/ProjectsItemFrame.css';
 import './projects-styles/floatGrid.css';
 
@@ -17,6 +20,7 @@ export default function ProjectsItemFrame(props) {
         className="container"
       >
         <div
+          role="button"
           className="image-container"
           onClick={() => fectchProject(props.projectId)}
         >
@@ -33,3 +37,9 @@ export default function ProjectsItemFrame(props) {
 
   );
 }
+
+ProjectsItemFrame.propTypes = {
+  thumbnailSrc: PropTypes.string.isRequired,
+  projectId: PropTypes.string.isRequired,
+  confirmDelete: PropTypes.func.isRequired,
+};
