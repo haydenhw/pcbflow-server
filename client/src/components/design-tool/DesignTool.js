@@ -42,7 +42,10 @@ let DesignTool = class extends Component {
       shouldHideContextMenu: false,
       image: null,
     };
-
+    
+    this.toggleDraggingToBoard.bind(this)
+    this.toggleDocumentationCard.bind(this)
+    
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
     this.bound_handleMouseUp = this.handleMouseUp.bind(this);
     this.bound_handleMouseMove = this.handleMouseMove.bind(this);
@@ -60,6 +63,51 @@ let DesignTool = class extends Component {
       store.dispatch(actions.redo());
     }
   }
+
+  static calculateNewModuleCoordinates(coordinateData) {
+    const cd = coordinateData;
+
+    const boundToSide = getPerimeterSide(cd.boundToSideIndex) || null;
+
+    switch (boundToSide) {
+      case 'top':
+        return {
+          x: cd.moduleX - cd.boardX - (cd.width / 2),
+          y: 0
+        };
+      case 'bottom':
+        return {
+          x: cd.moduleX - cd.boardX - (cd.width / 2),
+          y: cd.boardHeight - cd.height,
+        };
+      default:
+        return {
+          x: cd.moduleX - cd.boardX - (cd.width / 2),
+          y: cd.moduleY - cd.boardY - (cd.height / 2),
+        };
+    }
+  }
+
+  static handleNameChange(projectId, newName) {
+    const nameObject = {
+      name: newName.message,
+    };
+
+    store.dispatch(actions.updateProject(nameObject, projectId));
+  }
+
+  static updateLastSaved() {
+    const lastSaved = getTimeStamp();
+    store.dispatch(actions.updateLastSavedTime(lastSaved));
+  }
+
+  static recordSavedChanges() {
+    store.dispatch(actions.toggleHasUnsavedChanges());
+  }
+  
+  static routeToProjects () {
+    hashHistory.push('/projects')
+  } 
 
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
@@ -107,33 +155,6 @@ let DesignTool = class extends Component {
     this.removeHanlders();
   }
 
-  calculateNewModuleCoordinates(coordinateData) {
-    const cd = coordinateData;
-
-    const boundToSide = getPerimeterSide(cd.boundToSideIndex) || null;
-
-    switch (boundToSide) {
-      case 'top':
-        return {
-          x: cd.moduleX - cd.boardX - cd.width / 2,
-          y: 0,
-        };
-        break;
-      case 'bottom':
-        return {
-          x: cd.moduleX - cd.boardX - cd.width / 2,
-          y: cd.boardHeight - cd.height,
-        };
-        break;
-      default:
-        return {
-          x: cd.moduleX - cd.boardX - cd.width / 2,
-          y: cd.moduleY - cd.boardY - cd.height / 2,
-        };
-        break;
-    }
-  }
-
   dropDraggingModule() {
     const { draggingModuleData, boardSpecs } = this.props;
     const { width, height, boundToSideIndex } = draggingModuleData;
@@ -151,8 +172,8 @@ let DesignTool = class extends Component {
     };
 
     const testModuleCoordinates = {
-      x: x - width / 2,
-      y: y - height / 2,
+      x: x - (width / 2),
+      y: y - (height / 2),
     };
 
     const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
@@ -160,7 +181,7 @@ let DesignTool = class extends Component {
     let isNewModuleOutOfBounds = checkCollision([testModule, boardSpecs]);
     isNewModuleOutOfBounds = isNewModuleOutOfBounds.length > 0;
 
-    const adjustedModuleCoordinates = this.calculateNewModuleCoordinates(coordinateData);
+    const adjustedModuleCoordinates = DesignTool.calculateNewModuleCoordinates(coordinateData);
 
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
 
@@ -176,7 +197,7 @@ let DesignTool = class extends Component {
     const evtobj = window.event ? event : evt;
     const { isMouseOverModule, selectedModuleIndex } = this.props;
 
-    if (isMouseOverModule && evtobj.code === 'Delete') {
+    if (isMouseOverModule && (evtobj.code === 'Delete')) {
       store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
     }
   }
@@ -209,14 +230,13 @@ let DesignTool = class extends Component {
 
   handleMouseUp(evt) {
     if (evt.which === 1 && !this.state.shouldHideContextMenu) {
-      console.log('hola');
       this.toggleShouldHideContextMenu(true);
     }
 
     if (evt.which === 3 && this.props.isMouseOverModule) {
       this.toggleShouldHideContextMenu(false);
     }
-    // this.setState({isDraggingToBoard: false});
+
     this.dropDraggingModule();
     store.dispatch(actions.toggleIsMouseDown(false));
   }
@@ -231,21 +251,8 @@ let DesignTool = class extends Component {
     });
   }
 
-  handleNameChange(projectId, newName) {
-    const nameObject = {
-      name: newName.message,
-    };
-
-    store.dispatch(actions.updateProject(nameObject, projectId));
-  }
-
   updateState(url) {
     this.setState({ image: url });
-  }
-
-  updateLastSaved() {
-    const lastSaved = getTimeStamp();
-    store.dispatch(actions.updateLastSavedTime(lastSaved));
   }
 
   toggleDocumentationCard() {
@@ -274,10 +281,6 @@ let DesignTool = class extends Component {
     });
   }
 
-  recordSavedChanges() {
-    store.dispatch(actions.toggleHasUnsavedChanges());
-  }
-
   rotate() {
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const rotationData = rotate(selectedModuleProps, anchorPositions, boardSpecs);
@@ -291,23 +294,21 @@ let DesignTool = class extends Component {
       currentProjectPrice,
       timeLastSaved,
       draggingModuleData,
-      isMouseDownOnIcon,
     } = this.props;
     const {
       x,
       y,
-      isDraggingToBoard,
       shouldUpdateThumbnail,
       shouldRenderDocumentation,
       shouldRenderDocumentationButton,
       shouldHideContextMenu,
     } = this.state;
-    const { height, width, image } = draggingModuleData;
+    const { height, width } = draggingModuleData;
 
     const draggingModule = (
       <Module
-        x={x - width / 2}
-        y={y - height / 2}
+        x={x - (width / 2)}
+        y={y - (height / 2)}
         width={draggingModuleData.width}
         height={draggingModuleData.height}
         stroke={draggingModuleData.stroke}
@@ -322,7 +323,7 @@ let DesignTool = class extends Component {
       />
     );
 
-    let sideBar = (<SideBar toggleDraggingToBoard={this.toggleDraggingToBoard.bind(this)} />);
+    let sideBar = (<SideBar toggleDraggingToBoard={this.toggleDraggingToBoard} />);
     sideBar = this.state.isDraggingToBoard
       ? ''
       : sideBar;
@@ -339,26 +340,20 @@ let DesignTool = class extends Component {
 
     const infoButton = (
       <DesignToolInfoButton
-        clickHandler={this.toggleDocumentationCard.bind(this)}
+        clickHandler={this.toggleDocumentationCard}
         icon={infoButtonIcon}
       />
     );
 
-
-    const imageStyle = {
-      height: '150px',
-      width: '200px',
-    };
     return (
       <div>
-        {/* {true? <img style={imageStyle} src={this.props.boardSpecs.thumbnail} /> : <div></div>} */}
         <TopNavbar
           projectName={currentProjectName}
-          handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
-          routeToProjects={() => hashHistory.push('/projects')}
+          handleNameChange={DesignTool.handleNameChange.bind(null, currentProjectId)}
+          routeToProjects={DesignTool.routeToProjects}
           updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
-          updateLastSaved={this.updateLastSaved}
-          recordSavedChanges={this.recordSavedChanges}
+          updateLastSaved={DesignTool.updateLastSaved}
+          recordSavedChanges={DesignTool.recordSavedChanges}
         />
 
         <div onMouseMove={this.handleMouseMove.bind(this)}>
@@ -421,4 +416,6 @@ DesignTool.propTypes = {
   hasUnsavedChanges: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
+  params:  PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
