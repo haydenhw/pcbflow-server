@@ -42,11 +42,11 @@ let DesignTool = class extends Component {
       shouldHideContextMenu: false,
       image: null,
     };
-    
-    this.toggleDraggingToBoard = this.toggleDraggingToBoard.bind(this)
-    this.toggleDocumentationCard = this.toggleDocumentationCard.bind(this)
-    this.toggleShouldUpadateThumbnail = this.toggleShouldUpadateThumbnail.bind(this)
-    
+
+    this.toggleDraggingToBoard = this.toggleDraggingToBoard.bind(this);
+    this.toggleDocumentationCard = this.toggleDocumentationCard.bind(this);
+    this.toggleShouldUpadateThumbnail = this.toggleShouldUpadateThumbnail.bind(this);
+
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
     this.bound_handleMouseUp = this.handleMouseUp.bind(this);
     this.bound_handleMouseMove = this.handleMouseMove.bind(this);
@@ -74,7 +74,7 @@ let DesignTool = class extends Component {
       case 'top':
         return {
           x: cd.moduleX - cd.boardX - (cd.width / 2),
-          y: 0
+          y: 0,
         };
       case 'bottom':
         return {
@@ -105,10 +105,10 @@ let DesignTool = class extends Component {
   static recordSavedChanges() {
     store.dispatch(actions.toggleHasUnsavedChanges());
   }
-  
-  static routeToProjects () {
-    hashHistory.push('/projects')
-  } 
+
+  static routeToProjects() {
+    hashHistory.push('/projects');
+  }
 
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
@@ -119,9 +119,7 @@ let DesignTool = class extends Component {
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
 
     const shouldConfirmOnReload = false;
-    window.onbeforeunload = () => { 
-      return shouldConfirmOnReload ? '' : null; 
-    };
+    window.onbeforeunload = () => shouldConfirmOnReload ? '' : null;
   }
 
   removeHanlders() {
@@ -382,7 +380,7 @@ let DesignTool = class extends Component {
       </div>
     );
   }
-}
+};
 
 const mapStateToProps = state => ({
   currentProjectName: state.currentProjectInfo.name,
@@ -394,7 +392,7 @@ const mapStateToProps = state => ({
   boardSpecs: state.boardSpecs,
   selectedModuleProps: state.selectedModule,
   anchorPositions: state.anchorPositions,
-  hasUnsavedChanges: state.hasUnsavedChanges
+  hasUnsavedChanges: state.hasUnsavedChanges,
 });
 
 DesignTool = withRouter(DesignTool);
@@ -413,6 +411,6 @@ DesignTool.propTypes = {
   hasUnsavedChanges: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
-  params:  PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 };

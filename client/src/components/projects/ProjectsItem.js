@@ -13,6 +13,6 @@ export default function ProjectItem(props) {
 }
 
 ProjectItem.propTypes = {
-  projectName: PropTypes.string.isRequired
+  projectName: PropTypes.string.isRequired,
 };
 
