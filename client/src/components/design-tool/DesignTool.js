@@ -49,12 +49,24 @@ let DesignTool = class extends Component {
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
 
+  static keyPress(evt) {
+    const evtobj = window.event ? event : evt;
+
+    if (evtobj.keyCode === 90 && evtobj.ctrlKey) {
+      store.dispatch(actions.undo());
+    }
+
+    if (evtobj.keyCode === 89 && evtobj.ctrlKey) {
+      store.dispatch(actions.redo());
+    }
+  }
+
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
-    document.onkeydown = this.keyPress;
+    document.onkeydown = DesignTool.keyPress;
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
 
     const shouldConfirmOnReload = false;
@@ -76,18 +88,6 @@ let DesignTool = class extends Component {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }
     });
-  }
-  
-  keyPress(evt) {
-    const evtobj = window.event ? event : evt;
-
-    if (evtobj.keyCode === 90 && evtobj.ctrlKey) {
-      store.dispatch(actions.undo());
-    }
-
-    if (evtobj.keyCode === 89 && evtobj.ctrlKey) {
-      store.dispatch(actions.redo());
-    }
   }
 
   componentDidMount() {
@@ -400,6 +400,7 @@ const mapStateToProps = state => ({
   boardSpecs: state.boardSpecs,
   selectedModuleProps: state.selectedModule,
   anchorPositions: state.anchorPositions,
+  hasUnsavedChanges: state.hasUnsavedChanges
 });
 
 DesignTool = withRouter(DesignTool);
@@ -417,5 +418,7 @@ DesignTool.propTypes = {
   boardSpecs: PropTypes.object.isRequired,
   selectedModuleProps: PropTypes.object.isRequired,
   anchorPositions: PropTypes.object.isRequired,
+  hasUnsavedChanges: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
 };
