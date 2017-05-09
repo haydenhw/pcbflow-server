@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, hashHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import checkCollision from 'helpers/checkCollision';
+import getPerimeterSide from 'helpers/getPerimeterSide';
+import getTimeStamp from 'helpers/getTimeStamp';
+import rotate from 'helpers/rotate';
 
 import Board from 'components/board/Board';
 import Module from 'components/modules/ModulesItem';
@@ -15,14 +20,8 @@ import SideBar from 'components/side-bar/SideBar';
 import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText';
 import Footer from 'components/footer/Footer';
 import DesignToolStage from './DesignToolStage';
-import SaveButton from './DesignToolSaveButton';
 import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
-
-import checkCollision from 'helpers/checkCollision';
-import getPerimeterSide from 'helpers/getPerimeterSide';
-import getTimeStamp from 'helpers/getTimeStamp';
-import rotate from 'helpers/rotate';
 
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
@@ -50,17 +49,7 @@ class DesignTool extends Component {
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
 
-  keyPress(evt) {
-    const evtobj = window.event ? event : evt;
-
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-      store.dispatch(actions.undo());
-    }
-
-    if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
-      store.dispatch(actions.redo());
-    }
-  }
+  
 
 
   addHanlders() {
@@ -88,6 +77,18 @@ class DesignTool extends Component {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }
     });
+  }
+  
+  keyPress(evt) {
+    const evtobj = window.event ? event : evt;
+
+    if (evtobj.keyCode === 90 && evtobj.ctrlKey) {
+      store.dispatch(actions.undo());
+    }
+
+    if (evtobj.keyCode === 89 && evtobj.ctrlKey) {
+      store.dispatch(actions.redo());
+    }
   }
 
   componentDidMount() {
@@ -401,10 +402,24 @@ const mapStateToProps = state => ({
   selectedModuleIndex: state.selectedModule.index,
   boardSpecs: state.boardSpecs,
   selectedModuleProps: state.selectedModule,
-  anchorPositions: state.anchorPositions,
-
-  /*  hasUnsavedChanges: state.hasUnsavedChanges.bool*/
+  anchorPositions: state.anchorPositions
 });
 
 DesignTool = withRouter(DesignTool);
 export default connect(mapStateToProps)(DesignTool);
+
+DesignTool.propTypes = {
+  currentProjectName: state.currentProjectInfo.name,
+  currentProjectId: state.currentProjectInfo.id,
+  currentProjectPrice: state.currentProjectInfo.price,
+  timeLastSaved: state.currentProjectInfo.timeLastSaved,
+  currentProjectModules: state.currentProjectModules,
+  isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
+  isMouseDown: state.mouseEvents.isMouseDown,
+  isMouseOverModule: state.mouseEvents.isMouseOverModule,
+  draggingModuleData: state.draggingModule,
+  selectedModuleIndex: state.selectedModule.index,
+  boardSpecs: state.boardSpecs,
+  selectedModuleProps: state.selectedModule,
+  anchorPositions: state.anchorPositions
+};
