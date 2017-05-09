@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Konva from 'konva';
+import shortid from 'shortid';
 
+import * as actions from 'actions/indexActions';
 import confirm from 'helpers/confirm';
 import store from 'reduxFiles/store';
 
 import ProjectsItem from './ProjectsItem';
 import ProjectsItemFrame from './ProjectsItemFrame';
-import * as actions from 'actions/indexActions';
 
 import './projects-styles/floatGrid.css';
 import './projects-styles/ProjectsItemFrame.css';
@@ -17,26 +18,26 @@ function convertToUrl(json) {
 }
 
 class ProjectList extends Component {
-  componentDidMount() {
-    store.dispatch(actions.fetchProjects());
-  }
-
-  confirmDelete(projectId) {
+  static confirmDelete(projectId) {
     confirm('Are you sure you want to delete this project?').then(() => {
       store.dispatch(actions.deleteProject(projectId));
     }, () => {});
+  }
+
+  componentDidMount() {
+    store.dispatch(actions.fetchProjects());
   }
 
   render() {
     const { projects } = this.props;
 
     if (projects && projects.length > 0) {
-      const projectsList = [...projects/* ...projects, ...projects, ...projects, ...projects,...projects, ...projects, ...projects*/].map((project, index) => {
+      const projectsList = projects.map((project, index) => {
         // console.log(thumbnail)
         const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
         return (
           <ProjectsItemFrame
-            key={index}
+            key={shortid.generate()}
             thumbnailSrc={thumbnailSrc}
             projectId={project._id}
             confirmDelete={this.confirmDelete}
