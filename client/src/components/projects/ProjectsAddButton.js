@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Router, Link, hashHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import './projects-styles/ProjectsAddButton.css';
 
 export default class ProjectsAddButton extends Component {
-  handleClick() {
+  static handleClick() {
     const newProject = {
       name: 'Untitled',
       boardSpecs: {
@@ -25,7 +25,7 @@ export default class ProjectsAddButton extends Component {
 
   render() {
     return (
-      <div className="project-add-button button" onClick={this.handleClick}>
+      <div className="project-add-button button" onClick={ProjectsAddButton.handleClick}>
         <FontAwesome
           name="fa-plus"
           className="fa-plus"

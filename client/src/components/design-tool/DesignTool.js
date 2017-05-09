@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
 import { withRouter, hashHistory } from 'react-router';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import FontAwesome from 'react-fontawesome';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import Board from 'components/board/Board';
 import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
