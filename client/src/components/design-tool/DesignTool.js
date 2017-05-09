@@ -387,12 +387,13 @@ const mapStateToProps = state => ({
   currentProjectId: state.currentProjectInfo.id,
   currentProjectPrice: state.currentProjectInfo.price,
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
+  currentProjectModules: state.currentProjectModules,
+  isMouseOverModule: state.mouseEvents.isMouseOverModule,
   draggingModuleData: state.draggingModule,
   selectedModuleIndex: state.selectedModule.index,
   boardSpecs: state.boardSpecs,
   selectedModuleProps: state.selectedModule,
   anchorPositions: state.anchorPositions,
-  hasUnsavedChanges: state.hasUnsavedChanges,
 });
 
 DesignTool = withRouter(DesignTool);
