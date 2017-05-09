@@ -2,20 +2,11 @@ import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 
 import LandingPageCard from './LandingPageCard';
-// import ExecutionEnvironment from 'react/lib/ExecutionEnvironment'
 
 import './landing-page-styles/LandingPage.css';
 import './landing-page-styles/floatGrid.css';
 
 export default class LandingPage extends Component {
-
-  changeButtonPosition(w) {
-    console.log('hello');
-  }
-
-  componentDidMount() {
-    document.body.addEventListener('scroll', () => { console.log(''); });
-  }
 
   render() {
     const imgUrl = 'images/landing-background.jpg';
