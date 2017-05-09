@@ -1,9 +1,8 @@
 import * as actions from '../actions/indexActions';
-import { demoProject } from './demoProject';
 
-export const projectList = (state = demoProject, action) => {
+export const projectList = (state = [], action) => {
   if (action.type === actions.FETCH_PROJECTS_SUCCESS) {
-    return [...state, ...action.projects];
+    return action.projects;
   }
   return state;
 };
