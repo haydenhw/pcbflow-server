@@ -49,9 +49,6 @@ let DesignTool = class extends Component {
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
 
-  
-
-
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
@@ -61,7 +58,9 @@ let DesignTool = class extends Component {
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
 
     const shouldConfirmOnReload = false;
-    window.onbeforeunload = () => shouldConfirmOnReload ? '' : null;
+    window.onbeforeunload = () => { 
+      return shouldConfirmOnReload ? '' : null; 
+    };
   }
 
   removeHanlders() {
@@ -407,15 +406,16 @@ DesignTool = withRouter(DesignTool);
 export default connect(mapStateToProps)(DesignTool);
 
 DesignTool.propTypes = {
-  currentProjectName: PropTypes.string.isRequired,
-  currentProjectId: PropTypes.string.isRequired,
+  currentProjectName: PropTypes.string,
+  currentProjectId: PropTypes.string,
   currentProjectPrice: PropTypes.string.isRequired,
-  timeLastSaved: PropTypes.string.isRequired,
+  timeLastSaved: PropTypes.string,
   isMouseDownOnIcon: PropTypes.bool.isRequired,
   isMouseOverModule: PropTypes.bool.isRequired,
   draggingModuleData: PropTypes.object.isRequired,
-  selectedModuleIndex: PropTypes.number.isRequired,
+  selectedModuleIndex: PropTypes.number,
   boardSpecs: PropTypes.object.isRequired,
   selectedModuleProps: PropTypes.object.isRequired,
   anchorPositions: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };
