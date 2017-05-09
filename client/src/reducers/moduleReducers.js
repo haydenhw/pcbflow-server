@@ -80,13 +80,13 @@ export const currentProjectModules = (state = [], action) => {
           return i === index ? updatedModuleProps : module;
         });
         break;
-        
+
       case actions.UPDATE_MODULE_STROKE:
         return state.map((module, i) => {
           const { stroke, index } = action.moduleStroke;
           const updatedModuleProps = {
             ...module,
-            stroke
+            stroke,
           };
           return i === index ? updatedModuleProps : module;
         });

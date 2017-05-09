@@ -20,12 +20,12 @@ describe('hasUnsavedChanges reducer', () => {
 
 
     const resultState = hasUnsavedChanges(deepFreeze(initialState), {
-      type: 'UPDATE_MODULE_POSITION'
+      type: 'UPDATE_MODULE_POSITION',
     });
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should toggle state project is saved', () => {
     const initialState = {
       hasUnsavedChanges: true,
@@ -36,7 +36,7 @@ describe('hasUnsavedChanges reducer', () => {
     };
 
     const resultState = hasUnsavedChanges(deepFreeze(initialState), {
-      type: 'TOGGLE_HAS_UNSAVED_CHANGES'
+      type: 'TOGGLE_HAS_UNSAVED_CHANGES',
     });
 
     assert.deepEqual(resultState, expectedState);

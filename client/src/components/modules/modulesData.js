@@ -246,7 +246,7 @@ export const modulesData = [
     fontFamily,
     fill,
     strokeWidth,
-    stroke: "#debd37",
+    stroke: '#debd37',
     width: 90,
     height: 110,
     rotation: 0,

@@ -27,7 +27,7 @@ export default function enforceRules(nodeArray, perimeterNode, ruleBreakingActio
   const outOfBoundsNodes = checkExceedsPerimter(nodeArray, perimeterNode, adjustDimesionsForRotation);
   const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes];
   const ruleFollowingNodes = nodeArray.diff(ruleBreakingNodes);
-  
+
   ruleFollowingAction(perimeterNode);
   ruleBreakingNodes.forEach(node => ruleBreakingAction(node));
   ruleFollowingNodes.forEach(node => ruleFollowingAction(node));

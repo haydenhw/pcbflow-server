@@ -14,7 +14,7 @@ export default function rotate(selectedModuleProps, anchorPositions, boardSpecs)
     rotation,
     width,
     height,
-    boundToSideIndex
+    boundToSideIndex,
   } = selectedModuleProps;
   const { topLeft } = anchorPositions;
   let newParentGroupCoordinates;
@@ -24,7 +24,7 @@ export default function rotate(selectedModuleProps, anchorPositions, boardSpecs)
   newInnerGroupCoordinates = (
     rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
   );
-  
+
   const rotationData = {
     index,
     boundToSideIndex: newInnerGroupCoordinates.boundToSideIndex,
@@ -37,5 +37,4 @@ export default function rotate(selectedModuleProps, anchorPositions, boardSpecs)
 
   return rotationData;
 }
-  
-  
+

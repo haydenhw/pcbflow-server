@@ -12,7 +12,7 @@ class Anchor extends Component {
       strokeWidth: 2,
     };
   }
-  
+
   updatePosition() {
     const activeAnchor = this.refs.anchor;
     const group = this.refs.anchor.getParent();
@@ -50,13 +50,13 @@ class Anchor extends Component {
       bottomLeft: { x: bottomLeft.getX(), y: bottomLeft.getY() },
       bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() },
     };
-    
-    anchorPositions.bottomRight.y = 
+
+    anchorPositions.bottomRight.y =
       anchorPositions.bottomRight.y < 0
       ? this.props.anchorPositions.bottomRight.y
       : anchorPositions.bottomRight.y;
-      
-    anchorPositions.bottomLeft.y = 
+
+    anchorPositions.bottomLeft.y =
       anchorPositions.bottomLeft.y < 0
       ? this.props.anchorPositions.bottomLeft.y
       : anchorPositions.bottomLeft.y;
@@ -72,7 +72,7 @@ class Anchor extends Component {
         width,
         height,
       };
-      
+
       store.dispatch(actions.updateBoardDimensions(boardDimensions));
     }
   }
@@ -97,12 +97,12 @@ class Anchor extends Component {
       strokeWidth: 4,
     });
   }
-  
+
   handleDragMove() {
     this.updatePosition();
     this.props.hideDocumentation();
   }
-  
+
   handleDragEnd() {
     this.props.unhideDocumentation();
     this.draggableOn();
@@ -141,7 +141,7 @@ const mapStateToProps = state => ({
   height: state.boardSpecs.height,
   boardX: state.boardSpecs.x,
   boardY: state.boardSpecs.y,
-  anchorPositions: state.anchorPositions
+  anchorPositions: state.anchorPositions,
 });
 
 export default connect(mapStateToProps)(Anchor);

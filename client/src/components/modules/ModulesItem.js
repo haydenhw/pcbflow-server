@@ -14,7 +14,7 @@ export default class ModulesItem extends Component {
 
     this.state = {
       image: null,
-      strokeWidth: 1
+      strokeWidth: 1,
     };
   }
 
@@ -41,27 +41,26 @@ export default class ModulesItem extends Component {
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodeArray = boardGroup.get('.moduleGroup');
     const boardNode = boardGroup.getParent().get('.board')[0];
-    
-    if(index) {
-      moduleNodeArray.splice(index, 1)
+
+    if (index) {
+      moduleNodeArray.splice(index, 1);
     }
 
     const addRedStroke = (node) => {
       node.attrs.isStrokeRed = true;
-      node.attrs.name === "board" 
-        ? store.dispatch(actions.updateBoardStroke("red")) 
+      node.attrs.name === 'board'
+        ? store.dispatch(actions.updateBoardStroke('red'))
         : node.attrs.isStrokeRed = true;
     };
 
     const removeRedStroke = (node) => {
       node.attrs.isStrokeRed = false;
-      
-      node.attrs.name === "board" 
-        ? store.dispatch(actions.updateBoardStroke(null)) 
+
+      node.attrs.name === 'board'
+        ? store.dispatch(actions.updateBoardStroke(null))
         : node.attrs.isStrokeRed = false;
-        
     };
-    
+
     if (!this.props || !this.props.isDraggingToBoard) {
       enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
@@ -73,18 +72,18 @@ export default class ModulesItem extends Component {
     this.setDefaultStroke();
     setTimeout(() => this.highlightRuleBreakingModules(), 1);
   }
-  
+
   componentDidUpdate(prevProps, prevState) {
-    if(this.props.rotation !== prevProps.rotation) {
+    if (this.props.rotation !== prevProps.rotation) {
       this.highlightRuleBreakingModules();
     }
-    
+
     if (this.props.shouldCheckCollission === true) {
       this.highlightRuleBreakingModules();
       this.props.toggleShouldCheckCollission();
     }
   }
-  
+
   updateThumbnail() {
     const module = this.refs.moduleGroup;
     const boardLayer = module.getParent().getParent().getParent();
@@ -107,11 +106,11 @@ export default class ModulesItem extends Component {
     this.setState({
       strokeWidth: 1,
     });
-    
+
     document.body.style.cursor = 'default';
     store.dispatch(actions.toggleIsMouseOverModule(false));
   }
-  
+
   getNewPosition() {
     const { boundToSideIndex } = this.props;
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
@@ -121,7 +120,7 @@ export default class ModulesItem extends Component {
       y: module.getPosition().y,
       index: this.props.index,
     };
-    
+
     return newPosition;
   }
 
@@ -153,12 +152,12 @@ export default class ModulesItem extends Component {
     );
     let isStrokeRed;
     let defaultStroke;
-    
+
     if (this.refs.moduleGroup) {
       isStrokeRed = this.refs.moduleGroup.attrs.isStrokeRed;
       defaultStroke = this.refs.moduleGroup.attrs.defaultStroke;
     }
-    
+
     return (
       <Group
         draggable="true"
@@ -212,7 +211,7 @@ export default class ModulesItem extends Component {
             ref="moduleBorder"
             width={this.props.width}
             height={this.props.height}
-            stroke={isStrokeRed ? "red" : this.props.stroke}
+            stroke={isStrokeRed ? 'red' : this.props.stroke}
             strokeWidth={this.state.strokeWidth}
           />
 

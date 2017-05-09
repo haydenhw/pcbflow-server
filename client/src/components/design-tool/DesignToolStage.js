@@ -23,7 +23,6 @@ class DesignToolStage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
     if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
       this.updateThumbnail();
       this.props.toggleShouldUpadateThumbnail();
@@ -35,7 +34,6 @@ class DesignToolStage extends Component {
   }
 
   render() {
-    
     const {
       shouldRenderBoard,
       draggingModule,
@@ -45,19 +43,19 @@ class DesignToolStage extends Component {
       rotate,
       hideDocumentation,
       unhideDocumentation,
-      shouldHideContextMenu
+      shouldHideContextMenu,
      } = this.props;
-     
-    const contextMenuClass =  shouldHideContextMenu ? "hideContextMenu" : "react-contextmenu";
-    
+
+    const contextMenuClass = shouldHideContextMenu ? 'hideContextMenu' : 'react-contextmenu';
+
     const board = (
-        <Board 
-        rotate={rotate} 
+      <Board
+        rotate={rotate}
         hideDocumentation={hideDocumentation}
         unhideDocumentation={unhideDocumentation}
       />
     );
-    
+
     return (
       <div>
         <ContextMenuTrigger
@@ -72,15 +70,15 @@ class DesignToolStage extends Component {
               height={1000}
             >
               <Grid gridWidth={5000} cellWidth={20} />
-              {shouldRenderBoard ? board  : <Layer />}
+              {shouldRenderBoard ? board : <Layer />}
               {isMouseDownOnIcon ? <Layer>{ draggingModule }</Layer> : <Layer /> }
             </Stage>
           </div>
         </ContextMenuTrigger>
-        
-        <ContextMenu 
+
+        <ContextMenu
           id={'SIMPLE'}
-          className= {contextMenuClass}
+          className={contextMenuClass}
         >
           <MenuItem onClick={this.deleteModule.bind(this)}>delete</MenuItem>
           <MenuItem onClick={rotate}>rotate</MenuItem>
@@ -101,5 +99,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(DesignToolStage);
-
 

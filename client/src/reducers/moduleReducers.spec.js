@@ -8,7 +8,6 @@ import * as actions from 'actions/indexActions';
 import { selectedModule, draggingModule, currentProjectModules } from './moduleReducers';
 
 describe('draggingModule reducer', () => {
-  
   it('It should return update draggingModule data', () => {
     const initialState = {
       x: 10,
@@ -16,18 +15,18 @@ describe('draggingModule reducer', () => {
       width: 50,
       height: 50,
       stroke: 'black',
-      rotation: 0
+      rotation: 0,
     };
-      
+
     const expectedState = {
       x: 5,
       y: 5,
       width: 75,
       height: 75,
       stroke: 'blue',
-      rotation: 90
+      rotation: 90,
     };
-    
+
     const resultState = draggingModule(deepFreeze(initialState), {
       type: 'CHANGE_DRAGGING_MODULE',
       moduleData: {
@@ -36,13 +35,13 @@ describe('draggingModule reducer', () => {
         width: 75,
         height: 75,
         stroke: 'blue',
-        rotation: 90
-      }
+        rotation: 90,
+      },
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should return update draggingModule image', () => {
     const initialState = {
       x: 10,
@@ -50,9 +49,9 @@ describe('draggingModule reducer', () => {
       width: 50,
       height: 50,
       stroke: 'black',
-      rotation: 0
+      rotation: 0,
     };
-      
+
     const expectedState = {
       x: 10,
       y: 10,
@@ -60,10 +59,10 @@ describe('draggingModule reducer', () => {
       height: 50,
       stroke: 'black',
       rotation: 0,
-      imageNode: 'this a node'
-      
+      imageNode: 'this a node',
+
     };
-    
+
     const resultState = draggingModule(deepFreeze(initialState), {
       type: 'UPDATE_MODULE_IMAGE',
       moduleData: {
@@ -73,15 +72,14 @@ describe('draggingModule reducer', () => {
         height: 50,
         stroke: 'black',
         rotation: 0,
-        imageNode: 'this a node'
-      }
+        imageNode: 'this a node',
+      },
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
 });
 describe('draggingModule reducer', () => {
-  
   it('It should update selectedModule data', () => {
     const initialState = {
       x: 10,
@@ -89,18 +87,18 @@ describe('draggingModule reducer', () => {
       width: 50,
       height: 50,
       stroke: 'black',
-      rotation: 0
+      rotation: 0,
     };
-      
+
     const expectedState = {
       x: 5,
       y: 5,
       width: 75,
       height: 75,
       stroke: 'blue',
-      rotation: 90
+      rotation: 90,
     };
-    
+
     const resultState = selectedModule(deepFreeze(initialState), {
       type: 'UPDATE_SELECTED_MODULE',
       moduleData: {
@@ -109,13 +107,13 @@ describe('draggingModule reducer', () => {
         width: 75,
         height: 75,
         stroke: 'blue',
-        rotation: 90
-      }
+        rotation: 90,
+      },
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should update selectedModule position', () => {
     const initialState = {
       x: 10,
@@ -123,33 +121,31 @@ describe('draggingModule reducer', () => {
       width: 50,
       height: 50,
       stroke: 'black',
-      rotation: 0
+      rotation: 0,
     };
-      
+
     const expectedState = {
       x: 5,
       y: 5,
       width: 50,
       height: 50,
       stroke: 'black',
-      rotation: 0
+      rotation: 0,
     };
-    
+
     const resultState = selectedModule(deepFreeze(initialState), {
       type: 'UPDATE_MODULE_POSITION',
       modulePosition: {
         x: 5,
-        y: 5
-      }
+        y: 5,
+      },
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
-    
 });
 
 describe('currentProjectModules reducer', () => {
-
   it('It should return correct module position', () => {
     const initialState = [
       {
@@ -158,7 +154,7 @@ describe('currentProjectModules reducer', () => {
         width: 50,
         height: 50,
         stroke: 'black',
-        rotation: 0
+        rotation: 0,
       },
       {
         x: 100,
@@ -166,8 +162,8 @@ describe('currentProjectModules reducer', () => {
         width: 100,
         height: 100,
         stroke: 'black',
-        rotation: 0
-      }
+        rotation: 0,
+      },
     ];
 
     const expectedState = [
@@ -177,7 +173,7 @@ describe('currentProjectModules reducer', () => {
         width: 50,
         height: 50,
         stroke: 'black',
-        rotation: 0
+        rotation: 0,
       },
       {
         x: 50,
@@ -185,8 +181,8 @@ describe('currentProjectModules reducer', () => {
         width: 100,
         height: 100,
         stroke: 'black',
-        rotation: 0
-      }
+        rotation: 0,
+      },
     ];
 
     const resultState = currentProjectModules(deepFreeze(initialState), {
@@ -197,10 +193,10 @@ describe('currentProjectModules reducer', () => {
         y: 50,
       },
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should return an array of modules', () => {
     const initialState = [
       {
@@ -209,8 +205,8 @@ describe('currentProjectModules reducer', () => {
         width: 50,
         height: 50,
         stroke: 'black',
-        rotation: 0
-      }
+        rotation: 0,
+      },
     ];
 
     const expectedState = [
@@ -220,7 +216,7 @@ describe('currentProjectModules reducer', () => {
         width: 50,
         height: 50,
         stroke: 'black',
-        rotation: 0
+        rotation: 0,
       },
       {
         x: 50,
@@ -228,8 +224,8 @@ describe('currentProjectModules reducer', () => {
         width: 100,
         height: 100,
         stroke: 'black',
-        rotation: 0
-      }
+        rotation: 0,
+      },
     ];
 
     const resultState = currentProjectModules(deepFreeze(initialState), {
@@ -242,7 +238,7 @@ describe('currentProjectModules reducer', () => {
             width: 50,
             height: 50,
             stroke: 'black',
-            rotation: 0
+            rotation: 0,
           },
           {
             x: 50,
@@ -250,15 +246,15 @@ describe('currentProjectModules reducer', () => {
             width: 100,
             height: 100,
             stroke: 'black',
-            rotation: 0
-          }
-        ]
-      }
+            rotation: 0,
+          },
+        ],
+      },
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should push a new module to the array', () => {
     const initialState = [
       {
@@ -267,8 +263,8 @@ describe('currentProjectModules reducer', () => {
         width: 50,
         height: 50,
         stroke: 'black',
-        rotation: 0
-      }
+        rotation: 0,
+      },
     ];
 
     const expectedState = [
@@ -278,7 +274,7 @@ describe('currentProjectModules reducer', () => {
         width: 50,
         height: 50,
         stroke: 'black',
-        rotation: 0
+        rotation: 0,
       },
       {
         x: 50,
@@ -286,8 +282,8 @@ describe('currentProjectModules reducer', () => {
         width: 100,
         height: 100,
         stroke: 'black',
-        rotation: 0
-      }
+        rotation: 0,
+      },
     ];
 
     const resultState = currentProjectModules(deepFreeze(initialState), {
@@ -298,13 +294,13 @@ describe('currentProjectModules reducer', () => {
         width: 100,
         height: 100,
         stroke: 'black',
-        rotation: 0
-      }
+        rotation: 0,
+      },
     });
-  
+
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should rotate specified module', () => {
     const initialState = [
       {
@@ -319,7 +315,7 @@ describe('currentProjectModules reducer', () => {
         parentGroupY: 90,
         innerGroupX: 90,
         innerGroupY: 90,
-      }
+      },
     ];
 
     const expectedState = [
@@ -335,31 +331,31 @@ describe('currentProjectModules reducer', () => {
         parentGroupY: 90,
         innerGroupX: 90,
         innerGroupY: 90,
-      }
+      },
     ];
 
     const resultState = currentProjectModules(deepFreeze(initialState), {
       type: 'ROTATE_SELECTED_MODULE',
       rotationData: {
-          index: 0,
-          x: 10,
-          y: 10,
-          width: 50,
-          height: 50,
-          stroke: 'black',
-          rotation: 180,
-          boundToSideIndex: 1,
-          parentGroupX: 90,
-          parentGroupY: 90,
-          innerGroupX: 90,
-          innerGroupY: 90,
-      }
+        index: 0,
+        x: 10,
+        y: 10,
+        width: 50,
+        height: 50,
+        stroke: 'black',
+        rotation: 180,
+        boundToSideIndex: 1,
+        parentGroupX: 90,
+        parentGroupY: 90,
+        innerGroupX: 90,
+        innerGroupY: 90,
+      },
     });
-  
+
     assert.deepEqual(resultState, expectedState);
   });
-  
-  
+
+
   it('It should delete specified module', () => {
     const initialState = [
       {
@@ -368,7 +364,7 @@ describe('currentProjectModules reducer', () => {
         width: 50,
         height: 50,
         stroke: 'black',
-        rotation: 0
+        rotation: 0,
       },
       {
         x: 50,
@@ -376,8 +372,8 @@ describe('currentProjectModules reducer', () => {
         width: 100,
         height: 100,
         stroke: 'black',
-        rotation: 0
-      }
+        rotation: 0,
+      },
     ];
 
     const expectedState = [
@@ -387,15 +383,15 @@ describe('currentProjectModules reducer', () => {
         width: 50,
         height: 50,
         stroke: 'black',
-        rotation: 0
-      }
+        rotation: 0,
+      },
     ];
 
     const resultState = currentProjectModules(deepFreeze(initialState), {
       type: 'DELETE_SELECTED_MODULE',
-      moduleIndex: 1
+      moduleIndex: 1,
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
 });

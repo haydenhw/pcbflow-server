@@ -25,16 +25,16 @@ export default function Projects() {
         <img className="logo-image" src="images/logo4.png" alt="" />
         <span className="logo-text" >PCB Design</span>
       </div>
-        <div className="button-bar">
-          <div className="row-project">
-            <div className="col-wrapper">
-              <div>
-                <ProjectsAddButton />
-              </div>
+      <div className="button-bar">
+        <div className="row-project">
+          <div className="col-wrapper">
+            <div>
+              <ProjectsAddButton />
             </div>
           </div>
-        
         </div>
+
+      </div>
       <ProjectsList />
     </div>
   );

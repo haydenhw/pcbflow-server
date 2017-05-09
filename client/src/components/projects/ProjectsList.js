@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Konva from 'konva';
 
-import * as actions from 'actions/indexActions';
+import confirm from 'helpers/confirm';
 import store from 'reduxFiles/store';
+
 import ProjectsItem from './ProjectsItem';
 import ProjectsItemFrame from './ProjectsItemFrame';
+import * as actions from 'actions/indexActions';
+
 import './projects-styles/floatGrid.css';
 import './projects-styles/ProjectsItemFrame.css';
-import confirm from 'helpers/confirm';
 
 function convertToUrl(json) {
   return Konva.Node.create(json).toDataURL();
 }
 
-class ProjectListContainer extends Component {
+class ProjectList extends Component {
   componentDidMount() {
     store.dispatch(actions.fetchProjects());
   }
@@ -67,4 +69,4 @@ const mapStateToProps = (state, props) => ({
   thumbnail: state.boardSpecs.thumbnail,
 });
 
-export default connect(mapStateToProps)(ProjectListContainer);
+export default connect(mapStateToProps)(ProjectList);

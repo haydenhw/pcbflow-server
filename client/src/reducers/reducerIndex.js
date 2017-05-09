@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+
 import undoable from 'helpers/undoable';
 import skipIfImageNodeNull from 'helpers/skipIfImageNodeNull';
 

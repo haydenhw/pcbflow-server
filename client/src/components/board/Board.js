@@ -10,33 +10,32 @@ import Anchor from './BoardAnchor';
 import generateThumbnail from 'helpers/generateThumbnail';
 
 
-
 class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
       x: null,
-      y: null
-    }
+      y: null,
+    };
   }
-  
+
   componentWillReceiveProps(newProps) {
-    //console.log(newProps, this.props)
+    // console.log(newProps, this.props)
   }
 
   updateLocalStatePosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
-    
+
     this.setState({
       x,
-      y
+      y,
     });
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
   }
-  
+
   updateReduxPosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
@@ -73,7 +72,7 @@ class Board extends Component {
       bottomRight,
       rotate,
       hideDocumentation,
-      unhideDocumentation
+      unhideDocumentation,
      }
      = this.props;
 
@@ -103,31 +102,31 @@ class Board extends Component {
             height={bottomLeft.y - topLeft.y || height}
             fill="#e3e3e5"
             opacity="0.5"
-            stroke={this.props.stroke || "#ccc"}
+            stroke={this.props.stroke || '#ccc'}
           />
 
-          <Anchor 
+          <Anchor
             x={topLeft.x}
             y={topLeft.y}
             name={'topLeft'}
             hideDocumentation={hideDocumentation}
             unhideDocumentation={unhideDocumentation}
           />
-          <Anchor 
+          <Anchor
             x={topRight.x || width}
             y={topRight.y}
             name={'topRight'}
             hideDocumentation={hideDocumentation}
             unhideDocumentation={unhideDocumentation}
           />
-          <Anchor 
+          <Anchor
             x={bottomLeft.x}
             y={bottomLeft.y || height}
             name={'bottomLeft'}
             hideDocumentation={hideDocumentation}
             unhideDocumentation={unhideDocumentation}
           />
-          <Anchor 
+          <Anchor
             x={bottomRight.x || width}
             y={bottomRight.y || height}
             name={'bottomRight'}

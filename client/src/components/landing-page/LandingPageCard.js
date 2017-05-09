@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import './landing-page-styles/LandingPageCard.css';
 
@@ -20,4 +20,4 @@ LandingPageCard.propTypes = {
   icon: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-}
+};

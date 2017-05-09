@@ -9,24 +9,24 @@ class SideBarDimensionInput extends React.Component {
     if (isNaN(value)) {
       return '';
     }
-    
+
     if (Number(value) > 1000) {
       return 1000;
     }
-    
-    return Number(value); 
+
+    return Number(value);
   }
-  
+
   handleWidthChange(event) {
     const targetValue = event.target.value;
     const newBoardWidth = this.validate(targetValue);
-    
+
     const {
       topLeft,
       topRight,
       bottomLeft,
       bottomRight,
-      boardWidth
+      boardWidth,
      }
      = this.props;
 
@@ -61,7 +61,7 @@ class SideBarDimensionInput extends React.Component {
 
     const boardDimensions = {
       width: this.props.boardWidth,
-      height: newBoardHeight
+      height: newBoardHeight,
     };
 
     const anchorPositions = {

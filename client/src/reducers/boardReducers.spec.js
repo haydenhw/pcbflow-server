@@ -34,7 +34,7 @@ describe('boardSpecs reducer', () => {
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should return the correct position', () => {
     const initialState = {
       x: 10,
@@ -60,7 +60,7 @@ describe('boardSpecs reducer', () => {
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should return the correct stroke', () => {
     const initialState = {
       x: 10,
@@ -74,33 +74,33 @@ describe('boardSpecs reducer', () => {
       y: 10,
       width: 600,
       height: 300,
-      stroke: 'red'
+      stroke: 'red',
     };
 
     const resultState = boardSpecs(deepFreeze(initialState), {
       type: 'UPDATE_BOARD_STROKE',
-      boardStroke: 'red'
+      boardStroke: 'red',
     });
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should return the correct boardSpecs', () => {
     const initialState = {
       x: 10,
       y: 10,
       width: 600,
-      height: 300
+      height: 300,
     };
 
     const expectedState = {
       x: 50,
       y: 50,
       width: 450,
-      height: 450
-  
+      height: 450,
+
     };
-    
+
     const resultState = boardSpecs(deepFreeze(initialState), {
       type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
       project: {
@@ -108,20 +108,20 @@ describe('boardSpecs reducer', () => {
           x: 50,
           y: 50,
           width: 450,
-          height: 450
-        }
-      }
+          height: 450,
+        },
+      },
     });
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should return the correct thumbnail', () => {
     const initialState = {
       x: 10,
       y: 10,
       width: 600,
-      height: 300
+      height: 300,
     };
 
     const expectedState = {
@@ -129,13 +129,13 @@ describe('boardSpecs reducer', () => {
       y: 10,
       width: 600,
       height: 300,
-      thumbnail: "This is a string"
-  
+      thumbnail: 'This is a string',
+
     };
-    
+
     const resultState = boardSpecs(deepFreeze(initialState), {
       type: 'UPDATE_BOARD_THUMBNAIL',
-      thumbnail: "This is a string"
+      thumbnail: 'This is a string',
     });
 
     assert.deepEqual(resultState, expectedState);
@@ -149,14 +149,14 @@ describe('anchorPositions reducer', () => {
       topLeft: { x: 0, y: 0 },
       topRight: { x: null, y: 0 },
       bottomLeft: { x: 0, y: null },
-      bottomRight: { x: null, y: null }
+      bottomRight: { x: null, y: null },
     };
 
     const expectedState = {
       topLeft: { x: 0, y: 0 },
       topRight: { x: 15, y: 15 },
       bottomLeft: { x: 50, y: 50 },
-      bottomRight: { x: 20, y: 20 }
+      bottomRight: { x: 20, y: 20 },
     };
 
     const resultState = anchorPositions(deepFreeze(initialState), {
@@ -165,8 +165,8 @@ describe('anchorPositions reducer', () => {
         topLeft: { x: 0, y: 0 },
         topRight: { x: 15, y: 15 },
         bottomLeft: { x: 50, y: 50 },
-        bottomRight: { x: 20, y: 20 }
-      }
+        bottomRight: { x: 20, y: 20 },
+      },
     });
 
     assert.deepEqual(resultState, expectedState);

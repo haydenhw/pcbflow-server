@@ -18,14 +18,14 @@ import {
 } from 'config/moduleConfig';
 
 class Modules extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
-      shouldCheckCollission: false
+      shouldCheckCollission: false,
     };
   }
-  
+
   calculatePrice(modules) {
     if (modules && modules.length > 0) {
       const modulePriceSum = this.props.modules
@@ -33,35 +33,35 @@ class Modules extends Component {
       .reduce((a, b) => a + b);
       const basePrice = 15;
       const totalPriceString = generatePriceString(basePrice + modulePriceSum);
-      
+
       return totalPriceString;
     }
-    
+
     return generatePriceString(15);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.modules.length !== this.props.modules.length) {
-      const totalPriceString = this.calculatePrice(this.props.modules)
+      const totalPriceString = this.calculatePrice(this.props.modules);
       store.dispatch(actions.updateProjectPrice(totalPriceString));
-      
+
       this.setState({
-        shouldCheckCollission: !this.state.shouldCheckCollission
-      })
+        shouldCheckCollission: !this.state.shouldCheckCollission,
+      });
     }
   }
-  
+
   componentDidMount() {
     const totalPriceString = this.calculatePrice(this.props.modules);
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
-  
+
   toggleShouldCheckCollission() {
     this.setState({
-      shouldCheckCollission: !this.state.shouldCheckCollission
+      shouldCheckCollission: !this.state.shouldCheckCollission,
     });
   }
-  
+
   render() {
     let modules = [];
 
@@ -69,7 +69,7 @@ class Modules extends Component {
       modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
 
         <ModulesItem
-          ref = "module"
+          ref="module"
           key={index}
           index={index}
           x={module.x}

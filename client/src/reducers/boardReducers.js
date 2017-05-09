@@ -4,7 +4,7 @@ const defaultboardSpecs = {
   x: 10,
   y: 10,
   width: 600,
-  height: 300
+  height: 300,
 };
 
 export const boardSpecs = (state = defaultboardSpecs, action) => {
@@ -26,7 +26,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
     case actions.UPDATE_BOARD_STROKE:
       return {
         ...state,
-        stroke: action.boardStroke
+        stroke: action.boardStroke,
       };
       break;
     case actions.UPDATE_BOARD_THUMBNAIL:

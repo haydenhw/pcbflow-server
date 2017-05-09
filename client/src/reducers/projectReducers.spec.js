@@ -33,7 +33,7 @@ describe('currentProjectInfo redcuers', () => {
     const expectedState = {
       price: '$15.00',
       name: 'hola',
-      id: 1234321
+      id: 1234321,
     };
 
     const resultState = currentProjectInfo(deepFreeze(initialState), {
@@ -47,35 +47,35 @@ describe('currentProjectInfo redcuers', () => {
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should update the name of the current project', () => {
     const initialState = {
       price: '$15.00',
       name: 'hola',
-      id: 1234321
+      id: 1234321,
     };
 
     const expectedState = {
       price: '$15.00',
       name: 'new name',
-      id: 1234321
+      id: 1234321,
     };
 
     const resultState = currentProjectInfo(deepFreeze(initialState), {
       type: 'UPDATE_PROJECT_SUCCESS',
       project: {
-        name: 'new name'
-      }   
+        name: 'new name',
+      },
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should update the price of the current project', () => {
     const initialState = {
       price: '$15.00',
       name: 'hola',
-      id: 1234321
+      id: 1234321,
     };
 
     const expectedState = {
@@ -86,32 +86,32 @@ describe('currentProjectInfo redcuers', () => {
 
     const resultState = currentProjectInfo(deepFreeze(initialState), {
       type: 'UPDATE_PROJECT_PRICE',
-      price: '$25.00'
+      price: '$25.00',
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should update the time project was last saved', () => {
     const initialState = {
       price: '$15.00',
       name: 'hola',
       timeLastSaved: '5pm',
-      id: 1234321
+      id: 1234321,
     };
 
     const expectedState = {
       price: '$15.00',
       name: 'hola',
       timeLastSaved: '6pm',
-      id: 1234321
+      id: 1234321,
     };
 
     const resultState = currentProjectInfo(deepFreeze(initialState), {
       type: 'UPDATE_LAST_SAVED_TIME',
-      time: '6pm'
+      time: '6pm',
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
 });

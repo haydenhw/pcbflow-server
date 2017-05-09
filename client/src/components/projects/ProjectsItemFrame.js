@@ -12,24 +12,24 @@ function fectchProject(projectId) {
 
 export default function ProjectsItemFrame(props) {
   return (
-      <div className="col3-project">
+    <div className="col3-project">
+      <div
+        className="container"
+      >
         <div
-          className="container"
+          className="image-container"
+          onClick={() => fectchProject(props.projectId)}
         >
-          <div
-            className="image-container"
-            onClick={() => fectchProject(props.projectId)}
-          >
-            <img className="project-thumbnail" src={props.thumbnailSrc} alt="project-thumbnail" />
+          <img className="project-thumbnail" src={props.thumbnailSrc} alt="project-thumbnail" />
+        </div>
+        <div className="title-bar">
+          <div className="title">
+            {props.children}
           </div>
-          <div className="title-bar">
-            <div className="title">
-              {props.children}
-            </div>
-            <DeleteButton projectId={props.projectId} confirmDelete={props.confirmDelete} />
-          </div>
+          <DeleteButton projectId={props.projectId} confirmDelete={props.confirmDelete} />
         </div>
       </div>
+    </div>
 
   );
 }
