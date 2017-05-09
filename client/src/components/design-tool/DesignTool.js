@@ -43,8 +43,9 @@ let DesignTool = class extends Component {
       image: null,
     };
     
-    this.toggleDraggingToBoard.bind(this)
-    this.toggleDocumentationCard.bind(this)
+    this.toggleDraggingToBoard = this.toggleDraggingToBoard.bind(this)
+    this.toggleDocumentationCard = this.toggleDocumentationCard.bind(this)
+    this.toggleShouldUpadateThumbnail = this.toggleShouldUpadateThumbnail.bind(this)
     
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
     this.bound_handleMouseUp = this.handleMouseUp.bind(this);
@@ -351,7 +352,7 @@ let DesignTool = class extends Component {
           projectName={currentProjectName}
           handleNameChange={DesignTool.handleNameChange.bind(null, currentProjectId)}
           routeToProjects={DesignTool.routeToProjects}
-          updateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
+          updateThumbnail={this.toggleShouldUpadateThumbnail}
           updateLastSaved={DesignTool.updateLastSaved}
           recordSavedChanges={DesignTool.recordSavedChanges}
         />
