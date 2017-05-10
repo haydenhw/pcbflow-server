@@ -9,8 +9,6 @@ import { modulesData } from 'components/modules/modulesData';
 
 function getUnmetDependencyIds(modules, dependencies) {
   const onBoardIds = modules.map((module) => module.id);
-  console.log(onBoardIds)
-  
   const unmetDependencyIds = dependencies.filter((id) => onBoardIds.indexOf(id) === -1);
 
   return unmetDependencyIds;
@@ -18,7 +16,6 @@ function getUnmetDependencyIds(modules, dependencies) {
 
 function getUnmetDependencies(moduleList, onBoardModules, dependencies) {
   const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, dependencies)
-  console.log(unmetDependencyIds)
   const unmetDependencies = (
     moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
   );
@@ -27,10 +24,12 @@ function getUnmetDependencies(moduleList, onBoardModules, dependencies) {
 }
 
 function SideBarIconList(props) {
-  const { moduleBank } = props;
+  const { moduleBank, onBoardModules } = props;
   
-  const dependencies = getUnmetDependencies(modulesData, [101,100])
+  const dependencies = getUnmetDependencies(modulesData, onBoardModules, [101,102])
+  
   console.log(dependencies);
+
 
   const iconList = modulesData.map((module, index) => (
     <SideBarIconFrame
@@ -59,6 +58,7 @@ function SideBarIconList(props) {
 
 const mapStateToProps = (state, props) => ({
   moduleBank: state.moduleBank,
+  onBoardModules: state.currentProjectModules.present,
 });
 
 export default connect(mapStateToProps)(SideBarIconList);
