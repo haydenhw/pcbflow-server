@@ -409,7 +409,7 @@ DesignTool.propTypes = {
   boardSpecs: PropTypes.object.isRequired,
   selectedModuleProps: PropTypes.object.isRequired,
   anchorPositions: PropTypes.object.isRequired,
-  hasUnsavedChanges: PropTypes.object.isRequired,
+  hasUnsavedChanges: PropTypes.object,
   route: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
