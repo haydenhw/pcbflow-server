@@ -32,6 +32,8 @@ export const modulesData = [
     iconHeight: '70px',
     price: 5,
     info: null,
+    id: 101,
+    dependencies: [105, 111]
   },
   {
     fontSize,
@@ -58,6 +60,7 @@ export const modulesData = [
     iconHeight: '70px',
     price: 12,
     info: null,
+    id: 102
   },
   {
     fontSize,
@@ -84,6 +87,7 @@ export const modulesData = [
     iconHeight: '70px',
     price: 2.25,
     info: null,
+    id: 103
   },
   {
     fontSize,
@@ -110,6 +114,7 @@ export const modulesData = [
     iconHeight: '70px',
     price: 2.25,
     info: null,
+    id: 104
   },
   {
     fontSize,
@@ -136,6 +141,7 @@ export const modulesData = [
     iconHeight: '70px',
     price: 15,
     info: null,
+    id: 105
   },
   {
     fontSize,
@@ -162,6 +168,7 @@ export const modulesData = [
     iconHeight: '70px',
     price: 13.5,
     info: null,
+    id: 106
   },
   {
     fontSize,
@@ -188,6 +195,7 @@ export const modulesData = [
     iconHeight: '70px',
     price: 1.2,
     info: null,
+    id: 107
   },
   {
     fontSize,
@@ -214,6 +222,7 @@ export const modulesData = [
     iconHeight: '70px',
     price: 9.75,
     info: null,
+    id: 108
   },
   {
     fontSize,
@@ -240,6 +249,7 @@ export const modulesData = [
     iconHeight: '70px',
     price: 9.75,
     info: null,
+    id: 109
   },
   {
     fontSize,
@@ -266,6 +276,7 @@ export const modulesData = [
     iconHeight: '70px',
     price: 5,
     info: null,
+    id: 110
   },
   {
     fontSize,
@@ -291,5 +302,6 @@ export const modulesData = [
     iconHeight: '70px',
     price: 4.25,
     info: null,
+    id: 111
   },
 ];

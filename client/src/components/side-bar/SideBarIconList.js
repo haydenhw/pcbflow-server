@@ -7,8 +7,30 @@ import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
 import { modulesData } from 'components/modules/modulesData';
 
+function getUnmetDependencyIds(modules, dependencies) {
+  const onBoardIds = modules.map((module) => module.id);
+  console.log(onBoardIds)
+  
+  const unmetDependencyIds = dependencies.filter((id) => onBoardIds.indexOf(id) === -1);
+
+  return unmetDependencyIds;
+}
+
+function getUnmetDependencies(moduleList, onBoardModules, dependencies) {
+  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, dependencies)
+  console.log(unmetDependencyIds)
+  const unmetDependencies = (
+    moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
+  );
+  
+  return unmetDependencies;
+}
+
 function SideBarIconList(props) {
   const { moduleBank } = props;
+  
+  const dependencies = getUnmetDependencies(modulesData, [101,100])
+  console.log(dependencies);
 
   const iconList = modulesData.map((module, index) => (
     <SideBarIconFrame
