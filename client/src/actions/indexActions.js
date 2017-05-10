@@ -4,3 +4,4 @@ export * from './projectActions';
 export * from './mouseEventActions';
 export * from './savedStateActions';
 export * from './undoRedoActions';
+export * from './sideBarActions';

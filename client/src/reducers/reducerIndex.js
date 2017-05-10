@@ -8,6 +8,7 @@ import { projectList, currentProjectInfo } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { hasUnsavedChanges } from './savedStateReducers';
+import { iconVisibity } from './sideBarReducers';
 
 export default combineReducers({
   projectList,
@@ -18,6 +19,7 @@ export default combineReducers({
   selectedModule,
   boardSpecs,
   anchorPositions,
+  iconVisibity,
   mouseEvents,
   hasUnsavedChanges,
 });

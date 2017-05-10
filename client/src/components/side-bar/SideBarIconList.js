@@ -23,14 +23,26 @@ function getUnmetDependencies(moduleList, onBoardModules, dependencies) {
   return unmetDependencies;
 }
 
+const  getVisibleIcons = (visibilityMode, moduleList, onBoardModules, dependencies ) => {
+  switch(visibilityMode) {
+    case 'ALL':
+      return moduleList;
+    case 'DEPENDENCY':
+      return getUnmetDependencies(moduleList, onBoardModules, dependencies);
+    default:
+      return moduleList;
+  }
+}
+
 function SideBarIconList(props) {
-  const { moduleBank, onBoardModules } = props;
+  const { moduleBank, onBoardModules, } = props;
   
   const dependencies = getUnmetDependencies(modulesData, onBoardModules, [101,102])
   
-  console.log(dependencies);
-
-
+  // store.dispatch(actions.updateIconVisibity('DEPENDENCY'))
+  //store.dispatch(actions.updateCurrentDependencies([123, 101]))
+  const visibleIcons = getVisibleIcons('DEPENDENCY', modulesData, onBoardModules, [101,102]); 
+  console.log(visibleIcons);
   const iconList = modulesData.map((module, index) => (
     <SideBarIconFrame
       key={index}
@@ -59,6 +71,8 @@ function SideBarIconList(props) {
 const mapStateToProps = (state, props) => ({
   moduleBank: state.moduleBank,
   onBoardModules: state.currentProjectModules.present,
+  iconVisibityMode: state.iconVisibity.mode,
+  dependencies: state.iconVisibity.dependencies,
 });
 
 export default connect(mapStateToProps)(SideBarIconList);
