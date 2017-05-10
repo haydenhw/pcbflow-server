@@ -134,10 +134,16 @@ export default class ModulesItem extends Component {
     this.updateThumbnail();
     this.highlightRuleBreakingModules();
   }
+  
+  handleClick() {
+    store.dispatch(actions.updateIconVisibity('DEPENDENCY'))
+    store.dispatch(actions.updateCurrentDependencies(this.props.dependencies))
+  }
 
   handleDoubleClick() {
     this.props.rotate();
   }
+  
 
   render() {
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
@@ -195,6 +201,7 @@ export default class ModulesItem extends Component {
           x={this.props.innerGroupX}
           y={this.props.innerGroupY}
           rotation={this.props.rotation}
+          onClick={this.handleClick.bind(this)}
           onDblClick={this.handleDoubleClick.bind(this)}
         >
 

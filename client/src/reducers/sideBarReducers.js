@@ -1,7 +1,7 @@
 import * as actions from '../actions/indexActions';
 
 const defaultIconsVibility = {
-  iconVisibity: 'ALL',
+  mode: 'ALL',
   dependencies: []
 }
 
@@ -10,7 +10,7 @@ export const iconVisibity = (state = defaultIconsVibility, action) => {
     case actions.UPDATE_ICON_VISBILITY:
     return {
       ...state,
-      iconVisibity: action.mode
+      mode: action.mode
     };
     
     case actions.UPDATE_CURRENT_DEPENDENCIES:

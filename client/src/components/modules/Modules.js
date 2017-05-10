@@ -96,6 +96,7 @@ class Modules extends Component {
           imageSrc={module.imageSrc}
           imageNode={module.imageNode}
           iconSrc={module.iconSrc}
+          dependencies={module.dependencies}
           topLeftAnchor={this.props.topLeftAnchor}
           selectedModuleProps={this.props.selectedModuleProps}
           anchorPositions={this.props.anchorPositions}
