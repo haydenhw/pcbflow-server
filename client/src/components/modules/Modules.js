@@ -77,9 +77,9 @@ class Modules extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.modules.length !== this.props.modules.length) {
       this.updatePrice();
-     console.log(this.props.modules[])
+    //  console.log(this.props.modules[this.props.modules.length-1].id)
       const sample = updateMetDependencies(this.props.modules);
-     //console.log(sample)
+    //  console.log(sample)
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });

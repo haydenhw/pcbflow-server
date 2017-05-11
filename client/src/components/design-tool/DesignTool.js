@@ -36,8 +36,8 @@ let DesignTool = class extends Component {
       isDraggingToBoard: false,
       shouldRender: false,
       shouldUpdateThumbnail: false,
-      wasDocumentationOpen: true,
-      shouldRenderDocumentation: true,
+      wasDocumentationOpen: false,  //should be true in production
+      shouldRenderDocumentation: false, //should be true in production
       shouldRenderDocumentationButton: true,
       shouldHideContextMenu: false,
       image: null,
