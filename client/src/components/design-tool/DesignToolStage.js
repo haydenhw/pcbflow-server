@@ -34,6 +34,7 @@ class DesignToolStage extends Component {
   }
 
   render() {
+  
     const {
       shouldRenderBoard,
       draggingModule,
@@ -44,6 +45,7 @@ class DesignToolStage extends Component {
       hideDocumentation,
       unhideDocumentation,
       shouldHideContextMenu,
+      isDraggingToBoard
      } = this.props;
 
     const contextMenuClass = shouldHideContextMenu ? 'hideContextMenu' : 'react-contextmenu';
@@ -53,6 +55,7 @@ class DesignToolStage extends Component {
         rotate={rotate}
         hideDocumentation={hideDocumentation}
         unhideDocumentation={unhideDocumentation}
+        isDraggingToBoard={isDraggingToBoard}
       />
     );
 

@@ -73,6 +73,7 @@ class Board extends Component {
       rotate,
       hideDocumentation,
       unhideDocumentation,
+      isDraggingToBoard
      }
      = this.props;
 
@@ -134,7 +135,10 @@ class Board extends Component {
             unhideDocumentation={unhideDocumentation}
           />
 
-          <Modules rotate={rotate} />
+          <Modules 
+            rotate={rotate}
+            isDraggingToBoard={isDraggingToBoard}
+          />
         </Group>
       </Layer>
     );

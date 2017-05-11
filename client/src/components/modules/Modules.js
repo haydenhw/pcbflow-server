@@ -161,7 +161,7 @@ class Modules extends Component {
           selectedModuleProps={this.props.selectedModuleProps}
           anchorPositions={this.props.anchorPositions}
           boardSpecs={this.props.boardSpecs}
-          isDraggingToBoard={false}
+          isDraggingToBoard={this.props.isDraggingToBoard}
           rotate={this.props.rotate}
           shouldCheckCollission={this.state.shouldCheckCollission}
           toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}

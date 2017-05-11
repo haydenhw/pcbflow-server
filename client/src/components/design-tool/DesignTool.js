@@ -307,6 +307,7 @@ let DesignTool = class extends Component {
       shouldRenderDocumentation,
       shouldRenderDocumentationButton,
       shouldHideContextMenu,
+      isDraggingToBoard
     } = this.state;
     const { height, width } = draggingModuleData;
 
@@ -324,7 +325,6 @@ let DesignTool = class extends Component {
         imageHeight={draggingModuleData.imageHeight}
         imageSrc={draggingModuleData.imageSrc}
         imageNode={draggingModuleData.imageNode}
-        isDraggingToBoard
       />
     );
 
@@ -368,6 +368,7 @@ let DesignTool = class extends Component {
               updateState={this.updateState.bind(this)}
               rotate={this.rotate.bind(this)}
               toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
+              isDraggingToBoard={isDraggingToBoard}
               shouldRenderBoard={currentProjectName}
               shouldUpdateThumbnail={shouldUpdateThumbnail}
               draggingModule={draggingModule}

@@ -91,6 +91,39 @@ export default class ModulesItem extends Component {
 
     store.dispatch(actions.updateBoardThumbnail(thumbnail));
   }
+  
+  getNewPosition() {
+    const { boundToSideIndex } = this.props;
+    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
+    const module = this.refs.moduleGroup;
+    const newPosition = {
+      x: module.getPosition().x,
+      y: module.getPosition().y,
+      index: this.props.index,
+    };
+
+    return newPosition;
+  }
+  
+  getFill() {
+    const { metDependencies, dependencies, isDraggingToBoard } = this.props;
+    
+    if ((isDraggingToBoard === true) || (isDraggingToBoard === undefined)) {
+      return null;
+    }
+    
+    if (metDependencies.length === 0) {
+      return 'red';
+    }
+    
+    if (metDependencies.length < dependencies.length) {
+      return 'yellow';
+    }
+    
+    if (metDependencies.length === dependencies.length) {
+      return 'green';
+    }
+  }
 
   handleMouseOver() {
     this.setState({
@@ -109,35 +142,6 @@ export default class ModulesItem extends Component {
 
     document.body.style.cursor = 'default';
     store.dispatch(actions.toggleIsMouseOverModule(false));
-  }
-
-  getNewPosition() {
-    const { boundToSideIndex } = this.props;
-    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-    const module = this.refs.moduleGroup;
-    const newPosition = {
-      x: module.getPosition().x,
-      y: module.getPosition().y,
-      index: this.props.index,
-    };
-
-    return newPosition;
-  }
-  
-  getFill() {
-    const { metDependencies, dependencies } = this.props;
-    
-    if (metDependencies.length === 0) {
-      return 'red';
-    }
-    
-    if (metDependencies.length < dependencies.length) {
-      return 'yellow';
-    }
-    
-    if (metDependencies.length === dependencies.length) {
-      return 'green';
-    }
   }
 
   handleDragMove() {
@@ -165,8 +169,6 @@ export default class ModulesItem extends Component {
   
 
   render() {
-
-    console.log(this.getFill())
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const image = (
       <Image
