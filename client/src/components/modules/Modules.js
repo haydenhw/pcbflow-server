@@ -19,31 +19,31 @@ import {
 
 
 function updateMetDependencies(moduleArray) {
-  const filterdArray = moduleArray.map(module => {
-    const { index, id, dependencies, metDependencies } = module;
+  const filterdArray = moduleArray.map((module, index) => {
+    const { id, dependencies, metDependencies } = module;
     return {
       index,
       id,
       dependencies,
-      metDependencies
-    }
+      metDependencies: metDependencies || []
+    };
   });
   
   filterdArray.forEach((module) => {
     const dependencies = module.dependencies;
-    const metDependencies = module.metDependencies
+    const metDependencies = module.metDependencies;
     
     filterdArray.forEach((otherModule) => {
       if (
         (dependencies.indexOf(otherModule.id) !== -1) &&
         (metDependencies.indexOf(otherModule.id) === -1)
       ) {
-        metDependencies.push(otherModule.id)
+        metDependencies.push(otherModule.id);
       }
     });
   });
    
-  return filterdArray
+  return filterdArray;
 }
 
 
@@ -77,8 +77,9 @@ class Modules extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.modules.length !== this.props.modules.length) {
       this.updatePrice();
+     console.log(this.props.modules[])
       const sample = updateMetDependencies(this.props.modules);
-      console.log(sample)
+     //console.log(sample)
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });
