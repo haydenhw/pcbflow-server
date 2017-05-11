@@ -106,23 +106,25 @@ export default class ModulesItem extends Component {
   }
   
   getFill() {
-    const { metDependencies, dependencies, isDraggingToBoard } = this.props;
+    const { metDependencies, dependencies, isDraggingToBoard, id } = this.props;
     
     if ((isDraggingToBoard === true) || (isDraggingToBoard === undefined)) {
       return null;
     }
     
-    if (metDependencies.length === 0) {
-      return 'red';
+    if ((metDependencies.length === dependencies.length) || (id === '110')) {
+      return 'green';
     }
     
     if (metDependencies.length < dependencies.length) {
       return 'yellow';
     }
     
-    if (metDependencies.length === dependencies.length) {
-      return 'green';
+    if (metDependencies.length === 0) {
+      return 'red';
     }
+    
+    return null;
   }
 
   handleMouseOver() {

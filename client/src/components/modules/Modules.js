@@ -155,6 +155,7 @@ class Modules extends Component {
           imageSrc={module.imageSrc}
           imageNode={module.imageNode}
           iconSrc={module.iconSrc}
+          id={module.id}
           dependencies={module.dependencies}
           metDependencies={module.metDependencies}
           topLeftAnchor={this.props.topLeftAnchor}
