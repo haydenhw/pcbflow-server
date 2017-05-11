@@ -52,10 +52,15 @@ function updateMetDependencies(dependencyDiffArray) {
   dependencyDiffArray.forEach(element => {
     const { metDependencies, index } = element;
     
-    store.dispatch(actions.updateMetDependencies({
-      metDependencies,
-      index
-    }));
+  
+    /*setTimeout(() => {
+      store.dispatch(actions.updateMetDependencies({
+        metDependencies,
+        index
+      })),
+      1
+    });*/
+  
   });
 }
 
@@ -91,8 +96,8 @@ class Modules extends Component {
     if (prevProps.modules.length !== this.props.modules.length) {
       this.updatePrice();
     //  console.log(this.props.modules[this.props.modules.length-1].id)
-      const dependencyDiffArray = getDependencyDiff(this.props.modules);
-      updateMetDependencies(dependencyDiffArray);
+      //const dependencyDiffArray = getDependencyDiff(this.props.modules);
+      //updateMetDependencies(dependencyDiffArray);
       
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
