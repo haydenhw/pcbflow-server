@@ -67,7 +67,6 @@ class Modules extends Component {
 
     if (this.props.modules) {
       modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
-
         <ModulesItem
           ref="module"
           key={index}

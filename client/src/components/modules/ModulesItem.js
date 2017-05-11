@@ -135,9 +135,11 @@ export default class ModulesItem extends Component {
     this.highlightRuleBreakingModules();
   }
   
-  handleClick() {
-    store.dispatch(actions.updateIconVisibity('DEPENDENCY'))
-    store.dispatch(actions.updateCurrentDependencies(this.props.dependencies))
+  handleClick(evt) {
+    if (evt.evt.which === 1) {
+      store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
+      store.dispatch(actions.updateCurrentDependencies(this.props.dependencies));
+    }
   }
 
   handleDoubleClick() {

@@ -228,8 +228,14 @@ let DesignTool = class extends Component {
   }
 
   handleMouseUp(evt) {
-    if (evt.which === 1 && !this.state.shouldHideContextMenu) {
-      this.toggleShouldHideContextMenu(true);
+    if (evt.which === 1) {
+      if (!this.state.shouldHideContextMenu) {
+        this.toggleShouldHideContextMenu(true);
+      }
+      
+      if (!this.props.isMouseOverModule) {
+        store.dispatch(actions.updateIconVisibity('ALL'));
+      }
     }
 
     if (evt.which === 3 && this.props.isMouseOverModule) {

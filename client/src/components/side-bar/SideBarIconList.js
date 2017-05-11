@@ -7,15 +7,15 @@ import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
 import { modulesData } from 'components/modules/modulesData';
 
-function getUnmetDependencyIds(modules, dependencies) {
+function getUnmetDependencyIds(modules, selectedModuleDependencies) {
   const onBoardIds = modules.map((module) => module.id);
-  const unmetDependencyIds = dependencies.filter((id) => onBoardIds.indexOf(id) === -1);
+  const unmetDependencyIds = selectedModuleDependencies.filter((id) => onBoardIds.indexOf(id) === -1);
 
   return unmetDependencyIds;
 }
 
-function getUnmetDependencies(moduleList, onBoardModules, dependencies) {
-  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, dependencies)
+function getUnmetDependencies(moduleList, onBoardModules, selectedModuleDependencies) {
+  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, selectedModuleDependencies)
   const unmetDependencies = (
     moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
   );
@@ -23,21 +23,20 @@ function getUnmetDependencies(moduleList, onBoardModules, dependencies) {
   return unmetDependencies;
 }
 
-const  getVisibleIcons = (visibilityMode, moduleList, onBoardModules, dependencies ) => {
-  console.log(visibilityMode, dependencies )
+const  getVisibleIcons = (visibilityMode, moduleList, onBoardModules, selectedModuleDependencies ) => {
   switch(visibilityMode) {
     case 'ALL':
       return moduleList;
     case 'DEPENDENCY':
-      return getUnmetDependencies(moduleList, onBoardModules, dependencies);
+      return getUnmetDependencies(moduleList, onBoardModules, selectedModuleDependencies);
     default:
       return moduleList;
   }
 }
 
 function SideBarIconList(props) {
-  const { moduleBank, onBoardModules, iconVisibityMode, dependencies } = props;
-  const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, dependencies); 
+  const { moduleBank, onBoardModules, iconVisibityMode, selectedModuleDependencies } = props;
+  const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
   
   const iconList = visibleIcons.map((module, index) => (
     <SideBarIconFrame
@@ -68,7 +67,7 @@ const mapStateToProps = (state, props) => ({
   moduleBank: state.moduleBank,
   onBoardModules: state.currentProjectModules.present,
   iconVisibityMode: state.iconVisibity.mode,
-  dependencies: state.iconVisibity.dependencies,
+  selectedModuleDependencies: state.iconVisibity.dependencies,
 });
 
 export default connect(mapStateToProps)(SideBarIconList);
