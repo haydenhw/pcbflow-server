@@ -48,42 +48,28 @@ function getDependencyDiff(moduleArray) {
   return filterdArray.filter(element => changedElements.indexOf(element.index) !== -1);
 }
 
+
+
 function updateMetDependencies(dependencyDiffArray) {
   
-   const test = dependencyDiffArray[0];
-   const { metDependencies, index } = test;
-   
-   const dispatchMetDependencies = () => {
-     console.log('hola')
-     store.dispatch(actions.updateMetDependencies({
-       metDependencies,
-       index
-     }))
+   const dispatchMetDependencies = metDependencies  => {
+     store.dispatch(actions.updateMetDependencies(metDependencies));
    };
    
-   setTimeout(() => dispatchMetDependencies(), 1);
+   function setDelay(metDependencies) {
+     setTimeout(function(){
+       dispatchMetDependencies(metDependencies);
+     }, 1);
+   }
    
-   
-  /*dependencyDiffArray.forEach(element => {
+  dependencyDiffArray.forEach(element => {
     const { metDependencies, index } = element;
     
-    
-    
-    
-    /*store.dispatch(actions.updateMetDependencies({
+    setDelay({
       metDependencies,
       index
-    }))*/
-  
-    /*setTimeout(() => {
-      store.dispatch(actions.updateMetDependencies({
-        metDependencies,
-        index
-      })),
-      1
     });
-  
-  });*/
+  });
 }
 
 
