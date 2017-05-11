@@ -91,6 +91,19 @@ export const currentProjectModules = (state = [], action) => {
           return i === index ? updatedModuleProps : module;
         });
         break;
+        
+        case actions.UPDATE_MET_DEPENDECIES:
+          return state.map((module, i) => {
+            const { metDependencies, index } = action.metDependencies;
+            console.log(metDependencies)
+            const updatedModuleProps = {
+              ...module,
+              metDependencies,
+            };
+            console.log(updatedModuleProps)
+            return i === index ? updatedModuleProps : module;
+          });
+          break;
 
       case actions.UPDATE_MODULE_IMAGE:
         return state.map((module, i) => {

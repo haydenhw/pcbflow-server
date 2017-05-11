@@ -18,7 +18,9 @@ import {
 } from 'config/moduleConfig';
 
 
-function updateMetDependencies(moduleArray) {
+function getDependencyDiff(moduleArray) {
+  const changedElements = [];
+  
   const filterdArray = moduleArray.map((module, index) => {
     const { id, dependencies, metDependencies } = module;
     return {
@@ -30,8 +32,7 @@ function updateMetDependencies(moduleArray) {
   });
   
   filterdArray.forEach((module) => {
-    const dependencies = module.dependencies;
-    const metDependencies = module.metDependencies;
+    const { dependencies, metDependencies, index } = module;
     
     filterdArray.forEach((otherModule) => {
       if (
@@ -39,11 +40,23 @@ function updateMetDependencies(moduleArray) {
         (metDependencies.indexOf(otherModule.id) === -1)
       ) {
         metDependencies.push(otherModule.id);
+        changedElements.push(index);
       }
     });
   });
    
-  return filterdArray;
+  return filterdArray.filter(element => changedElements.indexOf(element.index) !== -1);
+}
+
+function updateMetDependencies(dependencyDiffArray) {
+  dependencyDiffArray.forEach(element => {
+    const { metDependencies, index } = element;
+    
+    store.dispatch(actions.updateMetDependencies({
+      metDependencies,
+      index
+    }));
+  });
 }
 
 
@@ -78,8 +91,9 @@ class Modules extends Component {
     if (prevProps.modules.length !== this.props.modules.length) {
       this.updatePrice();
     //  console.log(this.props.modules[this.props.modules.length-1].id)
-      const sample = updateMetDependencies(this.props.modules);
-    //  console.log(sample)
+      const dependencyDiffArray = getDependencyDiff(this.props.modules);
+      updateMetDependencies(dependencyDiffArray);
+      
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });

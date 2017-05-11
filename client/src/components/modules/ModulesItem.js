@@ -228,6 +228,6 @@ export default class ModulesItem extends Component {
         </Group>
       </Group>
     );
-  }
+  } 
 }
 

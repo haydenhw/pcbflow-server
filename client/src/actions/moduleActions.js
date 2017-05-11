@@ -30,6 +30,12 @@ export const updateModuleImage = moduleData => ({
   moduleData,
 });
 
+export const UPDATE_MET_DEPENDECIES = 'UPDATE_MET_DEPENDECIES';
+export const updateMetDependencies = metDependencies => ({
+  type: 'UPDATE_MET_DEPENDECIES',
+  metDependencies,
+});
+
 export const UPDATE_SELECTED_MODULE = 'UPDATE_SELECTED_MODULE';
 export const updateSelectedModule = moduleData => ({
   type: 'UPDATE_SELECTED_MODULE',
