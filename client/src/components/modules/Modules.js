@@ -17,8 +17,37 @@ import {
   strokeWidth,
 } from 'config/moduleConfig';
 
-class Modules extends Component {
 
+function updateMetDependencies(moduleArray) {
+  const filterdArray = moduleArray.map(module => {
+    const { index, id, dependencies, metDependencies } = module;
+    return {
+      index,
+      id,
+      dependencies,
+      metDependencies
+    }
+  });
+  
+  filterdArray.forEach((module) => {
+    const dependencies = module.dependencies;
+    const metDependencies = module.metDependencies
+    
+    filterdArray.forEach((otherModule) => {
+      if (
+        (dependencies.indexOf(otherModule.id) !== -1) &&
+        (metDependencies.indexOf(otherModule.id) === -1)
+      ) {
+        metDependencies.push(otherModule.id)
+      }
+    });
+  });
+   
+  return filterdArray
+}
+
+
+class Modules extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,12 +68,17 @@ class Modules extends Component {
 
     return generatePriceString(15);
   }
+  
+  updatePrice() {
+    const totalPriceString = this.calculatePrice(this.props.modules);
+    store.dispatch(actions.updateProjectPrice(totalPriceString));
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.modules.length !== this.props.modules.length) {
-      const totalPriceString = this.calculatePrice(this.props.modules);
-      store.dispatch(actions.updateProjectPrice(totalPriceString));
-
+      this.updatePrice();
+      const sample = updateMetDependencies(this.props.modules);
+      console.log(sample)
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });
