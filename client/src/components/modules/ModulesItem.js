@@ -123,6 +123,22 @@ export default class ModulesItem extends Component {
 
     return newPosition;
   }
+  
+  getFill() {
+    const { metDependencies, dependencies } = this.props;
+    
+    if (metDependencies.length === 0) {
+      return 'red';
+    }
+    
+    if (metDependencies.length < dependencies.length) {
+      return 'yellow';
+    }
+    
+    if (metDependencies.length === dependencies.length) {
+      return 'green';
+    }
+  }
 
   handleDragMove() {
     const newPosition = this.getNewPosition();
@@ -137,7 +153,7 @@ export default class ModulesItem extends Component {
   
   handleClick(evt) {
     if (evt.evt.which === 1) {
-      console.log(this.props.dependencies)
+      console.log(this.props.metDependencies)
       store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
       store.dispatch(actions.updateCurrentDependencies(this.props.dependencies));
     }
@@ -149,6 +165,8 @@ export default class ModulesItem extends Component {
   
 
   render() {
+
+    console.log(this.getFill())
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const image = (
       <Image
@@ -212,7 +230,7 @@ export default class ModulesItem extends Component {
             ref="topLayer"
             width={this.props.width}
             height={this.props.height}
-            fill={this.props.fill}
+            fill={this.getFill()}
             opacity={this.props.opacity}
           />
 
@@ -232,3 +250,6 @@ export default class ModulesItem extends Component {
   } 
 }
 
+ModulesItem.defaultProps = {
+  metDependencies: []
+}

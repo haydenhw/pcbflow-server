@@ -95,12 +95,10 @@ export const currentProjectModules = (state = [], action) => {
         case actions.UPDATE_MET_DEPENDECIES:
           return state.map((module, i) => {
             const { metDependencies, index } = action.metDependencies;
-            console.log(metDependencies)
             const updatedModuleProps = {
               ...module,
               metDependencies,
             };
-            console.log(updatedModuleProps)
             return i === index ? updatedModuleProps : module;
           });
           break;

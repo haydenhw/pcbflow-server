@@ -17,7 +17,6 @@ import {
   strokeWidth,
 } from 'config/moduleConfig';
 
-
 function getDependencyDiff(moduleArray) {
   const changedElements = [];
   
@@ -48,8 +47,6 @@ function getDependencyDiff(moduleArray) {
   return filterdArray.filter(element => changedElements.indexOf(element.index) !== -1);
 }
 
-
-
 function updateMetDependencies(dependencyDiffArray) {
   
    const dispatchMetDependencies = metDependencies  => {
@@ -71,7 +68,6 @@ function updateMetDependencies(dependencyDiffArray) {
     });
   });
 }
-
 
 class Modules extends Component {
   constructor(props) {
@@ -116,6 +112,8 @@ class Modules extends Component {
   componentDidMount() {
     const totalPriceString = this.calculatePrice(this.props.modules);
     store.dispatch(actions.updateProjectPrice(totalPriceString));
+    const dependencyDiffArray = getDependencyDiff(this.props.modules);
+    updateMetDependencies(dependencyDiffArray);
   }
 
   toggleShouldCheckCollission() {
@@ -158,6 +156,7 @@ class Modules extends Component {
           imageNode={module.imageNode}
           iconSrc={module.iconSrc}
           dependencies={module.dependencies}
+          metDependencies={module.metDependencies}
           topLeftAnchor={this.props.topLeftAnchor}
           selectedModuleProps={this.props.selectedModuleProps}
           anchorPositions={this.props.anchorPositions}
