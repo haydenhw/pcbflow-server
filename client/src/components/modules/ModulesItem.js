@@ -137,6 +137,7 @@ export default class ModulesItem extends Component {
   
   handleClick(evt) {
     if (evt.evt.which === 1) {
+      console.log(this.props.dependencies)
       store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
       store.dispatch(actions.updateCurrentDependencies(this.props.dependencies));
     }
