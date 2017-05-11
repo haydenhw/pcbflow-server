@@ -6,6 +6,8 @@ import Konva from 'konva';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import generatePriceString from 'helpers/generatePriceString';
+import { getDependencyDiff, updateMetDependencies } from 'helpers/dependencies';
+
 import ModulesItem from './ModulesItem';
 import { modulesData } from './modulesData';
 import {
@@ -16,58 +18,6 @@ import {
   stroke,
   strokeWidth,
 } from 'config/moduleConfig';
-
-function getDependencyDiff(moduleArray) {
-  const changedElements = [];
-  
-  const filterdArray = moduleArray.map((module, index) => {
-    const { id, dependencies, metDependencies } = module;
-    return {
-      index,
-      id,
-      dependencies,
-      metDependencies: metDependencies || []
-    };
-  });
-  
-  filterdArray.forEach((module) => {
-    const { dependencies, metDependencies, index } = module;
-    
-    filterdArray.forEach((otherModule) => {
-      if (
-        (dependencies.indexOf(otherModule.id) !== -1) &&
-        (metDependencies.indexOf(otherModule.id) === -1)
-      ) {
-        metDependencies.push(otherModule.id);
-        changedElements.push(index);
-      }
-    });
-  });
-   
-  return filterdArray.filter(element => changedElements.indexOf(element.index) !== -1);
-}
-
-function updateMetDependencies(dependencyDiffArray) {
-  
-   const dispatchMetDependencies = metDependencies  => {
-     store.dispatch(actions.updateMetDependencies(metDependencies));
-   };
-   
-   function setDelay(metDependencies) {
-     setTimeout(function(){
-       dispatchMetDependencies(metDependencies);
-     }, 1);
-   }
-   
-  dependencyDiffArray.forEach(element => {
-    const { metDependencies, index } = element;
-    
-    setDelay({
-      metDependencies,
-      index
-    });
-  });
-}
 
 class Modules extends Component {
   constructor(props) {
@@ -98,10 +48,10 @@ class Modules extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.modules.length !== this.props.modules.length) {
-      this.updatePrice();
-    //  console.log(this.props.modules[this.props.modules.length-1].id)
       const dependencyDiffArray = getDependencyDiff(this.props.modules);
+      
       updateMetDependencies(dependencyDiffArray);
+      this.updatePrice();
       
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
