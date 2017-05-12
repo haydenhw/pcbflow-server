@@ -19,9 +19,6 @@ export function getUnmetDependencies(moduleList, onBoardModules, selectedModuleD
 }
 
 export function getDependencyDiff(moduleArray) {
-
-  const changedElements = [];
-  
   const filterdArray = moduleArray.map((module, index) => {
     const { id, dependencies, metDependencies } = module;
     return {
@@ -41,7 +38,6 @@ export function getDependencyDiff(moduleArray) {
         (metDependencies.indexOf(otherModule.id) === -1)
       ) {
         metDependencies.push(otherModule.id);
-        changedElements.push(index);
       }
     });
   });
