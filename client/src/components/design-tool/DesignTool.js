@@ -325,6 +325,7 @@ let DesignTool = class extends Component {
         imageHeight={draggingModuleData.imageHeight}
         imageSrc={draggingModuleData.imageSrc}
         imageNode={draggingModuleData.imageNode}
+        id={'100'}
       />
     );
 

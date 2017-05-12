@@ -2,7 +2,24 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 
+export function getUnmetDependencyIds(modules, selectedModuleDependencies) {
+  const onBoardIds = modules.map((module) => module.id);
+  const unmetDependencyIds = selectedModuleDependencies.filter((id) => onBoardIds.indexOf(id) === -1);
+
+  return unmetDependencyIds;
+}
+
+export function getUnmetDependencies(moduleList, onBoardModules, selectedModuleDependencies) {
+  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, selectedModuleDependencies)
+  const unmetDependencies = (
+    moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
+  );
+  
+  return unmetDependencies;
+}
+
 export function getDependencyDiff(moduleArray) {
+
   const changedElements = [];
   
   const filterdArray = moduleArray.map((module, index) => {
@@ -28,7 +45,7 @@ export function getDependencyDiff(moduleArray) {
       }
     });
   });
-   
+  console.log(filterdArray)
   return filterdArray.filter(element => changedElements.indexOf(element.index) !== -1);
 }
 

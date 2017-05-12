@@ -37,6 +37,7 @@ export default class ModulesItem extends Component {
   }
 
   highlightRuleBreakingModules(module, index) {
+    const { isDraggingToBoard } = this.props;
     const draggingModuleNode = module || this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
     const moduleNodeArray = boardGroup.get('.moduleGroup');
@@ -61,16 +62,15 @@ export default class ModulesItem extends Component {
         : node.attrs.isStrokeRed = false;
     };
 
-    if (!this.props || !this.props.isDraggingToBoard) {
+    if (!isDraggingToBoard && isDraggingToBoard !== undefined) {
       enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
   }
 
   componentDidMount() {
-    this.refs.moduleGroup.attrs.highlightRuleBreakingModules = this.highlightRuleBreakingModules;
     this.setImage();
     this.setDefaultStroke();
-    setTimeout(() => this.highlightRuleBreakingModules(), 1);
+    setTimeout(() => {/*console.log('called');*/ this.highlightRuleBreakingModules()}, 1);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -107,8 +107,7 @@ export default class ModulesItem extends Component {
   
   getFill() {
     const { metDependencies, dependencies, isDraggingToBoard, id } = this.props;
-    
-    if ((isDraggingToBoard === true) || (isDraggingToBoard === undefined)) {
+    if (id === '100') {
       return null;
     }
     
@@ -116,13 +115,15 @@ export default class ModulesItem extends Component {
       return 'green';
     }
     
+    if (metDependencies.length === 0) {
+      return 'red';
+    }
+    
     if (metDependencies.length < dependencies.length) {
       return 'yellow';
     }
     
-    if (metDependencies.length === 0) {
-      return 'red';
-    }
+  
     
     return null;
   }

@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import { getUnmetDependencyIds, getUnmetDependencies } from 'helpers/dependencies';
+import { modulesData } from 'components/modules/modulesData';
 
 import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
-import { modulesData } from 'components/modules/modulesData';
 
-function getUnmetDependencyIds(modules, selectedModuleDependencies) {
-  const onBoardIds = modules.map((module) => module.id);
-  const unmetDependencyIds = selectedModuleDependencies.filter((id) => onBoardIds.indexOf(id) === -1);
-
-  return unmetDependencyIds;
-}
-
-function getUnmetDependencies(moduleList, onBoardModules, selectedModuleDependencies) {
-  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, selectedModuleDependencies)
-  const unmetDependencies = (
-    moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
-  );
-  
-  return unmetDependencies;
-}
 
 const  getVisibleIcons = (visibilityMode, moduleList, onBoardModules, selectedModuleDependencies ) => {
   switch(visibilityMode) {
