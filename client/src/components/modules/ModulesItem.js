@@ -72,7 +72,7 @@ export default class ModulesItem extends Component {
     store.dispatch(actions.updateCurrentDependencies(this.props.dependencies));
   }
   
-/*  showAllModuleIcons() {
+  showAllModuleIcons() {
     store.dispatch(actions.updateIconVisibity('ALL'));
   }
   
@@ -83,13 +83,20 @@ export default class ModulesItem extends Component {
       return true;
     }
     return false; 
-  }*/
+  }
+  
+  callWithTimeout() {
+      this.highlightRuleBreakingModules();
+      
+      if (!this.areDependenciesMet() && this.props.iconVisibityMode === "ALL") {
+        this.showDependencies();
+      }
+  }
 
   componentDidMount() {
     this.setImage();
     this.setDefaultStroke();
-    //this.areDependenciesMet() ? this.showAllModuleIcons() : this.showDependencies()
-    setTimeout(() => {/*console.log('called');*/ this.highlightRuleBreakingModules()}, 1);
+    setTimeout(this.callWithTimeout.bind(this), 1);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -142,8 +149,6 @@ export default class ModulesItem extends Component {
       return 'yellow';
     }
     
-  
-    
     return null;
   }
 
@@ -187,7 +192,6 @@ export default class ModulesItem extends Component {
     this.props.rotate();
   }
   
-
   render() {
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const image = (

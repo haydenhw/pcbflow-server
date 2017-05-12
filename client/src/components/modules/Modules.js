@@ -115,6 +115,7 @@ class Modules extends Component {
           isDraggingToBoard={this.props.isDraggingToBoard}
           rotate={this.props.rotate}
           shouldCheckCollission={this.state.shouldCheckCollission}
+          iconVisibityMode={this.props.iconVisibityMode}
           toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
         />);
     }
@@ -133,6 +134,7 @@ const mapStateToProps = state => ({
   selectedModuleProps: state.selectedModule,
   boardSpecs: state.boardSpecs,
   anchorPositions: state.anchorPositions,
+  iconVisibityMode: state.iconVisibity.mode
 });
 
 export default connect(mapStateToProps)(Modules);

@@ -9,7 +9,6 @@ import { modulesData } from 'components/modules/modulesData';
 import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
 
-
 const  getVisibleIcons = (visibilityMode, moduleList, onBoardModules, selectedModuleDependencies ) => {
   switch(visibilityMode) {
     case 'ALL':
@@ -17,7 +16,7 @@ const  getVisibleIcons = (visibilityMode, moduleList, onBoardModules, selectedMo
     case 'DEPENDENCY':
       return getUnmetDependencies(moduleList, onBoardModules, selectedModuleDependencies);
     default:
-      return moduleList;
+      return moduleList; 
   }
 }
 
@@ -44,7 +43,7 @@ function SideBarIconList(props) {
     ));
 
   const style = {
-    magrin: '10px auto',
+    magrin: '10px auto'
   };
 
   return (
