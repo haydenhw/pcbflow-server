@@ -96,7 +96,7 @@ export default class ModulesItem extends Component {
   componentDidMount() {
     this.setImage();
     this.setDefaultStroke();
-    setTimeout(this.callWithTimeout.bind(this), 5);
+    setTimeout(this.callWithTimeout.bind(this), 1);
   }
 
   componentDidUpdate(prevProps, prevState) {
