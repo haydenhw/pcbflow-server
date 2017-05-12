@@ -27,7 +27,6 @@ export default function SideBar(props) {
     />
   );
   
-  console.log(mode)
   return (
     <div className="sideBar" style={style}>
       {mode === 'DEPENDENCY' && dependencyMessage}
