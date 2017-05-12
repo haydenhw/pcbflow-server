@@ -28,7 +28,7 @@ export function getDependencyDiff(moduleArray) {
       index,
       id,
       dependencies,
-      metDependencies: metDependencies || []
+      metDependencies: []
     };
   });
   
@@ -45,8 +45,8 @@ export function getDependencyDiff(moduleArray) {
       }
     });
   });
-  console.log(filterdArray)
-  return filterdArray.filter(element => changedElements.indexOf(element.index) !== -1);
+  
+  return filterdArray
 }
 
 export function updateMetDependencies(dependencyDiffArray) {
