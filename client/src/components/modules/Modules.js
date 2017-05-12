@@ -26,7 +26,7 @@ class Modules extends Component {
       shouldCheckCollission: false,
     };
   }
-
+  
   calculatePrice(modules) {
     if (modules && modules.length > 0) {
       const modulePriceSum = this.props.modules
@@ -34,10 +34,10 @@ class Modules extends Component {
       .reduce((a, b) => a + b);
       const basePrice = 15;
       const totalPriceString = generatePriceString(basePrice + modulePriceSum);
-
+      
       return totalPriceString;
     }
-
+    
     return generatePriceString(15);
   }
   
@@ -45,9 +45,9 @@ class Modules extends Component {
     const totalPriceString = this.calculatePrice(this.props.modules);
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
-
+  
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.modules.length !== this.props.modules.length) {
+    if ((prevProps.modules.length !== this.props.modules.length)) {
       const dependencyDiffArray = getDependencyDiff(this.props.modules);
       
       updateMetDependencies(dependencyDiffArray);
@@ -58,75 +58,73 @@ class Modules extends Component {
       });
     }
   }
-
+  
   componentDidMount() {
     const totalPriceString = this.calculatePrice(this.props.modules);
     store.dispatch(actions.updateProjectPrice(totalPriceString));
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
     updateMetDependencies(dependencyDiffArray);
   }
-
+  
   toggleShouldCheckCollission() {
     this.setState({
       shouldCheckCollission: !this.state.shouldCheckCollission,
     });
   }
-
+  
   render() {
-    let modules = [];
-
-    if (this.props.modules) {
-      modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
-        <ModulesItem
-          ref="module"
-          key={index}
-          index={index}
-          x={module.x}
-          y={module.y}
-          width={module.width}
-          height={module.height}
-          name={module.name}
-          boundToSideIndex={module.boundToSideIndex}
-          innerGroupX={module.innerGroupX}
-          innerGroupY={module.innerGroupY}
-          rotation={module.rotation}
-          text={module.text}
-          textX={module.textX}
-          textY={module.textY}
-          fontSize={fontSize}
-          fontFamily={fontFamily}
-          fill={fill}
-          opacity={opacity}
-          stroke={module.stroke}
-          strokeWidth={strokeWidth}
-          imageX={module.imageX}
-          imageY={module.imageY}
-          imageWidth={module.imageWidth}
-          imageHeight={module.imageHeight}
-          imageSrc={module.imageSrc}
-          imageNode={module.imageNode}
-          iconSrc={module.iconSrc}
-          id={module.id}
-          dependencies={module.dependencies}
-          metDependencies={module.metDependencies}
-          topLeftAnchor={this.props.topLeftAnchor}
-          selectedModuleProps={this.props.selectedModuleProps}
-          anchorPositions={this.props.anchorPositions}
-          boardSpecs={this.props.boardSpecs}
-          isDraggingToBoard={this.props.isDraggingToBoard}
-          rotate={this.props.rotate}
-          shouldCheckCollission={this.state.shouldCheckCollission}
-          iconVisibityMode={this.props.iconVisibityMode}
-          toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
-        />);
-    }
+    const modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
+      <ModulesItem
+        ref="module"
+        key={index}
+        index={index}
+        x={module.x}
+        y={module.y}
+        width={module.width}
+        height={module.height}
+        name={module.name}
+        boundToSideIndex={module.boundToSideIndex}
+        innerGroupX={module.innerGroupX}
+        innerGroupY={module.innerGroupY}
+        rotation={module.rotation}
+        text={module.text}
+        textX={module.textX}
+        textY={module.textY}
+        fontSize={fontSize}
+        fontFamily={fontFamily}
+        fill={fill}
+        opacity={opacity}
+        stroke={module.stroke}
+        strokeWidth={strokeWidth}
+        imageX={module.imageX}
+        imageY={module.imageY}
+        imageWidth={module.imageWidth}
+        imageHeight={module.imageHeight}
+        imageSrc={module.imageSrc}
+        imageNode={module.imageNode}
+        iconSrc={module.iconSrc}
+        id={module.id}
+        dependencies={module.dependencies}
+        metDependencies={module.metDependencies}
+        topLeftAnchor={this.props.topLeftAnchor}
+        selectedModuleProps={this.props.selectedModuleProps}
+        anchorPositions={this.props.anchorPositions}
+        boardSpecs={this.props.boardSpecs}
+        isDraggingToBoard={this.props.isDraggingToBoard}
+        rotate={this.props.rotate}
+        shouldCheckCollission={this.state.shouldCheckCollission}
+        iconVisibityMode={this.props.iconVisibityMode}
+        toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
+      />
+    );
+    
     return (
       <Group>
         {modules}
       </Group>
     );
   }
-
+  
 }
 
 const mapStateToProps = state => ({
@@ -139,3 +137,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(Modules);
+
+Modules.defaultProps = {
+  modules: []
+}

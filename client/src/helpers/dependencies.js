@@ -2,7 +2,7 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 
-export function getUnmetDependencyIds(modules, selectedModuleDependencies) {
+export function getUnmetDependencyIds(modules=[], selectedModuleDependencies) {
   const onBoardIds = modules.map((module) => module.id);
   const unmetDependencyIds = selectedModuleDependencies.filter((id) => onBoardIds.indexOf(id) === -1);
 
