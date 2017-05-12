@@ -49,6 +49,7 @@ let DesignTool = class extends Component {
 
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
     this.bound_handleMouseUp = this.handleMouseUp.bind(this);
+    this.bound_handleClick = this.handleClick.bind(this);
     this.bound_handleMouseMove = this.handleMouseMove.bind(this);
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
@@ -113,6 +114,7 @@ let DesignTool = class extends Component {
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
+    document.body.addEventListener('click', this.bound_handleClick);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
     document.onkeydown = DesignTool.keyPress;
@@ -226,19 +228,20 @@ let DesignTool = class extends Component {
       shouldHideContextMenu: boolean,
     });
   }
+  
+  handleClick(evt) {
+    console.log('clicked')
+    if ((evt.which === 1) && !this.props.isMouseOverModule) {
+      store.dispatch(actions.updateIconVisibity('ALL'));
+    }
+  }
 
   handleMouseUp(evt) {
-    if (evt.which === 1) {
-      if (!this.state.shouldHideContextMenu) {
+    if ((evt.which === 1) && !this.state.shouldHideContextMenu) {
         this.toggleShouldHideContextMenu(true);
-      }
-      
-      if (!this.props.isMouseOverModule) {
-        store.dispatch(actions.updateIconVisibity('ALL'));
-      }
     }
-
-    if (evt.which === 3 && this.props.isMouseOverModule) {
+    
+    if ((evt.which === 3) && this.props.isMouseOverModule) {
       this.toggleShouldHideContextMenu(false);
     }
 
