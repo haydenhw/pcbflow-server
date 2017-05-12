@@ -66,10 +66,29 @@ export default class ModulesItem extends Component {
       enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
   }
+  
+  showDependencies() {
+    store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
+    store.dispatch(actions.updateCurrentDependencies(this.props.dependencies));
+  }
+  
+  showAllModuleIcons() {
+    store.dispatch(actions.updateIconVisibity('ALL'));
+  }
+  
+  areDependenciesMet() {
+    const { dependencies, metDependencies } = this.props;
+    console.log(dependencies, metDependencies)
+    if (dependencies && (dependencies.length === metDependencies.length)) {
+      return true;
+    }
+    return false; 
+  }
 
   componentDidMount() {
     this.setImage();
     this.setDefaultStroke();
+    this.areDependenciesMet() ? this.showAllModuleIcons() : this.showDependencies()
     setTimeout(() => {/*console.log('called');*/ this.highlightRuleBreakingModules()}, 1);
   }
 
@@ -160,8 +179,7 @@ export default class ModulesItem extends Component {
   
   handleClick(evt) {
     if (evt.evt.which === 1) {
-      store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
-      store.dispatch(actions.updateCurrentDependencies(this.props.dependencies));
+      this.showDependencies();
     }
   }
 
