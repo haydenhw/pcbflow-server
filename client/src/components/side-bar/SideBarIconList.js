@@ -21,8 +21,15 @@ const  getVisibleIcons = (visibilityMode, moduleList, onBoardModules, selectedMo
 }
 
 let SideBarIconList = class extends Component {
-  componentDidMount() {
-    if (this.visibleIcons.length === modulesData.length) {
+  componentWillUpdate(nextProps) {
+    if (nextProps.onBoardModules !== this.props.onBoardModules) {
+      const { 
+        onBoardModules,
+        iconVisibityMode,
+        selectedModuleDependencies,
+      } = this.props;
+      const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
+
       store.dispatch(actions.updateIconVisibity('ALL'));
     }
   }
@@ -36,9 +43,9 @@ let SideBarIconList = class extends Component {
       toggleIsClicked
     } = this.props;
     
-    this.visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
+    const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
     
-    const iconList = this.visibleIcons.map((module, index) => (
+    const iconList = visibleIcons.map((module, index) => (
       <SideBarIconFrame
         key={index}
         moduleName={module.text}

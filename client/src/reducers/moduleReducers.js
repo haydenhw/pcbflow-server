@@ -116,7 +116,6 @@ export const currentProjectModules = (state = [], action) => {
         break;
 
       case actions.ROTATE_SELECTED_MODULE:
-
         const {
           rotation,
           boundToSideIndex,

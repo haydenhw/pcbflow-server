@@ -67,15 +67,7 @@ export default class ModulesItem extends Component {
     }
   }
   
-  showDependencies() {
-    const dependencyData = {
-      dependencies: this.props.dependencies,
-      name: this.props.text
-    }
-    
-    store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
-    store.dispatch(actions.updateCurrentDependencies(dependencyData));
-  }
+  
   
   showAllModuleIcons() {
     store.dispatch(actions.updateIconVisibity('ALL'));
@@ -84,10 +76,19 @@ export default class ModulesItem extends Component {
   areDependenciesMet() {
     const { dependencies, metDependencies } = this.props;
     
-    if (dependencies && (dependencies.length === metDependencies.length)) {
-      return true;
+    return Boolean(dependencies && (dependencies.length === metDependencies.length))
+  }
+  
+  showDependencies() {
+    if (!this.areDependenciesMet()) {
+      const dependencyData = {
+        dependencies: this.props.dependencies,
+        name: this.props.text
+      }
+      
+      store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
+      store.dispatch(actions.updateCurrentDependencies(dependencyData));
     }
-    return false; 
   }
   
   callWithTimeout() {

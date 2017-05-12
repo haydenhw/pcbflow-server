@@ -49,7 +49,7 @@ let DesignTool = class extends Component {
 
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
     this.bound_handleMouseUp = this.handleMouseUp.bind(this);
-    this.bound_handleClick = this.handleClick.bind(this);
+    // this.bound_handleClick = this.handleClick.bind(this);
     this.bound_handleMouseMove = this.handleMouseMove.bind(this);
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
@@ -114,7 +114,7 @@ let DesignTool = class extends Component {
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
-    document.body.addEventListener('click', this.bound_handleClick);
+    // document.body.addEventListener('click', this.bound_handleClick);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
     document.onkeydown = DesignTool.keyPress;
@@ -230,9 +230,9 @@ let DesignTool = class extends Component {
   }
   
   handleClick(evt) {
-    if ((evt.which === 1) && !this.props.isMouseOverModule) {
+    /*if ((evt.which === 1) && !this.props.isMouseOverModule) {
       store.dispatch(actions.updateIconVisibity('ALL'));
-    }
+    }*/
   }
 
   handleMouseUp(evt) {
