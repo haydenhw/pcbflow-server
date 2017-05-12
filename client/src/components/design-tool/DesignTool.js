@@ -261,6 +261,11 @@ let DesignTool = class extends Component {
   updateState(url) {
     this.setState({ image: url });
   }
+  
+  showAllModuleIcons() {
+    store.dispatch(actions.updateIconVisibity('ALL'));
+  }
+  
 
   toggleDocumentationCard() {
     const { shouldRenderDocumentation, wasDocumentationOpen } = this.state;
@@ -301,6 +306,8 @@ let DesignTool = class extends Component {
       currentProjectPrice,
       timeLastSaved,
       draggingModuleData,
+      showAllModuleIcons,
+      iconVisibityData
     } = this.props;
     const {
       x,
@@ -331,7 +338,13 @@ let DesignTool = class extends Component {
       />
     );
 
-    let sideBar = (<SideBar toggleDraggingToBoard={this.toggleDraggingToBoard} />);
+    let sideBar = (
+      <SideBar 
+        toggleDraggingToBoard={this.toggleDraggingToBoard} 
+        showAll={this.showAllModuleIcons}
+        iconVisibityData={iconVisibityData}    
+      />
+  );
     sideBar = this.state.isDraggingToBoard
       ? ''
       : sideBar;
@@ -404,6 +417,7 @@ const mapStateToProps = state => ({
   boardSpecs: state.boardSpecs,
   selectedModuleProps: state.selectedModule,
   anchorPositions: state.anchorPositions,
+  iconVisibityData: state.iconVisibity
 });
 
 DesignTool = withRouter(DesignTool);

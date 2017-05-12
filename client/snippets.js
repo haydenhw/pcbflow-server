@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+import React from 'react';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 
@@ -9,3 +11,7 @@ LandingPageCard.propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
 };
+
+export default function() {
+  
+}

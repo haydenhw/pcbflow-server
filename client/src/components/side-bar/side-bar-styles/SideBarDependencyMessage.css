@@ -1,0 +1,23 @@
+.dependency-message {
+   font-style: italic;
+   font-size: 15px;
+}
+
+.dependency-message p, h2 {
+  text-align: center;
+}
+
+.dependency-message h2 {
+  line-height: 1px;
+  font-weight: normal;
+  font-size: 1.3em;
+}
+
+.show-all{
+  text-decoration: underline;
+  color: grey;
+  font-size: .8em;
+}
+.show-all:hover {
+  cursor: pointer;
+}

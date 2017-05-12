@@ -14,12 +14,6 @@ export const iconVisibity = (state = defaultIconsVibility, action) => {
     };
     
     case actions.UPDATE_CURRENT_DEPENDENCIES:
-    console.log(action)
-    console.log({
-      ...state,
-      dependencies: action.dependencyData.dependencies,
-      moduleName: action.dependencyData.name
-    })
     return {
       ...state,
       dependencies: action.dependencyData.dependencies,
