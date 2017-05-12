@@ -67,11 +67,9 @@ export default class ModulesItem extends Component {
     }
   }
   
-  
-  
-  showAllModuleIcons() {
+/*  showAllModuleIcons() {
     store.dispatch(actions.updateIconVisibity('ALL'));
-  }
+  }*/
   
   areDependenciesMet() {
     const { dependencies, metDependencies } = this.props;
