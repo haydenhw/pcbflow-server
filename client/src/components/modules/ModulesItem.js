@@ -68,8 +68,13 @@ export default class ModulesItem extends Component {
   }
   
   showDependencies() {
+    const dependencyData = {
+      dependencies: this.props.dependencies,
+      name: 'test name'
+    }
+    
     store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
-    store.dispatch(actions.updateCurrentDependencies(this.props.dependencies));
+    store.dispatch(actions.updateCurrentDependencies(dependencyData));
   }
   
   showAllModuleIcons() {

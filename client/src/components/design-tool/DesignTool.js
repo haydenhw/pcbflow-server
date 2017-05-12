@@ -230,7 +230,6 @@ let DesignTool = class extends Component {
   }
   
   handleClick(evt) {
-    console.log('clicked')
     if ((evt.which === 1) && !this.props.isMouseOverModule) {
       store.dispatch(actions.updateIconVisibity('ALL'));
     }

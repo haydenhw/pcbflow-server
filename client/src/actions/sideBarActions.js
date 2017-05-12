@@ -5,7 +5,7 @@ export const updateIconVisibity = mode => ({
 });
 
 export const UPDATE_CURRENT_DEPENDENCIES = 'UPDATE_CURRENT_DEPENDENCIES';
-export const updateCurrentDependencies = dependencies => ({
+export const updateCurrentDependencies = dependencyData => ({
   type: 'UPDATE_CURRENT_DEPENDENCIES',
-  dependencies,
+  dependencyData,
 });
