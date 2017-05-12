@@ -25,6 +25,10 @@ function SideBarIconList(props) {
   const { moduleBank, onBoardModules, iconVisibityMode, selectedModuleDependencies } = props;
   const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
   
+  if(visibleIcons.length === moduleBank.length) {
+    store.dispatch(actions.updateIconVisibity('ALL'));
+  }
+  
   const iconList = visibleIcons.map((module, index) => (
     <SideBarIconFrame
       key={index}

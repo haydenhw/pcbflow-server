@@ -15,6 +15,10 @@ export function getUnmetDependencies(moduleList, onBoardModules, selectedModuleD
     moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
   );
   
+  if (unmetDependencies.length === 0) {
+    return moduleList;
+  }
+  
   return unmetDependencies;
 }
 
