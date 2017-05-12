@@ -337,12 +337,13 @@ let DesignTool = class extends Component {
         id={'100'}
       />
     );
-
+    
     let sideBar = (
       <SideBar 
         toggleDraggingToBoard={this.toggleDraggingToBoard} 
         showAll={this.showAllModuleIcons}
-        iconVisibityData={iconVisibityData}    
+        iconVisibityData={iconVisibityData}
+        onBoardModulesLength={this.props.currentProjectModules.length}    
       />
   );
     sideBar = this.state.isDraggingToBoard
@@ -410,7 +411,7 @@ const mapStateToProps = state => ({
   currentProjectId: state.currentProjectInfo.id,
   currentProjectPrice: state.currentProjectInfo.price,
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
-  currentProjectModules: state.currentProjectModules,
+  currentProjectModules: state.currentProjectModules.present,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   draggingModuleData: state.draggingModule,
   selectedModuleIndex: state.selectedModule.index,

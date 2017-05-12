@@ -34,6 +34,7 @@ export default function SideBar(props) {
         <SideBarIconList
           toggleDraggingToBoard={props.toggleDraggingToBoard}
           toggleIsClicked={props.toggleIsClicked}
+          onBoardModulesLength={props.onBoardModulesLength}
         />
       </div>
       <DimensionForm />
