@@ -41,7 +41,28 @@ export const selectedModule = (state = {}, action) => {
         y,
       };
       break;
-
+    case actions.ROTATE_SELECTED_MODULE:
+      const {
+        rotation,
+        boundToSideIndex,
+        parentGroupX,
+        parentGroupY,
+        innerGroupX,
+        innerGroupY,
+        width,
+        height,
+        index,
+      } = action.rotationData;
+      
+      return {
+        ...state,
+        boundToSideIndex,
+        innerGroupX,
+        innerGroupY,
+        rotation,
+        x: parentGroupX,
+        y: parentGroupY,
+      };
     default:
       return state;
   }
@@ -127,7 +148,7 @@ export const currentProjectModules = (state = [], action) => {
           height,
           index,
         } = action.rotationData;
-
+        
         return state.map((module, i) => {
           const updatedModuleProps = {
             ...module,

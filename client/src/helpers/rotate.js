@@ -4,8 +4,9 @@ import store from 'reduxFiles/store';
 import rotateAboutCenter from 'helpers/rotateAboutCenter';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 
+
+
 export default function rotate(selectedModuleProps, anchorPositions, boardSpecs) {
-  console.log('rotating')
   const {
     x,
     y,
