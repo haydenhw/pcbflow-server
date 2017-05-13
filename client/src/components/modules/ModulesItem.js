@@ -67,10 +67,6 @@ export default class ModulesItem extends Component {
     }
   }
   
-/*  showAllModuleIcons() {
-    store.dispatch(actions.updateIconVisibity('ALL'));
-  }*/
-  
   areDependenciesMet() {
     const { dependencies, metDependencies } = this.props;
     
@@ -83,7 +79,7 @@ export default class ModulesItem extends Component {
         dependencies: this.props.dependencies,
         name: this.props.text
       }
-      
+    
       store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
       store.dispatch(actions.updateCurrentDependencies(dependencyData));
     }
@@ -100,7 +96,7 @@ export default class ModulesItem extends Component {
   componentDidMount() {
     this.setImage();
     this.setDefaultStroke();
-    setTimeout(this.callWithTimeout.bind(this), 1);
+    setTimeout(this.callWithTimeout.bind(this), 5);
   }
 
   componentDidUpdate(prevProps, prevState) {
