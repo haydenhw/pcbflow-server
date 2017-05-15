@@ -74,12 +74,13 @@ export default class ModulesItem extends Component {
   }
   
   showDependencies() {
+    console.log(this.areDependenciesMet())
     if (!this.areDependenciesMet()) {
       const dependencyData = {
         dependencies: this.props.dependencies,
         name: this.props.text
       }
-    
+      console.log('dependency')
       store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
       store.dispatch(actions.updateCurrentDependencies(dependencyData));
     }
@@ -89,6 +90,7 @@ export default class ModulesItem extends Component {
       this.highlightRuleBreakingModules();
       
       if (!this.areDependenciesMet() && this.props.iconVisibityMode === "ALL") {
+        console.log('holalalala')
         this.showDependencies();
       }
   }
@@ -104,7 +106,8 @@ export default class ModulesItem extends Component {
       this.highlightRuleBreakingModules();
     }
 
-    if (this.props.shouldCheckCollission === true) {
+    if (this.props.shouldCheckCollission
+    ) {
       this.highlightRuleBreakingModules();
       this.props.toggleShouldCheckCollission();
     }
@@ -184,6 +187,7 @@ export default class ModulesItem extends Component {
   
   handleClick(evt) {
     if (evt.evt.which === 1) {
+      console.log('click call')
       this.showDependencies();
     }
   }
