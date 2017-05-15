@@ -202,18 +202,22 @@ let DesignTool = class extends Component {
       store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
     }
   }
+  
+  updateClientPosition(evt) {
+    const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
+    const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
+    const x = Number(evt.clientX) - stageOffsetX;
+    const y = Number(evt.clientY) - stageOffsetY;
+
+    this.setState({
+      x,
+      y,
+    });
+  }
 
   handleMouseMove(evt) {
     if (this.state.isDraggingToBoard) {
-      const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
-      const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
-      const x = Number(evt.clientX) - stageOffsetX;
-      const y = Number(evt.clientY) - stageOffsetY;
-
-      this.setState({
-        x,
-        y,
-      });
+      this.updateClientPosition(evt);
     }
   }
 
@@ -343,7 +347,8 @@ let DesignTool = class extends Component {
         toggleDraggingToBoard={this.toggleDraggingToBoard} 
         showAll={this.showAllModuleIcons}
         iconVisibityData={iconVisibityData}
-        onBoardModulesLength={this.props.currentProjectModules.length}    
+        onBoardModulesLength={this.props.currentProjectModules.length}
+        updateClientPosition={this.updateClientPosition.bind(this)}    
       />
   );
     sideBar = this.state.isDraggingToBoard

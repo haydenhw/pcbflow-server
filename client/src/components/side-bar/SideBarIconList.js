@@ -45,7 +45,8 @@ let SideBarIconList = class extends Component {
       iconVisibityMode,
       selectedModuleDependencies,
       toggleDraggingToBoard,
-      toggleIsClicked
+      toggleIsClicked,
+      updateClientPosition
     } = this.props;
     
     const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
@@ -60,6 +61,7 @@ let SideBarIconList = class extends Component {
             moduleData={module}
             toggleDraggingToBoard={toggleDraggingToBoard}
             toggleIsClicked={toggleIsClicked}
+            updateClientPosition={updateClientPosition}
           />
         </SideBarIconFrame>
       ));

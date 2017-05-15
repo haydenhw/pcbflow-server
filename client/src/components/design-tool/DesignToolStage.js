@@ -34,7 +34,7 @@ class DesignToolStage extends Component {
   }
 
   render() {
-  
+    console.log('rendering stage')
     const {
       shouldRenderBoard,
       draggingModule,
