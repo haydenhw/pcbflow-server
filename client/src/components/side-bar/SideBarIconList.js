@@ -29,9 +29,8 @@ let SideBarIconList = class extends Component {
       selectedModuleDependencies,
     } = this.props;
     const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
-    // console.log(visibleIcons.length , modulesData.length)
+    
     if (visibleIcons.length === modulesData.length) {
-      console.log('called')
       store.dispatch(actions.updateIconVisibity('ALL'));
     }
   }
