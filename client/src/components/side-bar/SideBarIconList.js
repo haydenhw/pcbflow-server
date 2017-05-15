@@ -21,18 +21,23 @@ const  getVisibleIcons = (visibilityMode, moduleList, onBoardModules, selectedMo
 }
 
 let SideBarIconList = class extends Component {
-  componentWillMount() {
+  
+  displayAllIcons() {
     const { 
       onBoardModules,
       iconVisibityMode,
       selectedModuleDependencies,
     } = this.props;
     const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
-    console.log(visibleIcons.length , modulesData.length)
+    // console.log(visibleIcons.length , modulesData.length)
     if (visibleIcons.length === modulesData.length) {
       console.log('called')
       store.dispatch(actions.updateIconVisibity('ALL'));
     }
+  }
+  
+  componentDidMount() {
+    this.displayAllIcons();
   }
 
   render() {

@@ -70,7 +70,13 @@ export default class ModulesItem extends Component {
   areDependenciesMet() {
     const { dependencies, metDependencies } = this.props;
     
-    return Boolean(dependencies && (dependencies.length === metDependencies.length))
+    if (!dependencies) {
+      console.log('no dependencies');
+      return true;
+    }
+    
+    console.log(dependencies, metDependencies)
+    return Boolean((dependencies.length === metDependencies.length))
   }
   
   showDependencies() {
@@ -98,7 +104,7 @@ export default class ModulesItem extends Component {
   componentDidMount() {
     this.setImage();
     this.setDefaultStroke();
-    setTimeout(this.callWithTimeout.bind(this), 1);
+    setTimeout(this.callWithTimeout.bind(this), 5);
   }
 
   componentDidUpdate(prevProps, prevState) {

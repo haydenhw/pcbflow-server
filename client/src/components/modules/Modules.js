@@ -46,11 +46,14 @@ class Modules extends Component {
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
   
+  updateMetDependencies() {
+    const dependencyDiffArray = getDependencyDiff(this.props.modules);
+    updateMetDependencies(dependencyDiffArray);
+  }
+  
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.modules.length !== this.props.modules.length)) {
-      const dependencyDiffArray = getDependencyDiff(this.props.modules);
-      
-      updateMetDependencies(dependencyDiffArray);
+      this.updateMetDependencies();
       this.updatePrice();
       
       this.setState({
@@ -61,9 +64,9 @@ class Modules extends Component {
   
   componentDidMount() {
     const totalPriceString = this.calculatePrice(this.props.modules);
+    
+    this.updateMetDependencies();
     store.dispatch(actions.updateProjectPrice(totalPriceString));
-    const dependencyDiffArray = getDependencyDiff(this.props.modules);
-    updateMetDependencies(dependencyDiffArray);
   }
   
   toggleShouldCheckCollission() {

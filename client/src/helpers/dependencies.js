@@ -52,6 +52,7 @@ export function getDependencyDiff(moduleArray) {
 export function updateMetDependencies(dependencyDiffArray) {
   
    const dispatchMetDependencies = metDependencies  => {
+     console.log('updating dep')
      store.dispatch(actions.updateMetDependencies(metDependencies));
    };
    
