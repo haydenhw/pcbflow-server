@@ -10,14 +10,20 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "quotes": [2, "single"],
-    "strict": [2, "never"],
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2,
-    "import/extensions": "off"
+     "indent": ["error", 4, {
+            "SwitchCase": 1
+        }],
+        "max-len": "off",
+        "react/jsx-indent": [2, 4],
+        "react/jsx-no-bind": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "react/no-unused-prop-types": ["error", { "customValidators": [], "skipShapeProps": true }],
+        "import/prefer-default-export": "off"
   },
   "plugins": [
     "react"
-  ]
+  ],
+   "settings": {
+        "import/resolver": "webpack"
+    }
 }

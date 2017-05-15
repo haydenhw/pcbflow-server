@@ -136,6 +136,7 @@ let DesignTool = class extends Component {
       if (/* true ||*/ this.props.hasUnsavedChanges) {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }
+      return null;
     });
   }
 
