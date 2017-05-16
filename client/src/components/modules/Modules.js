@@ -127,7 +127,6 @@ class Modules extends Component {
       </Group>
     );
   }
-  
 }
 
 const mapStateToProps = state => ({

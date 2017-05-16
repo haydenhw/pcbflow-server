@@ -91,9 +91,9 @@ export default class ModulesItem extends Component {
   callWithTimeout() {
       this.highlightRuleBreakingModules();
       
-      if (!this.areDependenciesMet() && this.props.iconVisibityMode === "ALL") {
+    /*  if (!this.areDependenciesMet() && this.props.iconVisibityMode === "ALL") {
         this.showDependencies();
-      }
+      }*/
   }
 
   componentDidMount() {

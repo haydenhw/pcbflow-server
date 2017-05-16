@@ -51,14 +51,13 @@ export function getDependencyDiff(moduleArray) {
 
 export function updateMetDependencies(dependencyDiffArray) {
   
-   const dispatchMetDependencies = metDependencies  => {
-     console.log('updating dep')
-     store.dispatch(actions.updateMetDependencies(metDependencies));
+   const dispatchMetDependencies = metDependencyData  => {
+     store.dispatch(actions.updateMetDependencies(metDependencyData));
    };
    
-   function setDelay(metDependencies) {
+   function setDelay(metDependencyData) {
      setTimeout(function(){
-       dispatchMetDependencies(metDependencies);
+       dispatchMetDependencies(metDependencyData);
      }, 1);
    }
    
@@ -70,4 +69,8 @@ export function updateMetDependencies(dependencyDiffArray) {
       index
     });
   });
+}
+
+export function updateCurrentDependency() {
+  
 }
