@@ -46,6 +46,25 @@ class Modules extends Component {
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
   
+
+  
+  updateDisplayedDependencies() {
+    const findUnmetDependencyElement = dependencyDiffArray => (
+      dependencyDiffArray.find(element => element.metDependencies < element.dependencies)
+    );
+    const dependencyDiffArray = getDependencyDiff(this.props.modules);
+    const { index } = this.props.currentDependencyData;
+    
+    if (!index) {
+      const unmetDependencyElement = findUnmetDependencyElement(dependencyDiffArray);
+      
+    }
+    
+    console.log(unmetDependencyElement)
+    console.log(index);
+    console.log(dependencyDiffArray[index]);
+  }
+  
   updateMetDependencies() {
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
     updateMetDependencies(dependencyDiffArray);
@@ -54,6 +73,7 @@ class Modules extends Component {
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.modules.length !== this.props.modules.length)) {
       this.updateMetDependencies();
+      this.updateDisplayedDependencies();
       this.updatePrice();
       
       this.setState({
@@ -135,7 +155,8 @@ const mapStateToProps = state => ({
   selectedModuleProps: state.selectedModule,
   boardSpecs: state.boardSpecs,
   anchorPositions: state.anchorPositions,
-  iconVisibityMode: state.iconVisibity.mode
+  iconVisibityMode: state.iconVisibity.mode,
+  currentDependencyData: state.iconVisibity
 });
 
 export default connect(mapStateToProps)(Modules);
