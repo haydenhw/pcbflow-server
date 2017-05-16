@@ -42,7 +42,7 @@ let DesignTool = class extends Component {
       shouldUpdateThumbnail: false,
       wasDocumentationOpen: false,  //should be true in production
       shouldRenderDocumentation: false, //should be true in production
-      shouldRenderDocumentationButton: true,
+      shouldRenderInfoButton: true,
       shouldHideContextMenu: false,
       image: null,
       step: 0,
@@ -340,7 +340,7 @@ let DesignTool = class extends Component {
     if (!this.props.isMouseOverModule) {
       this.setState({
         shouldRenderDocumentation: false,
-        shouldRenderDocumentationButton: false,
+        shouldRenderInfoButton: false,
       });
     }
   }
@@ -350,7 +350,7 @@ let DesignTool = class extends Component {
     
     this.setState({
       shouldRenderDocumentation: !!wasDocumentationOpen,
-      shouldRenderDocumentationButton: true,
+      shouldRenderInfoButton: true,
     });
   }
 
@@ -401,6 +401,26 @@ let DesignTool = class extends Component {
     
     return null;
   }
+  
+  renderInfoButton() {
+    const { shouldRenderDocumentation } = this.state;
+    const infoButtonIconClass = shouldRenderDocumentation ? 'fa-close' : 'fa-question';
+    
+    const infoButtonIcon = (
+      <FontAwesome
+        className={infoButtonIconClass}
+        name={infoButtonIconClass}
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+      />
+    );
+    
+    return (
+      <DesignToolInfoButton
+        clickHandler={this.toggleDocumentationCard}
+        icon={infoButtonIcon}
+      />
+    );
+  }
 
   render() {
     const {
@@ -414,13 +434,10 @@ let DesignTool = class extends Component {
     } = this.props;
     
     const {
-      x,
-      y,
       shouldUpdateThumbnail,
       shouldRenderDocumentation,
-      shouldRenderDocumentationButton,
-      shouldHideContextMenu,
-      isDraggingToBoard
+      shouldRenderInfoButton,
+      shouldHideContextMenu
     } = this.state;
     
     const joyrideProps = {
@@ -435,33 +452,6 @@ let DesignTool = class extends Component {
       steps: joyride.steps || this.state.steps,
       type: joyride.type || 'continuous'
     };
-    
-    const infoButtonIconClass = shouldRenderDocumentation ? 'fa-close' : 'fa-question';
-    
-    const infoButtonIcon = (
-      <FontAwesome
-        className={infoButtonIconClass}
-        name={infoButtonIconClass}
-        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-      />
-    );
-    
-    const infoButton = (
-      <DesignToolInfoButton
-        clickHandler={this.toggleDocumentationCard}
-        icon={infoButtonIcon}
-      />
-    );
-    
-    const testStyle = {
-      position: "absolute",
-      height: "300px",
-      width: "300px",
-      border: "1px solid black",
-      zIndex: "100",
-      left: "1000px"
-      
-    }
     
     return (
       <div>
@@ -500,7 +490,7 @@ let DesignTool = class extends Component {
           timeLastSaved={timeLastSaved}
         />
         {shouldRenderDocumentation && <DocumentationCard />}
-        {shouldRenderDocumentationButton && infoButton}
+        {shouldRenderInfoButton && this.renderInfoButton()}
       </div>
     );
   }
