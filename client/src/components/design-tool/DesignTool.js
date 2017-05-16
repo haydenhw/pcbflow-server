@@ -23,6 +23,7 @@ import Footer from 'components/footer/Footer';
 import DesignToolStage from './DesignToolStage';
 import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
+import { steps } from './DesignToolTourSteps';
 
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
@@ -32,6 +33,7 @@ let DesignTool = class extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      steps,
       x: 0,
       y: 0,
       isSideBarHidden: false,
@@ -43,35 +45,9 @@ let DesignTool = class extends Component {
       shouldRenderDocumentationButton: true,
       shouldHideContextMenu: false,
       image: null,
-      autoStart: true,
-      running: false,
-      steps: [
-        {
-          title: 'Title only steps — As they say: Make the font bigger!',
-          textAlign: 'center',
-          selector: '.projects .list',
-          position: 'top'
-        },
-        {
-          title: 'Our Mission',
-          text: 'Can be advanced by clicking an element through the overlay hole.',
-          selector: '.mission button',
-          position: 'bottom',
-          allowClicksThruHole: true,
-          style: {
-            beacon: {
-              offsetY: 20
-            },
-            button: {
-              display: 'none',
-            }
-          }
-        }
-      ],
       step: 0,
     };
     
-    this.handleClickStart = this.handleClickStart.bind(this);
     this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
     this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
     
@@ -180,6 +156,13 @@ let DesignTool = class extends Component {
     });
   }
   
+  startTour() {
+    this.setState({
+      running: true,
+      step: 0,
+    });
+  }
+  
   componentDidMount() {
     if (!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;
@@ -190,39 +173,7 @@ let DesignTool = class extends Component {
     
     this.setRouteHook();
     this.addHanlders();
-    
-    this.joyride.addTooltip({
-      title: 'The classic joyride',
-      text: 'Let\'s go on a magical tour! Just click the big orange button.',
-      selector: '.hero__tooltip',
-      position: 'bottom',
-      event: 'click',
-      style: {
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        borderRadius: 0,
-        color: '#fff',
-        mainColor: '#ff67b4',
-        textAlign: 'center',
-        width: '29rem'
-      }
-    });
-    
-    this.joyride.addTooltip({
-      title: 'A fixed tooltip',
-      text: 'For fixed elements, you know?',
-      selector: '.demo__footer img',
-      position: 'top',
-      isFixed: true,
-      event: 'hover',
-      style: {
-        backgroundColor: 'rgba(255, 255, 255, 1)',
-        borderRadius: 0,
-        color: '#333',
-        textAlign: 'center',
-        width: '29rem'
-      }
-    });
-    
+    //this.startTour();
   }
   
   componentWillUnmount() {
@@ -301,12 +252,6 @@ let DesignTool = class extends Component {
     }
   }
   
-  toggleShouldHideContextMenu(boolean) {
-    this.setState({
-      shouldHideContextMenu: boolean,
-    });
-  }
-  
   handleClick(evt) {
     /*if ((evt.which === 1) && !this.props.isMouseOverModule) {
     store.dispatch(actions.updateIconVisibity('ALL'));
@@ -325,9 +270,47 @@ let DesignTool = class extends Component {
     this.dropDraggingModule();
     store.dispatch(actions.toggleIsMouseDown(false));
   }
+  
+  handleNextButtonClick() {
+    if (this.state.step === 1) {
+      this.joyride.next();
+    }
+  }
 
+  handleJoyrideCallback(result) {
+    const { joyride } = this.props;
+    
+    if (result.type === 'step:before') {
+      // Keep internal state in sync with joyride
+      this.setState({ step: result.index });
+    }
+    
+    if (result.type === 'finished' && this.state.running) {
+      // Need to set our running state to false, so we can restart if we click start again.
+      this.setState({ running: false });
+    }
+    
+    if (result.type === 'error:target_not_found') {
+      this.setState({
+        step: result.action === 'back' ? result.index - 1 : result.index + 1,
+        autoStart: result.action !== 'close' && result.action !== 'esc',
+      });
+    }
+    
+    if (typeof joyride.callback === 'function') {
+      joyride.callback();
+    }
+  }
+
+  
   toggleDraggingToBoard() {
     this.setState({ isDraggingToBoard: true });
+  }
+  
+  toggleShouldHideContextMenu(boolean) {
+    this.setState({
+      shouldHideContextMenu: boolean,
+    });
   }
 
   toggleShouldUpadateThumbnail() {
@@ -376,86 +359,15 @@ let DesignTool = class extends Component {
     const rotationData = rotate(selectedModuleProps, anchorPositions, boardSpecs);
     store.dispatch(actions.rotateSelectedModule(rotationData));
   }
-
-  handleClickStart(e) {
-    e.preventDefault();
+  
+  getDraggingModule() {
+    const { draggingModuleData } = this.props;
+    const { x , y } = this.state;
     
-    this.setState({
-      running: true,
-      step: 0,
-    });
-  }
-
-  handleNextButtonClick() {
-    if (this.state.step === 1) {
-      this.joyride.next();
-    }
-  }
-
-  handleJoyrideCallback(result) {
-    const { joyride } = this.props;
-    
-    if (result.type === 'step:before') {
-      // Keep internal state in sync with joyride
-      this.setState({ step: result.index });
-    }
-    
-    if (result.type === 'finished' && this.state.running) {
-      // Need to set our running state to false, so we can restart if we click start again.
-      this.setState({ running: false });
-    }
-    
-    if (result.type === 'error:target_not_found') {
-      this.setState({
-        step: result.action === 'back' ? result.index - 1 : result.index + 1,
-        autoStart: result.action !== 'close' && result.action !== 'esc',
-      });
-    }
-    
-    if (typeof joyride.callback === 'function') {
-      joyride.callback();
-    }
-  }
-
-  render() {
-    const { joyride } = this.props;
-    const joyrideProps = {
-      autoStart: joyride.autoStart || this.state.autoStart,
-      callback: this.handleJoyrideCallback,
-      debug: false,
-      disableOverlay: this.state.step === 1,
-      resizeDebounce: joyride.resizeDebounce,
-      run: joyride.run || this.state.running,
-      scrollToFirstStep: joyride.scrollToFirstStep || true,
-      stepIndex: joyride.stepIndex || this.state.step,
-      steps: joyride.steps || this.state.steps,
-      type: joyride.type || 'continuous'
-    };
-    
-    const {
-      currentProjectName,
-      currentProjectId,
-      currentProjectPrice,
-      timeLastSaved,
-      draggingModuleData,
-      showAllModuleIcons,
-      iconVisibityData
-    } = this.props;
-    const {
-      x,
-      y,
-      shouldUpdateThumbnail,
-      shouldRenderDocumentation,
-      shouldRenderDocumentationButton,
-      shouldHideContextMenu,
-      isDraggingToBoard
-    } = this.state;
-    const { height, width } = draggingModuleData;
-    
-    const draggingModule = (
+    return (
       <Module
-        x={x - (width / 2)}
-        y={y - (height / 2)}
+        x={x - (draggingModuleData.width / 2)}
+        y={y - (draggingModuleData.height / 2)}
         width={draggingModuleData.width}
         height={draggingModuleData.height}
         stroke={draggingModuleData.stroke}
@@ -469,19 +381,60 @@ let DesignTool = class extends Component {
         id={'100'}
       />
     );
+  }
+  
+  renderSideBar() {
+    const {iconVisibityData, currentProjectModules } = this.props
+    const { isDraggingToBoard } = this.state;
     
-    let sideBar = (
-      <SideBar 
-        toggleDraggingToBoard={this.toggleDraggingToBoard} 
-        showAll={this.showAllModuleIcons}
-        iconVisibityData={iconVisibityData}
-        onBoardModulesLength={this.props.currentProjectModules.length}
-        updateClientPosition={this.updateClientPosition.bind(this)}    
-      />
-    );
-    sideBar = this.state.isDraggingToBoard
-    ? ''
-    : sideBar;
+    if (!isDraggingToBoard) {
+      return (
+        <SideBar 
+          toggleDraggingToBoard={this.toggleDraggingToBoard} 
+          showAll={this.showAllModuleIcons}
+          updateClientPosition={this.updateClientPosition.bind(this)}    
+          iconVisibityData={iconVisibityData}
+          onBoardModulesLength={currentProjectModules.length}
+        />
+      );
+    }
+    
+    return null;
+  }
+
+  render() {
+    const {
+      currentProjectName,
+      currentProjectId,
+      currentProjectPrice,
+      timeLastSaved,
+      showAllModuleIcons,
+      iconVisibityData,
+      joyride
+    } = this.props;
+    
+    const {
+      x,
+      y,
+      shouldUpdateThumbnail,
+      shouldRenderDocumentation,
+      shouldRenderDocumentationButton,
+      shouldHideContextMenu,
+      isDraggingToBoard
+    } = this.state;
+    
+    const joyrideProps = {
+      autoStart: joyride.autoStart || this.state.autoStart,
+      callback: this.handleJoyrideCallback,
+      debug: false,
+      disableOverlay: this.state.step === 1,
+      resizeDebounce: joyride.resizeDebounce,
+      run: joyride.run || this.state.running,
+      scrollToFirstStep: joyride.scrollToFirstStep || true,
+      stepIndex: joyride.stepIndex || this.state.step,
+      steps: joyride.steps || this.state.steps,
+      type: joyride.type || 'continuous'
+    };
     
     const infoButtonIconClass = shouldRenderDocumentation ? 'fa-close' : 'fa-question';
     
@@ -500,11 +453,22 @@ let DesignTool = class extends Component {
       />
     );
     
+    const testStyle = {
+      position: "absolute",
+      height: "300px",
+      width: "300px",
+      border: "1px solid black",
+      zIndex: "100",
+      left: "1000px"
+      
+    }
+    
     return (
       <div>
         <Joyride
         {...joyrideProps}
-        ref={c => (this.joyride = c)} />
+        ref={node => this.joyride = node} 
+      />
         
         <TopNavbar
           projectName={currentProjectName}
@@ -514,45 +478,9 @@ let DesignTool = class extends Component {
           updateLastSaved={DesignTool.updateLastSaved}
           recordSavedChanges={DesignTool.recordSavedChanges}
         />
-        <div className="hero">
-          <div className="container">
-            <div className="hero__content">
-              <h1>
-                <span>Create walkthroughs and guided tours for your ReactJS apps.</span>
-                <a href="#tooltip" className="hero__tooltip">?</a>
-              </h1>
-              <a href="#start" className="hero__start" onClick={this.handleClickStart}>Let's Go!</a>
-            </div>
-          </div>
-        </div>
-        <div className="demo__section projects">
-          <div className="container">
-            <h2><span>Projects</span></h2>
-            <div className="list">
-              <div>
-                <img src="http://placehold.it/800x600/ff0044/ffffff?txtsize=50&text=ASBESTOS" alt="ASBESTOS" />
-              </div>
-              <div>
-                <img src="http://placehold.it/800x600/00ff44/ffffff?txtsize=50&text=GROW" alt="GROW" />
-              </div>
-              <div>
-                <img src="http://placehold.it/800x600/333/ffffff?txtsize=50&text=∂Vo∑" alt="∂Vo∑" />
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="demo__section mission">
-          <div className="container">
-            <h2><span>Mission</span></h2>
-            <button className="btn btn-secondary mission__button" onClick={this.handleNextButtonClick}>Advance
-            </button>
-          </div>
-        </div>
-        
         <div onMouseMove={this.handleMouseMove.bind(this)}>
           <div ref={node => this.stageContainer = node}>
-            {sideBar}
+            {this.renderSideBar()}
             <DesignToolStage
               updateState={this.updateState.bind(this)}
               rotate={this.rotate.bind(this)}
@@ -560,7 +488,7 @@ let DesignTool = class extends Component {
               isDraggingToBoard={isDraggingToBoard}
               shouldRenderBoard={currentProjectName}
               shouldUpdateThumbnail={shouldUpdateThumbnail}
-              draggingModule={draggingModule}
+              draggingModule={this.getDraggingModule()}
               shouldHideContextMenu={shouldHideContextMenu}
               hideDocumentation={this.hideDocumentation.bind(this)}
               unhideDocumentation={this.unhideDocumentation.bind(this)}
