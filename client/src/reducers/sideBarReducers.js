@@ -14,12 +14,12 @@ export const iconVisibity = (state = defaultIconsVibility, action) => {
     };
     
     case actions.UPDATE_CURRENT_DEPENDENCIES:
-    const { dependencies, name, index } = action.dependencyData;
+    const { dependencies, text, index } = action.dependencyData;
     return {
       ...state,
-      dependencies: dependencies,
-      moduleName: name,
-      index: index
+      dependencies,
+      index,
+      moduleName: text,
     };
     default:
       return state;

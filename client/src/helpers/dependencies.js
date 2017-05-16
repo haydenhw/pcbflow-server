@@ -24,10 +24,11 @@ export function getUnmetDependencies(moduleList, onBoardModules, selectedModuleD
 
 export function getDependencyDiff(moduleArray) {
   const filterdArray = moduleArray.map((module, index) => {
-    const { id, dependencies, metDependencies } = module;
+    const { id, dependencies, text } = module;
     return {
       index,
       id,
+      text,
       dependencies,
       metDependencies: []
     };

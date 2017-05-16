@@ -47,22 +47,54 @@ class Modules extends Component {
   }
   
 
+
   
   updateDisplayedDependencies() {
+    
+    function areDependenciesMet(dependencies, metDependencies) {
+      if (!dependencies) {
+        return true;
+      }
+      
+      return Boolean((dependencies.length === metDependencies.length))
+    }
+    
     const findUnmetDependencyElement = dependencyDiffArray => (
       dependencyDiffArray.find(element => element.metDependencies < element.dependencies)
     );
+    
+    
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
     const { index } = this.props.currentDependencyData;
-    
-    if (!index) {
-      const unmetDependencyElement = findUnmetDependencyElement(dependencyDiffArray);
+    console.log(index)
+    if (isNaN(index)) {
+      const dependencyData = findUnmetDependencyElement(dependencyDiffArray);
       
+      if (dependencyData) {
+        setTimeout(() => {
+          store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
+          store.dispatch(actions.updateCurrentDependencies(dependencyData));
+        }, 5);
+      }
+    } else {
+      const displayedModule = dependencyDiffArray[index];
+      console.log(displayedModule)
+      const { metDependencies, dependencies } = displayedModule;
+      const areDependenciesMet = areDependenciesMet(metDependencies, dependencies);
+      console.log(hasUnmetDependencies)
+      
+      if (!areDependenciesMet) {
+        setTimeout(() => {
+          console.log('dispatching')
+          store.dispatch(actions.updateIconVisibity('ALL'));
+        }, 5);
+      }
     }
     
-    console.log(unmetDependencyElement)
-    console.log(index);
-    console.log(dependencyDiffArray[index]);
+    
+    
+    // console.log(index);
+    // console.log(dependencyDiffArray[index]);
   }
   
   updateMetDependencies() {
