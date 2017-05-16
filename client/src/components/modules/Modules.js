@@ -80,13 +80,19 @@ class Modules extends Component {
       const displayedModule = dependencyDiffArray[index];
       console.log(displayedModule)
       const { metDependencies, dependencies } = displayedModule;
-      const areDependenciesMet = areDependenciesMet(metDependencies, dependencies);
+      const hasUnmetDependencies = !areDependenciesMet(metDependencies, dependencies);
       console.log(hasUnmetDependencies)
       
-      if (!areDependenciesMet) {
+      if (!hasUnmetDependencies) {
+        const dependencyData = {
+          index: null,
+          dependencies: null,
+          text: null
+        }
         setTimeout(() => {
           console.log('dispatching')
           store.dispatch(actions.updateIconVisibity('ALL'));
+          store.dispatch(actions.updateCurrentDependencies(dependencyData));
         }, 5);
       }
     }
