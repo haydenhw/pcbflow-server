@@ -46,9 +46,6 @@ class Modules extends Component {
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
   
-
-
-  
   updateDisplayedDependencies() {
     
     function areDependenciesMet(dependencies, metDependencies) {
@@ -66,11 +63,11 @@ class Modules extends Component {
     
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
     const { index } = this.props.currentDependencyData;
-    console.log(index)
+    
     if (isNaN(index)) {
       const dependencyData = findUnmetDependencyElement(dependencyDiffArray);
       
-      if (dependencyData) {
+      if (dependencyData !== -1) {
         setTimeout(() => {
           store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
           store.dispatch(actions.updateCurrentDependencies(dependencyData));
@@ -78,22 +75,31 @@ class Modules extends Component {
       }
     } else {
       const displayedModule = dependencyDiffArray[index];
-      console.log(displayedModule)
       const { metDependencies, dependencies } = displayedModule;
       const hasUnmetDependencies = !areDependenciesMet(metDependencies, dependencies);
-      console.log(hasUnmetDependencies)
       
       if (!hasUnmetDependencies) {
-        const dependencyData = {
-          index: null,
-          dependencies: null,
-          text: null
+        
+        const nextDepencencyData = findUnmetDependencyElement(dependencyDiffArray);
+        
+        if (nextDepencencyData !== -1) {
+          setTimeout(() => {
+            store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
+            store.dispatch(actions.updateCurrentDependencies(nextDepencencyData));
+          }, 5);
+        } else {
+          const dependencyData = {
+            index: null,
+            dependencies: null,
+            text: null
+          }
+          
+          setTimeout(() => {
+            console.log('dispatching')
+            store.dispatch(actions.updateIconVisibity('ALL'));
+            store.dispatch(actions.updateCurrentDependencies(dependencyData));
+          }, 5);
         }
-        setTimeout(() => {
-          console.log('dispatching')
-          store.dispatch(actions.updateIconVisibity('ALL'));
-          store.dispatch(actions.updateCurrentDependencies(dependencyData));
-        }, 5);
       }
     }
     

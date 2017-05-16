@@ -8,6 +8,7 @@ const defaultIconsVibility = {
 export const iconVisibity = (state = defaultIconsVibility, action) => {
   switch (action.type) {
     case actions.UPDATE_ICON_VISBILITY:
+    console.log(action)
     return {
       ...state,
       mode: action.mode

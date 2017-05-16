@@ -434,6 +434,7 @@ let DesignTool = class extends Component {
     } = this.props;
     
     const {
+      isDraggingToBoard,
       shouldUpdateThumbnail,
       shouldRenderDocumentation,
       shouldRenderInfoButton,
