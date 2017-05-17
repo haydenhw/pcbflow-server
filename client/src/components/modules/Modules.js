@@ -61,9 +61,24 @@ class Modules extends Component {
       ))
     );
     
+    function shouldStateUpdate(currentDependencyData) {
+      
+    }
     
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
-    const { index } = this.props.currentDependencyData;
+    const { iconVisibityMode, currentDependencyData } = this.props;
+    const { index } = currentDependencyData;
+    
+    const areDependenciesDiplayed = iconVisibityMode === 'DEPENDENCY';
+    
+    /*if (areDependenciesDiplayed) {
+          
+        shouldStateUpdate(currentDependencyData) ? dispatchDependencyUpdates() : null; 
+        
+        
+    }*/
+    
+    
     console.log(dependencyDiffArray)
     if (isNaN(index)) {
       const dependencyData = findUnmetDependencyElement(dependencyDiffArray);
