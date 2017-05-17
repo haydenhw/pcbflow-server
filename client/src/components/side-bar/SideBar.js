@@ -31,7 +31,7 @@ export default function SideBar(props) {
     }
     return null;
   }
-  console.log(renderDependencyMessage())
+  
   return (
     <div className="sideBar" style={style}>
       {renderDependencyMessage()}

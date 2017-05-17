@@ -67,6 +67,7 @@ class Modules extends Component {
     }
     
     function updateStateDependencyData(dependencyDiffArray) {
+      console.log('updateStateDependencyData')
       const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
       const nullData = {
         dependencies: [],
@@ -87,16 +88,17 @@ class Modules extends Component {
     
     const areDependenciesDiplayed = iconVisibityMode === 'DEPENDENCY';
       
-      if (!displayedParentData) {
+      updateStateDependencyData(dependencyDiffArray)
+      /*if (!displayedParentData) {
         updateStateDependencyData(dependencyDiffArray);
       } else if (areDependenciesDiplayed) {
-      
+
       const { dependencies, metDependencies } = displayedParentData;
       
       areDependenciesMet(dependencies, metDependencies) ? updateStateDependencyData(dependencyDiffArray) : null;
     } else {
       updateStateDependencyData(dependencyDiffArray);
-    }
+    }*/
     
     
 
@@ -124,6 +126,7 @@ class Modules extends Component {
     const totalPriceString = this.calculatePrice(this.props.modules);
     
     this.updateMetDependencies();
+    this.updateDisplayedDependencies();
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
   

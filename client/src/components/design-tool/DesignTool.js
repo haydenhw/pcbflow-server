@@ -385,9 +385,9 @@ let DesignTool = class extends Component {
   }
   
   renderSideBar() {
-    const {iconVisibityData, currentProjectModules, shouldRenderSideBar } = this.props;
+    const { iconVisibityData, currentProjectModules, shouldRenderSideBar } = this.props;
     const { isDraggingToBoard } = this.state;
-    console.log(shouldRenderSideBar)
+    
     if (shouldRenderSideBar) {
       return (
         <SideBar 
