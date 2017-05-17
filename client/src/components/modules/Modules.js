@@ -46,30 +46,46 @@ class Modules extends Component {
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
   
-  updateDisplayedDependencies() {
-    function dispatchDependencyData({visibilityMode, dependencyData}) {
-      setTimeout(() => {
-        store.dispatch(actions.updateIconVisibity(visibilityMode));
-        store.dispatch(actions.updateCurrentDependencies(dependencyData));
-        store.dispatch(actions.toggleShouldRenderSideBar(true));
-      }, 5);
-    }
-    
-    const { modules } = this.props;
-    
-    const newDepenencyData = getNewDependencyData(modules);
-    dispatchDependencyData(newDepenencyData);
-    
-  }
-  
   updateMetDependencies() {
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
-    updateMetDependencies(dependencyDiffArray);
+    const dispatchMetDependencies = metDependencyData  => {
+      store.dispatch(actions.updateMetDependencies(metDependencyData));
+    };
+    
+    function setDelay(metDependencyData) {
+      setTimeout(function(){
+        dispatchMetDependencies(metDependencyData);
+      }, 1);
+    }
+     
+    dependencyDiffArray.forEach(element => {
+      const { metDependencies, index } = element;
+      
+      setDelay({
+        metDependencies,
+        index
+      });
+    });
+  }
+  
+  dispatchDependencyData({visibilityMode, dependencyData}) {
+    setTimeout(() => {
+      store.dispatch(actions.updateIconVisibity(visibilityMode));
+      store.dispatch(actions.updateCurrentDependencies(dependencyData));
+      store.dispatch(actions.toggleShouldRenderSideBar(true));
+    }, 5);
+  }
+  
+  updateDisplayedDependencies() {
+    const { modules } = this.props;
+    const newDepenencyData = getNewDependencyData(modules);
+    
+    this.updateMetDependencies();
+    this.dispatchDependencyData(newDepenencyData);
   }
   
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.modules.length !== this.props.modules.length)) {
-      this.updateMetDependencies();
       this.updateDisplayedDependencies();
       this.updatePrice();
       
@@ -82,7 +98,6 @@ class Modules extends Component {
   componentDidMount() {
     const totalPriceString = this.calculatePrice(this.props.modules);
     
-    this.updateMetDependencies();
     this.updateDisplayedDependencies();
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
