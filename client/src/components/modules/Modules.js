@@ -70,7 +70,9 @@ class Modules extends Component {
         dependencies: [],
         index: null,
         text: null,
+        moduleName: null
       }
+      
       nextParentToDisplay
         ? dispatchDependencyData('DEPENDENCY', nextParentToDisplay)
         : dispatchDependencyData('ALL', nullData)

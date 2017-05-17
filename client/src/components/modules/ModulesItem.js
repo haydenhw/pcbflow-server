@@ -79,10 +79,11 @@ export default class ModulesItem extends Component {
   
   showDependencies() {
     if (!this.areDependenciesMet()) {
-      const dependencyData = {
-        dependencies: this.props.dependencies,
-        name: this.props.text,
-        index: this.props.index
+      const { dependencies, text, index } = this.props;
+      const dependencyData = { 
+        dependencies,
+        text,
+        index,
       }
       
       store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
