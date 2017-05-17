@@ -62,6 +62,7 @@ class Modules extends Component {
         console.log('updating data')
         store.dispatch(actions.updateIconVisibity(visibilityMode));
         store.dispatch(actions.updateCurrentDependencies(dependencyData));
+        store.dispatch(actions.toggleShouldRenderSideBar(true));
       }, 5);
     }
     

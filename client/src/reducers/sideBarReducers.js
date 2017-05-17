@@ -28,12 +28,10 @@ export const iconVisibity = (state = defaultIconsVibility, action) => {
   };
 }
 
-export const shouldRenderSideBar = (state = { shouldRender: true }, action) => {
+export const shouldRenderSideBar = (state = true, action) => {
   switch (action.type) {
     case actions.TOGGLE_SHOULD_RENDER_SIDEBAR:
-    return {
-      shouldRender: !state.shouldRender
-    };
+      return action.bool;
     default:
       return state;
   };

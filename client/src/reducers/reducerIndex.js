@@ -8,18 +8,19 @@ import { projectList, currentProjectInfo } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { hasUnsavedChanges } from './savedStateReducers';
-import { iconVisibity } from './sideBarReducers';
+import { iconVisibity, shouldRenderSideBar } from './sideBarReducers';
 
 export default combineReducers({
+  currentProjectModules: undoable(currentProjectModules, skipIfImageNodeNull),
   projectList,
   currentProjectInfo,
-  currentProjectModules: undoable(currentProjectModules, skipIfImageNodeNull),
   moduleBank,
   draggingModule,
   selectedModule,
   boardSpecs,
   anchorPositions,
   iconVisibity,
+  shouldRenderSideBar,
   mouseEvents,
   hasUnsavedChanges,
 });

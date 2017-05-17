@@ -303,9 +303,9 @@ let DesignTool = class extends Component {
     }
   }
 
-  
   toggleDraggingToBoard() {
     this.setState({ isDraggingToBoard: true });
+    store.dispatch(actions.toggleShouldRenderSideBar(false));
   }
   
   toggleShouldHideContextMenu(boolean) {
@@ -385,10 +385,10 @@ let DesignTool = class extends Component {
   }
   
   renderSideBar() {
-    const {iconVisibityData, currentProjectModules } = this.props
+    const {iconVisibityData, currentProjectModules, shouldRenderSideBar } = this.props;
     const { isDraggingToBoard } = this.state;
-    
-    if (!isDraggingToBoard) {
+    console.log(shouldRenderSideBar)
+    if (shouldRenderSideBar) {
       return (
         <SideBar 
           toggleDraggingToBoard={this.toggleDraggingToBoard} 
@@ -511,7 +511,8 @@ const mapStateToProps = state => ({
   boardSpecs: state.boardSpecs,
   selectedModuleProps: state.selectedModule,
   anchorPositions: state.anchorPositions,
-  iconVisibityData: state.iconVisibity
+  iconVisibityData: state.iconVisibity,
+  shouldRenderSideBar: state.shouldRenderSideBar
 });
 
 DesignTool = withRouter(DesignTool);
