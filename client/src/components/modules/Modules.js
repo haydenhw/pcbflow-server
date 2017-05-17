@@ -57,36 +57,47 @@ class Modules extends Component {
       ))
     );
     
-    function dispatchDependencyData(visibilityMode, dependencyData) {
+    function dispatchDependencyData({visibilityMode, dependencyData}) {
       setTimeout(() => {
-        console.log('updating data')
         store.dispatch(actions.updateIconVisibity(visibilityMode));
         store.dispatch(actions.updateCurrentDependencies(dependencyData));
         store.dispatch(actions.toggleShouldRenderSideBar(true));
       }, 5);
     }
     
-    function updateStateDependencyData(dependencyDiffArray) {
-      console.log('updateStateDependencyData')
+    function getNewDependencyData(dependencyDiffArray) {
       const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
-      const nullData = {
-        dependencies: [],
-        index: null,
-        text: null,
-        moduleName: null
-      }
+    
       
-      nextParentToDisplay
-        ? dispatchDependencyData('DEPENDENCY', nextParentToDisplay)
-        : dispatchDependencyData('ALL', nullData)
+      if (nextParentToDisplay) {
+        return {
+          visibilityMode: 'DEPENDENCY',
+          dependencyData: nextParentToDisplay
+        }
+      } else {
+        const nullData = {
+          dependencies: [],
+          index: null,
+          text: null,
+          moduleName: null
+        }
+        
+         return {
+          visibilityMode: 'ALL',
+          dependencyData: nullData
+        }
+      }
     }
     
-    const dependencyDiffArray = getDependencyDiff(this.props.modules);
-    const { iconVisibityMode, currentDependencyData } = this.props;
+    const { currentDependencyData, modules } = this.props;
     const { index } = currentDependencyData;
+    
+    const dependencyDiffArray = getDependencyDiff(modules);
     const displayedParentData = dependencyDiffArray[index];
-      
-    updateStateDependencyData(dependencyDiffArray)
+    
+    const newDepenencyData = getNewDependencyData(dependencyDiffArray);
+    dispatchDependencyData(newDepenencyData);
+    
   }
   
   
