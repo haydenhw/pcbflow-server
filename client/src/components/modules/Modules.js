@@ -59,6 +59,7 @@ class Modules extends Component {
     
     function dispatchDependencyData(visibilityMode, dependencyData) {
       setTimeout(() => {
+        console.log('updating data')
         store.dispatch(actions.updateIconVisibity(visibilityMode));
         store.dispatch(actions.updateCurrentDependencies(dependencyData));
       }, 5);

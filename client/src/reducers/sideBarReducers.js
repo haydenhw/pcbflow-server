@@ -2,7 +2,7 @@ import * as actions from '../actions/indexActions';
 
 const defaultIconsVibility = {
   mode: 'ALL',
-  dependencies: []
+  dependencies: [],
 }
 
 export const iconVisibity = (state = defaultIconsVibility, action) => {
@@ -22,6 +22,17 @@ export const iconVisibity = (state = defaultIconsVibility, action) => {
       dependencies,
       index,
       moduleName: text,
+    };
+    default:
+      return state;
+  };
+}
+
+export const shouldRenderSideBar = (state = { shouldRender: true }, action) => {
+  switch (action.type) {
+    case actions.TOGGLE_SHOULD_RENDER_SIDEBAR:
+    return {
+      shouldRender: !state.shouldRender
     };
     default:
       return state;
