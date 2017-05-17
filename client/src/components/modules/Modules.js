@@ -47,47 +47,54 @@ class Modules extends Component {
   }
   
   updateDisplayedDependencies() {
-    
     function areDependenciesMet(dependencies, metDependencies) {
       if (!dependencies) {
         return true;
       }
       
-      return Boolean((dependencies.length === metDependencies.length))
+      return Boolean(dependencies.length === metDependencies.length);
     }
     
     const findUnmetDependencyElement = dependencyDiffArray => (
-      dependencyDiffArray.find(element => element.metDependencies < element.dependencies)
+      dependencyDiffArray.find(element => (
+        !areDependenciesMet(element.dependencies, element.metDependencies)
+      ))
     );
     
     
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
     const { index } = this.props.currentDependencyData;
-    
+    console.log(dependencyDiffArray)
     if (isNaN(index)) {
       const dependencyData = findUnmetDependencyElement(dependencyDiffArray);
       
-      if (dependencyData !== -1) {
+      if (dependencyData) {
         setTimeout(() => {
+          console.log('dispatch 1')
+          
           store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
           store.dispatch(actions.updateCurrentDependencies(dependencyData));
         }, 5);
       }
-    } else {
+    } else if (dependencyDiffArray.length > 1){
+      console.log(dependencyDiffArray)
       const displayedModule = dependencyDiffArray[index];
+      
       const { metDependencies, dependencies } = displayedModule;
       const hasUnmetDependencies = !areDependenciesMet(metDependencies, dependencies);
       
       if (!hasUnmetDependencies) {
         
         const nextDepencencyData = findUnmetDependencyElement(dependencyDiffArray);
-        
-        if (nextDepencencyData !== -1) {
+        console.log(nextDepencencyData)
+        if (nextDepencencyData) {
+          console.log('dispatch 2')
           setTimeout(() => {
             store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
             store.dispatch(actions.updateCurrentDependencies(nextDepencencyData));
           }, 5);
         } else {
+          console.log('no more deps')
           const dependencyData = {
             index: null,
             dependencies: null,
@@ -95,7 +102,6 @@ class Modules extends Component {
           }
           
           setTimeout(() => {
-            console.log('dispatching')
             store.dispatch(actions.updateIconVisibity('ALL'));
             store.dispatch(actions.updateCurrentDependencies(dependencyData));
           }, 5);

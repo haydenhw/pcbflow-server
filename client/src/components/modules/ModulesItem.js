@@ -84,7 +84,7 @@ export default class ModulesItem extends Component {
         name: this.props.text,
         index: this.props.index
       }
-      console.log('hola')
+      
       store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
       store.dispatch(actions.updateCurrentDependencies(dependencyData));
     }

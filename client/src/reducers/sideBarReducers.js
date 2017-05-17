@@ -8,13 +8,14 @@ const defaultIconsVibility = {
 export const iconVisibity = (state = defaultIconsVibility, action) => {
   switch (action.type) {
     case actions.UPDATE_ICON_VISBILITY:
-    console.log(action)
+    //console.log(action)
     return {
       ...state,
       mode: action.mode
     };
     
     case actions.UPDATE_CURRENT_DEPENDENCIES:
+    //console.log(action)
     const { dependencies, text, index } = action.dependencyData;
     return {
       ...state,
