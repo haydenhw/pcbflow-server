@@ -65,29 +65,28 @@ class Modules extends Component {
       }, 5);
     }
     
-    function getNewDependencyData(dependencyDiffArray) {
-      const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
+  function getNewDependencyData(dependencyDiffArray) {
+    const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
     
-      
-      if (nextParentToDisplay) {
-        return {
-          visibilityMode: 'DEPENDENCY',
-          dependencyData: nextParentToDisplay
-        }
-      } else {
-        const nullData = {
-          dependencies: [],
-          index: null,
-          text: null,
-          moduleName: null
-        }
-        
-         return {
-          visibilityMode: 'ALL',
-          dependencyData: nullData
-        }
+    const nullData = {
+      dependencies: [],
+      index: null,
+      text: null,
+      moduleName: null
+    }
+    
+    if (nextParentToDisplay) {
+      return {
+        visibilityMode: 'DEPENDENCY',
+        dependencyData: nextParentToDisplay
       }
     }
+    
+    return {
+      visibilityMode: 'ALL',
+      dependencyData: nullData
+    }
+  }
     
     const { currentDependencyData, modules } = this.props;
     const { index } = currentDependencyData;
