@@ -9,7 +9,7 @@ import './side-bar-styles/SideBar.css';
 
 export default function SideBar(props) {
   const { showAll, updateClientPosition } = props
-  const { mode, moduleName } = props.iconVisibityData
+  const { mode, moduleName, dependencies } = props.iconVisibityData
   
   const style = {
     height: '100% !important',
@@ -20,16 +20,21 @@ export default function SideBar(props) {
     verticalAlign: 'top',
   };
   
-  const dependencyMessage = (
-    <SideBarDependencyMessage 
-      moduleName={moduleName}
-      showAll={showAll} 
-    />
-  );
+  const renderDependencyMessage = () => {
+    if ((mode === 'DEPENDENCY') && (dependencies.length > 0)) {
+      return (
+        <SideBarDependencyMessage 
+          moduleName={moduleName}
+          showAll={showAll} 
+        />
+      );
+    }
+    return null;
+  }
   
   return (
     <div className="sideBar" style={style}>
-      {mode === 'DEPENDENCY' && dependencyMessage}
+      {renderDependencyMessage()}
       <div className="module-container">
         <SideBarIconList
           toggleDraggingToBoard={props.toggleDraggingToBoard}
