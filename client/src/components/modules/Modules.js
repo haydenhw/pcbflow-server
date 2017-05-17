@@ -65,9 +65,9 @@ class Modules extends Component {
       }, 5);
     }
     
-  function getNewDependencyData(dependencyDiffArray) {
+  function getNewDependencyData(modules) {
+    const dependencyDiffArray = getDependencyDiff(modules);
     const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
-    
     const nullData = {
       dependencies: [],
       index: null,
@@ -88,13 +88,9 @@ class Modules extends Component {
     }
   }
     
-    const { currentDependencyData, modules } = this.props;
-    const { index } = currentDependencyData;
+    const { modules } = this.props;
     
-    const dependencyDiffArray = getDependencyDiff(modules);
-    const displayedParentData = dependencyDiffArray[index];
-    
-    const newDepenencyData = getNewDependencyData(dependencyDiffArray);
+    const newDepenencyData = getNewDependencyData(modules);
     dispatchDependencyData(newDepenencyData);
     
   }
