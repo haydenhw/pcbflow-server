@@ -7,6 +7,7 @@ import enforceRules from 'helpers/enforceRules';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail from 'helpers/generateThumbnail';
+import { areDependenciesMet } from 'helpers/dependencies';
 
 export default class ModulesItem extends Component {
   constructor(props) {
@@ -67,19 +68,10 @@ export default class ModulesItem extends Component {
     }
   }
   
-  areDependenciesMet() {
-    const { dependencies, metDependencies } = this.props;
-    
-    if (!dependencies) {
-      return true;
-    }
-    
-    return Boolean((dependencies.length === metDependencies.length))
-  }
-  
   showDependencies() {
-    if (!this.areDependenciesMet()) {
-      const { dependencies, text, index } = this.props;
+    const { dependencies, metDependencies, text, index } = this.props;
+    
+    if (!areDependenciesMet(dependencies, metDependencies)) {
       const dependencyData = { 
         dependencies,
         text,

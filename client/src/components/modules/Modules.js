@@ -6,7 +6,7 @@ import Konva from 'konva';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import generatePriceString from 'helpers/generatePriceString';
-import { getDependencyDiff, updateMetDependencies } from 'helpers/dependencies';
+import { getDependencyDiff, updateMetDependencies, getNewDependencyData } from 'helpers/dependencies';
 
 import ModulesItem from './ModulesItem';
 import { modulesData } from './modulesData';
@@ -47,16 +47,6 @@ class Modules extends Component {
   }
   
   updateDisplayedDependencies() {
-    function areDependenciesMet(dependencies, metDependencies) {
-      return dependencies ? (dependencies.length === metDependencies.length) : true;
-    }
-    
-    const findUnmetDependency = dependencyDiffArray => (
-      dependencyDiffArray.find(element => (
-        !areDependenciesMet(element.dependencies, element.metDependencies)
-      ))
-    );
-    
     function dispatchDependencyData({visibilityMode, dependencyData}) {
       setTimeout(() => {
         store.dispatch(actions.updateIconVisibity(visibilityMode));
@@ -65,36 +55,12 @@ class Modules extends Component {
       }, 5);
     }
     
-  function getNewDependencyData(modules) {
-    const dependencyDiffArray = getDependencyDiff(modules);
-    const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
-    const nullData = {
-      dependencies: [],
-      index: null,
-      text: null,
-      moduleName: null
-    }
-    
-    if (nextParentToDisplay) {
-      return {
-        visibilityMode: 'DEPENDENCY',
-        dependencyData: nextParentToDisplay
-      }
-    }
-    
-    return {
-      visibilityMode: 'ALL',
-      dependencyData: nullData
-    }
-  }
-    
     const { modules } = this.props;
     
     const newDepenencyData = getNewDependencyData(modules);
     dispatchDependencyData(newDepenencyData);
     
   }
-  
   
   updateMetDependencies() {
     const dependencyDiffArray = getDependencyDiff(this.props.modules);

@@ -68,6 +68,35 @@ export function updateMetDependencies(dependencyDiffArray) {
   });
 }
 
-export function updateCurrentDependency() {
+export function areDependenciesMet(dependencies, metDependencies) {
+  return dependencies ? (dependencies.length === metDependencies.length) : true;
+}
+
+export function findUnmetDependency(dependencyDiffArray) {
+  return dependencyDiffArray.find(element => (
+    !areDependenciesMet(element.dependencies, element.metDependencies)
+  ));
+}
+
+export function getNewDependencyData(modules) {
+  const dependencyDiffArray = getDependencyDiff(modules);
+  const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
+  const nullData = {
+    dependencies: [],
+    index: null,
+    text: null,
+    moduleName: null
+  }
   
+  if (nextParentToDisplay) {
+    return {
+      visibilityMode: 'DEPENDENCY',
+      dependencyData: nextParentToDisplay
+    }
+  }
+  
+  return {
+    visibilityMode: 'ALL',
+    dependencyData: nullData
+  }
 }
