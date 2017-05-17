@@ -46,41 +46,58 @@ class Modules extends Component {
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
   
+
+  
   updateDisplayedDependencies() {
     function areDependenciesMet(dependencies, metDependencies) {
-      if (!dependencies) {
-        return true;
-      }
-      
-      return Boolean(dependencies.length === metDependencies.length);
+      return dependencies ? (dependencies.length === metDependencies.length) : true;
     }
     
-    const findUnmetDependencyElement = dependencyDiffArray => (
+    const findUnmetDependency = dependencyDiffArray => (
       dependencyDiffArray.find(element => (
         !areDependenciesMet(element.dependencies, element.metDependencies)
       ))
     );
     
-    function shouldStateUpdate(currentDependencyData) {
-      
+    function dispatchDependencyData(visibilityMode, dependencyData) {
+      console.log(visibilityMode, dependencyData)
+      setTimeout(() => {
+        store.dispatch(actions.updateIconVisibity(visibilityMode));
+        store.dispatch(actions.updateCurrentDependencies(dependencyData));
+      }, 5);
+    }
+    
+    function updateStateDependencyData(dependencyDiffArray) {
+      const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
+      const nullData = {
+        index: null,
+        dependencies: null,
+        text: null
+      }
+      console.log(nextParentToDisplay)
+      nextParentToDisplay
+        ? dispatchDependencyData('DEPENDENCY', nextParentToDisplay)
+        : dispatchDependencyData('ALL', nullData)
     }
     
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
     const { iconVisibityMode, currentDependencyData } = this.props;
-    const { index } = currentDependencyData;
     
     const areDependenciesDiplayed = iconVisibityMode === 'DEPENDENCY';
     
-    /*if (areDependenciesDiplayed) {
-          
-        shouldStateUpdate(currentDependencyData) ? dispatchDependencyUpdates() : null; 
-        
-        
-    }*/
+    if (areDependenciesDiplayed) {
+      const { index } = currentDependencyData;
+      const displayedParentData = dependencyDiffArray[index];
+      const { dependencies, metDependencies } = displayedParentData;
+      console.log(displayedParentData)  
+      
+      areDependenciesMet(dependencies, metDependencies) ? updateStateDependencyData(dependencyDiffArray) : null;
+    } else {
+      updateStateDependencyData(dependencyDiffArray)
+    }
     
     
-    console.log(dependencyDiffArray)
-    if (isNaN(index)) {
+  /*  if (isNaN(index)) {
       const dependencyData = findUnmetDependencyElement(dependencyDiffArray);
       
       if (dependencyData) {
@@ -122,11 +139,11 @@ class Modules extends Component {
           }, 5);
         }
       }
-    }
-    
+    }*/
+  }
     // console.log(index);
     // console.log(dependencyDiffArray[index]);
-  }
+  
   
   updateMetDependencies() {
     const dependencyDiffArray = getDependencyDiff(this.props.modules);

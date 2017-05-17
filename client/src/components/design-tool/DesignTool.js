@@ -23,6 +23,7 @@ import Footer from 'components/footer/Footer';
 import DesignToolStage from './DesignToolStage';
 import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
+import DesignToolOnboardModal from './DesignToolOnboardModal';
 import { steps } from './DesignToolTourSteps';
 
 import './design-tool-styles/DesignToolToggleInfoButton.css';
@@ -469,6 +470,7 @@ let DesignTool = class extends Component {
           updateLastSaved={DesignTool.updateLastSaved}
           recordSavedChanges={DesignTool.recordSavedChanges}
         />
+        {/* <DesignToolOnboardModal /> */}
         <div onMouseMove={this.handleMouseMove.bind(this)}>
           <div ref={node => this.stageContainer = node}>
             {this.renderSideBar()}
