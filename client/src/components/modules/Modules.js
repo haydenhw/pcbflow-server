@@ -85,23 +85,8 @@ class Modules extends Component {
     const { iconVisibityMode, currentDependencyData } = this.props;
     const { index } = currentDependencyData;
     const displayedParentData = dependencyDiffArray[index];
-    
-    const areDependenciesDiplayed = iconVisibityMode === 'DEPENDENCY';
       
-      updateStateDependencyData(dependencyDiffArray)
-      /*if (!displayedParentData) {
-        updateStateDependencyData(dependencyDiffArray);
-      } else if (areDependenciesDiplayed) {
-
-      const { dependencies, metDependencies } = displayedParentData;
-      
-      areDependenciesMet(dependencies, metDependencies) ? updateStateDependencyData(dependencyDiffArray) : null;
-    } else {
-      updateStateDependencyData(dependencyDiffArray);
-    }*/
-    
-    
-
+    updateStateDependencyData(dependencyDiffArray)
   }
   
   
