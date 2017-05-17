@@ -25,6 +25,8 @@ import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
 import DesignToolOnboardModal from './DesignToolOnboardModal';
 import { steps } from './DesignToolTourSteps';
+import { tutorialSteps } from './DesignToolTutorialSteps';
+
 
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
@@ -34,6 +36,7 @@ let DesignTool = class extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      tutorialSteps,
       steps,
       x: 0,
       y: 0,
@@ -47,6 +50,7 @@ let DesignTool = class extends Component {
       shouldHideContextMenu: false,
       image: null,
       step: 0,
+      tutorialStep:0
     };
     
     this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
@@ -302,6 +306,24 @@ let DesignTool = class extends Component {
       joyride.callback();
     }
   }
+  
+  incrementTutorialStep() {
+    const { tutorialStep, tutorialSteps } = this.state;
+    
+    if (tutorialStep < tutorialSteps.length - 1) {
+      this.setState({
+        tutorialStep: tutorialStep + 1
+      });
+    }
+  }
+  
+  decrementTutorialStep() {
+    if (tutorialStep > 0 ) {
+      this.setState({
+        tutorialStep: this.state.tutorialStep - 1
+      });
+    }
+  }
 
   toggleDraggingToBoard() {
     this.setState({ isDraggingToBoard: true });
@@ -422,6 +444,22 @@ let DesignTool = class extends Component {
       />
     );
   }
+  
+  renderModal() {
+    const { shouldRenderModal } = this.state;
+    
+    const modalProps = {
+      
+    }
+    
+    if (shouldRenderModal) {
+      return (
+        <DesignToolOnboardModal 
+          {...modalProps}
+        />
+      );
+    }
+  }
 
   render() {
     const {
@@ -470,7 +508,6 @@ let DesignTool = class extends Component {
           updateLastSaved={DesignTool.updateLastSaved}
           recordSavedChanges={DesignTool.recordSavedChanges}
         />
-        {/* <DesignToolOnboardModal /> */}
         <div onMouseMove={this.handleMouseMove.bind(this)}>
           <div ref={node => this.stageContainer = node}>
             {this.renderSideBar()}
@@ -494,6 +531,7 @@ let DesignTool = class extends Component {
         />
         {shouldRenderDocumentation && <DocumentationCard />}
         {shouldRenderInfoButton && this.renderInfoButton()}
+        {this.renderModal()}
       </div>
     );
   }

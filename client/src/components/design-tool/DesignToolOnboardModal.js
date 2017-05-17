@@ -3,21 +3,37 @@ import React from 'react';
 import Modal from 'components/modal/Modal';
 import './design-tool-styles/DesignToolOnboardModal.css'
 
-export default function DesignToolOnboardModal() {
+export default function DesignToolOnboardModal(props) {
+  const handleClick = () => {
+    props.handleNextButtonClick();
+  }
+  
+  const renderBackButton = () => {
+    if (props.shouldRenderBackButton) {
+      return (
+        <button 
+          className="modal-button"
+          onClick={() => props.handleBackButtonClick()}
+        >
+          {props.backButtonText}
+        </button>
+      );
+    }
+    
+    return null;
+  }
+  
   return (
     <Modal>
       <div className="modal-content">
-        <div className="modal-header">
-          <span className="close">&times;</span>
-          <h2>Modal Header</h2>
-        </div>
-        <div className="modal-body">
-          <p>Some text in the Modal Body</p>
-          <p>Some other text...</p>
-        </div>
-        <div className="modal-footer">
-          <h3>Modal Footer</h3>
-        </div>
+        <span className="modal-close">&times;</span>
+        <div className="modal-header"></div>
+        
+         <p className="modal-text">{props.text}</p>
+         <div className="modal-button-wrapper">
+           {renderBackButton()}
+           <button className="modal-button" onClick={handleClick}>{props.nextButtonText}</button>
+         </div>
       </div>
     </Modal>
   )
