@@ -13,5 +13,11 @@ export const tutorialSteps = [
     image: 'images/design-tool-screenshot.png',
     imageClassName: 'completed-tutorial-project' 
   },
+  {
+    text: 'First let\'s take a quick tour...',
+    nextButtonText: 'Okay',
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
   
 ]

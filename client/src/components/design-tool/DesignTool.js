@@ -173,6 +173,10 @@ let DesignTool = class extends Component {
   
   startTour() {
     this.setState({
+      shouldRenderModal: false
+    })
+    
+    this.setState({
       running: true,
       step: 0,
     });
@@ -188,7 +192,6 @@ let DesignTool = class extends Component {
     
     this.setRouteHook();
     this.addHanlders();
-    //this.startTour();
   }
   
   componentWillUnmount() {
@@ -468,6 +471,11 @@ let DesignTool = class extends Component {
       case 0:
         return {
           handleNextButtonClick: this.incrementTutorialStep.bind(this), 
+          handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
+        }
+      case 2:
+        return {
+          handleNextButtonClick: this.startTour.bind(this), 
           handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
         }
       default:

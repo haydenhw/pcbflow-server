@@ -12,7 +12,7 @@ export default class Modal extends Component {
     document.body.appendChild(this.modalTarget);
     this._render();
   }
-  
+  //Will update if using redux
   componentDidUpdate() {
     this._render();
   }

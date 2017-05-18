@@ -1,23 +1,16 @@
 export const steps = [
   {
-    title: 'Title only steps — As they say: Make the font bigger!',
+    title: 'Module Pallate',
+    text: 'Build a circiut by dragging and dropping modules from the module pallate to the board.',
     textAlign: 'center',
-    selector: '.test',
+    selector: '.sideBar',
     position: 'right'
   },
   {
-    title: 'Our Mission',
-    text: 'Can be advanced by clicking an element through the overlay hole.',
-    selector: '.test2',
+    title: 'The Board',
+    text: 'This is the board. Modules are arranged here to build a ciruit.',
+    selector: '.save-button',
     position: 'bottom',
     allowClicksThruHole: true,
-    style: {
-      beacon: {
-        offsetY: 20
-      },
-      button: {
-        display: 'none',
-      }
-    }
   }
 ]
