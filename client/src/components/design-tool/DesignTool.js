@@ -56,7 +56,7 @@ let DesignTool = class extends Component {
       wasDocumentationOpen: false,  //should be true in production
       shouldRenderDocumentation: false, //should be true in production
       shouldRenderInfoButton: true,
-      shouldRenderModal: true, 
+      shouldRenderModal: false, 
       shouldHideContextMenu: false,
       image: null,
       step: 0,
@@ -192,6 +192,23 @@ let DesignTool = class extends Component {
     
     this.setRouteHook();
     this.addHanlders();
+    
+    this.joyride.addTooltip({
+     title: 'The classic joyride',
+     text: 'Let\'s go on a magical tour! Just click the big orange button.',
+     selector: '.save-button',
+     position: 'bottom',
+     trigger: '.round-button',
+    //  event: 'click',
+     style: {
+       backgroundColor: 'rgba(0, 0, 0, 0.8)',
+       borderRadius: 0,
+       color: '#fff',
+       mainColor: '#ff67b4',
+       textAlign: 'center',
+       width: '29rem'
+     }
+   });
   }
   
   componentWillUnmount() {
