@@ -38,45 +38,54 @@ let SideBarIconList = class extends Component {
   componentDidMount() {
     this.displayAllIcons();
   }
-
-  render() {
+  
+  renderSideBarIcon(module, index, isDisabled) {
     const { 
-      onBoardModules,
-      iconVisibityMode,
-      selectedModuleDependencies,
       toggleDraggingToBoard,
       toggleIsClicked,
-      updateClientPosition
-    } = this.props;
+      updateClientPosition, 
+    } = this.props
     
-    const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
+    return (
+      <SideBarIcon
+        moduleData={module}
+        toggleDraggingToBoard={toggleDraggingToBoard}
+        toggleIsClicked={toggleIsClicked}
+        updateClientPosition={updateClientPosition}
+        disabled={isDisabled}
+      />
+    );
+  }
+  
+  renderSideBarIconFrame(module, index) {
+    const { disabledIconExceptions } = this.props;
     
-    const iconList = visibleIcons.map((module, index) => (
+    const isDisabled = disabledIconExceptions ? (disabledIconExceptions.indexOf(index) === -1) : false;
+    
+    return (
       <SideBarIconFrame
         key={index}
         moduleName={module.text}
         modulePrice={module.price}
+        disabled={isDisabled}
         >
-          <SideBarIcon
-            moduleData={module}
-            toggleDraggingToBoard={toggleDraggingToBoard}
-            toggleIsClicked={toggleIsClicked}
-            updateClientPosition={updateClientPosition}
-          />
-        </SideBarIconFrame>
-      ));
-      
-      const style = {
-        magrin: '10px auto'
-      };
-      
-      return (
-        <div style={style}>
-          {iconList}
-        </div>
-      );
-    }
+        {this.renderSideBarIcon(module, index, isDisabled)}
+      </SideBarIconFrame>
+    );
   }
+
+  render() {
+    const { onBoardModules, iconVisibityMode, selectedModuleDependencies } = this.props;
+    const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
+    const iconList = visibleIcons.map((module, index) => this.renderSideBarIconFrame(module, index));
+    
+    return (
+      <div>
+        {iconList}
+      </div>
+    );
+  }
+}
   
 
 const mapStateToProps = (state, props) => ({

@@ -8,7 +8,7 @@ import SideBarDependencyMessage from './SideBarDependencyMessage';
 import './side-bar-styles/SideBar.css';
 
 export default function SideBar(props) {
-  const { showAll, updateClientPosition } = props
+  const { showAll, updateClientPosition, disabledIconExceptions } = props
   const { mode, moduleName, dependencies } = props.iconVisibityData
   
   const style = {
@@ -41,6 +41,7 @@ export default function SideBar(props) {
           toggleIsClicked={props.toggleIsClicked}
           onBoardModulesLength={props.onBoardModulesLength}
           updateClientPosition={updateClientPosition}
+          disabledIconExceptions={disabledIconExceptions}
         />
       </div>
       <DimensionForm />

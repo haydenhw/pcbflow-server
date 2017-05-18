@@ -56,11 +56,12 @@ let DesignTool = class extends Component {
       wasDocumentationOpen: false,  //should be true in production
       shouldRenderDocumentation: false, //should be true in production
       shouldRenderInfoButton: true,
-      shouldRenderModal: false, 
+      shouldRenderModal: true, 
       shouldHideContextMenu: false,
       image: null,
       step: 0,
-      tutorialStep: 3
+      tutorialStep: 3,
+      disabledIconExceptions: null
     };
     
     this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
@@ -381,6 +382,7 @@ let DesignTool = class extends Component {
     });
   }
 
+
   updateState(url) {
     this.setState({ image: url });
   }
@@ -447,7 +449,7 @@ let DesignTool = class extends Component {
   
   renderSideBar() {
     const { iconVisibityData, currentProjectModules, shouldRenderSideBar } = this.props;
-    const { isDraggingToBoard } = this.state;
+    const { isDraggingToBoard, disabledIconExceptions } = this.state;
     
     if (shouldRenderSideBar) {
       return (
@@ -457,6 +459,7 @@ let DesignTool = class extends Component {
           updateClientPosition={this.updateClientPosition.bind(this)}    
           iconVisibityData={iconVisibityData}
           onBoardModulesLength={currentProjectModules.length}
+          disabledIconExceptions={disabledIconExceptions}
         />
       );
     }
@@ -498,8 +501,15 @@ let DesignTool = class extends Component {
             handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
           }
         case 3:
+          const stepThreeNextClickHandler = function() {
+            this.incrementTutorialStep(),
+            this.toggleShouldRenderModal(), 
+            this.setState({
+              disabledIconExceptions: [0]
+            });
+          }
           return {
-            handleNextButtonClick: this.incrementTutorialStep.bind(this), 
+            handleNextButtonClick: stepThreeNextClickHandler.bind(this),
             handleBackButtonClick: this.startTour.bind(this)
           }
         default:

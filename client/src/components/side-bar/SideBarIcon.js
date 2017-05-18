@@ -14,23 +14,22 @@ export default class SideBarIcon extends Component {
   }
 
   render() {
-    const style = {
-      height: '70px' /* this.props.moduleData.iconHeight*/,
-      width: '50px',
-      margin: '0 auto',
-      marginBottom: '10px',
-    };
-
+    const { disabled, moduleData } = this.props;
+    const cursorDefault = {
+      cursor: 'default'
+    }
     return (
       <div
         className="module-icon"
-        ref={(module) => { this.selectedModule = module; }}
-        onMouseDown={this.handleMouseDown.bind(this)}
-        onMouseOut={() => store.dispatch(actions.mouseDownOnIcon(false))}
+        ref={module => { this.selectedModule = module; }}
+        onMouseDown={disabled ? null : this.handleMouseDown.bind(this)}
+        onMouseOut={disabled ? null : () => store.dispatch(actions.mouseDownOnIcon(false))}
       >
         <img
           className="module-icon-image"
-          src={this.props.moduleData.iconSrc}
+          style={disabled ? cursorDefault: {}}
+          draggable={false}
+          src={moduleData.iconSrc}
         />
       </div>
     );
