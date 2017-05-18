@@ -56,7 +56,7 @@ let DesignTool = class extends Component {
       wasDocumentationOpen: false,  //should be true in production
       shouldRenderDocumentation: false, //should be true in production
       shouldRenderInfoButton: true,
-      shouldRenderModal: false, 
+      shouldRenderModal: true, 
       shouldHideContextMenu: false,
       image: null,
       step: 0,
@@ -467,23 +467,32 @@ let DesignTool = class extends Component {
   }
   
   getModalMethods(tutorialStep) {
-    switch(tutorialStep) {
-      case 0:
-        return {
-          handleNextButtonClick: this.incrementTutorialStep.bind(this), 
-          handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
-        }
-      case 2:
-        return {
-          handleNextButtonClick: this.startTour.bind(this), 
-          handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
-        }
-      default:
-        return {
-          handleNextButtonClick: this.incrementTutorialStep.bind(this), 
-          handleBackButtonClick: this.decrementTutorialStep.bind(this)
-        }
-    } 
+    const getButtonMethods = () => {
+      switch(tutorialStep) {
+        case 0:
+          return {
+            handleNextButtonClick: this.incrementTutorialStep.bind(this), 
+            handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
+          }
+        case 2:
+          return {
+            handleNextButtonClick: this.startTour.bind(this), 
+            handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
+          }
+        default:
+          return {
+            handleNextButtonClick: this.incrementTutorialStep.bind(this), 
+            handleBackButtonClick: this.decrementTutorialStep.bind(this)
+          }
+        } 
+    }
+    
+    const buttonMethods = getButtonMethods(tutorialStep);
+    const handleClose = {
+      handleCloseButtonClick:this.toggleShouldRenderModal.bind(this)
+    }
+    
+    return Object.assign(buttonMethods, handleClose)
   }
   
   renderModal() {
