@@ -9,6 +9,7 @@ import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { hasUnsavedChanges } from './savedStateReducers';
 import { iconVisibity, shouldRenderSideBar } from './sideBarReducers';
+import { tutorial } from './tutorialReducers';
 
 export default combineReducers({
   currentProjectModules: undoable(currentProjectModules, skipIfImageNodeNull),
@@ -23,4 +24,5 @@ export default combineReducers({
   shouldRenderSideBar,
   mouseEvents,
   hasUnsavedChanges,
+  tutorial
 });

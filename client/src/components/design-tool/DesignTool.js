@@ -32,15 +32,6 @@ import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
 import './design-tool-styles/joyride.css';
 
-function increment() {
-    return (previousState, currentProps) => {
-        return { 
-          ...previousState, 
-          tutorialStep: previousState.tutorialStep + 1 
-        };
-      }
-}
-
 let DesignTool = class extends Component {
   constructor(props) {
     super(props);
@@ -322,7 +313,7 @@ let DesignTool = class extends Component {
     }
     
     if (result.type === 'finished' && this.state.running) {
-      this.incrementTutorialStep();
+      store.dispatch(actions.incrementTutorialStep());
       this.setState({ running: false });
       this.toggleShouldRenderModal();
     }
@@ -336,26 +327,6 @@ let DesignTool = class extends Component {
     
     if (typeof joyride.callback === 'function') {
       joyride.callback();
-    }
-  }
-  
-  incrementTutorialStep() {
-    if (this.state.tutorialStep < this.state.tutorialSteps.length - 1) {
-      this.setState((prevState, props) => {
-        return { 
-          tutorialStep: prevState.tutorialStep + 1 
-        }
-      });
-    }
-  }
-  
-  decrementTutorialStep() {
-    if (this.state.tutorialStep > 0) {
-      this.setState((prevState, props) => {
-        return { 
-          tutorialStep: prevState.tutorialStep - 1 
-        }
-      });
     }
   }
 
@@ -492,7 +463,7 @@ let DesignTool = class extends Component {
       switch(tutorialStep) {
         case 0:
           return {
-            handleNextButtonClick: this.incrementTutorialStep.bind(this), 
+            handleNextButtonClick: store.dispatch(actions.incrementTutorialStep()),
             handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
           }
         case 2:
@@ -502,7 +473,7 @@ let DesignTool = class extends Component {
           }
         case 3:
           const stepThreeNextClickHandler = function() {
-            this.incrementTutorialStep(),
+            store.dispatch(actions.incrementTutorialStep());
             this.toggleShouldRenderModal(), 
             this.setState({
               disabledIconExceptions: [0]
@@ -514,8 +485,8 @@ let DesignTool = class extends Component {
           }
         default:
           return {
-            handleNextButtonClick: this.incrementTutorialStep.bind(this), 
-            handleBackButtonClick: this.decrementTutorialStep.bind(this)
+            handleNextButtonClick: store.dispatch(actions.incrementTutorialStep()),
+            handleBackButtonClick: store.dispatch(actions.decrementTutorialStep())
           }
         } 
     }

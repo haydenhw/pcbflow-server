@@ -5,3 +5,4 @@ export * from './mouseEventActions';
 export * from './savedStateActions';
 export * from './undoRedoActions';
 export * from './sideBarActions';
+export * from './tutorialActions';
