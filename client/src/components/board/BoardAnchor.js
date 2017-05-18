@@ -50,17 +50,7 @@ class Anchor extends Component {
       bottomLeft: { x: bottomLeft.getX(), y: bottomLeft.getY() },
       bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() },
     };
-
-    anchorPositions.bottomRight.y =
-      anchorPositions.bottomRight.y < 0
-      ? this.props.anchorPositions.bottomRight.y
-      : anchorPositions.bottomRight.y;
-
-    anchorPositions.bottomLeft.y =
-      anchorPositions.bottomLeft.y < 0
-      ? this.props.anchorPositions.bottomLeft.y
-      : anchorPositions.bottomLeft.y;
-
+    
     store.dispatch(actions.updateAnchorPositions(anchorPositions));
     board.position(topLeft.position());
 
@@ -116,23 +106,24 @@ class Anchor extends Component {
   }
 
   render() {
-    return (<Circle
-      ref="anchor"
-      x={this.props.x}
-      y={this.props.y}
-      stroke="#666"
-      fill="#ddd"
-      strokeWidth={this.state.strokeWidth}
-      radius="8"
-      name={this.props.name}
-      draggable="true"
-      dragOnTop="false"
-      onMouseOver={this.handleMouseOver.bind(this)}
-      onMouseOut={this.handleMouseOut.bind(this)}
-      onMouseDown={this.moveToTop.bind(this)}
-      onDragMove={this.handleDragMove.bind(this)}
-      onDragEnd={this.handleDragEnd.bind(this)}
-    />);
+    return (
+      <Circle
+        ref="anchor"
+        x={this.props.x}
+        y={this.props.y}
+        stroke="#666"
+        fill="#ddd"
+        strokeWidth={this.state.strokeWidth}
+        radius="8"
+        name={this.props.name}
+        draggable="true"
+        dragOnTop="false"
+        onMouseOver={this.handleMouseOver.bind(this)}
+        onMouseOut={this.handleMouseOut.bind(this)}
+        onMouseDown={this.moveToTop.bind(this)}
+        onDragMove={this.handleDragMove.bind(this)}
+        onDragEnd={this.handleDragEnd.bind(this)}
+      />);
   }
 }
 

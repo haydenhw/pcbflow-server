@@ -56,7 +56,7 @@ let DesignTool = class extends Component {
       wasDocumentationOpen: false,  //should be true in production
       shouldRenderDocumentation: false, //should be true in production
       shouldRenderInfoButton: true,
-      shouldRenderModal: true, 
+      shouldRenderModal: false, 
       shouldHideContextMenu: false,
       image: null,
       step: 0,
@@ -502,6 +502,20 @@ let DesignTool = class extends Component {
     return null;
   }
   
+  renderFooter() {
+    const { currentProjectPrice, timeLastSaved } = this.props;
+    if(this.state.shouldRenderInfoButton) {
+      return (
+        <Footer
+          price={currentProjectPrice}
+          timeLastSaved={timeLastSaved}
+        />
+      );
+    }
+    
+    return null;
+  }
+  
   
 
   render() {
@@ -568,10 +582,7 @@ let DesignTool = class extends Component {
             />
           </div>
         </div>
-        <Footer
-          price={currentProjectPrice}
-          timeLastSaved={timeLastSaved}
-        />
+        {this.renderFooter()}
         {shouldRenderDocumentation && <DocumentationCard />}
         {shouldRenderInfoButton && this.renderInfoButton()}
         {this.renderModal()}
