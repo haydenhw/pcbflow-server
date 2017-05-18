@@ -41,7 +41,6 @@ export default function SideBar(props) {
           toggleIsClicked={props.toggleIsClicked}
           onBoardModulesLength={props.onBoardModulesLength}
           updateClientPosition={updateClientPosition}
-          disabledIconExceptions={disabledIconExceptions}
         />
       </div>
       <DimensionForm />

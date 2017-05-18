@@ -59,7 +59,6 @@ let SideBarIconList = class extends Component {
   
   renderSideBarIconFrame(module, index) {
     const { disabledIconExceptions } = this.props;
-    
     const isDisabled = disabledIconExceptions ? (disabledIconExceptions.indexOf(index) === -1) : false;
     
     return (
@@ -86,13 +85,13 @@ let SideBarIconList = class extends Component {
     );
   }
 }
-  
 
 const mapStateToProps = (state, props) => ({
   moduleBank: state.moduleBank,
   onBoardModules: state.currentProjectModules.present,
   iconVisibityMode: state.iconVisibity.mode,
   selectedModuleDependencies: state.iconVisibity.dependencies,
+  disabledIconExceptions: state.tutorial.disabledIconExceptions
 });
 
 export default connect(mapStateToProps)(SideBarIconList);

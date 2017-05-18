@@ -51,7 +51,6 @@ let DesignTool = class extends Component {
       shouldHideContextMenu: false,
       image: null,
       step: 0,
-      tutorialStep: 3,
       disabledIconExceptions: null
     };
     
@@ -430,7 +429,6 @@ let DesignTool = class extends Component {
           updateClientPosition={this.updateClientPosition.bind(this)}    
           iconVisibityData={iconVisibityData}
           onBoardModulesLength={currentProjectModules.length}
-          disabledIconExceptions={disabledIconExceptions}
         />
       );
     }
@@ -463,7 +461,7 @@ let DesignTool = class extends Component {
       switch(tutorialStep) {
         case 0:
           return {
-            handleNextButtonClick: store.dispatch(actions.incrementTutorialStep()),
+            handleNextButtonClick: () => store.dispatch(actions.incrementTutorialStep()),
             handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
           }
         case 2:
@@ -474,10 +472,8 @@ let DesignTool = class extends Component {
         case 3:
           const stepThreeNextClickHandler = function() {
             store.dispatch(actions.incrementTutorialStep());
-            this.toggleShouldRenderModal(), 
-            this.setState({
-              disabledIconExceptions: [0]
-            });
+            store.dispatch(actions.updateDisabledIconExceptions([0]));
+            this.toggleShouldRenderModal();
           }
           return {
             handleNextButtonClick: stepThreeNextClickHandler.bind(this),
@@ -485,8 +481,8 @@ let DesignTool = class extends Component {
           }
         default:
           return {
-            handleNextButtonClick: store.dispatch(actions.incrementTutorialStep()),
-            handleBackButtonClick: store.dispatch(actions.decrementTutorialStep())
+            handleNextButtonClick: () => store.dispatch(actions.incrementTutorialStep()),
+            handleBackButtonClick: () => store.dispatch(actions.decrementTutorialStep())
           }
         } 
     }
@@ -500,7 +496,9 @@ let DesignTool = class extends Component {
   }
   
   renderModal() {
-    const { shouldRenderModal, tutorialSteps, tutorialStep } = this.state;
+    const { shouldRenderModal, tutorialSteps } = this.state;
+    const { tutorialStep } = this.props;
+    console.log(tutorialStep)
     const modalMethods = this.getModalMethods(tutorialStep);
     const modalProps = Object.assign(tutorialSteps[tutorialStep], modalMethods);
     
@@ -618,7 +616,8 @@ const mapStateToProps = state => ({
   selectedModuleProps: state.selectedModule,
   anchorPositions: state.anchorPositions,
   iconVisibityData: state.iconVisibity,
-  shouldRenderSideBar: state.shouldRenderSideBar
+  shouldRenderSideBar: state.shouldRenderSideBar,
+  tutorialStep: state.tutorial.step
 });
 
 DesignTool = withRouter(DesignTool);
