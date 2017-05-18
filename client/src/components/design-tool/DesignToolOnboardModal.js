@@ -23,17 +23,29 @@ export default function DesignToolOnboardModal(props) {
     return null;
   }
   
+  const renderImage = () => {
+    if (props.image) {
+      return (
+        <img className={props.imageClassName} src={props.image} alt="completed tutorial project"/>
+      );
+    }
+    
+    return null
+  } 
+  
   return (
     <Modal>
       <div className="modal-content">
         <span className="modal-close">&times;</span>
         <div className="modal-header"></div>
-        
-         <p className="modal-text">{props.text}</p>
-         <div className="modal-button-wrapper">
-           {renderBackButton()}
-           <button className="modal-button" onClick={handleClick}>{props.nextButtonText}</button>
-         </div>
+        <div className="modal-text">
+          {props.text.split("\n").map((line, index) => <div key={index}>{line}</div>)}
+        </div>
+          {renderImage()}
+        <div className="modal-button-wrapper">
+          {renderBackButton()}
+          <button className="modal-button" onClick={handleClick}>{props.nextButtonText}</button>
+        </div>
       </div>
     </Modal>
   )

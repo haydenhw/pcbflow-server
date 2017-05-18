@@ -32,6 +32,15 @@ import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
 import './design-tool-styles/joyride.css';
 
+function increment() {
+    return (previousState, currentProps) => {
+        return { 
+          ...previousState, 
+          tutorialStep: previousState.tutorialStep + 1 
+        };
+      }
+}
+
 let DesignTool = class extends Component {
   constructor(props) {
     super(props);
@@ -47,10 +56,11 @@ let DesignTool = class extends Component {
       wasDocumentationOpen: false,  //should be true in production
       shouldRenderDocumentation: false, //should be true in production
       shouldRenderInfoButton: true,
+      shouldRenderModal: true, 
       shouldHideContextMenu: false,
       image: null,
       step: 0,
-      tutorialStep:0
+      tutorialStep: 0
     };
     
     this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
@@ -308,19 +318,21 @@ let DesignTool = class extends Component {
   }
   
   incrementTutorialStep() {
-    const { tutorialStep, tutorialSteps } = this.state;
-    
-    if (tutorialStep < tutorialSteps.length - 1) {
-      this.setState({
-        tutorialStep: tutorialStep + 1
+    if (this.state.tutorialStep < this.state.tutorialSteps.length - 1) {
+      this.setState((prevState, props) => {
+        return { 
+          tutorialStep: prevState.tutorialStep + 1 
+        }
       });
     }
   }
   
   decrementTutorialStep() {
-    if (tutorialStep > 0 ) {
-      this.setState({
-        tutorialStep: this.state.tutorialStep - 1
+    if (this.state.tutorialStep > 0) {
+      this.setState((prevState, props) => {
+        return { 
+          tutorialStep: prevState.tutorialStep - 1 
+        }
       });
     }
   }
@@ -339,6 +351,12 @@ let DesignTool = class extends Component {
   toggleShouldUpadateThumbnail() {
     this.setState({
       shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail,
+    });
+  }
+  
+  toggleShouldRenderModal() {
+    this.setState({
+      shouldRenderModal: !this.state.shouldRenderModal,
     });
   }
 
@@ -445,12 +463,25 @@ let DesignTool = class extends Component {
     );
   }
   
+  getModalMethods(tutorialStep) {
+    switch(tutorialStep) {
+      case 0:
+        return {
+          handleNextButtonClick: this.incrementTutorialStep.bind(this), 
+          handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
+        }
+      default:
+        return {
+          handleNextButtonClick: this.incrementTutorialStep.bind(this), 
+          handleBackButtonClick: this.decrementTutorialStep.bind(this)
+        }
+    } 
+  }
+  
   renderModal() {
-    const { shouldRenderModal } = this.state;
-    
-    const modalProps = {
-      
-    }
+    const { shouldRenderModal, tutorialSteps, tutorialStep } = this.state;
+    const modalMethods = this.getModalMethods(tutorialStep);
+    const modalProps = Object.assign(tutorialSteps[tutorialStep], modalMethods);
     
     if (shouldRenderModal) {
       return (
@@ -459,7 +490,11 @@ let DesignTool = class extends Component {
         />
       );
     }
+    
+    return null;
   }
+  
+  
 
   render() {
     const {

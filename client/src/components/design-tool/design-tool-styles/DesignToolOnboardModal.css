@@ -79,6 +79,13 @@
     cursor: pointer;
 }
 
+.completed-tutorial-project {
+  height: 200px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 @media only screen and (max-width: 675px) {
   .modal-content {
     width: 80%;
