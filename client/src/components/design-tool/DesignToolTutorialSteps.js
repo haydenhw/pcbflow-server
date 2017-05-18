@@ -19,5 +19,11 @@ export const tutorialSteps = [
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },
+  {
+    text: 'Okay, now we\'re ready to get started! \n First drag and drop the COM connector module anywhere on the board',
+    nextButtonText: 'Okay',
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
   
 ]

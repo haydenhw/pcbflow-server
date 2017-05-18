@@ -60,7 +60,7 @@ let DesignTool = class extends Component {
       shouldHideContextMenu: false,
       image: null,
       step: 0,
-      tutorialStep: 0
+      tutorialStep: 3
     };
     
     this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
@@ -304,8 +304,9 @@ let DesignTool = class extends Component {
     }
     
     if (result.type === 'finished' && this.state.running) {
-      // Need to set our running state to false, so we can restart if we click start again.
+      this.incrementTutorialStep();
       this.setState({ running: false });
+      this.toggleShouldRenderModal();
     }
     
     if (result.type === 'error:target_not_found') {
@@ -479,6 +480,11 @@ let DesignTool = class extends Component {
             handleNextButtonClick: this.startTour.bind(this), 
             handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
           }
+        case 3:
+          return {
+            handleNextButtonClick: this.incrementTutorialStep.bind(this), 
+            handleBackButtonClick: this.startTour.bind(this)
+          }
         default:
           return {
             handleNextButtonClick: this.incrementTutorialStep.bind(this), 
@@ -556,7 +562,8 @@ let DesignTool = class extends Component {
       scrollToFirstStep: joyride.scrollToFirstStep || true,
       stepIndex: joyride.stepIndex || this.state.step,
       steps: joyride.steps || this.state.steps,
-      type: joyride.type || 'continuous'
+      type: joyride.type || 'continuous',
+      locale: {next: 'Next', last: 'Next', back: 'Back'}
     };
     
     return (
