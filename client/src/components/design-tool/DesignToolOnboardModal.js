@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Modal from 'components/modal/Modal';
 import './design-tool-styles/DesignToolOnboardModal.css'
 
 
-export default function DesignToolOnboardModal(props) {
-  const handleCloseButtonClick = () => {
-    props.handleCloseButtonClick();
+export default class DesignToolOnboardModal extends Component {
+  componentDidMount() {
+    if (this.props.handleDidMount) {
+      this.props.handleDidMount();
+    }
   }
   
-  const handleNextButtonClick = () => {
-    props.handleNextButtonClick();
+  handleCloseButtonClick() {
+    this.props.handleCloseButtonClick();
   }
   
-  const renderBackButton = () => {
-    if (props.shouldRenderBackButton) {
+  handleNextButtonClick() {
+    this.props.handleNextButtonClick();
+  }
+  
+  renderBackButton() {
+    if (this.props.shouldRenderBackButton) {
       return (
         <button 
           className="modal-button"
-          onClick={() => props.handleBackButtonClick()}
+          onClick={() => this.props.handleBackButtonClick()}
         >
-          {props.backButtonText}
+          {this.props.backButtonText}
         </button>
       );
     }
@@ -28,32 +34,40 @@ export default function DesignToolOnboardModal(props) {
     return null;
   }
   
-  const renderImage = () => {
-    if (props.image) {
+  renderImage() {
+    if (this.props.image) {
       return (
-        <img className={props.imageClassName} src={props.image} alt="completed tutorial project"/>
+        <img className={this.props.imageClassName} 
+          src={this.props.image} 
+          alt="completed tutorial project" 
+        />
       );
     }
     
     return null
   } 
   
-  const nextButtonClass = `modal-button ${props.nextButtonClass}`
-  
-  return (
-    <Modal>
-      <div className="modal-content">
-        <span className="modal-close" onClick={handleCloseButtonClick}>&times;</span>
-        <div className="modal-header"></div>
-        <div className="modal-text">
-          {props.text.split("\n").map((line, index) => <div key={index}>{line}</div>)}
+  render() {
+    const nextButtonClass = `modal-button ${this.props.nextButtonClass}`
+    
+    return (
+      <Modal>
+        <div className="modal-content">
+          <span className="modal-close" onClick={this.handleCloseButtonClick}>&times;</span>
+          <div className="modal-header"></div>
+          <div className="modal-text">
+            {this.props.text.split("\n").map((line, index) => <div key={index}>{line}</div>)}
+          </div>
+            {this.renderImage()}
+          <div className="modal-button-wrapper">
+            {this.renderBackButton()}
+            <button className={nextButtonClass} 
+              onClick={this.handleNextButtonClick}>
+              {this.props.nextButtonText}
+            </button>
+          </div>
         </div>
-          {renderImage()}
-        <div className="modal-button-wrapper">
-          {renderBackButton()}
-          <button className={nextButtonClass} onClick={handleNextButtonClick}>{props.nextButtonText}</button>
-        </div>
-      </div>
-    </Modal>
-  )
+      </Modal>
+    )
+  }
 }
