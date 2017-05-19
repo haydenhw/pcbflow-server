@@ -53,7 +53,7 @@ export default class DesignToolOnboardModal extends Component {
     return (
       <Modal>
         <div className="modal-content">
-          <span className="modal-close" onClick={this.handleCloseButtonClick}>&times;</span>
+          <span className="modal-close" onClick={this.handleCloseButtonClick.bind(this)}>&times;</span>
           <div className="modal-header"></div>
           <div className="modal-text">
             {this.props.text.split("\n").map((line, index) => <div key={index}>{line}</div>)}
@@ -62,7 +62,7 @@ export default class DesignToolOnboardModal extends Component {
           <div className="modal-button-wrapper">
             {this.renderBackButton()}
             <button className={nextButtonClass} 
-              onClick={this.handleNextButtonClick}>
+              onClick={this.handleNextButtonClick.bind(this)}>
               {this.props.nextButtonText}
             </button>
           </div>

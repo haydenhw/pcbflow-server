@@ -190,24 +190,6 @@ let DesignTool = class extends Component {
     this.removeHanlders();
   }
   
-  addTooltip() {
-    console.log('adding tooltip')
-    this.joyride.addTooltip({
-     text: 'Drag the COM Connector module onto the board ',
-     selector:/* '.save-button', */'.id101',
-     position: 'right',
-     trigger: '.save-button',  //'.com-connector-tooltip',
-     style: {
-       backgroundColor: 'white',
-       borderRadius: 0,
-       color: 'black',
-       mainColor: '#ff67b4',
-       textAlign: 'center',
-       width: '29rem'
-     }
-   });
-  }
-  
   dropDraggingModule() {
     const { draggingModuleData, boardSpecs } = this.props;
     const { width, height, boundToSideIndex } = draggingModuleData;
@@ -399,7 +381,6 @@ let DesignTool = class extends Component {
       store.dispatch(actions.incrementTutorialStep());
       this.setState({ running: false });
       store.dispatch(actions.toggleShouldRenderModal());
-      this.addTooltip();
     }
     
     if (result.type === 'error:target_not_found') {
@@ -412,6 +393,24 @@ let DesignTool = class extends Component {
     if (typeof joyride.callback === 'function') {
       joyride.callback();
     }
+  }
+  
+  addTooltip() {
+    console.log('adding tooltip')
+    this.joyride.addTooltip({
+     text: 'Drag the COM Connector module onto the board ',
+     selector:/* '.save-button', */'.id101',
+     position: 'right',
+     trigger: /*'.save-button',*/ '.com-connector-tooltip',
+     style: {
+       backgroundColor: 'white',
+       borderRadius: 0,
+       color: 'black',
+       mainColor: '#ff67b4',
+       textAlign: 'center',
+       width: '29rem'
+     }
+   });
   }
   
   renderJoyride() {
@@ -518,7 +517,8 @@ let DesignTool = class extends Component {
       store.dispatch(actions.toggleShouldRenderModal());
     } 
     const handleClose = {
-      handleCloseButtonClick: handleCloseFunction.bind(this)
+      handleCloseButtonClick: handleCloseFunction.bind(this),
+      handleDidMount: this.addTooltip.bind(this)
     }
     const buttonMethods = getButtonMethods(tutorialStep);
     
