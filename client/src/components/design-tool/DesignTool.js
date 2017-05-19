@@ -408,6 +408,31 @@ let DesignTool = class extends Component {
     );
   }
   
+  renderJoyride() {
+    const { joyride } = this.props;
+    
+    const joyrideProps = {
+      autoStart: joyride.autoStart || this.state.autoStart,
+      callback: this.handleJoyrideCallback,
+      debug: false,
+      disableOverlay: this.state.step === 1,
+      resizeDebounce: joyride.resizeDebounce,
+      run: joyride.run || this.state.running,
+      scrollToFirstStep: joyride.scrollToFirstStep || true,
+      stepIndex: joyride.stepIndex || this.state.step,
+      steps: joyride.steps || this.state.steps,
+      type: joyride.type || 'continuous',
+      locale: {next: 'Next', last: 'Next', back: 'Back'}
+    };
+    
+    return (
+      <Joyride
+        {...joyrideProps}
+        ref={node => this.joyride = node} 
+      />
+    );
+  }
+  
   renderSideBar() {
     const { iconVisibityData, currentProjectModules, shouldRenderSideBar } = this.props;
     const { isDraggingToBoard, disabledIconExceptions } = this.state;
@@ -529,7 +554,7 @@ let DesignTool = class extends Component {
   renderBoardFrame() {
     const { tutorialStep, boardSpecs } = this.props;
   
-    if(tutorialStep === 3) {
+    if (tutorialStep === 2) {
       return (
         <DesignToolBoardFrame 
           height={boardSpecs.height + 27}
@@ -564,28 +589,10 @@ let DesignTool = class extends Component {
       shouldHideContextMenu
     } = this.state;
     
-    const joyrideProps = {
-      autoStart: joyride.autoStart || this.state.autoStart,
-      callback: this.handleJoyrideCallback,
-      debug: false,
-      disableOverlay: this.state.step === 1,
-      resizeDebounce: joyride.resizeDebounce,
-      run: joyride.run || this.state.running,
-      scrollToFirstStep: joyride.scrollToFirstStep || true,
-      stepIndex: joyride.stepIndex || this.state.step,
-      steps: joyride.steps || this.state.steps,
-      type: joyride.type || 'continuous',
-      locale: {next: 'Next', last: 'Next', back: 'Back'}
-    };
-    
     return (
       <div>
+        {this.renderJoyride()}
         {this.renderBoardFrame()}
-        
-        <Joyride
-        {...joyrideProps}
-        ref={node => this.joyride = node} 
-        />
         
         <TopNavbar
           projectName={currentProjectName}
@@ -635,6 +642,7 @@ const mapStateToProps = state => ({
   anchorPositions: state.anchorPositions,
   iconVisibityData: state.iconVisibity,
   shouldRenderSideBar: state.shouldRenderSideBar,
+  isTutorialActive: state.tutorial.isTutorialModeActive,
   tutorialStep: state.tutorial.step,
   shouldRenderModal: state.tutorial.shouldRenderModal
 });
