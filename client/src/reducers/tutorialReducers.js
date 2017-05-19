@@ -2,8 +2,9 @@ import * as actions from 'actions/indexActions';
 
 const defaultState = {
   isTutorialModeActive: false,
+  shouldRenderModal: true, 
   disabledIconExceptions: null,
-  step: 0
+  step: 3,
 }
 
 export const tutorial = (state = defaultState, action) => {
@@ -18,12 +19,12 @@ export const tutorial = (state = defaultState, action) => {
         ...state,
         disabledIconExceptions: action.exceptions
       };
-    case actions.INCREMENT_TUTORIAL_STEP:
+    case actions.INCREMENT_STEP:
       return {
         ...state,
         step: state.step + 1,
       };
-    case actions.DECREMENT_TUTORIAL_STEP:
+    case actions.DECREMENT_STEP:
       return {
         ...state,
         step: state.step - 1,

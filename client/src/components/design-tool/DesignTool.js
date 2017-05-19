@@ -460,8 +460,12 @@ let DesignTool = class extends Component {
     const getButtonMethods = () => {
       switch(tutorialStep) {
         case 0:
+          const stepOneNextClickHandler = function() {
+            store.dispatch(actions.incrementTutorialStep());
+            store.dispatch(actions.toggleTutorialMode());
+          }
           return {
-            handleNextButtonClick: () => store.dispatch(actions.incrementTutorialStep()),
+            handleNextButtonClick: stepOneNextClickHandler,
             handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
           }
         case 2:
@@ -487,10 +491,14 @@ let DesignTool = class extends Component {
         } 
     }
     
-    const buttonMethods = getButtonMethods(tutorialStep);
+    const handleCloseFunction = function() {
+      store.dispatch(actions.toggleTutorialMode());
+      this.toggleShouldRenderModal();
+    } 
     const handleClose = {
-      handleCloseButtonClick:this.toggleShouldRenderModal.bind(this)
+      handleCloseButtonClick: handleCloseFunction.bind(this)
     }
+    const buttonMethods = getButtonMethods(tutorialStep);
     
     return Object.assign(buttonMethods, handleClose)
   }
@@ -498,7 +506,6 @@ let DesignTool = class extends Component {
   renderModal() {
     const { shouldRenderModal, tutorialSteps } = this.state;
     const { tutorialStep } = this.props;
-    console.log(tutorialStep)
     const modalMethods = this.getModalMethods(tutorialStep);
     const modalProps = Object.assign(tutorialSteps[tutorialStep], modalMethods);
     

@@ -1,20 +1,46 @@
+import { tutorialSteps } from 'components/design-tool/DesignToolTutorialSteps';
+
 export const TOGGLE_TUTORIAL_MODE = 'TOGGLE_TUTORIAL_MODE';
 export const toggleTutorialMode = () => ({
   type: 'TOGGLE_TUTORIAL_MODE'
 });
 
 export const UPDATE_DISABLED_ICON_EXCEPTIONS = 'UPDATE_DISABLED_ICON_EXCEPTIONS';
-export const updateDisabledIconExceptions = (exceptions) => ({
+export const updateDisabledIconExceptions = exceptions => ({
   type: 'UPDATE_DISABLED_ICON_EXCEPTIONS',
-  excpetions
+  exceptions
 });
 
-export const INCREMENT_TUTORIAL_STEP = 'INCREMENT_TUTORIAL_STEP';
-export const incrementTutorialStep = () => ({
-  type: 'INCREMENT_TUTORIAL_STEP'
+export const INCREMENT_STEP = 'INCREMENT_STEP';
+export const incrementStep = () => ({
+  type: 'INCREMENT_STEP'
 });
 
-export const DECREMENT_TUTORIAL_STEP = 'INCREMENT_TUTORIAL_STEP';
-export const decrementTutorialStep = () => ({
-  type: 'INCREMENT_TUTORIAL_STEP'
+export const incrementTutorialStep = () => {
+  return (dispatch, getState) => {
+    const currentStep = getState().tutorial.step
+    
+    if (currentStep < tutorialSteps.length - 1) {
+      return dispatch(incrementStep());
+    }
+    
+    return null;
+  };
+}
+
+export const DECREMENT_STEP = 'DECREMENT_STEP';
+export const decrementStep = () => ({
+  type: 'DECREMENT_STEP'
 });
+
+export const decrementTutorialStep = () => {
+  return (dispatch, getState) => {
+    const currentStep = getState().tutorial.step
+    
+    if (currentStep > 0) {
+      return dispatch(decrementStep());
+    }
+    
+    return null;
+  };
+}
