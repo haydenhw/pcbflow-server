@@ -3,7 +3,7 @@ export const steps = [
     title: 'The Board',
     text: 'This is the board. Modules are arranged here to build a ciruit.',
     selector: '.board-frame',
-    position: 'bottom',
+    position: 'left',
     allowClicksThruHole: true,
   },
   {
@@ -12,6 +12,5 @@ export const steps = [
     textAlign: 'center',
     selector: '.sideBar',
     position: 'right'
-  }
+  },
 ]
-

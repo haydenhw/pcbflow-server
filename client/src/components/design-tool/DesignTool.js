@@ -52,7 +52,8 @@ let DesignTool = class extends Component {
       shouldHideContextMenu: false,
       image: null,
       step: 0,
-      disabledIconExceptions: null
+      disabledIconExceptions: null,
+      running: false
     };
     
     this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
@@ -163,7 +164,7 @@ let DesignTool = class extends Component {
     });
   }
   
-  startTour() {
+  startTour(step) {
     store.dispatch(actions.toggleShouldRenderModal());
     
     this.setState({
@@ -182,13 +183,20 @@ let DesignTool = class extends Component {
     
     this.setRouteHook();
     this.addHanlders();
-    
+  }
+  
+  componentWillUnmount() {
+    clearTimeout(this.timeOut);
+    this.removeHanlders();
+  }
+  
+  addTooltip() {
+    console.log('adding tooltip')
     this.joyride.addTooltip({
      text: 'Drag the COM Connector module onto the board ',
-     selector: '.id101',
+     selector:/* '.save-button', */'.id101',
      position: 'right',
-     trigger: '.com-connector-tooltip',
-    //  event: 'click',
+     trigger: '.save-button',  //'.com-connector-tooltip',
      style: {
        backgroundColor: 'white',
        borderRadius: 0,
@@ -198,11 +206,6 @@ let DesignTool = class extends Component {
        width: '29rem'
      }
    });
-  }
-  
-  componentWillUnmount() {
-    clearTimeout(this.timeOut);
-    this.removeHanlders();
   }
   
   dropDraggingModule() {
@@ -301,31 +304,7 @@ let DesignTool = class extends Component {
     }
   }
 
-  handleJoyrideCallback(result) {
-    const { joyride } = this.props;
-    
-    if (result.type === 'step:before') {
-      // Keep internal state in sync with joyride
-      this.setState({ step: result.index });
-    }
-    
-    if (result.type === 'finished' && this.state.running) {
-      store.dispatch(actions.incrementTutorialStep());
-      this.setState({ running: false });
-      store.dispatch(actions.toggleShouldRenderModal());
-    }
-    
-    if (result.type === 'error:target_not_found') {
-      this.setState({
-        step: result.action === 'back' ? result.index - 1 : result.index + 1,
-        autoStart: result.action !== 'close' && result.action !== 'esc',
-      });
-    }
-    
-    if (typeof joyride.callback === 'function') {
-      joyride.callback();
-    }
-  }
+  
 
   toggleDraggingToBoard() {
     this.setState({ isDraggingToBoard: true });
@@ -408,6 +387,33 @@ let DesignTool = class extends Component {
     );
   }
   
+  handleJoyrideCallback(result) {
+    const { joyride } = this.props;
+    
+    if (result.type === 'step:before') {
+      // Keep internal state in sync with joyride
+      this.setState({ step: result.index });
+    }
+    
+    if (result.type === 'finished' && this.state.running) {
+      store.dispatch(actions.incrementTutorialStep());
+      this.setState({ running: false });
+      store.dispatch(actions.toggleShouldRenderModal());
+      this.addTooltip();
+    }
+    
+    if (result.type === 'error:target_not_found') {
+      this.setState({
+        step: result.action === 'back' ? result.index - 1 : result.index + 1,
+        autoStart: result.action !== 'close' && result.action !== 'esc',
+      });
+    }
+    
+    if (typeof joyride.callback === 'function') {
+      joyride.callback();
+    }
+  }
+  
   renderJoyride() {
     const { joyride } = this.props;
     
@@ -417,9 +423,9 @@ let DesignTool = class extends Component {
       debug: false,
       disableOverlay: this.state.step === 1,
       resizeDebounce: joyride.resizeDebounce,
-      run: joyride.run || this.state.running,
+      run: false || joyride.run || this.state.running,
       scrollToFirstStep: joyride.scrollToFirstStep || true,
-      stepIndex: joyride.stepIndex || this.state.step,
+      stepIndex: 1 || joyride.stepIndex || this.state.step,
       steps: joyride.steps || this.state.steps,
       type: joyride.type || 'continuous',
       locale: {next: 'Next', last: 'Next', back: 'Back'}
