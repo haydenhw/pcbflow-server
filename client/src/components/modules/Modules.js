@@ -93,6 +93,10 @@ class Modules extends Component {
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });
     }
+    
+    if((prevProps.modules.length < this.props.modules.length) && (prevProps.tutorialStep === 3)) {
+      setTimeout(() => store.dispatch(actions.toggleShouldRenderModal()), 1000)
+    }
   }
   
   componentDidMount() {
@@ -169,7 +173,8 @@ const mapStateToProps = state => ({
   boardSpecs: state.boardSpecs,
   anchorPositions: state.anchorPositions,
   iconVisibityMode: state.iconVisibity.mode,
-  currentDependencyData: state.iconVisibity
+  currentDependencyData: state.iconVisibity,
+  tutorialStep: state.tutorial.step
 });
 
 export default connect(mapStateToProps)(Modules);

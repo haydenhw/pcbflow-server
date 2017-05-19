@@ -14,6 +14,11 @@ export const tutorial = (state = defaultState, action) => {
         ...state,
         isTutorialModeActive: !state.isTutorialModeActive
       };
+    case actions.TOGGLE_SHOULD_RENDER_MODAL:
+      return {
+        ...state,
+        shouldRenderModal: !state.shouldRenderModal
+      };
     case actions.UPDATE_DISABLED_ICON_EXCEPTIONS:
       return {
         ...state,

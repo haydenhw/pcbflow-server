@@ -314,7 +314,7 @@ let DesignTool = class extends Component {
     if (result.type === 'finished' && this.state.running) {
       store.dispatch(actions.incrementTutorialStep());
       this.setState({ running: false });
-      this.toggleShouldRenderModal();
+      store.dispatch(actions.toggleShouldRenderModal());
     }
     
     if (result.type === 'error:target_not_found') {
@@ -345,13 +345,6 @@ let DesignTool = class extends Component {
       shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail,
     });
   }
-  
-  toggleShouldRenderModal() {
-    this.setState({
-      shouldRenderModal: !this.state.shouldRenderModal,
-    });
-  }
-
 
   updateState(url) {
     this.setState({ image: url });
@@ -466,18 +459,18 @@ let DesignTool = class extends Component {
           }
           return {
             handleNextButtonClick: stepOneNextClickHandler,
-            handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
+            handleBackButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
           }
         case 2:
           return {
             handleNextButtonClick: this.startTour.bind(this), 
-            handleBackButtonClick: this.toggleShouldRenderModal.bind(this)
+            handleBackButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
           }
         case 3:
           const stepThreeNextClickHandler = function() {
             store.dispatch(actions.incrementTutorialStep());
             store.dispatch(actions.updateDisabledIconExceptions([0]));
-            this.toggleShouldRenderModal();
+            store.dispatch(actions.toggleShouldRenderModal());
           }
           return {
             handleNextButtonClick: stepThreeNextClickHandler.bind(this),
@@ -493,7 +486,7 @@ let DesignTool = class extends Component {
     
     const handleCloseFunction = function() {
       store.dispatch(actions.toggleTutorialMode());
-      this.toggleShouldRenderModal();
+      store.dispatch(actions.toggleShouldRenderModal());
     } 
     const handleClose = {
       handleCloseButtonClick: handleCloseFunction.bind(this)
@@ -504,8 +497,8 @@ let DesignTool = class extends Component {
   }
   
   renderModal() {
-    const { shouldRenderModal, tutorialSteps } = this.state;
-    const { tutorialStep } = this.props;
+    const { tutorialStep, shouldRenderModal } = this.props;
+    const { tutorialSteps } = this.state;
     const modalMethods = this.getModalMethods(tutorialStep);
     const modalProps = Object.assign(tutorialSteps[tutorialStep], modalMethods);
     
@@ -624,7 +617,8 @@ const mapStateToProps = state => ({
   anchorPositions: state.anchorPositions,
   iconVisibityData: state.iconVisibity,
   shouldRenderSideBar: state.shouldRenderSideBar,
-  tutorialStep: state.tutorial.step
+  tutorialStep: state.tutorial.step,
+  shouldRenderModal: state.tutorial.shouldRenderModal
 });
 
 DesignTool = withRouter(DesignTool);

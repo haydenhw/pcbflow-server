@@ -11,6 +11,11 @@ export const updateDisabledIconExceptions = exceptions => ({
   exceptions
 });
 
+export const TOGGLE_SHOULD_RENDER_MODAL = 'TOGGLE_SHOULD_RENDER_MODAL';
+export const toggleShouldRenderModal = () => ({
+  type: 'TOGGLE_SHOULD_RENDER_MODAL'
+});
+
 export const INCREMENT_STEP = 'INCREMENT_STEP';
 export const incrementStep = () => ({
   type: 'INCREMENT_STEP'
