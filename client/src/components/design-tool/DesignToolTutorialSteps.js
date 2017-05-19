@@ -22,7 +22,14 @@ export const tutorialSteps = [
   {
     text: 'Okay, now we\'re ready to get started! \n First drag and drop the COM connector module anywhere on the board',
     nextButtonText: 'Okay',
+    nextButtonClass: 'com-connector-tooltip',
     shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
+  {
+    text: 'Nice! The COM connenctor is ...',
+    nextButtonText: 'Okay',
+    shouldRenderBackButton: false,
     backButtonText: 'Back'
   },
   

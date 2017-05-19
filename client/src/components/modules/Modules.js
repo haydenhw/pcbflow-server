@@ -94,8 +94,10 @@ class Modules extends Component {
       });
     }
     
-    if((prevProps.modules.length < this.props.modules.length) && (prevProps.tutorialStep === 3)) {
-      setTimeout(() => store.dispatch(actions.toggleShouldRenderModal()), 1000)
+    if((prevProps.modules.length < this.props.modules.length) && (prevProps.tutorialStep === 4)) {
+      console.log('hola')
+      store.dispatch(actions.incrementTutorialStep());
+      setTimeout(() => store.dispatch(actions.toggleShouldRenderModal()), 700)
     }
   }
   

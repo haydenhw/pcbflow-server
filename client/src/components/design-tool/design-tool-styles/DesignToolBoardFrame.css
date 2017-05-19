@@ -1,0 +1,6 @@
+.board-frame {
+  position: absolute;
+  margin-left: auto;
+  z-index: 1000;
+  border: 1px solid #000;
+}

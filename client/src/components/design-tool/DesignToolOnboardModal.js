@@ -38,6 +38,8 @@ export default function DesignToolOnboardModal(props) {
     return null
   } 
   
+  const nextButtonClass = `modal-button ${props.nextButtonClass}`
+  
   return (
     <Modal>
       <div className="modal-content">
@@ -49,7 +51,7 @@ export default function DesignToolOnboardModal(props) {
           {renderImage()}
         <div className="modal-button-wrapper">
           {renderBackButton()}
-          <button className="modal-button" onClick={handleNextButtonClick}>{props.nextButtonText}</button>
+          <button className={nextButtonClass} onClick={handleNextButtonClick}>{props.nextButtonText}</button>
         </div>
       </div>
     </Modal>

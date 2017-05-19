@@ -9,7 +9,7 @@ export default function IconFrame(props) {
   };
   return (
     <div 
-      className="icon-frame-container"
+      className={`icon-frame-container id${props.id}`}
       style={props.disabled ? fadeOut : {} }
     >
       <div className="icon-frame-title">

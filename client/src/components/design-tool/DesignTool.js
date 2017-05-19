@@ -24,6 +24,7 @@ import DesignToolStage from './DesignToolStage';
 import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
 import DesignToolOnboardModal from './DesignToolOnboardModal';
+import DesignToolBoardFrame from './DesignToolBoardFrame';
 import { steps } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
 
@@ -163,9 +164,7 @@ let DesignTool = class extends Component {
   }
   
   startTour() {
-    this.setState({
-      shouldRenderModal: false
-    })
+    store.dispatch(actions.toggleShouldRenderModal());
     
     this.setState({
       running: true,
@@ -185,16 +184,15 @@ let DesignTool = class extends Component {
     this.addHanlders();
     
     this.joyride.addTooltip({
-     title: 'The classic joyride',
-     text: 'Let\'s go on a magical tour! Just click the big orange button.',
-     selector: '.save-button',
-     position: 'bottom',
-     trigger: '.round-button',
+     text: 'Drag the COM Connector module onto the board ',
+     selector: '.id101',
+     position: 'right',
+     trigger: '.com-connector-tooltip',
     //  event: 'click',
      style: {
-       backgroundColor: 'rgba(0, 0, 0, 0.8)',
+       backgroundColor: 'white',
        borderRadius: 0,
-       color: '#fff',
+       color: 'black',
        mainColor: '#ff67b4',
        textAlign: 'center',
        width: '29rem'
@@ -564,6 +562,7 @@ let DesignTool = class extends Component {
     
     return (
       <div>
+        <DesignToolBoardFrame />
         <Joyride
         {...joyrideProps}
         ref={node => this.joyride = node} 
