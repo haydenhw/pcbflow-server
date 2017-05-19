@@ -562,11 +562,17 @@ let DesignTool = class extends Component {
     
     return (
       <div>
-        <DesignToolBoardFrame />
+        <DesignToolBoardFrame 
+          height={this.props.boardSpecs.height + 27}
+          width={this.props.boardSpecs.width + 27}
+          top={this.props.boardSpecs.y - 14}
+          left={this.props.boardSpecs.x - 13}
+        />
+        
         <Joyride
         {...joyrideProps}
         ref={node => this.joyride = node} 
-      />
+        />
         
         <TopNavbar
           projectName={currentProjectName}
@@ -606,8 +612,8 @@ const mapStateToProps = state => ({
   currentProjectName: state.currentProjectInfo.name,
   currentProjectId: state.currentProjectInfo.id,
   currentProjectPrice: state.currentProjectInfo.price,
-  timeLastSaved: state.currentProjectInfo.timeLastSaved,
   currentProjectModules: state.currentProjectModules.present,
+  timeLastSaved: state.currentProjectInfo.timeLastSaved,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   draggingModuleData: state.draggingModule,
   selectedModuleIndex: state.selectedModule.index,
