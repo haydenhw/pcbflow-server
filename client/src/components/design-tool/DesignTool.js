@@ -513,11 +513,29 @@ let DesignTool = class extends Component {
   
   renderFooter() {
     const { currentProjectPrice, timeLastSaved } = this.props;
+    
     if(this.state.shouldRenderInfoButton) {
       return (
         <Footer
           price={currentProjectPrice}
           timeLastSaved={timeLastSaved}
+        />
+      );
+    }
+    
+    return null;
+  }
+  
+  renderBoardFrame() {
+    const { tutorialStep, boardSpecs } = this.props;
+  
+    if(tutorialStep === 3) {
+      return (
+        <DesignToolBoardFrame 
+          height={boardSpecs.height + 27}
+          width={boardSpecs.width + 27}
+          top={boardSpecs.y - 14}
+          left={boardSpecs.x - 14}
         />
       );
     }
@@ -562,12 +580,7 @@ let DesignTool = class extends Component {
     
     return (
       <div>
-        <DesignToolBoardFrame 
-          height={this.props.boardSpecs.height + 27}
-          width={this.props.boardSpecs.width + 27}
-          top={this.props.boardSpecs.y - 14}
-          left={this.props.boardSpecs.x - 13}
-        />
+        {this.renderBoardFrame()}
         
         <Joyride
         {...joyrideProps}
