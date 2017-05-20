@@ -399,7 +399,7 @@ let DesignTool = class extends Component {
     console.log('adding tooltip')
     this.joyride.addTooltip({
      text: 'Drag the COM Connector module onto the board ',
-     selector:/* '.save-button', */'.id101',
+     selector:/* '.save-button', */'.id105',
      position: 'right',
      trigger: /*'.save-button',*/ '.com-connector-tooltip',
      style: {
@@ -502,7 +502,8 @@ let DesignTool = class extends Component {
           }
           return {
             handleNextButtonClick: stepThreeNextClickHandler.bind(this),
-            handleBackButtonClick: this.startTour.bind(this)
+            handleBackButtonClick: this.startTour.bind(this),
+            handleDidMount: this.addTooltip.bind(this)
           }
         default:
           return {
@@ -517,8 +518,7 @@ let DesignTool = class extends Component {
       store.dispatch(actions.toggleShouldRenderModal());
     } 
     const handleClose = {
-      handleCloseButtonClick: handleCloseFunction.bind(this),
-      handleDidMount: this.addTooltip.bind(this)
+      handleCloseButtonClick: handleCloseFunction.bind(this)
     }
     const buttonMethods = getButtonMethods(tutorialStep);
     

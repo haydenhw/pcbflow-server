@@ -10,11 +10,11 @@ export const tutorialSteps = [
     nextButtonText: 'Next',
     shouldRenderBackButton: true,
     backButtonText: 'Back',
-    image: 'images/design-tool-screenshot.png',
+    image: {src: null, alt: 'image of completed project'},
     imageClassName: 'completed-tutorial-project' 
   },
   {
-    text: 'First let\'s take a quick tour...',
+    text: 'First let\'s take a short tour...',
     nextButtonText: 'Okay',
     shouldRenderBackButton: true,
     backButtonText: 'Back'
@@ -27,9 +27,28 @@ export const tutorialSteps = [
     backButtonText: 'Back'
   },
   {
-    text: 'Nice! The COM connenctor is ...',
-    nextButtonText: 'Okay',
+    text: 'Nice! The COM or \'computer on module\' component will act as the control center for our HTPC. It is quite literally a computer which runs a linux or android operating system.\n The COM has a wide range of interfacing capabilities including: ',
+    list: ['WiFi','HDMI','USB', 'Audio', 'Ethernet', 'RGB'],
+    nextButtonText: 'Next',
     shouldRenderBackButton: false,
+    backButtonText: 'Back'
+  },
+  {
+    text: 'So which module should we add next? Let\'s take a look at the module pallate for some insight.',
+    nextButtonText: 'Okay',
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
+  {
+    text: '(Render tooltip pointing to module pallate with the following text...) \n Some modules are depndent other specific modules to function. When you add a module that has unmet dependencies, those dependencies will be listed in the module pallate'
+    nextButtonText: 'Okay',
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
+  {
+    text: '(New tooltip points to module pallate with the following text...)'
+    nextButtonText: 'Okay',
+    shouldRenderBackButton: true,
     backButtonText: 'Back'
   },
   

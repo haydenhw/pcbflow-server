@@ -47,6 +47,18 @@ export default class DesignToolOnboardModal extends Component {
     return null
   } 
   
+  renderList() {
+    const { list } = this.props;
+    
+    if (list){
+      const items = list.map((item, index) => <li key={index} >{item}</li>);
+      
+      return <ul style={{textAlign: "left" }}>{items}</ul>
+    }
+    
+    return null;
+  }
+  
   render() {
     const nextButtonClass = `modal-button ${this.props.nextButtonClass}`
     
@@ -57,6 +69,7 @@ export default class DesignToolOnboardModal extends Component {
           <div className="modal-header"></div>
           <div className="modal-text">
             {this.props.text.split("\n").map((line, index) => <div key={index}>{line}</div>)}
+            {this.renderList()}
           </div>
             {this.renderImage()}
           <div className="modal-button-wrapper">
