@@ -25,7 +25,7 @@ import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
 import DesignToolOnboardModal from './DesignToolOnboardModal';
 import DesignToolBoardFrame from './DesignToolBoardFrame';
-import { steps } from './DesignToolTourSteps';
+import { tourSteps } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
 
 
@@ -38,7 +38,7 @@ let DesignTool = class extends Component {
     super(props);
     this.state = {
       tutorialSteps,
-      steps,
+      tourSteps,
       x: 0,
       y: 0,
       isSideBarHidden: false,
@@ -164,7 +164,7 @@ let DesignTool = class extends Component {
     });
   }
   
-  startTour(step) {
+  startTour() {
     store.dispatch(actions.toggleShouldRenderModal());
     
     this.setState({
@@ -425,7 +425,7 @@ let DesignTool = class extends Component {
       run: false || joyride.run || this.state.running,
       scrollToFirstStep: joyride.scrollToFirstStep || true,
       stepIndex: 1 || joyride.stepIndex || this.state.step,
-      steps: joyride.steps || this.state.steps,
+      steps: joyride.steps || this.state.tourSteps,
       type: joyride.type || 'continuous',
       locale: {next: 'Next', last: 'Next', back: 'Back'}
     };

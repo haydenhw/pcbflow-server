@@ -1,4 +1,4 @@
-export const steps = [
+export const tourSteps = [
   {
     title: 'The Board',
     text: 'This is the board. Modules are arranged here to build a ciruit.',
