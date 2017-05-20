@@ -169,7 +169,7 @@ let DesignTool = class extends Component {
     
     this.setState({
       running: true,
-      step: 0,
+      joyrideStep: 0,
     });
   }
   
@@ -281,7 +281,7 @@ let DesignTool = class extends Component {
   }
   
   handleNextButtonClick() {
-    if (this.state.step === 1) {
+    if (this.state.joyrideStep === 1) {
       this.joyride.next();
     }
   }
@@ -420,11 +420,11 @@ let DesignTool = class extends Component {
       autoStart: joyride.autoStart || this.state.autoStart,
       callback: this.handleJoyrideCallback,
       debug: false,
-      disableOverlay: this.state.step === 1,
+      disableOverlay: this.state.joyrideStep === 1,
       resizeDebounce: joyride.resizeDebounce,
       run: false || joyride.run || this.state.running,
       scrollToFirstStep: joyride.scrollToFirstStep || true,
-      stepIndex: 1 || joyride.stepIndex || this.state.step,
+      stepIndex: joyride.stepIndex || this.state.joyrideStep,
       steps: joyride.steps || this.state.tourSteps,
       type: joyride.type || 'continuous',
       locale: {next: 'Next', last: 'Next', back: 'Back'}

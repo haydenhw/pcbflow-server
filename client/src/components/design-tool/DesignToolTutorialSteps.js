@@ -40,7 +40,7 @@ export const tutorialSteps = [
     backButtonText: 'Back'
   },
   {
-    text: '(Render tooltip pointing to module pallate with the following text...) \n Some modules are depndent other specific modules to function. When you add a module that has unmet dependencies, those dependencies will be listed in the module pallate',
+    text: '(Render tooltip pointing to module pallate with the following text...) \n Some modules are dependent on other particular modules to function. When you add a module that has unmet dependencies, those dependencies will be listed in the module pallate',
     nextButtonText: 'Okay',
     shouldRenderBackButton: true,
     backButtonText: 'Back'
