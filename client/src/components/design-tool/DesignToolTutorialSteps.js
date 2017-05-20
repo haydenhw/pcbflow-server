@@ -10,7 +10,7 @@ export const tutorialSteps = [
     nextButtonText: 'Next',
     shouldRenderBackButton: true,
     backButtonText: 'Back',
-    image: {src: null, alt: 'image of completed project'},
+    //image: {src: null, alt: 'image of completed project'},
     imageClassName: 'completed-tutorial-project' 
   },
   {
@@ -40,14 +40,32 @@ export const tutorialSteps = [
     backButtonText: 'Back'
   },
   {
-    text: '(Render tooltip pointing to module pallate with the following text...) \n Some modules are depndent other specific modules to function. When you add a module that has unmet dependencies, those dependencies will be listed in the module pallate'
+    text: '(Render tooltip pointing to module pallate with the following text...) \n Some modules are depndent other specific modules to function. When you add a module that has unmet dependencies, those dependencies will be listed in the module pallate',
     nextButtonText: 'Okay',
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },
   {
-    text: '(New tooltip points to module pallate with the following text...)'
-    nextButtonText: 'Okay',
+    text: '(New tooltip points to module pallate with the following text...) \n Go ahead and drag and drop the 5V/5A Regulator onto the board',
+    nextButtonText: 'Next',
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
+  {
+    text: 'Great! You may have noticed that the COM Connector module turned green after you added the 5V/5A Regulator. Modules will dispaly red if they have unmet dependencies and green if all dependencies are satisfied', 
+    nextButtonText: 'Next', 
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
+  {
+    text: 'So why exactly does the COM need a 5V/5A Regulator to function?\n This is becasue the COM is designed to operate at voltage in the range of 3.5V-6V, but as we\'ll see in the next step, our board will be running off of a 20V power supply. The 5V/5A Regulator will act as a voltage throttle, taking in 20 Volts and delivering 5 Volts to the COM.', 
+    nextButtonText: 'Next', 
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
+  {
+    text: 'Tutorial continues...', 
+    nextButtonText: 'Click X in top left to close', 
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },

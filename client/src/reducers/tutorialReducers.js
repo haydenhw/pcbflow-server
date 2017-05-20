@@ -4,7 +4,7 @@ const defaultState = {
   isTutorialModeActive: false,
   shouldRenderModal: true, 
   disabledIconExceptions: null,
-  step: 5,
+  step: 0,
 }
 
 export const tutorial = (state = defaultState, action) => {

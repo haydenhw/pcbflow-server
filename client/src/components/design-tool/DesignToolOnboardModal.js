@@ -68,7 +68,7 @@ export default class DesignToolOnboardModal extends Component {
           <span className="modal-close" onClick={this.handleCloseButtonClick.bind(this)}>&times;</span>
           <div className="modal-header"></div>
           <div className="modal-text">
-            {this.props.text.split("\n").map((line, index) => <div key={index}>{line}</div>)}
+            {this.props.text.split("\n").map((line, index) => <p key={index}>{line}</p>)}
             {this.renderList()}
           </div>
             {this.renderImage()}
