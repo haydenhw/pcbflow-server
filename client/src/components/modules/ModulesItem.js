@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Rect, Group, Image, Text } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
@@ -9,7 +9,7 @@ import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail from 'helpers/generateThumbnail';
 import { areDependenciesMet } from 'helpers/dependencies';
 
-export default class ModulesItem extends Component {
+export default class ModulesItem extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -192,6 +192,7 @@ export default class ModulesItem extends Component {
   }
   
   render() {
+    console.log(this.props.text)
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const image = (
       <Image
