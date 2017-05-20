@@ -27,7 +27,7 @@ export const tutorialSteps = [
     backButtonText: 'Back'
   },
   {
-    text: 'Nice! The COM or \'computer on module\' component will act as the control center for our HTPC. It is quite literally a computer which runs a linux or android operating system.\n The COM has a wide range of interfacing capabilities including: ',
+    text: 'Nice! The COM or \'computer on module\' component will act as the control center for our HTPC. It is quite literally a computer which runs a linux or android operating system.\n The COM has a wide range of multimedia interfacing capabilities including: ',
     list: ['WiFi','HDMI','USB', 'Audio', 'Ethernet', 'RGB'],
     nextButtonText: 'Next',
     shouldRenderBackButton: false,
@@ -64,10 +64,15 @@ export const tutorialSteps = [
     backButtonText: 'Back'
   },
   {
-    text: 'Tutorial continues...', 
-    nextButtonText: 'Click X in top left to close', 
+    text: 'So how about that power supply?\n Let\'s add the DC Barrel Jack to give our HTPC some juice...', 
+    nextButtonText: 'Next', 
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },
-  
+  {
+    text: 'So how about that power supply?\n Let\'s add the DC Barrel Jack to give our HTPC some juice...', 
+    nextButtonText: 'Next', 
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
 ]

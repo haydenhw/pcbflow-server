@@ -14,3 +14,15 @@ export const steps = [
     position: 'right'
   },
 ]
+
+export const dependecyDemo = [
+
+  {
+    title: 'The Module Pallate',
+    text: 'Add modules to the board by dragging and dropping from the module pallate.',
+    textAlign: 'center',
+    selector: '.sideBar',
+    position: 'right'
+  },
+]
+
