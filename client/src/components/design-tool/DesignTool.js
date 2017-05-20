@@ -51,7 +51,7 @@ let DesignTool = class extends Component {
       shouldRenderModal: true, 
       shouldHideContextMenu: false,
       image: null,
-      step: 0,
+      joyrideStep: 0,
       disabledIconExceptions: null,
       running: false
     };
