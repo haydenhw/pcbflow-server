@@ -40,12 +40,6 @@ export const tutorialSteps = [
     backButtonText: 'Back'
   },
   {
-    text: '(Render tooltip pointing to module pallate with the following text...) \n Some modules are dependent on other particular modules to function. When you add a module that has unmet dependencies, those dependencies will be listed in the module pallate',
-    nextButtonText: 'Okay',
-    shouldRenderBackButton: true,
-    backButtonText: 'Back'
-  },
-  {
     text: '(New tooltip points to module pallate with the following text...) \n Go ahead and drag and drop the 5V/5A Regulator onto the board',
     nextButtonText: 'Next',
     shouldRenderBackButton: true,

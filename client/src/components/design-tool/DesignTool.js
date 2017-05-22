@@ -364,12 +364,20 @@ let DesignTool = class extends Component {
   
   startTour() {
     store.dispatch(actions.toggleShouldRenderModal());
-    console.log('starting...')
-    console.log(this.state.running)
     this.setState({
       running: true,
       joyrideStep: 0,
     });
+  }
+  
+  restartTour() {
+    store.dispatch(actions.toggleShouldRenderModal());
+    console.log('re-starting...')
+    this.joyride.reset(true);
+  /*  this.setState({
+      running: true,
+      joyrideStep: 0,
+    });*/
   }
   
   handleJoyrideCallback(result) {
@@ -501,7 +509,7 @@ let DesignTool = class extends Component {
           }
         case 5: 
         return {
-          handleNextButtonClick: this.startTour.bind(this), 
+          handleNextButtonClick: this.restartTour.bind(this), 
           handleBackButtonClick: () => store.dispatch(actions.decrementTutorialStep())
         }
         
