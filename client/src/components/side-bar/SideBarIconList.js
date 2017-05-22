@@ -41,13 +41,13 @@ let SideBarIconList = class extends Component {
   renderSideBarIconFrame(module, index) {
     const { disabledIconExceptions } = this.props;
     const isDisabled = disabledIconExceptions ? (disabledIconExceptions.indexOf(index) === -1) : false;
-    
     return (
       <SideBarIconFrame
         key={index}
         moduleName={module.text}
         modulePrice={module.price}
         id={module.id}
+        hasTooltip={module.hasTooltip}
         disabled={isDisabled}
         >
         {this.renderSideBarIcon(module, index, isDisabled)}

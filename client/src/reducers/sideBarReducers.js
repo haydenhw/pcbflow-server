@@ -43,7 +43,7 @@ export const moduleData = (state = modulesData, action) => {
     return state.map((module) => {
       const updatedModuleProps = {
         ...module,
-        hasTooltip: !module.hasTooltip
+        hasTooltip: false
       };
       return action.id === module.id ? updatedModuleProps : module;
     });

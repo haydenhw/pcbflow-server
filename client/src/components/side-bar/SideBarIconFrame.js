@@ -7,9 +7,10 @@ export default function IconFrame(props) {
   const fadeOut = {
     opacity: '0.3'
   };
+  
   return (
     <div 
-      className={`icon-frame-container id${props.id}`}
+      className={`icon-frame-container ${props.hasTooltip ? `toolTip-${props.id}` : ''}`}
       style={props.disabled ? fadeOut : {} }
     >
       <div className="icon-frame-title">
