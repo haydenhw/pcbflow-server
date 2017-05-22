@@ -25,9 +25,10 @@ import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
 import DesignToolOnboardModal from './DesignToolOnboardModal';
 import DesignToolBoardFrame from './DesignToolBoardFrame';
-import { tourSteps } from './DesignToolTourSteps';
+import { tourSteps, dependecyDemo } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
-
+import { toolTips } from 'config/toolTips'
+console.log(toolTips)
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
 import './design-tool-styles/joyride.css';
@@ -38,7 +39,6 @@ let DesignTool = class extends Component {
     super(props);
     this.state = {
       tutorialSteps,
-      tourSteps,
       x: 0,
       y: 0,
       isSideBarHidden: false,
@@ -52,6 +52,7 @@ let DesignTool = class extends Component {
       shouldHideContextMenu: false,
       image: null,
       joyrideStep: 0,
+      tourSteps: tourSteps,
       disabledIconExceptions: null,
       running: false,
     };
@@ -161,15 +162,6 @@ let DesignTool = class extends Component {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }
       return null;
-    });
-  }
-  
-  startTour() {
-    store.dispatch(actions.toggleShouldRenderModal());
-    
-    this.setState({
-      running: true,
-      joyrideStep: 0,
     });
   }
   
@@ -370,6 +362,16 @@ let DesignTool = class extends Component {
     );
   }
   
+  startTour() {
+    store.dispatch(actions.toggleShouldRenderModal());
+    console.log('starting...')
+    console.log(this.state.running)
+    this.setState({
+      running: true,
+      joyrideStep: 0,
+    });
+  }
+  
   handleJoyrideCallback(result) {
     const { joyride } = this.props;
     
@@ -380,8 +382,13 @@ let DesignTool = class extends Component {
     
     if (result.type === 'finished' && this.state.running) {
       store.dispatch(actions.incrementTutorialStep());
-      this.setState({ running: false });
       store.dispatch(actions.toggleShouldRenderModal());
+      this.setState({
+         running: false,
+         joyrideStep: 0, 
+         tourSteps: dependecyDemo 
+       });
+      
     }
     
     if (result.type === 'error:target_not_found') {
@@ -396,38 +403,24 @@ let DesignTool = class extends Component {
     }
   }
   
-  addTooltip() {
-    this.joyride.addTooltip({
-     text: 'Drag the COM Connector module onto the board ',
-     type: 'click',
-     selector:/* '.save-button', */'.toolTip-105',
-     position: 'right',
-     trigger: /*'.save-button',*/ '.com-connector-tooltip',
-     style: {
-       backgroundColor: 'white',
-       borderRadius: 0,
-       color: 'black',
-       mainColor: '#ff67b4',
-       textAlign: 'center',
-       width: '29rem'
-     }
-   });
+  addTooltip(toolTipData) {
+    this.joyride.addTooltip(toolTipData);
   }
   
   renderJoyride() {
     const { joyride } = this.props;
     
     const joyrideProps = {
-      autoStart: joyride.autoStart || this.state.autoStart,
+      autoStart: true || joyride.autoStart || this.state.autoStart,
       callback: this.handleJoyrideCallback,
       debug: false,
       disableOverlay: true,
       resizeDebounce: joyride.resizeDebounce,
-      run: false || joyride.run || this.state.running,
+      run: this.state.running,
       scrollToFirstStep: joyride.scrollToFirstStep || true,
-      stepIndex: joyride.stepIndex || this.state.joyrideStep,
-      steps: joyride.steps || this.state.tourSteps,
-      type: joyride.type || 'continuous',
+      stepIndex: 0,  //joyride.stepIndex || this.state.joyrideStep,
+      steps: this.state.tourSteps,
+      type: 'continuous',
       locale: {next: 'Next', last: 'Next', back: 'Back'}
     };
     
@@ -504,8 +497,14 @@ let DesignTool = class extends Component {
           return {
             handleNextButtonClick: stepThreeNextClickHandler.bind(this),
             handleBackButtonClick: this.startTour.bind(this),
-            handleDidMount: this.addTooltip.bind(this)
+            handleDidMount: this.addTooltip.bind(this, toolTips[0])
           }
+        case 5: 
+        return {
+          handleNextButtonClick: this.startTour.bind(this), 
+          handleBackButtonClick: () => store.dispatch(actions.decrementTutorialStep())
+        }
+        
         default:
           return {
             handleNextButtonClick: () => store.dispatch(actions.incrementTutorialStep()),

@@ -16,10 +16,9 @@ export const tourSteps = [
 ]
 
 export const dependecyDemo = [
-
   {
-    title: 'The Module Pallate',
-    text: 'Add modules to the board by dragging and dropping from the module pallate.',
+    title: 'dependencies',
+    text: 'About deps',
     textAlign: 'center',
     selector: '.sideBar',
     position: 'right'
