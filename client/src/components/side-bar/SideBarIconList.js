@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import { getUnmetDependencyIds, getUnmetDependencies } from 'helpers/dependencies';
-import { modulesData } from 'components/modules/modulesData';
 
 import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
@@ -21,24 +20,6 @@ const  getVisibleIcons = (visibilityMode, moduleList, onBoardModules, selectedMo
 }
 
 let SideBarIconList = class extends Component {
-  
-  displayAllIcons() {
-    const { 
-      onBoardModules,
-      iconVisibityMode,
-      selectedModuleDependencies,
-    } = this.props;
-    const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
-    
-    if (visibleIcons.length === modulesData.length) {
-      //store.dispatch(actions.updateIconVisibity('ALL'));
-    }
-  }
-  
-  componentDidMount() {
-    this.displayAllIcons();
-  }
-  
   renderSideBarIcon(module, index, isDisabled) {
     const { 
       toggleDraggingToBoard,
@@ -75,8 +56,8 @@ let SideBarIconList = class extends Component {
   }
 
   render() {
-    const { onBoardModules, iconVisibityMode, selectedModuleDependencies } = this.props;
-    const visibleIcons = getVisibleIcons(iconVisibityMode, modulesData, onBoardModules, selectedModuleDependencies); 
+    const { onBoardModules, iconVisibityMode, selectedModuleDependencies, moduleData } = this.props;
+    const visibleIcons = getVisibleIcons(iconVisibityMode, moduleData, onBoardModules, selectedModuleDependencies); 
     const iconList = visibleIcons.map((module, index) => this.renderSideBarIconFrame(module, index));
     
     return (
@@ -88,11 +69,11 @@ let SideBarIconList = class extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  moduleBank: state.moduleBank,
+  moduleData: state.moduleData,
   onBoardModules: state.currentProjectModules.present,
   iconVisibityMode: state.iconVisibity.mode,
   selectedModuleDependencies: state.iconVisibity.dependencies,
-  disabledIconExceptions: state.tutorial.disabledIconExceptions
+  disabledIconExceptions: state.tutorial.disabledIconExceptions,
 });
 
 export default connect(mapStateToProps)(SideBarIconList);

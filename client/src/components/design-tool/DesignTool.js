@@ -28,10 +28,10 @@ import DesignToolBoardFrame from './DesignToolBoardFrame';
 import { tourSteps } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
 
-
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
 import './design-tool-styles/joyride.css';
+
 
 let DesignTool = class extends Component {
   constructor(props) {
