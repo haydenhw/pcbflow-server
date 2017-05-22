@@ -1,7 +1,7 @@
 export const tourSteps = [
   {
     title: 'The Board',
-    text: 'This is the board. Modules are arranged here to build a ciruit.',
+    text: 'This is the board. Modules are arranged here to build a circuit.',
     selector: '.board-frame',
     position: 'left',
     allowClicksThruHole: true,

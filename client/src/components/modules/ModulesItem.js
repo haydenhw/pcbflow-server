@@ -192,7 +192,6 @@ export default class ModulesItem extends PureComponent {
   }
   
   render() {
-    console.log(this.props.text)
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const image = (
       <Image

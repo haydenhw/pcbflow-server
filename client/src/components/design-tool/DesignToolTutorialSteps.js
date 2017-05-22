@@ -64,13 +64,13 @@ export const tutorialSteps = [
     backButtonText: 'Back'
   },
   {
-    text: 'So how about that power supply?\n Let\'s add the DC Barrel Jack to give our HTPC some juice...', 
+    text: 'So how about that power supply?\n Let\'s add the DC Barrel Jack to give our HTPC some life...', 
     nextButtonText: 'Next', 
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },
   {
-    text: 'So how about that power supply?\n Let\'s add the DC Barrel Jack to give our HTPC some juice...', 
+    text: 'Now we\'ll be able to plug our HTCP into the wall with a standard 2.1mm x 5.5mm DC power supply', 
     nextButtonText: 'Next', 
     shouldRenderBackButton: true,
     backButtonText: 'Back'

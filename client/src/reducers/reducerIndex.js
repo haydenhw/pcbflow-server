@@ -8,7 +8,7 @@ import { projectList, currentProjectInfo } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { hasUnsavedChanges } from './savedStateReducers';
-import { iconVisibity, shouldRenderSideBar } from './sideBarReducers';
+import { iconVisibity, shouldRenderSideBar ,moduleData } from './sideBarReducers';
 import { tutorial } from './tutorialReducers';
 
 export default combineReducers({
@@ -24,5 +24,6 @@ export default combineReducers({
   shouldRenderSideBar,
   mouseEvents,
   hasUnsavedChanges,
-  tutorial
+  tutorial,
+  moduleData
 });

@@ -1,9 +1,12 @@
-import * as actions from '../actions/indexActions';
+import * as actions from 'actions/indexActions';
+import { modulesData } from '../config/modulesData';
 
 const defaultIconsVibility = {
   mode: 'ALL',
   dependencies: [],
 }
+
+
 
 export const iconVisibity = (state = defaultIconsVibility, action) => {
   switch (action.type) {
@@ -29,6 +32,21 @@ export const shouldRenderSideBar = (state = false, action) => {
   switch (action.type) {
     case actions.TOGGLE_SHOULD_RENDER_SIDEBAR:
       return action.bool;
+    default:
+      return state;
+  };
+}
+
+export const moduleData = (state = modulesData, action) => {
+  switch (action.type) {
+    case actions.TOGGLE_HAS_TOOLTIP:
+    return state.map((module) => {
+      const updatedModuleProps = {
+        ...module,
+        hasTooltip: !module.hasTooltip
+      };
+      return action.id === module.id ? updatedModuleProps : module;
+    });
     default:
       return state;
   };

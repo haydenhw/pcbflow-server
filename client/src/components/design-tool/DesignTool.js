@@ -53,7 +53,8 @@ let DesignTool = class extends Component {
       image: null,
       joyrideStep: 0,
       disabledIconExceptions: null,
-      running: false
+      running: false,
+      tooltipHook: 'hola'
     };
     
     this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
@@ -319,6 +320,7 @@ let DesignTool = class extends Component {
     this.setState({
       shouldRenderDocumentation: !shouldRenderDocumentation,
       wasDocumentationOpen: !wasDocumentationOpen,
+      tooltipHook: null
     });
   }
 
@@ -396,9 +398,9 @@ let DesignTool = class extends Component {
   }
   
   addTooltip() {
-    console.log('adding tooltip')
     this.joyride.addTooltip({
      text: 'Drag the COM Connector module onto the board ',
+     type: 'click',
      selector:/* '.save-button', */'.id105',
      position: 'right',
      trigger: /*'.save-button',*/ '.com-connector-tooltip',
@@ -420,7 +422,7 @@ let DesignTool = class extends Component {
       autoStart: joyride.autoStart || this.state.autoStart,
       callback: this.handleJoyrideCallback,
       debug: false,
-      disableOverlay: this.state.joyrideStep === 1,
+      disableOverlay: true,
       resizeDebounce: joyride.resizeDebounce,
       run: false || joyride.run || this.state.running,
       scrollToFirstStep: joyride.scrollToFirstStep || true,
@@ -473,6 +475,7 @@ let DesignTool = class extends Component {
       <DesignToolInfoButton
         clickHandler={this.toggleDocumentationCard}
         icon={infoButtonIcon}
+        tooltipHook={this.state.tooltipHook}
       />
     );
   }
