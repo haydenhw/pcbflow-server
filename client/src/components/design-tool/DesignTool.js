@@ -28,7 +28,7 @@ import DesignToolBoardFrame from './DesignToolBoardFrame';
 import { tourSteps, dependecyDemo } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
 import { toolTips } from 'config/toolTips'
-console.log(toolTips)
+
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
 import './design-tool-styles/joyride.css';
@@ -388,7 +388,8 @@ let DesignTool = class extends Component {
       this.setState({ step: result.index });
     }
     
-    if (result.type === 'finished' && this.state.running) {
+    if (result.type === 'finished') {
+      console.log('finishing...')
       store.dispatch(actions.incrementTutorialStep());
       store.dispatch(actions.toggleShouldRenderModal());
       this.setState({
