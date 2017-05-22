@@ -40,8 +40,8 @@ export const tutorialSteps = [
     backButtonText: 'Back'
   },
   {
-    text: '(New tooltip points to module pallate with the following text...) \n Go ahead and drag and drop the 5V/5A Regulator onto the board',
-    nextButtonText: 'Next',
+    text: 'Go ahead and drag and drop the 5V/5A Regulator onto the board',
+    nextButtonText: 'Okay',
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },

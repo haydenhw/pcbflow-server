@@ -513,6 +513,16 @@ let DesignTool = class extends Component {
           handleNextButtonClick: this.restartTour.bind(this), 
           handleBackButtonClick: () => store.dispatch(actions.decrementTutorialStep())
         }
+        case 6:
+          const stepThreeSixClickHandler = function() {
+            store.dispatch(actions.incrementTutorialStep());
+            store.dispatch(actions.toggleShouldRenderModal());
+          }
+          return {
+            handleNextButtonClick: stepThreeSixClickHandler.bind(this),
+            handleBackButtonClick: this.startTour.bind(this),
+            handleDidMount: this.addTooltip.bind(this, toolTips[1])
+          }
         
         default:
           return {
