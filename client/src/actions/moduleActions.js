@@ -9,7 +9,11 @@ export const pushNewModule = module => ({
 
 function getIndex(id) {
   const idIndexMap = {
-    '107': 3
+    '106': 0,
+    '101': 1,
+    '112': 2,
+    '107': 3,
+    '108': 4
   }
   
   return idIndexMap[id];

@@ -28,7 +28,7 @@ const draggableOptions = {
 
 export default function DesignToolTodo(props) {
   const { todoBools } = props;
-  console.log(todoBools)
+  
   return (
     <Interactive draggable draggableOptions={draggableOptions}>
       <div className="todo">
