@@ -493,7 +493,7 @@ let DesignTool = class extends Component {
         case 0:
           const stepOneNextClickHandler = function() {
             store.dispatch(actions.incrementTutorialStep());
-            store.dispatch(actions.toggleTutorialMode());
+            store.dispatch(actions.toggleTutorialIsActive());
           }
           return {
             handleNextButtonClick: stepOneNextClickHandler,
@@ -550,7 +550,7 @@ let DesignTool = class extends Component {
     }
     
     const handleCloseFunction = function() {
-      store.dispatch(actions.toggleTutorialMode());
+      store.dispatch(actions.toggleTutorialIsActive());
       store.dispatch(actions.toggleShouldRenderModal());
     } 
     const handleClose = {

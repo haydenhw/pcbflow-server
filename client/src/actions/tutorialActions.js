@@ -1,19 +1,26 @@
 import { tutorialSteps } from 'components/design-tool/DesignToolTutorialSteps';
 
-export const TOGGLE_TUTORIAL_MODE = 'TOGGLE_TUTORIAL_MODE';
-export const toggleTutorialMode = () => ({
-  type: 'TOGGLE_TUTORIAL_MODE'
-});
-
-export const UPDATE_DISABLED_ICON_EXCEPTIONS = 'UPDATE_DISABLED_ICON_EXCEPTIONS';
-export const updateDisabledIconExceptions = exceptions => ({
-  type: 'UPDATE_DISABLED_ICON_EXCEPTIONS',
-  exceptions
+export const TOGGLE_TUTORIAL_IS_ACTIVE = 'TOGGLE_TUTORIAL_IS_ACTIVE';
+export const toggleTutorialIsActive = () => ({
+  type: 'TOGGLE_TUTORIAL_IS_ACTIVE'
 });
 
 export const TOGGLE_SHOULD_RENDER_MODAL = 'TOGGLE_SHOULD_RENDER_MODAL';
 export const toggleShouldRenderModal = () => ({
   type: 'TOGGLE_SHOULD_RENDER_MODAL'
+});
+
+export const exitTutorial = () => {
+  return (dispatch, getState) => {
+    dispatch(actions.toggleTutorialIsActive());
+    dispatch(actions.toggleShouldRenderModal())
+  }
+}
+
+export const UPDATE_DISABLED_ICON_EXCEPTIONS = 'UPDATE_DISABLED_ICON_EXCEPTIONS';
+export const updateDisabledIconExceptions = exceptions => ({
+  type: 'UPDATE_DISABLED_ICON_EXCEPTIONS',
+  exceptions
 });
 
 export const UPDATE_SHOULD_RENDER_TODO_LIST = 'UPDATE_SHOULD_RENDER_TODO_LIST';
@@ -22,7 +29,15 @@ export const updateShouldRenderTodoList = (bool) => ({
   bool
 });
 
+export const SHOW_TUTORIAL_EXIT_SCREEN = 'SHOW_TUTORIAL_EXIT_SCREEN';
+export const showTutorialExitScreen = () => ({
+  type: 'SHOW_TUTORIAL_EXIT_SCREEN'
+});
 
+export const RESUME_TUTORIAL = 'RESUME_TUTORIAL';
+export const showTutorialExitScreen = () => ({
+  type: 'RESUME_TUTORIAL'
+});
 
 export const INCREMENT_STEP = 'INCREMENT_STEP';
 export const incrementStep = () => ({

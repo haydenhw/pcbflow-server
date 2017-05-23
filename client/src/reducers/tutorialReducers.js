@@ -1,18 +1,19 @@
 import * as actions from 'actions/indexActions';
 
 const defaultState = {
-  isTutorialActive: true,
+  isTutorialActive: false,
   isTutorialComplete: false, 
-  shouldRenderModal: false,
-  shouldRenderTodoList: true, 
+  shouldRenderModal: true,
+  shouldRenderTodoList: false, 
   disabledIconExceptions: null,
-  step: 12,
+  step: 1,
+  previousStep: null,
   todoBools: [false, false, false, false, false]
 }
 
 export const tutorial = (state = defaultState, action) => {
   switch (action.type) {
-    case actions.TOGGLE_TUTORIAL_MODE:
+    case actions.TOGGLE_TUTORIAL_IS_ACTIVE:
       return {
         ...state,
         isTutorialActive: !state.isTutorialActive
@@ -36,11 +37,26 @@ export const tutorial = (state = defaultState, action) => {
       return {
         ...state,
         step: state.step + 1,
+        previousStep: state.step
+        
       };
     case actions.DECREMENT_STEP:
       return {
         ...state,
         step: state.step - 1,
+        previousStep: state.step
+      };
+    case actions.SHOW_TUTORIAL_EXIT_SCREEN:
+      return {
+        ...state,
+        step: 0,
+        previousStep: state.step, 
+      };
+    case actions.SHOW_TUTORIAL_EXIT_SCREEN:
+      return {
+        ...state,
+        step: state.previousStep,
+        previousStep: null, 
       };
     case actions.COMPLETE_TODO:
       const { index } = action;
