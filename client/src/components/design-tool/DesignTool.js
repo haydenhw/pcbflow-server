@@ -487,7 +487,7 @@ let DesignTool = class extends Component {
     );
   }
   
-  getModalMethods(tutorialStep) {
+  getOnboardModalHandlers(tutorialStep) {
     const getButtonMethods = () => {
       switch(tutorialStep) {
         case 0:
@@ -552,7 +552,7 @@ let DesignTool = class extends Component {
     }
     
     const handleCloseFunction = function() {
-      store.dispatch(actions.showTutorialExitScreen());
+      store.dispatch(actions.changeModalType('CONFIRM'));
     } 
     
     const handleClose = {
@@ -564,18 +564,36 @@ let DesignTool = class extends Component {
   }
   
   renderModal() {
-    const { tutorialStep, shouldRenderModal } = this.props;
+    const { tutorialStep, shouldRenderModal, modalType} = this.props;
     const { tutorialSteps } = this.state;
     
+    
     if (shouldRenderModal) {
-      const modalMethods = this.getModalMethods(tutorialStep);
-      const modalProps = Object.assign(tutorialSteps[tutorialStep], modalMethods);
-      
-      return (
-        <DesignToolOnboardModal 
-          {...modalProps}
-        />
-      );
+      switch(modalType){
+        case 'ONBOARD':
+          const onboardModalMethods = this.getOnboardModalHandlers(tutorialStep);
+          const onboardModalProps = Object.assign(tutorialSteps[tutorialStep], onboardModalMethods);
+          
+          return (
+            <DesignToolOnboardModal 
+              {...onboardModalProps}
+            />
+          );
+        case 'CONFIRM':
+          return (
+            <DesignToolOnboardModal 
+              text="Are you sure you want to exit the tutorial?"
+              rightButtonText="Exit"
+              shouldRenderLeftButton={true}
+              leftButtonText="Go Back"
+              handleRightButtonClick={() => store.dispatch(actions.exitTutorial())}
+              handleLeftButtonClick={() => store.dispatch(actions.resumeTutorial())}
+              handleCloseButtonClick={() => store.dispatch(actions.exitTutorial())}
+            />
+          );
+        default:
+          throw new Error('Unexpected modal type')
+      }
     }
     
     return null;
@@ -703,9 +721,10 @@ const mapStateToProps = state => ({
   shouldRenderSideBar: state.shouldRenderSideBar,
   isTutorialActive: state.tutorial.isTutorialActive,
   tutorialStep: state.tutorial.step,
-  shouldRenderModal: state.tutorial.shouldRenderModal,
   shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
   todoBools: state.tutorial.todoBools,
+  shouldRenderModal: state.modal.shouldRenderModal,
+  modalType: state.modal.modalType
 });
 
 DesignTool = withRouter(DesignTool);

@@ -10,6 +10,7 @@ import { mouseEvents } from './mouseEventReducers';
 import { hasUnsavedChanges } from './savedStateReducers';
 import { iconVisibity, shouldRenderSideBar ,moduleData } from './sideBarReducers';
 import { tutorial } from './tutorialReducers';
+import { modal } from './modalReducers';
 
 export default combineReducers({
   currentProjectModules: undoable(currentProjectModules, skipIfImageNodeNull),
@@ -25,5 +26,6 @@ export default combineReducers({
   mouseEvents,
   hasUnsavedChanges,
   tutorial,
-  moduleData
+  moduleData,
+  modal
 });

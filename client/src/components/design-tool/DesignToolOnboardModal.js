@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Modal from 'components/modal/Modal';
+import RootModal from 'components/modal/RootModal';
 import './design-tool-styles/DesignToolOnboardModal.css'
 
 
@@ -63,7 +63,7 @@ export default class DesignToolOnboardModal extends Component {
     const rightButtonClass = `modal-button ${this.props.rightButtonClass}`
     
     return (
-      <Modal>
+      <RootModal>
         <div className="modal-content">
           <span className="modal-close" onClick={this.handleCloseButtonClick.bind(this)}>&times;</span>
           <div className="modal-header"></div>
@@ -80,7 +80,7 @@ export default class DesignToolOnboardModal extends Component {
             </button>
           </div>
         </div>
-      </Modal>
+      </RootModal>
     )
   }
 }

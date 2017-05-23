@@ -6,3 +6,4 @@ export * from './savedStateActions';
 export * from './undoRedoActions';
 export * from './sideBarActions';
 export * from './tutorialActions';
+export * from './modalActions';

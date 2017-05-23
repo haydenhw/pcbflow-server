@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import store from 'reduxFiles/store';
-import './Modal.css';
+import './RootModal.css';
  
-export default class Modal extends Component {
+export default class RootModal extends Component {
   componentDidMount() {
     this.modalTarget = document.createElement('div');
     this.modalTarget.className = 'modal';

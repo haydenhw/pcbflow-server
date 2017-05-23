@@ -1,4 +1,4 @@
-import * as actions from '../actions/indexActions';
+import * as actions from 'actions/indexActions';
 
 const defaultboardSpecs = {
   x: 10,
