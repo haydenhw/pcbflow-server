@@ -99,12 +99,16 @@ class Modules extends Component {
           case 4:
           case 7:
           case 10:
-          store.dispatch(actions.updateDisabledIconExceptions(null));
-          setTimeout(() => store.dispatch(actions.toggleShouldRenderModal()), 700)
-          break;
+            store.dispatch(actions.updateDisabledIconExceptions(null));
+            setTimeout(() => store.dispatch(actions.toggleShouldRenderModal()), 700)
+            break;
           case 12:
-            store.dispatch(actions.completeTodo(3));
+            setTimeout(() => store.dispatch(actions.completeTodo(3)), 10)
+            break
+          default:
+            return null;
         }
+          
       }
     }
     

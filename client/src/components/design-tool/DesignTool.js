@@ -558,10 +558,10 @@ let DesignTool = class extends Component {
   renderModal() {
     const { tutorialStep, shouldRenderModal } = this.props;
     const { tutorialSteps } = this.state;
-    const modalMethods = this.getModalMethods(tutorialStep);
-    const modalProps = Object.assign(tutorialSteps[tutorialStep], modalMethods);
     
     if (shouldRenderModal) {
+      const modalMethods = this.getModalMethods(tutorialStep);
+      const modalProps = Object.assign(tutorialSteps[tutorialStep], modalMethods);
       
       return (
         <DesignToolOnboardModal 
