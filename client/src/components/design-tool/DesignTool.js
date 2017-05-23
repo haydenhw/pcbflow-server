@@ -615,7 +615,8 @@ let DesignTool = class extends Component {
       timeLastSaved,
       showAllModuleIcons,
       iconVisibityData,
-      joyride
+      joyride,
+      todoBools
     } = this.props;
     
     const {
@@ -625,7 +626,7 @@ let DesignTool = class extends Component {
       shouldRenderInfoButton,
       shouldHideContextMenu
     } = this.state;
-    
+
     return (
       <div>
         {this.renderJoyride()}
@@ -660,7 +661,9 @@ let DesignTool = class extends Component {
         {shouldRenderDocumentation && <DocumentationCard />}
         {shouldRenderInfoButton && this.renderInfoButton()}
         {this.renderModal()}
-        <DesignToolTodo />
+        <DesignToolTodo 
+          todoBools={todoBools}
+        />
       </div>
     );
   }
@@ -680,9 +683,10 @@ const mapStateToProps = state => ({
   anchorPositions: state.anchorPositions,
   iconVisibityData: state.iconVisibity,
   shouldRenderSideBar: state.shouldRenderSideBar,
-  isTutorialActive: state.tutorial.isTutorialModeActive,
+  isTutorialActive: state.tutorial.isTutorialActive,
   tutorialStep: state.tutorial.step,
-  shouldRenderModal: state.tutorial.shouldRenderModal
+  shouldRenderModal: state.tutorial.shouldRenderModal,
+  todoBools: state.tutorial.todoBools
 });
 
 DesignTool = withRouter(DesignTool);

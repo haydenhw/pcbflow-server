@@ -95,19 +95,6 @@ class Modules extends Component {
     }
     
     if((prevProps.modules.length < this.props.modules.length)) {
-        switch(prevProps.tutorialStep) {
-          case 4:
-          case 7:
-          case 10:
-            store.dispatch(actions.updateDisabledIconExceptions(null));
-            setTimeout(() => store.dispatch(actions.toggleShouldRenderModal()), 700)
-            break;
-          case 12:
-            setTimeout(() => store.dispatch(actions.completeTodo(3)), 10)
-            break
-          default:
-            return null;
-        }
           
       }
     }

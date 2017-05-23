@@ -1,10 +1,45 @@
 import { projectsUrl } from '../config/endpointUrls';
+import * as actions from 'actions/indexActions';
 
-export const PUSH_TO_CURRENT_PROJECT_MODULES = 'PUSH_TO_CURRENT_PROJECT_MODULES';
-export const pushToCurrentProjectModules = module => ({
-  type: 'PUSH_TO_CURRENT_PROJECT_MODULES',
+export const PUSH_NEW_MODULE = 'PUSH_NEW_MODULE';
+export const pushNewModule = module => ({
+  type: 'PUSH_NEW_MODULE',
   module,
 });
+
+function getIndex(id) {
+  const idIndexMap = {
+    '107': 3
+  }
+  
+  return idIndexMap[id];
+}
+
+
+export const pushToCurrentProjectModules = (module) => {
+  return (dispatch, getState) => {
+    const { step, isTutorialActive } = getState().tutorial;
+    
+    if (isTutorialActive) {
+      switch(step) {
+        case 4:
+        case 7:
+        case 10:
+          dispatch(actions.updateDisabledIconExceptions(null));
+          setTimeout(() => dispatch(actions.toggleShouldRenderModal()), 700)
+          break;
+        case 12:
+          const todoIndex = getIndex(module.id);
+          dispatch(actions.completeTodo(todoIndex));
+          break
+        default:
+          //do nothing
+      }
+    }
+  
+    dispatch(actions.pushNewModule(module));
+  }
+}
 
 export const CHANGE_DRAGGING_MODULE = 'CHANGE_DRAGGING_MODULE';
 export const changeDraggingModule = moduleData => ({

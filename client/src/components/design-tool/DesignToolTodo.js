@@ -22,21 +22,23 @@ const draggableOptions = {
   }
 }
 
-  const getTextDecoration = function(index, isCompleteArray) {
-    return isCompleteArray[index] ? { textDecoration: "line-through"} : {};
+  const getTextDecoration = function(bool) {
+    return bool ? { textDecoration: "line-through"} : {};
   }
 
-export default function DesignToolTodo() {
+export default function DesignToolTodo(props) {
+  const { todoBools } = props;
+  console.log(todoBools)
   return (
     <Interactive draggable draggableOptions={draggableOptions}>
       <div className="todo">
         <h2>Modules To Add</h2>
           <ul>
-            <li style={getTextDecoration(0, [true])}>USB Standard-A Jack</li>
-            <li>MicroSD Card</li>
-            <li>HDMI Connector</li>
-            <li>Tactile Switch</li>
-            <li>LED</li>
+            <li style={getTextDecoration(todoBools[0])}>USB Standard-A Jack</li>
+            <li style={getTextDecoration(todoBools[1])}>MicroSD Card</li>
+            <li style={getTextDecoration(todoBools[2])}>HDMI Connector</li>
+            <li style={getTextDecoration(todoBools[3])}>Tactile Switch</li>
+            <li style={getTextDecoration(todoBools[4])}>LED</li>
           </ul>
         <span>Exit Tutorial</span>
       </div>

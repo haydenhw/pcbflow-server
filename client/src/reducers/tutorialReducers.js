@@ -1,7 +1,7 @@
 import * as actions from 'actions/indexActions';
 
 const defaultState = {
-  isTutorialModeActive: false,
+  isTutorialActive: true,
   isTutorialComplete: false, 
   shouldRenderModal: false,
   shouldRenderTodoList: true, 
@@ -15,7 +15,7 @@ export const tutorial = (state = defaultState, action) => {
     case actions.TOGGLE_TUTORIAL_MODE:
       return {
         ...state,
-        isTutorialModeActive: !state.isTutorialModeActive
+        isTutorialActive: !state.isTutorialActive
       };
     case actions.TOGGLE_SHOULD_RENDER_MODAL:
       return {
@@ -43,8 +43,10 @@ export const tutorial = (state = defaultState, action) => {
       const newArray = state.todoBools.map((bool, i) => {
         return i === index ? true : bool;
       })
-      console.log(newArray)
-      return newArray;
+      return {
+        ...state,
+        todoBools: newArray
+      };
     default:
       return state;
   }

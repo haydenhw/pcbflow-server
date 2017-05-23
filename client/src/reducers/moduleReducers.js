@@ -86,7 +86,7 @@ export const currentProjectModules = (state = [], action) => {
         return action.project.modules;
         break;
 
-      case actions.PUSH_TO_CURRENT_PROJECT_MODULES:
+      case actions.PUSH_NEW_MODULE:
         return [...state, action.module];
         break;
 

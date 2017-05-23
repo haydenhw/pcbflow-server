@@ -6,8 +6,6 @@ const defaultIconsVibility = {
   dependencies: [],
 }
 
-
-
 export const iconVisibity = (state = defaultIconsVibility, action) => {
   switch (action.type) {
     case actions.UPDATE_ICON_VISBILITY:
