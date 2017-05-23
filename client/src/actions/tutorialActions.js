@@ -56,12 +56,6 @@ export const completeSpecifiedTodo = (index) => ({
   index
 });
 
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const completeSpecifiedTodo = (index) => ({
-  type: 'COMPLETE_TODO',
-  index
-});
-
 export const COMPLETE_TUTORIAL = 'COMPLETE_TUTORIAL';
 export const completeTuorial = (index) => ({
   type: 'COMPLETE_TUTORIAL',
@@ -70,10 +64,10 @@ export const completeTuorial = (index) => ({
 
 export const completeTodo = (index) => {
   return (dispatch, getState) => {
-    const completedTodoBools = getState().tutorial.todoBools;
-    const trueCount = completedTodoBools.fliter(bool => bool === true).length;
+    const todoBools = getState().tutorial.todoBools;
+    const trueCount = todoBools.filter(bool => bool === true).length;
     
-    dispatch(completeTodo(index));
+    dispatch(completeSpecifiedTodo(index));
     
     if (trueCount === 3) {
       dispatch(completeTuorial());

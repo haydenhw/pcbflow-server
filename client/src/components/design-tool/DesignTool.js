@@ -562,6 +562,7 @@ let DesignTool = class extends Component {
     const modalProps = Object.assign(tutorialSteps[tutorialStep], modalMethods);
     
     if (shouldRenderModal) {
+      
       return (
         <DesignToolOnboardModal 
           {...modalProps}

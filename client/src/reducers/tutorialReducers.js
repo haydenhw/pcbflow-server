@@ -6,9 +6,8 @@ const defaultState = {
   shouldRenderModal: false,
   shouldRenderTodoList: true, 
   disabledIconExceptions: null,
-  step: 9,
-  todoBools:[false, false, false, false]
-  ]
+  step: 12,
+  todoBools: [false, false, false, false, false]
 }
 
 export const tutorial = (state = defaultState, action) => {
@@ -38,11 +37,13 @@ export const tutorial = (state = defaultState, action) => {
         ...state,
         step: state.step - 1,
       };
-    case actions.COMPLETE_TUTORIAL:
-      const { index } = action.index;
-      const newArray = state.map((bool, i) => {
+    case actions.COMPLETE_TODO:
+      const { index } = action;
+      
+      const newArray = state.todoBools.map((bool, i) => {
         return i === index ? true : bool;
       })
+      console.log(newArray)
       return newArray;
     default:
       return state;

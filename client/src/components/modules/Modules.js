@@ -94,15 +94,20 @@ class Modules extends Component {
       });
     }
     
-    if(
-      (prevProps.modules.length < this.props.modules.length) && 
-      (prevProps.tutorialStep === 4 || prevProps.tutorialStep === 7 ||  prevProps.tutorialStep === 10)
-    ) {
-      store.dispatch(actions.updateDisabledIconExceptions(null));
-      setTimeout(() => store.dispatch(actions.toggleShouldRenderModal()), 700)
+    if((prevProps.modules.length < this.props.modules.length)) {
+        switch(prevProps.tutorialStep) {
+          case 4:
+          case 7:
+          case 10:
+          store.dispatch(actions.updateDisabledIconExceptions(null));
+          setTimeout(() => store.dispatch(actions.toggleShouldRenderModal()), 700)
+          break;
+          case 12:
+            store.dispatch(actions.completeTodo(3));
+        }
+      }
     }
-  }
-  
+    
   componentDidMount() {
     const totalPriceString = this.calculatePrice(this.props.modules);
     
