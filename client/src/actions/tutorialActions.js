@@ -35,7 +35,7 @@ export const showTutorialExitScreen = () => ({
 });
 
 export const RESUME_TUTORIAL = 'RESUME_TUTORIAL';
-export const showTutorialExitScreen = () => ({
+export const resumeTutorial = () => ({
   type: 'RESUME_TUTORIAL'
 });
 

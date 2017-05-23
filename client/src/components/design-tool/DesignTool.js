@@ -491,6 +491,8 @@ let DesignTool = class extends Component {
     const getButtonMethods = () => {
       switch(tutorialStep) {
         case 0:
+          
+        case 1:
           const stepOneNextClickHandler = function() {
             store.dispatch(actions.incrementTutorialStep());
             store.dispatch(actions.toggleTutorialIsActive());
@@ -550,9 +552,9 @@ let DesignTool = class extends Component {
     }
     
     const handleCloseFunction = function() {
-      store.dispatch(actions.toggleTutorialIsActive());
-      store.dispatch(actions.toggleShouldRenderModal());
+      store.dispatch(actions.showTutorialExitScreen());
     } 
+    
     const handleClose = {
       handleCloseButtonClick: handleCloseFunction.bind(this)
     }
