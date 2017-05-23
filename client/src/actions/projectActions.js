@@ -1,6 +1,8 @@
-
 import { Route, hashHistory } from 'react-router';
+
+import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import { projectsUrl } from '../config/endpointUrls';
 
 export const UPDATE_PROJECT_PRICE = 'UPDATE_PROJECT_PRICE';
@@ -34,25 +36,27 @@ export function fetchProjects() {
   };
 }
 
-export const fetchProjectByIdSuccess = project => ({
-  type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
-  project,
-});
 
 export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
-export const fetchProjectByIdSuccess = (index) => {
+export const fetchProjectByIdSuccess = (project) => {
   return (dispatch, getState) => {
-    const todoBools = getState().tutorial.todoBools;
-    const trueCount = todoBools.filter(bool => bool === true).length;
+    const { isTutorialActive } = getState().tutorial;
     
-    dispatch(completeSpecifiedTodo(index));
-    
-    if (trueCount === 3) {
-      dispatch(completeTuorial());
+    if (isTutorialActive) {
+      const todoIds = ['101', '106', '107', '108', '112' ]; 
+      
+      project.modules.forEach((module) => {
+        if (todoIds.indexOf(module.id) !== -1) {
+          dispatch(actions.completeTodo(module.id))
+        }
+      });
     }
     
-    return null;
-  };
+    dispatch({
+      type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
+      project,
+    })
+  }
 }
 
 

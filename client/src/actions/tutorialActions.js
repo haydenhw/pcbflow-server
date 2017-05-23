@@ -70,12 +70,26 @@ export const completeTutorial = (index) => {
   };
 }
 
-export const completeTodo = (index) => {
+function getIndex(id) {
+  const idIndexMap = {
+    '106': 0,
+    '101': 1,
+    '112': 2,
+    '107': 3,
+    '108': 4
+  }
+  
+  return idIndexMap[id];
+}
+
+export const completeTodo = (id) => {
   return (dispatch, getState) => {
+  
     const todoBools = getState().tutorial.todoBools;
     const trueCount = todoBools.filter(bool => bool === true).length;
+    const todoIndex = getIndex(id); 
     
-    dispatch(completeSpecifiedTodo(index));
+    dispatch(completeSpecifiedTodo(todoIndex));
     
     if (trueCount === 3) {
       dispatch(completeTuorial());

@@ -38,6 +38,7 @@ export const tutorial = (state = defaultState, action) => {
         step: state.step - 1,
       };
     case actions.COMPLETE_TODO:
+      console.log(action)
       const { index } = action;
       
       const newArray = state.todoBools.map((bool, i) => {

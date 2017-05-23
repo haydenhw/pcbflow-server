@@ -7,18 +7,6 @@ export const pushNewModule = module => ({
   module,
 });
 
-function getIndex(id) {
-  const idIndexMap = {
-    '106': 0,
-    '101': 1,
-    '112': 2,
-    '107': 3,
-    '108': 4
-  }
-  
-  return idIndexMap[id];
-}
-
 export const pushToCurrentProjectModules = (module) => {
   return (dispatch, getState) => {
     const { step, isTutorialActive } = getState().tutorial;
@@ -32,8 +20,7 @@ export const pushToCurrentProjectModules = (module) => {
           setTimeout(() => dispatch(actions.toggleShouldRenderModal()), 700)
           break;
         case 12:
-          const todoIndex = getIndex(module.id);
-          dispatch(actions.completeTodo(todoIndex));
+          dispatch(actions.completeTodo(module.id));
           break
         default:
           //do nothing
