@@ -9,7 +9,7 @@ import generatePriceString from 'helpers/generatePriceString';
 import { getDependencyDiff, updateMetDependencies, getNewDependencyData } from 'helpers/dependencies';
 
 import ModulesItem from './ModulesItem';
-import { modulesData } from './modulesData';
+
 import {
   fontSize,
   fontFamily,
