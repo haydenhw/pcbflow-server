@@ -71,4 +71,23 @@ export const tutorialSteps = [
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },
+  {
+    text: 'Here\'s a rundown of  what we\'ll need to finish our HTPC design:', 
+    list: [
+      'USB port — This will allow us to connect a keyboard to our device to configure the COM as well as a USB flash drive or other USB mass storage device to play media from.',
+      'MicroSD card — provides flash memory storage for the device’s operating system, applications, multimedia, etc.',
+      'HDMI Connector — allows us to connect our HTPC to a TV or monitor.',
+      'Tactile Switch — Serves as a switch for powering the unit on/off. ',
+      'LED — Provides visual indication of when unit is powered on or off.'
+    ],
+    nextButtonText: 'Next', 
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
+  {
+    text: 'Now we\'ll set you free to finish the design on your own. You\'ll be provided with a to-do list containing the names of the modules listed on the previous screen.', 
+    nextButtonText: 'Next', 
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
 ]

@@ -98,6 +98,7 @@ class Modules extends Component {
       (prevProps.modules.length < this.props.modules.length) && 
       (prevProps.tutorialStep === 4 || prevProps.tutorialStep === 7 ||  prevProps.tutorialStep === 10)
     ) {
+      store.dispatch(actions.updateDisabledIconExceptions(null));
       setTimeout(() => store.dispatch(actions.toggleShouldRenderModal()), 700)
     }
   }
