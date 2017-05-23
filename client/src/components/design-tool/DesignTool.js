@@ -25,6 +25,7 @@ import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
 import DesignToolOnboardModal from './DesignToolOnboardModal';
 import DesignToolBoardFrame from './DesignToolBoardFrame';
+import DesignToolTodo from './DesignToolTodo';
 import { tourSteps, dependecyDemo } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
 import { toolTips } from 'config/toolTips'
@@ -658,6 +659,7 @@ let DesignTool = class extends Component {
         {shouldRenderDocumentation && <DocumentationCard />}
         {shouldRenderInfoButton && this.renderInfoButton()}
         {this.renderModal()}
+        <DesignToolTodo />
       </div>
     );
   }

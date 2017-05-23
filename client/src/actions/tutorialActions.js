@@ -49,3 +49,20 @@ export const decrementTutorialStep = () => {
     return null;
   };
 }
+
+export const COMPLETE_TODO = 'COMPLETE_TODO';
+export const completeTodo = (index) => ({
+  type: 'COMPLETE_TODO',
+  index
+});
+
+export const decrementTutorialStep = () => {
+  return (dispatch, getState) => {
+    const completedTodoBools = getState().tutorial.todoBools;
+    const trueCount = completedTodoBools.fliter(bool => bool === true).length;
+    
+    dispatch()
+    
+    return null;
+  };
+}

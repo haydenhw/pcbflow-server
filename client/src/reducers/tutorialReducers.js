@@ -2,7 +2,8 @@ import * as actions from 'actions/indexActions';
 
 const defaultState = {
   isTutorialModeActive: false,
-  shouldRenderModal: true, 
+  shouldRenderModal: false,
+  shouldRenderTodoList: true, 
   disabledIconExceptions: null,
   step: 9,
 }

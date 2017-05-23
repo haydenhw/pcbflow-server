@@ -78,7 +78,7 @@ export const tutorialSteps = [
       'MicroSD card — provides flash memory storage for the device’s operating system, applications, multimedia, etc.',
       'HDMI Connector — allows us to connect our HTPC to a TV or monitor.',
       'Tactile Switch — Serves as a switch for powering the unit on/off. ',
-      'LED — Provides visual indication of when unit is powered on or off.'
+      'LED — Provides a visual indication of when the unit is powered on or off.'
     ],
     nextButtonText: 'Next', 
     shouldRenderBackButton: true,
