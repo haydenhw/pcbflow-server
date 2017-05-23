@@ -15,18 +15,18 @@ export default class DesignToolOnboardModal extends Component {
     this.props.handleCloseButtonClick();
   }
   
-  handleNextButtonClick() {
-    this.props.handleNextButtonClick();
+  handleRightButtonClick() {
+    this.props.handleRightButtonClick();
   }
   
-  renderBackButton() {
-    if (this.props.shouldRenderBackButton) {
+  renderLeftButton() {
+    if (this.props.shouldRenderLeftButton) {
       return (
         <button 
           className="modal-button"
-          onClick={() => this.props.handleBackButtonClick()}
+          onClick={() => this.props.handleLeftButtonClick()}
         >
-          {this.props.backButtonText}
+          {this.props.leftButtonText}
         </button>
       );
     }
@@ -60,7 +60,7 @@ export default class DesignToolOnboardModal extends Component {
   }
   
   render() {
-    const nextButtonClass = `modal-button ${this.props.nextButtonClass}`
+    const rightButtonClass = `modal-button ${this.props.rightButtonClass}`
     
     return (
       <Modal>
@@ -73,10 +73,10 @@ export default class DesignToolOnboardModal extends Component {
           </div>
             {this.renderImage()}
           <div className="modal-button-wrapper">
-            {this.renderBackButton()}
-            <button className={nextButtonClass} 
-              onClick={this.handleNextButtonClick.bind(this)}>
-              {this.props.nextButtonText}
+            {this.renderLeftButton()}
+            <button className={rightButtonClass} 
+              onClick={this.handleRightButtonClick.bind(this)}>
+              {this.props.rightButtonText}
             </button>
           </div>
         </div>

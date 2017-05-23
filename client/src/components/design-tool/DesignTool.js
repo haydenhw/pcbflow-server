@@ -58,7 +58,7 @@ let DesignTool = class extends Component {
       running: false,
     };
     
-    this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
+    this.handleRightButtonClick = this.handleRightButtonClick.bind(this);
     this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
     
     this.toggleDraggingToBoard = this.toggleDraggingToBoard.bind(this);
@@ -273,7 +273,7 @@ let DesignTool = class extends Component {
     store.dispatch(actions.toggleIsMouseDown(false));
   }
   
-  handleNextButtonClick() {
+  handleRightButtonClick() {
     if (this.state.joyrideStep === 1) {
       this.joyride.next();
     }
@@ -498,13 +498,13 @@ let DesignTool = class extends Component {
             store.dispatch(actions.toggleTutorialIsActive());
           }
           return {
-            handleNextButtonClick: stepOneNextClickHandler,
-            handleBackButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
+            handleRightButtonClick: stepOneNextClickHandler,
+            handleLeftButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
           }
         case 2:
           return {
-            handleNextButtonClick: this.startTour.bind(this), 
-            handleBackButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
+            handleRightButtonClick: this.startTour.bind(this), 
+            handleLeftButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
           }
         case 3:
           const stepThreeNextClickHandler = function() {
@@ -513,14 +513,14 @@ let DesignTool = class extends Component {
             store.dispatch(actions.toggleShouldRenderModal());
           }
           return {
-            handleNextButtonClick: stepThreeNextClickHandler.bind(this),
-            handleBackButtonClick: this.startTour.bind(this),
+            handleRightButtonClick: stepThreeNextClickHandler.bind(this),
+            handleLeftButtonClick: this.startTour.bind(this),
             handleDidMount: this.addTooltip.bind(this, toolTips[0])
           }
         case 5: 
         return {
-          handleNextButtonClick: this.restartTour.bind(this), 
-          handleBackButtonClick: () => store.dispatch(actions.decrementTutorialStep())
+          handleRightButtonClick: this.restartTour.bind(this), 
+          handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep())
         }
         case 6:
           const stepThreeSixClickHandler = function() {
@@ -528,8 +528,8 @@ let DesignTool = class extends Component {
             store.dispatch(actions.toggleShouldRenderModal());
           }
           return {
-            handleNextButtonClick: stepThreeSixClickHandler.bind(this),
-            handleBackButtonClick: this.startTour.bind(this),
+            handleRightButtonClick: stepThreeSixClickHandler.bind(this),
+            handleLeftButtonClick: this.startTour.bind(this),
             handleDidMount: this.addTooltip.bind(this, toolTips[1])
           }
         case 9:
@@ -538,15 +538,15 @@ let DesignTool = class extends Component {
             store.dispatch(actions.toggleShouldRenderModal());
           }
           return {
-            handleNextButtonClick: stepNineClickHandler.bind(this),
-            handleBackButtonClick: () => store.dispatch(actions.decrementTutorialStep()),
+            handleRightButtonClick: stepNineClickHandler.bind(this),
+            handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep()),
             handleDidMount: this.addTooltip.bind(this, toolTips[2])
           }
         
         default:
           return {
-            handleNextButtonClick: () => store.dispatch(actions.incrementTutorialStep()),
-            handleBackButtonClick: () => store.dispatch(actions.decrementTutorialStep())
+            handleRightButtonClick: () => store.dispatch(actions.incrementTutorialStep()),
+            handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep())
           }
         } 
     }
