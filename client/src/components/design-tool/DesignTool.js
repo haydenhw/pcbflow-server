@@ -523,6 +523,16 @@ let DesignTool = class extends Component {
             handleBackButtonClick: this.startTour.bind(this),
             handleDidMount: this.addTooltip.bind(this, toolTips[1])
           }
+        case 9:
+          const stepNineClickHandler = function() {
+            store.dispatch(actions.incrementTutorialStep());
+            store.dispatch(actions.toggleShouldRenderModal());
+          }
+          return {
+            handleNextButtonClick: stepNineClickHandler.bind(this),
+            handleBackButtonClick: store.dispatch(actions.decrementTutorialStep()),
+            handleDidMount: this.addTooltip.bind(this, toolTips[2])
+          }
         
         default:
           return {

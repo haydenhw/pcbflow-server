@@ -55,6 +55,7 @@ export const tutorialSteps = [
   {
     text: 'So why exactly does the COM need a 5V/5A Regulator to function?\n This is becasue the COM is designed to operate at voltage in the range of 3.5V-6V, but as we\'ll see in the next step, our board will be running off of a 20V power supply. The 5V/5A Regulator will act as a voltage throttle, taking in 20 Volts and delivering 5 Volts to the COM.', 
     nextButtonText: 'Next', 
+    nextButtonClass: 'barrel-connector-tooltip',
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },

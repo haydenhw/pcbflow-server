@@ -289,7 +289,8 @@ export const modulesData = [
     price: 5,
     info: null,
     id: '110',
-    dependencies: []
+    dependencies: [],
+    hasTooltip: true
   },
   {
     fontSize,
