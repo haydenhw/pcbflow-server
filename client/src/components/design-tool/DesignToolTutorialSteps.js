@@ -42,6 +42,7 @@ export const tutorialSteps = [
   {
     text: 'Go ahead and drag and drop the 5V/5A Regulator onto the board',
     nextButtonText: 'Okay',
+    nextButtonClass: 'regulator-tooltip',
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },
