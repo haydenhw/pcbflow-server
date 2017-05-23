@@ -34,11 +34,28 @@ export function fetchProjects() {
   };
 }
 
-export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
 export const fetchProjectByIdSuccess = project => ({
   type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
   project,
 });
+
+export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
+export const fetchProjectByIdSuccess = (index) => {
+  return (dispatch, getState) => {
+    const todoBools = getState().tutorial.todoBools;
+    const trueCount = todoBools.filter(bool => bool === true).length;
+    
+    dispatch(completeSpecifiedTodo(index));
+    
+    if (trueCount === 3) {
+      dispatch(completeTuorial());
+    }
+    
+    return null;
+  };
+}
+
+
 
 export function fetchProjectById(projectId, currentRoute) {
   const projectUrl = `${projectsUrl}/${projectId}`;

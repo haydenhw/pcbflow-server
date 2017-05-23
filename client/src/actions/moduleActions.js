@@ -19,7 +19,6 @@ function getIndex(id) {
   return idIndexMap[id];
 }
 
-
 export const pushToCurrentProjectModules = (module) => {
   return (dispatch, getState) => {
     const { step, isTutorialActive } = getState().tutorial;

@@ -62,6 +62,14 @@ export const completeTuorial = (index) => ({
   index
 });
 
+
+export const completeTutorial = (index) => {
+  return (dispatch, getState) => {
+    dispatch(incrementStep());
+    dispatch(toggleShouldRenderModal());
+  };
+}
+
 export const completeTodo = (index) => {
   return (dispatch, getState) => {
     const todoBools = getState().tutorial.todoBools;

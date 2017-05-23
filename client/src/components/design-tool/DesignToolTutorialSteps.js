@@ -90,4 +90,10 @@ export const tutorialSteps = [
     shouldRenderBackButton: true,
     backButtonText: 'Back'
   },
+  {
+    text: 'Success! Nice job. You\'ve completed the tutorial for', 
+    nextButtonText: 'Next', 
+    shouldRenderBackButton: true,
+    backButtonText: 'Back'
+  },
 ]
