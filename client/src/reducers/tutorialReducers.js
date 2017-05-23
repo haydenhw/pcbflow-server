@@ -22,6 +22,11 @@ export const tutorial = (state = defaultState, action) => {
         ...state,
         shouldRenderModal: !state.shouldRenderModal
       };
+    case actions.UPDATE_SHOULD_RENDER_TODO_LIST:
+      return {
+        ...state,
+        shouldRenderTodoList: action.bool
+      };
     case actions.UPDATE_DISABLED_ICON_EXCEPTIONS:
       return {
         ...state,
@@ -38,7 +43,6 @@ export const tutorial = (state = defaultState, action) => {
         step: state.step - 1,
       };
     case actions.COMPLETE_TODO:
-      console.log(action)
       const { index } = action;
       
       const newArray = state.todoBools.map((bool, i) => {

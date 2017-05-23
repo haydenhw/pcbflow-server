@@ -316,8 +316,9 @@ let DesignTool = class extends Component {
     });
   }
 
-  hideDocumentation() {
+  hideFloatingElements() {
     if (!this.props.isMouseOverModule) {
+      store.dispatch(actions.updateShouldRenderTodoList(false))
       this.setState({
         shouldRenderDocumentation: false,
         shouldRenderInfoButton: false,
@@ -325,11 +326,16 @@ let DesignTool = class extends Component {
     }
   }
 
-  unhideDocumentation() {
+  unhideFloatingElements() {
     const { wasDocumentationOpen } = this.state;
+    const { isTutorialActive } = this.props;
+    
+    if (isTutorialActive) {
+      store.dispatch(actions.updateShouldRenderTodoList(true));
+    }
     
     this.setState({
-      shouldRenderDocumentation: !!wasDocumentationOpen,
+      shouldRenderDocumentation: wasDocumentationOpen,
       shouldRenderInfoButton: true,
     });
   }
@@ -605,7 +611,19 @@ let DesignTool = class extends Component {
     return null;
   }
   
-  
+  renderTodo() {
+    const { shouldRenderTodoList, todoBools } = this.props;
+    
+    if(shouldRenderTodoList) {
+      return (
+        <DesignToolTodo 
+          todoBools={todoBools}
+        />
+      );
+    }
+    
+    return null;
+  }
 
   render() {
     const {
@@ -652,8 +670,8 @@ let DesignTool = class extends Component {
               shouldUpdateThumbnail={shouldUpdateThumbnail}
               draggingModule={this.getDraggingModule()}
               shouldHideContextMenu={shouldHideContextMenu}
-              hideDocumentation={this.hideDocumentation.bind(this)}
-              unhideDocumentation={this.unhideDocumentation.bind(this)}
+              hideFloatingElements={this.hideFloatingElements.bind(this)}
+              unhideFloatingElements={this.unhideFloatingElements.bind(this)}
             />
           </div>
         </div>
@@ -661,9 +679,7 @@ let DesignTool = class extends Component {
         {shouldRenderDocumentation && <DocumentationCard />}
         {shouldRenderInfoButton && this.renderInfoButton()}
         {this.renderModal()}
-        <DesignToolTodo 
-          todoBools={todoBools}
-        />
+        {this.renderTodo()}
       </div>
     );
   }
@@ -686,7 +702,8 @@ const mapStateToProps = state => ({
   isTutorialActive: state.tutorial.isTutorialActive,
   tutorialStep: state.tutorial.step,
   shouldRenderModal: state.tutorial.shouldRenderModal,
-  todoBools: state.tutorial.todoBools
+  shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
+  todoBools: state.tutorial.todoBools,
 });
 
 DesignTool = withRouter(DesignTool);

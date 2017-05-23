@@ -16,6 +16,14 @@ export const toggleShouldRenderModal = () => ({
   type: 'TOGGLE_SHOULD_RENDER_MODAL'
 });
 
+export const UPDATE_SHOULD_RENDER_TODO_LIST = 'UPDATE_SHOULD_RENDER_TODO_LIST';
+export const updateShouldRenderTodoList = (bool) => ({
+  type: 'UPDATE_SHOULD_RENDER_TODO_LIST',
+  bool
+});
+
+
+
 export const INCREMENT_STEP = 'INCREMENT_STEP';
 export const incrementStep = () => ({
   type: 'INCREMENT_STEP'
@@ -56,15 +64,9 @@ export const completeSpecifiedTodo = (index) => ({
   index
 });
 
-export const COMPLETE_TUTORIAL = 'COMPLETE_TUTORIAL';
-export const completeTuorial = (index) => ({
-  type: 'COMPLETE_TUTORIAL',
-  index
-});
-
-
-export const completeTutorial = (index) => {
+export const completeTutorial = () => {
   return (dispatch, getState) => {
+    console.log('completing')
     dispatch(incrementStep());
     dispatch(toggleShouldRenderModal());
   };
@@ -84,15 +86,14 @@ function getIndex(id) {
 
 export const completeTodo = (id) => {
   return (dispatch, getState) => {
-  
     const todoBools = getState().tutorial.todoBools;
     const trueCount = todoBools.filter(bool => bool === true).length;
     const todoIndex = getIndex(id); 
     
     dispatch(completeSpecifiedTodo(todoIndex));
-    
-    if (trueCount === 3) {
-      dispatch(completeTuorial());
+  
+    if (trueCount === 4) {
+      dispatch(completeTutorial());
     }
     
     return null;

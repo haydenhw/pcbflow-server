@@ -91,7 +91,7 @@ export const tutorialSteps = [
     backButtonText: 'Back'
   },
   {
-    text: 'Success! Nice job. You\'ve completed the tutorial for', 
+    text: 'Success! Nice job. You\'ve completed the HTPC design tutorial. Feel free to contiue customizing your HTCP or start a new project by clicking on folder on the top left of the page. ', 
     nextButtonText: 'Next', 
     shouldRenderBackButton: true,
     backButtonText: 'Back'

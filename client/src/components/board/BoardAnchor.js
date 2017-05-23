@@ -90,11 +90,11 @@ class Anchor extends Component {
 
   handleDragMove() {
     this.updatePosition();
-    this.props.hideDocumentation();
+    this.props.hideFloatingElements();
   }
 
   handleDragEnd() {
-    this.props.unhideDocumentation();
+    this.props.unhideFloatingElements();
     this.draggableOn();
   }
 

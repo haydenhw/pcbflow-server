@@ -34,7 +34,7 @@ export default function DesignToolTodo(props) {
       <div className="todo">
         <h2>Modules To Add</h2>
           <ul>
-            <li style={getTextDecoration(todoBools[0])}>USB Standard-A Jack</li>
+            <li style={getTextDecoration(todoBools[0])}>USB Type-A Jack</li>
             <li style={getTextDecoration(todoBools[1])}>MicroSD Card</li>
             <li style={getTextDecoration(todoBools[2])}>HDMI Connector</li>
             <li style={getTextDecoration(todoBools[3])}>Tactile Switch</li>

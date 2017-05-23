@@ -49,7 +49,7 @@ class Board extends Component {
 
   handleDragMove() {
     this.updateLocalStatePosition();
-    this.props.hideDocumentation();
+    this.props.hideFloatingElements();
       // improves performance
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
@@ -57,7 +57,7 @@ class Board extends Component {
 
   handleDragEnd() {
     this.updateReduxPosition();
-    this.props.unhideDocumentation();
+    this.props.unhideFloatingElements();
   }
 
   render() {
@@ -71,8 +71,8 @@ class Board extends Component {
       bottomLeft,
       bottomRight,
       rotate,
-      hideDocumentation,
-      unhideDocumentation,
+      hideFloatingElements,
+      unhideFloatingElements,
       isDraggingToBoard
      }
      = this.props;
@@ -110,29 +110,29 @@ class Board extends Component {
             x={topLeft.x}
             y={topLeft.y}
             name={'topLeft'}
-            hideDocumentation={hideDocumentation}
-            unhideDocumentation={unhideDocumentation}
+            hideFloatingElements={hideFloatingElements}
+            unhideFloatingElements={unhideFloatingElements}
           />
           <Anchor
             x={topRight.x || width}
             y={topRight.y}
             name={'topRight'}
-            hideDocumentation={hideDocumentation}
-            unhideDocumentation={unhideDocumentation}
+            hideFloatingElements={hideFloatingElements}
+            unhideFloatingElements={unhideFloatingElements}
           />
           <Anchor
             x={bottomLeft.x}
             y={bottomLeft.y || height}
             name={'bottomLeft'}
-            hideDocumentation={hideDocumentation}
-            unhideDocumentation={unhideDocumentation}
+            hideFloatingElements={hideFloatingElements}
+            unhideFloatingElements={unhideFloatingElements}
           />
           <Anchor
             x={bottomRight.x || width}
             y={bottomRight.y || height}
             name={'bottomRight'}
-            hideDocumentation={hideDocumentation}
-            unhideDocumentation={unhideDocumentation}
+            hideFloatingElements={hideFloatingElements}
+            unhideFloatingElements={unhideFloatingElements}
           />
 
           <Modules 

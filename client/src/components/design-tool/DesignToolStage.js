@@ -41,8 +41,8 @@ class DesignToolStage extends Component {
       isMouseDown,
       isMouseOverModule,
       rotate,
-      hideDocumentation,
-      unhideDocumentation,
+      hideFloatingElements,
+      unhideFloatingElements,
       shouldHideContextMenu,
       isDraggingToBoard
      } = this.props;
@@ -52,8 +52,8 @@ class DesignToolStage extends Component {
     const board = (
       <Board
         rotate={rotate}
-        hideDocumentation={hideDocumentation}
-        unhideDocumentation={unhideDocumentation}
+        hideFloatingElements={hideFloatingElements}
+        unhideFloatingElements={unhideFloatingElements}
         isDraggingToBoard={isDraggingToBoard}
       />
     );
