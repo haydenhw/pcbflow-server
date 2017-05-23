@@ -2,10 +2,13 @@ import * as actions from 'actions/indexActions';
 
 const defaultState = {
   isTutorialModeActive: false,
+  isTutorialComplete: false, 
   shouldRenderModal: false,
   shouldRenderTodoList: true, 
   disabledIconExceptions: null,
   step: 9,
+  todoBools:[false, false, false, false]
+  ]
 }
 
 export const tutorial = (state = defaultState, action) => {
@@ -35,6 +38,12 @@ export const tutorial = (state = defaultState, action) => {
         ...state,
         step: state.step - 1,
       };
+    case actions.COMPLETE_TUTORIAL:
+      const { index } = action.index;
+      const newArray = state.map((bool, i) => {
+        return i === index ? true : bool;
+      })
+      return newArray;
     default:
       return state;
   }

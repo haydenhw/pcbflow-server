@@ -51,17 +51,33 @@ export const decrementTutorialStep = () => {
 }
 
 export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const completeTodo = (index) => ({
+export const completeSpecifiedTodo = (index) => ({
   type: 'COMPLETE_TODO',
   index
 });
 
-export const decrementTutorialStep = () => {
+export const COMPLETE_TODO = 'COMPLETE_TODO';
+export const completeSpecifiedTodo = (index) => ({
+  type: 'COMPLETE_TODO',
+  index
+});
+
+export const COMPLETE_TUTORIAL = 'COMPLETE_TUTORIAL';
+export const completeTuorial = (index) => ({
+  type: 'COMPLETE_TUTORIAL',
+  index
+});
+
+export const completeTodo = (index) => {
   return (dispatch, getState) => {
     const completedTodoBools = getState().tutorial.todoBools;
     const trueCount = completedTodoBools.fliter(bool => bool === true).length;
     
-    dispatch()
+    dispatch(completeTodo(index));
+    
+    if (trueCount === 3) {
+      dispatch(completeTuorial());
+    }
     
     return null;
   };
