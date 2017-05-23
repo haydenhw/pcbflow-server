@@ -18,7 +18,7 @@ export const tourSteps = [
 export const dependecyDemo = [
   {
     title: 'Dependencies',
-    text: 'Some modules are dependent on other particular modules to function. When you add a module that has unmet dependencies, those dependencies will be listed in the module pallate.',
+    text: 'Some modules are dependent on other certain modules to function. When you add a module that has unmet dependencies, those dependencies will be listed in the module pallate.',
     textAlign: 'center',
     selector: '.sideBar',
     position: 'right'

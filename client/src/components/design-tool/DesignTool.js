@@ -530,7 +530,7 @@ let DesignTool = class extends Component {
           }
           return {
             handleNextButtonClick: stepNineClickHandler.bind(this),
-            handleBackButtonClick: store.dispatch(actions.decrementTutorialStep()),
+            handleBackButtonClick: () => store.dispatch(actions.decrementTutorialStep()),
             handleDidMount: this.addTooltip.bind(this, toolTips[2])
           }
         
