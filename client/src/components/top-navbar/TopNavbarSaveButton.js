@@ -90,7 +90,7 @@ const mapStateToProps = state => ({
   modules: state.currentProjectModules.present,
   projectName: state.currentProjectInfo.name,
   id: state.currentProjectInfo.id,
-  projects: state.projectList,
+  projects: state.projects.items,
 });
 
 export default connect(mapStateToProps)(SaveButton);

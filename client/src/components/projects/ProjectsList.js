@@ -65,7 +65,7 @@ class ProjectList extends Component {
 }
 
 const mapStateToProps = state => ({
-  projects: state.projectList,
+  projects: state.projects.items,
   thumbnail: state.boardSpecs.thumbnail,
 });
 

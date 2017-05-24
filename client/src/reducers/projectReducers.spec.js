@@ -5,16 +5,16 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { projectList, currentProjectInfo } from './projectReducers';
+import { projects, currentProjectInfo } from './projectReducers';
 
-describe('projectList reducer', () => {
+describe('projects reducer', () => {
     // Fetch Basic Info about User
   it('It should return a list of projects', () => {
     const initialState = [];
 
     const expectedState = [1, 2, 3];
 
-    const resultState = projectList(deepFreeze(initialState), {
+    const resultState = projects(deepFreeze(initialState), {
       type: 'FETCH_PROJECTS_SUCCESS',
       projects: [1, 2, 3],
 

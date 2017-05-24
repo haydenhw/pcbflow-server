@@ -1,9 +1,11 @@
 import * as actions from '../actions/indexActions';
 
 
-export const projectList = (state = [], action) => {
+export const projects = (state = {}, action) => {
   if (action.type === actions.FETCH_PROJECTS_SUCCESS) {
-    return action.projects;
+    return {
+      items: action.projects 
+    }
   }
   return state;
 };
@@ -45,7 +47,7 @@ export const currentProjectInfo = (state = defaultProjectInfo, action) => {
 };
 
 /*
-export const projectList = (state = [], action) => {
+export const projects = (state = [], action) => {
   switch(action.type){
     case(actions.FETCH_PROJECTS_SUCCESS):
       return action.projects;
