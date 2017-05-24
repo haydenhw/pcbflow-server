@@ -20,7 +20,7 @@ export const tutorialSteps = [
     leftButtonText: 'Back'
   },
   {
-    text: 'Okay, now we\'re ready to get started! \n First drag and drop the COM connector module anywhere on the board',
+    text: 'Okay, now we\'re ready to get started! \n First drag and drop the COM connector module anywhere on the board.',
     rightButtonText: 'Okay',
     rightButtonClass: 'com-connector-tooltip',
     shouldRenderLeftButton: true,
@@ -47,7 +47,7 @@ export const tutorialSteps = [
     leftButtonText: 'Back'
   },
   {
-    text: 'Great! You may have noticed that the COM Connector module turned green after you added the 5V/5A Regulator. Modules will dispaly red if they have unmet dependencies and green if all dependencies are satisfied', 
+    text: 'Great! You may have noticed that the COM Connector module turned green after you added the 5V/5A Regulator. Modules will dispaly red if they have unmet dependencies and green if all dependencies are satisfied.', 
     rightButtonText: 'Next', 
     shouldRenderLeftButton: true,
     leftButtonText: 'Back'

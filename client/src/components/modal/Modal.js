@@ -53,7 +53,11 @@ export default class DesignToolOnboardModal extends Component {
     if (list){
       const items = list.map((item, index) => <li key={index} >{item}</li>);
       
-      return <ul style={{textAlign: "left" }}>{items}</ul>
+      return (
+        <div className="list-wrapper">
+          <ul>{items}</ul>
+        </div>
+      )
     }
     
     return null;
@@ -61,10 +65,10 @@ export default class DesignToolOnboardModal extends Component {
   
   render() {
     const rightButtonClass = `modal-button ${this.props.rightButtonClass}`
-    
+    console.log(this.props.modalClass)
     return (
       <RootModal>
-        <div className="modal-content">
+        <div className={`modal-content ${this.props.modalClass}`}>
           <span className="modal-close" onClick={this.handleCloseButtonClick.bind(this)}>&times;</span>
           <div className="modal-header"></div>
           <div className="modal-text">
@@ -75,7 +79,8 @@ export default class DesignToolOnboardModal extends Component {
           <div className="modal-button-wrapper">
             {this.renderLeftButton()}
             <button className={rightButtonClass} 
-              onClick={this.handleRightButtonClick.bind(this)}>
+              onClick={this.handleRightButtonClick.bind(this)}
+            >
               {this.props.rightButtonText}
             </button>
           </div>

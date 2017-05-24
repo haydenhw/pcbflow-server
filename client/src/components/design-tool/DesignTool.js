@@ -32,6 +32,7 @@ import { toolTips } from 'config/toolTips'
 
 import './design-tool-styles/DesignToolToggleInfoButton.css';
 import './design-tool-styles/DesignToolDocumentationCard.css';
+import './design-tool-styles/DesignToolOnboardModal.css'
 import './design-tool-styles/joyride.css';
 
 
@@ -278,8 +279,6 @@ let DesignTool = class extends Component {
       this.joyride.next();
     }
   }
-
-  
 
   toggleDraggingToBoard() {
     this.setState({ isDraggingToBoard: true });
@@ -570,8 +569,8 @@ let DesignTool = class extends Component {
       handleCloseButtonClick: handleCloseFunction.bind(this)
     }
     const buttonMethods = getButtonMethods(tutorialStep);
-    
-    return Object.assign(buttonMethods, handleClose)
+    const modalClass = {modalClass: `modal-step-${this.props.tutorialStep}`}
+    return Object.assign(buttonMethods, handleClose, modalClass)
   }
   
   renderModal() {

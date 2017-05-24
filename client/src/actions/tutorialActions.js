@@ -1,9 +1,9 @@
 import * as actions from 'actions/indexActions'
 import { tutorialSteps } from 'components/design-tool/DesignToolTutorialSteps';
 
-export const TOGGLE_TUTORIAL_IS_ACTIVE = 'TOGGLE_TUTORIAL_IS_ACTIVE';
+export const TOGGLE_IS_TUTORIAL_ACTIVE = 'TOGGLE_IS_TUTORIAL_ACTIVE';
 export const toggleTutorialIsActive = () => ({
-  type: 'TOGGLE_TUTORIAL_IS_ACTIVE'
+  type: 'TOGGLE_IS_TUTORIAL_ACTIVE'
 });
 
 export const exitTutorial = () => {

@@ -5,14 +5,14 @@ const defaultState = {
   isTutorialComplete: false, 
   shouldRenderTodoList: true, 
   disabledIconExceptions: null,
-  step: 12,
+  step: 7,
   previousStep: null,
   todoBools: [false, false, false, false, false]
 }
 
 export const tutorial = (state = defaultState, action) => {
   switch (action.type) {
-    case actions.TOGGLE_TUTORIAL_IS_ACTIVE:
+    case actions.TOGGLE_IS_TUTORIAL_ACTIVE:
       return {
         ...state,
         isTutorialActive: !state.isTutorialActive
