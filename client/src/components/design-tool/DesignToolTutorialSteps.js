@@ -13,8 +13,11 @@ export const tutorialSteps = [
     rightButtonText: 'Next',
     shouldRenderLeftButton: true,
     leftButtonText: 'Back',
-    //image: {src: null, alt: 'image of completed project'},
-    imageClassName: 'completed-tutorial-project' 
+    image: {
+      src: 'images/htpc.png', 
+      alt: 'completed htpc project',
+      class: 'completed-htpc-project' 
+    }
   },
   {
     text: 'First let\'s take a short tour...',
@@ -27,14 +30,25 @@ export const tutorialSteps = [
     rightButtonText: 'Okay',
     rightButtonClass: 'com-connector-tooltip',
     shouldRenderLeftButton: true,
-    leftButtonText: 'Back'
+    leftButtonText: 'Back',
+    image: {
+      src: 'images/COM-connector.svg', 
+      alt: 'com connector icon',
+      class: 'com-connector-icon' 
+    }
   },
   {
     text: 'Nice! The COM or \'computer on module\' component will act as the control center for our HTPC. It is quite literally a computer which runs a linux or android operating system.\n The COM has a wide range of multimedia interfacing capabilities including: ',
     list: ['WiFi','HDMI','USB', 'Audio', 'Ethernet', 'RGB'],
     rightButtonText: 'Next',
     shouldRenderLeftButton: false,
-    leftButtonText: 'Back'
+    leftButtonText: 'Back',
+    image: {src: 'images/real-com.jpg', alt: 'com connector icon'},
+    image: {
+      src: 'images/real-com.jpg', 
+      alt: 'real com module',
+      class: 'real-com' 
+    }
   },
   {
     text: 'So which module should we add next? Let\'s take a look at the module pallate for some insight.',
@@ -47,32 +61,57 @@ export const tutorialSteps = [
     rightButtonText: 'Okay',
     rightButtonClass: 'regulator-tooltip',
     shouldRenderLeftButton: true,
-    leftButtonText: 'Back'
+    leftButtonText: 'Back',
+    image: {
+      src: 'images/regulator-5V5A-icon.svg', 
+      alt: 'regulator icon',
+      class: 'regulator-icon' 
+    }
   },
   {
     text: 'Great! You may have noticed that the COM Connector module turned green after you added the 5V/5A Regulator. Modules will dispaly red if they have unmet dependencies and green if all dependencies are satisfied.', 
     rightButtonText: 'Next', 
     shouldRenderLeftButton: true,
-    leftButtonText: 'Back'
+    leftButtonText: 'Back',
+    image: {
+      src: 'images/red-to-green.svg', 
+      alt: 'red to green dependency illustration',
+      class: 'red-to-green' 
+    }
   },
   {
     text: 'So why exactly does the COM need a 5V/5A Regulator to function?\n This is becasue the COM is designed to operate at voltage in the range of 3.5V-6V, but as we\'ll see in the next step, our board will be running off of a 20V power supply. The 5V/5A Regulator will act as a voltage throttle, taking in 20 Volts and delivering 5 Volts to the COM.', 
     rightButtonText: 'Next', 
     shouldRenderLeftButton: true,
-    leftButtonText: 'Back'
+    leftButtonText: 'Back',
+    image: {
+      src: 'images/real-regulator.jpg', 
+      alt: 'real regulator',
+      class: 'real-require' 
+    }
   },
   {
     text: 'So how about that power supply?\n Let\'s add the DC Barrel Jack to give our HTPC some life...', 
     rightButtonText: 'Next', 
     rightButtonClass: 'barrel-connector-tooltip',
     shouldRenderLeftButton: true,
-    leftButtonText: 'Back'
+    leftButtonText: 'Back',
+    image: {
+      src: 'images/barrel-connector-icon.svg', 
+      alt: 'barrel connector icon',
+      class: 'barrel-connector-icon'
+    }
   },
   {
     text: 'Now we\'ll be able to plug our HTCP into the wall with a standard 2.1mm x 5.5mm DC power supply.', 
     rightButtonText: 'Next', 
     shouldRenderLeftButton: true,
-    leftButtonText: 'Back'
+    leftButtonText: 'Back',
+    image: {
+      src: 'images/real-power.svg', 
+      alt: 'real power',
+      class: 'real-power' 
+    }
   },
   {
     text: 'Here\'s a rundown of  what we\'ll need to finish our HTPC design:', 
@@ -91,7 +130,12 @@ export const tutorialSteps = [
     text: 'Now we\'ll set you free to finish the design on your own. You\'ll be provided with a to-do list containing the names of the modules listed on the previous screen.', 
     rightButtonText: 'Next', 
     shouldRenderLeftButton: true,
-    leftButtonText: 'Back'
+    leftButtonText: 'Back',
+    image: {
+      src: 'images/htpc.png', 
+      alt: 'completed htpc project',
+      class: 'completed-htpc-project' 
+    }
   },
   {
     text: 'Success! Nice job. You\'ve completed the HTPC design tutorial. Feel free to contiue customizing your HTCP or start a new project by clicking on folder icon on the top left corner of the page. ', 

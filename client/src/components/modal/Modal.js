@@ -18,7 +18,6 @@ export default class DesignToolOnboardModal extends Component {
     }
   }
   
-  
   handleCloseButtonClick() {
     this.props.handleCloseButtonClick();
   }
@@ -44,10 +43,12 @@ export default class DesignToolOnboardModal extends Component {
   
   renderImage() {
     if (this.props.image) {
+      
       return (
-        <img className={this.props.imageClassName} 
-          src={this.props.image} 
-          alt="completed tutorial project" 
+        <img 
+          className={`modal-image ${this.props.image.class}`} 
+          src={this.props.image.src} 
+          alt={this.props.image.alt} 
         />
       );
     }
