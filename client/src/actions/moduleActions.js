@@ -19,7 +19,7 @@ export const pushToCurrentProjectModules = (module) => {
           dispatch(actions.updateDisabledIconExceptions(null));
           setTimeout(() => dispatch(actions.toggleShouldRenderModal()), 700)
           break;
-        case 12:
+        case 13:
           dispatch(actions.completeTodo(module.id));
           break
         default:

@@ -1,16 +1,28 @@
 import * as actions from 'actions/indexActions';
 
+const devMode = true;
+
+const devState = {
+  isTutorialActive: true,
+  isTutorialComplete: false, 
+  shouldRenderTodoList: false, 
+  disabledIconExceptions: null,
+  step: 12,
+  previousStep: null,
+  todoBools: [false, false, false, false, false]
+}
+
 const defaultState = {
   isTutorialActive: false,
   isTutorialComplete: false, 
   shouldRenderTodoList: false, 
   disabledIconExceptions: null,
-  step: 8,
+  step: 0,
   previousStep: null,
   todoBools: [false, false, false, false, false]
 }
 
-export const tutorial = (state = defaultState, action) => {
+export const tutorial = (state = devMode ? devState : defaultState, action) => {
   switch (action.type) {
     case actions.TOGGLE_IS_TUTORIAL_ACTIVE:
       return {

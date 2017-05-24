@@ -69,7 +69,7 @@ export const tutorialSteps = [
     leftButtonText: 'Back'
   },
   {
-    text: 'Now we\'ll be able to plug our HTCP into the wall with a standard 2.1mm x 5.5mm DC power supply', 
+    text: 'Now we\'ll be able to plug our HTCP into the wall with a standard 2.1mm x 5.5mm DC power supply.', 
     rightButtonText: 'Next', 
     shouldRenderLeftButton: true,
     leftButtonText: 'Back'
@@ -94,9 +94,9 @@ export const tutorialSteps = [
     leftButtonText: 'Back'
   },
   {
-    text: 'Success! Nice job. You\'ve completed the HTPC design tutorial. Feel free to contiue customizing your HTCP or start a new project by clicking on folder on the top left of the page. ', 
-    rightButtonText: 'Next', 
-    shouldRenderLeftButton: true,
+    text: 'Success! Nice job. You\'ve completed the HTPC design tutorial. Feel free to contiue customizing your HTCP or start a new project by clicking on folder icon on the top left corner of the page. ', 
+    rightButtonText: 'Finish', 
+    shouldRenderLeftButton: false,
     leftButtonText: 'Back'
   },
 ]

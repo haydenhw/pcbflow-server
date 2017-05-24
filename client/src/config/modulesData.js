@@ -90,7 +90,7 @@ export const modulesData = [
     price: 5,
     info: null,
     id: '101',
-    dependencies: ['105', '111']
+    dependencies: ['105']
   },
   {
     fontSize,

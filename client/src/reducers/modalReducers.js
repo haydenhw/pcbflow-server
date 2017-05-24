@@ -8,7 +8,6 @@ const defaultState = {
 export const modal = (state = defaultState, action) => {
   switch (action.type) {
     case actions.TOGGLE_SHOULD_RENDER_MODAL:
-      console.log(action)
       return {
         ...state,
         shouldRenderModal: !state.shouldRenderModal

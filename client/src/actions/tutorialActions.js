@@ -9,7 +9,8 @@ export const toggleTutorialIsActive = () => ({
 export const exitTutorial = () => {
   return (dispatch, getState) => {
     dispatch(actions.toggleTutorialIsActive());
-    dispatch(actions.toggleShouldRenderModal())
+    dispatch(actions.toggleShouldRenderModal());
+    dispatch(updateShouldRenderTodoList(false));
   }
 }
 
@@ -83,8 +84,7 @@ export const completeSpecifiedTodo = (index) => ({
 export const completeTutorial = () => {
   return (dispatch, getState) => {
     console.log('completing')
-    dispatch(incrementStep());
-    dispatch(toggleShouldRenderModal());
+    dispatch(actions.toggleShouldRenderModal());
   };
 }
 
@@ -109,7 +109,7 @@ export const completeTodo = (id) => {
     dispatch(completeSpecifiedTodo(todoIndex));
   
     if (trueCount === 4) {
-      dispatch(completeTutorial());
+      dispatch(actions.toggleShouldRenderModal());
     }
     
     return null;

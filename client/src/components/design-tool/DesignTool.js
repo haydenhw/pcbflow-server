@@ -413,7 +413,6 @@ let DesignTool = class extends Component {
   }
   
   addTooltip(toolTipData) {
-    console.log('adding tooltip...')
     this.joyride.addTooltip(toolTipData);
   }
   
@@ -544,11 +543,18 @@ let DesignTool = class extends Component {
             handleRightButtonClick: stepTwelveClickHandler.bind(this),
             handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep()),
           }
-        
+        case 13:
+          const stepThirteenClickHandler = function() {
+            store.dispatch(actions.exitTutorial());
+          }
+          return {
+            handleRightButtonClick: stepThirteenClickHandler.bind(this),
+          }
+      
         default:
           return {
             handleRightButtonClick: () => store.dispatch(actions.incrementTutorialStep()),
-            handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep())
+            handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep()),
           }
         } 
     }

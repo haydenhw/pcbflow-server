@@ -7,13 +7,12 @@ import './Modal.css'
 export default class DesignToolOnboardModal extends Component {
 
   componentDidUpdate() {
-    if (this.props.handleDidUpadte) {
-      this.props.handleDidUpadte();
+    if (this.props.handleDidUpdate) {
+      this.props.handleDidUpdate();
     }
   }
   
   componentDidMount() {
-    console.log('mounting')
     if (this.props.handleDidMount) {
       this.props.handleDidMount();
     }
@@ -58,7 +57,6 @@ export default class DesignToolOnboardModal extends Component {
   
   renderList() {
     const { list } = this.props;
-    console.log(this.props.handleDidUpdate)
     
     if (list){
       const items = list.map((item, index) => <li key={index} >{item}</li>);
