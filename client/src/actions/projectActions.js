@@ -17,6 +17,12 @@ export const updateLastSavedTime = time => ({
   time,
 });
 
+export const FETCH_PROJECTS_REQUEST = 'FETCH_PROJECTS_REQUEST';
+export const fetchProjectsRequest = () => ({
+  type: 'FETCH_PROJECTS_REQUEST',
+  
+});
+
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
 export const fetchProjectsSuccess = projects => ({
   type: 'FETCH_PROJECTS_SUCCESS',
@@ -25,7 +31,8 @@ export const fetchProjectsSuccess = projects => ({
 
 export function fetchProjects() {
   return (dispatch) => {
-    fetch(projectsUrl)
+    dispatch(fetchProjectsRequest())
+    return fetch(projectsUrl)
     .then(res => res.json())
     .then((data) => {
       dispatch(fetchProjectsSuccess(data));
