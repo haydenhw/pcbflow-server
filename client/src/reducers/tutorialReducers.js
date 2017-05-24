@@ -3,7 +3,7 @@ import * as actions from 'actions/indexActions';
 const defaultState = {
   isTutorialActive: true,
   isTutorialComplete: false, 
-  shouldRenderTodoList: false, 
+  shouldRenderTodoList: true, 
   disabledIconExceptions: null,
   step: 12,
   previousStep: null,

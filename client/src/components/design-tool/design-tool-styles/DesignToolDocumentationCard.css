@@ -13,6 +13,7 @@
   background-color: white;
   text-align: left;
   font-family: Helvetica, Arial, sans-serif;
+  z-index: 100;
 }
 
 .doc-wrapper {

@@ -22,9 +22,9 @@ const draggableOptions = {
   }
 }
 
-  const getTextDecoration = function(bool) {
-    return bool ? { textDecoration: "line-through"} : {};
-  }
+const getTextDecoration = function(bool) {
+  return bool ? { textDecoration: "line-through"} : {};
+}
 
 export default function DesignToolTodo(props) {
   const { todoBools } = props;
@@ -40,7 +40,9 @@ export default function DesignToolTodo(props) {
             <li style={getTextDecoration(todoBools[3])}>Tactile Switch</li>
             <li style={getTextDecoration(todoBools[4])}>LED</li>
           </ul>
-        <span onClick={props.handleLinkClick}>Exit Tutorial</span>
+        <div>
+          <span onClick={props.handleLinkClick}>Exit Tutorial</span>
+        </div>
       </div>
     </Interactive>
   );
