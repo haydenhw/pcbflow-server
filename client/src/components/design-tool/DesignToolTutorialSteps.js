@@ -9,7 +9,7 @@ export const tutorialSteps = [
     leftButtonText: 'No Thanks',
   },
   {
-    text: 'In this tutorial we\'ll build a Home Theatre PC device which can be conntected to a tv or monitor to play media from a mass storage device using a smart phone as a remote control. ',
+    text: 'In this tutorial we\'ll build a Home Theatre PC device that can be conntected to a tv or monitor to play media from a mass storage device using a smart phone as a remote control. ',
     rightButtonText: 'Next',
     shouldRenderLeftButton: true,
     leftButtonText: 'Back',

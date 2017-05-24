@@ -79,7 +79,7 @@ module.exports = {
       config: path.join(__dirname, '../src', 'config'),
       helpers: path.join(__dirname, '../src', 'helpers'),
       'react': path.resolve(__dirname, '../node_modules', 'react'),
-      'react-native': 'react-native-web',
+      //'react-native': 'react-native-web',
     },
     extensions: ['', '.js', '.jsx']
   },
