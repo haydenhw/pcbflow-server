@@ -19,6 +19,10 @@ function convertToUrl(json) {
 }
 
 class ProjectList extends Component {
+  static defaultProps = {
+    projects: []
+  }
+  
   static confirmDelete(projectId) {
     confirm('Are you sure you want to delete this project?').then(() => {
       store.dispatch(actions.deleteProject(projectId));
@@ -28,12 +32,29 @@ class ProjectList extends Component {
   componentDidMount() {
     store.dispatch(actions.fetchProjects());
   }
+  
+  renderProjectItem(project, thumbnailSrc) {
+    const { isFetching } = this.props;
+    console.log(isFetching)
+    if (isFetching) {
+      return <span key={shortid.generate()}>Loading...</span>
+    }
+    
+    return (
+      <ProjectsItem
+        projectId={project._id}
+        projectName={project.name}
+      />
+    );
+  }
 
   render() {
-    const { projects } = this.props;
-    if (projects && projects.length > 0) {
+    const { projects, isFetching } = this.props;
+    if (!isFetching) {
+    
       const projectsList = projects.map((project) => {
         const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
+        
         return (
           <ProjectsItemFrame
             key={shortid.generate()}
@@ -41,12 +62,11 @@ class ProjectList extends Component {
             projectId={project._id}
             confirmDelete={ProjectList.confirmDelete}
           >
-            <ProjectsItem
-              projectId={project._id}
-              projectName={project.name}
-            />
+            {this.renderProjectItem(project, thumbnailSrc)}
           </ProjectsItemFrame>
-        );
+        )
+        
+        
       });
 
       return (
@@ -58,15 +78,25 @@ class ProjectList extends Component {
           </div>
         </div>
       );
+    } else {
+      return (
+        <div
+          style={{height:"500px", width:"500px", background:"red"}}
+        >
+          
+        </div>
+      )
     }
 
-    return <div />;
   }
 }
 
 const mapStateToProps = state => ({
   projects: state.projects.items,
+  isFetching: state.projects.isFetching,
   thumbnail: state.boardSpecs.thumbnail,
 });
+
+
 
 export default connect(mapStateToProps)(ProjectList);

@@ -66,8 +66,6 @@ export const fetchProjectByIdSuccess = (project) => {
   }
 }
 
-
-
 export function fetchProjectById(projectId, currentRoute) {
   const projectUrl = `${projectsUrl}/${projectId}`;
   return (dispatch) => {

@@ -8,11 +8,13 @@ const defaultProjectState = {
 export const projects = (state = defaultProjectState, action) => {
   switch (action.type) {
     case actions.FETCH_PROJECTS_REQUEST:
+    console.log(state)
       return {
         ...state,
         isFetching: true
       }
     case actions.FETCH_PROJECTS_SUCCESS:
+    console.log(state)
       return {
         ...state,
         isFetching: false,
@@ -64,12 +66,3 @@ export const currentProjectInfo = (state = defaultProjectInfo, action) => {
   }
 };
 
-/*
-export const projects = (state = [], action) => {
-  switch(action.type){
-    case(actions.FETCH_PROJECTS_SUCCESS):
-      return action.projects;
-      break;
-    case(actions.DELETE_PROJECT_SUCCESS):
-  }
-}*/
