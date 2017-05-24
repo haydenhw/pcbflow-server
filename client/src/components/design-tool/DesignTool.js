@@ -20,10 +20,10 @@ import TopNavbar from 'components/top-navbar/TopNavbar';
 import SideBar from 'components/side-bar/SideBar';
 import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText';
 import Footer from 'components/footer/Footer';
+import Modal from 'components/modal/Modal';
 import DesignToolStage from './DesignToolStage';
 import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
-import DesignToolOnboardModal from './DesignToolOnboardModal';
 import DesignToolBoardFrame from './DesignToolBoardFrame';
 import DesignToolTodo from './DesignToolTodo';
 import { tourSteps, dependecyDemo } from './DesignToolTourSteps';
@@ -542,6 +542,17 @@ let DesignTool = class extends Component {
             handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep()),
             handleDidMount: this.addTooltip.bind(this, toolTips[2])
           }
+        case 12:
+          const stepTwelveClickHandler = function() {
+            store.dispatch(actions.incrementTutorialStep());
+            store.dispatch(actions.toggleShouldRenderModal());
+            store.dispatch(actions.updateShouldRenderTodoList(true));
+          }
+          return {
+            handleRightButtonClick: stepTwelveClickHandler.bind(this),
+            handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep()),
+            handleDidMount: this.addTooltip.bind(this, toolTips[2])
+          }
         
         default:
           return {
@@ -575,13 +586,13 @@ let DesignTool = class extends Component {
           const onboardModalProps = Object.assign(tutorialSteps[tutorialStep], onboardModalMethods);
           
           return (
-            <DesignToolOnboardModal 
+            <Modal 
               {...onboardModalProps}
             />
           );
         case 'CONFIRM':
           return (
-            <DesignToolOnboardModal 
+            <Modal 
               text="Are you sure you want to exit the tutorial?"
               rightButtonText="Exit"
               shouldRenderLeftButton={true}
@@ -634,10 +645,16 @@ let DesignTool = class extends Component {
   renderTodo() {
     const { shouldRenderTodoList, todoBools } = this.props;
     
+    const handleLinkClick = () => {
+      store.dispatch(actions.changeModalType('CONFIRM'));
+      store.dispatch(actions.toggleShouldRenderModal());
+    }
+    
     if(shouldRenderTodoList) {
       return (
         <DesignToolTodo 
           todoBools={todoBools}
+          handleLinkClick={handleLinkClick}
         />
       );
     }

@@ -13,6 +13,7 @@ export const modal = (state = defaultState, action) => {
         shouldRenderModal: !state.shouldRenderModal
       };
     case actions.CHANGE_MODAL_TYPE:
+    console.log(action)
       return {
         ...state,
         modalType: action.modalType

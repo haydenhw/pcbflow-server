@@ -31,9 +31,14 @@ export const showTutorialExitScreen = () => ({
 });
 
 export const RESUME_TUTORIAL = 'RESUME_TUTORIAL';
-export const resumeTutorial = () => ({
-  type: 'RESUME_TUTORIAL'
-});
+export const resumeTutorial = () => {
+  return (dispatch, getState) => {
+    dispatch(actions.changeModalType('ONBOARD'))
+    dispatch({
+      type: 'RESUME_TUTORIAL',
+    })
+  }
+}
 
 export const INCREMENT_STEP = 'INCREMENT_STEP';
 export const incrementStep = () => ({

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import RootModal from 'components/modal/RootModal';
-import './design-tool-styles/DesignToolOnboardModal.css'
+import RootModal from './RootModal';
+import './Modal.css'
 
 
 export default class DesignToolOnboardModal extends Component {

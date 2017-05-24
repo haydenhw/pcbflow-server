@@ -40,7 +40,7 @@ export default function DesignToolTodo(props) {
             <li style={getTextDecoration(todoBools[3])}>Tactile Switch</li>
             <li style={getTextDecoration(todoBools[4])}>LED</li>
           </ul>
-        <span>Exit Tutorial</span>
+        <span onClick={props.handleLinkClick}>Exit Tutorial</span>
       </div>
     </Interactive>
   );
