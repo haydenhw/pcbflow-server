@@ -1,14 +1,32 @@
 import * as actions from '../actions/indexActions';
 
+const defaultProjectState = {
+  isFetching: false,
+  items: []
+}
 
-export const projects = (state = {}, action) => {
-  if (action.type === actions.FETCH_PROJECTS_SUCCESS) {
-    return {
-      items: action.projects 
-    }
+export const projects = (state = defaultProjectState, action) => {
+  switch (action.type) {
+    case actions.FETCH_PROJECTS_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      }
+    case actions.FETCH_PROJECTS_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        items: action.projects 
+      }
+    case actions.FETCH_PROJECTS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+      }
+    default:
+      return state;
   }
-  return state;
-};
+}
 
 const defaultProjectInfo = {
   price: '$15.00',
