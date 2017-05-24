@@ -83,7 +83,6 @@ export const completeSpecifiedTodo = (index) => ({
 
 export const completeTutorial = () => {
   return (dispatch, getState) => {
-    console.log('completing')
     dispatch(actions.toggleShouldRenderModal());
   };
 }

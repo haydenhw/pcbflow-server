@@ -327,9 +327,9 @@ let DesignTool = class extends Component {
 
   unhideFloatingElements() {
     const { wasDocumentationOpen } = this.state;
-    const { isTutorialActive } = this.props;
+    const { isTutorialActive, tutorialStep } = this.props;
     
-    if (isTutorialActive) {
+    if (isTutorialActive && tutorialStep === 13) {
       store.dispatch(actions.updateShouldRenderTodoList(true));
     }
     
