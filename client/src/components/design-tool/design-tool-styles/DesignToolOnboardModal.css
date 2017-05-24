@@ -1,4 +1,18 @@
 .modal-step-4 ul {
+  margin-top: 0;
   display: inline-block;
   text-align: initial;
 }
+
+.modal-step-11 ul {
+  display: inline-block;
+}
+
+.modal-step-11 li {
+  margin: 10px 0
+}
+
+.modal-step-11 li:nth-child(1) {
+  margin-top: 0;
+}
+

@@ -5,7 +5,7 @@ const defaultState = {
   isTutorialComplete: false, 
   shouldRenderTodoList: true, 
   disabledIconExceptions: null,
-  step: 7,
+  step: 11,
   previousStep: null,
   todoBools: [false, false, false, false, false]
 }
