@@ -5,11 +5,20 @@ import './Modal.css'
 
 
 export default class DesignToolOnboardModal extends Component {
+
+  componentDidUpdate() {
+    if (this.props.handleDidUpadte) {
+      this.props.handleDidUpadte();
+    }
+  }
+  
   componentDidMount() {
+    console.log('mounting')
     if (this.props.handleDidMount) {
       this.props.handleDidMount();
     }
   }
+  
   
   handleCloseButtonClick() {
     this.props.handleCloseButtonClick();
@@ -49,6 +58,7 @@ export default class DesignToolOnboardModal extends Component {
   
   renderList() {
     const { list } = this.props;
+    console.log(this.props.handleDidUpdate)
     
     if (list){
       const items = list.map((item, index) => <li key={index} >{item}</li>);
@@ -65,7 +75,6 @@ export default class DesignToolOnboardModal extends Component {
   
   render() {
     const rightButtonClass = `modal-button ${this.props.rightButtonClass}`
-    console.log(this.props.modalClass)
     return (
       <RootModal>
         <div className={`modal-content ${this.props.modalClass}`}>

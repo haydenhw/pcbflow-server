@@ -378,12 +378,7 @@ let DesignTool = class extends Component {
   
   restartTour() {
     store.dispatch(actions.toggleShouldRenderModal());
-    console.log('re-starting...')
     this.joyride.reset(true);
-  /*  this.setState({
-      running: true,
-      joyrideStep: 0,
-    });*/
   }
   
   handleJoyrideCallback(result) {
@@ -395,7 +390,6 @@ let DesignTool = class extends Component {
     }
     
     if (result.type === 'finished') {
-      console.log('finishing...')
       store.dispatch(actions.incrementTutorialStep());
       store.dispatch(actions.toggleShouldRenderModal());
       this.setState({
@@ -419,6 +413,7 @@ let DesignTool = class extends Component {
   }
   
   addTooltip(toolTipData) {
+    console.log('adding tooltip...')
     this.joyride.addTooltip(toolTipData);
   }
   
@@ -489,8 +484,6 @@ let DesignTool = class extends Component {
   getOnboardModalHandlers(tutorialStep) {
     const getButtonMethods = () => {
       switch(tutorialStep) {
-        case 0:
-          
         case 1:
           const stepOneNextClickHandler = function() {
             store.dispatch(actions.incrementTutorialStep());
@@ -539,7 +532,7 @@ let DesignTool = class extends Component {
           return {
             handleRightButtonClick: stepNineClickHandler.bind(this),
             handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep()),
-            handleDidMount: this.addTooltip.bind(this, toolTips[2])
+            handleDidUpdate: this.addTooltip.bind(this, toolTips[2])
           }
         case 12:
           const stepTwelveClickHandler = function() {
@@ -550,7 +543,6 @@ let DesignTool = class extends Component {
           return {
             handleRightButtonClick: stepTwelveClickHandler.bind(this),
             handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep()),
-            handleDidMount: this.addTooltip.bind(this, toolTips[2])
           }
         
         default:

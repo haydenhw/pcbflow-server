@@ -5,7 +5,7 @@ const defaultState = {
   isTutorialComplete: false, 
   shouldRenderTodoList: false, 
   disabledIconExceptions: null,
-  step: 0,
+  step: 8,
   previousStep: null,
   todoBools: [false, false, false, false, false]
 }
@@ -16,11 +16,6 @@ export const tutorial = (state = defaultState, action) => {
       return {
         ...state,
         isTutorialActive: !state.isTutorialActive
-      };
-    case actions.TOGGLE_SHOULD_RENDER_MODAL:
-      return {
-        ...state,
-        shouldRenderModal: !state.shouldRenderModal
       };
     case actions.UPDATE_SHOULD_RENDER_TODO_LIST:
       return {
