@@ -50,25 +50,22 @@ class ProjectList extends Component {
 
   render() {
     const { projects, isFetching } = this.props;
-    if (!isFetching) {
     
-      const projectsList = projects.map((project) => {
-        const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
-        
-        return (
-          <ProjectsItemFrame
-            key={shortid.generate()}
-            thumbnailSrc={thumbnailSrc}
-            projectId={project._id}
-            confirmDelete={ProjectList.confirmDelete}
+    const projectsList = projects.map((project) => {
+      const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
+      
+      return (
+        <ProjectsItemFrame
+          key={shortid.generate()}
+          thumbnailSrc={thumbnailSrc}
+          projectId={project._id}
+          confirmDelete={ProjectList.confirmDelete}
           >
             {this.renderProjectItem(project, thumbnailSrc)}
           </ProjectsItemFrame>
-        )
-        
-        
+        );
       });
-
+      
       return (
         <div className="thumbnail-row">
           <div className="row-project">
@@ -78,25 +75,13 @@ class ProjectList extends Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div
-          style={{height:"500px", width:"500px", background:"red"}}
-        >
-          
-        </div>
-      )
     }
-
   }
-}
 
 const mapStateToProps = state => ({
   projects: state.projects.items,
   isFetching: state.projects.isFetching,
   thumbnail: state.boardSpecs.thumbnail,
 });
-
-
 
 export default connect(mapStateToProps)(ProjectList);

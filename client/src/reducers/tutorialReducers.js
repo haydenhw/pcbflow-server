@@ -1,11 +1,11 @@
 import * as actions from 'actions/indexActions';
 
 const defaultState = {
-  isTutorialActive: true,
+  isTutorialActive: false,
   isTutorialComplete: false, 
-  shouldRenderTodoList: true, 
+  shouldRenderTodoList: false, 
   disabledIconExceptions: null,
-  step: 11,
+  step: 0,
   previousStep: null,
   todoBools: [false, false, false, false, false]
 }

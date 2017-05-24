@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export const tutorialSteps = [
   {
     text: 'Welcome to PCBflow! \n Would you like to take a quick tutorial?',
@@ -76,7 +77,6 @@ export const tutorialSteps = [
   {
     text: 'Here\'s a rundown of  what we\'ll need to finish our HTPC design:', 
     list: [
-      <div>Hola Lula</div>,
       'USB port — This will allow us to connect a keyboard to our device to configure the COM as well as a USB flash drive or other USB mass storage device to play media from.',
       'MicroSD card — provides flash memory storage for the device’s operating system, applications, multimedia, etc.',
       'HDMI Connector — allows us to connect our HTPC to a TV or monitor.',
