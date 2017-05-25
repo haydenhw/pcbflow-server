@@ -13,7 +13,22 @@
   width: 300px;
 }
 
+.modal-step-1 .modal-text-child {
+  margin-left: 7%;
+}
 
+.modal-step-4 .modal-text-child {
+  margin-left: 4%;
+}
+
+.modal-step-4 .modal-title {
+  margin-left: 4%;
+  font-size: 1.3em;
+}
+
+.modal-step-7 .modal-text-parent {
+ margin-top: 10px;
+}
 
 .modal-step-1 .modal-title, 
 .modal-step-4 .modal-title, 
@@ -61,6 +76,10 @@
 
 .real-com {
   width: 39%;
+}
+
+.real-require {
+  margin: 0 auto;
 }
 
 

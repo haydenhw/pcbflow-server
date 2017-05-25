@@ -1,13 +1,13 @@
 import * as actions from 'actions/indexActions';
 
-const devMode = false;
+const devMode = true;
 
 const devState = {
   isTutorialActive: true,
   isTutorialComplete: false, 
   shouldRenderTodoList: false, 
   disabledIconExceptions: null,
-  step: 2,
+  step: 7,
   previousStep: null,
   todoBools: [false, false, false, false, false]
 }

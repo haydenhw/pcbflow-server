@@ -16,7 +16,7 @@
   border-radius: 2px;
   background-color: #fefefe;
   margin: 10% auto;
-  padding: 57px 64px;
+  padding: 57px 45px;
   padding-bottom: 125px;
   /*padding-left: 64px;*/
   border: 1px solid #888;
@@ -29,8 +29,8 @@
 }
 
 .modal-text-parent {
-  text-align: center;
   line-height: 1.5;
+  margin-top: 40px;
 }
 
 .modal-text-child {
@@ -39,7 +39,7 @@
 }
 
 .modal-text-child p {
-  margin-top: 0;
+  margin-top: 0; 
   display: inline-block;
 }
 
@@ -53,14 +53,14 @@
   display: block;
   width: 75%;
   margin: 0 auto;
-  margin-bottom: 20px;
   /*font-family: 'Source Sans Pro', sans-serif;*/
 }
 
 .modal-image {
   display: block;
-  margin: 60px auto;
-  margin-top: 40px; 
+  margin: 0 auto;
+  margin-top: 55px;
+  margin-bottom: 55px; 
 }
 
 .modal-button-wrapper {
@@ -102,11 +102,13 @@
    font-weight: bold;
 }
 
-.modal-button-right:hover,
-.modal-button-right:focus {
+.modal-button-right:hover {
     background-color: #76a5f4;
-    text-decoration: none;
     cursor: pointer;
+}
+
+.modal-button:focus {
+  text-decoration: none;
 }
 
 .modal-button-left:hover,
