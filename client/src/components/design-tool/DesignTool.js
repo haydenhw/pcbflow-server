@@ -187,7 +187,7 @@ let DesignTool = class extends Component {
   dropDraggingModule() {
     const { draggingModuleData, boardSpecs } = this.props;
     const { width, height, boundToSideIndex } = draggingModuleData;
-    const { x, y } = this.state;
+    const { x, y, isDraggingToBoard } = this.state;
     
     const coordinateData = {
       width,
@@ -207,15 +207,17 @@ let DesignTool = class extends Component {
     
     const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
     
-    let isNewModuleOutOfBounds = checkCollision([testModule, boardSpecs]);
-    isNewModuleOutOfBounds = isNewModuleOutOfBounds.length > 0;
+    let isNewModuleWithinBounds = checkCollision([testModule, boardSpecs]);
+    isNewModuleWithinBounds = isNewModuleWithinBounds.length > 0;
     
     const adjustedModuleCoordinates = DesignTool.calculateNewModuleCoordinates(coordinateData);
     
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
     
-    if (isNewModuleOutOfBounds && this.state.isDraggingToBoard) {
+    if (isNewModuleWithinBounds && isDraggingToBoard) {
       store.dispatch(actions.pushToCurrentProjectModules(newModule));
+    } else {
+      store.dispatch(actions.toggleShouldRenderSideBar(true));
     }
     
     this.timeOut = setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1);
