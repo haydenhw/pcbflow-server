@@ -1,19 +1,34 @@
+.bold {
+  font-weight: bold;
+}
+
+
 .modal-step-4 ul {
   margin-top: 0;
   display: inline-block;
   text-align: initial;
 }
 
+
+.modal-step-11 .modal-text {
+  margin-bottom: 0;
+}
+
+.modal-step-11 p {
+  margin-bottom: 0;
+  display: inline-block;
+  text-align: initial;
+}
+
 .modal-step-11 ul {
   display: inline-block;
+  margin-bottom: 0;
+  margin-top: 15px;
 }
 
 .modal-step-11 li {
-  margin: 10px 0
-}
-
-.modal-step-11 li:nth-child(1) {
-  margin-top: 0;
+  margin: 10px 0;
+  text-align: left;
 }
 
 .completed-htpc-project {
@@ -25,10 +40,14 @@
 }
 
 .real-com {
-  width: 50%;
+  width: 39%;
 }
 
 .red-to-green {
   margin: 31px 0;
+}
+
+.completed-htpc-project {
+  margin-bottom: 10px;
 }
 

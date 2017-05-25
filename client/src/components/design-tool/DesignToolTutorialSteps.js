@@ -117,11 +117,12 @@ export const tutorialSteps = [
   {
     text: 'Here\'s a rundown of  what we\'ll need to finish our HTPC design:', 
     list1: [
-      'USB port — This will allow us to connect a keyboard to our device to configure the COM as well as a USB flash drive or other USB mass storage device to play media from.',
-      'MicroSD card — provides flash memory storage for the device’s operating system, applications, multimedia, etc.',
-      'HDMI Connector — allows us to connect our HTPC to a TV or monitor.',
-      'Tactile Switch — Serves as a switch for powering the unit on/off. ',
-      'LED — Provides a visual indication of when the unit is powered on or off.'
+      <span><span className="bold">USB port</span> — This will allow us to connect a keyboard to our device to configure the COM as well as a USB flash drive or other USB mass storage device to play media from.</span>,
+      <span><span className="bold">MicroSD card</span> — provides flash memory storage for the device’s operating system, applications, multimedia, etc.</span>,
+      <span><span className="bold">HDMI Connector</span> — allows us to connect our HTPC to a TV or monitor.</span>,
+      <span><span className="bold">Tactile Switch</span> — Serves as a switch for powering the unit on/off. </span>,
+      <span><span className="bold">LED</span> — Provides a visual indication of when the unit is powered on or off.</span>
+      
     ],
     rightButtonText: 'Next', 
     shouldRenderLeftButton: true,
@@ -132,11 +133,6 @@ export const tutorialSteps = [
     rightButtonText: 'Next', 
     shouldRenderLeftButton: true,
     leftButtonText: 'Back',
-    image: {
-      src: 'images/htpc.png', 
-      alt: 'completed htpc project',
-      class: 'completed-htpc-project' 
-    }
   },
   {
     text: 'Success! Nice job. You\'ve completed the HTPC design tutorial. Feel free to contiue customizing your HTCP or start a new project by clicking on folder icon on the top left corner of the page. ', 

@@ -7,7 +7,7 @@ const devState = {
   isTutorialComplete: false, 
   shouldRenderTodoList: false, 
   disabledIconExceptions: null,
-  step: 10,
+  step: 0,
   previousStep: null,
   todoBools: [false, false, false, false, false]
 }
