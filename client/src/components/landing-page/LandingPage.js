@@ -25,7 +25,7 @@ export default function LandingPage() {
       </div>
       <section style={backgroundStyle} className="landing-page-content">
         <div className="landing-page-text">
-          <span>Design production ready Printed Circuit Boards in record time</span>
+          <span>Design cutting edge IoT devices in minutes</span>
           <div
             role="button"
             className="landing-page-button"

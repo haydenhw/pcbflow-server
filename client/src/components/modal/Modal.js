@@ -5,7 +5,7 @@ import './Modal.css'
 
 
 export default class DesignToolOnboardModal extends Component {
-
+  
   componentDidUpdate() {
     if (this.props.handleDidUpdate) {
       this.props.handleDidUpdate();
@@ -32,15 +32,15 @@ export default class DesignToolOnboardModal extends Component {
         <button 
           className="modal-button-left modal-button"
           onClick={() => this.props.handleLeftButtonClick()}
-        >
-          {this.props.leftButtonText}
-        </button>
-      );
-    }
-    
-    return null;
+          >
+            {this.props.leftButtonText}
+          </button>
+        );
+      }
+      
+      return null;
   }
-  
+    
   renderImage() {
     if (this.props.image) {
       
@@ -90,24 +90,24 @@ export default class DesignToolOnboardModal extends Component {
       <RootModal>
         <div className={`modal-content ${this.props.modalClass}`}>
           <span className="modal-close" onClick={this.handleCloseButtonClick.bind(this)}>&times;</span>
+          <h2 className="modal-title">{this.props.title}</h2>
+          {this.renderImage()}
           <div className="modal-text-parent">
             <div className="modal-text-child">
-              <h2 className="modal-title">{this.props.title}</h2>
-              {this.renderImage()}
               {this.props.text.split("\n").map((line, index) => <p key={index}>{line}</p>)}
               {this.renderList()}
             </div>
           </div>
-              <div className="modal-button-wrapper">
-                {this.renderLeftButton()}
-                <button className={`modal-button-right modal-button ${rightButtonClass}`} 
-                  onClick={this.handleRightButtonClick.bind(this)}
-                >
-                  {this.props.rightButtonText}
-                </button>
-              </div>
-        </div>
-      </RootModal>
-    )
+          <div className="modal-button-wrapper">
+            {this.renderLeftButton()}
+            <button className={`modal-button-right modal-button ${rightButtonClass}`} 
+              onClick={this.handleRightButtonClick.bind(this)}
+              >
+                {this.props.rightButtonText}
+              </button>
+            </div>
+          </div>
+        </RootModal>
+      )
+    }
   }
-}

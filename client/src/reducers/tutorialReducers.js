@@ -1,9 +1,9 @@
 import * as actions from 'actions/indexActions';
 
-const devMode = true;
+const devMode = false;
 
 const devState = {
-  isTutorialActive: false,
+  isTutorialActive: true,
   isTutorialComplete: false, 
   shouldRenderTodoList: false, 
   disabledIconExceptions: null,

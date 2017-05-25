@@ -16,7 +16,7 @@
   border-radius: 2px;
   background-color: #fefefe;
   margin: 10% auto;
-  padding: 57px 46px;
+  padding: 57px 64px;
   padding-bottom: 125px;
   /*padding-left: 64px;*/
   border: 1px solid #888;
@@ -40,6 +40,7 @@
 
 .modal-text-child p {
   margin-top: 0;
+  display: inline-block;
 }
 
 .modal-title {
@@ -75,7 +76,7 @@
   background-color: transparent;
   border: 2px solid #e3e3e3;
   padding: 12px 17px;
-  font-size: 1em;
+  font-size: .75em;
   margin-right: 5px;
   font-weight: bold;
   display: inline-block;
@@ -90,9 +91,6 @@
 .modal-button-left {
   color: #4285f4;
 }
-
-
-
 
 .modal-close {
    position: absolute;
