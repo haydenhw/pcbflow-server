@@ -57,14 +57,26 @@ export default class DesignToolOnboardModal extends Component {
   } 
   
   renderList() {
-    const { list } = this.props;
+    const { list1, list2 } = this.props;
     
-    if (list){
-      const items = list.map((item, index) => <li key={index} >{item}</li>);
+    if (list1 && !list2){
+      const items = list1.map((item, index) => <li key={index} >{item}</li>);
       
       return (
         <div className="list-wrapper">
           <ul>{items}</ul>
+        </div>
+      )
+    }
+    
+    if (list1 && list2){
+      const items1 = list1.map((item, index) => <li key={index} >{item}</li>);
+      const items2 = list2.map((item, index) => <li key={index} >{item}</li>);
+      
+      return (
+        <div className="list-wrapper">
+          <ul>{items1}</ul>
+          <ul>{items2}</ul>
         </div>
       )
     }
