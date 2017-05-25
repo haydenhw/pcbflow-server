@@ -16,9 +16,9 @@
   border-radius: 2px;
   background-color: #fefefe;
   margin: 10% auto;
-  padding: 57px 40px;
+  padding: 57px 46px;
   padding-bottom: 125px;
-  padding-left: 64px;
+  /*padding-left: 64px;*/
   border: 1px solid #888;
   max-width: 600px;
   font-size: 22px;
@@ -44,13 +44,15 @@
 
 .modal-title {
   font-size: 1.1em;
-  display: inline-block;
-  margin-top: 0;
-  margin-bottom: 20px;
   font-weight: bold;
   letter-spacing: .02em;
   color: #424242;
   font-family: Lato;
+  
+  display: block;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 20px;
   /*font-family: 'Source Sans Pro', sans-serif;*/
 }
 
