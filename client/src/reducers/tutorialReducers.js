@@ -3,11 +3,11 @@ import * as actions from 'actions/indexActions';
 const devMode = true;
 
 const devState = {
-  isTutorialActive: true,
+  isTutorialActive: false,
   isTutorialComplete: false, 
   shouldRenderTodoList: false, 
   disabledIconExceptions: null,
-  step: 0,
+  step: 4,
   previousStep: null,
   todoBools: [false, false, false, false, false]
 }
