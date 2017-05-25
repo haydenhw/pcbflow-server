@@ -492,12 +492,12 @@ let DesignTool = class extends Component {
           }
           return {
             handleRightButtonClick: stepOneNextClickHandler,
-            handleLeftButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
+            handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep())
           }
         case 2:
           return {
             handleRightButtonClick: this.startTour.bind(this), 
-            handleLeftButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
+            handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep())
           }
         case 3:
           const stepThreeNextClickHandler = function() {

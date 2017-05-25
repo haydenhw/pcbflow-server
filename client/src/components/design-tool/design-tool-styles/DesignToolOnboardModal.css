@@ -8,6 +8,27 @@
   text-align: initial;
 }
 
+.modal-step-4 .list-wrapper {
+  margin: 0 auto;
+  width: 300px;
+}
+
+
+
+.modal-step-1 .modal-title, 
+.modal-step-4 .modal-title, 
+.modal-step-6 .modal-title, 
+/*.modal-step-9 .modal-title, */
+.modal-step-10 .modal-title, 
+.modal-step-7 .modal-title {
+  display: block;
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.modal-step-6 p {
+}
 
 .modal-step-11 .modal-text {
   margin-bottom: 0;
@@ -31,9 +52,7 @@
 }
 
 .completed-htpc-project {
-  width: 65%;
-  margin-bottom: 15px;
-  
+  width: 65%;  
 }
 
 .com-connector-icon {
@@ -44,9 +63,6 @@
   width: 39%;
 }
 
-.red-to-green {
-  margin: 31px 0;
-}
 
 
 
