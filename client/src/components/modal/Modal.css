@@ -20,18 +20,22 @@
   border: 1px solid #888;
   width: 575px;
   max-height: 450px;
-  font-size:100%;
+  font-size: 100%;
+  text-align: center;
 }
 
 .modal-text {
   margin-bottom: 20px;
-  height: 120px;
   font-size: 17px;
   text-align: center;
 }
 
 .modal-image {
   display: inline-block;
+}
+
+.modal-footer {
+  height: 50px; 
 }
 
 .modal-button {

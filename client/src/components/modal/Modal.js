@@ -84,14 +84,16 @@ export default class DesignToolOnboardModal extends Component {
             {this.renderList()}
           </div>
             {this.renderImage()}
-          <div className="modal-button-wrapper">
-            {this.renderLeftButton()}
-            <button className={rightButtonClass} 
-              onClick={this.handleRightButtonClick.bind(this)}
-            >
-              {this.props.rightButtonText}
-            </button>
-          </div>
+            <div className="modal-footer">
+              <div className="modal-button-wrapper">
+                {this.renderLeftButton()}
+                <button className={rightButtonClass} 
+                  onClick={this.handleRightButtonClick.bind(this)}
+                >
+                  {this.props.rightButtonText}
+                </button>
+              </div>
+            </div>
         </div>
       </RootModal>
     )
