@@ -92,7 +92,7 @@ export default class DesignToolOnboardModal extends Component {
           <span className="modal-close" onClick={this.handleCloseButtonClick.bind(this)}>&times;</span>
           <div className="modal-title">{this.props.title}</div>
           <div className="modal-text-parent">
-            <div className="modal-text-childe">
+            <div className="modal-text-child">
               {this.props.text.split("\n").map((line, index) => <p key={index}>{line}</p>)}
               {this.renderList()}
             </div>

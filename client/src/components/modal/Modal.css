@@ -16,7 +16,7 @@
   border-radius: 2px;
   background-color: #fefefe;
   margin: 10% auto;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #888;
   width: 575px;
   max-height: 475px;
@@ -26,7 +26,7 @@
 }
 
 .modal-text-parent {
-  margin: 30px auto;
+  text-align: center;
   font-size: 17px;
   line-height: 1.3;
 }
@@ -80,7 +80,7 @@
 
 .modal-close {
    position: absolute;
-   top: 13;
+   top: 13px;
    right: 26px;
    color: #aaa;
    float: right;
