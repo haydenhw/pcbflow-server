@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .react-contextmenu {
   width: 125px;
   padding: 5px 0;

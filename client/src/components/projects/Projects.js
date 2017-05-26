@@ -16,7 +16,7 @@ export default function Projects() {
     <div>
       <div className="navWide project-navbar">
         <img className="logo-image" src="images/logo4.png" alt="" />
-        <span className="logo-text" >PCB Design</span>
+        <span className="logo-text" >PCB<span className="bold">flow</span></span>
       </div>
       <div className="button-bar">
         <div className="row-project">
