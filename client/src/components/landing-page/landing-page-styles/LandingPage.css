@@ -143,7 +143,8 @@
 }
 
 .landing-page-card-section {
-  background-color: #f7f9fb
+  background-color: #f7f9fb;
+  padding-top: 50px;
 }
 
 .landing-page-card-wrapper {

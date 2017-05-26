@@ -52,7 +52,7 @@ export default function LandingPage() {
         
         <section className="landing-page-card-section row">
           <div className="landing-page-section-heading">
-            <h2>Design With Ease</h2>
+            <h2>Design with ease</h2>
             <p>PCBflow's user friendly drag and drop interface is a breeze to learn and use.</p>
           </div>
           <div className="landing-page-card-wrapper">
@@ -77,7 +77,7 @@ export default function LandingPage() {
                 className="landing-page-card "
                 icon="images/info-card-test-icon.png"
                 title="Instant Price Estimates"
-                content="Get a price estimate that updates automatically as you add and remove modules so you can keep your project under budget"
+                content="Get a price estimate that updates automatically as you add and remove modules so you can keep your project under budget."
               />
             </div>
           </div>
