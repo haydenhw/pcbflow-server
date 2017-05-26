@@ -485,6 +485,11 @@ let DesignTool = class extends Component {
   getOnboardModalHandlers(tutorialStep) {
     const getButtonMethods = () => {
       switch(tutorialStep) {
+        case 0:
+          return { 
+            handleRightButtonClick: () => store.dispatch(actions.incrementTutorialStep()),
+            handleLeftButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
+          }
         case 1:
           const stepOneNextClickHandler = function() {
             store.dispatch(actions.incrementTutorialStep());

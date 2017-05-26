@@ -76,7 +76,7 @@ export const modulesData = [
     boundToSideIndex: 0,
     innerGroupX: 0,
     innerGroupY: 0,
-    text: 'microSD slot',
+    text: 'MicroSD Slot',
     textX: 10,
     textY: 20,
     imageX: 3.5,
