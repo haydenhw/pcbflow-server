@@ -95,9 +95,9 @@ export default class DesignToolOnboardModal extends Component {
           <div className="modal-text-parent">
             <div className="modal-text-child">
               {this.props.text.split("\n").map((line, index) => <p key={index}>{line}</p>)}
-              {this.renderList()}
             </div>
           </div>
+          {this.renderList()}
           <div className="modal-button-wrapper">
             {this.renderLeftButton()}
             <button className={`modal-button-right modal-button ${rightButtonClass}`} 

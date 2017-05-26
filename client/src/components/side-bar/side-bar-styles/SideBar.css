@@ -6,8 +6,8 @@
 }
 
 .module-container {
-  height: 75%;
-  overflow-y: scroll;
+  height: 78.5%;
+  overflow-y: auto;
 }
 
 .example-enter {

@@ -1,7 +1,6 @@
 .dimension-bar {
     width: 100%;
     height: 40px;
-    margin-top: 28px;
     border-top: 1px solid #adaeb3;
     border-bottom: 1px solid #adaeb3;
     background-color: #cdced1;
@@ -10,6 +9,15 @@
     color: #5a5a5a;
     letter-spacing: .5px;
 }
+  
+  .dimension-input-form {
+    position: absolute;
+    height: 200px;
+    width: 100%;
+    left: 0px;
+    bottom: 12px;
+    background-color: #e6e6e6;
+  }
 
 .dimension-input-wrapper {
   width: 150px;

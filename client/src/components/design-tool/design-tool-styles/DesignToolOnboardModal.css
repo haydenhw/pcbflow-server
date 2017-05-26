@@ -2,6 +2,14 @@
   font-weight: bold;
 }
 
+.modal-step-1 .modal-text-child {
+  margin-left: 7%;
+}
+
+.modal-step-3 .modal-text-child {
+  margin-left: 8%;
+}
+
 .modal-step-4 ul {
   margin-top: 0;
   display: inline-block;
@@ -13,33 +21,32 @@
   width: 300px;
 }
 
-.modal-step-1 .modal-text-child {
-  margin-left: 7%;
-}
-
-.modal-step-4 .modal-text-child {
+.modal-step-4 .modal-text-child,
+.modal-step-8 .modal-text-child {
   margin-left: 4%;
 }
 
 .modal-step-4 .modal-title {
-  margin-left: 4%;
   font-size: 1.3em;
 }
 
+
 .modal-step-7 .modal-text-parent {
- margin-top: 10px;
+  margin-top: 20px;
 }
 
-.modal-step-1 .modal-title, 
-.modal-step-4 .modal-title, 
-.modal-step-6 .modal-title, 
-/*.modal-step-9 .modal-title, */
-.modal-step-10 .modal-title, 
-.modal-step-7 .modal-title {
-  display: block;
-  width: 75%;
-  margin: 0 auto;
-  margin-bottom: 20px;
+.modal-step-7 .modal-text-child {
+  margin-left: 6%;
+}
+
+.modal-step-10 .modal-text-child {
+  margin-left: 3%;
+}
+
+.modal-step-6 .modal-text-child,
+.modal-step-12 .modal-text-child,
+.modal-step-13 .modal-text-child {
+  margin-left: 5%;
 }
 
 .modal-step-6 p {

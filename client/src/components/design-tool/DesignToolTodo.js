@@ -32,7 +32,7 @@ export default function DesignToolTodo(props) {
   return (
     <Interactive draggable draggableOptions={draggableOptions}>
       <div className="todo">
-        <h2>Modules To Add</h2>
+        <h2>Modules To Add:</h2>
           <ul>
             <li style={getTextDecoration(todoBools[2])}>HDMI Connector</li>
             <li style={getTextDecoration(todoBools[1])}>MicroSD Slot</li>

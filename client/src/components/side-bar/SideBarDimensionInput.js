@@ -78,7 +78,7 @@ class SideBarDimensionInput extends React.Component {
   render() {
     const { boardWidth, boardHeight } = this.props;
     return (
-      <form>
+      <form className="dimension-input-form">
         <div className="dimension-bar">Dimensions</div>
         <div className="dimension-input-wrapper">
           <div className="input-wrapper">

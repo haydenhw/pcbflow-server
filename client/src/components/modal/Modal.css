@@ -29,6 +29,7 @@
 }
 
 .modal-text-parent {
+  font-size: 0.9em;
   line-height: 1.5;
   margin-top: 40px;
 }
@@ -45,7 +46,7 @@
 
 .modal-title {
   font-size: 1.1em;
-  font-weight: bold;
+  font-weight: normal;
   letter-spacing: .02em;
   color: #424242;
   font-family: Lato;
@@ -100,6 +101,14 @@
    float: right;
    font-size: 25px;
    font-weight: bold;
+}
+
+.modal-close:hover {
+  cursor: pointer; 
+}
+
+.modal-close:hover {
+  
 }
 
 .modal-button-right:hover {
