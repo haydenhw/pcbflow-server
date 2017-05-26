@@ -7,15 +7,17 @@ import './side-bar-styles/SideBarIcon.css';
 export default class SideBarIcon extends Component {
 
   handleMouseDown(evt) {
-    const { moduleData } = this.props;
-    const { id } = moduleData;
-    this.props.updateClientPosition(evt);
-    this.props.toggleDraggingToBoard();
-    
-    store.dispatch(actions.mouseDownOnIcon(true));
-    store.dispatch(actions.toggleHasTooltip(id))
-    store.dispatch(actions.changeDraggingModule(moduleData));
-  }
+    if (evt.nativeEvent.which === 1) {
+        const { moduleData } = this.props;
+        const { id } = moduleData;
+        this.props.updateClientPosition(evt);
+        this.props.toggleDraggingToBoard();
+        
+        store.dispatch(actions.mouseDownOnIcon(true));
+        store.dispatch(actions.toggleHasTooltip(id))
+        store.dispatch(actions.changeDraggingModule(moduleData));
+      }
+    }
 
   render() {
     const { disabled, moduleData } = this.props;
