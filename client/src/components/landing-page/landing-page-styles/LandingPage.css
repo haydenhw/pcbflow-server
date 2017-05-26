@@ -30,13 +30,25 @@
   vertical-align: middle;
 }
 
-.landing-page-text {
+
+.landing-page-text,
+.landing-page-button {
   font-size: 30px;
   color: white;
-  width: 50%;
+  max-width: 439px;
+  line-height: 1.5;
   margin: 0 auto;
   font-weight: 400;
   text-align: center;
+}
+
+.landing-page-button {
+  margin-top: 105px;
+  background-color: #1fabfb;
+  border-radius: 4px;
+  padding: 15px 30px;
+  width: 228px;
+  font-size: 25px;
 }
 
 .landing-page-body-wrapper {
@@ -57,8 +69,8 @@
   max-width: 100%;
   background-size: cover;
   position: relative;
-  padding-top: 200px;
-  
+  padding-top: 162px;
+  padding-bottom: 100px; 
 }
 
 .landing-page-section-heading {
@@ -73,15 +85,10 @@
 .landing-page-section-heading p {
   color: #6d7784;
   text-align: center;
+  max-width: 650px;
+  line-height: 1.5;
+  margin: 0 auto;
   font-weight: lighter;
-}
-
-.landing-page-button {
-  margin: 105px auto;
-  background-color: #1fabfb;
-  border-radius: 4px;
-  padding: 15px 30px;
-  width: 320px;
 }
 
 .landing-page-button:hover {
@@ -91,7 +98,7 @@
 
 .design-to-pcb-visual {
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 68px;
   padding-bottom: 85px;
   text-align: center;
   
@@ -133,14 +140,20 @@
   display: none;
 }
 
+.arrows {
+  display: none;
+  width: 45px;
+}
+
 .design-tool-screenshot {
   position: absolute;
   top: 8%;
   left: 17.6%;
   height: 62.5%;
   width: 64.5%;
-  
 }
+
+
 
 .landing-page-card-section {
   background-color: #f7f9fb;
@@ -196,6 +209,49 @@
 }
 
 @media only screen and (min-width : 320px) and (max-width : 480px) {
+  
+  .landing-page-content {
+    padding-top: 128px;
+  }
+  
+  .landing-page-text {
+    width: 80%;
+  }  
+  
+  .landing-page-button {
+    padding: 15px 0;
+    width: 257px;
+  }
+  
+  .inline-image {
+    display: block;
+  }
+  
+  .dots {
+    display: none;
+  }
+  
+  .less-dots {
+    display: none;
+  }
+  
+  .computer-wrapper {
+    width: 100%;
+  }
+  
+  .computer-image {
+    width: 75%;
+    margin: 0 auto;
+  }
+  
+  .arrows {
+    display: inline; 
+  }
+  
+  .circuit-board-image {
+    margin: 0 auto;
+    width: 64%;
+  }
 
   .thumbnail-row {
     width: 100%;

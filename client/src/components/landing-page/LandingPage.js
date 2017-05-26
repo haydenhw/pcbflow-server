@@ -21,23 +21,23 @@ export default function LandingPage() {
     <div className="landing-page-body">
       <div className="landing-navbar">
         <img className="white-logo-image" src="images/white-logo.png" alt="" />
-        <span className="landing-logo-text" >PCBflow</span>
+        <span className="landing-logo-text" >PCB<span className="bold">flow</span></span>
       </div>
       <section style={backgroundStyle} className="landing-page-content">
         <div className="landing-page-text">
           <span>Design cutting edge electronics in minutes</span>
-          <div
-            role="button"
-            className="landing-page-button"
-            onClick={() => hashHistory.push('/projects')}
-            >
-              Get Started
-          </div>
+        </div>
+        <div
+          role="button"
+          className="landing-page-button"
+          onClick={() => hashHistory.push('/projects')}
+        >
+          Get Started
         </div>
       </section>
       <main className="landing-page-main">
         <div className="landing-page-section-heading">
-          <h2>Bring you ideas to life</h2>
+          <h2>Bring your ideas to life</h2>
           <p>Create your custom design with PCBflow. Submit for review by our team of expert engineers. We'll manufacture and ship your device, tested and fully functional, with 15 days.</p>
         </div>
         <section className="design-to-pcb-visual">
@@ -47,6 +47,7 @@ export default function LandingPage() {
           </div>
           <img className="dots inline-image" src="images/dots.svg" alt="dots" />
           <img className="less-dots inline-image" src="images/less-dots.svg" alt="dots" />
+          <img className="arrows inline-image" src="images/arrows.svg" alt="arrow"/>
           <img className="circuit-board-image inline-image" src="images/real-pcb.jpg" alt="circuit board" />
         </section>
         
