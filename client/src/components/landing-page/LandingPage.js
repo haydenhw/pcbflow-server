@@ -16,29 +16,29 @@ export default function LandingPage() {
     ),
     url(${imgUrl})`,
   };
-
+  
   return (
     <div className="landing-page-body">
       <div className="landing-navbar">
         <img className="white-logo-image" src="images/white-logo.png" alt="" />
-        <span className="landing-logo-text" >PCB Design</span>
+        <span className="landing-logo-text" >PCBflow</span>
       </div>
       <section style={backgroundStyle} className="landing-page-content">
         <div className="landing-page-text">
-          <span>Design cutting edge IoT devices in minutes</span>
+          <span>Design cutting edge electronics in minutes</span>
           <div
             role="button"
             className="landing-page-button"
             onClick={() => hashHistory.push('/projects')}
-          >
+            >
               Get Started
-            </div>
+          </div>
         </div>
       </section>
       <main className="landing-page-main">
         <div className="landing-page-section-heading">
-          <h2>This is a heading</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lacinia ac magna id pellentesque. Donec consectetur adipiscing.</p>
+          <h2>Bring you ideas to life</h2>
+          <p>Create your custom design with PCBflow. Submit for review by our team of expert engineers. We'll manufacture and ship your device, tested and fully functional, with 15 days.</p>
         </div>
         <section className="design-to-pcb-visual">
           <div className="computer-wrapper">
@@ -49,19 +49,27 @@ export default function LandingPage() {
           <img className="less-dots inline-image" src="images/less-dots.svg" alt="dots" />
           <img className="circuit-board-image inline-image" src="images/real-pcb.jpg" alt="circuit board" />
         </section>
-
+        
         <section className="landing-page-card-section row">
           <div className="landing-page-section-heading">
-            <h2>This is a heading</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lacinia ac magna id pellentesque. Donec.</p>
+            <h2>Design With Ease</h2>
+            <p>PCBflow's user friendly drag and drop interface is a breeze to learn and use.</p>
           </div>
           <div className="landing-page-card-wrapper">
             <div className="col4">
               <LandingPageCard
                 className="landing-page-card"
                 icon="images/info-card-test-icon.png"
-                title="Easy to Use Interface"
-                content="Complete your desgin in no time with PCBDesign's user friendly drag and drop interface. No engineers required"
+                title="No Engineers Required"
+                content="PCBflow abstracts away the hard parts of printed circuit board design. You don’t need to worry about routing or connections."
+              />
+            </div>
+            <div className="col4">
+              <LandingPageCard
+                className="landing-page-card "
+                icon="images/info-card-test-icon.png"
+                title="Interactive Tutorial"
+                content="Our step by step tutorial will teach you how to reason about printed circuit board design while demostrating how to use the tool."
               />
             </div>
             <div className="col4">
@@ -72,18 +80,10 @@ export default function LandingPage() {
                 content="Get a price estimate that updates automatically as you add and remove modules so you can keep your project under budget"
               />
             </div>
-            <div className="col4">
-              <LandingPageCard
-                className="landing-page-card "
-                icon="images/info-card-test-icon.png"
-                title="From Design to Production"
-                content="You only need to focus on the design. We'll take care of the production logistics for you"
-              />
-            </div>
           </div>
         </section>
       </main>
     </div>
   );
 }
-
+  
