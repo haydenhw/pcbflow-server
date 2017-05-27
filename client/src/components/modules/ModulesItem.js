@@ -144,10 +144,6 @@ export default class ModulesItem extends PureComponent {
       return 'red';
     }
     
-    if (metDependencies.length < dependencies.length) {
-      return 'yellow';
-    }
-    
     return null;
   }
 
