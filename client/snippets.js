@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import React from 'react';
+import { connect } from 'react-redux';
 import shortid from 'shortid';
 import PropTypes from 'prop-types';
 
@@ -12,6 +13,17 @@ LandingPageCard.propTypes = {
   content: PropTypes.string.isRequired,
 };
 
+export default class extends Component {
+  
+}
+
 export default function() {
   
 }
+
+
+const mapStateToProps = state => ({
+
+});
+
+export default connect(mapStateToProps)();
