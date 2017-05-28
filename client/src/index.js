@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import store from 'reduxFiles/store';
 
 import DesignTool from 'components/design-tool/DesignTool';
-import Projects from 'components/projects/Projects';
+import ProjectsContainer from 'components/projects/ProjectsContainer';
 import LandingPage from 'components/landing-page/LandingPage';
 
 import './index.css';
@@ -17,7 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={LandingPage} />
-      <Route path="/projects" component={Projects} />
+      <Route path="/projects" component={ProjectsContainer} />
       <Route path="/design/:projectId" component={DesignTool} />
     </Router>
   </Provider>,

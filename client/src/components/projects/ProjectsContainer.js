@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
+
+import Modal from 'components/modal/Modal';
 import Projects from './Projects';
-import Modal from 'componets/modal/Modal';
 
 export class ProjectContainer extends Component {
-  render() {
-    renderModal() {
+  renderModal() {
+    const { shouldRenderModal } = this.props;
+    console.log(shouldRenderModal)
+    if (shouldRenderModal) {
       return (
         <Modal 
           text="Are you sure you want to exit the tutorial?"
-          rightButtonText="Exit"
+          rightButtonText="Cancel"
           shouldRenderLeftButton={true}
-          leftButtonText="Go Back"
+          leftButtonText="Delete"
           handleRightButtonClick={() => store.dispatch(actions.exitTutorial())}
-          handleLeftButtonClick={() => store.dispatch(actions.resumeTutorial())}
-          handleCloseButtonClick={() => store.dispatch(actions.exitTutorial())}
+          handleLeftButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
+          handleCloseButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
         />
+      );
     }
+  }
+    
+  render() {
+    
     return(
       <div>
         <Projects />
@@ -27,7 +38,7 @@ export class ProjectContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  shouldRenderModal: state.modal.shouldRenderModal,
+  shouldRenderModal: state.modal.shouldRenderModal
 
 });
 

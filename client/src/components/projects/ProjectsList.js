@@ -35,7 +35,7 @@ class ProjectList extends Component {
   
   renderProjectItem(project, thumbnailSrc) {
     const { isFetching } = this.props;
-    console.log(isFetching)
+    
     if (isFetching) {
       return <span key={shortid.generate()}>Loading...</span>
     }
