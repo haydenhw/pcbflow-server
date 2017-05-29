@@ -1,6 +1,6 @@
 import * as actions from 'actions/indexActions';
 
-const devMode = true;
+const devMode = false;
 
 const devState = {
   isTutorialActive: true,
