@@ -131,18 +131,26 @@
 }
 
 @media only screen and (max-width: 675px) {
-  .modal-content {
-    width: 80%;
-  }
+
 }
 
-@media only screen and (max-width: 425px) {
+@media only screen and (min-width : 320px) and (max-width : 480px) {
   .modal-content {
-    width: 80%;
+    width: 90%;
+    padding: 40px 15px;
+    padding-bottom: 125px;
   }
   
-  .modal-text {
-    
+  .modal-image {
+    margin:  20px auto;
+    margin-bottom: 0;
   }
+  
+  .modal-text-parent {
+    font-size: .7em;
+
+  }
+  
+
   
 }
