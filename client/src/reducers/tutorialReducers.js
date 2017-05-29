@@ -5,9 +5,9 @@ const devMode = true;
 const devState = {
   isTutorialActive: true,
   isTutorialComplete: false, 
-  shouldRenderTodoList: false, 
+  shouldRenderTodoList: true, 
   disabledIconExceptions: null,
-  step: 0,
+  step: 13,
   previousStep: null,
   todoBools: [false, false, false, false, false]
 }
@@ -25,15 +25,19 @@ const defaultState = {
 export const tutorial = (state = devMode ? devState : defaultState, action) => {
   switch (action.type) {
     case actions.TOGGLE_IS_TUTORIAL_ACTIVE:
-    case actions.EXIT_TUTORIAL:
       return {
         ...state,
         isTutorialActive: !state.isTutorialActive
       };
     case actions.UPDATE_SHOULD_RENDER_TODO_LIST:
+      return {
+        ...state,
+        shouldRenderTodoList: action.bool
+      };
     case actions.EXIT_TUTORIAL:
       return {
         ...state,
+        isTutorialActive: !state.isTutorialActive,
         shouldRenderTodoList: action.bool
       };
     case actions.UPDATE_DISABLED_ICON_EXCEPTIONS:
@@ -59,12 +63,6 @@ export const tutorial = (state = devMode ? devState : defaultState, action) => {
         ...state,
         step: 0,
         previousStep: state.step, 
-      };
-    case actions.SHOW_TUTORIAL_EXIT_SCREEN:
-      return {
-        ...state,
-        step: state.previousStep,
-        previousStep: null, 
       };
     case actions.COMPLETE_TODO:
       const { index } = action;
