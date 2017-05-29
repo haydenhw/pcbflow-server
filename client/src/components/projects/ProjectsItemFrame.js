@@ -14,6 +14,7 @@ function fectchProject(projectId) {
 }
 
 export default function ProjectsItemFrame(props) {
+  
   return (
     <div className="col3-project">
       <div
@@ -30,7 +31,7 @@ export default function ProjectsItemFrame(props) {
           <div className="title">
             {props.children}
           </div>
-          <DeleteButton projectId={props.projectId} confirmDelete={props.confirmDelete} />
+          <DeleteButton projectId={props.projectId} projectName={props.projectName} confirmDelete={props.confirmDelete} />
         </div>
       </div>
     </div>

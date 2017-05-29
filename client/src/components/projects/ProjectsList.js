@@ -23,10 +23,12 @@ class ProjectList extends Component {
     projects: []
   }
   
-  static confirmDelete(projectId) {
-    confirm('Are you sure you want to delete this project?').then(() => {
-      store.dispatch(actions.deleteProject(projectId));
-    }, () => {});
+  static confirmDelete(projectId, projectName) {
+    console.log(projectName)
+    store.dispatch(actions.confirmProjectDelete({
+      projectId,
+      projectName
+    }));
   }
 
   componentDidMount() {
@@ -59,6 +61,7 @@ class ProjectList extends Component {
           key={shortid.generate()}
           thumbnailSrc={thumbnailSrc}
           projectId={project._id}
+          projectName={project.name}
           confirmDelete={ProjectList.confirmDelete}
           >
             {this.renderProjectItem(project, thumbnailSrc)}

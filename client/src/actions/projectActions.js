@@ -148,9 +148,14 @@ export const deleteProjectSuccess = (projectId, projects) => ({
   projectId,
 });
 
+export const DELETE_PROJECT_REQUEST = 'DELETE_PROJECT_REQUEST';
 export function deleteProject(projectId, projects) {
   const url = `${projectsUrl}/${projectId}`;
   return (dispatch) => {
+    dispatch({
+      type: 'DELETE_PROJECT_REQUEST'
+    });
+    
     fetch(
       url,
       {

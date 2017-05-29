@@ -8,17 +8,19 @@ import Modal from 'components/modal/Modal';
 import Projects from './Projects';
 
 export class ProjectContainer extends Component {
+  
   renderModal() {
-    const { shouldRenderModal } = this.props;
-    console.log(shouldRenderModal)
+    const { shouldRenderModal, modalProps } = this.props;
+    
     if (shouldRenderModal) {
+      const { projectId, projectName } = modalProps;
       return (
         <Modal 
-          text="Are you sure you want to exit the tutorial?"
-          rightButtonText="Cancel"
+          text={`Are you sure you want to delete project "${projectName}"  ?`}
           shouldRenderLeftButton={true}
-          leftButtonText="Delete"
-          handleRightButtonClick={() => store.dispatch(actions.exitTutorial())}
+          rightButtonText="Delete"
+          leftButtonText="Cancel"
+          handleRightButtonClick={() => store.dispatch(actions.deleteProject(projectId))}
           handleLeftButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
           handleCloseButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
         />
@@ -38,8 +40,8 @@ export class ProjectContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  shouldRenderModal: state.modal.shouldRenderModal
-
+  shouldRenderModal: state.modal.shouldRenderModal,
+  modalProps: state.modal.modalProps
 });
 
 export default connect(mapStateToProps)(ProjectContainer);
