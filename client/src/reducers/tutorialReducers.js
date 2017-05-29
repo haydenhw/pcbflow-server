@@ -25,11 +25,13 @@ const defaultState = {
 export const tutorial = (state = devMode ? devState : defaultState, action) => {
   switch (action.type) {
     case actions.TOGGLE_IS_TUTORIAL_ACTIVE:
+    case actions.EXIT_TUTORIAL:
       return {
         ...state,
         isTutorialActive: !state.isTutorialActive
       };
     case actions.UPDATE_SHOULD_RENDER_TODO_LIST:
+    case actions.EXIT_TUTORIAL:
       return {
         ...state,
         shouldRenderTodoList: action.bool

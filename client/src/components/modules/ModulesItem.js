@@ -102,8 +102,7 @@ export default class ModulesItem extends PureComponent {
       this.highlightRuleBreakingModules();
     }
 
-    if (this.props.shouldCheckCollission
-    ) {
+    if (this.props.shouldCheckCollission) {
       this.highlightRuleBreakingModules();
       this.props.toggleShouldCheckCollission();
     }

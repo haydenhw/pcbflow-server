@@ -6,13 +6,11 @@ export const toggleTutorialIsActive = () => ({
   type: 'TOGGLE_IS_TUTORIAL_ACTIVE'
 });
 
-export const exitTutorial = () => {
-  return (dispatch, getState) => {
-    dispatch(actions.toggleTutorialIsActive());
-    dispatch(actions.toggleShouldRenderModal());
-    dispatch(updateShouldRenderTodoList(false));
-  }
-}
+export const EXIT_TUTORIAL =  'EXIT_TUTORIAL';
+export const exitTutorial = () =>  ({
+    type: 'EXIT_TUTORIAL',
+    bool: false
+});
 
 export const UPDATE_DISABLED_ICON_EXCEPTIONS = 'UPDATE_DISABLED_ICON_EXCEPTIONS';
 export const updateDisabledIconExceptions = exceptions => ({

@@ -206,12 +206,11 @@ let DesignTool = class extends Component {
     };
     
     const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
-    
-    let isNewModuleWithinBounds = checkCollision([testModule, boardSpecs]);
-    isNewModuleWithinBounds = isNewModuleWithinBounds.length > 0;
-    
+
+    const isNewModuleWithinBounds = checkCollision([testModule, boardSpecs]).length > 0;
+
     const adjustedModuleCoordinates = DesignTool.calculateNewModuleCoordinates(coordinateData);
-    
+
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
     
     if (isNewModuleWithinBounds && isDraggingToBoard) {
@@ -306,7 +305,6 @@ let DesignTool = class extends Component {
   showAllModuleIcons() {
     store.dispatch(actions.updateIconVisibity('ALL'));
   }
-
 
   toggleDocumentationCard() {
     const { shouldRenderDocumentation, wasDocumentationOpen } = this.state;
