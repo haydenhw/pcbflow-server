@@ -2,6 +2,12 @@
   font-weight: bold;
 }
 
+.modal-step-0,
+.modal-step-5 {
+  padding-top: 86px;
+  padding-bottom: 130px;
+}
+
 .modal-step-1 .modal-text-child {
   margin-left: 7%;
 }
@@ -24,6 +30,9 @@
 .modal-step-4 .modal-text-child,
 .modal-step-8 .modal-text-child {
   margin-left: 4%;
+}
+.modal-step-5 .modal-text-child {
+  margin-left: 9%;
 }
 
 .modal-step-4 .modal-title {

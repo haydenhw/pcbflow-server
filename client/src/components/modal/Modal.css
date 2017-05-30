@@ -11,7 +11,6 @@
 
 .modal-content {
   position: absolute;
-  margin: 2% 0;
   max-height: 100%;
   top: 50%;
   left: 50%;
@@ -24,8 +23,7 @@
   padding-bottom: 125px;
   /*padding-left: 64px;*/
   border: 1px solid #888;
-  max-width: 600px;
-  min-width: 450px;
+  width: 600px;
   font-size: 22px;
   text-align: center;
   box-shadow: 0 4px 25px rgba(0,0,0,.4);
@@ -137,9 +135,11 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: 675px) {
-
-}
+/*@media only screen and (min-width: 1000px) {
+  .modal-image {
+    min-width: 350px;
+  }
+}*/
 
 @media only screen and (min-width : 320px) and (max-width : 480px) {
   .modal-content {
