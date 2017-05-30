@@ -88,7 +88,18 @@
 .real-require {
   margin: 0 auto;
 }
+@media only screen and (max-width : 905px) {
+  .modal-step-0 .modal-text-child {
+    text-align: center;
+    }
+}
 
-
-
-
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+  .modal-step-0 .modal-text-child {
+    text-align: center;
+  }
+  
+  .red-to-green {
+    width: 90%;
+  }
+}

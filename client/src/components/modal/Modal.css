@@ -148,9 +148,10 @@
   
   .modal-text-parent {
     font-size: .7em;
-
   }
   
-
-  
+  .list-wrapper {
+    font-size: .7em;
+    width: 243px;
+  }
 }
