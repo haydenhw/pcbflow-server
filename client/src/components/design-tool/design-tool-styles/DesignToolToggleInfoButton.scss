@@ -1,6 +1,9 @@
+$primary-color: #333;
+
 .toggle-info-button {
   position: absolute;
   bottom: 55px;
   right: 45px;
+  color: $primary-color;
 }
 

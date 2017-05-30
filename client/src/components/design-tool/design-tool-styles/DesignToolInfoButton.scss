@@ -1,3 +1,6 @@
+$primary-color: #333;
+
+
 .round-button {
   position: absolute;
   bottom: 63px;
@@ -14,7 +17,7 @@
   padding-bottom: 100%;
   border-radius: 50%;
   overflow:hidden;
-  background: #fc8d2a; 
+  background: $primary-color; 
   box-shadow: 0 0 3px gray;
   z-index: 200;
 }

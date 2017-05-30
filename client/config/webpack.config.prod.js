@@ -105,7 +105,8 @@ module.exports = {
           /\.(js|jsx)$/,
           /\.css$/,
           /\.json$/,
-          /\.svg$/
+          /\.svg$/,
+          /\.scss$/,
         ],
         loader: 'url',
         query: {
@@ -149,7 +150,12 @@ module.exports = {
         loader: 'file',
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
-        }
+        },
+      {
+        test: /\.scss$/,
+        include: paths.appSrc,
+        loaders: ["style", "css", "sass"]
+      },
       }
     ]
   },

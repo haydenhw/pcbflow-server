@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './design-tool-styles/DesignToolInfoButton.css';
+import './design-tool-styles/DesignToolInfoButton.scss';
 
 export default function DesignToolInfoButton(props) {
   return (
