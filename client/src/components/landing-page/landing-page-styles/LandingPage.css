@@ -1,5 +1,4 @@
 .landing-page-body {
-  padding-bottom: 20px;
   font-family: Lato;
 }
 
@@ -153,11 +152,9 @@
   width: 64.5%;
 }
 
-
-
 .landing-page-card-section {
   background-color: #f7f9fb;
-  padding-top: 50px;
+  padding: 50px 0;
 }
 
 .landing-page-card-wrapper {
@@ -176,35 +173,11 @@
     display: inline;
     margin-right: 36px;
   }
-  
 }
 
-@media only screen and (max-width: 1175px) {
-  .col2 {
-    width: 16.66%;
-  }
-  .col3 {
-    width: 50%;
-  }
-
-  .col12 {
-    width: 100%;
-    text-align: left;
-  }
-}
-
-@media only screen and (max-width: 825px) {
-  .col2 {
-    width: 16.66%;
-  }
-  .col3 {
-    width: 100%;
-  }
-  
-
-  .col12 {
-    width: 100%;
-    text-align: left;
+@media only screen and (max-width: 500px) {
+  .less-dots {
+    width: 145px;
   }
 }
 
