@@ -8,11 +8,18 @@ import Modal from 'components/modal/Modal';
 import Projects from './Projects';
 
 export class ProjectContainer extends Component {
+  componentWillMount() {
+    const { shouldRenderModal } = this.props;
+    
+    if (shouldRenderModal) {
+      store.dispatch(actions.toggleShouldRenderModal());
+    }
+  }
   
   renderModal() {
     const { shouldRenderModal, modalProps } = this.props;
     
-    if (shouldRenderModal) {
+    if (shouldRenderModal && modalProps) {
       const { projectId, projectName } = modalProps;
       return (
         <Modal 
@@ -26,6 +33,8 @@ export class ProjectContainer extends Component {
         />
       );
     }
+    
+    return null;
   }
     
   render() {

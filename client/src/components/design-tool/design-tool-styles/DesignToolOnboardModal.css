@@ -92,6 +92,11 @@
 .real-require {
   margin: 0 auto;
 }
+
+.confirm-exit-tutorial .modal-text-child {
+  text-align: center;
+}
+
 @media only screen and (max-width : 905px) {
   .modal-step-0 .modal-text-child {
     text-align: center;

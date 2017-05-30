@@ -167,6 +167,14 @@ let DesignTool = class extends Component {
     });
   }
   
+  componentWillMount() {
+    const { shouldRenderModal } = this.props;
+    
+    if (!shouldRenderModal) {
+      store.dispatch(actions.toggleShouldRenderModal());
+    }
+  }
+  
   componentDidMount() {
     if (!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;
@@ -595,6 +603,7 @@ let DesignTool = class extends Component {
         case 'CONFIRM':
           return (
             <Modal 
+              modalClass="confirm-exit-tutorial"
               text="Are you sure you want to exit the tutorial?"
               rightButtonText="Exit"
               shouldRenderLeftButton={true}

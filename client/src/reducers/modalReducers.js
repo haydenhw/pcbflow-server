@@ -1,7 +1,7 @@
 import * as actions from 'actions/indexActions';
 
 const defaultState = {
-  shouldRenderModal: true,
+  shouldRenderModal: false,
   modalType: 'ONBOARD',
   modalProps: null
 }
