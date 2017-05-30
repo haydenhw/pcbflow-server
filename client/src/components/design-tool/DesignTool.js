@@ -141,14 +141,12 @@ let DesignTool = class extends Component {
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
-    // document.body.addEventListener('click', this.bound_handleClick);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
     document.onkeydown = DesignTool.keyPress;
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
+    window.onbeforeunload = () => this.props.hasUnsavedChanges ? '' : null;
     
-    const shouldConfirmOnReload = false;
-    window.onbeforeunload = () => shouldConfirmOnReload ? '' : null;
   }
   
   removeHanlders() {
@@ -159,8 +157,11 @@ let DesignTool = class extends Component {
   }
   
   setRouteHook() {
-    this.props.router.setRouteLeaveHook(this.props.route, () => {
-      if (/* true ||*/ this.props.hasUnsavedChanges) {
+    const { router, route, hasUnsavedChanges} = this.props;
+    
+    router.setRouteLeaveHook(route, () => {
+      console.log(hasUnsavedChanges)
+      if (/* true ||*/ hasUnsavedChanges) {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }
       return null;
@@ -171,7 +172,7 @@ let DesignTool = class extends Component {
     const { shouldRenderModal } = this.props;
     
     if (!shouldRenderModal) {
-      store.dispatch(actions.toggleShouldRenderModal());
+    //  store.dispatch(actions.toggleShouldRenderModal());
     }
   }
   
@@ -187,6 +188,17 @@ let DesignTool = class extends Component {
     this.addHanlders();
   }
   
+  /*componentDidUpdate(prevProps) {
+    if (prevProps.hasUnsavedChanges === false && this.props.hasUnsavedChanges === true) {
+      window.onbeforeunload = () => true ? '' : null;
+    }
+    
+    if (prevProps.hasUnsavedChanges === true && this.props.hasUnsavedChanges === false) {
+      console.log('saved')
+      window.onbeforeunload = () => false ? '' : null;
+    }
+  }
+  */
   componentWillUnmount() {
     clearTimeout(this.timeOut);
     this.removeHanlders();
@@ -355,7 +367,7 @@ let DesignTool = class extends Component {
   
   getDraggingModule() {
     const { draggingModuleData } = this.props;
-    const { x , y } = this.state;
+    const { x,y } = this.state;
     
     return (
       <Module
@@ -752,7 +764,8 @@ const mapStateToProps = state => ({
   shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
   todoBools: state.tutorial.todoBools,
   shouldRenderModal: state.modal.shouldRenderModal,
-  modalType: state.modal.modalType
+  modalType: state.modal.modalType,
+  hasUnsavedChanges: state.hasUnsavedChanges
 });
 
 DesignTool = withRouter(DesignTool);
@@ -768,7 +781,7 @@ DesignTool.propTypes = {
   boardSpecs: PropTypes.object.isRequired,
   selectedModuleProps: PropTypes.object.isRequired,
   anchorPositions: PropTypes.object.isRequired,
-  hasUnsavedChanges: PropTypes.object,
+  hasUnsavedChanges: PropTypes.boolean,
   route: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,

@@ -21,7 +21,7 @@ export default function LandingPage() {
     <div className="landing-page-body">
       <div className="landing-navbar">
         <img className="white-logo-image" src="images/white-logo.png" alt="" />
-        <span className="landing-logo-text" >PCB<span className="bold">flow</span></span>
+        <span className="landing-page-logo-text" >PCB<span className="bold">flow</span></span>
       </div>
       <section style={backgroundStyle} className="landing-page-content">
         <div className="landing-page-text">

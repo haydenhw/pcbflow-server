@@ -115,7 +115,7 @@
 }
 
 .modal-button-right:hover {
-  background-color: #76a5f4;
+  background-color: #528ff5;
   cursor: pointer;
 }
 
@@ -125,7 +125,7 @@
 
 .modal-button-left:hover,
 .modal-button-left:focus {
-  color: #76a5f4;
+  color: #528ff5;
   text-decoration: none;
   cursor: pointer;
 }
