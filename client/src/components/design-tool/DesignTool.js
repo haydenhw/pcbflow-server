@@ -68,7 +68,6 @@ let DesignTool = class extends Component {
     
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
     this.bound_handleMouseUp = this.handleMouseUp.bind(this);
-    // this.bound_handleClick = this.handleClick.bind(this);
     this.bound_handleMouseMove = this.handleMouseMove.bind(this);
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
   }
@@ -144,9 +143,9 @@ let DesignTool = class extends Component {
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
     document.onkeydown = DesignTool.keyPress;
+    
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
     window.onbeforeunload = () => this.props.hasUnsavedChanges ? '' : null;
-    
   }
   
   removeHanlders() {
@@ -172,7 +171,7 @@ let DesignTool = class extends Component {
     const { shouldRenderModal } = this.props;
     
     if (!shouldRenderModal) {
-    //  store.dispatch(actions.toggleShouldRenderModal());
+     store.dispatch(actions.toggleShouldRenderModal());
     }
   }
   
@@ -276,12 +275,6 @@ let DesignTool = class extends Component {
     }
   }
   
-  handleClick(evt) {
-    /*if ((evt.which === 1) && !this.props.isMouseOverModule) {
-    store.dispatch(actions.updateIconVisibity('ALL'));
-  }*/
-  }
-
   handleMouseUp(evt) {
     if ((evt.which === 1) && !this.state.shouldHideContextMenu) {
       this.toggleShouldHideContextMenu(true);
@@ -504,18 +497,17 @@ let DesignTool = class extends Component {
     const getButtonMethods = () => {
       switch(tutorialStep) {
         case 0:
-          return { 
-            handleRightButtonClick: () => store.dispatch(actions.incrementTutorialStep()),
-            handleLeftButtonClick: () => store.dispatch(actions.toggleShouldRenderModal())
-          }
-        case 1:
-          const stepOneNextClickHandler = function() {
+          const stepZeroRightButtonHandler = function() {
             store.dispatch(actions.incrementTutorialStep());
             store.dispatch(actions.toggleTutorialIsActive());
           }
-          return {
-            handleRightButtonClick: stepOneNextClickHandler,
-            handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep())
+          const stepZeroLeftButtoHandler = function() {
+            store.dispatch(actions.toggleShouldRenderModal());
+            this.toggleDocumentationCard();
+          } 
+          return { 
+            handleRightButtonClick: stepZeroRightButtonHandler, 
+            handleLeftButtonClick: stepZeroLeftButtoHandler.bind(this)
           }
         case 2:
           return {
@@ -523,13 +515,13 @@ let DesignTool = class extends Component {
             handleLeftButtonClick: () => store.dispatch(actions.decrementTutorialStep())
           }
         case 3:
-          const stepThreeNextClickHandler = function() {
+          const stepThreeClickHandler = function() {
             store.dispatch(actions.incrementTutorialStep());
             store.dispatch(actions.updateDisabledIconExceptions([0]));
             store.dispatch(actions.toggleShouldRenderModal());
           }
           return {
-            handleRightButtonClick: stepThreeNextClickHandler.bind(this),
+            handleRightButtonClick: stepThreeClickHandler.bind(this),
             handleLeftButtonClick: this.startTour.bind(this),
             handleDidMount: this.addTooltip.bind(this, toolTips[0])
           }
@@ -571,6 +563,7 @@ let DesignTool = class extends Component {
         case 13:
           const stepThirteenClickHandler = function() {
             store.dispatch(actions.exitTutorial());
+            this.toggleDocumentationCard();
           }
           return {
             handleRightButtonClick: stepThirteenClickHandler.bind(this),
@@ -613,6 +606,10 @@ let DesignTool = class extends Component {
             />
           );
         case 'CONFIRM':
+          const rightButtonClick = function() {
+            store.dispatch(actions.exitTutorial())
+            this.toggleDocumentationCard();
+          }
           return (
             <Modal 
               modalClass="confirm-exit-tutorial"
@@ -620,7 +617,7 @@ let DesignTool = class extends Component {
               rightButtonText="Exit"
               shouldRenderLeftButton={true}
               leftButtonText="Go Back"
-              handleRightButtonClick={() => store.dispatch(actions.exitTutorial())}
+              handleRightButtonClick={rightButtonClick.bind(this)}
               handleLeftButtonClick={() => store.dispatch(actions.resumeTutorial())}
               handleCloseButtonClick={() => store.dispatch(actions.exitTutorial())}
             />
@@ -781,7 +778,7 @@ DesignTool.propTypes = {
   boardSpecs: PropTypes.object.isRequired,
   selectedModuleProps: PropTypes.object.isRequired,
   anchorPositions: PropTypes.object.isRequired,
-  hasUnsavedChanges: PropTypes.boolean,
+  hasUnsavedChanges: PropTypes.bool,
   route: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
