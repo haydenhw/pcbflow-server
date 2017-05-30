@@ -21,7 +21,6 @@
   background-color: #fefefe;
   padding: 57px 45px;
   padding-bottom: 125px;
-  /*padding-left: 64px;*/
   border: 1px solid #888;
   width: 600px;
   font-size: 22px;
@@ -62,7 +61,6 @@
   display: block;
   width: 75%;
   margin: 0 auto;
-  /*font-family: 'Source Sans Pro', sans-serif;*/
 }
 
 .modal-image {
@@ -135,16 +133,9 @@
   cursor: pointer;
 }
 
-/*@media only screen and (min-width: 1000px) {
-  .modal-image {
-    min-width: 350px;
-  }
-}*/
-
 @media only screen and (min-width : 320px) and (max-width : 480px) {
   .modal-content {
     width: 90%;
-    /*max-height: 90%;*/
     min-width: 90%;
     padding: 40px 15px;
     padding-bottom: 125px;
