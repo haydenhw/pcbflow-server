@@ -1,5 +1,8 @@
-$primary-color: #333;
-
+.toggle-info-button {
+  position: absolute;
+  bottom: 55px;
+  right: 45px;
+}
 
 .round-button {
   position: absolute;
@@ -17,7 +20,7 @@ $primary-color: #333;
   padding-bottom: 100%;
   border-radius: 50%;
   overflow:hidden;
-  background: $primary-color; 
+  background: #fc8d2a; 
   box-shadow: 0 0 3px gray;
   z-index: 200;
 }

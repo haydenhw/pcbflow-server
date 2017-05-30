@@ -30,7 +30,6 @@ import { tourSteps, dependecyDemo } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
 import { toolTips } from 'config/toolTips'
 
-import './design-tool-styles/DesignToolToggleInfoButton.scss';
 import './design-tool-styles/DesignToolDocumentationCard.css';
 import './design-tool-styles/DesignToolOnboardModal.css'
 import './design-tool-styles/joyride.css';

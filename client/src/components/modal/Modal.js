@@ -90,14 +90,16 @@ export default class DesignToolOnboardModal extends Component {
       <RootModal>
         <div className={`modal-content ${this.props.modalClass}`}>
           <span className="modal-close" onClick={this.handleCloseButtonClick.bind(this)}>&times;</span>
-          <h2 className="modal-title">{this.props.title}</h2>
-          {this.renderImage()}
-          <div className="modal-text-parent">
-            <div className="modal-text-child">
-              {this.props.text.split("\n").map((line, index) => <p key={index}>{line}</p>)}
+          <div className="modal-scroll-wrapper">
+            <h2 className="modal-title">{this.props.title}</h2>
+            {this.renderImage()}
+            <div className="modal-text-parent">
+              <div className="modal-text-child">
+                {this.props.text.split("\n").map((line, index) => <p key={index}>{line}</p>)}
+              </div>
             </div>
+            {this.renderList()}
           </div>
-          {this.renderList()}
           <div className="modal-button-wrapper">
             {this.renderLeftButton()}
             <button className={`modal-button-right modal-button ${rightButtonClass}`} 

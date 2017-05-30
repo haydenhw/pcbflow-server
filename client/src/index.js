@@ -12,7 +12,6 @@ import LandingPage from 'components/landing-page/LandingPage';
 import './index.css';
 import './reset.css';
 
-
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
