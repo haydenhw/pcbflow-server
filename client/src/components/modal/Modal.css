@@ -18,12 +18,12 @@
   -moz-border-radius: 2px;
   border-radius: 2px;
   background-color: #fefefe;
-  /*margin: 10% auto;*/
   padding: 57px 45px;
   padding-bottom: 125px;
   /*padding-left: 64px;*/
   border: 1px solid #888;
   max-width: 600px;
+  min-width: 450px;
   font-size: 22px;
   text-align: center;
   box-shadow: 0 4px 25px rgba(0,0,0,.4);
@@ -137,6 +137,8 @@
 @media only screen and (min-width : 320px) and (max-width : 480px) {
   .modal-content {
     width: 90%;
+    /*max-height: 90%;*/
+    min-width: 90%;
     padding: 40px 15px;
     padding-bottom: 125px;
   }

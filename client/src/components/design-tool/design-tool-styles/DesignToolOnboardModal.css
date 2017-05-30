@@ -39,6 +39,10 @@
   margin-left: 6%;
 }
 
+.modal-step-7 .modal-text-child {
+  margin-left: 6%;
+}
+
 .modal-step-10 .modal-text-child {
   margin-left: 3%;
 }
@@ -99,7 +103,8 @@
     text-align: center;
   }
   
-  .red-to-green {
+  .red-to-green,
+  .real-power {
     width: 90%;
   }
 }
