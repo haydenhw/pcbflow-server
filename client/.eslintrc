@@ -16,8 +16,11 @@
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "class-methods-use-this": "off",
-    "react/forbid-prop-types": "off"
-
+    "react/forbid-prop-types": "off",
+    "react/jsx-filename-extension": "off",
+    "no-case-declarations": "off",
+    "react/require-default-props": "off",
+    "func-names": "off"
     
   },
   "plugins": [

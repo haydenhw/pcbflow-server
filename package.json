@@ -54,7 +54,7 @@
     "start": "concurrently \"node server.js\"  \"cd client && npm start\"",
     "server": "babel-node server.js",
     "test": "mocha",
-    "lint": "eslint --ext .js --ext .jsx client/src || exit 0",
+    "lint": "eslint --ext .js --ext .jsx client/src/components/design-tool/DesignTool.js || exit 0",
     "build:client": "cd client && npm run build",
     "push:git": "git add . && git commit -m \"build\" && git push origin master || exit 0",
     "push:heroku": "git push heroku master",
