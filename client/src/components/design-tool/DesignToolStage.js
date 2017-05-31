@@ -17,6 +17,11 @@ import Grid from './DesignToolGrid';
 
 
 class DesignToolStage extends Component {
+  constructor() {
+      super();
+      this.deleteModule = this.deleteModule.bind(this)
+  }
+  
   updateThumbnail() {
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
@@ -32,7 +37,8 @@ class DesignToolStage extends Component {
   }
 
   deleteModule() {
-    store.dispatch(actions.deleteSelectedModule(this.props.selectedModuleIndex));
+    const { selectedModuleIndex } = this.props; 
+    store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
   }
 
   render() {
@@ -84,7 +90,7 @@ class DesignToolStage extends Component {
           id={'SIMPLE'}
           className={contextMenuClass}
         >
-          <MenuItem onClick={this.deleteModule.bind(this)}>delete</MenuItem>
+          <MenuItem onClick={this.deleteModule}>delete</MenuItem>
           <MenuItem onClick={rotate}>rotate</MenuItem>
         </ContextMenu>
       </div>
@@ -113,6 +119,11 @@ DesignToolStage.propTypes = {
   rotate: PropTypes.func.isRequired, 
   hideFloatingElements: PropTypes.func.isRequired, 
   unhideFloatingElements: PropTypes.func.isRequired, 
+  toggleShouldUpadateThumbnail: PropTypes.func.isRequired, 
   shouldHideContextMenu: PropTypes.bool.isRequired, 
   isDraggingToBoard: PropTypes.bool.isRequired, 
+  anchorPositions: PropTypes.object.isRequired,  
+  selectedModuleIndex: PropTypes.number,  
+  selectedModuleProps: PropTypes.object.isRequired,  
+  boardSpecs: PropTypes.object.isRequired,  
 };
