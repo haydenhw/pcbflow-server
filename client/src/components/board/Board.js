@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Layer, Rect, Group } from 'react-konva';
 import { connect } from 'react-redux';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
+import generateThumbnail from 'helpers/generateThumbnail';
+
 import Modules from 'components/modules/Modules';
 import ModulesItem from 'components/modules/ModulesItem';
 import Anchor from './BoardAnchor';
-import generateThumbnail from 'helpers/generateThumbnail';
 
 
 class Board extends Component {
@@ -19,10 +22,6 @@ class Board extends Component {
     };
   }
 
-  componentWillReceiveProps(newProps) {
-    // console.log(newProps, this.props)
-  }
-
   updateLocalStatePosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
@@ -32,6 +31,7 @@ class Board extends Component {
       x,
       y,
     });
+
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
   }
@@ -50,7 +50,7 @@ class Board extends Component {
   handleDragMove() {
     this.updateLocalStatePosition();
     this.props.hideFloatingElements();
-      // improves performance
+
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
   }
@@ -74,8 +74,8 @@ class Board extends Component {
       hideFloatingElements,
       unhideFloatingElements,
       isDraggingToBoard,
-     }
-     = this.props;
+    }
+    = this.props;
 
     return (
       <Layer
@@ -146,15 +146,32 @@ class Board extends Component {
 }
 
 const mapStateToProps = state => ({
-  width: state.boardSpecs.width,
-  height: state.boardSpecs.height,
-  stroke: state.boardSpecs.stroke,
   x: state.boardSpecs.x,
   y: state.boardSpecs.y,
-  topLeft: state.anchorPositions.topLeft,
-  topRight: state.anchorPositions.topRight,
+  width: state.boardSpecs.width,
+  height: state.boardSpecs.height,
   bottomLeft: state.anchorPositions.bottomLeft,
   bottomRight: state.anchorPositions.bottomRight,
+  stroke: state.boardSpecs.stroke,
+  topLeft: state.anchorPositions.topLeft,
+  topRight: state.anchorPositions.topRight,
 });
 
 export default connect(mapStateToProps)(Board);
+
+Board.propTypes = {
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  topLeft: PropTypes.object.isRequired,
+  topRight: PropTypes.object.isRequired,
+  bottomLeft: PropTypes.object.isRequired,
+  bottomRight: PropTypes.object.isRequired,
+  hideFloatingElements: PropTypes.func.isRequired,
+  isDraggingToBoard: PropTypes.bool.isRequired,
+  rotate: PropTypes.func.isRequired,
+  stroke: PropTypes.string,
+  unhideFloatingElements: PropTypes.func.isRequired,
+};
+

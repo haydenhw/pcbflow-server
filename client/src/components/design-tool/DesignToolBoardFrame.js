@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 export default function DesignToolBoardFrame(props) {
   const { width, heght, top, left } = props;
-  
+
   const style = {
     position: 'absolute',
-    width: width,
-    height: height,
-    top: top,
-    left: left,
+    width,
+    height,
+    top,
+    left,
   };
 
   return <div className="board-frame" style={style} />;

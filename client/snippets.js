@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import shortid from 'shortid';
-import PropTypes from 'prop-types';
 
 shortid.generate();
 

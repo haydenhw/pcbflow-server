@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Interactive from 'components/Interactable';
 
@@ -27,7 +28,7 @@ const getTextDecoration = function (bool) {
 };
 
 export default function DesignToolTodo(props) {
-  const { todoBools } = props;
+  const { todoBools, handleLinkClick } = props;
 
   return (
     <Interactive draggable draggableOptions={draggableOptions}>
@@ -41,9 +42,14 @@ export default function DesignToolTodo(props) {
           <li style={getTextDecoration(todoBools[4])}>LED</li>
         </ul>
         <div>
-          <span onClick={props.handleLinkClick}>Exit Tutorial</span>
+          <span onClick={handleLinkClick} role="link" >Exit Tutorial</span>
         </div>
       </div>
     </Interactive>
   );
 }
+
+DesignToolTodo.propTypes = {
+  handleLinkClick: PropTypes.func.isRequired,
+  todoBools: PropTypes.array.isRequired,
+};

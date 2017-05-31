@@ -18,10 +18,10 @@ import Grid from './DesignToolGrid';
 
 class DesignToolStage extends Component {
   constructor() {
-      super();
-      this.deleteModule = this.deleteModule.bind(this)
+    super();
+    this.deleteModule = this.deleteModule.bind(this);
   }
-  
+
   updateThumbnail() {
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
@@ -37,7 +37,7 @@ class DesignToolStage extends Component {
   }
 
   deleteModule() {
-    const { selectedModuleIndex } = this.props; 
+    const { selectedModuleIndex } = this.props;
     store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
   }
 
@@ -111,19 +111,19 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(DesignToolStage);
 
 DesignToolStage.propTypes = {
-  shouldRenderBoard: PropTypes.bool.isRequired,  
+  shouldRenderBoard: PropTypes.bool.isRequired,
   draggingModule: PropTypes.object.isRequired,
-  isMouseDownOnIcon: PropTypes.bool.isRequired, 
-  isMouseDown: PropTypes.bool.isRequired, 
-  isMouseOverModule: PropTypes.bool.isRequired, 
-  rotate: PropTypes.func.isRequired, 
-  hideFloatingElements: PropTypes.func.isRequired, 
-  unhideFloatingElements: PropTypes.func.isRequired, 
-  toggleShouldUpadateThumbnail: PropTypes.func.isRequired, 
-  shouldHideContextMenu: PropTypes.bool.isRequired, 
-  isDraggingToBoard: PropTypes.bool.isRequired, 
-  anchorPositions: PropTypes.object.isRequired,  
-  selectedModuleIndex: PropTypes.number,  
-  selectedModuleProps: PropTypes.object.isRequired,  
-  boardSpecs: PropTypes.object.isRequired,  
+  isMouseDownOnIcon: PropTypes.bool.isRequired,
+  isMouseDown: PropTypes.bool.isRequired,
+  isMouseOverModule: PropTypes.bool.isRequired,
+  rotate: PropTypes.func.isRequired,
+  hideFloatingElements: PropTypes.func.isRequired,
+  unhideFloatingElements: PropTypes.func.isRequired,
+  toggleShouldUpadateThumbnail: PropTypes.func.isRequired,
+  shouldHideContextMenu: PropTypes.bool.isRequired,
+  isDraggingToBoard: PropTypes.bool.isRequired,
+  anchorPositions: PropTypes.object.isRequired,
+  selectedModuleIndex: PropTypes.number,
+  selectedModuleProps: PropTypes.object.isRequired,
+  boardSpecs: PropTypes.object.isRequired,
 };

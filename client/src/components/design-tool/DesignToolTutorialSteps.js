@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export const tutorialSteps = [
   {
     title: 'Welcome to PCBflow!',
@@ -48,7 +47,6 @@ export const tutorialSteps = [
     rightButtonText: 'Next',
     shouldRenderLeftButton: false,
     leftButtonText: 'Back',
-    image: { src: 'images/real-com.jpg', alt: 'com connector icon' },
     image: {
       src: 'images/real-com.jpg',
       alt: 'real com module',

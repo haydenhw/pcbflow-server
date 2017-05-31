@@ -685,7 +685,7 @@ let DesignTool = class extends Component {
       shouldRenderInfoButton,
       shouldHideContextMenu,
     } = this.state;
-  
+
     return (
       <div>
         {this.renderJoyride()}
