@@ -20,7 +20,7 @@ class Board extends Component {
       x: null,
       y: null,
     };
-    
+
     this.handleDragMove = this.handleDragMove.bind(this);
     this.handleDragEnd = this.handleDragEnd.bind(this);
   }

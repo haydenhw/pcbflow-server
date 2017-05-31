@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import './side-bar-styles/SideBarDimensionInput.css';
 
-class SideBarDimensionInput extends React.Component {
+class SideBarDimensionInput extends Component {
+  constructor() {
+    super();
+
+    this.handleWidthChange = this.handleWidthChange.bind(this);
+    this.handleHeightChange = this.handleHeightChange.bind(this);
+  }
   validate(value) {
     if (isNaN(value)) {
       return '';
@@ -26,52 +35,51 @@ class SideBarDimensionInput extends React.Component {
       topRight,
       bottomLeft,
       bottomRight,
-      boardWidth,
+      boardHeight,
+      boardDimensions,
      }
      = this.props;
 
-    const boardDimensions = {
-      width: newBoardWidth,
-      height: this.props.boardHeight,
-    };
+    const width = newBoardWidth;
+    const height = boardHeight;
+
 
     const anchorPositions = {
       topLeft: { x: topLeft.x, y: topLeft.y },
-      topRight: { x: topLeft.x + boardDimensions.width, y: topRight.y },
-      bottomLeft: { x: bottomLeft.x, y: topLeft.y + boardDimensions.height },
-      bottomRight: { x: bottomLeft.x + boardDimensions.width, y: topRight.y + boardDimensions.height },
+      topRight: { x: topLeft.x + width, y: topRight.y },
+      bottomLeft: { x: bottomLeft.x, y: topLeft.y + height },
+      bottomRight: { x: bottomLeft.x + width, y: topRight.y + height },
     };
 
-    store.dispatch(actions.updateBoardDimensions(boardDimensions));
+    store.dispatch(actions.updateBoardDimensions({ width, height }));
     store.dispatch(actions.updateAnchorPositions(anchorPositions));
   }
 
   handleHeightChange(event) {
     const targetValue = event.target.value;
     const newBoardHeight = this.validate(targetValue);
+
     const {
-      width,
-      height,
       topLeft,
       topRight,
       bottomLeft,
       bottomRight,
+      boardWidth,
      }
      = this.props;
 
-    const boardDimensions = {
-      width: this.props.boardWidth,
-      height: newBoardHeight,
-    };
+    const width = boardWidth;
+    const height = newBoardHeight;
+
 
     const anchorPositions = {
       topLeft: { x: topLeft.x, y: topLeft.y },
-      topRight: { x: topLeft.x + boardDimensions.width, y: topRight.y },
-      bottomLeft: { x: bottomLeft.x, y: topLeft.y + boardDimensions.height },
-      bottomRight: { x: bottomLeft.x + boardDimensions.width, y: topRight.y + boardDimensions.height },
+      topRight: { x: topLeft.x + width, y: topRight.y },
+      bottomLeft: { x: bottomLeft.x, y: topLeft.y + height },
+      bottomRight: { x: bottomLeft.x + width, y: topRight.y + height },
     };
 
-    store.dispatch(actions.updateBoardDimensions(boardDimensions));
+    store.dispatch(actions.updateBoardDimensions({ width, height }));
     store.dispatch(actions.updateAnchorPositions(anchorPositions));
   }
 
@@ -86,18 +94,18 @@ class SideBarDimensionInput extends React.Component {
               type="text"
               className="width-input dimension-input"
               value={boardWidth === 0 ? '' : boardWidth}
-              onChange={this.handleWidthChange.bind(this)}
+              onChange={this.handleWidthChange}
             />
-            <label>Width</label>
+            <label htmlFor="width">Width</label>
           </div>
           <div className="input-wrapper">
             <input
               className="height-input dimension-input"
               type="text"
               value={boardHeight === 0 ? '' : boardHeight}
-              onChange={this.handleHeightChange.bind(this)}
+              onChange={this.handleHeightChange}
             />
-            <label>Height</label>
+            <label htmlFor="height">Height</label>
           </div>
         </div>
       </form>
@@ -106,7 +114,7 @@ class SideBarDimensionInput extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   boardWidth: state.boardSpecs.width,
   boardHeight: state.boardSpecs.height,
   topLeft: state.anchorPositions.topLeft,
@@ -116,3 +124,12 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default connect(mapStateToProps)(SideBarDimensionInput);
+
+SideBarDimensionInput.propTypes = {
+  boardWidth: PropTypes.number.isRequired,
+  boardHeight: PropTypes.number.isRequired,
+  topLeft: PropTypes.object.isRequired,
+  topRight: PropTypes.object.isRequired,
+  bottomLeft: PropTypes.object.isRequired,
+  bottomRight: PropTypes.object.isRequired,
+};

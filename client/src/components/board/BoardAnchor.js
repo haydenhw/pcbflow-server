@@ -12,19 +12,19 @@ export default class Anchor extends Component {
     this.state = {
       strokeWidth: 2,
     };
-  
+
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.moveToTop = this.moveToTop.bind(this);
     this.handleDragMove = this.handleDragMove.bind(this);
     this.handleDragEnd = this.handleDragEnd.bind(this);
   }
-  
+
   draggableOn() {
     const group = this.refs.anchor.getParent();
     group.setDraggable(true);
   }
-  
+
   moveToTop() {
     const group = this.refs.anchor.getParent();
     const layer = group.getLayer();
@@ -137,7 +137,7 @@ export default class Anchor extends Component {
 Anchor.propTypes = {
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
-  name:  PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   hideFloatingElements: PropTypes.func.isRequired,
   unhideFloatingElements: PropTypes.func.isRequired,
 };

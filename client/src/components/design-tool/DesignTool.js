@@ -16,7 +16,6 @@ import rotate from 'helpers/rotate';
 import Board from 'components/board/Board';
 import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
-import BoardDimensionInput from 'components/board/BoardDimensionForm';
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import SideBar from 'components/side-bar/SideBar';
 import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText';
