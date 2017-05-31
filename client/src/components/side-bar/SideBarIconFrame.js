@@ -1,6 +1,7 @@
 import React from 'react';
 
 import generatePriceString from 'helpers/generatePriceString';
+
 import './side-bar-styles/SideBarIconFrame.css';
 
 export default function IconFrame(props) {

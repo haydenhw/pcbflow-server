@@ -9,7 +9,7 @@ import './side-bar-styles/SideBarIcon.css';
 export default class SideBarIcon extends Component {
   constructor() {
     super();
-    
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
   
   handleMouseDown(evt) {
@@ -24,6 +24,10 @@ export default class SideBarIcon extends Component {
       store.dispatch(actions.changeDraggingModule(moduleData));
     }
   }
+  
+  handleMouseOut() {
+    store.dispatch(actions.mouseDownOnIcon(false));
+  }
 
   render() {
     const { disabled, moduleData } = this.props;
@@ -34,8 +38,8 @@ export default class SideBarIcon extends Component {
       <div
         className="module-icon"
         ref={(module) => { this.selectedModule = module; }}
-        onMouseDown={disabled ? null : this.handleMouseDown.bind(this)}
-        onMouseOut={disabled ? null : () => store.dispatch(actions.mouseDownOnIcon(false))}
+        onMouseDown={disabled ? null : this.handleMouseDown}
+        onMouseOut={disabled ? null : this.handleMouseOut}
         role="button"
       >
         <img
@@ -52,5 +56,5 @@ export default class SideBarIcon extends Component {
 
 SideBarIcon.propTypes = {
   disabled: PropTypes.bool.isRequired,
-  moduleData: PropTypes.array.isRequired,
+  moduleData: PropTypes.object.isRequired,
 };
