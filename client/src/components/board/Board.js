@@ -20,6 +20,9 @@ class Board extends Component {
       x: null,
       y: null,
     };
+    
+    this.handleDragMove = this.handleDragMove.bind(this);
+    this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
   updateLocalStatePosition() {
@@ -36,7 +39,7 @@ class Board extends Component {
     layer.draw();
   }
 
-  updateReduxPosition() {
+  updateGlobalStatePosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
@@ -56,7 +59,7 @@ class Board extends Component {
   }
 
   handleDragEnd() {
-    this.updateReduxPosition();
+    this.updateGlobalStatePosition();
     this.props.unhideFloatingElements();
   }
 
@@ -90,8 +93,8 @@ class Board extends Component {
           width={width}
           height={height}
           draggable="true"
-          onDragMove={this.handleDragMove.bind(this)}
-          onDragEnd={this.handleDragEnd.bind(this)}
+          onDragMove={this.handleDragMove}
+          onDragEnd={this.handleDragEnd}
         >
 
           <Rect
