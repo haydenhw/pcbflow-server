@@ -153,11 +153,11 @@ const mapStateToProps = state => ({
   y: state.boardSpecs.y,
   width: state.boardSpecs.width,
   height: state.boardSpecs.height,
+  topLeft: state.anchorPositions.topLeft,
+  topRight: state.anchorPositions.topRight,
   bottomLeft: state.anchorPositions.bottomLeft,
   bottomRight: state.anchorPositions.bottomRight,
   stroke: state.boardSpecs.stroke,
-  topLeft: state.anchorPositions.topLeft,
-  topRight: state.anchorPositions.topRight,
 });
 
 export default connect(mapStateToProps)(Board);

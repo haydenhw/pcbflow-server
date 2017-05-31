@@ -1,16 +1,36 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Circle } from 'react-konva';
 import { connect } from 'react-redux';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-class Anchor extends Component {
+export default class Anchor extends Component {
   constructor(props) {
     super(props);
     this.state = {
       strokeWidth: 2,
     };
+  
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.moveToTop = this.moveToTop.bind(this);
+    this.handleDragMove = this.handleDragMove.bind(this);
+    this.handleDragEnd = this.handleDragEnd.bind(this);
+  }
+  
+  draggableOn() {
+    const group = this.refs.anchor.getParent();
+    group.setDraggable(true);
+  }
+  
+  moveToTop() {
+    const group = this.refs.anchor.getParent();
+    const layer = group.getLayer();
+
+    group.setDraggable(false);
+    this.refs.anchor.moveToTop();
   }
 
   updatePosition() {
@@ -67,20 +87,6 @@ class Anchor extends Component {
     }
   }
 
-  moveToTop() {
-    const group = this.refs.anchor.getParent();
-    const layer = group.getLayer();
-
-    group.setDraggable(false);
-    this.refs.anchor.moveToTop();
-  }
-
-  draggableOn() {
-    const group = this.refs.anchor.getParent();
-    const layer = group.getLayer();
-    group.setDraggable(true);
-  }
-
   handleMouseOver() {
     document.body.style.cursor = 'pointer';
     this.setState({
@@ -106,33 +112,32 @@ class Anchor extends Component {
   }
 
   render() {
+    const { x, y, name } = this.props;
     return (
       <Circle
         ref="anchor"
-        x={this.props.x}
-        y={this.props.y}
+        x={x}
+        y={y}
         stroke="#666"
         fill="#ddd"
         strokeWidth={this.state.strokeWidth}
         radius="8"
-        name={this.props.name}
+        name={name}
         draggable="true"
         dragOnTop="false"
-        onMouseOver={this.handleMouseOver.bind(this)}
-        onMouseOut={this.handleMouseOut.bind(this)}
-        onMouseDown={this.moveToTop.bind(this)}
-        onDragMove={this.handleDragMove.bind(this)}
-        onDragEnd={this.handleDragEnd.bind(this)}
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
+        onMouseDown={this.moveToTop}
+        onDragMove={this.handleDragMove}
+        onDragEnd={this.handleDragEnd}
       />);
   }
 }
 
-const mapStateToProps = state => ({
-  width: state.boardSpecs.width,
-  height: state.boardSpecs.height,
-  boardX: state.boardSpecs.x,
-  boardY: state.boardSpecs.y,
-  anchorPositions: state.anchorPositions,
-});
-
-export default connect(mapStateToProps)(Anchor);
+Anchor.propTypes = {
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  name:  PropTypes.string.isRequired,
+  hideFloatingElements: PropTypes.func.isRequired,
+  unhideFloatingElements: PropTypes.func.isRequired,
+};
