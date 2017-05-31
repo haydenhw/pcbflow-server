@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import './side-bar-styles/SideBarIcon.css';
 
-
 export default class SideBarIcon extends Component {
-
+  constructor() {
+    super();
+    
+  }
+  
   handleMouseDown(evt) {
     if (evt.nativeEvent.which === 1) {
       const { moduleData } = this.props;
@@ -30,14 +36,21 @@ export default class SideBarIcon extends Component {
         ref={(module) => { this.selectedModule = module; }}
         onMouseDown={disabled ? null : this.handleMouseDown.bind(this)}
         onMouseOut={disabled ? null : () => store.dispatch(actions.mouseDownOnIcon(false))}
+        role="button"
       >
         <img
           className="module-icon-image"
           style={disabled ? cursorDefault : {}}
           draggable={false}
           src={moduleData.iconSrc}
+          alt="module icon image"
         />
       </div>
     );
   }
 }
+
+SideBarIcon.propTypes = {
+  disabled: PropTypes.bool.isRequired,
+  moduleData: PropTypes.array.isRequired,
+};
