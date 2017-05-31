@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import { getUnmetDependencyIds, getUnmetDependencies } from 'helpers/dependencies';
 
 import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
 
-const getVisibleIcons = (visibilityMode, moduleList, onBoardModules, selectedModuleDependencies) => {
-  switch (visibilityMode) {
+const getVisibleIcons = (props) => {
+  const { iconVisibityMode, moduleData, onBoardModules, selectedModuleDependencies } = props;
+  
+  switch (iconVisibityMode) {
     case 'ALL':
-      return moduleList;
+      return moduleData;
     case 'DEPENDENCY':
-      return getUnmetDependencies(moduleList, onBoardModules, selectedModuleDependencies);
+      return getUnmetDependencies(moduleData, onBoardModules, selectedModuleDependencies);
     default:
       return moduleList;
   }
@@ -56,9 +60,11 @@ const SideBarIconList = class extends Component {
   }
 
   render() {
-    const { onBoardModules, iconVisibityMode, selectedModuleDependencies, moduleData } = this.props;
-    const visibleIcons = getVisibleIcons(iconVisibityMode, moduleData, onBoardModules, selectedModuleDependencies);
-    const iconList = visibleIcons.map((module, index) => this.renderSideBarIconFrame(module, index));
+    const visibleIcons = getVisibleIcons(this.props);
+    
+    const iconList = visibleIcons.map((module, index) => (
+      this.renderSideBarIconFrame(module, index)
+    ));
 
     return (
       <div>
@@ -68,7 +74,7 @@ const SideBarIconList = class extends Component {
   }
 };
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   moduleData: state.moduleData,
   onBoardModules: state.currentProjectModules.present,
   iconVisibityMode: state.iconVisibity.mode,
