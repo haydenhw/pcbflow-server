@@ -11,6 +11,8 @@ import PropTypes from 'prop-types';
 shortid.generate();
 
 LandingPageCard.propTypes = {
+};
+
   className: PropTypes.string.isRequired,
   icon: PropTypes.array.isRequired,
   title: PropTypes.object.isRequired,

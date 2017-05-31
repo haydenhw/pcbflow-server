@@ -1,7 +1,7 @@
-`import React from 'react';
+import React from 'react';
 import DesignToolDocumentationCardKey from './DesignToolDocumentationCardKey';
 
-export default function DesignToolDocumentationCard(props) {
+export default function DesignToolDocumentationCard() {
   const deleteKey = <DesignToolDocumentationCardKey text="del" />;
   const ctrlKey = <DesignToolDocumentationCardKey text="ctrl" />;
   const zKey = <DesignToolDocumentationCardKey text="z" />;
