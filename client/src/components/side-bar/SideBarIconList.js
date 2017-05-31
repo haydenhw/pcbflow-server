@@ -26,9 +26,9 @@ const getVisibleIcons = (props) => {
 const SideBarIconList = class extends Component {
   renderSideBarIcon(module, index, isDisabled) {
     const {
+      updateClientPosition,
       toggleDraggingToBoard,
       toggleIsClicked,
-      updateClientPosition,
     } = this.props;
 
     return (
@@ -75,11 +75,22 @@ const SideBarIconList = class extends Component {
 };
 
 const mapStateToProps = state => ({
+  disabledIconExceptions: state.tutorial.disabledIconExceptions,
+  iconVisibityMode: state.iconVisibity.mode,
   moduleData: state.moduleData,
   onBoardModules: state.currentProjectModules.present,
-  iconVisibityMode: state.iconVisibity.mode,
   selectedModuleDependencies: state.iconVisibity.dependencies,
-  disabledIconExceptions: state.tutorial.disabledIconExceptions,
 });
 
 export default connect(mapStateToProps)(SideBarIconList);
+
+SideBarIconList.PropTypes = {
+  disabledIconExceptions: PropTypes.object.isRequired,
+  iconVisibityMode: PropTypes.string.isRequired,
+  moduleData: PropTypes.array.isRequired,
+  onBoardModules: PropTypes.array.isRequired,
+  selectedModuleDependencies: PropTypes.array.isRequired,
+  toggleDraggingToBoard: PropTypes.func.isRequired,
+  toggleIsClicked: PropTypes.func.isRequired,
+  updateClientPosition: PropTypes.func.isRequired,
+};
