@@ -1,4 +1,4 @@
-import React from 'react';
+`import React from 'react';
 import DesignToolDocumentationCardKey from './DesignToolDocumentationCardKey';
 
 export default function DesignToolDocumentationCard(props) {

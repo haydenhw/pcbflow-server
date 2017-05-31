@@ -12,9 +12,13 @@ shortid.generate();
 
 LandingPageCard.propTypes = {
   className: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  icon: PropTypes.array.isRequired,
+  title: PropTypes.object.isRequired,
+  content: PropTypes.number.isRequired,
+  className: PropTypes.string,
+  icon: PropTypes.array,
+  title: PropTypes.object,
+  content: PropTypes.number,
 };
 
 export default class extends Component {
