@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import SideBarIconList from './SideBarIconList';
-import SideBarIcon from './SideBarIcon';
 import DimensionForm from './SideBarDimensionInput';
 import SideBarDependencyMessage from './SideBarDependencyMessage';
 
 import './side-bar-styles/SideBar.css';
 
 export default function SideBar(props) {
-  const { showAll, updateClientPosition, disabledIconExceptions } = props;
-  const { mode, moduleName, dependencies } = props.iconVisibityData;
 
   const style = {
     height: '100% !important',
@@ -21,6 +19,9 @@ export default function SideBar(props) {
   };
 
   const renderDependencyMessage = () => {
+    const { showAll, iconVisibityData } = props;
+    const { mode, moduleName, dependencies } = iconVisibityData;
+    
     if ((mode === 'DEPENDENCY') && (dependencies.length > 0)) {
       return (
         <SideBarDependencyMessage
@@ -31,15 +32,23 @@ export default function SideBar(props) {
     }
     return null;
   };
-
+  
+  const { 
+    disabledIconExceptions,
+    onBoardModulesLength,
+    toggleDraggingToBoard,
+    toggleIsClicked,
+    updateClientPosition,
+  } = props;
+  
   return (
     <div className="sideBar" style={style}>
       {renderDependencyMessage()}
       <div className="module-container">
         <SideBarIconList
-          toggleDraggingToBoard={props.toggleDraggingToBoard}
-          toggleIsClicked={props.toggleIsClicked}
-          onBoardModulesLength={props.onBoardModulesLength}
+          onBoardModulesLength={onBoardModulesLength}
+          toggleDraggingToBoard={toggleDraggingToBoard}
+          toggleIsClicked={toggleIsClicked}
           updateClientPosition={updateClientPosition}
         />
       </div>
@@ -47,3 +56,13 @@ export default function SideBar(props) {
     </div>
   );
 }
+
+SideBar.propTypes = {
+  disabledIconExceptions: PropTypes.func,
+  iconVisibityData: PropTypes.object.isRequired,
+  onBoardModulesLength: PropTypes.number,
+  showAll: PropTypes.func.isRequired,
+  toggleDraggingToBoard: PropTypes.func.isRequired,
+  toggleIsClicked: PropTypes.func,
+  updateClientPosition: PropTypes.func.isRequired,
+};
