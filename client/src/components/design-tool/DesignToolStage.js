@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { Layer, Rect, Stage, Group } from 'react-konva';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import { Layer, Stage } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import Board from 'components/board/Board';
-import ModuleContainer from 'components/modules/Modules';
-import Grid from './DesignToolGrid';
+
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail from 'helpers/generateThumbnail';
 
-import assert from 'assert';
+import Board from 'components/board/Board';
+import ModuleContainer from 'components/modules/Modules';
+import Grid from './DesignToolGrid';
+
 
 class DesignToolStage extends Component {
   updateThumbnail() {
@@ -101,3 +103,16 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(DesignToolStage);
+
+DesignToolStage.propTypes = {
+  shouldRenderBoard: PropTypes.bool.isRequired,  
+  draggingModule: PropTypes.object.isRequired,
+  isMouseDownOnIcon: PropTypes.bool.isRequired, 
+  isMouseDown: PropTypes.bool.isRequired, 
+  isMouseOverModule: PropTypes.bool.isRequired, 
+  rotate: PropTypes.func.isRequired, 
+  hideFloatingElements: PropTypes.func.isRequired, 
+  unhideFloatingElements: PropTypes.func.isRequired, 
+  shouldHideContextMenu: PropTypes.bool.isRequired, 
+  isDraggingToBoard: PropTypes.bool.isRequired, 
+};
