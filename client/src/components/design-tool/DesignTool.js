@@ -65,7 +65,7 @@ let DesignTool = class extends Component {
     this.toggleDraggingToBoard = this.toggleDraggingToBoard.bind(this);
     this.toggleDocumentationCard = this.toggleDocumentationCard.bind(this);
     this.toggleShouldUpadateThumbnail = this.toggleShouldUpadateThumbnail.bind(this);
-
+    this.updateClientPosition = this.updateClientPosition.bind(this)
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
     this.bound_handleMouseUp = this.handleMouseUp.bind(this);
     this.bound_handleMouseMove = this.handleMouseMove.bind(this);
@@ -145,7 +145,9 @@ let DesignTool = class extends Component {
     document.onkeydown = this.keyPress;
 
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
-    window.onbeforeunload = () => {this.props.hasUnsavedChanges ? '' : null; };
+    window.onbeforeunload = () => {
+      return this.props.hasUnsavedChanges ? '' : null;
+    };
   }
 
   removeHanlders() {
@@ -159,7 +161,6 @@ let DesignTool = class extends Component {
     const { router, route, hasUnsavedChanges } = this.props;
 
     router.setRouteLeaveHook(route, () => {
-      
       if (/* true ||*/ hasUnsavedChanges) {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }
@@ -437,7 +438,7 @@ let DesignTool = class extends Component {
     return (
       <Joyride
         {...joyrideProps}
-        ref={node => this.joyride = node}
+        ref={node => (this.joyride = node)}
       />
     );
   }
@@ -451,7 +452,7 @@ let DesignTool = class extends Component {
         <SideBar
           toggleDraggingToBoard={this.toggleDraggingToBoard}
           showAll={this.showAllModuleIcons}
-          updateClientPosition={this.updateClientPosition.bind(this)}
+          updateClientPosition={this.updateClientPosition}
           iconVisibityData={iconVisibityData}
           onBoardModulesLength={currentProjectModules.length}
         />
@@ -760,14 +761,22 @@ DesignTool.propTypes = {
   currentProjectName: PropTypes.string,
   currentProjectId: PropTypes.string,
   currentProjectPrice: PropTypes.string.isRequired,
+  currentProjectModules: PropTypes.array.isRequired,
+  iconVisibityData: PropTypes.object.isRequired,
   timeLastSaved: PropTypes.string,
   draggingModuleData: PropTypes.object.isRequired,
   selectedModuleIndex: PropTypes.number,
   boardSpecs: PropTypes.object.isRequired,
   selectedModuleProps: PropTypes.object.isRequired,
   anchorPositions: PropTypes.object.isRequired,
-  hasUnsavedChanges: PropTypes.bool,
+  shouldRenderModal: PropTypes.bool.isRequired,
+  shouldRenderSideBar: PropTypes.bool.isRequired,
+  isMouseOverModule: PropTypes.bool.isRequired,
+  isTutorialActive: PropTypes.bool.isRequired,
+  tutorialStep: PropTypes.number.isRequired,
+  hasUnsavedChanges: PropTypes.bool.isRequired,
   route: PropTypes.object.isRequired,
+  joyride: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
