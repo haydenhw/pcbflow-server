@@ -1,4 +1,3 @@
-'use strict';
 
 
 // Build script from https://github.com/nodeca/mincer/tree/master/examples
@@ -8,7 +7,7 @@
 //
 
 
-var Mincer = require('mincer');
+const Mincer = require('mincer');
 
 
 //
@@ -30,7 +29,7 @@ Mincer.logger.use(console);
 //
 
 
-var environment = new Mincer.Environment(process.cwd());
+const environment = new Mincer.Environment(process.cwd());
 
 
 //
@@ -38,11 +37,11 @@ var environment = new Mincer.Environment(process.cwd());
 //
 
 // Include bootstrap scss load path
-var bootstrapPath = '../../';
-environment.appendPath(bootstrapPath + 'assets/stylesheets');
+const bootstrapPath = '../../';
+environment.appendPath(`${bootstrapPath}assets/stylesheets`);
 
 // Include fonts load path
-environment.appendPath(bootstrapPath + 'assets/fonts');
+environment.appendPath(`${bootstrapPath}assets/fonts`);
 
 // Include dir with assets, root just for test
 environment.appendPath('./');
@@ -55,13 +54,13 @@ environment.appendPath('./');
 
 
 environment.ContextClass.defineAssetPath(function (pathname, options) {
-  var asset = this.environment.findAsset(pathname, options);
+  const asset = this.environment.findAsset(pathname, options);
 
   if (!asset) {
-    throw new Error("File " + pathname + " not found");
+    throw new Error(`File ${pathname} not found`);
   }
 
-  return '/assets/' + asset.digestPath;
+  return `/assets/${asset.digestPath}`;
 });
 
 
@@ -69,19 +68,19 @@ environment.ContextClass.defineAssetPath(function (pathname, options) {
 // Create and compile Manifest
 //
 
-var manifest_path = process.argv[2] || __dirname + '/assets';
+const manifest_path = process.argv[2] || `${__dirname}/assets`;
 
-var manifest = new Mincer.Manifest(environment, manifest_path);
+const manifest = new Mincer.Manifest(environment, manifest_path);
 
 
-manifest.compile(['application.css'], function (err, assetsData) {
+manifest.compile(['application.css'], (err, assetsData) => {
   if (err) {
-    console.error("Failed compile assets: " + (err.message || err.toString()));
+    console.error(`Failed compile assets: ${err.message || err.toString()}`);
     process.exit(128);
   }
 
-  console.info('\n\nAssets were successfully compiled.\n' +
-               'Manifest data (a proper JSON) was written to:\n' +
-               manifest.path + '\n\n');
+  console.info(`${'\n\nAssets were successfully compiled.\n' +
+               'Manifest data (a proper JSON) was written to:\n'}${
+               manifest.path}\n\n`);
   console.dir(assetsData);
 });

@@ -16,7 +16,7 @@ export default function LandingPage() {
     ),
     url(${imgUrl})`,
   };
-  
+
   return (
     <div className="landing-page-body">
       <div className="landing-navbar">
@@ -47,10 +47,10 @@ export default function LandingPage() {
           </div>
           <img className="dots inline-image" src="images/dots.svg" alt="dots" />
           <img className="less-dots inline-image" src="images/less-dots.svg" alt="dots" />
-          <img className="arrows inline-image" src="images/arrows.svg" alt="arrow"/>
+          <img className="arrows inline-image" src="images/arrows.svg" alt="arrow" />
           <img className="circuit-board-image inline-image" src="images/real-pcb.jpg" alt="circuit board" />
         </section>
-        
+
         <section className="landing-page-card-section row">
           <div className="landing-page-section-heading">
             <h2>Design with ease</h2>
@@ -87,4 +87,4 @@ export default function LandingPage() {
     </div>
   );
 }
-  
+

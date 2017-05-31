@@ -20,28 +20,28 @@ function convertToUrl(json) {
 
 class ProjectList extends Component {
   static defaultProps = {
-    projects: []
+    projects: [],
   }
-  
+
   static confirmDelete(projectId, projectName) {
-    console.log(projectName)
+    console.log(projectName);
     store.dispatch(actions.confirmProjectDelete({
       projectId,
-      projectName
+      projectName,
     }));
   }
 
   componentDidMount() {
     store.dispatch(actions.fetchProjects());
   }
-  
+
   renderProjectItem(project, thumbnailSrc) {
     const { isFetching } = this.props;
-    
+
     if (isFetching) {
-      return <span key={shortid.generate()}>Loading...</span>
+      return <span key={shortid.generate()}>Loading...</span>;
     }
-    
+
     return (
       <ProjectsItem
         projectId={project._id}
@@ -52,10 +52,10 @@ class ProjectList extends Component {
 
   render() {
     const { projects, isFetching } = this.props;
-    
+
     const projectsList = projects.map((project) => {
       const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
-      
+
       return (
         <ProjectsItemFrame
           key={shortid.generate()}
@@ -63,22 +63,22 @@ class ProjectList extends Component {
           projectId={project._id}
           projectName={project.name}
           confirmDelete={ProjectList.confirmDelete}
-          >
-            {this.renderProjectItem(project, thumbnailSrc)}
-          </ProjectsItemFrame>
-        );
-      });
-      
-      return (
-        <div className="thumbnail-row">
-          <div className="row-project">
-            <div className="col-wrapper card">
-              {projectsList}
-            </div>
+        >
+          {this.renderProjectItem(project, thumbnailSrc)}
+        </ProjectsItemFrame>
+      );
+    });
+
+    return (
+      <div className="thumbnail-row">
+        <div className="row-project">
+          <div className="col-wrapper card">
+            {projectsList}
           </div>
         </div>
-      );
-    }
+      </div>
+    );
+  }
   }
 
 const mapStateToProps = state => ({

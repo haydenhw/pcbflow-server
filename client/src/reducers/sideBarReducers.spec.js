@@ -14,16 +14,16 @@ describe('iconVisibity reducer', () => {
     const expectedState = {
       mode: 'DEPENDECY',
       dependencies: [],
-    };;
-    
+    };
+
     const resultState = iconVisibity(deepFreeze(initialState), {
       type: 'UPDATE_ICON_VISBILITY',
-      mode: 'DEPENDECY'
+      mode: 'DEPENDECY',
     });
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should update dependency array', () => {
     const initialState = {
       mode: 'ALL',
@@ -34,17 +34,17 @@ describe('iconVisibity reducer', () => {
       mode: 'ALL',
       dependencies: ['101', '102'],
       index: 3,
-      moduleName: 'COM'
-    };;
-    
+      moduleName: 'COM',
+    };
+
     const resultState = iconVisibity(deepFreeze(initialState), {
       type: 'UPDATE_CURRENT_DEPENDENCIES',
       dependencyData: {
         dependencies: ['101', '102'],
         index: 3,
-        text: 'COM'
-      }
-      
+        text: 'COM',
+      },
+
     });
 
     assert.deepEqual(resultState, expectedState);
@@ -56,10 +56,10 @@ describe('shouldRenderSideBar reducer', () => {
     const initialState = false;
 
     const expectedState = true;
-    
+
     const resultState = shouldRenderSideBar(deepFreeze(initialState), {
       type: 'TOGGLE_SHOULD_RENDER_SIDEBAR',
-      bool: true
+      bool: true,
     });
 
     assert.deepEqual(resultState, expectedState);
@@ -70,46 +70,46 @@ describe('shouldRenderSideBar reducer', () => {
 describe('moduleData reducer', () => {
   it('It should toggle hasTooltip boolean ', () => {
     const initialState = [
-        {
-          height: '100px',
-          width: '100px',
-          fill: 'green',
-          hasTooltip: false,
-          id: '101'
-          
-        },
-        {
-          height: '200px',
-          width: '200px',
-          fill: 'red',
-          hasTooltip: true,
-          id: '102'
-        }
+      {
+        height: '100px',
+        width: '100px',
+        fill: 'green',
+        hasTooltip: false,
+        id: '101',
+
+      },
+      {
+        height: '200px',
+        width: '200px',
+        fill: 'red',
+        hasTooltip: true,
+        id: '102',
+      },
     ];
 
     const expectedState = [
-        {
-          height: '100px',
-          width: '100px',
-          fill: 'green',
-          hasTooltip: false,
-          id: '101'
-        },
-        {
-          height: '200px',
-          width: '200px',
-          fill: 'red',
-          hasTooltip: false,
-          id: '102'
-          
-        }
+      {
+        height: '100px',
+        width: '100px',
+        fill: 'green',
+        hasTooltip: false,
+        id: '101',
+      },
+      {
+        height: '200px',
+        width: '200px',
+        fill: 'red',
+        hasTooltip: false,
+        id: '102',
+
+      },
     ];
-    
+
     const resultState = moduleData(deepFreeze(initialState), {
       type: 'TOGGLE_HAS_TOOLTIP',
-      id: '102'
+      id: '102',
     });
-    
+
     assert.deepEqual(resultState, expectedState);
   });
 });

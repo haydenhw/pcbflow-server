@@ -53,7 +53,7 @@ export const selectedModule = (state = {}, action) => {
         height,
         index,
       } = action.rotationData;
-      
+
       return {
         ...state,
         boundToSideIndex,
@@ -112,17 +112,17 @@ export const currentProjectModules = (state = [], action) => {
           return i === index ? updatedModuleProps : module;
         });
         break;
-        
-        case actions.UPDATE_MET_DEPENDECIES:
-          return state.map((module, i) => {
-            const { metDependencies, index } = action.metDependencies;
-            const updatedModuleProps = {
-              ...module,
-              metDependencies,
-            };
-            return i === index ? updatedModuleProps : module;
-          });
-          break;
+
+      case actions.UPDATE_MET_DEPENDECIES:
+        return state.map((module, i) => {
+          const { metDependencies, index } = action.metDependencies;
+          const updatedModuleProps = {
+            ...module,
+            metDependencies,
+          };
+          return i === index ? updatedModuleProps : module;
+        });
+        break;
 
       case actions.UPDATE_MODULE_IMAGE:
         return state.map((module, i) => {
@@ -148,7 +148,7 @@ export const currentProjectModules = (state = [], action) => {
           height,
           index,
         } = action.rotationData;
-        
+
         return state.map((module, i) => {
           const updatedModuleProps = {
             ...module,

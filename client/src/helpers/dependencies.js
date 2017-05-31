@@ -1,16 +1,16 @@
-export function getUnmetDependencyIds(modules=[], selectedModuleDependencies) {
-  const onBoardIds = modules.map((module) => module.id);
-  const unmetDependencyIds = selectedModuleDependencies.filter((id) => onBoardIds.indexOf(id) === -1);
+export function getUnmetDependencyIds(modules = [], selectedModuleDependencies) {
+  const onBoardIds = modules.map(module => module.id);
+  const unmetDependencyIds = selectedModuleDependencies.filter(id => onBoardIds.indexOf(id) === -1);
 
   return unmetDependencyIds;
 }
 
 export function getUnmetDependencies(moduleList, onBoardModules, selectedModuleDependencies) {
-  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, selectedModuleDependencies)
+  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, selectedModuleDependencies);
   const unmetDependencies = (
     moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
   );
-  
+
   return unmetDependencies;
 }
 
@@ -22,13 +22,13 @@ export function getDependencyDiff(moduleArray) {
       id,
       text,
       dependencies,
-      metDependencies: []
+      metDependencies: [],
     };
   });
-  
+
   filterdArray.forEach((module) => {
     const { dependencies, metDependencies, index } = module;
-    
+
     filterdArray.forEach((otherModule) => {
       if (
         (dependencies.indexOf(otherModule.id) !== -1) &&
@@ -38,8 +38,8 @@ export function getDependencyDiff(moduleArray) {
       }
     });
   });
-  
-  return filterdArray
+
+  return filterdArray;
 }
 
 export function areDependenciesMet(dependencies, metDependencies) {
@@ -59,18 +59,18 @@ export function getNewDependencyData(modules) {
     dependencies: [],
     index: null,
     text: null,
-    moduleName: null
-  }
-  
+    moduleName: null,
+  };
+
   if (nextParentToDisplay) {
     return {
       visibilityMode: 'DEPENDENCY',
-      dependencyData: nextParentToDisplay
-    }
+      dependencyData: nextParentToDisplay,
+    };
   }
-  
+
   return {
     visibilityMode: 'ALL',
-    dependencyData: nullData
-  }
+    dependencyData: nullData,
+  };
 }

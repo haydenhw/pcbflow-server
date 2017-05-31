@@ -44,7 +44,7 @@ class DesignToolStage extends Component {
       hideFloatingElements,
       unhideFloatingElements,
       shouldHideContextMenu,
-      isDraggingToBoard
+      isDraggingToBoard,
      } = this.props;
 
     const contextMenuClass = shouldHideContextMenu ? 'hideContextMenu' : 'react-contextmenu';

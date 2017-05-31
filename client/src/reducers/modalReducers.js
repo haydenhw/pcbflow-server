@@ -3,8 +3,8 @@ import * as actions from 'actions/indexActions';
 const defaultState = {
   shouldRenderModal: false,
   modalType: 'ONBOARD',
-  modalProps: null
-}
+  modalProps: null,
+};
 
 export const modal = (state = defaultState, action) => {
   switch (action.type) {
@@ -13,25 +13,25 @@ export const modal = (state = defaultState, action) => {
     case actions.EXIT_TUTORIAL:
       return {
         ...state,
-        shouldRenderModal: !state.shouldRenderModal
+        shouldRenderModal: !state.shouldRenderModal,
       };
     case actions.CHANGE_MODAL_TYPE:
       return {
         ...state,
-        modalType: action.modalType
+        modalType: action.modalType,
       };
     case actions.UPDATE_MODAL_PROPS:
       return {
         ...state,
-        modalProps: action.modalProps
+        modalProps: action.modalProps,
       };
     case actions.CONFIRM_PROJECT_DELETE:
       return {
         shouldRenderModal: true,
         modalType: 'CONFIRM',
-        modalProps: action.modalProps
+        modalProps: action.modalProps,
       };
-    
+
     default:
       return state;
   }

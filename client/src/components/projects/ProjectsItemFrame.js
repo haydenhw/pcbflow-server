@@ -14,7 +14,6 @@ function fectchProject(projectId) {
 }
 
 export default function ProjectsItemFrame(props) {
-  
   return (
     <div className="col3-project">
       <div

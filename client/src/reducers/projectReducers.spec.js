@@ -12,12 +12,12 @@ describe('projects reducer', () => {
   it('It should return a list of projects', () => {
     const initialState = {
       isFetching: false,
-      items: []
+      items: [],
     };
 
     const expectedState = {
       isFetching: false,
-      items: [1, 2, 3]
+      items: [1, 2, 3],
     };
 
     const resultState = projects(deepFreeze(initialState), {

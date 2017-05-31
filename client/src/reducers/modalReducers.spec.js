@@ -13,13 +13,13 @@ describe('modal reducer', () => {
     const initialState = {
       shouldRenderModal: false,
       modalType: 'ONBOARD',
-      modalProps: null
+      modalProps: null,
     };
 
     const expectedState = {
       shouldRenderModal: true,
       modalType: 'ONBOARD',
-      modalProps: null
+      modalProps: null,
     };
 
     const resultState = modal(deepFreeze(initialState), {
@@ -28,12 +28,12 @@ describe('modal reducer', () => {
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should return updated modalProps', () => {
     const initialState = {
       shouldRenderModal: false,
       modalType: 'ONBOARD',
-      modalProps: null
+      modalProps: null,
     };
 
     const expectedState = {
@@ -41,26 +41,26 @@ describe('modal reducer', () => {
       modalType: 'ONBOARD',
       modalProps: {
         color: 'red',
-        text: 'hello'
-      }
+        text: 'hello',
+      },
     };
 
     const resultState = modal(deepFreeze(initialState), {
       type: 'UPDATE_MODAL_PROPS',
       modalProps: {
         color: 'red',
-        text: 'hello'
-      }
+        text: 'hello',
+      },
     });
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should update state for project delete confirmation', () => {
     const initialState = {
       shouldRenderModal: false,
       modalType: 'ONBOARD',
-      modalProps: null
+      modalProps: null,
     };
 
     const expectedState = {
@@ -68,40 +68,39 @@ describe('modal reducer', () => {
       modalType: 'CONFIRM',
       modalProps: {
         color: 'red',
-        text: 'hello'
-      }
+        text: 'hello',
+      },
     };
 
     const resultState = modal(deepFreeze(initialState), {
       type: 'CONFIRM_PROJECT_DELETE',
       modalProps: {
         color: 'red',
-        text: 'hello'
-      }
+        text: 'hello',
+      },
     });
 
     assert.deepEqual(resultState, expectedState);
   });
-  
+
   it('It should update update the modal type', () => {
     const initialState = {
       shouldRenderModal: false,
       modalType: 'ONBOARD',
-      modalProps: null
+      modalProps: null,
     };
 
     const expectedState = {
       shouldRenderModal: false,
       modalType: 'CONFIRM',
-      modalProps: null
+      modalProps: null,
     };
 
     const resultState = modal(deepFreeze(initialState), {
       type: 'CHANGE_MODAL_TYPE',
-      modalType: 'CONFIRM'
+      modalType: 'CONFIRM',
     });
 
     assert.deepEqual(resultState, expectedState);
   });
-  
 });

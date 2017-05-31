@@ -20,7 +20,7 @@ export const updateLastSavedTime = time => ({
 export const FETCH_PROJECTS_REQUEST = 'FETCH_PROJECTS_REQUEST';
 export const fetchProjectsRequest = () => ({
   type: 'FETCH_PROJECTS_REQUEST',
-  
+
 });
 
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
@@ -31,7 +31,7 @@ export const fetchProjectsSuccess = projects => ({
 
 export function fetchProjects() {
   return (dispatch) => {
-    dispatch(fetchProjectsRequest())
+    dispatch(fetchProjectsRequest());
     return fetch(projectsUrl)
     .then(res => res.json())
     .then((data) => {
@@ -45,26 +45,24 @@ export function fetchProjects() {
 
 
 export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
-export const fetchProjectByIdSuccess = (project) => {
-  return (dispatch, getState) => {
-    const { isTutorialActive } = getState().tutorial;
-    
-    if (isTutorialActive) {
-      const todoIds = ['101', '106', '107', '108', '112' ]; 
-      
-      project.modules.forEach((module) => {
-        if (todoIds.indexOf(module.id) !== -1) {
-          dispatch(actions.completeTodo(module.id))
-        }
-      });
-    }
-    
-    dispatch({
-      type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
-      project,
-    })
+export const fetchProjectByIdSuccess = project => (dispatch, getState) => {
+  const { isTutorialActive } = getState().tutorial;
+
+  if (isTutorialActive) {
+    const todoIds = ['101', '106', '107', '108', '112'];
+
+    project.modules.forEach((module) => {
+      if (todoIds.indexOf(module.id) !== -1) {
+        dispatch(actions.completeTodo(module.id));
+      }
+    });
   }
-}
+
+  dispatch({
+    type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
+    project,
+  });
+};
 
 export function fetchProjectById(projectId, currentRoute) {
   const projectUrl = `${projectsUrl}/${projectId}`;
@@ -153,9 +151,9 @@ export function deleteProject(projectId, projects) {
   const url = `${projectsUrl}/${projectId}`;
   return (dispatch) => {
     dispatch({
-      type: 'DELETE_PROJECT_REQUEST'
+      type: 'DELETE_PROJECT_REQUEST',
     });
-    
+
     fetch(
       url,
       {

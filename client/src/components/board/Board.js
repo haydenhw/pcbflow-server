@@ -73,7 +73,7 @@ class Board extends Component {
       rotate,
       hideFloatingElements,
       unhideFloatingElements,
-      isDraggingToBoard
+      isDraggingToBoard,
      }
      = this.props;
 
@@ -135,7 +135,7 @@ class Board extends Component {
             unhideFloatingElements={unhideFloatingElements}
           />
 
-          <Modules 
+          <Modules
             rotate={rotate}
             isDraggingToBoard={isDraggingToBoard}
           />

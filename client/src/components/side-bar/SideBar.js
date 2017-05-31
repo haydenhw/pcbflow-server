@@ -8,9 +8,9 @@ import SideBarDependencyMessage from './SideBarDependencyMessage';
 import './side-bar-styles/SideBar.css';
 
 export default function SideBar(props) {
-  const { showAll, updateClientPosition, disabledIconExceptions } = props
-  const { mode, moduleName, dependencies } = props.iconVisibityData
-  
+  const { showAll, updateClientPosition, disabledIconExceptions } = props;
+  const { mode, moduleName, dependencies } = props.iconVisibityData;
+
   const style = {
     height: '100% !important',
     width: '200px',
@@ -19,19 +19,19 @@ export default function SideBar(props) {
     left: '0px',
     verticalAlign: 'top',
   };
-  
+
   const renderDependencyMessage = () => {
     if ((mode === 'DEPENDENCY') && (dependencies.length > 0)) {
       return (
-        <SideBarDependencyMessage 
+        <SideBarDependencyMessage
           moduleName={moduleName}
-          showAll={showAll} 
+          showAll={showAll}
         />
       );
     }
     return null;
-  }
-  
+  };
+
   return (
     <div className="sideBar" style={style}>
       {renderDependencyMessage()}

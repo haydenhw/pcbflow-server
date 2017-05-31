@@ -50,7 +50,7 @@ class Anchor extends Component {
       bottomLeft: { x: bottomLeft.getX(), y: bottomLeft.getY() },
       bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() },
     };
-    
+
     store.dispatch(actions.updateAnchorPositions(anchorPositions));
     board.position(topLeft.position());
 

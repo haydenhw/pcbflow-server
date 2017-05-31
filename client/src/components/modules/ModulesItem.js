@@ -67,25 +67,25 @@ export default class ModulesItem extends PureComponent {
       enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
   }
-  
+
   showDependencies() {
     const { dependencies, metDependencies, text, index } = this.props;
-    
+
     if (!areDependenciesMet(dependencies, metDependencies)) {
-      const dependencyData = { 
+      const dependencyData = {
         dependencies,
         text,
         index,
-      }
-      
+      };
+
       store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
       store.dispatch(actions.updateCurrentDependencies(dependencyData));
     }
   }
-  
+
   callWithTimeout() {
-      this.highlightRuleBreakingModules();
-      
+    this.highlightRuleBreakingModules();
+
     /*  if (!this.areDependenciesMet() && this.props.iconVisibityMode === "ALL") {
         this.showDependencies();
       }*/
@@ -115,7 +115,7 @@ export default class ModulesItem extends PureComponent {
 
     store.dispatch(actions.updateBoardThumbnail(thumbnail));
   }
-  
+
   getNewPosition() {
     const { boundToSideIndex } = this.props;
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
@@ -128,21 +128,21 @@ export default class ModulesItem extends PureComponent {
 
     return newPosition;
   }
-  
+
   getFill() {
     const { metDependencies, dependencies, isDraggingToBoard, id } = this.props;
     if (id === '100') {
       return null;
     }
-    
+
     if ((metDependencies.length === dependencies.length) || (id === '110')) {
       return 'green';
     }
-    
+
     if (metDependencies.length === 0) {
       return 'red';
     }
-    
+
     return null;
   }
 
@@ -175,7 +175,7 @@ export default class ModulesItem extends PureComponent {
     this.updateThumbnail();
     this.highlightRuleBreakingModules();
   }
-  
+
   handleClick(evt) {
     if (evt.evt.which === 1) {
       this.showDependencies();
@@ -185,7 +185,7 @@ export default class ModulesItem extends PureComponent {
   handleDoubleClick() {
     this.props.rotate();
   }
-  
+
   render() {
     const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
     const image = (
@@ -267,9 +267,9 @@ export default class ModulesItem extends PureComponent {
         </Group>
       </Group>
     );
-  } 
+  }
 }
 
 ModulesItem.defaultProps = {
-  metDependencies: []
-}
+  metDependencies: [],
+};

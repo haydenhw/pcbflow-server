@@ -10,21 +10,21 @@ import Projects from './Projects';
 export class ProjectContainer extends Component {
   componentWillMount() {
     const { shouldRenderModal } = this.props;
-    
+
     if (shouldRenderModal) {
       store.dispatch(actions.toggleShouldRenderModal());
     }
   }
-  
+
   renderModal() {
     const { shouldRenderModal, modalProps } = this.props;
-    
+
     if (shouldRenderModal && modalProps) {
       const { projectId, projectName } = modalProps;
       return (
-        <Modal 
+        <Modal
           text={`Are you sure you want to delete project "${projectName}"  ?`}
-          shouldRenderLeftButton={true}
+          shouldRenderLeftButton
           rightButtonText="Delete"
           leftButtonText="Cancel"
           handleRightButtonClick={() => store.dispatch(actions.deleteProject(projectId))}
@@ -33,24 +33,23 @@ export class ProjectContainer extends Component {
         />
       );
     }
-    
+
     return null;
   }
-    
+
   render() {
-    
-    return(
+    return (
       <div>
         <Projects />
-        {this.renderModal()} 
+        {this.renderModal()}
       </div>
-    )  
+    );
   }
 }
 
 const mapStateToProps = state => ({
   shouldRenderModal: state.modal.shouldRenderModal,
-  modalProps: state.modal.modalProps
+  modalProps: state.modal.modalProps,
 });
 
 export default connect(mapStateToProps)(ProjectContainer);

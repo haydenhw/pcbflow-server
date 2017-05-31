@@ -7,29 +7,27 @@ export const pushNewModule = module => ({
   module,
 });
 
-export const pushToCurrentProjectModules = (module) => {
-  return (dispatch, getState) => {
-    const { step, isTutorialActive } = getState().tutorial;
-    
-    if (isTutorialActive) {
-      switch(step) {
-        case 4:
-        case 7:
-        case 10:
-          dispatch(actions.updateDisabledIconExceptions(null));
-          setTimeout(() => dispatch(actions.toggleShouldRenderModal()), 700)
-          break;
-        case 13:
-          dispatch(actions.completeTodo(module.id));
-          break
-        default:
-          //do nothing
-      }
+export const pushToCurrentProjectModules = module => (dispatch, getState) => {
+  const { step, isTutorialActive } = getState().tutorial;
+
+  if (isTutorialActive) {
+    switch (step) {
+      case 4:
+      case 7:
+      case 10:
+        dispatch(actions.updateDisabledIconExceptions(null));
+        setTimeout(() => dispatch(actions.toggleShouldRenderModal()), 700);
+        break;
+      case 13:
+        dispatch(actions.completeTodo(module.id));
+        break;
+      default:
+          // do nothing
     }
-  
-    dispatch(actions.pushNewModule(module));
   }
-}
+
+  dispatch(actions.pushNewModule(module));
+};
 
 export const CHANGE_DRAGGING_MODULE = 'CHANGE_DRAGGING_MODULE';
 export const changeDraggingModule = moduleData => ({

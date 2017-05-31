@@ -11,16 +11,14 @@ export const updateCurrentDependencies = dependencyData => ({
 });
 
 export const TOGGLE_SHOULD_RENDER_SIDEBAR = 'TOGGLE_SHOULD_RENDER_SIDEBAR';
-export const toggleShouldRenderSideBar = (bool) => ({
+export const toggleShouldRenderSideBar = bool => ({
   type: 'TOGGLE_SHOULD_RENDER_SIDEBAR',
-  bool
+  bool,
 });
 
 export const TOGGLE_HAS_TOOLTIP = 'TOGGLE_HAS_TOOLTIP';
-export const toggleHasTooltip = (id) => ({
+export const toggleHasTooltip = id => ({
   type: 'TOGGLE_HAS_TOOLTIP',
-  id
+  id,
 });
-
-
 

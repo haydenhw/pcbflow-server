@@ -8,7 +8,7 @@ import { projects, currentProjectInfo } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { hasUnsavedChanges } from './savedStateReducers';
-import { iconVisibity, shouldRenderSideBar ,moduleData } from './sideBarReducers';
+import { iconVisibity, shouldRenderSideBar, moduleData } from './sideBarReducers';
 import { tutorial } from './tutorialReducers';
 import { modal } from './modalReducers';
 
@@ -27,5 +27,5 @@ export default combineReducers({
   hasUnsavedChanges,
   tutorial,
   moduleData,
-  modal
+  modal,
 });

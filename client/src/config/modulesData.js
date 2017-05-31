@@ -34,7 +34,7 @@ export const modulesData = [
     info: null,
     id: '105',
     dependencies: ['109'],
-    hasTooltip: true
+    hasTooltip: true,
   },
   {
     fontSize,
@@ -62,7 +62,7 @@ export const modulesData = [
     price: 3.25,
     info: null,
     id: '112',
-    dependencies: ['105']
+    dependencies: ['105'],
   },
   {
     fontSize,
@@ -90,7 +90,7 @@ export const modulesData = [
     price: 5,
     info: null,
     id: '101',
-    dependencies: ['105']
+    dependencies: ['105'],
   },
   {
     fontSize,
@@ -118,7 +118,7 @@ export const modulesData = [
     price: 12,
     info: null,
     id: '102',
-    dependencies: ['103', '105', '111']
+    dependencies: ['103', '105', '111'],
   },
   {
     fontSize,
@@ -146,7 +146,7 @@ export const modulesData = [
     price: 2.25,
     info: null,
     id: '103',
-    dependencies: ['105', '111']
+    dependencies: ['105', '111'],
   },
   {
     fontSize,
@@ -174,7 +174,7 @@ export const modulesData = [
     price: 2.25,
     info: null,
     id: '104',
-    dependencies: ['105']
+    dependencies: ['105'],
   },
   {
     fontSize,
@@ -202,7 +202,7 @@ export const modulesData = [
     price: 13.5,
     info: null,
     id: '106',
-    dependencies: ['109']
+    dependencies: ['109'],
   },
   {
     fontSize,
@@ -230,8 +230,8 @@ export const modulesData = [
     price: 1.2,
     info: null,
     id: '107',
-    dependencies: ['105']
-    
+    dependencies: ['105'],
+
   },
   {
     fontSize,
@@ -259,8 +259,8 @@ export const modulesData = [
     price: 9.75,
     info: null,
     id: '108',
-    dependencies: ['105']
-    
+    dependencies: ['105'],
+
   },
   {
     fontSize,
@@ -289,7 +289,7 @@ export const modulesData = [
     info: null,
     id: '109',
     dependencies: ['110'],
-    hasTooltip: true
+    hasTooltip: true,
   },
   {
     fontSize,
@@ -316,7 +316,7 @@ export const modulesData = [
     price: 4.25,
     info: null,
     id: '111',
-    dependencies: ['110']
+    dependencies: ['110'],
   },
   {
     fontSize,
@@ -345,6 +345,6 @@ export const modulesData = [
     info: null,
     id: '110',
     dependencies: [],
-    hasTooltip: true
+    hasTooltip: true,
   },
 ];
