@@ -79,7 +79,7 @@ let DesignTool = class extends Component {
     },
   };
   
-  static keyPress(evt) {
+   keyPress(evt) {
     const evtobj = window.event ? event : evt;
     
     if (evtobj.keyCode === 90 && evtobj.ctrlKey) {
@@ -91,7 +91,7 @@ let DesignTool = class extends Component {
     }
   }
   
-  static calculateNewModuleCoordinates(coordinateData) {
+   calculateNewModuleCoordinates(coordinateData) {
     const cd = coordinateData;
     
     const boundToSide = getPerimeterSide(cd.boundToSideIndex) || null;
@@ -115,7 +115,7 @@ let DesignTool = class extends Component {
     }
   }
   
-  static handleNameChange(projectId, newName) {
+   handleNameChange(projectId, newName) {
     const nameObject = {
       name: newName.message,
     };
@@ -123,16 +123,16 @@ let DesignTool = class extends Component {
     store.dispatch(actions.updateProject(nameObject, projectId));
   }
   
-  static updateLastSaved() {
+   updateLastSaved() {
     const lastSaved = getTimeStamp();
     store.dispatch(actions.updateLastSavedTime(lastSaved));
   }
   
-  static recordSavedChanges() {
+   recordSavedChanges() {
     store.dispatch(actions.toggleHasUnsavedChanges());
   }
   
-  static routeToProjects() {
+   routeToProjects() {
     hashHistory.push('/projects');
   }
   
@@ -141,7 +141,7 @@ let DesignTool = class extends Component {
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
     document.body.addEventListener('mousemove', this.bound_handleMouseMove);
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
-    document.onkeydown = DesignTool.keyPress;
+    document.onkeydown = this.keyPress;
     
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
     window.onbeforeunload = () => this.props.hasUnsavedChanges ? '' : null;
@@ -186,17 +186,6 @@ let DesignTool = class extends Component {
     this.addHanlders();
   }
   
-  /*componentDidUpdate(prevProps) {
-    if (prevProps.hasUnsavedChanges === false && this.props.hasUnsavedChanges === true) {
-      window.onbeforeunload = () => true ? '' : null;
-    }
-    
-    if (prevProps.hasUnsavedChanges === true && this.props.hasUnsavedChanges === false) {
-      console.log('saved')
-      window.onbeforeunload = () => false ? '' : null;
-    }
-  }
-  */
   componentWillUnmount() {
     clearTimeout(this.timeOut);
     this.removeHanlders();
@@ -227,7 +216,7 @@ let DesignTool = class extends Component {
 
     const isNewModuleWithinBounds = checkCollision([testModule, boardSpecs]).length > 0;
 
-    const adjustedModuleCoordinates = DesignTool.calculateNewModuleCoordinates(coordinateData);
+    const adjustedModuleCoordinates = this.calculateNewModuleCoordinates(coordinateData);
 
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
     
@@ -708,11 +697,11 @@ let DesignTool = class extends Component {
         
         <TopNavbar
           projectName={currentProjectName}
-          handleNameChange={DesignTool.handleNameChange.bind(null, currentProjectId)}
-          routeToProjects={DesignTool.routeToProjects}
+          handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
+          routeToProjects={this.routeToProjects}
           updateThumbnail={this.toggleShouldUpadateThumbnail}
-          updateLastSaved={DesignTool.updateLastSaved}
-          recordSavedChanges={DesignTool.recordSavedChanges}
+          updateLastSaved={this.updateLastSaved}
+          recordSavedChanges={this.recordSavedChanges}
         />
         <div onMouseMove={this.handleMouseMove.bind(this)}>
           <div ref={node => this.stageContainer = node}>
