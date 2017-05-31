@@ -287,7 +287,7 @@ describe('currentProjectModules reducer', () => {
     ];
 
     const resultState = currentProjectModules(deepFreeze(initialState), {
-      type: 'PUSH_TO_CURRENT_PROJECT_MODULES',
+      type: 'PUSH_NEW_MODULE',
       module: {
         x: 50,
         y: 50,

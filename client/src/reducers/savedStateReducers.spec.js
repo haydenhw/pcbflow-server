@@ -10,13 +10,9 @@ import { hasUnsavedChanges } from './savedStateReducers';
 describe('hasUnsavedChanges reducer', () => {
     // Fetch Basic Info about User
   it('It should set state to true if a change is made to a project', () => {
-    const initialState = {
-      hasUnsavedChanges: false,
-    };
+    const initialState = false;
 
-    const expectedState = {
-      hasUnsavedChanges: true,
-    };
+    const expectedState = true;
 
 
     const resultState = hasUnsavedChanges(deepFreeze(initialState), {
@@ -27,13 +23,9 @@ describe('hasUnsavedChanges reducer', () => {
   });
 
   it('It should toggle state project is saved', () => {
-    const initialState = {
-      hasUnsavedChanges: true,
-    };
+    const initialState = true;
 
-    const expectedState = {
-      hasUnsavedChanges: false,
-    };
+    const expectedState = false;
 
     const resultState = hasUnsavedChanges(deepFreeze(initialState), {
       type: 'TOGGLE_HAS_UNSAVED_CHANGES',

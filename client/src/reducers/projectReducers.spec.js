@@ -10,9 +10,15 @@ import { projects, currentProjectInfo } from './projectReducers';
 describe('projects reducer', () => {
     // Fetch Basic Info about User
   it('It should return a list of projects', () => {
-    const initialState = [];
+    const initialState = {
+      isFetching: false,
+      items: []
+    };
 
-    const expectedState = [1, 2, 3];
+    const expectedState = {
+      isFetching: false,
+      items: [1, 2, 3]
+    };
 
     const resultState = projects(deepFreeze(initialState), {
       type: 'FETCH_PROJECTS_SUCCESS',
