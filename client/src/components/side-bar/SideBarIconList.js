@@ -25,26 +25,25 @@ const getVisibleIcons = (props) => {
 
 const SideBarIconList = class extends Component {
   renderSideBarIcon(module, index, isDisabled) {
-    const {
-      updateClientPosition,
-      toggleDraggingToBoard,
-      toggleIsClicked,
-    } = this.props;
+    const { toggleDraggingToBoard, toggleIsClicked, updateClientPosition } = this.props;
 
     return (
       <SideBarIcon
+        disabled={isDisabled}
         moduleData={module}
         toggleDraggingToBoard={toggleDraggingToBoard}
         toggleIsClicked={toggleIsClicked}
         updateClientPosition={updateClientPosition}
-        disabled={isDisabled}
       />
     );
   }
 
   renderSideBarIconFrame(module, index) {
     const { disabledIconExceptions } = this.props;
-    const isDisabled = disabledIconExceptions ? (disabledIconExceptions.indexOf(index) === -1) : false;
+    const isDisabled = (
+      disabledIconExceptions ? (disabledIconExceptions.indexOf(index) === -1) : false
+    );
+    
     return (
       <SideBarIconFrame
         key={index}
@@ -84,7 +83,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(SideBarIconList);
 
-SideBarIconList.PropTypes = {
+SideBarIconList.propTypes = {
   disabledIconExceptions: PropTypes.object.isRequired,
   iconVisibityMode: PropTypes.string.isRequired,
   moduleData: PropTypes.array.isRequired,
