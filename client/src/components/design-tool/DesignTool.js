@@ -672,16 +672,7 @@ let DesignTool = class extends Component {
   }
 
   render() {
-    const {
-      currentProjectName,
-      currentProjectId,
-      currentProjectPrice,
-      timeLastSaved,
-      showAllModuleIcons,
-      iconVisibityData,
-      joyride,
-      todoBools,
-    } = this.props;
+    const { currentProjectName, currentProjectId } = this.props;
 
     const {
       isDraggingToBoard,
@@ -759,9 +750,11 @@ export default connect(mapStateToProps)(DesignTool);
 
 DesignTool.propTypes = {
   currentProjectName: PropTypes.string,
+  modalType: PropTypes.string.isRequired,
   currentProjectId: PropTypes.string,
   currentProjectPrice: PropTypes.string.isRequired,
   currentProjectModules: PropTypes.array.isRequired,
+  todoBools: PropTypes.array.isRequired,
   iconVisibityData: PropTypes.object.isRequired,
   timeLastSaved: PropTypes.string,
   draggingModuleData: PropTypes.object.isRequired,
@@ -771,6 +764,7 @@ DesignTool.propTypes = {
   anchorPositions: PropTypes.object.isRequired,
   shouldRenderModal: PropTypes.bool.isRequired,
   shouldRenderSideBar: PropTypes.bool.isRequired,
+  shouldRenderTodoList: PropTypes.bool.isRequired,
   isMouseOverModule: PropTypes.bool.isRequired,
   isTutorialActive: PropTypes.bool.isRequired,
   tutorialStep: PropTypes.number.isRequired,
