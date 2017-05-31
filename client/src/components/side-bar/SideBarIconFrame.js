@@ -1,17 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import generatePriceString from 'helpers/generatePriceString';
 
 import './side-bar-styles/SideBarIconFrame.css';
 
-export default function IconFrame(props) {
+export default function SideBarIconFrame(props) {
   const fadeOut = {
     opacity: '0.3',
   };
-
+  const {
+    children,
+    disabled,
+    hasTooltip,
+    id,
+    moduleName,
+    modulePrice
+  } = props;
+  
   return (
     <div
-      className={`icon-frame-container ${props.hasTooltip ? `toolTip-${props.id}` : ''}`}
+      className={`icon-frame-container ${hasTooltip ? `toolTip-${id}` : ''}`}
       style={props.disabled ? fadeOut : {}}
     >
       <div className="icon-frame-title">
@@ -26,3 +35,12 @@ export default function IconFrame(props) {
     </div>
   );
 }
+
+SideBarIconFrame.propTypes = {
+  children: PropTypes.object.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  hasTooltip: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  moduleName: PropTypes.string.isRequired,
+  modulePrice: PropTypes.number.isRequired,
+};
