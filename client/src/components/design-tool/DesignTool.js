@@ -1,4 +1,4 @@
-im+port React, { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, hashHistory } from 'react-router';
@@ -52,13 +52,12 @@ let DesignTool = class extends Component {
       running: false,
       shouldHideContextMenu: false,
       shouldRender: false,
-      shouldRenderDocumentation: false, // should be true in production
+      shouldRenderDocumentation: false,
       shouldRenderInfoButton: true,
       shouldRenderModal: true,
       shouldUpdateThumbnail: false,
-      wasDocumentationOpen: false,  // should be true in production
+      wasDocumentationOpen: false,
     };
-
     this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleRightButtonClick = this.handleRightButtonClick.bind(this);
@@ -85,7 +84,6 @@ let DesignTool = class extends Component {
     },
   };
 
-  
   addHanlders() {
     document.body.addEventListener('mousedown', this.bound_handleMouseDown);
     document.body.addEventListener('mouseup', this.bound_handleMouseUp);
@@ -94,9 +92,7 @@ let DesignTool = class extends Component {
     document.onkeydown = this.handleKeyPress;
 
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
-    window.onbeforeunload = () => {
-      return this.props.hasUnsavedChanges ? '' : null;
-    };
+    window.onbeforeunload = () => this.props.hasUnsavedChanges ? '' : null;
   }
 
   removeHanlders() {
@@ -110,7 +106,7 @@ let DesignTool = class extends Component {
     const { router, route, hasUnsavedChanges } = this.props;
 
     router.setRouteLeaveHook(route, () => {
-      if (/* true ||*/ hasUnsavedChanges) {
+      if (hasUnsavedChanges) {
         return 'Changes you made will not be saved. Are you sure you want to leave?';
       }
       return null;
@@ -141,14 +137,13 @@ let DesignTool = class extends Component {
     clearTimeout(this.timeOut);
     this.removeHanlders();
   }
-  
+
   addTooltip(toolTipData) {
     this.joyride.addTooltip(toolTipData);
   }
-  
+
   calculateNewModuleCoordinates(coordinateData) {
     const cd = coordinateData;
-
     const boundToSide = getPerimeterSide(cd.boundToSideIndex) || null;
 
     switch (boundToSide) {
@@ -207,287 +202,6 @@ let DesignTool = class extends Component {
 
     this.timeOut = setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1);
     this.setState({ isDraggingToBoard: false });
-  }
-  
-  getDraggingModule() {
-    const { draggingModuleData } = this.props;
-    const { x, y } = this.state;
-    
-    return (
-      <Module
-        x={x - (draggingModuleData.width / 2)}
-        y={y - (draggingModuleData.height / 2)}
-        width={draggingModuleData.width}
-        height={draggingModuleData.height}
-        id={'100'}
-        imageHeight={draggingModuleData.imageHeight}
-        imageNode={draggingModuleData.imageNode}
-        imageSrc={draggingModuleData.imageSrc}
-        imageWidth={draggingModuleData.imageWidth}
-        imageX={draggingModuleData.imageX}
-        imageY={draggingModuleData.imageY}
-        stroke={draggingModuleData.stroke}
-        strokeWidth={draggingModuleData.strokeWidth}
-      />
-    );
-  }
-  
-  handleJoyrideCallback(result) {
-    const { joyride } = this.props;
-
-    if (result.type === 'step:before') {
-      // Keep internal state in sync with joyride
-      this.setState({ step: result.index });
-    }
-
-    if (result.type === 'finished') {
-      store.dispatch(actions.incrementTutorialStep());
-      store.dispatch(actions.toggleShouldRenderModal());
-      this.setState({
-        running: false,
-        joyrideStep: 0,
-        tourSteps: dependecyDemo,
-      });
-    }
-
-    if (result.type === 'error:target_not_found') {
-      this.setState({
-        step: result.action === 'back' ? result.index - 1 : result.index + 1,
-        autoStart: result.action !== 'close' && result.action !== 'esc',
-      });
-    }
-
-    if (typeof joyride.callback === 'function') {
-      joyride.callback();
-    }
-  }
-
-  
-  handleKeyPress(evt) {
-    const evtobj = window.event ? event : evt;
-
-    if (evtobj.keyCode === 90 && evtobj.ctrlKey) {
-      store.dispatch(actions.undo());
-    }
-
-    if (evtobj.keyCode === 89 && evtobj.ctrlKey) {
-      store.dispatch(actions.redo());
-    }
-  }
-
-  handleNameChange(projectId, newName) {
-    const nameObject = {
-      name: newName.message,
-    };
-
-    store.dispatch(actions.updateProject(nameObject, projectId));
-  }
-  
-  handleKeyUp(evt) {
-    const evtobj = window.event ? event : evt;
-    const { isMouseOverModule, selectedModuleIndex } = this.props;
-
-    if (isMouseOverModule && (evtobj.code === 'Delete')) {
-      store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
-    }
-  }
-
-  handleMouseMove(evt) {
-    if (this.state.isDraggingToBoard) {
-      this.updateClientPosition(evt);
-    }
-  }
-
-  handleMouseDown(evt) {
-    if (evt.which === 1) {
-      store.dispatch(actions.toggleIsMouseDown(true));
-    }
-  }
-
-  handleMouseUp(evt) {
-    if ((evt.which === 1) && !this.state.shouldHideContextMenu) {
-      this.toggleShouldHideContextMenu(true);
-    }
-
-    if ((evt.which === 3) && this.props.isMouseOverModule) {
-      this.toggleShouldHideContextMenu(false);
-    }
-
-    this.dropDraggingModule();
-    store.dispatch(actions.toggleIsMouseDown(false));
-  }
-
-  handleRightButtonClick() {
-    if (this.state.joyrideStep === 1) {
-      this.joyride.next();
-    }
-  }
-  
-  hideFloatingElements() {
-    if (!this.props.isMouseOverModule) {
-      store.dispatch(actions.updateShouldRenderTodoList(false));
-      this.setState({
-        shouldRenderDocumentation: false,
-        shouldRenderInfoButton: false,
-      });
-    }
-  }
-  
-  recordSavedChanges() {
-    store.dispatch(actions.toggleHasUnsavedChanges());
-  }
-  
-  routeToProjects() {
-    hashHistory.push('/projects');
-  }
-  
-  showAllModuleIcons() {
-    store.dispatch(actions.updateIconVisibity('ALL'));
-  }
-  
-  toggleDocumentationCard() {
-    const { shouldRenderDocumentation, wasDocumentationOpen } = this.state;
-    this.setState({
-      shouldRenderDocumentation: !shouldRenderDocumentation,
-      wasDocumentationOpen: !wasDocumentationOpen,
-      tooltipHook: null,
-    });
-  }
-
-  toggleDraggingToBoard() {
-    this.setState({ isDraggingToBoard: true });
-    store.dispatch(actions.toggleShouldRenderSideBar(false));
-  }
-
-  toggleShouldHideContextMenu(boolean) {
-    this.setState({
-      shouldHideContextMenu: boolean,
-    });
-  }
-
-  toggleShouldUpadateThumbnail() {
-    this.setState({
-      shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail,
-    });
-  }
-  
-  updateLastSaved() {
-    const lastSaved = getTimeStamp();
-    store.dispatch(actions.updateLastSavedTime(lastSaved));
-  }
-  
-  updateClientPosition(evt) {
-    const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
-    const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
-    const x = Number(evt.clientX) - stageOffsetX;
-    const y = Number(evt.clientY) - stageOffsetY;
-    
-    this.setState({
-      x,
-      y,
-    });
-  }
-  
-  updateState(url) {
-    this.setState({ image: url });
-  }
-
-  unhideFloatingElements() {
-    const { wasDocumentationOpen } = this.state;
-    const { isTutorialActive, tutorialStep } = this.props;
-
-    if (isTutorialActive && tutorialStep === 13) {
-      store.dispatch(actions.updateShouldRenderTodoList(true));
-    }
-
-    this.setState({
-      shouldRenderDocumentation: wasDocumentationOpen,
-      shouldRenderInfoButton: true,
-    });
-  }
-  
-  restartTour() {
-    store.dispatch(actions.toggleShouldRenderModal());
-    this.joyride.reset(true);
-  }
-
-  rotate() {
-    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-    const rotationData = rotate(selectedModuleProps, anchorPositions, boardSpecs);
-    store.dispatch(actions.rotateSelectedModule(rotationData));
-  }
-
-  
-  startTour() {
-    store.dispatch(actions.toggleShouldRenderModal());
-    this.setState({
-      running: true,
-      joyrideStep: 0,
-    });
-  }
-
-  renderJoyride() {
-    const { joyride } = this.props;
-
-    const joyrideProps = {
-      autoStart: true || joyride.autoStart || this.state.autoStart,
-      callback: this.handleJoyrideCallback,
-      debug: false,
-      disableOverlay: true,
-      resizeDebounce: joyride.resizeDebounce,
-      run: this.state.running,
-      scrollToFirstStep: joyride.scrollToFirstStep || true,
-      stepIndex: 0,  // joyride.stepIndex || this.state.joyrideStep,
-      steps: this.state.tourSteps,
-      type: 'continuous',
-      locale: { next: 'Next', last: 'Next', back: 'Back' },
-    };
-
-    return (
-      <Joyride
-        {...joyrideProps}
-        ref={node => (this.joyride = node)}
-      />
-    );
-  }
-
-  renderSideBar() {
-    const { iconVisibityData, currentProjectModules, shouldRenderSideBar } = this.props;
-    const { isDraggingToBoard, disabledIconExceptions } = this.state;
-
-    if (shouldRenderSideBar) {
-      return (
-        <SideBar
-          iconVisibityData={iconVisibityData}
-          onBoardModulesLength={currentProjectModules.length}
-          showAll={this.showAllModuleIcons}
-          toggleDraggingToBoard={this.toggleDraggingToBoard}
-          updateClientPosition={this.updateClientPosition}
-        />
-      );
-    }
-
-    return null;
-  }
-
-  renderInfoButton() {
-    const { shouldRenderDocumentation } = this.state;
-    const infoButtonIconClass = shouldRenderDocumentation ? 'fa-close' : 'fa-question';
-
-    const infoButtonIcon = (
-      <FontAwesome
-        className={infoButtonIconClass}
-        name={infoButtonIconClass}
-        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-      />
-    );
-
-    return (
-      <DesignToolInfoButton
-        clickHandler={this.toggleDocumentationCard}
-        icon={infoButtonIcon}
-      />
-    );
   }
 
   getOnboardModalHandlers(tutorialStep) {
@@ -586,45 +300,238 @@ let DesignTool = class extends Component {
     return Object.assign(buttonMethods, handleClose, modalClass);
   }
 
-  renderModal() {
-    const { tutorialStep, shouldRenderModal, modalType } = this.props;
-    const { tutorialSteps } = this.state;
+  handleJoyrideCallback(result) {
+    const { joyride } = this.props;
+
+    if (result.type === 'step:before') {
+      // Keep internal state in sync with joyride
+      this.setState({ step: result.index });
+    }
+
+    if (result.type === 'finished') {
+      store.dispatch(actions.incrementTutorialStep());
+      store.dispatch(actions.toggleShouldRenderModal());
+      this.setState({
+        running: false,
+        joyrideStep: 0,
+        tourSteps: dependecyDemo,
+      });
+    }
+
+    if (result.type === 'error:target_not_found') {
+      this.setState({
+        step: result.action === 'back' ? result.index - 1 : result.index + 1,
+        autoStart: result.action !== 'close' && result.action !== 'esc',
+      });
+    }
+
+    if (typeof joyride.callback === 'function') {
+      joyride.callback();
+    }
+  }
 
 
-    if (shouldRenderModal) {
-      switch (modalType) {
-        case 'ONBOARD':
-          const onboardModalMethods = this.getOnboardModalHandlers(tutorialStep);
-          const onboardModalProps = Object.assign(tutorialSteps[tutorialStep], onboardModalMethods);
+  handleKeyPress(evt) {
+    const evtobj = window.event ? event : evt;
 
-          return (
-            <Modal
-              {...onboardModalProps}
-            />
-          );
-        case 'CONFIRM':
-          const rightButtonClick = function () {
-            store.dispatch(actions.exitTutorial());
-            this.toggleDocumentationCard();
-          };
-          return (
-            <Modal
-              handleCloseButtonClick={() => store.dispatch(actions.exitTutorial())}
-              handleLeftButtonClick={() => store.dispatch(actions.resumeTutorial())}
-              handleRightButtonClick={rightButtonClick.bind(this)}
-              leftButtonText="Go Back"
-              modalClass="confirm-exit-tutorial"
-              rightButtonText="Exit"
-              shouldRenderLeftButton={true}
-              text="Are you sure you want to exit the tutorial?"
-            />
-          );
-        default:
-          throw new Error('Unexpected modal type');
-      }
+    if (evtobj.keyCode === 90 && evtobj.ctrlKey) {
+      store.dispatch(actions.undo());
+    }
+
+    if (evtobj.keyCode === 89 && evtobj.ctrlKey) {
+      store.dispatch(actions.redo());
+    }
+  }
+
+  handleNameChange(projectId, newName) {
+    const nameObject = {
+      name: newName.message,
+    };
+
+    store.dispatch(actions.updateProject(nameObject, projectId));
+  }
+
+  handleKeyUp(evt) {
+    const evtobj = window.event ? event : evt;
+    const { isMouseOverModule, selectedModuleIndex } = this.props;
+
+    if (isMouseOverModule && (evtobj.code === 'Delete')) {
+      store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
+    }
+  }
+
+  handleMouseMove(evt) {
+    if (this.state.isDraggingToBoard) {
+      this.updateClientPosition(evt);
+    }
+  }
+
+  handleMouseDown(evt) {
+    if (evt.which === 1) {
+      store.dispatch(actions.toggleIsMouseDown(true));
+    }
+  }
+
+  handleMouseUp(evt) {
+    if ((evt.which === 1) && !this.state.shouldHideContextMenu) {
+      this.toggleShouldHideContextMenu(true);
+    }
+
+    if ((evt.which === 3) && this.props.isMouseOverModule) {
+      this.toggleShouldHideContextMenu(false);
+    }
+
+    this.dropDraggingModule();
+    store.dispatch(actions.toggleIsMouseDown(false));
+  }
+
+  handleRightButtonClick() {
+    if (this.state.joyrideStep === 1) {
+      this.joyride.next();
+    }
+  }
+
+  hideFloatingElements() {
+    if (!this.props.isMouseOverModule) {
+      store.dispatch(actions.updateShouldRenderTodoList(false));
+      this.setState({
+        shouldRenderDocumentation: false,
+        shouldRenderInfoButton: false,
+      });
+    }
+  }
+
+  recordSavedChanges() {
+    store.dispatch(actions.toggleHasUnsavedChanges());
+  }
+
+  routeToProjects() {
+    hashHistory.push('/projects');
+  }
+
+  showAllModuleIcons() {
+    store.dispatch(actions.updateIconVisibity('ALL'));
+  }
+
+  toggleDocumentationCard() {
+    const { shouldRenderDocumentation, wasDocumentationOpen } = this.state;
+    this.setState({
+      shouldRenderDocumentation: !shouldRenderDocumentation,
+      wasDocumentationOpen: !wasDocumentationOpen,
+      tooltipHook: null,
+    });
+  }
+
+  toggleDraggingToBoard() {
+    this.setState({ isDraggingToBoard: true });
+    store.dispatch(actions.toggleShouldRenderSideBar(false));
+  }
+
+  toggleShouldHideContextMenu(boolean) {
+    this.setState({
+      shouldHideContextMenu: boolean,
+    });
+  }
+
+  toggleShouldUpadateThumbnail() {
+    this.setState({
+      shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail,
+    });
+  }
+
+  updateLastSaved() {
+    const lastSaved = getTimeStamp();
+    store.dispatch(actions.updateLastSavedTime(lastSaved));
+  }
+
+  updateClientPosition(evt) {
+    const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
+    const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
+    const x = Number(evt.clientX) - stageOffsetX;
+    const y = Number(evt.clientY) - stageOffsetY;
+
+    this.setState({
+      x,
+      y,
+    });
+  }
+
+  updateState(url) {
+    this.setState({ image: url });
+  }
+
+  unhideFloatingElements() {
+    const { wasDocumentationOpen } = this.state;
+    const { isTutorialActive, tutorialStep } = this.props;
+
+    if (isTutorialActive && tutorialStep === 13) {
+      store.dispatch(actions.updateShouldRenderTodoList(true));
+    }
+
+    this.setState({
+      shouldRenderDocumentation: wasDocumentationOpen,
+      shouldRenderInfoButton: true,
+    });
+  }
+
+  restartTour() {
+    store.dispatch(actions.toggleShouldRenderModal());
+    this.joyride.reset(true);
+  }
+
+  rotate() {
+    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
+    const rotationData = rotate(selectedModuleProps, anchorPositions, boardSpecs);
+    store.dispatch(actions.rotateSelectedModule(rotationData));
+  }
+
+
+  startTour() {
+    store.dispatch(actions.toggleShouldRenderModal());
+    this.setState({
+      running: true,
+      joyrideStep: 0,
+    });
+  }
+
+  renderBoardFrame() {
+    const { tutorialStep, boardSpecs } = this.props;
+
+    if (tutorialStep === 2) {
+      return (
+        <DesignToolBoardFrame
+          width={boardSpecs.width + 27}
+          height={boardSpecs.height + 27}
+          top={boardSpecs.y - 14}
+          left={boardSpecs.x - 14}
+        />
+      );
     }
 
     return null;
+  }
+
+  renderDraggingModule() {
+    const { draggingModuleData } = this.props;
+    const { x, y } = this.state;
+
+    return (
+      <Module
+        x={x - (draggingModuleData.width / 2)}
+        y={y - (draggingModuleData.height / 2)}
+        width={draggingModuleData.width}
+        height={draggingModuleData.height}
+        id={'100'}
+        imageHeight={draggingModuleData.imageHeight}
+        imageNode={draggingModuleData.imageNode}
+        imageSrc={draggingModuleData.imageSrc}
+        imageWidth={draggingModuleData.imageWidth}
+        imageX={draggingModuleData.imageX}
+        imageY={draggingModuleData.imageY}
+        stroke={draggingModuleData.stroke}
+        strokeWidth={draggingModuleData.strokeWidth}
+      />
+    );
   }
 
   renderFooter() {
@@ -642,16 +549,105 @@ let DesignTool = class extends Component {
     return null;
   }
 
-  renderBoardFrame() {
-    const { tutorialStep, boardSpecs } = this.props;
+  renderInfoButton() {
+    const { shouldRenderDocumentation } = this.state;
+    const infoButtonIconClass = shouldRenderDocumentation ? 'fa-close' : 'fa-question';
 
-    if (tutorialStep === 2) {
+    const infoButtonIcon = (
+      <FontAwesome
+        className={infoButtonIconClass}
+        name={infoButtonIconClass}
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+      />
+    );
+
+    return (
+      <DesignToolInfoButton
+        clickHandler={this.toggleDocumentationCard}
+        icon={infoButtonIcon}
+      />
+    );
+  }
+
+  renderJoyride() {
+    const { joyride } = this.props;
+
+    const joyrideProps = {
+      autoStart: true || joyride.autoStart || this.state.autoStart,
+      callback: this.handleJoyrideCallback,
+      debug: false,
+      disableOverlay: true,
+      resizeDebounce: joyride.resizeDebounce,
+      run: this.state.running,
+      scrollToFirstStep: joyride.scrollToFirstStep || true,
+      stepIndex: 0,
+      steps: this.state.tourSteps,
+      type: 'continuous',
+      locale: { next: 'Next', last: 'Next', back: 'Back' },
+    };
+
+    return (
+      <Joyride
+        {...joyrideProps}
+        ref={node => (this.joyride = node)}
+      />
+    );
+  }
+
+  renderModal() {
+    const { tutorialStep, shouldRenderModal, modalType } = this.props;
+    const { tutorialSteps } = this.state;
+
+
+    if (shouldRenderModal) {
+      switch (modalType) {
+        case 'ONBOARD':
+          const onboardModalMethods = this.getOnboardModalHandlers(tutorialStep);
+          const onboardModalProps = Object.assign(tutorialSteps[tutorialStep], onboardModalMethods);
+
+          return (
+            <Modal
+              {...onboardModalProps}
+            />
+          );
+        case 'CONFIRM':
+          let rightButtonClick = function () {
+            store.dispatch(actions.exitTutorial());
+            this.toggleDocumentationCard();
+          };
+          rightButtonClick = rightButtonClick.bind(this);
+          return (
+            <Modal
+              handleCloseButtonClick={() => store.dispatch(actions.exitTutorial())}
+              handleLeftButtonClick={() => store.dispatch(actions.resumeTutorial())}
+              handleRightButtonClick={rightButtonClick}
+              leftButtonText="Go Back"
+              modalClass="confirm-exit-tutorial"
+              rightButtonText="Exit"
+              shouldRenderLeftButton
+              text="Are you sure you want to exit the tutorial?"
+            />
+          );
+        default:
+          throw new Error('Unexpected modal type');
+      }
+    }
+
+    return null;
+  }
+
+  renderSideBar() {
+    const { iconVisibityData, currentProjectModules, shouldRenderSideBar } = this.props;
+    const { isDraggingToBoard, disabledIconExceptions } = this.state;
+
+    if (shouldRenderSideBar) {
       return (
-        <DesignToolBoardFrame
-          width={boardSpecs.width + 27}
-          height={boardSpecs.height + 27}
-          top={boardSpecs.y - 14}
-          left={boardSpecs.x - 14}
+        <SideBar
+          iconVisibityData={iconVisibityData}
+          onBoardModulesLength={currentProjectModules.length}
+          showAll={this.showAllModuleIcons}
+          toggleDraggingToBoard={this.toggleDraggingToBoard}
+          updateClientPosition={this.updateClientPosition}
         />
       );
     }
@@ -689,7 +685,7 @@ let DesignTool = class extends Component {
       shouldRenderInfoButton,
       shouldHideContextMenu,
     } = this.state;
-
+  
     return (
       <div>
         {this.renderJoyride()}
@@ -707,14 +703,14 @@ let DesignTool = class extends Component {
           <div ref={node => (this.stageContainer = node)}>
             {this.renderSideBar()}
             <DesignToolStage
-              draggingModule={this.getDraggingModule()}
+              draggingModule={this.renderDraggingModule()}
               hideFloatingElements={this.hideFloatingElements}
               isDraggingToBoard={isDraggingToBoard}
               rotate={this.rotate}
               shouldHideContextMenu={shouldHideContextMenu}
               shouldRenderBoard={currentProjectName}
               shouldUpdateThumbnail={shouldUpdateThumbnail}
-              toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail.bind(this)}
+              toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail}
               unhideFloatingElements={this.unhideFloatingElements}
               updateState={this.updateState}
             />
