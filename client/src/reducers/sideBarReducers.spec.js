@@ -66,7 +66,6 @@ describe('shouldRenderSideBar reducer', () => {
   });
 });
 
-
 describe('moduleData reducer', () => {
   it('It should toggle hasTooltip boolean ', () => {
     const initialState = [

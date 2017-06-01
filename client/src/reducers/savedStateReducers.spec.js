@@ -14,7 +14,6 @@ describe('hasUnsavedChanges reducer', () => {
 
     const expectedState = true;
 
-
     const resultState = hasUnsavedChanges(deepFreeze(initialState), {
       type: 'UPDATE_MODULE_POSITION',
     });

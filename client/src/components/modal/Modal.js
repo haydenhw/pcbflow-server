@@ -14,17 +14,14 @@ export default class Modal extends Component {
       handleDidMount();
     }
   }
-  
+
   componentDidUpdate() {
     const { handleDidUpdate } = this.props;
-    
+
     if (handleDidUpdate) {
       handleDidUpdate();
     }
   }
-
-
-
 
   renderLeftButton() {
     const { leftButtonText, handleLeftButtonClick, shouldRenderLeftButton } = this.props;

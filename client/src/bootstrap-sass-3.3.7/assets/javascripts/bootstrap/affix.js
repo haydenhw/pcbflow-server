@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-
 +(function ($) {
   // AFFIX CLASS DEFINITION
   // ======================
@@ -110,7 +109,6 @@
     }
   };
 
-
   // AFFIX PLUGIN DEFINITION
   // =======================
 
@@ -130,7 +128,6 @@
   $.fn.affix = Plugin;
   $.fn.affix.Constructor = Affix;
 
-
   // AFFIX NO CONFLICT
   // =================
 
@@ -138,7 +135,6 @@
     $.fn.affix = old;
     return this;
   };
-
 
   // AFFIX DATA-API
   // ==============

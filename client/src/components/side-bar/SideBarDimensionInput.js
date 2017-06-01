@@ -43,7 +43,6 @@ class SideBarDimensionInput extends Component {
     const width = newBoardWidth;
     const height = boardHeight;
 
-
     const anchorPositions = {
       topLeft: { x: topLeft.x, y: topLeft.y },
       topRight: { x: topLeft.x + width, y: topRight.y },
@@ -70,7 +69,6 @@ class SideBarDimensionInput extends Component {
 
     const width = boardWidth;
     const height = newBoardHeight;
-
 
     const anchorPositions = {
       topLeft: { x: topLeft.x, y: topLeft.y },

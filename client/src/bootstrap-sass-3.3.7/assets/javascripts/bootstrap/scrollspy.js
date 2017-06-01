@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-
 +(function ($) {
   // SCROLLSPY CLASS DEFINITION
   // ==========================
@@ -127,7 +126,6 @@
       .removeClass('active');
   };
 
-
   // SCROLLSPY PLUGIN DEFINITION
   // ===========================
 
@@ -147,7 +145,6 @@
   $.fn.scrollspy = Plugin;
   $.fn.scrollspy.Constructor = ScrollSpy;
 
-
   // SCROLLSPY NO CONFLICT
   // =====================
 
@@ -155,7 +152,6 @@
     $.fn.scrollspy = old;
     return this;
   };
-
 
   // SCROLLSPY DATA-API
   // ==================

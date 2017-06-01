@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-
 +(function ($) {
   // DROPDOWN CLASS DEFINITION
   // =========================
@@ -121,7 +120,6 @@
     $items.eq(index).trigger('focus');
   };
 
-
   // DROPDOWN PLUGIN DEFINITION
   // ==========================
 
@@ -140,7 +138,6 @@
   $.fn.dropdown = Plugin;
   $.fn.dropdown.Constructor = Dropdown;
 
-
   // DROPDOWN NO CONFLICT
   // ====================
 
@@ -148,7 +145,6 @@
     $.fn.dropdown = old;
     return this;
   };
-
 
   // APPLY TO STANDARD DROPDOWN ELEMENTS
   // ===================================

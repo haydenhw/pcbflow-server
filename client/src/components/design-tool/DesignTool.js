@@ -34,7 +34,6 @@ import './design-tool-styles/DesignToolDocumentationCard.css';
 import './design-tool-styles/DesignToolOnboardModal.css';
 import './design-tool-styles/joyride.css';
 
-
 let DesignTool = class extends Component {
   constructor(props) {
     super(props);
@@ -329,7 +328,6 @@ let DesignTool = class extends Component {
     }
   }
 
-
   handleKeyPress(evt) {
     const evtobj = window.event ? event : evt;
 
@@ -484,7 +482,6 @@ let DesignTool = class extends Component {
     store.dispatch(actions.rotateSelectedModule(rotationData));
   }
 
-
   startTour() {
     store.dispatch(actions.toggleShouldRenderModal());
     this.setState({
@@ -596,7 +593,6 @@ let DesignTool = class extends Component {
   renderModal() {
     const { tutorialStep, shouldRenderModal, modalType } = this.props;
     const { tutorialSteps } = this.state;
-
 
     if (shouldRenderModal) {
       switch (modalType) {

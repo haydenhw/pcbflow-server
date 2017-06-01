@@ -15,7 +15,7 @@
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
-    "no-multiple-empty-lines":  {"error", "max": 2 },
+    "no-multiple-empty-lines":  ["error",  "max": 1 ],
     "class-methods-use-this": "off",
     "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": "off",

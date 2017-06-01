@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-
 +(function ($) {
   // CAROUSEL CLASS DEFINITION
   // =========================
@@ -167,7 +166,6 @@
     return this;
   };
 
-
   // CAROUSEL PLUGIN DEFINITION
   // ==========================
 
@@ -190,7 +188,6 @@
   $.fn.carousel = Plugin;
   $.fn.carousel.Constructor = Carousel;
 
-
   // CAROUSEL NO CONFLICT
   // ====================
 
@@ -198,7 +195,6 @@
     $.fn.carousel = old;
     return this;
   };
-
 
   // CAROUSEL DATA-API
   // =================

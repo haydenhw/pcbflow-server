@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-
 +(function ($) {
   // MODAL CLASS DEFINITION
   // ======================
@@ -281,7 +280,6 @@
     return scrollbarWidth;
   };
 
-
   // MODAL PLUGIN DEFINITION
   // =======================
 
@@ -302,7 +300,6 @@
   $.fn.modal = Plugin;
   $.fn.modal.Constructor = Modal;
 
-
   // MODAL NO CONFLICT
   // =================
 
@@ -310,7 +307,6 @@
     $.fn.modal = old;
     return this;
   };
-
 
   // MODAL DATA-API
   // ==============

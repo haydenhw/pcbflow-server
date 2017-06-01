@@ -43,7 +43,6 @@ export function fetchProjects() {
   };
 }
 
-
 export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
 export const fetchProjectByIdSuccess = project => (dispatch, getState) => {
   const { isTutorialActive } = getState().tutorial;

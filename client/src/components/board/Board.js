@@ -12,7 +12,6 @@ import Modules from 'components/modules/Modules';
 import ModulesItem from 'components/modules/ModulesItem';
 import Anchor from './BoardAnchor';
 
-
 class Board extends Component {
   constructor(props) {
     super(props);

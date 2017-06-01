@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-
 +(function ($) {
   // BUTTON PUBLIC CLASS DEFINITION
   // ==============================
@@ -69,7 +68,6 @@
     }
   };
 
-
   // BUTTON PLUGIN DEFINITION
   // ========================
 
@@ -91,7 +89,6 @@
   $.fn.button = Plugin;
   $.fn.button.Constructor = Button;
 
-
   // BUTTON NO CONFLICT
   // ==================
 
@@ -99,7 +96,6 @@
     $.fn.button = old;
     return this;
   };
-
 
   // BUTTON DATA-API
   // ===============

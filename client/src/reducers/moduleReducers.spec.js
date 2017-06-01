@@ -355,7 +355,6 @@ describe('currentProjectModules reducer', () => {
     assert.deepEqual(resultState, expectedState);
   });
 
-
   it('It should delete specified module', () => {
     const initialState = [
       {

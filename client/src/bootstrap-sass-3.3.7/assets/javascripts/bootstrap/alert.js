@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-
 +(function ($) {
   // ALERT CLASS DEFINITION
   // ======================
@@ -55,7 +54,6 @@
       removeElement();
   };
 
-
   // ALERT PLUGIN DEFINITION
   // =======================
 
@@ -74,7 +72,6 @@
   $.fn.alert = Plugin;
   $.fn.alert.Constructor = Alert;
 
-
   // ALERT NO CONFLICT
   // =================
 
@@ -82,7 +79,6 @@
     $.fn.alert = old;
     return this;
   };
-
 
   // ALERT DATA-API
   // ==============

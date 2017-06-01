@@ -20,7 +20,6 @@ export const squareData = [
   },
 ];
 
-
 const module = {
   height: '50',
   width: '50',

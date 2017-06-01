@@ -1,36 +1,28 @@
 
-
 // Build script from https://github.com/nodeca/mincer/tree/master/examples
 
 //
 // Require module
 //
 
-
 const Mincer = require('mincer');
-
 
 //
 // Get Mincer environment
 //
-
 
 //
 // Configure Mincers logger, by default, all
 // messages are going to the middle of nowhere
 //
 
-
 Mincer.logger.use(console);
-
 
 //
 // Create and export environment
 //
 
-
 const environment = new Mincer.Environment(process.cwd());
-
 
 //
 // Configure environment load paths (where to find ssets)
@@ -46,12 +38,10 @@ environment.appendPath(`${bootstrapPath}assets/fonts`);
 // Include dir with assets, root just for test
 environment.appendPath('./');
 
-
 //
 // Define environment essential *_path helper that will be available in the
 // processed assets. See `assets/stylesheets/app.css.ejs` for example.
 //
-
 
 environment.ContextClass.defineAssetPath(function (pathname, options) {
   const asset = this.environment.findAsset(pathname, options);
@@ -63,7 +53,6 @@ environment.ContextClass.defineAssetPath(function (pathname, options) {
   return `/assets/${asset.digestPath}`;
 });
 
-
 //
 // Create and compile Manifest
 //
@@ -71,7 +60,6 @@ environment.ContextClass.defineAssetPath(function (pathname, options) {
 const manifest_path = process.argv[2] || `${__dirname}/assets`;
 
 const manifest = new Mincer.Manifest(environment, manifest_path);
-
 
 manifest.compile(['application.css'], (err, assetsData) => {
   if (err) {

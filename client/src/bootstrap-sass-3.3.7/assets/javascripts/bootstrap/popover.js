@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-
 +(function ($) {
   // POPOVER PUBLIC CLASS DEFINITION
   // ===============================
@@ -25,7 +24,6 @@
     content: '',
     template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
   });
-
 
   // NOTE: POPOVER EXTENDS tooltip.js
   // ================================
@@ -73,7 +71,6 @@
     return (this.$arrow = this.$arrow || this.tip().find('.arrow'));
   };
 
-
   // POPOVER PLUGIN DEFINITION
   // =========================
 
@@ -93,7 +90,6 @@
 
   $.fn.popover = Plugin;
   $.fn.popover.Constructor = Popover;
-
 
   // POPOVER NO CONFLICT
   // ===================

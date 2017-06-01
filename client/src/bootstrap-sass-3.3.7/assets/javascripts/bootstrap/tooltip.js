@@ -7,7 +7,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-
 +(function ($) {
   // TOOLTIP PUBLIC CLASS DEFINITION
   // ===============================
@@ -484,7 +483,6 @@
     });
   };
 
-
   // TOOLTIP PLUGIN DEFINITION
   // =========================
 
@@ -504,7 +502,6 @@
 
   $.fn.tooltip = Plugin;
   $.fn.tooltip.Constructor = Tooltip;
-
 
   // TOOLTIP NO CONFLICT
   // ===================

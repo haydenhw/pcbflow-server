@@ -15,7 +15,6 @@ import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
 
-
 class DesignToolStage extends Component {
   constructor() {
     super();

@@ -5,7 +5,6 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import enforceRules from 'helpers/enforceRules';
 
-
 export default class ModulesItem extends Component {
   constructor(props) {
     super(props);
