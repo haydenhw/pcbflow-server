@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Group } from 'react-konva';
+import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
-import shortid from 'shortid';
+// import Konva from 'konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-
 import generatePriceString from 'helpers/generatePriceString';
 import { getDependencyDiff, updateMetDependencies, getNewDependencyData } from 'helpers/dependencies';
+
+import ModulesItem from './ModulesItem';
 
 import {
   fontSize,
@@ -18,13 +19,7 @@ import {
   strokeWidth,
 } from 'config/moduleConfig';
 
-import ModulesItem from './ModulesItem';
-
 class Modules extends Component {
-  static defaultProps = {
-    modules: [],
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -39,90 +34,89 @@ class Modules extends Component {
       .reduce((a, b) => a + b);
       const basePrice = 15;
       const totalPriceString = generatePriceString(basePrice + modulePriceSum);
-
+      
       return totalPriceString;
     }
-
+    
     return generatePriceString(15);
   }
-
+  
   updatePrice() {
     const totalPriceString = this.calculatePrice(this.props.modules);
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
-
+  
   updateMetDependencies() {
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
-    const dispatchMetDependencies = (metDependencyData) => {
+    const dispatchMetDependencies = metDependencyData  => {
       store.dispatch(actions.updateMetDependencies(metDependencyData));
     };
-
+    
     function setDelay(metDependencyData) {
-      setTimeout(() => {
+      setTimeout(function(){
         dispatchMetDependencies(metDependencyData);
       }, 1);
     }
-
-    dependencyDiffArray.forEach((element) => {
+     
+    dependencyDiffArray.forEach(element => {
       const { metDependencies, index } = element;
-
+      
       setDelay({
         metDependencies,
-        index,
+        index
       });
     });
   }
-
-  dispatchDependencyData({ visibilityMode, dependencyData }) {
+  
+  dispatchDependencyData({visibilityMode, dependencyData}) {
     setTimeout(() => {
       store.dispatch(actions.updateIconVisibity(visibilityMode));
       store.dispatch(actions.updateCurrentDependencies(dependencyData));
       store.dispatch(actions.toggleShouldRenderSideBar(true));
     }, 5);
   }
-
+  
   updateDisplayedDependencies() {
     const { modules } = this.props;
     const newDepenencyData = getNewDependencyData(modules);
-
+    
     this.updateMetDependencies();
     this.dispatchDependencyData(newDepenencyData);
   }
-
+  
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.modules.length !== this.props.modules.length)) {
       this.updateDisplayedDependencies();
       this.updatePrice();
-
+      
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });
     }
-
-    if ((prevProps.modules.length < this.props.modules.length)) {
-
+    
+    if((prevProps.modules.length < this.props.modules.length)) {
+          
+      }
     }
-  }
-
+    
   componentDidMount() {
     const totalPriceString = this.calculatePrice(this.props.modules);
-
+    
     this.updateDisplayedDependencies();
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
-
+  
   toggleShouldCheckCollission() {
     this.setState({
       shouldCheckCollission: !this.state.shouldCheckCollission,
     });
   }
-
+  
   render() {
-    const { modules } = this.props;
-    const moduleList = modules.map((module, index) => (
+    const modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
       <ModulesItem
         ref="module"
-        key={shortid.generate()}
+        key={index}
         index={index}
         x={module.x}
         y={module.y}
@@ -162,12 +156,11 @@ class Modules extends Component {
         iconVisibityMode={this.props.iconVisibityMode}
         toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
       />
-    ),
-  );
-
+    );
+    
     return (
       <Group>
-        {moduleList}
+        {modules}
       </Group>
     );
   }
@@ -181,8 +174,11 @@ const mapStateToProps = state => ({
   anchorPositions: state.anchorPositions,
   iconVisibityMode: state.iconVisibity.mode,
   currentDependencyData: state.iconVisibity,
-  tutorialStep: state.tutorial.step,
+  tutorialStep: state.tutorial.step
 });
 
 export default connect(mapStateToProps)(Modules);
 
+Modules.defaultProps = {
+  modules: []
+}
