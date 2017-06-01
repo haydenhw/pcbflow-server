@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './footer-styles/Footer.css';
 
 export default function Footer(props) {
@@ -20,3 +22,7 @@ export default function Footer(props) {
   );
 }
 
+Footer.propTypes = {
+  price: PropTypes.number.isRequired,
+  timeLastSaved: PropTypes.number.isRequired,
+};

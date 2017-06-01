@@ -12,7 +12,7 @@ import SideBarIconFrame from './SideBarIconFrame';
 
 const getVisibleIcons = (props) => {
   const { iconVisibityMode, moduleData, onBoardModules, selectedModuleDependencies } = props;
-  
+
   switch (iconVisibityMode) {
     case 'ALL':
       return moduleData;
@@ -43,7 +43,7 @@ const SideBarIconList = class extends Component {
     const isDisabled = (
       disabledIconExceptions ? (disabledIconExceptions.indexOf(index) === -1) : false
     );
-    
+
     return (
       <SideBarIconFrame
         key={index}
@@ -60,7 +60,7 @@ const SideBarIconList = class extends Component {
 
   render() {
     const visibleIcons = getVisibleIcons(this.props);
-    
+
     const iconList = visibleIcons.map((module, index) => (
       this.renderSideBarIconFrame(module, index)
     ));

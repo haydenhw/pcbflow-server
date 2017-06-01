@@ -9,7 +9,7 @@ export default function SideBarDependencyMessage(props) {
     <div className="dependency-message">
       <p>Showing dependencies for module</p>
       <h2>{moduleName}</h2>
-      <p className="show-all" onClick={showAll} role= "link">Show all modules</p>
+      <p className="show-all" onClick={showAll} role="link">Show all modules</p>
     </div>
   );
 }

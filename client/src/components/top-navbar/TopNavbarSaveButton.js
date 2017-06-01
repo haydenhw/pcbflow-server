@@ -41,13 +41,13 @@ export function SaveButton(props) {
       },
       modules: updatedModules,
     };
-    
+
     store.dispatch(actions.updateProject(updatedProject, id));
-  }
+  };
 
   const handleClick = () => {
-    const { updateThumbnail, updateLastSaved, recordSavedChanges } = props; 
-    
+    const { updateThumbnail, updateLastSaved, recordSavedChanges } = props;
+
     const updateThenSave = new Promise((resolve) => {
       updateThumbnail();
       resolve();
@@ -59,12 +59,14 @@ export function SaveButton(props) {
 
     updateLastSaved();
     recordSavedChanges();
-  }
+  };
 
   return (
     <button className="save-button" onClick={handleClick}>
-      <FontAwesome name="fa-cloud" className="fa-cloud" />
-      <span>Save</span>
+      <div>
+        <FontAwesome name="fa-cloud" className="fa-cloud" />
+        <span>Save</span>
+      </div>
     </button>
   );
 }

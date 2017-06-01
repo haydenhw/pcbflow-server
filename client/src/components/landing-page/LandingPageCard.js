@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import './landing-page-styles/LandingPageCard.css';
 
 export default function LandingPageCard(props) {
+  const { className, content, icon, title } = props;
   return (
-    <div className={props.className}>
+    <div className={className}>
       <div className="card-icon-frame">
-        <img src={props.icon} alt="info card icon" />
+        <img src={icon} alt="info card icon" />
       </div>
-      <h1 className>{props.title}</h1>
-      <p className>{props.content}</p>
+      <h1 className>{title}</h1>
+      <p className>{content}</p>
     </div>
   );
 }

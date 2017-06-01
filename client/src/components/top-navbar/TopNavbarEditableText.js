@@ -10,7 +10,7 @@ export default class TopNavbarEditableText extends React.Component {
     this.state = {
       message: 'Click to Edit',
     };
-    
+
     this.dataChanged = this.dataChanged.bind(this);
   }
 
@@ -25,7 +25,7 @@ export default class TopNavbarEditableText extends React.Component {
 
   render() {
     const { text } = this.props;
-    
+
     return (<div>
       <InlineEdit
         validate={this.customValidateText}
@@ -49,4 +49,4 @@ export default class TopNavbarEditableText extends React.Component {
 
 TopNavbarEditableText.propTypes = {
   text: PropTypes.string,
-}
+};

@@ -7,8 +7,9 @@ import './Modal.css';
 export default class DesignToolOnboardModal extends Component {
 
   componentDidUpdate() {
-    if (this.props.handleDidUpdate) {
-      this.props.handleDidUpdate();
+    const handleDidUpdate = this.props; 
+    if (handleDidUpdate) {
+      handleDidUpdate();
     }
   }
 

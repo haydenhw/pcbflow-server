@@ -11,7 +11,7 @@ export default class SideBarIcon extends Component {
     super();
     this.handleMouseDown = this.handleMouseDown.bind(this);
   }
-  
+
   handleMouseDown(evt) {
     if (evt.nativeEvent.which === 1) {
       const { moduleData } = this.props;
@@ -24,7 +24,7 @@ export default class SideBarIcon extends Component {
       store.dispatch(actions.changeDraggingModule(moduleData));
     }
   }
-  
+
   handleMouseOut() {
     store.dispatch(actions.mouseDownOnIcon(false));
   }

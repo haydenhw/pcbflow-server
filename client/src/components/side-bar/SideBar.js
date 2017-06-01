@@ -8,7 +8,6 @@ import SideBarDependencyMessage from './SideBarDependencyMessage';
 import './side-bar-styles/SideBar.css';
 
 export default function SideBar(props) {
-
   const style = {
     height: '100% !important',
     width: '200px',
@@ -21,7 +20,7 @@ export default function SideBar(props) {
   const renderDependencyMessage = () => {
     const { showAll, iconVisibityData } = props;
     const { mode, moduleName, dependencies } = iconVisibityData;
-    
+
     if ((mode === 'DEPENDENCY') && (dependencies.length > 0)) {
       return (
         <SideBarDependencyMessage
@@ -32,15 +31,15 @@ export default function SideBar(props) {
     }
     return null;
   };
-  
-  const { 
+
+  const {
     disabledIconExceptions,
     onBoardModulesLength,
     toggleDraggingToBoard,
     toggleIsClicked,
     updateClientPosition,
   } = props;
-  
+
   return (
     <div className="sideBar" style={style}>
       {renderDependencyMessage()}

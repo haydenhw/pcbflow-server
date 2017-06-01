@@ -15,9 +15,9 @@ export default function SideBarIconFrame(props) {
     hasTooltip,
     id,
     moduleName,
-    modulePrice
+    modulePrice,
   } = props;
-  
+
   return (
     <div
       className={`icon-frame-container ${hasTooltip ? `toolTip-${id}` : ''}`}

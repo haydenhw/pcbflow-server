@@ -13,15 +13,15 @@ const titleStyle = {
 };
 
 export default function TopNavbar(props) {
-  const { 
+  const {
     handleNameChange,
     projectName,
     recordSavedChanges,
     routeToProjects,
     updateLastSaved,
     updateThumbnail,
-  } = props; 
-  
+  } = props;
+
   return (
     <div className="navWide">
       <div className="iconWrapper" onClick={routeToProjects}>
@@ -51,4 +51,4 @@ TopNavbar.propTypes = {
   routeToProjects: PropTypes.func.isRequired,
   updateLastSaved: PropTypes.func.isRequired,
   updateThumbnail: PropTypes.func.isRequired,
-}
+};
