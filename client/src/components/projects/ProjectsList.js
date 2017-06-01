@@ -15,32 +15,37 @@ import './projects-styles/floatGrid.css';
 import './projects-styles/ProjectsItemFrame.css';
 
 function convertToUrl(json) {
-  return Konva.Node.create(json).toDataURL();
+  if (json) {
+    return Konva.Node.create(json).toDataURL();
+  }
+  
+  return null;
 }
 
 class ProjectList extends Component {
   static defaultProps = {
-    projects: [],
+    projects: []
   }
-
+  
   static confirmDelete(projectId, projectName) {
+    console.log(projectName)
     store.dispatch(actions.confirmProjectDelete({
       projectId,
-      projectName,
+      projectName
     }));
   }
 
   componentDidMount() {
     store.dispatch(actions.fetchProjects());
   }
-
-  renderProjectItem(project, thumbnailSrc) {
+  
+  renderProjectItem(project) {
     const { isFetching } = this.props;
-
+    
     if (isFetching) {
-      return <span key={shortid.generate()}>Loading...</span>;
+      return <span key={shortid.generate()}>Loading...</span>
     }
-
+    
     return (
       <ProjectsItem
         projectId={project._id}
@@ -51,10 +56,10 @@ class ProjectList extends Component {
 
   render() {
     const { projects, isFetching } = this.props;
-
+  
     const projectsList = projects.map((project) => {
       const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
-
+      // const thumbnailSrc = 'images/arrows.png'
       return (
         <ProjectsItemFrame
           key={shortid.generate()}
@@ -62,22 +67,22 @@ class ProjectList extends Component {
           projectId={project._id}
           projectName={project.name}
           confirmDelete={ProjectList.confirmDelete}
-        >
-          {this.renderProjectItem(project, thumbnailSrc)}
-        </ProjectsItemFrame>
-      );
-    });
-
-    return (
-      <div className="thumbnail-row">
-        <div className="row-project">
-          <div className="col-wrapper card">
-            {projectsList}
+          >
+            {this.renderProjectItem(project)}
+          </ProjectsItemFrame>
+        );
+      });
+      
+      return (
+        <div className="thumbnail-row">
+          <div className="row-project">
+            <div className="col-wrapper card">
+              {projectsList}
+            </div>
           </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
   }
 
 const mapStateToProps = state => ({

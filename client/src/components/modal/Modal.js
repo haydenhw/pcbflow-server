@@ -136,10 +136,10 @@ Modal.propTypes = {
   leftButtonText: PropTypes.string.isRequired,
   list1: PropTypes.array,
   list2: PropTypes.array,
-  modalClass: PropTypes.string.isRequired,
+  modalClass: PropTypes.string,
   rightButtonClass: PropTypes.string,
   rightButtonText: PropTypes.string.isRequired,
   shouldRenderLeftButton: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
