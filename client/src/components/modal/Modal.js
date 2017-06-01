@@ -5,16 +5,7 @@ import shortid from 'shortid';
 import RootModal from './RootModal';
 import './Modal.css';
 
-
 export default class Modal extends Component {
-
-  componentDidUpdate() {
-    const { handleDidUpdate } = this.props;
-
-    if (handleDidUpdate) {
-      handleDidUpdate();
-    }
-  }
 
   componentDidMount() {
     const { handleDidMount } = this.props;
@@ -23,6 +14,17 @@ export default class Modal extends Component {
       handleDidMount();
     }
   }
+  
+  componentDidUpdate() {
+    const { handleDidUpdate } = this.props;
+    
+    if (handleDidUpdate) {
+      handleDidUpdate();
+    }
+  }
+
+
+
 
   renderLeftButton() {
     const { leftButtonText, handleLeftButtonClick, shouldRenderLeftButton } = this.props;
