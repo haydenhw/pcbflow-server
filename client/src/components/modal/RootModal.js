@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
@@ -12,7 +13,7 @@ export default class RootModal extends Component {
     document.body.appendChild(this.modalTarget);
     this._render();
   }
-  // Will update if using redux
+  // componentWillUpdate if using redux
   componentDidUpdate() {
     this._render();
   }
@@ -23,9 +24,11 @@ export default class RootModal extends Component {
   }
 
   _render() {
+    const { children } = this.props;
+    
     ReactDOM.render(
       <Provider store={store}>
-        <div>{this.props.children}</div>
+        <div>{children}</div>
       </Provider>,
       this.modalTarget,
     );
@@ -34,4 +37,8 @@ export default class RootModal extends Component {
   render() {
     return <noscript />;
   }
+}
+
+RootModal.propTypes = {
+  children: PropTypes.object.isRequired, 
 }

@@ -38,7 +38,7 @@ export function fetchProjects() {
       dispatch(fetchProjectsSuccess(data));
     })
     .catch((err) => {
-      throw new Error(err);
+      console.error(err);
     });
   };
 }

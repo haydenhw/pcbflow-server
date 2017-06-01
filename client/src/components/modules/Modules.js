@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Layer, Rect, Stage, Group } from 'react-konva';
+import { Group } from 'react-konva';
 import { connect } from 'react-redux';
-import Konva from 'konva';
+import shortid from 'shortid';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import generatePriceString from 'helpers/generatePriceString';
 import { getDependencyDiff, updateMetDependencies, getNewDependencyData } from 'helpers/dependencies';
-
-import ModulesItem from './ModulesItem';
 
 import {
   fontSize,
@@ -19,14 +18,20 @@ import {
   strokeWidth,
 } from 'config/moduleConfig';
 
+import ModulesItem from './ModulesItem';
+
 class Modules extends Component {
+  static defaultProps = {
+    modules: [],
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       shouldCheckCollission: false,
     };
   }
-
+  
   calculatePrice(modules) {
     if (modules && modules.length > 0) {
       const modulePriceSum = this.props.modules
@@ -113,10 +118,11 @@ class Modules extends Component {
   }
 
   render() {
-    const modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
+    const { modules } = this.props;
+    const moduleList = modules.map((module, index) => (
       <ModulesItem
         ref="module"
-        key={index}
+        key={shortid.generate()}
         index={index}
         x={module.x}
         y={module.y}
@@ -155,12 +161,13 @@ class Modules extends Component {
         shouldCheckCollission={this.state.shouldCheckCollission}
         iconVisibityMode={this.props.iconVisibityMode}
         toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
-      />,
-    );
+      />
+    ),
+  );
 
     return (
       <Group>
-        {modules}
+        {moduleList}
       </Group>
     );
   }
@@ -179,6 +186,3 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(Modules);
 
-Modules.defaultProps = {
-  modules: [],
-};

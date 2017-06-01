@@ -24,7 +24,6 @@ class ProjectList extends Component {
   }
 
   static confirmDelete(projectId, projectName) {
-    console.log(projectName);
     store.dispatch(actions.confirmProjectDelete({
       projectId,
       projectName,
