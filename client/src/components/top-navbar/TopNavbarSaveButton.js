@@ -8,16 +8,16 @@ import './top-navbar-styles/TopNavbarSaveButton.css';
 export class SaveButton extends Component {
   saveProject() {
     const {
-      width,
-      height,
       x,
       y,
+      width,
+      height,
+      id,
+      modules,
+      projectName,
       thumbnail,
       topLeftAnchorX,
       topLeftAnchorY,
-      modules,
-      projectName,
-      id,
     } = this.props;
 
     const updatedModules = modules.map((module) => {
@@ -48,7 +48,7 @@ export class SaveButton extends Component {
       },
     })
     .catch((err) => {
-      console.error(err);
+      throw new Error(err);
     });
   }
 

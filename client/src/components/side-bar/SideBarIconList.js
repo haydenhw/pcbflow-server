@@ -84,12 +84,12 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(SideBarIconList);
 
 SideBarIconList.propTypes = {
-  disabledIconExceptions: PropTypes.object.isRequired,
+  disabledIconExceptions: PropTypes.object,
   iconVisibityMode: PropTypes.string.isRequired,
   moduleData: PropTypes.array.isRequired,
   onBoardModules: PropTypes.array.isRequired,
   selectedModuleDependencies: PropTypes.array.isRequired,
   toggleDraggingToBoard: PropTypes.func.isRequired,
-  toggleIsClicked: PropTypes.func.isRequired,
+  toggleIsClicked: PropTypes.func,
   updateClientPosition: PropTypes.func.isRequired,
 };
