@@ -38,7 +38,7 @@ export function fetchProjects() {
       dispatch(fetchProjectsSuccess(data));
     })
     .catch((err) => {
-      console.error(err);
+      throw new Error(err);
     });
   };
 }
@@ -135,7 +135,7 @@ export function updateProject(data, projectId) {
         dispatch(updateProjectSuccess(data));
       })
       .catch((err) => {
-        console.error(err);
+        throw new Error(err);
       });
   };
 }

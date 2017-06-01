@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
+import PropTypes from 'prop-types';
+
+import store from 'reduxFiles/store';
+import * as actions from 'actions/indexActions';
 
 import { projectsUrl } from 'config/endpointUrls';
 import './top-navbar-styles/TopNavbarSaveButton.css';
 
-export class SaveButton extends Component {
-  saveProject() {
+export function SaveButton(props) {
+  const saveProject = () => {
     const {
       x,
       y,
@@ -18,7 +22,7 @@ export class SaveButton extends Component {
       thumbnail,
       topLeftAnchorX,
       topLeftAnchorY,
-    } = this.props;
+    } = props;
 
     const updatedModules = modules.map((module) => {
       const x = module.x - topLeftAnchorX;
@@ -37,60 +41,62 @@ export class SaveButton extends Component {
       },
       modules: updatedModules,
     };
-
-    const url = `${projectsUrl}/${id}`;
-    fetch(url, {
-      method: 'put',
-      body: JSON.stringify(updatedProject),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-    .catch((err) => {
-      throw new Error(err);
-    });
+    
+    store.dispatch(actions.updateProject(updatedProject, id));
   }
 
-  handleClick() {
-    const updateThenSave = new Promise((resolve, reject) => {
-      this.props.updateThumbnail();
+  const handleClick = () => {
+    const { updateThumbnail, updateLastSaved, recordSavedChanges } = props; 
+    
+    const updateThenSave = new Promise((resolve) => {
+      updateThumbnail();
       resolve();
     });
 
     updateThenSave.then(() => {
-      this.saveProject();
+      saveProject();
     });
 
-    this.props.updateLastSaved();
-    this.props.recordSavedChanges();
+    updateLastSaved();
+    recordSavedChanges();
   }
 
-  render() {
-    const style = {
-      marginBottom: '13px',
-    };
-    return (
-      <button className="save-button" style={style} onClick={this.handleClick.bind(this)}>
-        <FontAwesome name="fa-cloud" className="fa-cloud" />
-        <span>Save</span>
-      </button>
-    );
-  }
+  return (
+    <button className="save-button" onClick={handleClick}>
+      <FontAwesome name="fa-cloud" className="fa-cloud" />
+      <span>Save</span>
+    </button>
+  );
 }
 
 const mapStateToProps = state => ({
-  width: state.boardSpecs.width,
-  height: state.boardSpecs.height,
   x: state.boardSpecs.x,
   y: state.boardSpecs.y,
-  thumbnail: state.boardSpecs.thumbnail,
-  topLeftAnchorX: state.anchorPositions.topLeft.x,
-  topLeftAnchorY: state.anchorPositions.topLeft.y,
+  width: state.boardSpecs.width,
+  height: state.boardSpecs.height,
+  id: state.currentProjectInfo.id,
   modules: state.currentProjectModules.present,
   projectName: state.currentProjectInfo.name,
-  id: state.currentProjectInfo.id,
   projects: state.projects.items,
+  thumbnail: state.boardSpecs.string,
+  topLeftAnchorX: state.anchorPositions.topLeft.x,
+  topLeftAnchorY: state.anchorPositions.topLeft.y,
 });
 
 export default connect(mapStateToProps)(SaveButton);
+
+SaveButton.propTypes = {
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  id: PropTypes.string,
+  modules: PropTypes.array.isRequired,
+  projectName: PropTypes.string,
+  projects: PropTypes.array.isRequired,
+  recordSavedChanges: PropTypes.func.isRequired,
+  thumbnail: PropTypes.object,
+  topLeftAnchorX: PropTypes.number,
+  topLeftAnchorY: PropTypes.number,
+  updateThumbnail: PropTypes.func.isRequired,
+};
