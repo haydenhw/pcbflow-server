@@ -1,15 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import InlineEdit from 'react-edit-inline';
 
 import './top-navbar-styles/TopNavbarEditableText.css';
 
 export default class TopNavbarEditableText extends React.Component {
-  constructor(props) {
-    super(props);
-    this.dataChanged = this.dataChanged.bind(this);
+  constructor() {
+    super();
     this.state = {
       message: 'Click to Edit',
     };
+    
+    this.dataChanged = this.dataChanged.bind(this);
   }
 
   dataChanged(data) {
@@ -22,12 +24,14 @@ export default class TopNavbarEditableText extends React.Component {
   }
 
   render() {
+    const { text } = this.props;
+    
     return (<div>
       <InlineEdit
         validate={this.customValidateText}
         className="editable-project-title"
         activeClassName="editing"
-        text={this.props.text || ''}
+        text={text || ''}
         paramName="message"
         change={this.dataChanged}
         style={{
@@ -41,4 +45,8 @@ export default class TopNavbarEditableText extends React.Component {
       />
     </div>);
   }
+}
+
+TopNavbarEditableText.propTypes = {
+  text: PropTypes.string,
 }

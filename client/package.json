@@ -65,6 +65,7 @@
     "react": "^15.4.2",
     "react-contextmenu": "^2.5.1",
     "react-dom": "^15.4.2",
+    "react-edit-inline": "^1.0.8",
     "react-fontawesome": "^1.6.1",
     "react-interactjs": "^0.1.2",
     "react-joyride": "^1.10.1",
