@@ -23,6 +23,6 @@ export default function Footer(props) {
 }
 
 Footer.propTypes = {
-  price: PropTypes.number.isRequired,
-  timeLastSaved: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
+  timeLastSaved: PropTypes.number,
 };

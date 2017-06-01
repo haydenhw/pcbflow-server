@@ -1,40 +1,38 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import RootModal from './RootModal';
 import './Modal.css';
 
 
-export default class DesignToolOnboardModal extends Component {
+export default class Modal extends Component {
 
   componentDidUpdate() {
-    const handleDidUpdate = this.props; 
+    const { handleDidUpdate } = this.props;
+    
     if (handleDidUpdate) {
       handleDidUpdate();
     }
   }
 
   componentDidMount() {
-    if (this.props.handleDidMount) {
-      this.props.handleDidMount();
+    const { handleDidMount } = this.props;
+    
+    if (handleDidMount) {
+      handleDidMount();
     }
   }
 
-  handleCloseButtonClick() {
-    this.props.handleCloseButtonClick();
-  }
-
-  handleRightButtonClick() {
-    this.props.handleRightButtonClick();
-  }
-
   renderLeftButton() {
-    if (this.props.shouldRenderLeftButton) {
+    const { leftButtonText, shouldRenderLeftButton } = this.props;
+    
+    if (shouldRenderLeftButton) {
       return (
         <button
           className="modal-button-left modal-button"
           onClick={() => this.props.handleLeftButtonClick()}
         >
-          {this.props.leftButtonText}
+          {leftButtonText}
         </button>
       );
     }
@@ -43,12 +41,15 @@ export default class DesignToolOnboardModal extends Component {
   }
 
   renderImage() {
-    if (this.props.image) {
+    const { image } = this.props;
+    
+    if (image) {
+      const { alt, src } = image; 
       return (
         <img
-          className={`modal-image ${this.props.image.class}`}
-          src={this.props.image.src}
-          alt={this.props.image.alt}
+          className={`modal-image ${image.class}`}
+          src={src}
+          alt={alt}
         />
       );
     }
@@ -83,19 +84,28 @@ export default class DesignToolOnboardModal extends Component {
 
     return null;
   }
-
+  
   render() {
-    const rightButtonClass = `modal-button ${this.props.rightButtonClass}`;
+    const { 
+      handleCloseButtonClick,
+      handleRightButtonClick,
+      modalClass,
+      rightButtonText,
+      text, 
+      title,
+    } = this.props; 
+    
+    const rightButtonClass = `modal-button ${rightButtonClass}`;
     return (
       <RootModal>
-        <div className={`modal-content ${this.props.modalClass}`}>
-          <span className="modal-close" onClick={this.handleCloseButtonClick.bind(this)}>&times;</span>
+        <div className={`modal-content ${modalClass}`}>
+          <span className="modal-close" onClick={handleCloseButtonClick}>&times;</span>
           <div className="modal-scroll-wrapper">
-            <h2 className="modal-title">{this.props.title}</h2>
+            <h2 className="modal-title">{title}</h2>
             {this.renderImage()}
             <div className="modal-text-parent">
               <div className="modal-text-child">
-                {this.props.text.split('\n').map((line, index) => <p key={index}>{line}</p>)}
+                {text.split('\n').map((line, index) => <p key={index}>{line}</p>)}
               </div>
             </div>
             {this.renderList()}
@@ -104,13 +114,29 @@ export default class DesignToolOnboardModal extends Component {
             {this.renderLeftButton()}
             <button
               className={`modal-button-right modal-button ${rightButtonClass}`}
-              onClick={this.handleRightButtonClick.bind(this)}
+              onClick={handleRightButtonClick}
             >
-              {this.props.rightButtonText}
+              {rightButtonText}
             </button>
           </div>
         </div>
       </RootModal>
     );
   }
-  }
+}
+
+Modal.propTypes = {
+  handleCloseButtonClick: PropTypes.func.isRequired,
+  handleDidMount: PropTypes.func,
+  handleDidUpdate: PropTypes.func,
+  handleRightButtonClick: PropTypes.func.isRequired,
+  image: PropTypes.object,
+  leftButtonText: PropTypes.string.isRequired,
+  list1: PropTypes.array,
+  list2: PropTypes.array,
+  modalClass: PropTypes.string.isRequired,
+  rightButtonText: PropTypes.string.isRequired,
+  shouldRenderLeftButton: PropTypes.bool.isRequired,
+  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
