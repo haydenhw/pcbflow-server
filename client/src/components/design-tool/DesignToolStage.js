@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
-import jsPDF from 'jspdf';
+// import jsPDF from 'jspdf';
 import { Layer, Stage } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
@@ -10,7 +10,7 @@ import store from 'reduxFiles/store';
 
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
-import generateThumbnail from 'helpers/generateThumbnail';
+import generateThumbnail, { getScaledStage } from 'helpers/generateThumbnail';
 
 import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
@@ -22,10 +22,6 @@ class DesignToolStage extends Component {
     this.deleteModule = this.deleteModule.bind(this);
   }
   
-  hello() {
-    console.log('hola mundo')
-  }
-
   updateThumbnail() {
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
@@ -34,7 +30,13 @@ class DesignToolStage extends Component {
   }
   
   downloadePDF() {
-    
+    //pdf is 
+    const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
+    const imageData = getScaledStage(boardLayer).toDataURL("image/jpeg", 1.0)
+    const pdf = new jsPDF("landscape");
+
+    pdf.addImage(imageData, 'JPEG', 0, 50);
+    pdf.save('test.pdf');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,6 +46,7 @@ class DesignToolStage extends Component {
     }
     
     if (nextProps.shouldExportPDF && !this.props.shouldExportPDF) {
+      this.downloadePDF()
       this.props.toggleShouldExportPDF();
     }
   }

@@ -422,7 +422,6 @@ let DesignTool = class extends Component {
       wasDocumentationOpen: !wasDocumentationOpen,
       tooltipHook: null,
     });
-    console.log(this.child.getWrappedInstance());
   }
 
   toggleDraggingToBoard() {
@@ -714,7 +713,6 @@ let DesignTool = class extends Component {
           <div ref={node => (this.stageContainer = node)}>
             {this.renderSideBar()}
             <DesignToolStage
-              ref={instance => { this.child = instance; }}
               draggingModule={this.renderDraggingModule()}
               hideFloatingElements={this.hideFloatingElements}
               isDraggingToBoard={isDraggingToBoard}

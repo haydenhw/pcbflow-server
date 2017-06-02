@@ -24,5 +24,5 @@ export default function Footer(props) {
 
 Footer.propTypes = {
   price: PropTypes.string.isRequired,
-  timeLastSaved: PropTypes.number,
+  timeLastSaved: PropTypes.string,
 };
