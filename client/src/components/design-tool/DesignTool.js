@@ -36,7 +36,6 @@ import './design-tool-styles/joyride.css';
 
 import { devMode } from 'config/devMode';
 
-
 let DesignTool = class extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +50,7 @@ let DesignTool = class extends Component {
       isSideBarHidden: false,
       joyrideStep: 0,
       running: false,
+      shouldExportPDF:false,
       shouldHideContextMenu: false,
       shouldRender: false,
       shouldRenderDocumentation: false,
@@ -302,7 +302,7 @@ let DesignTool = class extends Component {
     const modalClass = { modalClass: `modal-step-${this.props.tutorialStep}` };
     return Object.assign(buttonMethods, handleClose, modalClass);
   }
-
+  
   handleJoyrideCallback(result) {
     const { joyride } = this.props;
 
@@ -422,11 +422,19 @@ let DesignTool = class extends Component {
       wasDocumentationOpen: !wasDocumentationOpen,
       tooltipHook: null,
     });
+    console.log(this.child.getWrappedInstance());
   }
 
   toggleDraggingToBoard() {
     this.setState({ isDraggingToBoard: true });
     store.dispatch(actions.toggleShouldRenderSideBar(false));
+  }
+  
+  toggleShouldExportPDF() {
+    const { shouldExportPDF } = this.state;
+    this.setState({
+      shouldExportPDF: !shouldExportPDF
+    });
   }
 
   toggleShouldHideContextMenu(boolean) {
@@ -680,6 +688,7 @@ let DesignTool = class extends Component {
 
     const {
       isDraggingToBoard,
+      shouldExportPDF, 
       shouldUpdateThumbnail,
       shouldRenderDocumentation,
       shouldRenderInfoButton,
@@ -692,24 +701,29 @@ let DesignTool = class extends Component {
         {this.renderBoardFrame()}
 
         <TopNavbar
+          handleExportButtonClick={this.toggleShouldExportPDF.bind(this)}
           handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
           projectName={currentProjectName}
           recordSavedChanges={this.recordSavedChanges}
           routeToProjects={this.routeToProjects}
           updateLastSaved={this.updateLastSaved}
           updateThumbnail={this.toggleShouldUpadateThumbnail}
+          
         />
         <div onMouseMove={this.handleMouseMove}>
           <div ref={node => (this.stageContainer = node)}>
             {this.renderSideBar()}
             <DesignToolStage
+              ref={instance => { this.child = instance; }}
               draggingModule={this.renderDraggingModule()}
               hideFloatingElements={this.hideFloatingElements}
               isDraggingToBoard={isDraggingToBoard}
               rotate={this.rotate}
+              shouldExportPDF={shouldExportPDF}
               shouldHideContextMenu={shouldHideContextMenu}
               shouldRenderBoard={Boolean(currentProjectName)}
               shouldUpdateThumbnail={shouldUpdateThumbnail}
+              toggleShouldExportPDF={this.toggleShouldExportPDF.bind(this)}
               toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail}
               unhideFloatingElements={this.unhideFloatingElements}
               updateState={this.updateState}

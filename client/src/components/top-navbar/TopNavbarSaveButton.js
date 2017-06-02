@@ -7,7 +7,7 @@ import store from 'reduxFiles/store';
 import * as actions from 'actions/indexActions';
 
 import { projectsUrl } from 'config/endpointUrls';
-import './top-navbar-styles/TopNavbarSaveButton.css';
+import './top-navbar-styles/TopNavbarButtons.css';
 
 export function SaveButton(props) {
   const saveProject = () => {
@@ -62,7 +62,7 @@ export function SaveButton(props) {
   };
 
   return (
-    <button className="save-button" onClick={handleClick}>
+    <button className="nav-button save-button" onClick={handleClick}>
       <div>
         <FontAwesome name="fa-cloud" className="fa-cloud" />
         <span>Save</span>

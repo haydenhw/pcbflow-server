@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import jsPDF from 'jspdf';
 import { Layer, Stage } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
@@ -20,6 +21,10 @@ class DesignToolStage extends Component {
     super();
     this.deleteModule = this.deleteModule.bind(this);
   }
+  
+  hello() {
+    console.log('hola mundo')
+  }
 
   updateThumbnail() {
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
@@ -27,11 +32,19 @@ class DesignToolStage extends Component {
 
     store.dispatch(actions.updateBoardThumbnail(thumbnail));
   }
+  
+  downloadePDF() {
+    
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
       this.updateThumbnail();
       this.props.toggleShouldUpadateThumbnail();
+    }
+    
+    if (nextProps.shouldExportPDF && !this.props.shouldExportPDF) {
+      this.props.toggleShouldExportPDF();
     }
   }
 
