@@ -34,6 +34,9 @@ import './design-tool-styles/DesignToolDocumentationCard.css';
 import './design-tool-styles/DesignToolOnboardModal.css';
 import './design-tool-styles/joyride.css';
 
+import { devMode } from 'config/devMode';
+
+
 let DesignTool = class extends Component {
   constructor(props) {
     super(props);
@@ -90,7 +93,7 @@ let DesignTool = class extends Component {
     document.onkeydown = this.handleKeyPress;
 
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
-    window.onbeforeunload = () => this.props.hasUnsavedChanges ? '' : null;
+    window.onbeforeunload = () => this.props.hasUnsavedChanges && !devMode ? '' : null;
   }
 
   removeHanlders() {
@@ -112,10 +115,12 @@ let DesignTool = class extends Component {
   }
 
   componentWillMount() {
-    const { shouldRenderModal } = this.props;
-
-    if (!shouldRenderModal) {
-      store.dispatch(actions.toggleShouldRenderModal());
+    if (!devMode) {
+      const { shouldRenderModal } = this.props;
+      
+      if (!shouldRenderModal) {
+        store.dispatch(actions.toggleShouldRenderModal());
+      }
     }
   }
 
