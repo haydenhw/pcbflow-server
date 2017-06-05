@@ -5,6 +5,7 @@
 
 .logo-link {
   width: 180px;
+  display: inline-block;
 }
 
 .logo-link:hover {

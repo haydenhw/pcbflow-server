@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function DropdownTrigger(props) {
-  const { children } = this.props;
+  const { children, isActive } = props;
   
   return (
-    <div>
-      {children}
+    <div className="dropdown-content">
+      {isActive && children}
     </div>
   );
 }
 
 DropdownTrigger.propTypes = {
-  children.propTypes.object
+  children: PropTypes.object.isRequired,
+  isActive: PropTypes.bool.isRequired
 }

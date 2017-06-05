@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function DropdownContent(props) {
-  const { children, shouldRender } = this.props;
+export default function DropdownTrigger(props) {
+  const { children } = props;
+  const shouldRender = true;
   
   return (
-    <div>
-      {shouldRender && children}
+    <div className="dropdown-trigger">
+      {children}
     </div>
   );
 }
 
 DropdownTrigger.propTypes = {
-  children.PropTypes.object,
-  shouldRender.PropTypes.bool
+  children: PropTypes.object,
+  shouldRender: PropTypes.bool
 }

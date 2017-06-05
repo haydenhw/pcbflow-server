@@ -9,7 +9,7 @@ import DesignTool from 'components/design-tool/DesignTool';
 import ProjectsContainer from 'components/projects/ProjectsContainer';
 import LandingPage from 'components/landing-page/LandingPage';
 
-import './index.css';
+import './index.scss';
 import './reset.css';
 
 ReactDOM.render(
