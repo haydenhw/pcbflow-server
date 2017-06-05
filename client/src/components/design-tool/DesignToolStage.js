@@ -10,7 +10,7 @@ import store from 'reduxFiles/store';
 
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
-import generateThumbnail, { getScaledStage } from 'helpers/generateThumbnail';
+import generateThumbnail, { getCroppedStage } from 'helpers/generateThumbnail';
 
 import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
@@ -29,25 +29,31 @@ class DesignToolStage extends Component {
     store.dispatch(actions.updateBoardThumbnail(thumbnail));
   }
   
-  downloadePDF() {
+  downloadPDF() {
     //pdf is 
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
-    const imageData = getScaledStage(boardLayer).toDataURL("image/jpeg", 1.0)
+    const croppedStage = getCroppedStage(boardLayer)
+    const imageDataURL = croppedStage.node.toDataURL("image/jpeg", 1.0)
+    const imageOffsetX = ((500 
+      -croppedStage.width) / 2) -4 ;
+    const imageOffsetY = ((595 - croppedStage.height) / 2) -7 ;
     const pdf = new jsPDF("landscape");
-
-    pdf.addImage(imageData, 'JPEG', 0, 50);
+    console.log(imageOffsetX)
+    pdf.addImage(imageDataURL, 'JPEG', imageOffsetX, 0 );
     pdf.save('test.pdf');
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
+    const { toggleShouldUpadateThumbnail ,toggleShouldExportPDF } = this.props;
+ }
+    if (nextProps.shouldUpdateThumbnail && !shouldUpdateThumbnail) {
       this.updateThumbnail();
-      this.props.toggleShouldUpadateThumbnail();
+      toggleShouldUpadateThumbnail();
     }
     
-    if (nextProps.shouldExportPDF && !this.props.shouldExportPDF) {
-      this.downloadePDF()
-      this.props.toggleShouldExportPDF();
+    if (nextProps.shouldExportPDF && !shouldExportPDF) {
+      this.downloadPDF()
+      toggleShouldExportPDF();
     }
   }
 
