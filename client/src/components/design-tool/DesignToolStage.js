@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
-// import jsPDF from 'jspdf';
 import { Layer, Stage } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
@@ -30,28 +29,29 @@ class DesignToolStage extends Component {
   }
   
   downloadPDF() {
-    //pdf is 
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const croppedStage = getCroppedStage(boardLayer)
     const imageDataURL = croppedStage.node.toDataURL("image/jpeg", 1.0)
-    const imageOffsetX = ((500 
-      -croppedStage.width) / 2) -4 ;
-    const imageOffsetY = ((595 - croppedStage.height) / 2) -7 ;
+    
+    const pxPerMillimeter = 0.2458333;
+    const imageOffsetX = (1125 
+      - croppedStage.width) / 2 * pxPerMillimeter * 1.02525;
+    const imageOffsetY = (795 - croppedStage.height) / 2 * pxPerMillimeter * 0.995;
+    
     const pdf = new jsPDF("landscape");
-    console.log(imageOffsetX)
-    pdf.addImage(imageDataURL, 'JPEG', imageOffsetX, 0 );
+    pdf.addImage(imageDataURL, 'JPEG', imageOffsetX, imageOffsetY);
     pdf.save('test.pdf');
   }
 
   componentWillReceiveProps(nextProps) {
-    const { toggleShouldUpadateThumbnail ,toggleShouldExportPDF } = this.props;
- }
-    if (nextProps.shouldUpdateThumbnail && !shouldUpdateThumbnail) {
+    const { toggleShouldUpadateThumbnail , toggleShouldExportPDF } = this.props;
+  
+    if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
       this.updateThumbnail();
       toggleShouldUpadateThumbnail();
     }
     
-    if (nextProps.shouldExportPDF && !shouldExportPDF) {
+    if (nextProps.shouldExportPDF && !this.props.shouldExportPDF) {
       this.downloadPDF()
       toggleShouldExportPDF();
     }
