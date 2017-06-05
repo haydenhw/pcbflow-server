@@ -29,7 +29,7 @@ export function SaveButton(props) {
       const y = module.y - topLeftAnchorY;
       return Object.assign({}, module, { x, y });
     });
-
+    
     const updatedProject = {
       projectName,
       boardSpecs: {
@@ -41,7 +41,7 @@ export function SaveButton(props) {
       },
       modules: updatedModules,
     };
-
+    
     store.dispatch(actions.updateProject(updatedProject, id));
   };
 
@@ -80,7 +80,7 @@ const mapStateToProps = state => ({
   modules: state.currentProjectModules.present,
   projectName: state.currentProjectInfo.name,
   projects: state.projects.items,
-  thumbnail: state.boardSpecs.string,
+  thumbnail: state.boardSpecs.thumbnail,
   topLeftAnchorX: state.anchorPositions.topLeft.x,
   topLeftAnchorY: state.anchorPositions.topLeft.y,
 });
@@ -97,7 +97,7 @@ SaveButton.propTypes = {
   projectName: PropTypes.string,
   projects: PropTypes.array.isRequired,
   recordSavedChanges: PropTypes.func.isRequired,
-  thumbnail: PropTypes.object,
+  thumbnail: PropTypes.string.isRequired,
   topLeftAnchorX: PropTypes.number,
   topLeftAnchorY: PropTypes.number,
   updateThumbnail: PropTypes.func.isRequired,

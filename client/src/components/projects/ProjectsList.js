@@ -15,11 +15,7 @@ import './projects-styles/floatGrid.css';
 import './projects-styles/ProjectsItemFrame.css';
 
 function convertToUrl(json) {
-  if (json) {
-    return Konva.Node.create(json).toDataURL();
-  }
-  
-  return null;
+  return json ?  Konva.Node.create(json).toDataURL() : null;
 }
 
 class ProjectList extends Component {
@@ -28,7 +24,6 @@ class ProjectList extends Component {
   }
   
   static confirmDelete(projectId, projectName) {
-    console.log(projectName)
     store.dispatch(actions.confirmProjectDelete({
       projectId,
       projectName
@@ -59,7 +54,6 @@ class ProjectList extends Component {
   
     const projectsList = projects.map((project) => {
       const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
-      // const thumbnailSrc = 'images/arrows.png'
       return (
         <ProjectsItemFrame
           key={shortid.generate()}
