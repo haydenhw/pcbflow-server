@@ -97,7 +97,7 @@ SaveButton.propTypes = {
   projectName: PropTypes.string,
   projects: PropTypes.array.isRequired,
   recordSavedChanges: PropTypes.func.isRequired,
-  thumbnail: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string,
   topLeftAnchorX: PropTypes.number,
   topLeftAnchorY: PropTypes.number,
   updateThumbnail: PropTypes.func.isRequired,

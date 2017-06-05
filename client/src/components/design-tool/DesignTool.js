@@ -135,6 +135,13 @@ let DesignTool = class extends Component {
     this.setRouteHook();
     this.addHanlders();
   }
+  
+  componentDidUpdate(prevProps) {
+    if(prevProps.hasUnsavedChanges !== this.props.hasUnsavedChanges) {
+      console.log('new hook')
+      this.setRouteHook();
+    }
+  }
 
   componentWillUnmount() {
     clearTimeout(this.timeOut);
