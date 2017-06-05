@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -14,6 +15,10 @@ export class ProjectContainer extends Component {
     if (shouldRenderModal) {
       store.dispatch(actions.toggleShouldRenderModal());
     }
+  }
+  
+  routeToHome() {
+    hashHistory.push('/');
   }
 
   renderModal() {
@@ -40,7 +45,7 @@ export class ProjectContainer extends Component {
   render() {
     return (
       <div>
-        <Projects />
+        <Projects handleLinkClick={this.routeToHome} />
         {this.renderModal()}
       </div>
     );

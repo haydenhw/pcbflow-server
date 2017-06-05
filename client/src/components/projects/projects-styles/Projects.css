@@ -1,7 +1,14 @@
 .project-navbar {
   position: fixed;
-  hieght: 62px;
   padding-left: 15px
+}
+
+.logo-link {
+  width: 180px;
+}
+
+.logo-link:hover {
+  cursor: pointer;
 }
 
 .logo-text {

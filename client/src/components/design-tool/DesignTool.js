@@ -138,7 +138,6 @@ let DesignTool = class extends Component {
   
   componentDidUpdate(prevProps) {
     if(prevProps.hasUnsavedChanges !== this.props.hasUnsavedChanges) {
-      console.log('new hook')
       this.setRouteHook();
     }
   }
