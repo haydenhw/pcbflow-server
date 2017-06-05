@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { Layer, Stage } from 'react-konva';
@@ -10,6 +11,7 @@ import store from 'reduxFiles/store';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail, { getCroppedStage } from 'helpers/generateThumbnail';
+import { getTimeDateStamp } from 'helpers/getTimeStamp';
 
 import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
@@ -29,16 +31,21 @@ class DesignToolStage extends Component {
   }
   
   downloadPDF() {
+    const { currentProjectName } = this.props;
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
-    const croppedStage = getCroppedStage(boardLayer)
-    const imageDataURL = croppedStage.node.toDataURL("image/jpeg", 1.0)
+    const croppedStage = getCroppedStage(boardLayer);
+    const imageDataURL = croppedStage.node.toDataURL("image/jpeg", 1.0);
+    const footerText = `${currentProjectName} created ${getTimeDateStamp()}` 
     
     const pxPerMillimeter = 0.2458333;
     const imageOffsetX = (1125 
       - croppedStage.width) / 2 * pxPerMillimeter * 1.02525;
     const imageOffsetY = (795 - croppedStage.height) / 2 * pxPerMillimeter * 0.995;
+    const textOffsetY = 795 * pxPerMillimeter + 5;
     
     const pdf = new jsPDF("landscape");
+    pdf.setFontSize(8), 
+    pdf.text(footerText, 10 , textOffsetY)
     pdf.addImage(imageDataURL, 'JPEG', imageOffsetX, imageOffsetY);
     pdf.save('test.pdf');
   }
@@ -120,6 +127,7 @@ class DesignToolStage extends Component {
 }
 
 const mapStateToProps = state => ({
+  currentProjectName: state.currentProjectInfo.name,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   isMouseDown: state.mouseEvents.isMouseDown,
@@ -132,6 +140,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(DesignToolStage);
 
 DesignToolStage.propTypes = {
+  currentProjectName: PropTypes.string,
   shouldRenderBoard: PropTypes.bool.isRequired,
   draggingModule: PropTypes.object.isRequired,
   isMouseDownOnIcon: PropTypes.bool.isRequired,
