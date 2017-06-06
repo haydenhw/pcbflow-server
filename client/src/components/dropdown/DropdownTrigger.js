@@ -12,6 +12,5 @@ export default function DropdownTrigger(props) {
 }
 
 DropdownTrigger.propTypes = {
-  children: PropTypes.array,
   shouldRender: PropTypes.bool
 }

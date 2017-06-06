@@ -5,13 +5,14 @@ export default function DropdownTrigger(props) {
   const { children, isActive } = props;
   
   return (
-    <ul className="dropdown-content">
-      {isActive && children}
-    </ul>
+    <div>
+      <ul className="dropdown-content">
+        {isActive && children}
+      </ul>
+    </div>
   );
 }
 
 DropdownTrigger.propTypes = {
-  children: PropTypes.object.isRequired,
   isActive: PropTypes.bool.isRequired
 }

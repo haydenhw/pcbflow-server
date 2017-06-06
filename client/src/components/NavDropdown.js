@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Dropdown from './Dropdown'
-import DropdownTrigger from './DropdownTrigger';
-import DropdownContent from './DropdownContent';
+
+import Dropdown from 'components/dropdown/Dropdown'
+import DropdownTrigger from 'components/dropdown/DropdownTrigger';
+import DropdownContent from 'components/dropdown/DropdownContent';
+
 import './styles/NavDropdown.css';
 
 export default class NavDropdown extends Component {

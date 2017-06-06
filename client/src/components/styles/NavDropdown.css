@@ -14,10 +14,6 @@ nav {
   margin-left: 10px;
 }
 
-/*.dropdown li {
-    float: left;
-}*/
-
 .dropdown-wrapper {
     float: left;
 }
@@ -37,6 +33,7 @@ nav {
     color: #c00;
     background-color: #fff;
 }
+
 .dropdown-content {       
   margin: 0px;
   list-style-type: none;	 
@@ -50,35 +47,3 @@ nav {
   padding:0px;
   border: 1px solid black;   
 }
-
-/*.test {
-  height: 100px;
-  width: 100px;
-  float: right;
-  background: teal;
-  z-index: 100;
-}
-
-.nav-dropdown {
-  float: right;
-  overflow: visible;
-  top: 10px;
-  right: 100px;
-  padding-right: 100px;
-}
-
-
-.nav-dropdown {
-  float: right;
-  overflow: hidden;
-  padding-right: 100px;
-}
-
-.dropdown-content{
-  position: absolute;
-  	left: 0;
-  	top: auto;
-  	display: none;
-  	z-index:999;
-  	width:auto
-}*/
