@@ -71,6 +71,7 @@ module.exports = {
       reduxFiles: path.join(__dirname, '../src', 'redux-files'),
       config: path.join(__dirname, '../src', 'config'),
       helpers: path.join(__dirname, '../src', 'helpers'),
+      styles: path.join(__dirname, '../src', 'styles'),
       images: path.join(__dirname, '../src', 'images'),
       'react': path.resolve(__dirname, '../node_modules', 'react')
 

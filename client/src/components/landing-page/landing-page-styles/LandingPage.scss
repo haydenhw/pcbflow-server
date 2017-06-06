@@ -1,3 +1,5 @@
+@import './variables'
+
 $heading-font: 'Fredoka One', cursive;
 $paragraph-font: 'Open Sans', sans-serif;
 $sub-heading-color: #424242;
@@ -8,7 +10,7 @@ $sub-heading-color: #424242;
 
 .landing-navbar {
   position: relative;
-  background-color: #f78d1e;
+  background-color: $primary-color;
   overflow: hidden;
   width: 100%;
   z-index: 1;
@@ -48,7 +50,7 @@ $sub-heading-color: #424242;
 
 .landing-page-button {
   margin-top: 105px;
-  background-color: #1fabfb;
+  background-color: $tertiary-color;
   border-radius: 4px;
   padding: 15px 30px;
   width: 228px;
