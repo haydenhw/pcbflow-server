@@ -1,10 +1,14 @@
 
 .dropdown {
-  margin-right: 68px;
+  height: 100%;
+  position: fixed;
+  right: 0; 
+  top: 0;
+  width: 200px;
+  text-align: right;
 }
 
 .dropdown-wrapper {
-    float: right;
 }
 
 .dropdown-item {
@@ -12,9 +16,12 @@
 }
 
 .dropdown-trigger-wrapper {
-  width: 100px;
-  padding-left: 94px;
-  padding-top: 15px;
+  height: 50px;
+  border: 1px solid #ffffff;
+  padding: 15px;
+  display: inline-block;
+  /*padding-left: 94px;*/
+  /*padding-top: 15px;*/
 }
 
 .dropdown a {
@@ -29,17 +36,14 @@
     color: grey;
 }
 
-.dropdown-content {       
-  margin: 0px;
-  list-style-type: none;	 
-}
-
 .dropdown-content {
+  width: 100%;
   display: block;
   position:absolute;
   background-color: white;
   list-style-type: none;	
-  padding:0px;
+  padding: 0;
+  margin: 0;
   border: 1px solid black;   
 }
 
