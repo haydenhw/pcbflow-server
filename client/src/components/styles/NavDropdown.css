@@ -1,6 +1,6 @@
 
 .dropdown {
-  margin-left: 10px;
+  margin-right: 68px;
 }
 
 .dropdown-wrapper {
@@ -11,6 +11,12 @@
     clear: both;
 }
 
+.dropdown-trigger-wrapper {
+  width: 100px;
+  padding-left: 94px;
+  padding-top: 15px;
+}
+
 .dropdown a {
     display: block;
     padding: 8px 15px;
@@ -19,8 +25,8 @@
     color: gray;
 }
 .dropdown li a:hover {
-    color: #c00;
-    background-color: #fff;
+    background-color: tomatoe;
+    color: grey;
 }
 
 .dropdown-content {       
@@ -35,4 +41,9 @@
   list-style-type: none;	
   padding:0px;
   border: 1px solid black;   
+}
+
+.fa-bars {
+  color: white;
+  font-size: 33px;
 }

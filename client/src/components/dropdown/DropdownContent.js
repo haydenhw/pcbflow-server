@@ -4,11 +4,23 @@ import PropTypes from 'prop-types';
 export default function DropdownTrigger(props) {
   const { children, isActive } = props;
   
+  const renderContent = () => {
+    const { isActive } = props;
+    
+    if (isActive) {
+      return (
+        <ul className="dropdown-content">
+          {children}
+        </ul>
+      );
+      
+      return null;
+    }
+  }
+  
   return (
     <div>
-      <ul className="dropdown-content">
-        {isActive && children}
-      </ul>
+      {renderContent()}
     </div>
   );
 }

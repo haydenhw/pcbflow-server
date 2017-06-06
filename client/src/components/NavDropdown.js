@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 
 import Dropdown from 'components/dropdown/Dropdown'
 import DropdownTrigger from 'components/dropdown/DropdownTrigger';
@@ -31,7 +32,7 @@ export default class NavDropdown extends Component {
       <Dropdown>
         <div className='dropdown-wrapper'>
           <DropdownTrigger handleClick={this.toggleIsActive}>
-            <a>DROPDOWN</a>
+            <FontAwesome name="fa-bars" className="fa-bars"/>
           </DropdownTrigger>
           <DropdownContent isActive={isActive}>
             <li className='dropdown-item'><a href="#">dropdown 1</a></li>
