@@ -8,7 +8,7 @@ var getClientEnvironment = require('./env');
 var paths = require('./paths');
 var path = require('path');
 
-
+console.log(path.join(__dirname, 'src', 'styles'));
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 var publicPath = '/';
@@ -71,7 +71,6 @@ module.exports = {
       reduxFiles: path.join(__dirname, '../src', 'redux-files'),
       config: path.join(__dirname, '../src', 'config'),
       helpers: path.join(__dirname, '../src', 'helpers'),
-      styles: path.join(__dirname, '../src', 'styles'),
       images: path.join(__dirname, '../src', 'images'),
       'react': path.resolve(__dirname, '../node_modules', 'react')
 
@@ -156,7 +155,12 @@ module.exports = {
         include: paths.appSrc,
         loaders: ["style", "css", "sass"]
       },
+    
     ]
+  },
+  
+  sassLoader: {
+  includePaths: [path.join(__dirname, '../', 'src', 'styles')],
   },
   
   // We use PostCSS for autoprefixing only.
