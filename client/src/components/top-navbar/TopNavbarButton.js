@@ -5,6 +5,7 @@ import './top-navbar-styles/TopNavbarButtons.css';
 
 export default function TopNavbarButton(props) {
   const { className, handleClick, icon, text } = props;
+  
   return (
       <button className={className} onClick={handleClick}>
         <div>

@@ -17,11 +17,8 @@
 
 .dropdown-trigger-wrapper {
   height: 50px;
-  border: 1px solid #ffffff;
-  padding: 15px;
+  padding: 9px 15px;
   display: inline-block;
-  /*padding-left: 94px;*/
-  /*padding-top: 15px;*/
 }
 
 .dropdown a {
