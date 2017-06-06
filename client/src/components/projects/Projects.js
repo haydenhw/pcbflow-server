@@ -16,13 +16,13 @@ import './projects-styles/Projects.css';
 export default function Projects(props) {
   return (
     <div>
-      <div className="navWide project-navbar">
+      <nav>
         <div className="logo-link" onClick={props.handleLinkClick}>
-            <img className="logo-image" src="images/logo4.png" alt="" />
-            <span className="logo-text">PCB<span className="bold">flow</span></span>
+          <img className="logo-image" src="images/logo4.png" alt="" />
+          <span className="logo-text">PCB<span className="bold">flow</span></span>
         </div>
         <NavDropdown />
-      </div>
+      </nav>
       <div className="button-bar">
         <div className="row-project">
           <div className="col-wrapper">
@@ -32,8 +32,15 @@ export default function Projects(props) {
           </div>
         </div>
       </div>
-      <ProjectsList />
     </div>
-  );
+  )
+  //   <div>
+  //     <div className="navWide project-navbar">
+  //       <NavDropdown />
+  //     </div>
+     
+  //     <ProjectsList />
+  //   </div>
+  // );
 }
 

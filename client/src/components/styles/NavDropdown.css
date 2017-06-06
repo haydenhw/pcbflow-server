@@ -1,21 +1,10 @@
-nav {
-    width: 100%;
-    margin: 0 0 3em 0;
-    padding: 0;
-    list-style: none;
-    background-color: #242424;
-    border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    position:fixed;
-    top:0px;
-}
 
 .dropdown {
   margin-left: 10px;
 }
 
 .dropdown-wrapper {
-    float: left;
+    float: right;
 }
 
 .dropdown-item {
