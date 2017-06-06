@@ -35,8 +35,8 @@ export default class NavDropdown extends Component {
             <FontAwesome name="fa-bars" className="fa-bars"/>
           </DropdownTrigger>
           <DropdownContent isActive={isActive}>
-            <li className='dropdown-item'><a href="#">dropdown 1</a></li>
-            <li className='dropdown-item'><a href="#">dropdown 2</a></li>
+            <li className='dropdown-item'><a href="#">Home</a></li>
+            <li className='dropdown-item'><a href="#">Sign Out</a></li>
             <li className='dropdown-item'><a href="#">dropdown 3</a></li>
           </DropdownContent>
         </div>
