@@ -1,8 +1,10 @@
 .nav-button-group {
   position: absolute;
-  right: 37px;
+  right: 61px;
   top: 4px;
   display: inline-block;
+  
+  /*float:right;*/
 }
 
 .nav-button {

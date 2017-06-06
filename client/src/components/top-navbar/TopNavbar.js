@@ -2,6 +2,7 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 
+import  NavDropdown from 'components/NavDropdown'
 import TopNavbarEditableText from './TopNavbarEditableText';
 import TopNavbarSaveButton from './TopNavbarSaveButton';
 import TopNavbarButton from './TopNavbarButton';
@@ -51,6 +52,7 @@ export default function TopNavbar(props) {
           icon={<FontAwesome name="fa-file-pdf-o" className="fa-file-pdf-o" /> }
           text="Export"
         />
+        <NavDropdown /> 
       </div>
     </div>
   );
