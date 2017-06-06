@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './landing-page-styles/LandingPageCard.css';
+import './landing-page-styles/LandingPageCard.scss';
 
 export default function LandingPageCard(props) {
   const { className, content, icon, title } = props;

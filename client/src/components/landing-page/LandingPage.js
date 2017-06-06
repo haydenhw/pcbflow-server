@@ -3,7 +3,7 @@ import { hashHistory } from 'react-router';
 
 import LandingPageCard from './LandingPageCard';
 
-import './landing-page-styles/LandingPage.css';
+import './landing-page-styles/LandingPage.scss';
 import './landing-page-styles/floatGrid.css';
 
 export default function LandingPage() {
@@ -38,7 +38,7 @@ export default function LandingPage() {
       <main className="landing-page-main">
         <div className="landing-page-section-heading">
           <h2>Bring your ideas to life</h2>
-          <p>Create your custom design with PCBflow. Submit for review by our team of expert engineers. We'll manufacture and ship your device, tested and fully functional, with 15 days.</p>
+          <p>Learn to create custom circuit board designs with PCBflow, save work in progress diagrams, and export them when you're ready to build the real thing.</p>
         </div>
         <section className="design-to-pcb-visual">
           <div className="computer-wrapper">
