@@ -1,10 +1,4 @@
-.button-bar {
-  position: fixed;
-  top: 63px;
-  width: 100%;
-  background: white;
-  z-index: 100;
-}
+
 
 .button-wrapper {
   width: 75%;
