@@ -10,6 +10,10 @@ nav {
     top:0px;
 }
 
+.dropdown {
+  margin-left: 10px;
+}
+
 /*.dropdown li {
     float: left;
 }*/
@@ -33,9 +37,9 @@ nav {
     color: #c00;
     background-color: #fff;
 }
-.dropdown-content
-{       
-    list-style-type: none;	 
+.dropdown-content {       
+  margin: 0px;
+  list-style-type: none;	 
 }
 
 .dropdown-content {

@@ -6,7 +6,7 @@ import DropdownContent from './DropdownContent'
 export default function DropdownMenu(props) {
   const { className, children } = props;
   
-  return(
+  return (
     <div className={`dropdown ${className || ''}`}>
       {children}
     </div>
