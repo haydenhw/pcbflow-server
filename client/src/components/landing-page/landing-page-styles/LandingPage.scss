@@ -1,4 +1,8 @@
-@import './variables'
+// @import 'styles/variables';
+
+$primary-color: #FFA726;
+$secondary-color: FFA726;
+$tertiary-color: #84FFFF; 
 
 $heading-font: 'Fredoka One', cursive;
 $paragraph-font: 'Open Sans', sans-serif;
@@ -15,13 +19,14 @@ $sub-heading-color: #424242;
   width: 100%;
   z-index: 1;
   height: 65px;
-  padding-left: 15px
+  font-family: $heading-font;
 }
 
 .white-logo-image {
   position: absolute;
   top: 10px;
   height: 40px;
+  display:none;
 }
 
 .landing-page-logo-text {
