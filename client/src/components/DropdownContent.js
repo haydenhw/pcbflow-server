@@ -5,9 +5,9 @@ export default function DropdownTrigger(props) {
   const { children, isActive } = props;
   
   return (
-    <div className="dropdown-content">
+    <ul className=" ">
       {isActive && children}
-    </div>
+    </ul>
   );
 }
 

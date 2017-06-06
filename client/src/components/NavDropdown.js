@@ -7,19 +7,20 @@ import './styles/NavDropdown.css'
 
 export default function NavDropdown() {
   return (
-    <div className="nav-dropdown">
-      <Dropdown>
-        <DropdownTrigger>
-          <button>Show Menu</button>
-        </DropdownTrigger>
-        <DropdownContent isActive={true}>
-          <ul>
-            <li>Home</li>
-            <li>Login</li>
-          </ul>
-        </DropdownContent>
-      </Dropdown>
+  <Dropdown>
+    <div classname="dropdown-wrapper">
+      <DropdownTrigger>
+          <a className="trigger">DROPDOWN</a>
+      </DropdownTrigger>
+    <DropdownContent isActive={true}>
+      <ul className='dropdown-content'>
+        <li className='dropdown-item'><a href="#">dropdown 1</a></li>
+        <li className='dropdown-item'><a href="#">dropdown 2</a></li>
+        <li className='dropdown-item'><a href="#">dropdown 3</a></li>
+      </ul>
+    </DropdownContent>
     </div>
-  )
+  </Dropdown>
+)
 }
 
