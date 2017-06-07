@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { hashHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 
 import Dropdown from 'components/dropdown/Dropdown'
@@ -19,6 +20,11 @@ export default class NavDropdown extends Component {
     this.toggleIsActive = this.toggleIsActive.bind(this);
   }
   
+  routeToHome() {
+    console.log('routing')
+    hashHistory.push('/');
+  }
+  
   toggleIsActive () {
     const { isActive } = this.state;
     console.log('switching')
@@ -35,9 +41,12 @@ export default class NavDropdown extends Component {
             <FontAwesome name="fa-bars" className="fa-bars"/>
           </DropdownTrigger>
           <DropdownContent isActive={isActive}>
-            <li className='dropdown-item'><a href="#">Home</a></li>
-            <li className='dropdown-item'><a href="#">Sign Out</a></li>
-            <li className='dropdown-item'><a href="#">dropdown 3</a></li>
+            <li className='dropdown-item' onClick={this.routeToHome}>
+              <a href="#">Home</a>
+            </li>
+            <li onClick={() => alert('Sorry the log in feature is still under construction!')} className='dropdown-item'>
+              <a href="#">Sign Out</a>
+            </li>
           </DropdownContent>
         </div>
       </Dropdown>
