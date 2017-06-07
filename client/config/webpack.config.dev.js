@@ -155,12 +155,11 @@ module.exports = {
         include: paths.appSrc,
         loaders: ["style", "css", "sass"]
       },
-    
     ]
   },
   
   sassLoader: {
-  includePaths: [path.join(__dirname, '../', 'src', 'styles')],
+   includePaths: [path.join(__dirname, '../', 'src', 'styles')],
   },
   
   // We use PostCSS for autoprefixing only.
