@@ -33,9 +33,10 @@ export default class NavDropdown extends Component {
   
   render () {
     const { isActive } = this.state;
+    const { className } = this.props;
     
     return (
-      <Dropdown>
+      <Dropdown className={className}>
         <div className='dropdown-wrapper'>
           <DropdownTrigger handleClick={this.toggleIsActive}>
             <FontAwesome name="fa-bars" className="fa-bars"/>

@@ -22,7 +22,7 @@ export default function Projects(props) {
             <img className="logo-image" src="images/logo4.png" alt="" />
             <span className="logo-text">PCB<span className="bold">flow</span></span>
           </div>
-          <NavDropdown />
+          <NavDropdown className={"projects-dropdown"} />
         </div>
         <div className="project-nav-bottom">
           <div className="row-project">
