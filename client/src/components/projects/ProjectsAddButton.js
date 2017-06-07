@@ -7,7 +7,7 @@ import store from 'reduxFiles/store';
 import './projects-styles/ProjectsAddButton.css';
 
 export default class ProjectsAddButton extends Component {
-  static handleClick() {
+  handleClick() {
     const newProject = {
       name: 'Untitled',
       boardSpecs: {
@@ -25,7 +25,7 @@ export default class ProjectsAddButton extends Component {
 
   render() {
     return (
-      <div className="project-add-button button" onClick={ProjectsAddButton.handleClick}>
+      <div className="project-add-button button" onClick={this.handleClick} role="button">
         <FontAwesome name="fa-plus" className="fa-plus"/>
         <span className="project-add-button-text">Project</span>
       </div>

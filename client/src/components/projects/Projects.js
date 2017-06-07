@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'react-router';
 
 import * as actions from 'actions/indexActions';
@@ -22,7 +23,7 @@ export default function Projects(props) {
             <img className="logo-image" src="images/logo4.png" alt="" />
             <span className="logo-text">PCB<span className="bold">flow</span></span>
           </div>
-          <NavDropdown className={"projects-dropdown"} />
+          <NavDropdown className="projects-dropdown" />
         </div>
         <div className="project-nav-bottom">
           <div className="row-project">
@@ -39,3 +40,6 @@ export default function Projects(props) {
   );
 }
 
+Projects.propTypes = {
+  handleLinkClick: PropTypes.func
+}

@@ -56,7 +56,7 @@
     "start": "concurrently \"node server.js\"  \"cd client && npm start\"",
     "server": "babel-node server.js",
     "test": "mocha",
-    "lint": "eslint --ext .js --ext .jsx client/src/components/side-bar/ || exit 0",
+    "lint": "eslint --ext .js --ext .jsx client/src/components/ || exit 0",
     "lint:fix": "eslint --fix --ext .js --ext .jsx client/src/components/ || exit 0",
     "build:client": "cd client && npm run build",
     "push:git": "git add . && git commit -m \"build\" && git push origin master || exit 0",

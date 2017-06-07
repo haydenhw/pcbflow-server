@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 
@@ -28,13 +29,13 @@ export class ProjectContainer extends Component {
       const { projectId, projectName } = modalProps;
       return (
         <Modal
-          text={`Are you sure you want to delete project "${projectName}"  ?`}
-          shouldRenderLeftButton
-          rightButtonText="Delete"
-          leftButtonText="Cancel"
-          handleRightButtonClick={() => store.dispatch(actions.deleteProject(projectId))}
-          handleLeftButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
           handleCloseButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
+          handleLeftButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
+          handleRightButtonClick={() => store.dispatch(actions.deleteProject(projectId))}
+          leftButtonText="Cancel"
+          rightButtonText="Delete"
+          shouldRenderLeftButton
+          text={`Are you sure you want to delete project "${projectName}"  ?`}
         />
       );
     }
@@ -53,8 +54,13 @@ export class ProjectContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  shouldRenderModal: state.modal.shouldRenderModal,
   modalProps: state.modal.modalProps,
+  shouldRenderModal: state.modal.shouldRenderModal,
 });
 
 export default connect(mapStateToProps)(ProjectContainer);
+
+ProjectContainer.propTypes = {
+  shouldRenderModal: PropTypes.bool.isRequired,
+  modalProps: PropTypes.object.modalProps,
+}
