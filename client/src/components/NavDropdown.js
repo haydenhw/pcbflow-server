@@ -44,7 +44,7 @@ export default class NavDropdown extends Component {
             <li className='dropdown-item' onClick={this.routeToHome}>
               <a>Home</a>
             </li>
-            <li onClick={() => alert('Sorry, the login feature is still under construction!')} className='dropdown-item'>
+            <li onClick={() => alert('Sorry! the login feature is still under construction.')} className='dropdown-item'>
               <a>Sign Out</a>
             </li>
           </DropdownContent>
