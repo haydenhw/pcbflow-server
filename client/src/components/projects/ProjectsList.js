@@ -7,7 +7,6 @@ import shortid from 'shortid';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import ProjectsItem from './ProjectsItem';
 import ProjectsItemFrame from './ProjectsItemFrame';
 
 import './projects-styles/floatGrid.css';
@@ -17,7 +16,7 @@ function convertToUrl(json) {
   return json ? Konva.Node.create(json).toDataURL() : null;
 }
 
-class ProjectList extends Component {
+class ProjectsList extends Component {
   static defaultProps = {
     projects: [],
   }
@@ -33,34 +32,19 @@ class ProjectList extends Component {
     }));
   }
 
-  renderProjectItem(project) {
-    const { isFetching } = this.props;
-
-    if (isFetching) {
-      return <span key={shortid.generate()}>Loading...</span>;
-    }
-
-    return (
-      <ProjectsItem
-        projectId={project._id}
-        projectName={project.name}
-      />
-    );
-  }
-
   render() {
-    const { projects, isFetching } = this.props;
-    
+    const { projects } = this.props;
+
     const projectsList = projects.map((project) => {
       const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
+
       return (
         <ProjectsItemFrame
           key={shortid.generate()}
+          projectName={project.name}
           thumbnailSrc={thumbnailSrc}
           confirmDelete={this.confirmDelete()}
-        >
-          {this.renderProjectItem(project)}
-        </ProjectsItemFrame>
+        />
       );
     });
 
@@ -78,8 +62,12 @@ class ProjectList extends Component {
 
 const mapStateToProps = state => ({
   projects: state.projects.items,
-  isFetching: state.projects.isFetching,
   thumbnail: state.boardSpecs.thumbnail,
 });
 
-export default connect(mapStateToProps)(ProjectList);
+export default connect(mapStateToProps)(ProjectsList);
+
+ProjectsList.propTypes = {
+  projects: PropTypes.array,
+};
+

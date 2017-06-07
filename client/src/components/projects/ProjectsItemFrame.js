@@ -28,7 +28,7 @@ export default function ProjectsItemFrame(props) {
         </div>
         <div className="title-bar">
           <div className="title">
-            {props.children}
+            {props.projectName}
           </div>
           <DeleteButton handleClick={props.confirmDelete} />
         </div>
@@ -39,6 +39,8 @@ export default function ProjectsItemFrame(props) {
 }
 
 ProjectsItemFrame.propTypes = {
+  projectId: PropTypes.string,
+  projectName: PropTypes.string.isRequired,
   thumbnailSrc: PropTypes.string.isRequired,
   confirmDelete: PropTypes.func.isRequired,
 };
