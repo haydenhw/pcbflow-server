@@ -21,13 +21,12 @@ export default class NavDropdown extends Component {
   }
   
   routeToHome() {
-    console.log('routing')
     hashHistory.push('/');
   }
   
   toggleIsActive () {
     const { isActive } = this.state;
-    console.log('switching')
+    
     this.setState({ isActive: !isActive })
   }
   
@@ -43,10 +42,10 @@ export default class NavDropdown extends Component {
           </DropdownTrigger>
           <DropdownContent isActive={isActive}>
             <li className='dropdown-item' onClick={this.routeToHome}>
-              <a href="#">Home</a>
+              <a>Home</a>
             </li>
-            <li onClick={() => alert('Sorry the log in feature is still under construction!')} className='dropdown-item'>
-              <a href="#">Sign Out</a>
+            <li onClick={() => alert('Sorry, the login feature is still under construction!')} className='dropdown-item'>
+              <a>Sign Out</a>
             </li>
           </DropdownContent>
         </div>
