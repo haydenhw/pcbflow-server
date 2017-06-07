@@ -2,7 +2,7 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 
-import  NavDropdown from 'components/NavDropdown'
+import NavDropdown from 'components/NavDropdown';
 import TopNavbarEditableText from './TopNavbarEditableText';
 import TopNavbarSaveButton from './TopNavbarSaveButton';
 import TopNavbarButton from './TopNavbarButton';
@@ -16,7 +16,7 @@ const titleStyle = {
 
 export default function TopNavbar(props) {
   const {
-    handleExportButtonClick, 
+    handleExportButtonClick,
     handleNameChange,
     projectName,
     recordSavedChanges,
@@ -24,7 +24,6 @@ export default function TopNavbar(props) {
     updateLastSaved,
     updateThumbnail,
   } = props;
-  
 
   return (
     <div className="navWide">
@@ -39,20 +38,20 @@ export default function TopNavbar(props) {
         text={projectName}
         handleNameChange={handleNameChange}
       />
-      
+
       <div className="nav-button-group">
         <TopNavbarSaveButton
           updateThumbnail={updateThumbnail}
           updateLastSaved={updateLastSaved}
           recordSavedChanges={recordSavedChanges}
         />
-        <TopNavbarButton 
+        <TopNavbarButton
           className="nav-button export-button"
           handleClick={handleExportButtonClick}
-          icon={<FontAwesome name="fa-file-pdf-o" className="fa-file-pdf-o" /> }
+          icon={<FontAwesome name="fa-file-pdf-o" className="fa-file-pdf-o" />}
           text="Export"
         />
-        <NavDropdown /> 
+        <NavDropdown />
       </div>
     </div>
   );

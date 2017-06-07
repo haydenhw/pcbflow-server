@@ -25,7 +25,7 @@ export default class RootModal extends Component {
 
   _render() {
     const { children } = this.props;
-    
+
     ReactDOM.render(
       <Provider store={store}>
         <div>{children}</div>
@@ -40,5 +40,5 @@ export default class RootModal extends Component {
 }
 
 RootModal.propTypes = {
-  children: PropTypes.object.isRequired, 
-}
+  children: PropTypes.object.isRequired,
+};

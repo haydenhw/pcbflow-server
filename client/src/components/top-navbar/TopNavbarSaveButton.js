@@ -29,7 +29,7 @@ export function SaveButton(props) {
       const y = module.y - topLeftAnchorY;
       return Object.assign({}, module, { x, y });
     });
-    
+
     const updatedProject = {
       projectName,
       boardSpecs: {
@@ -41,7 +41,7 @@ export function SaveButton(props) {
       },
       modules: updatedModules,
     };
-    
+
     store.dispatch(actions.updateProject(updatedProject, id));
   };
 

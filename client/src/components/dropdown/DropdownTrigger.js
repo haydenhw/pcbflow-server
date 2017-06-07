@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function DropdownTrigger(props) {
   const { children, handleClick } = props;
-  
+
   return (
     <div className="dropdown-trigger-wrapper">
       <div className="dropdown-trigger" onClick={handleClick}>
@@ -14,5 +14,5 @@ export default function DropdownTrigger(props) {
 }
 
 DropdownTrigger.propTypes = {
-  shouldRender: PropTypes.bool
-}
+  shouldRender: PropTypes.bool,
+};

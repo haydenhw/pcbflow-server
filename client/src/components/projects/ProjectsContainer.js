@@ -17,7 +17,7 @@ export class ProjectContainer extends Component {
       store.dispatch(actions.toggleShouldRenderModal());
     }
   }
-  
+
   routeToHome() {
     hashHistory.push('/');
   }
@@ -62,5 +62,5 @@ export default connect(mapStateToProps)(ProjectContainer);
 
 ProjectContainer.propTypes = {
   shouldRenderModal: PropTypes.bool.isRequired,
-  modalProps: PropTypes.object.modalProps,
-}
+  modalProps: PropTypes.object,
+};

@@ -50,7 +50,7 @@ let DesignTool = class extends Component {
       isSideBarHidden: false,
       joyrideStep: 0,
       running: false,
-      shouldExportPDF:false,
+      shouldExportPDF: false,
       shouldHideContextMenu: false,
       shouldRender: false,
       shouldRenderDocumentation: false,
@@ -117,7 +117,7 @@ let DesignTool = class extends Component {
   componentWillMount() {
     if (!devMode) {
       const { shouldRenderModal } = this.props;
-      
+
       if (!shouldRenderModal) {
         store.dispatch(actions.toggleShouldRenderModal());
       }
@@ -135,9 +135,9 @@ let DesignTool = class extends Component {
     this.setRouteHook();
     this.addHanlders();
   }
-  
+
   componentDidUpdate(prevProps) {
-    if(prevProps.hasUnsavedChanges !== this.props.hasUnsavedChanges) {
+    if (prevProps.hasUnsavedChanges !== this.props.hasUnsavedChanges) {
       this.setRouteHook();
     }
   }
@@ -308,7 +308,7 @@ let DesignTool = class extends Component {
     const modalClass = { modalClass: `modal-step-${this.props.tutorialStep}` };
     return Object.assign(buttonMethods, handleClose, modalClass);
   }
-  
+
   handleJoyrideCallback(result) {
     const { joyride } = this.props;
 
@@ -434,11 +434,11 @@ let DesignTool = class extends Component {
     this.setState({ isDraggingToBoard: true });
     store.dispatch(actions.toggleShouldRenderSideBar(false));
   }
-  
+
   toggleShouldExportPDF() {
     const { shouldExportPDF } = this.state;
     this.setState({
-      shouldExportPDF: !shouldExportPDF
+      shouldExportPDF: !shouldExportPDF,
     });
   }
 
@@ -693,7 +693,7 @@ let DesignTool = class extends Component {
 
     const {
       isDraggingToBoard,
-      shouldExportPDF, 
+      shouldExportPDF,
       shouldUpdateThumbnail,
       shouldRenderDocumentation,
       shouldRenderInfoButton,
@@ -713,7 +713,7 @@ let DesignTool = class extends Component {
           routeToProjects={this.routeToProjects}
           updateLastSaved={this.updateLastSaved}
           updateThumbnail={this.toggleShouldUpadateThumbnail}
-          
+
         />
         <div onMouseMove={this.handleMouseMove}>
           <div ref={node => (this.stageContainer = node)}>

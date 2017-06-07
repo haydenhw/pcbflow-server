@@ -30,7 +30,7 @@ export default function ProjectsItemFrame(props) {
           <div className="title">
             {props.children}
           </div>
-          <DeleteButton projectId={props.projectId} projectName={props.projectName} confirmDelete={props.confirmDelete} />
+          <DeleteButton handleClick={props.confirmDelete} />
         </div>
       </div>
     </div>
@@ -39,7 +39,6 @@ export default function ProjectsItemFrame(props) {
 }
 
 ProjectsItemFrame.propTypes = {
-  thumbnailSrc: PropTypes.string.isRequired, 
-  projectId: PropTypes.string.isRequired,
+  thumbnailSrc: PropTypes.string.isRequired,
   confirmDelete: PropTypes.func.isRequired,
 };

@@ -15,8 +15,8 @@ export default function LandingPage() {
       rgba(0, 0, 0, 0.5)
     ),
     url(${imgUrl})`,
-    backgroundSize: "75%",
-    backgroundPosition: "center",
+    backgroundSize: '75%',
+    backgroundPosition: 'center',
   };
 
   return (

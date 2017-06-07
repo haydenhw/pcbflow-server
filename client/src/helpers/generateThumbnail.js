@@ -11,7 +11,7 @@ export function cropStage(boardLayer) {
 
   boardCloneAttrs.x = 10;
   boardCloneAttrs.y = 10;
-  
+
   return croppedStage.add(boardClone);
 }
 
@@ -26,14 +26,13 @@ export function getCroppedStage(boardLayer) {
 
   boardCloneAttrs.x = 10;
   boardCloneAttrs.y = 10;
-  
+
   return {
     width: croppedStage.getStage().attrs.width,
     height: croppedStage.getStage().attrs.height,
-    node: croppedStage.add(boardClone)
-  }
+    node: croppedStage.add(boardClone),
+  };
 }
-
 
 export default function generateThumbnail(boardLayer) {
   const boardClone = boardLayer.clone();

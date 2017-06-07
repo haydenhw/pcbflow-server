@@ -26,7 +26,7 @@ class Modules extends Component {
       shouldCheckCollission: false,
     };
   }
-  
+
   calculatePrice(modules) {
     if (modules && modules.length > 0) {
       const modulePriceSum = this.props.modules
@@ -34,84 +34,84 @@ class Modules extends Component {
       .reduce((a, b) => a + b);
       const basePrice = 15;
       const totalPriceString = generatePriceString(basePrice + modulePriceSum);
-      
+
       return totalPriceString;
     }
-    
+
     return generatePriceString(15);
   }
-  
+
   updatePrice() {
     const totalPriceString = this.calculatePrice(this.props.modules);
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
-  
+
   updateMetDependencies() {
     const dependencyDiffArray = getDependencyDiff(this.props.modules);
-    const dispatchMetDependencies = metDependencyData  => {
+    const dispatchMetDependencies = (metDependencyData) => {
       store.dispatch(actions.updateMetDependencies(metDependencyData));
     };
-    
+
     function setDelay(metDependencyData) {
-      setTimeout(function(){
+      setTimeout(() => {
         dispatchMetDependencies(metDependencyData);
       }, 1);
     }
-     
-    dependencyDiffArray.forEach(element => {
+
+    dependencyDiffArray.forEach((element) => {
       const { metDependencies, index } = element;
-      
+
       setDelay({
         metDependencies,
-        index
+        index,
       });
     });
   }
-  
-  dispatchDependencyData({visibilityMode, dependencyData}) {
+
+  dispatchDependencyData({ visibilityMode, dependencyData }) {
     setTimeout(() => {
       store.dispatch(actions.updateIconVisibity(visibilityMode));
       store.dispatch(actions.updateCurrentDependencies(dependencyData));
       store.dispatch(actions.toggleShouldRenderSideBar(true));
     }, 5);
   }
-  
+
   updateDisplayedDependencies() {
     const { modules } = this.props;
     const newDepenencyData = getNewDependencyData(modules);
-    
+
     this.updateMetDependencies();
     this.dispatchDependencyData(newDepenencyData);
   }
-  
+
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.modules.length !== this.props.modules.length)) {
       this.updateDisplayedDependencies();
       this.updatePrice();
-      
+
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });
     }
-    
-    if((prevProps.modules.length < this.props.modules.length)) {
-          
-      }
+
+    if ((prevProps.modules.length < this.props.modules.length)) {
+
     }
-    
+  }
+
   componentDidMount() {
     const totalPriceString = this.calculatePrice(this.props.modules);
-    
+
     this.updateDisplayedDependencies();
     store.dispatch(actions.updateProjectPrice(totalPriceString));
   }
-  
+
   toggleShouldCheckCollission() {
     this.setState({
       shouldCheckCollission: !this.state.shouldCheckCollission,
     });
   }
-  
+
   render() {
     const modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
       <ModulesItem
@@ -155,9 +155,9 @@ class Modules extends Component {
         shouldCheckCollission={this.state.shouldCheckCollission}
         iconVisibityMode={this.props.iconVisibityMode}
         toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
-      />
+      />,
     );
-    
+
     return (
       <Group>
         {modules}
@@ -174,11 +174,11 @@ const mapStateToProps = state => ({
   anchorPositions: state.anchorPositions,
   iconVisibityMode: state.iconVisibity.mode,
   currentDependencyData: state.iconVisibity,
-  tutorialStep: state.tutorial.step
+  tutorialStep: state.tutorial.step,
 });
 
 export default connect(mapStateToProps)(Modules);
 
 Modules.defaultProps = {
-  modules: []
-}
+  modules: [],
+};

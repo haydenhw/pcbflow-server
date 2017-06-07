@@ -5,7 +5,7 @@ import Link from 'react-router';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import NavDropdown from 'components/NavDropdown'
+import NavDropdown from 'components/NavDropdown';
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import ProjectsList from './ProjectsList';
 import ProjectsAddButton from './ProjectsAddButton';
@@ -41,5 +41,5 @@ export default function Projects(props) {
 }
 
 Projects.propTypes = {
-  handleLinkClick: PropTypes.func
-}
+  handleLinkClick: PropTypes.func,
+};
