@@ -16,7 +16,6 @@ export default combineReducers({
   currentProjectModules: undoable(currentProjectModules, skipIfImageNodeNull),
   projects,
   currentProjectInfo,
-  moduleBank,
   draggingModule,
   selectedModule,
   boardSpecs,
