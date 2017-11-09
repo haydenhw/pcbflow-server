@@ -14,5 +14,6 @@ export default function DropdownMenu(props) {
 }
 
 DropdownMenu.propTypes = {
+  children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };

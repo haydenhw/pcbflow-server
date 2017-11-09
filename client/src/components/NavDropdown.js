@@ -7,9 +7,7 @@ import Dropdown from 'components/dropdown/Dropdown';
 import DropdownTrigger from 'components/dropdown/DropdownTrigger';
 import DropdownContent from 'components/dropdown/DropdownContent';
 
-import './styles/NavDropdown.css';
-
-export default class NavDropdown extends Component {
+export default class EditMenu extends Component {
   constructor() {
     super();
 
@@ -18,10 +16,6 @@ export default class NavDropdown extends Component {
     };
 
     this.toggleIsActive = this.toggleIsActive.bind(this);
-  }
-
-  routeToHome() {
-    hashHistory.push('/');
   }
 
   toggleIsActive() {
@@ -53,4 +47,3 @@ export default class NavDropdown extends Component {
     );
   }
 }
-

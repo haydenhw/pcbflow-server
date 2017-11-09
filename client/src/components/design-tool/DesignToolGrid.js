@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Layer, Rect, Line } from 'react-konva';
 
 export default function Grid(props) {
-  const cellWidth = props.cellWidth;
-  const gridWidth = props.gridWidth;
+  const { cellWidth, gridWidth } = props;
   const gridHeight = gridWidth;
   const gridLines = [];
 
