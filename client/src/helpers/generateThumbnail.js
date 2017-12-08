@@ -36,19 +36,6 @@ export function getCroppedStage(boardLayer) {
 }
 
 export default function generateThumbnail(boardLayer) {
-  // const croppedStage = cropStage(boardLayer);
-
-  // const boardClone = boardLayer.clone();
-  // const boardCloneAttrs = boardClone.get('.boardGroup')[0].attrs;
-  // const croppedStage = new Konva.Stage({
-  //   width: boardCloneAttrs.width + 20,
-  //   height: boardCloneAttrs.height + 20,
-  //   container: 'container',
-  // });
-  //
-  // boardCloneAttrs.x = 10;
-  // boardCloneAttrs.y = 10;
-  // croppedStage.add(boardClone);
   const croppedStage = getCroppedStage(boardLayer);
   return croppedStage.node.toJSON();
 }
