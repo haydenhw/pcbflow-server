@@ -25,9 +25,9 @@ class DesignToolStage extends Component {
 
   updateThumbnail() {
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
-    // const thumbnail = generateThumbnail(boardLayer);
+    const thumbnail = generateThumbnail(boardLayer);
 
-    // store.dispatch(actions.updateBoardThumbnail(thumbnail));
+    store.dispatch(actions.updateBoardThumbnail(thumbnail));
   }
 
   downloadPDF() {

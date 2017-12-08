@@ -23,7 +23,7 @@ export function getCroppedStage(boardLayer) {
     container: 'container'
   });
 
-  // document.body.removeChild(tempContainer);
+  document.body.removeChild(tempContainer);
 
   boardCloneAttrs.x = 10;
   boardCloneAttrs.y = 10;

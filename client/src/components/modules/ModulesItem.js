@@ -111,9 +111,9 @@ export default class ModulesItem extends PureComponent {
   updateThumbnail() {
     const module = this.refs.moduleGroup;
     const boardLayer = module.getParent().getParent().getParent();
-    // const thumbnail = generateThumbnail(boardLayer);
+    const thumbnail = generateThumbnail(boardLayer);
 
-    // store.dispatch(actions.updateBoardThumbnail(thumbnail));
+    store.dispatch(actions.updateBoardThumbnail(thumbnail));
   }
 
   getNewPosition() {
