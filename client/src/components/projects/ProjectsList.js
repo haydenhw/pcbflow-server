@@ -6,6 +6,7 @@ import shortid from 'shortid';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import { createTempContainer } from 'helpers/generateThumbnail';
 
 import ProjectsItemFrame from './ProjectsItemFrame';
 
@@ -13,7 +14,15 @@ import './projects-styles/floatGrid.css';
 import './projects-styles/ProjectsItemFrame.css';
 
 function convertToUrl(json) {
-  return json ? Konva.Node.create(json).toDataURL() : null;
+  let dataUrl;
+
+  if (json) {
+    const tempContainer = createTempContainer();
+    dataUrl = Konva.Node.create(json, 'container').toDataURL();
+    document.body.removeChild(tempContainer);
+  }
+
+  return dataUrl;
 }
 
 class ProjectsList extends Component {
@@ -71,4 +80,3 @@ export default connect(mapStateToProps)(ProjectsList);
 ProjectsList.propTypes = {
   projects: PropTypes.array,
 };
-

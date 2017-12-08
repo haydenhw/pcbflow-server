@@ -1,28 +1,29 @@
 import Konva from 'konva';
 
-export function cropStage(boardLayer) {
-  const boardClone = boardLayer.clone();
-  const boardCloneAttrs = boardClone.get('.boardGroup')[0].attrs;
-  const currentStageAttrs = boardLayer.getParent().attrs;
-  const croppedStage = new Konva.Stage({
-    width: boardCloneAttrs.width + 20,
-    height: boardCloneAttrs.height + 20,
-  });
+function createTempElement(elementId) {
+  return () => {
+    const tempElement = document.createElement('div');
+    tempElement.id = elementId;
 
-  boardCloneAttrs.x = 10;
-  boardCloneAttrs.y = 10;
+    document.body.appendChild(tempElement);
 
-  return croppedStage.add(boardClone);
+    return tempElement;
+  };
 }
+
+export const createTempContainer = createTempElement('container');
 
 export function getCroppedStage(boardLayer) {
   const boardClone = boardLayer.clone();
   const boardCloneAttrs = boardClone.get('.boardGroup')[0].attrs;
-  const currentStageAttrs = boardLayer.getParent().attrs;
+  const tempContainer = createTempContainer();
   const croppedStage = new Konva.Stage({
     width: boardCloneAttrs.width + 20,
     height: boardCloneAttrs.height + 20,
+    container: 'container'
   });
+
+  // document.body.removeChild(tempContainer);
 
   boardCloneAttrs.x = 10;
   boardCloneAttrs.y = 10;
@@ -35,17 +36,19 @@ export function getCroppedStage(boardLayer) {
 }
 
 export default function generateThumbnail(boardLayer) {
-  const boardClone = boardLayer.clone();
-  const boardCloneAttrs = boardClone.get('.boardGroup')[0].attrs;
-  const currentStageAttrs = boardLayer.getParent().attrs;
-  const croppedStage = new Konva.Stage({
-    width: boardCloneAttrs.width + 20,
-    height: boardCloneAttrs.height + 20,
-  });
+  // const croppedStage = cropStage(boardLayer);
 
-  boardCloneAttrs.x = 10;
-  boardCloneAttrs.y = 10;
-  croppedStage.add(boardClone);
-
-  return croppedStage.toJSON();
+  // const boardClone = boardLayer.clone();
+  // const boardCloneAttrs = boardClone.get('.boardGroup')[0].attrs;
+  // const croppedStage = new Konva.Stage({
+  //   width: boardCloneAttrs.width + 20,
+  //   height: boardCloneAttrs.height + 20,
+  //   container: 'container',
+  // });
+  //
+  // boardCloneAttrs.x = 10;
+  // boardCloneAttrs.y = 10;
+  // croppedStage.add(boardClone);
+  const croppedStage = getCroppedStage(boardLayer);
+  return croppedStage.node.toJSON();
 }

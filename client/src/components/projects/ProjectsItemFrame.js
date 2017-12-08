@@ -41,6 +41,6 @@ export default function ProjectsItemFrame(props) {
 ProjectsItemFrame.propTypes = {
   projectId: PropTypes.string,
   projectName: PropTypes.string.isRequired,
-  thumbnailSrc: PropTypes.string.isRequired,
+  // thumbnailSrc: PropTypes.string.isRequired,
   confirmDelete: PropTypes.func.isRequired,
 };
