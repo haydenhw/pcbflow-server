@@ -1,3 +1,9 @@
+export const TRIGGER_THUMBNAIL_UPDATE = 'TRIGGER_THUMBNAIL_UPDATE';
+export const triggerThumbnailUpdate = positions => ({
+  type: 'TRIGGER_THUMBNAIL_UPDATE',
+  positions,
+});
+
 export const UPDATE_ANCHOR_POSITIONS = 'UPDATE_ANCHOR_POSITIONS';
 export const updateAnchorPositions = positions => ({
   type: 'UPDATE_ANCHOR_POSITIONS',
@@ -27,4 +33,3 @@ export const updateBoardThumbnail = thumbnail => ({
   type: 'UPDATE_BOARD_THUMBNAIL',
   thumbnail,
 });
-

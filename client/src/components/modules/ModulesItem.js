@@ -3,6 +3,7 @@ import { Rect, Group, Image, Text } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import enforceRules from 'helpers/enforceRules';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
@@ -98,7 +99,11 @@ export default class ModulesItem extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.rotation !== prevProps.rotation) {
+    if (prevProps.metDependencies.length !== this.props.metDependencies.length) {
+      store.dispatch(actions.updateModuleFill());
+    }
+
+    if (prevProps.rotation !== this.props.rotation) {
       this.highlightRuleBreakingModules();
     }
 
@@ -108,13 +113,13 @@ export default class ModulesItem extends PureComponent {
     }
   }
 
-  updateThumbnail() {
-    const module = this.refs.moduleGroup;
-    const boardLayer = module.getParent().getParent().getParent();
-    const thumbnail = generateThumbnail(boardLayer);
-
-    store.dispatch(actions.updateBoardThumbnail(thumbnail));
-  }
+  // updateThumbnail() {
+  //   const module = this.refs.moduleGroup;
+  //   const boardLayer = module.getParent().getParent().getParent();
+  //   const thumbnail = generateThumbnail(boardLayer);
+  //
+  //   store.dispatch(actions.updateBoardThumbnail(thumbnail));
+  // }
 
   getNewPosition() {
     const { boundToSideIndex } = this.props;
@@ -172,7 +177,6 @@ export default class ModulesItem extends PureComponent {
 
   handleDragEnd() {
     const module = this.refs.moduleGroup;
-    this.updateThumbnail();
     this.highlightRuleBreakingModules();
   }
 

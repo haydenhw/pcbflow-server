@@ -1,19 +1,25 @@
 import * as actions from 'actions/indexActions';
 
-import { doesModifyBoard } from 'helpers/doesModifyBoard';
+import doesModifyBoard from 'helpers/doesModifyBoard';
 
 const defaultboardSpecs = {
   x: 10,
   y: 10,
   width: 600,
   height: 300,
-  // savedThumbnail: null,
-  // tempThumbnail: null,
+  savedThumbnail: null,
+  tempThumbnail: null,
   updateThumbnailTrigger: false,
 };
 
 export const boardSpecs = (state = defaultboardSpecs, action) => {
   switch (action.type) {
+    case actions.TRIGGER_THUMBNAIL_UPDATE:
+      return {
+        ...state,
+        updateThumbnailTrigger: !state.updateThumbnailTrigger,
+      };
+      break;
     case actions.UPDATE_BOARD_DIMENSIONS:
       return {
         ...state,

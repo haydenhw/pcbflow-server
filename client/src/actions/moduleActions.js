@@ -41,6 +41,12 @@ export const updateModulePosition = modulePosition => ({
   modulePosition,
 });
 
+export const UPDATE_MODULE_FILL = 'UPDATE_MODULE_FILL';
+export const updateModuleFill = moduleFill => ({
+  type: 'UPDATE_MODULE_FILL',
+  moduleFill,
+});
+
 export const UPDATE_MODULE_STROKE = 'UPDATE_MODULE_STROKE';
 export const updateModuleStroke = moduleStroke => ({
   type: 'UPDATE_MODULE_STROKE',
@@ -100,4 +106,3 @@ export function saveModulePosition(
     });
   };
 }
-

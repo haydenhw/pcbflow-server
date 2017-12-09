@@ -62,7 +62,7 @@
 .project-thumbnail {
   margin-top: 41px;
   height: 125px;
-  width: 200px;
+  /*width: 200px;*/
 }
 
 @media only screen and (max-width: 1425px) {
@@ -88,5 +88,3 @@
     width: 100%;
   }
 }
-
-
