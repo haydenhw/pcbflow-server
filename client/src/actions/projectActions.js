@@ -119,7 +119,6 @@ export const updateProjectSuccess = project => ({
 });
 
 export function updateProject(data, projectId) {
-  console.log('saving project to db')
   return (dispatch) => {
     const projectUrl = `${projectsUrl}/${projectId}`;
     fetch(projectUrl, {
@@ -134,9 +133,9 @@ export function updateProject(data, projectId) {
       .then((data) => {
         dispatch(updateProjectSuccess(data));
       })
-      .catch((err) => {
-        throw new Error(err);
-      });
+      // .catch((err) => {
+      //   throw new Error(err);
+      // });
   };
 }
 

@@ -53,18 +53,9 @@ export function SaveButton(props) {
   };
 
   const handleClick = () => {
-    const { updateThumbnail, updateLastSaved, recordSavedChanges } = props;
+    const { updateLastSaved, recordSavedChanges } = props;
 
-    const updateThenSave = new Promise((resolve) => {
-      console.log('updating thumbnail')
-      updateThumbnail();
-      resolve();
-    });
-
-    updateThenSave.then(() => {
-      saveProject();
-    });
-
+    saveProject();
     updateLastSaved();
     recordSavedChanges();
   };
@@ -88,7 +79,7 @@ const mapStateToProps = state => ({
   modules: state.currentProjectModules.present,
   projectName: state.currentProjectInfo.name,
   projects: state.projects.items,
-  thumbnail: state.boardSpecs.thumbnail,
+  thumbnail: state.boardSpecs.tempThumbnail,
   topLeftAnchorX: state.anchorPositions.topLeft.x,
   topLeftAnchorY: state.anchorPositions.topLeft.y,
 });

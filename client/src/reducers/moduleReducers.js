@@ -68,17 +68,6 @@ export const selectedModule = (state = {}, action) => {
   }
 };
 
-/*export const moduleBank = (state = [], action) => {
-  switch (action.type) {
-    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
-      return action.project.moduleBank;
-      break;
-
-    default:
-      return state;
-  }
-};*/
-
 export const currentProjectModules = (state = [], action) => {
   if (action.type) {
     switch (action.type) {
@@ -87,7 +76,6 @@ export const currentProjectModules = (state = [], action) => {
         break;
 
       case actions.PUSH_NEW_MODULE:
-      console.log('pushed new module')
         return [...state, action.module];
         break;
 

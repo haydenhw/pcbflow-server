@@ -9,10 +9,21 @@ export const hasUnsavedChanges = (state = false, action) => {
     case actions.UPDATE_BOARD_POSITION:
     case actions.UPDATE_BOARD_DIMENSIONS:
       return true;
-      break;
+    break;
     case actions.TOGGLE_HAS_UNSAVED_CHANGES:
       return !state;
     default:
       return state;
   }
+  if (isBoardAlteration(action.type)) {
+
+  }
 };
+
+//function compares a recently dispatched actions to a list of actions that modify
+//isProjectAlteringAction
+
+
+psuedoSwitch(action.type, () => {
+
+})

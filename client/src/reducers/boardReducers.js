@@ -1,12 +1,14 @@
 import * as actions from 'actions/indexActions';
-import { printModuleNames } from 'helpers/printModuleNames';
+
+import { doesModifyBoard } from 'helpers/doesModifyBoard';
 
 const defaultboardSpecs = {
   x: 10,
   y: 10,
   width: 600,
   height: 300,
-  thumbnail: null,
+  // savedThumbnail: null,
+  // tempThumbnail: null,
   updateThumbnailTrigger: false,
 };
 
@@ -33,10 +35,15 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
       };
       break;
     case actions.UPDATE_BOARD_THUMBNAIL:
-      printModuleNames(action.thumbnail)
       return {
         ...state,
-        thumbnail: action.thumbnail,
+        tempThumbnail: action.thumbnail,
+      };
+    break;
+    case actions.UPDATE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        savedThumbnail: state.tempThumbnail,
       };
     break;
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
@@ -44,27 +51,25 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
       const { x, y, width, height, thumbnail } = boardSpecs;
 
       return {
+        ...state,
         x,
         y,
         width,
         height,
-        thumbnail,
+        tempThumbnail: thumbnail,
+        savedThumbnail: thumbnail,
       };
-    break;
-    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
-    case actions.ROTATE_SELECTED_MODULE:
-    case actions.UPDATE_MODULE_POSITION:
-    case actions.PUSH_NEW_MODULE:
-    case actions.DELETE_SELECTED_MODULE:
+      break;
+  }
+
+  if (doesModifyBoard(action)) {
     return {
       ...state,
-      updateThumbnailTrigger: !state.updateThumbnailTrigger
-    }
-    break;
-
-    default:
-      return state;
+      updateThumbnailTrigger: !state.updateThumbnailTrigger,
+    };
   }
+
+  return state;
 };
 
 const defaultAnchorPositions = {
