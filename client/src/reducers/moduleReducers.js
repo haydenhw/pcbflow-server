@@ -87,6 +87,7 @@ export const currentProjectModules = (state = [], action) => {
         break;
 
       case actions.PUSH_NEW_MODULE:
+      console.log('pushed new module')
         return [...state, action.module];
         break;
 

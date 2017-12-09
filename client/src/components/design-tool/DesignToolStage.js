@@ -12,7 +12,7 @@ import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail, { getCroppedStage } from 'helpers/generateThumbnail';
 import { getTimeDateStamp } from 'helpers/getTimeStamp';
-
+import { getModulesObject } from 'helpers/printModuleNames';
 import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
@@ -20,14 +20,20 @@ import Grid from './DesignToolGrid';
 class DesignToolStage extends Component {
   constructor() {
     super();
+    this.state = {
+      serializedModules:  null
+    }
+
     this.deleteModule = this.deleteModule.bind(this);
   }
 
   updateThumbnail() {
-    const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
-    const thumbnail = generateThumbnail(boardLayer);
-
-    store.dispatch(actions.updateBoardThumbnail(thumbnail));
+    console.log('updatingThumnail')
+    if (this.refs) {
+      const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
+      const thumbnail = generateThumbnail(boardLayer);
+      store.dispatch(actions.updateBoardThumbnail(thumbnail));
+    }
   }
 
   downloadPDF() {
@@ -50,13 +56,28 @@ class DesignToolStage extends Component {
     pdf.save('test.pdf');
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { toggleShouldUpadateThumbnail, toggleShouldExportPDF } = this.props;
-
-    if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
-      this.updateThumbnail();
-      toggleShouldUpadateThumbnail();
+  componentDidMount() {
+  }
+  componentDidUpdate(prevProps, prevState) {
+    // const serializedModules = this.serializedModules(this.refs.stage);
+    // if (prevState.serializedModules !== serializedModules) {
+    //   this.setState({ serializedModules }, () => console.log(this.state))
+    // }
+      // this.setState({ serializedModules },() => console.log(this.state));
+      // console.log(serializedModules)
+    if (prevProps.updateThumbnailTrigger !== this.props.updateThumbnailTrigger) {
+      const { modules } = this.props;
+      // this.updateThumbnail();
+      setTimeout(this.updateThumbnail.bind(this), 1000)
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { boardSpecs, toggleShouldExportPDF } = this.props;
+
+    // if (nextProps.shouldUpdateThumbnail && !this.props.shouldUpdateThumbnail) {
+    //   this.updateThumbnail();
+    // }
 
     if (nextProps.shouldExportPDF && !this.props.shouldExportPDF) {
       this.downloadPDF();
@@ -68,6 +89,20 @@ class DesignToolStage extends Component {
     const { selectedModuleIndex } = this.props;
     store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
   }
+
+  serializedModules(stageRef) {
+    const jsonStage = stageRef.getStage().toJSON();
+    const children = (JSON.parse(jsonStage).children[1].children[0]);
+    const childrenClone = Object.assign({}, children);
+    const keysLength = Object.keys(childrenClone).length;
+
+    if (keysLength > 0) {
+      const deeperChildren = childrenClone.children[5].children;
+      const finalJSON = JSON.stringify(deeperChildren);
+      return finalJSON;
+    }
+  }
+
 
   render() {
     const {
@@ -126,7 +161,9 @@ class DesignToolStage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  // console.log(state.boardSpecs);
+  return ({
   currentProjectName: state.currentProjectInfo.name,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
@@ -134,8 +171,11 @@ const mapStateToProps = state => ({
   selectedModuleIndex: state.selectedModule.index,
   selectedModuleProps: state.selectedModule,
   boardSpecs: state.boardSpecs,
+  updateThumbnailTrigger: state.boardSpecs.updateThumbnailTrigger,
   anchorPositions: state.anchorPositions,
-});
+  modules: state.currentProjectModules.present,
+})
+};
 
 export default connect(mapStateToProps)(DesignToolStage);
 

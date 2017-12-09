@@ -46,14 +46,13 @@ class ProjectsList extends Component {
 
     const projectsList = projects.map((project) => {
       const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
-
       return (
         <ProjectsItemFrame
           key={shortid.generate()}
           projectName={project.name}
           projectId={project._id}
           thumbnailSrc={thumbnailSrc}
-          confirmDelete={this.confirmDelete()}
+          confirmDelete={this.confirmDelete(project._id, project.name)}
         />
       );
     });

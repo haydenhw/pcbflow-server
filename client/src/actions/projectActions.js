@@ -119,6 +119,7 @@ export const updateProjectSuccess = project => ({
 });
 
 export function updateProject(data, projectId) {
+  console.log('saving project to db')
   return (dispatch) => {
     const projectUrl = `${projectsUrl}/${projectId}`;
     fetch(projectUrl, {

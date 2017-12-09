@@ -1,10 +1,13 @@
 import * as actions from 'actions/indexActions';
+import { printModuleNames } from 'helpers/printModuleNames';
 
 const defaultboardSpecs = {
   x: 10,
   y: 10,
   width: 600,
   height: 300,
+  thumbnail: null,
+  updateThumbnailTrigger: false,
 };
 
 export const boardSpecs = (state = defaultboardSpecs, action) => {
@@ -30,11 +33,12 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
       };
       break;
     case actions.UPDATE_BOARD_THUMBNAIL:
+      printModuleNames(action.thumbnail)
       return {
         ...state,
         thumbnail: action.thumbnail,
       };
-      break;
+    break;
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
       const boardSpecs = action.project.boardSpecs;
       const { x, y, width, height, thumbnail } = boardSpecs;
@@ -46,7 +50,17 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         height,
         thumbnail,
       };
-      break;
+    break;
+    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+    case actions.ROTATE_SELECTED_MODULE:
+    case actions.UPDATE_MODULE_POSITION:
+    case actions.PUSH_NEW_MODULE:
+    case actions.DELETE_SELECTED_MODULE:
+    return {
+      ...state,
+      updateThumbnailTrigger: !state.updateThumbnailTrigger
+    }
+    break;
 
     default:
       return state;

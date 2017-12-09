@@ -7,21 +7,21 @@ const moduleSchema = mongoose.Schema({
 });
 
 const projectSchema = mongoose.Schema({
-  name: {type: String, required: true},
+  name: { type: String, required: true },
   boardSpecs: {
-    x: {type: Number, required: true},
-    y: {type: Number, required: true},
-    height: {type: Number, required: true},
-    width: {type: Number, required: true},
-    thumbnail: String
+    x: { type: Number, required: true },
+    y: { type: Number, required: true },
+    height: { type: Number, required: true },
+    width: { type: Number, required: true },
+    thumbnail: { type: String, required: true },
   },
-  modules: [{  
-    x: {type: Number, required: true},
-    y: {type: Number, required: true},
-    height: {type: Number, required: true},
-    width: {type: Number, required: true},
+  modules: [{
+    x: { type: Number, required: true },
+    y: { type: Number, required: true },
+    height: { type: Number, required: true },
+    width: { type: Number, required: true },
     stroke: String,
-    rotation: {type: Number, required: true},
+    rotation: { type: Number, required: true },
     boundToSideIndex: Number,
     innerGroupX: Number,
     innerGroupY: Number,
@@ -54,7 +54,7 @@ const userSchema = mongoose.Schema({
 const Modules = mongoose.model('Modules', moduleSchema);
 const Projects = mongoose.model('Projects', projectSchema);
 
-module.exports = {Modules , Projects};
+module.exports = { Modules , Projects};
 /*
 {
 "name": "Test Project",
@@ -63,6 +63,6 @@ module.exports = {Modules , Projects};
   "y": 50,
   "height": 300,
   "width": 500
-},
+ },
 "moudles": []
 }*/

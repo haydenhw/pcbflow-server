@@ -27,6 +27,7 @@ export class ProjectContainer extends Component {
 
     if (shouldRenderModal && modalProps) {
       const { projectId, projectName } = modalProps;
+
       return (
         <Modal
           handleCloseButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}

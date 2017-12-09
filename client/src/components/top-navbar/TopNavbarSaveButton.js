@@ -24,6 +24,13 @@ export function SaveButton(props) {
       topLeftAnchorY,
     } = props;
 
+    // const children = JSON.parse(thumbnail).
+    //   children[0].
+    //   children[0].
+    //   children[5].
+    //   children.
+    //   forEach(module => console.log(module.children[0].attrs.text));
+
     const updatedModules = modules.map((module) => {
       const x = module.x - topLeftAnchorX;
       const y = module.y - topLeftAnchorY;
@@ -49,6 +56,7 @@ export function SaveButton(props) {
     const { updateThumbnail, updateLastSaved, recordSavedChanges } = props;
 
     const updateThenSave = new Promise((resolve) => {
+      console.log('updating thumbnail')
       updateThumbnail();
       resolve();
     });
