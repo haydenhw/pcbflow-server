@@ -18,9 +18,11 @@
 }
 
 .image-container {
-  width: 100%;
+  width: 75%;
   height: 210px;
   margin: 0 auto;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .container:hover {

@@ -86,10 +86,6 @@ export default class ModulesItem extends PureComponent {
 
   callWithTimeout() {
     this.highlightRuleBreakingModules();
-
-    /*  if (!this.areDependenciesMet() && this.props.iconVisibityMode === "ALL") {
-        this.showDependencies();
-      }*/
   }
 
   componentDidMount() {
@@ -112,14 +108,6 @@ export default class ModulesItem extends PureComponent {
       this.props.toggleShouldCheckCollission();
     }
   }
-
-  // updateThumbnail() {
-  //   const module = this.refs.moduleGroup;
-  //   const boardLayer = module.getParent().getParent().getParent();
-  //   const thumbnail = generateThumbnail(boardLayer);
-  //
-  //   store.dispatch(actions.updateBoardThumbnail(thumbnail));
-  // }
 
   getNewPosition() {
     const { boundToSideIndex } = this.props;
