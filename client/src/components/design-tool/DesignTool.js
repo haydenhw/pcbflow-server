@@ -417,6 +417,10 @@ let DesignTool = class extends Component {
     hashHistory.push('/projects');
   }
 
+  routeToHome() {
+    hashHistory.push('/');
+  }
+
   showAllModuleIcons() {
     store.dispatch(actions.updateIconVisibity('ALL'));
   }
@@ -708,9 +712,12 @@ let DesignTool = class extends Component {
         <TopNavbar
           handleExportButtonClick={this.toggleShouldExportPDF.bind(this)}
           handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
+          handleHomeButtonClick={this.routeToHome}
+          handleIndexButtonClick={this.routeToProjects}
+          handleSaveButtonCLick={this.routeToProjects}
           projectName={currentProjectName}
           recordSavedChanges={this.recordSavedChanges}
-          routeToProjects={this.routeToProjects}
+          routeToHome={this.routeToHome}
           updateLastSaved={this.updateLastSaved}
           updateThumbnail={this.toggleShouldUpadateThumbnail}
 

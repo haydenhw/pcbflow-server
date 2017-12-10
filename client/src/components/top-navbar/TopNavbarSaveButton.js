@@ -9,7 +9,7 @@ import * as actions from 'actions/indexActions';
 import { projectsUrl } from 'config/endpointUrls';
 import './top-navbar-styles/TopNavbarButtons.css';
 
-export function SaveButton(props)
+export function SaveButton(props) {
   const { hasUnsavedChanges } = props;
 
   const saveProject = () => {

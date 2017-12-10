@@ -17,6 +17,9 @@ const titleStyle = {
 export default function TopNavbar(props) {
   const {
     handleExportButtonClick,
+    handleHomeButtonClick,
+    handleIndexButtonClick,
+    handleSaveButtonCLick,
     handleNameChange,
     projectName,
     recordSavedChanges,
@@ -27,7 +30,7 @@ export default function TopNavbar(props) {
 
   return (
     <div className="navWide">
-      <div className="iconWrapper" onClick={routeToProjects}>
+      <div className="iconWrapper" onClick={handleIndexButtonClick}>
         <FontAwesome
           className="fa-folder-open"
           name="fa-folder-open"
@@ -51,7 +54,12 @@ export default function TopNavbar(props) {
           icon={<FontAwesome name="fa-file-pdf-o" className="fa-file-pdf-o" />}
           text="Export"
         />
-        <NavDropdown />
+        <TopNavbarButton
+          className="nav-button home-button"
+          handleClick={handleHomeButtonClick}
+          icon={<span className="icon-home" />}
+          text=""
+        />
       </div>
     </div>
   );
@@ -61,7 +69,6 @@ TopNavbar.propTypes = {
   handleNameChange: PropTypes.func.isRequired,
   projectName: PropTypes.string,
   recordSavedChanges: PropTypes.func.isRequired,
-  routeToProjects: PropTypes.func.isRequired,
   updateLastSaved: PropTypes.func.isRequired,
   updateThumbnail: PropTypes.func.isRequired,
 };
