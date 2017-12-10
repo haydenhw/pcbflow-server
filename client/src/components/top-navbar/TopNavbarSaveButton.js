@@ -9,7 +9,9 @@ import * as actions from 'actions/indexActions';
 import { projectsUrl } from 'config/endpointUrls';
 import './top-navbar-styles/TopNavbarButtons.css';
 
-export function SaveButton(props) {
+export function SaveButton(props)
+  const { hasUnsavedChanges } = props;
+
   const saveProject = () => {
     const {
       x,
@@ -65,6 +67,8 @@ export function SaveButton(props) {
       <div>
         <FontAwesome name="fa-cloud" className="fa-cloud" />
         <span>Save</span>
+        {/* <span className="save-button-bar" /> */}
+        <span className={`save-button-bar ${hasUnsavedChanges ? 'active' : ''}`} />
       </div>
     </button>
   );
@@ -75,6 +79,7 @@ const mapStateToProps = state => ({
   y: state.boardSpecs.y,
   width: state.boardSpecs.width,
   height: state.boardSpecs.height,
+  hasUnsavedChanges: state.hasUnsavedChanges,
   id: state.currentProjectInfo.id,
   modules: state.currentProjectModules.present,
   projectName: state.currentProjectInfo.name,
