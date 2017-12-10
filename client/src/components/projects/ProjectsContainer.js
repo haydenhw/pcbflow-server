@@ -47,7 +47,7 @@ export class ProjectContainer extends Component {
   render() {
     return (
       <div>
-        <Projects handleLinkClick={this.routeToHome} />
+        <Projects handleHomeButtonClick={this.routeToHome} />
         {this.renderModal()}
       </div>
     );

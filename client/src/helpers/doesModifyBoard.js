@@ -7,8 +7,6 @@ export default function doesModifyBoard(action) {
     case actions.ROTATE_SELECTED_MODULE:
     case actions.UPDATE_ANCHOR_POSITIONS:
     case actions.UPDATE_BOARD_POSITION:
-    case actions.UPDATE_BOARD_STROKE:
-    case actions.UPDATE_MODULE_FILL:
     case actions.UPDATE_MODULE_POSITION:
       return true;
     default:

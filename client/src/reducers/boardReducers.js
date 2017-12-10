@@ -15,6 +15,8 @@ const defaultboardSpecs = {
 export const boardSpecs = (state = defaultboardSpecs, action) => {
   switch (action.type) {
     case actions.TRIGGER_THUMBNAIL_UPDATE:
+    case actions.UPDATE_BOARD_STROKE:
+    case actions.UPDATE_MODULE_FILL:
       return {
         ...state,
         updateThumbnailTrigger: !state.updateThumbnailTrigger,

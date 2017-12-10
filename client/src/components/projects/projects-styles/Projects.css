@@ -1,7 +1,7 @@
 .project-nav {
-    width: 100%;
-    position:fixed;
-    top:0px;
+  width: 100%;
+  position:fixed;
+  top:0px;
 }
 
 .project-nav-top {
@@ -9,9 +9,15 @@
   border-bottom: 1px solid #ccc;
   height: 63px;
   padding-left: 10px;
-  
+  position: relative;
 }
 
+.project-nav-top .home-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .project-nav-bottom {
   background: white;
   height: 63px;
@@ -80,10 +86,10 @@
 }
 
 @keyframes sk-bouncedelay {
-  0%, 80%, 100% { 
+  0%, 80%, 100% {
     -webkit-transform: scale(0);
     transform: scale(0);
-  } 40% { 
+  } 40% {
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
