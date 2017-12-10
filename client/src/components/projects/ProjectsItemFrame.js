@@ -17,15 +17,14 @@ export default function ProjectsItemFrame(props) {
   return (
     <div className="col3-project">
       <div
-        className="container"
+        className="image-container"
       >
         <div
-          className="image-container"
+          className="thumbnail-image"
           style={{ backgroundImage: `url(${props.thumbnailSrc})`}}
           onClick={() => fectchProject(props.projectId)}
           role="button"
         >
-          {/* <img className="project-thumbnail" src={props.thumbnailSrc} alt="project-thumbnail" /> */}
         </div>
         <div className="title-bar">
           <div className="title">
