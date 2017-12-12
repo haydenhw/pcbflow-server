@@ -5,7 +5,6 @@ html, body {height:100%;overflow:auto}
   position: relative;
   /*background-color: purple;*/
   background-color: #3d4752;
-  overflow: hidden;
   width: 100%;
   z-index: 1 ;
   position: fixed;
@@ -26,5 +25,3 @@ html, body {height:100%;overflow:auto}
   cursor: pointer;
   background-color:#f99c46;
 }
-
-

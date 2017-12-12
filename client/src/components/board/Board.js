@@ -105,7 +105,7 @@ class Board extends Component {
             height={bottomLeft.y - topLeft.y || height}
             fill="#e3e3e5"
             opacity="0.5"
-            stroke={this.props.stroke || '#ccc'}
+            stroke={this.props.stroke}
           />
 
           <Anchor
@@ -176,4 +176,3 @@ Board.propTypes = {
   stroke: PropTypes.string,
   unhideFloatingElements: PropTypes.func.isRequired,
 };
-

@@ -18,7 +18,7 @@ export default function TopNavbarButton(props) {
 
 TopNavbarButton.propTypes = {
   className: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
   icon: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
 };

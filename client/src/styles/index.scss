@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 body {
   margin: 0;
@@ -29,7 +30,7 @@ body {
 .hideContextMenu {
   position: absolute !important;
   top: -9999px !important;
-  left: -9999px !important;; 
+  left: -9999px !important;;
 }
 
 .react-contextmenu.react-contextmenu--visible {

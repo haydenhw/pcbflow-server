@@ -3,19 +3,19 @@ import * as actions from 'actions/indexActions';
 import doesModifyBoard from 'helpers/doesModifyBoard';
 
 const defaultboardSpecs = {
-  x: 10,
-  y: 10,
-  width: 600,
   height: 300,
   savedThumbnail: null,
+  stroke: '#ccc',
   tempThumbnail: null,
   updateThumbnailTrigger: false,
+  width: 600,
+  x: 10,
+  y: 10,
 };
 
 export const boardSpecs = (state = defaultboardSpecs, action) => {
   switch (action.type) {
     case actions.TRIGGER_THUMBNAIL_UPDATE:
-    case actions.UPDATE_BOARD_STROKE:
     case actions.UPDATE_MODULE_FILL:
       return {
         ...state,
@@ -39,6 +39,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
     case actions.UPDATE_BOARD_STROKE:
       return {
         ...state,
+        updateThumbnailTrigger: !state.updateThumbnailTrigger,
         stroke: action.boardStroke,
       };
       break;

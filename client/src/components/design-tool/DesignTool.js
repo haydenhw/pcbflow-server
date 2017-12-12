@@ -47,6 +47,7 @@ let DesignTool = class extends Component {
       disabledIconExceptions: null,
       image: null,
       isDraggingToBoard: false,
+      isNavMenuActive: false,
       isSideBarHidden: false,
       joyrideStep: 0,
       running: false,
@@ -66,6 +67,7 @@ let DesignTool = class extends Component {
     this.rotate = this.rotate.bind(this);
     this.toggleDocumentationCard = this.toggleDocumentationCard.bind(this);
     this.toggleDraggingToBoard = this.toggleDraggingToBoard.bind(this);
+    this.toggleNavMenu = this.toggleNavMenu.bind(this);
     this.toggleShouldUpadateThumbnail = this.toggleShouldUpadateThumbnail.bind(this);
     this.unhideFloatingElements = this.unhideFloatingElements.bind(this);
     this.updateClientPosition = this.updateClientPosition.bind(this);
@@ -434,6 +436,12 @@ let DesignTool = class extends Component {
     });
   }
 
+  toggleNavMenu() {
+    const { isNavMenuActive } = this.state;
+
+    this.setState({ isNavMenuActive: !isNavMenuActive });
+  }
+
   toggleDraggingToBoard() {
     this.setState({ isDraggingToBoard: true });
     store.dispatch(actions.toggleShouldRenderSideBar(false));
@@ -697,6 +705,7 @@ let DesignTool = class extends Component {
 
     const {
       isDraggingToBoard,
+      isNavMenuActive,
       shouldExportPDF,
       shouldUpdateThumbnail,
       shouldRenderDocumentation,
@@ -714,7 +723,9 @@ let DesignTool = class extends Component {
           handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
           handleHomeButtonClick={this.routeToHome}
           handleIndexButtonClick={this.routeToProjects}
+          handleMenuClick={this.toggleNavMenu}
           handleSaveButtonCLick={this.routeToProjects}
+          isNavMenuActive={isNavMenuActive}
           projectName={currentProjectName}
           recordSavedChanges={this.recordSavedChanges}
           routeToHome={this.routeToHome}

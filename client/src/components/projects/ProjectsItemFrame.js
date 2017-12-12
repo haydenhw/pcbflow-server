@@ -16,9 +16,7 @@ function fectchProject(projectId) {
 export default function ProjectsItemFrame(props) {
   return (
     <div className="col3-project">
-      <div
-        className="image-container"
-      >
+      <div className="project-card">
         <div
           className="thumbnail-image"
           style={{ backgroundImage: `url(${props.thumbnailSrc})`}}
@@ -41,6 +39,6 @@ export default function ProjectsItemFrame(props) {
 ProjectsItemFrame.propTypes = {
   projectId: PropTypes.string,
   projectName: PropTypes.string.isRequired,
-  // thumbnailSrc: PropTypes.string.isRequired,
+  thumbnailSrc: PropTypes.string.isRequired,
   confirmDelete: PropTypes.func.isRequired,
 };

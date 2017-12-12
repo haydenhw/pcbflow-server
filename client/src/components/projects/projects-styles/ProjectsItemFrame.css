@@ -9,7 +9,7 @@
   padding-bottom: 10px;
 }
 
-.image-container {
+.project-card {
   margin-top: 55px;
   width: 280px;
   border-radius: 4px;
@@ -26,7 +26,7 @@
   background-position: center;
 }
 
-.container:hover {
+.project-card:hover {
   transform: scale(1.1);
   transition-duration: .3s;
   cursor: pointer;
