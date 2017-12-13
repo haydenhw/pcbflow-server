@@ -1,7 +1,12 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
 .nav-button-group {
-  position: fixed;
+  position: absolute;
   right: 10px;
-  top: 6px;
+  top: 4px;
+  /*top: 50%;*/
+  /*transform: translateY(-50%);*/
   display: inline-block;
 }
 
@@ -60,6 +65,13 @@
 
 .nav-button:focus {
   outline: 0;
+}
+
+.home-button,
+.export-button, {
+  @include respond-to(handhelds) {
+    @include hide();
+  }
 }
 
 .fa-cloud,

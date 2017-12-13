@@ -10,6 +10,12 @@
   animation: fade-in 1s ease-out $seconds forwards;
 }
 
+@mixin hide () {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
 @mixin respond-to($media) {
   @if $media == handhelds {
     @media only screen and (max-width: $break-small) { @content; }

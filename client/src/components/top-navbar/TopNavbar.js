@@ -67,7 +67,7 @@ export default function TopNavbar(props) {
         <PopupMenu>
           <PopupMenuTrigger handleClick={handleMenuClick}>
             <TopNavbarButton
-              className="nav-button home-button"
+              className="nav-button"
               icon={<span className="icon-menu" />}
               text=""
             />

@@ -35,6 +35,20 @@ $placeholder-font-size: 18px;
 // element structure
 $onboard-screen-top-margin: 15vh;
 
+// z-index map
+$z-index: (
+  footer: 100,
+  nav: 200,
+  modal: 100,
+  nav-menu: 9999,
+  sidebar: 100,
+  info-card: 100,
+  info-button: 100,
+  info-button-icon: 200,
+  project-nav-top: 100,
+  project-nav-bottom: 200,
+);
+
 // break points
 $break-small: 480px;
 $break-medium: 768px;

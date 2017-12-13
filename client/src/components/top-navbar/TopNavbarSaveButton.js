@@ -7,7 +7,7 @@ import store from 'reduxFiles/store';
 import * as actions from 'actions/indexActions';
 
 import { projectsUrl } from 'config/endpointUrls';
-import './top-navbar-styles/TopNavbarButtons.css';
+import './top-navbar-styles/TopNavbarButtons.scss';
 
 export function SaveButton(props) {
   const { hasUnsavedChanges } = props;
