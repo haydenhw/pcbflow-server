@@ -1,6 +1,8 @@
+@import 'variables';
+
 .modal-body {
   position: fixed;
-  z-index: 1;
+  z-index: map-get($z-index, modal);
   left: 0;
   top: 0;
   width: 100%;
@@ -32,7 +34,7 @@
 
 .modal-scroll-wrapper {
   max-height: 70vh;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 .modal-text-parent {
@@ -47,7 +49,7 @@
 }
 
 .modal-text-child p {
-  margin-top: 0; 
+  margin-top: 0;
   display: inline-block;
 }
 
@@ -57,7 +59,7 @@
   letter-spacing: .02em;
   color: #424242;
   font-family: Lato;
-  
+
   display: block;
   width: 75%;
   margin: 0 auto;
@@ -67,7 +69,7 @@
   display: block;
   margin: 0 auto;
   margin-top: 55px;
-  margin-bottom: 55px; 
+  margin-bottom: 55px;
 }
 
 .modal-button-wrapper {
@@ -91,7 +93,7 @@
 
 .modal-button-right {
   background-color: #4285f4;
-  border: none; 
+  border: none;
   color: white;
 }
 
@@ -110,11 +112,11 @@
 }
 
 .modal-close:hover {
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .modal-close:hover {
-  
+
 }
 
 .modal-button-right:hover {
@@ -140,16 +142,16 @@
     padding: 40px 15px;
     padding-bottom: 125px;
   }
-  
+
   .modal-image {
     margin:  20px auto;
     margin-bottom: 0;
   }
-  
+
   .modal-text-parent {
     font-size: .7em;
   }
-  
+
   .list-wrapper {
     font-size: .7em;
     width: 243px;

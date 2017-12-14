@@ -32,11 +32,8 @@
   cursor: pointer;
 }
 
-.round-button-icon {
-  z-index: map-get($z-index, info-button-icon);
-}
-
 .fa-question {
+  position: absolute;
   z-index: map-get($z-index, info-button-icon);
   top: 7px;
   left: 12px;
