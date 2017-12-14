@@ -38,15 +38,15 @@ $onboard-screen-top-margin: 15vh;
 // z-index map
 $z-index: (
   footer: 100,
-  nav: 200,
-  modal: 100,
-  nav-menu: 9999,
-  sidebar: 100,
-  info-card: 100,
-  info-button: 100,
   info-button-icon: 300,
-  project-nav-top: 100,
+  info-button: 200,
+  info-card: 100,
+  modal: 100,
+  nav: 200,
+  popup-menu: 9999,
   project-nav-bottom: 200,
+  project-nav-top: 100,
+  sidebar: 100,
 );
 
 // break points

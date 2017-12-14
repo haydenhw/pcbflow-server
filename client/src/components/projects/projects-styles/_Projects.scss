@@ -1,3 +1,5 @@
+@import 'variables';
+
 .project-nav {
   width: 100%;
   position:fixed;
@@ -22,7 +24,7 @@
 .project-nav-bottom {
   background: white;
   height: 63px;
-  z-index: 100;
+  z-index: map-get($z-index, project-nav-bottom);
 }
 
 .project-nav {
@@ -30,7 +32,7 @@
   background-color: #3d4752;
   overflow: hidden;
   width: 100%;
-  z-index: 1 ;
+  z-index: map-get($z-index, info-button);
   position: fixed;
 }
 
