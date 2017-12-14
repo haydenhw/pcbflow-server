@@ -1,5 +1,7 @@
 @import '../styles/mixins';
 
+// html, body {height:100%;overflow:auto}
+
 html, body {height:100%;overflow:auto}
 
 .navWide {
@@ -10,6 +12,11 @@ html, body {height:100%;overflow:auto}
   z-index: 1 ;
   position: fixed;
 }
+  @include respond-to(handhelds) {
+    .navWide {
+      background-color: teal;
+    }
+  }
 
 .iconWrapper {
   height: 50px;
