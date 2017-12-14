@@ -3,11 +3,13 @@
 
 .popup-menu {
   display: inline-block;
+  font-family: sans-serif;
   font-size: 16px;
   font-weight: 300;
   text-align: center;
   z-index: map-get($z-index, popup-menu);
 
+  @include hide();
   @include respond-to(handhelds) {
     position: static;
   }
@@ -72,12 +74,12 @@
 .popup-menu-item {
   border: 1px solid $grey-medium-light;
   border-bottom: 0;
-  // padding: 8px 10px;
-  text-transform: uppercase;
+  cursor: pointer;
   min-width: 0;
   padding-left: 5px;
   position: relative;
   text-align: left;
+
 
   &:last-child {
     border-bottom: 1px solid $grey-medium-light;
@@ -93,7 +95,7 @@
 
   .popup-menu-item-text {
     display: inline-block;
-    font-size: 13px;
+    font-size: 14px;
     padding: 8px 15px;
     text-decoration: none;
     color: #000;

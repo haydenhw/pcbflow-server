@@ -2,18 +2,11 @@
 @import 'mixins';
 
 .navWide {
-  position: relative;
-  /*background-color: purple;*/
   background-color: #3d4752;
+  position: fixed;
   width: 100%;
   z-index: map-get($z-index, nav);
-  position: fixed;
 }
-  @include respond-to(handhelds) {
-    .navWide {
-      background-color: teal;
-    }
-  }
 
 .iconWrapper {
   height: 50px;

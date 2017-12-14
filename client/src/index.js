@@ -11,7 +11,7 @@ import LandingPage from 'components/landing-page/LandingPage';
 
 import './styles/_reset.scss';
 import './styles/index.scss';
-import './styles/icons/_style.scss'
+import './styles/icons/style.css'
 
 ReactDOM.render(
   <Provider store={store}>

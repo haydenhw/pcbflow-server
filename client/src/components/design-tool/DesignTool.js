@@ -11,6 +11,7 @@ import store from 'reduxFiles/store';
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import getTimeStamp from 'helpers/getTimeStamp';
+import { isMobile } from 'helpers/isMobile';
 import rotate from 'helpers/rotate';
 
 import Board from 'components/board/Board';
@@ -48,6 +49,7 @@ let DesignTool = class extends Component {
       image: null,
       isDraggingToBoard: false,
       isNavMenuActive: false,
+      isMobile: false,
       isSideBarHidden: false,
       joyrideStep: 0,
       running: false,
@@ -95,7 +97,8 @@ let DesignTool = class extends Component {
     document.onkeydown = this.handleKeyPress;
 
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
-    window.onbeforeunload = () => this.props.hasUnsavedChanges && !devMode ? '' : null;
+    window.onbeforeunload = () => (this.props.hasUnsavedChanges && !devMode) ? '' : null;
+    window.onresize = this.checkIfMobile.bind(this);
   }
 
   removeHanlders() {
@@ -124,6 +127,8 @@ let DesignTool = class extends Component {
         store.dispatch(actions.toggleShouldRenderModal());
       }
     }
+
+    this.checkIfMobile();
   }
 
   componentDidMount() {
@@ -174,6 +179,10 @@ let DesignTool = class extends Component {
           y: cd.moduleY - cd.boardY - (cd.height / 2),
         };
     }
+  }
+
+  checkIfMobile() {
+    this.setState({ isMobile: isMobile() });
   }
 
   dropDraggingModule() {
@@ -706,6 +715,7 @@ let DesignTool = class extends Component {
     const {
       isDraggingToBoard,
       isNavMenuActive,
+      isMobile,
       shouldExportPDF,
       shouldUpdateThumbnail,
       shouldRenderDocumentation,
@@ -726,6 +736,7 @@ let DesignTool = class extends Component {
           handleMenuClick={this.toggleNavMenu}
           handleSaveButtonCLick={this.routeToProjects}
           isNavMenuActive={isNavMenuActive}
+          isMobile={isMobile}
           projectName={currentProjectName}
           recordSavedChanges={this.recordSavedChanges}
           routeToHome={this.routeToHome}

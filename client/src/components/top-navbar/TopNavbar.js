@@ -25,6 +25,7 @@ export default function TopNavbar(props) {
     handleSaveButtonCLick,
     handleNameChange,
     isNavMenuActive,
+    isMobile,
     projectName,
     recordSavedChanges,
     routeToProjects,
@@ -32,8 +33,10 @@ export default function TopNavbar(props) {
     updateThumbnail,
   } = props;
 
+  const navWidth = isMobile ? '25%' : '100%';
+
   return (
-    <div className="navWide">
+    <div className="navWide" style={{ width: navWidth}}>
       <div className="iconWrapper" onClick={handleIndexButtonClick}>
         <FontAwesome
           className="fa-folder-open"
@@ -67,8 +70,8 @@ export default function TopNavbar(props) {
         <PopupMenu>
           <PopupMenuTrigger handleClick={handleMenuClick}>
             <TopNavbarButton
-              className="nav-button"
-              icon={<span className="icon-menu" />}
+              className="nav-button menu-button"
+              icon={<span className="icon-menu1" />}
               text=""
             />
           </PopupMenuTrigger>
