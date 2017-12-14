@@ -10,8 +10,8 @@ import ProjectsContainer from 'components/projects/ProjectsContainer';
 import LandingPage from 'components/landing-page/LandingPage';
 
 import './styles/_reset.scss';
+import './styles/index.scss';
 import './styles/icons/_style.scss'
-import './styles/_index.scss';
 
 ReactDOM.render(
   <Provider store={store}>
