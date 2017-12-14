@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import './side-bar-styles/SideBarIcon.css';
+import './side-bar-styles/_SideBarIcon.scss';
 
 export default class SideBarIcon extends Component {
   constructor() {

@@ -10,9 +10,9 @@ import TopNavbarButton from 'components/top-navbar/TopNavbarButton';
 import ProjectsList from './ProjectsList';
 import ProjectsAddButton from './ProjectsAddButton';
 
-import 'components/top-navbar/top-navbar-styles/TopNavbar.css';
-import './projects-styles/floatGrid.css';
-import './projects-styles/Projects.css';
+import 'components/top-navbar/top-navbar-styles/_TopNavbar.scss';
+import './projects-styles/_floatGrid.scss';
+import './projects-styles/_Projects.scss';
 
 export default function Projects({ handleHomeButtonClick }) {
   return (

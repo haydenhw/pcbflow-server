@@ -9,7 +9,7 @@ import TopNavbarEditableText from './TopNavbarEditableText';
 import TopNavbarSaveButton from './TopNavbarSaveButton';
 import TopNavbarButton from './TopNavbarButton';
 
-import './top-navbar-styles/TopNavbar.css';
+import './top-navbar-styles/_TopNavbar.scss';
 
 const titleStyle = {
   color: 'white',

@@ -3,8 +3,8 @@ import { hashHistory } from 'react-router';
 
 import LandingPageCard from './LandingPageCard';
 
-import './landing-page-styles/LandingPage.scss';
-import './landing-page-styles/floatGrid.css';
+import './landing-page-styles/_LandingPage.scss';
+import './landing-page-styles/_floatGrid.scss';
 
 export default function LandingPage() {
   const imgUrl = 'images/circuit-tree-red-rotated.jpg';

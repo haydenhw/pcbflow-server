@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './footer-styles/Footer.css';
+import './footer-styles/_Footer.scss';
 
 export default function Footer(props) {
   const timeLastSaved = (

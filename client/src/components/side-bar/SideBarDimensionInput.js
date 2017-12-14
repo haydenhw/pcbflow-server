@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import './side-bar-styles/SideBarDimensionInput.css';
+import './side-bar-styles/_SideBarDimensionInput.scss';
 
 class SideBarDimensionInput extends Component {
   constructor() {

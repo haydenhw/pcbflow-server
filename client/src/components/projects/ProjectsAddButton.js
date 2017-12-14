@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import './projects-styles/ProjectsAddButton.css';
+import './projects-styles/_ProjectsAddButton.scss';
 
 export default class ProjectsAddButton extends Component {
   handleClick() {

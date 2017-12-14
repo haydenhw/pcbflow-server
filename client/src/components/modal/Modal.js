@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
 import RootModal from './RootModal';
-import './Modal.css';
+import './_Modal.scss';
 
 export default class Modal extends Component {
 

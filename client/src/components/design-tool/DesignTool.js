@@ -30,9 +30,9 @@ import DesignToolTodo from './DesignToolTodo';
 import { tourSteps, dependecyDemo } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
 
-import './design-tool-styles/DesignToolDocumentationCard.css';
-import './design-tool-styles/DesignToolOnboardModal.css';
-import './design-tool-styles/joyride.css';
+import './design-tool-styles/_DesignToolDocumentationCard.scss';
+import './design-tool-styles/_DesignToolOnboardModal.scss';
+import './design-tool-styles/_joyride.scss';
 
 import { devMode } from 'config/devMode';
 

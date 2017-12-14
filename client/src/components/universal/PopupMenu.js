@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './popup-menu.scss';
+import './_popup-menu.scss';
 
 export default function PopupMenu(props) {
   const { className, children } = props;

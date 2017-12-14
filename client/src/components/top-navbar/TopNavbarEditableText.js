@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InlineEdit from 'react-edit-inline';
 
-import './top-navbar-styles/TopNavbarEditableText.css';
+import './top-navbar-styles/_TopNavbarEditableText.scss';
 
 export default class TopNavbarEditableText extends React.Component {
   constructor() {

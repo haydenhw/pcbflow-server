@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './design-tool-styles/DesignToolInfoButton.scss';
+import './design-tool-styles/_DesignToolInfoButton.scss';
 
 export default function DesignToolInfoButton(props) {
   const { clickHandler, icon } = props;

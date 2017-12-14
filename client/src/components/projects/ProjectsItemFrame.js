@@ -6,8 +6,8 @@ import store from 'reduxFiles/store';
 
 import DeleteButton from './ProjectsDeleteButton';
 
-import './projects-styles/ProjectsItemFrame.css';
-import './projects-styles/floatGrid.css';
+import './projects-styles/_ProjectsItemFrame.scss';
+import './projects-styles/_floatGrid.scss';
 
 function fectchProject(projectId) {
   store.dispatch(actions.fetchProjectById(projectId));

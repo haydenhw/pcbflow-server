@@ -10,8 +10,8 @@ import { createTempContainer } from 'helpers/generateThumbnail';
 
 import ProjectsItemFrame from './ProjectsItemFrame';
 
-import './projects-styles/floatGrid.css';
-import './projects-styles/ProjectsItemFrame.css';
+import './projects-styles/_floatGrid.scss';
+import './projects-styles/_ProjectsItemFrame.scss';
 
 function convertToUrl(json) {
   let dataUrl;

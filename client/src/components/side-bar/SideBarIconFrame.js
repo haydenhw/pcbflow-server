@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import generatePriceString from 'helpers/generatePriceString';
 
-import './side-bar-styles/SideBarIconFrame.css';
+import './side-bar-styles/_SideBarIconFrame.scss';
 
 export default function SideBarIconFrame(props) {
   const fadeOut = {

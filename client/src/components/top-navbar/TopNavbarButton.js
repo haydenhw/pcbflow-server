@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './top-navbar-styles/TopNavbarButtons.scss';
+import './top-navbar-styles/_TopNavbarButtons.scss';
 
 export default function TopNavbarButton(props) {
   const { className, handleClick, icon, text } = props;

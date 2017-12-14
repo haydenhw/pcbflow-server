@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './design-tool-styles/DesignToolDocumentationCardKey.css';
+import './design-tool-styles/_DesignToolDocumentationCardKey.scss';
 
 export default function DesignToolDocumentationCardKey(props) {
   const { text } = props;

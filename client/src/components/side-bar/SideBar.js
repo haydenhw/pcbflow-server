@@ -5,7 +5,7 @@ import SideBarIconList from './SideBarIconList';
 import DimensionForm from './SideBarDimensionInput';
 import SideBarDependencyMessage from './SideBarDependencyMessage';
 
-import './side-bar-styles/SideBar.css';
+import './side-bar-styles/_SideBar.scss';
 
 export default function SideBar(props) {
   const style = {

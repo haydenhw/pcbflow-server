@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Interactive from 'components/Interactable';
 
-import './design-tool-styles/DesignToolTodo.css';
+import './design-tool-styles/_DesignToolTodo.scss';
 
 const draggableOptions = {
   onmove: (event) => {

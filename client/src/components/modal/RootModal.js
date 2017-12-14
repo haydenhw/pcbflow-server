@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import store from 'reduxFiles/store';
-import './RootModal.css';
+import './_RootModal.scss';
 
 export default class RootModal extends Component {
   componentDidMount() {
