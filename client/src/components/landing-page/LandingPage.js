@@ -1,91 +1,111 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
 
 import LandingPageCard from './LandingPageCard';
 
-import './landing-page-styles/_LandingPage.scss';
-import './landing-page-styles/_floatGrid.scss';
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      scrollY: 0,
+    }
+  }
 
-export default function LandingPage() {
-  const imgUrl = 'images/circuit-tree-red-rotated.jpg';
-  const backgroundStyle = {
-    backgroundImage:
-    `linear-gradient(
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    ),
-    url(${imgUrl})`,
-    backgroundSize: '75%',
-    backgroundPosition: 'center',
-  };
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll.bind(this));
+  }
 
-  return (
-    <div className="landing-page-body">
-      <div className="landing-navbar">
-        <img className="white-logo-image" src="images/white-logo.png" alt="" />
-        <span className="landing-page-logo-text" >PCB<span className="bold">flow</span></span>
-      </div>
-      <section style={backgroundStyle} className="landing-page-content">
-        <div className="landing-page-text">
-          <span>Design cutting edge electronics in minutes</span>
-        </div>
-        <div
-          role="button"
-          className="landing-page-button"
-          onClick={() => hashHistory.push('/projects')}
-        >
-          Get Started
-        </div>
-      </section>
-      <main className="landing-page-main">
-        <div className="landing-page-section-heading">
-          <h2>Bring your ideas to life</h2>
-          <p>Learn to create custom circuit board designs with PCBflow, save work in progress diagrams, and export them when you're ready to build the real thing.</p>
-        </div>
-        <section className="design-to-pcb-visual">
-          <div className="computer-wrapper">
-            <img className="computer-image inline-image" src="images/computer.png" alt="computer" />
-            <img className="design-tool-screenshot" src="images/design-tool-screenshot.png" alt="app screenshot" />
+  handleScroll() {
+    this.setState({ scrollY: window.scrollY })
+  }
+
+  getHeroOpacity() {
+    const { scrollY } = this.state;
+    // return 0;
+    // return (1 - (scrollY / 200));
+  }
+
+  render() {
+    const { scrollY } = this.state;
+    return(
+
+      <div className="landing-container">
+        <div className={`header ${scrollY > 0 ? 'header-white' : ''}`} >
+          <div className="header-logo">
+            <div className="header-logo-alignment-helper"></div>
+            <img className="header-logo-image" src={require("../images/logo-orange-cropped.png")} alt="logo"/>
+            <span className="header-logo-text">
+              <span className="header-logo-text-bold">PCB</span>
+              <span className="header-logo-text-light">flow</span>
+            </span>
           </div>
-          <img className="dots inline-image" src="images/dots.svg" alt="dots" />
-          <img className="less-dots inline-image" src="images/less-dots.svg" alt="dots" />
-          <img className="arrows inline-image" src="images/arrows.svg" alt="arrow" />
-          <img className="circuit-board-image inline-image" src="images/real-pcb.jpg" alt="circuit board" />
+          <div className="header-button-wrapper">
+            <button className={`${scrollY > 0 ? '' : 'header-button-hidden'} header-button onboard-button`}>
+              <span className="header-button-text">GET STARTED</span>
+              <span className="icon-arrow-right"></span>
+            </button>
+          </div>
+        </div>
+        <section className="hero" /*style={{ opacity: this.getHeroOpacity() }}*/>
+          {/* <div className="hero-circle-wrapper"> */}
+            <div className="hero-circle">
+              <div className="hero-circle-content">
+                <h1 className="hero-title">Design cutting edge electronics in minutes.</h1>
+                <button className="onboard-button hero-button">GET STARTED</button>
+              </div>
+            </div>
+          {/* </div> */}
         </section>
-
-        <section className="landing-page-card-section row">
-          <div className="landing-page-section-heading">
-            <h2>Design with ease</h2>
-            <p>PCBflow's user friendly drag and drop interface is a breeze to learn and use.</p>
+        <section className="demo-section">
+          {/* Consider removing the wrapper class below if not necessary */}
+          <div className="section-heading-wrapper">
+            <h2 className="section-heading">Bring your ideas to life</h2>
+            <p className="section-sub-heading">Learn to create custom circuit board designs with PCBflow, save work in progress diagrams, and export them when you're ready to build the real thing.</p>
           </div>
-          <div className="landing-page-card-wrapper">
+          <div className="design-to-pcb-demo">
+            <div className="computer-wrapper">
+              <img className="computer-image inline-image" src={require("../images/computer.png")} alt="computer" />
+              <img className="design-tool-screenshot" src={require("../images/design-tool-screenshot.png")} alt="app screenshot" />
+            </div>
+            <img className="dots inline-image" src={require("../images/dots.svg")} alt="dots" />
+            <img className="less-dots inline-image" src={require("../images/less-dots.svg")} alt="dots" />
+            <img className="arrows-right inline-image" src={require("../images/arrows-right.svg")} alt="arrow" />
+            <img className="arrows-down inline-image" src={require("../images/arrows-down.svg")} alt="arrow" />
+            <img className="circuit-board-image inline-image" src={require("../images/real-pcb.jpg")} alt="circuit board" />
+          </div>
+        </section>
+        <section className="info-card-section row">
+          <div className="section-heading-wrapper section-heading-wrapper-info">
+            <h2 className="section-heading">Design with ease</h2>
+            <p className="section-sub-heading">PCBflow's user friendly drag and drop interface is a breeze to learn and use.</p>
+          </div>
+          <div className="info-card-wrapper">
             <div className="col4">
               <LandingPageCard
-                className="landing-page-card"
-                icon="images/info-card-test-icon.png"
-                title="No Engineers Required"
+                infoType="no-engineer"
+                iconClassName="card-icon icon-wrench"
+                title="No Engineering Required"
                 content="PCBflow abstracts away the hard parts of printed circuit board design. You don’t need to worry about routing or connections."
               />
             </div>
             <div className="col4">
               <LandingPageCard
-                className="landing-page-card "
-                icon="images/info-card-test-icon.png"
+                infoType="tutorial"
+                iconClassName="card-icon icon-school"
                 title="Interactive Tutorial"
                 content="Our step by step tutorial will teach you how to reason about printed circuit board design while demostrating how to use the tool."
               />
             </div>
             <div className="col4">
               <LandingPageCard
-                className="landing-page-card "
-                icon="images/info-card-test-icon.png"
+                infoType="price-estimate"
+                iconClassName="card-icon icon-credit"
                 title="Instant Price Estimates"
                 content="Get a price estimate that updates automatically as you add and remove modules so you can keep your project under budget."
               />
             </div>
           </div>
         </section>
-      </main>
-    </div>
-  );
+      </div>
+    );
+  }
 }

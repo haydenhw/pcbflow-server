@@ -76,11 +76,11 @@ export default function TopNavbar(props) {
             />
           </PopupMenuTrigger>
           <PopupMenuContent isActive={isNavMenuActive}>
-            <li className="popup-menu-item">
+            <li onClick={handleHomeButtonClick} className="popup-menu-item">
               <span className="popup-menu-item-icon icon-home" />
               <span className="popup-menu-item-text">Home</span>
             </li>
-            <li className="popup-menu-item">
+            <li onClick={handleExportButtonClick} className="popup-menu-item">
               <FontAwesome name="fa-file-pdf-o" className="popup-menu-item-icon fa-file-pdf-o" />
               <span className="popup-menu-item-text">Export PDF</span>
             </li>
