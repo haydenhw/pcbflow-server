@@ -77,13 +77,13 @@ module.exports = {
     },
     extensions: ['', '.js', '.jsx']
   },
-    
+
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
-    
-    
-    
+
+
+
     loaders: [
       // Default loader: load all assets that are not handled
       // by other loaders with the url loader.
@@ -120,7 +120,7 @@ module.exports = {
         include: paths.appSrc,
         loader: 'babel',
         query: {
-          
+
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
@@ -157,11 +157,11 @@ module.exports = {
       },
     ]
   },
-  
+
   sassLoader: {
    includePaths: [path.join(__dirname, '../', 'src', 'styles')]
   },
-  
+
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
@@ -201,7 +201,7 @@ module.exports = {
     // makes the discovery automatic so you don't have to restart.
     // See https://github.com/facebookincubator/create-react-app/issues/186
     new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-    
+
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

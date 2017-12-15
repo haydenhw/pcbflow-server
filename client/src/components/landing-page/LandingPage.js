@@ -1,6 +1,7 @@
 import React from 'react';
 
 import LandingPageCard from './LandingPageCard';
+import './landing-page-styles/landing-styles-index.scss';
 
 export default class App extends React.Component {
   constructor() {
@@ -26,13 +27,14 @@ export default class App extends React.Component {
 
   render() {
     const { scrollY } = this.state;
-    return(
+    const style = { 'backgroundImage': "url('images/arduino1440.png')" };
 
+    return (
       <div className="landing-container">
         <div className={`header ${scrollY > 0 ? 'header-white' : ''}`} >
           <div className="header-logo">
             <div className="header-logo-alignment-helper"></div>
-            <img className="header-logo-image" src={require("../images/logo-orange-cropped.png")} alt="logo"/>
+            <img className="header-logo-image" src="images/logo-orange-cropped.png" alt="logo"/>
             <span className="header-logo-text">
               <span className="header-logo-text-bold">PCB</span>
               <span className="header-logo-text-light">flow</span>
@@ -63,14 +65,14 @@ export default class App extends React.Component {
           </div>
           <div className="design-to-pcb-demo">
             <div className="computer-wrapper">
-              <img className="computer-image inline-image" src={require("../images/computer.png")} alt="computer" />
-              <img className="design-tool-screenshot" src={require("../images/design-tool-screenshot.png")} alt="app screenshot" />
+              <img className="computer-image inline-image" src="images/computer.png" alt="computer" />
+              <img className="design-tool-screenshot" src="images/design-tool-screenshot.png" alt="app screenshot" />
             </div>
-            <img className="dots inline-image" src={require("../images/dots.svg")} alt="dots" />
-            <img className="less-dots inline-image" src={require("../images/less-dots.svg")} alt="dots" />
-            <img className="arrows-right inline-image" src={require("../images/arrows-right.svg")} alt="arrow" />
-            <img className="arrows-down inline-image" src={require("../images/arrows-down.svg")} alt="arrow" />
-            <img className="circuit-board-image inline-image" src={require("../images/real-pcb.jpg")} alt="circuit board" />
+            <img className="dots inline-image" src="images/dots.svg" alt="dots" />
+            <img className="less-dots inline-image" src="images/less-dots.svg" alt="dots" />
+            <img className="arrows-right inline-image" src="images/arrows-right.svg" alt="arrow" />
+            <img className="arrows-down inline-image" src="images/arrows-down.svg" alt="arrow" />
+            <img className="circuit-board-image inline-image" src="images/real-pcb.jpg" alt="circuit board" />
           </div>
         </section>
         <section className="info-card-section row">

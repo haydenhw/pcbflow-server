@@ -1,28 +1,45 @@
-$primary-color: #ffa726;
-$tertiary-color: #81d4fa;
+$font-heading: 'Roboto Condensed', sans-serif;
+// $font-paragrpah: 'Open Sans', sans-serif;
+$font-paragrpah: 'Roboto', sans-serif;
 
-// colors
+
+
 // $aqua: #1dd7b9;
-// $black: #000;
 // $black-faded: #424242;
+// $black: #000;
 // $blue-grey: #f0f4f7;
 // $blue-light: #f2faff;
 // $blue-steel-hover: #4c636e;
 // $blue-steel: #607d8b;
+// $red: #eb7e7f;
+// $teal-dark: #bdbdbd;
+// $teal-light: #4db6ac;
+// colors
+$black-faded: #424242;
+$blue-dark: #5da8ba;
+$blue-light: #71c9e9;
+$green-light: #92ff4a;
 $grey-dark: #808080;
+$grey-light: #f7f8f8;
 $grey-light: #f7f8f8;
 $grey-medium-dark: #d9d9d9;
 $grey-medium-light: #f5f5f5;
 $grey-medium: #e5e5e5;
 $grey-super-light: #fafafa;
-// $red: #eb7e7f;
+$orange-light: #fea727;
+$orange-meduim-light: #FF9800;
+$orange-meduim: #FB8C00;
+$red-light: #fc8b64;
+$red: #ff7e61;
+$teal-light: #55b6b1;
+$teal-super-light: #5ec3be;
 $teal: #008080;
-// $teal-light: #4db6ac;
-// $teal-dark: #bdbdbd;
+$teal: #49ada4;
 $white: #fff;
 
 $color-primary: $teal;
-
+$primary-color: #ffa726;
+$tertiary-color: #81d4fa;
 // typography
 $font-main: 'Roboto', sans-serif;
 $font-form: 'Raleway', sans-serif;

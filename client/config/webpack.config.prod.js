@@ -84,9 +84,9 @@ module.exports = {
     },
     extensions: ['', '.js', '.jsx']
   },
-  
+
   module: {
-    
+
     loaders: [
       // Default loader: load all assets that are not handled
       // by other loaders with the url loader.
@@ -120,7 +120,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel',
-        
+
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -156,11 +156,11 @@ module.exports = {
       {
         test: /\.scss$/,
         include: paths.appSrc,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style", "css?url=false", "sass"]
       },
     ]
   },
-  
+
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
