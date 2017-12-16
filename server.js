@@ -11,7 +11,7 @@ mongoose.Promise = global.Promise;
 //app.set('port', (process.env.PORT || 3001));
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-} 
+}
 
 app.use(express.static('public'))
 
@@ -41,7 +41,7 @@ app.get('/test', (req, res) => {
 app.post('/test', (req, res) => {
   console.log('post hit');
   console.log(req.body)
-  
+
   Modules
     .create({
       'function': req.body.function,
@@ -70,7 +70,7 @@ let server;
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
+    mongoose.connect(databaseUrl, { useMongoClient: true }, err => {
       if (err) {
         return reject(err);
       }

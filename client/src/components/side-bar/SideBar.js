@@ -1,3 +1,4 @@
+// fix shouldComponentUpdate function
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,18 +8,26 @@ import SideBarDependencyMessage from './SideBarDependencyMessage';
 
 import './side-bar-styles/_SideBar.scss';
 
-export default function SideBar(props) {
-  const style = {
-    height: '100% !important',
-    width: '200px',
-    position: 'fixed',
-    zIndex: '1',
-    left: '0px',
-    verticalAlign: 'top',
-  };
+const style = {
+  height: '100% !important',
+  width: '200px',
+  position: 'fixed',
+  zIndex: '1',
+  left: '0px',
+  verticalAlign: 'top',
+};
 
-  const renderDependencyMessage = () => {
-    const { showAll, iconVisibityData } = props;
+export default class SideBar extends Component {
+  shouldComponentUpdate() {
+    // return false;
+    return false;
+  }
+
+  componentDidUpdate() {
+  }
+
+  renderDependencyMessage = () => {
+    const { showAll, iconVisibityData } = this.props;
     const { mode, moduleName, dependencies } = iconVisibityData;
 
     if ((mode === 'DEPENDENCY') && (dependencies.length > 0)) {
@@ -32,28 +41,29 @@ export default function SideBar(props) {
     return null;
   };
 
-  const {
-    disabledIconExceptions,
-    onBoardModulesLength,
-    toggleDraggingToBoard,
-    toggleIsClicked,
-    updateClientPosition,
-  } = props;
+  render() {
+    const {
+      onBoardModulesLength,
+      toggleDraggingToBoard,
+      toggleIsClicked,
+      updateClientPosition,
+    } = this.props;
 
-  return (
-    <div className="sideBar" style={style}>
-      {renderDependencyMessage()}
-      <div className="module-container">
-        <SideBarIconList
-          onBoardModulesLength={onBoardModulesLength}
-          toggleDraggingToBoard={toggleDraggingToBoard}
-          toggleIsClicked={toggleIsClicked}
-          updateClientPosition={updateClientPosition}
-        />
+    return (
+      <div className="sideBar" style={style}>
+        {this.renderDependencyMessage()}
+        <div className="module-container">
+          <SideBarIconList
+            onBoardModulesLength={onBoardModulesLength}
+            toggleDraggingToBoard={toggleDraggingToBoard}
+            toggleIsClicked={toggleIsClicked}
+            updateClientPosition={updateClientPosition}
+          />
+        </div>
+        <DimensionForm />
       </div>
-      <DimensionForm />
-    </div>
-  );
+    );
+  }
 }
 
 SideBar.propTypes = {
