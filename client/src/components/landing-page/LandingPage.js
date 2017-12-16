@@ -2,7 +2,7 @@ import React from 'react';
 import { routeToProjects } from 'helpers/routeHelpers';
 
 import LandingPageCard from './LandingPageCard';
-import Logo from 'components/logo/Logo'
+import Logo from 'components/logo/Logo';
 
 import './landing-page-styles/LandingStylesIndex.scss';
 
@@ -11,7 +11,7 @@ export default class App extends React.Component {
     super();
     this.state = {
       scrollY: 0,
-    }
+    };
   }
 
   componentDidMount() {
@@ -19,7 +19,7 @@ export default class App extends React.Component {
   }
 
   handleScroll() {
-    this.setState({ scrollY: window.scrollY })
+    this.setState({ scrollY: window.scrollY });
   }
 
   getHeroOpacity() {
@@ -49,18 +49,18 @@ export default class App extends React.Component {
               onClick={routeToProjects}
             >
               <span className="header-button-text">GET STARTED</span>
-              <span className="icon-arrow-right"></span>
+              <span className="icon-arrow-right" />
             </button>
           </div>
         </div>
-        <section className="hero" /*style={{ opacity: this.getHeroOpacity() }}*/>
+        <section className="hero" /* style={{ opacity: this.getHeroOpacity() }} */>
           {/* <div className="hero-circle-wrapper"> */}
-            <div className="hero-circle">
-              <div className="hero-circle-content">
-                <h1 className="hero-title">Design cutting edge electronics in minutes.</h1>
-                <button className="onboard-button hero-button" onClick={routeToProjects}>GET STARTED</button>
-              </div>
+          <div className="hero-circle">
+            <div className="hero-circle-content">
+              <h1 className="hero-title">Design cutting edge electronics in minutes.</h1>
+              <button className="onboard-button hero-button" onClick={routeToProjects}>GET STARTED</button>
             </div>
+          </div>
           {/* </div> */}
         </section>
         <section className="demo-section">

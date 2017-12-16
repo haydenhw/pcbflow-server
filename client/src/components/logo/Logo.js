@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import './logo-styles/Logo.scss';
 
-export default function Logo() {
+export default function Logo({ className, handleClick }) {
   return (
-    <div className="logo">
+    <div className={`logo ${className || ''}`} onClick={handleClick}>
       {/* <div className="logo-alignment-helper" /> */}
       <img className="logo-image" src="images/logo-orange-cropped.png" alt="logo" />
       <span className="logo-text">

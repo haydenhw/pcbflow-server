@@ -2,13 +2,17 @@
 
 .logo {
   font-size: 25px;
+  color: $black-faded;
 
-  // &:before {
-  //   content: '';
-  //   display: inline-block;
-  //   height: 100%;
-  //   vertical-align: middle;
-  // }
+  &.project-nav-logo {
+    color: white;
+
+    .logo-text {
+      font-size: .85em;
+    }
+
+    cursor: pointer;
+  }
 }
 
 .logo-image {
@@ -21,7 +25,6 @@
 
 .logo-text {
   font-size: 1em;
-  color: $black-faded;
   vertical-align: middle;
 }
 

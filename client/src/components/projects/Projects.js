@@ -5,6 +5,7 @@ import Link from 'react-router';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
+import Logo from 'components/logo/Logo';
 import NavDropdown from 'components/NavDropdown';
 import TopNavbarButton from 'components/top-navbar/TopNavbarButton';
 import ProjectsList from './ProjectsList';
@@ -19,10 +20,7 @@ export default function Projects({ handleHomeButtonClick }) {
     <div>
       <nav>
         <div className="project-nav-top">
-          <div className="logo-link" onClick={handleHomeButtonClick}>
-            <img className="logo-image" src="images/logo4.png" alt="" />
-            <span className="logo-text">PCB<span className="bold">flow</span></span>
-          </div>
+          <Logo className="project-nav-logo" />
           <TopNavbarButton
             className="nav-button home-button"
             handleClick={handleHomeButtonClick}

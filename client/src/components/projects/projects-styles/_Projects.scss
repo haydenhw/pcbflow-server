@@ -1,16 +1,16 @@
 @import 'variables';
 
 .project-nav {
+  position: fixed;
+  top: 0px;
   width: 100%;
-  position:fixed;
-  top:0px;
 }
 
 .project-nav-top {
   background-color: #3d4752;
   border-bottom: 1px solid #ccc;
-  height: 63px;
-  padding-left: 10px;
+  height: 65px;
+  padding: 15px;
   position: relative;
 }
 
