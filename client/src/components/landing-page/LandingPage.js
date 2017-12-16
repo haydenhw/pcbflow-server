@@ -1,7 +1,10 @@
 import React from 'react';
+import { routeToProjects } from 'helpers/routeHelpers';
 
 import LandingPageCard from './LandingPageCard';
-import './landing-page-styles/landing-styles-index.scss';
+import Logo from 'components/logo/Logo'
+
+import './landing-page-styles/LandingStylesIndex.scss';
 
 export default class App extends React.Component {
   constructor() {
@@ -27,21 +30,24 @@ export default class App extends React.Component {
 
   render() {
     const { scrollY } = this.state;
-    const style = { 'backgroundImage': "url('images/arduino1440.png')" };
 
     return (
       <div className="landing-container">
         <div className={`header ${scrollY > 0 ? 'header-white' : ''}`} >
-          <div className="header-logo">
+          <Logo />
+          {/* <div className="header-logo">
             <div className="header-logo-alignment-helper"></div>
             <img className="header-logo-image" src="images/logo-orange-cropped.png" alt="logo"/>
             <span className="header-logo-text">
               <span className="header-logo-text-bold">PCB</span>
               <span className="header-logo-text-light">flow</span>
             </span>
-          </div>
+          </div> */}
           <div className="header-button-wrapper">
-            <button className={`${scrollY > 0 ? '' : 'header-button-hidden'} header-button onboard-button`}>
+            <button
+              className={`${scrollY > 0 ? '' : 'header-button-hidden'} header-button onboard-button`}
+              onClick={routeToProjects}
+            >
               <span className="header-button-text">GET STARTED</span>
               <span className="icon-arrow-right"></span>
             </button>
@@ -52,7 +58,7 @@ export default class App extends React.Component {
             <div className="hero-circle">
               <div className="hero-circle-content">
                 <h1 className="hero-title">Design cutting edge electronics in minutes.</h1>
-                <button className="onboard-button hero-button">GET STARTED</button>
+                <button className="onboard-button hero-button" onClick={routeToProjects}>GET STARTED</button>
               </div>
             </div>
           {/* </div> */}

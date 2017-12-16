@@ -11,6 +11,7 @@ import store from 'reduxFiles/store';
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import getTimeStamp from 'helpers/getTimeStamp';
+import { routeToHome, routeToProjects } from 'helpers/routeHelpers';
 import { isMobile } from 'helpers/isMobile';
 import rotate from 'helpers/rotate';
 
@@ -424,14 +425,6 @@ let DesignTool = class extends Component {
     store.dispatch(actions.toggleHasUnsavedChanges());
   }
 
-  routeToProjects() {
-    hashHistory.push('/projects');
-  }
-
-  routeToHome() {
-    hashHistory.push('/');
-  }
-
   showAllModuleIcons() {
     store.dispatch(actions.updateIconVisibity('ALL'));
   }
@@ -731,15 +724,13 @@ let DesignTool = class extends Component {
         <TopNavbar
           handleExportButtonClick={this.toggleShouldExportPDF.bind(this)}
           handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
-          handleHomeButtonClick={this.routeToHome}
-          handleIndexButtonClick={this.routeToProjects}
+          handleHomeButtonClick={routeToHome}
+          handleProjectsButtonClick={routeToProjects}
           handleMenuClick={this.toggleNavMenu}
-          handleSaveButtonCLick={this.routeToProjects}
           isNavMenuActive={isNavMenuActive}
           isMobile={isMobile}
           projectName={currentProjectName}
           recordSavedChanges={this.recordSavedChanges}
-          routeToHome={this.routeToHome}
           updateLastSaved={this.updateLastSaved}
           updateThumbnail={this.toggleShouldUpadateThumbnail}
 

@@ -2,9 +2,9 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
 
-import PopupMenu from 'components/universal/PopupMenu';
-import PopupMenuTrigger from 'components/universal/PopupMenuTrigger';
-import PopupMenuContent from 'components/universal/PopupMenuContent';
+import PopupMenu from 'components/popup-menu/PopupMenu';
+import PopupMenuTrigger from 'components/popup-menu/PopupMenuTrigger';
+import PopupMenuContent from 'components/popup-menu/PopupMenuContent';
 import TopNavbarEditableText from './TopNavbarEditableText';
 import TopNavbarSaveButton from './TopNavbarSaveButton';
 import TopNavbarButton from './TopNavbarButton';
@@ -20,9 +20,8 @@ export default function TopNavbar(props) {
   const {
     handleExportButtonClick,
     handleHomeButtonClick,
-    handleIndexButtonClick,
+    handleProjectsButtonClick,
     handleMenuClick,
-    handleSaveButtonCLick,
     handleNameChange,
     isNavMenuActive,
     isMobile,
@@ -37,7 +36,7 @@ export default function TopNavbar(props) {
 
   return (
     <div className="navWide" style={{ width: navWidth}}>
-      <div className="iconWrapper" onClick={handleIndexButtonClick}>
+      <div className="iconWrapper" onClick={handleProjectsButtonClick}>
         <FontAwesome
           className="fa-folder-open"
           name="fa-folder-open"
