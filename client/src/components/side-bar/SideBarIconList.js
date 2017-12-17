@@ -93,7 +93,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(SideBarIconList);
 
 SideBarIconList.propTypes = {
-  disabledIconExceptions: PropTypes.object,
+  disabledIconExceptions: PropTypes.array,
   iconVisibityMode: PropTypes.string.isRequired,
   moduleData: PropTypes.array.isRequired,
   onBoardModules: PropTypes.array.isRequired,

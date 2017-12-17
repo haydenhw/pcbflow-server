@@ -95,7 +95,6 @@ class Board extends Component {
           onDragMove={this.handleDragMove}
           onDragEnd={this.handleDragEnd}
         >
-
           <Rect
             ref="board"
             name={'board'}

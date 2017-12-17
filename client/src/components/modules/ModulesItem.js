@@ -216,7 +216,6 @@ export default class ModulesItem extends PureComponent {
         onDragMove={this.handleDragMove.bind(this)}
         onMouseOver={this.handleMouseOver.bind(this)}
         onMouseOut={this.handleMouseOut.bind(this)}
-
       >
         <Text
           ref="text"

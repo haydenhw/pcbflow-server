@@ -6,7 +6,6 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import Logo from 'components/logo/Logo';
-import NavDropdown from 'components/NavDropdown';
 import TopNavbarButton from 'components/top-navbar/TopNavbarButton';
 import ProjectsList from './ProjectsList';
 import ProjectsAddButton from './ProjectsAddButton';

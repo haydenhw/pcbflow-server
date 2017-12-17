@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function DesignToolBoardFrame(props) {
-  const { width, heght, top, left } = props;
+  const { width, height, top, left } = props;
 
   const style = {
     position: 'absolute',

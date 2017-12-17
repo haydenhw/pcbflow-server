@@ -1,11 +1,10 @@
 .module-icon {
+  cursor: move;
   height: 70px;
-  wdith: 100px;
   margin-bottom: 10px;
-  vertical-align: middle;
   position: relative;
+  vertical-align: middle;
 }
-
 
 .module-icon-image {
   position: absolute;
@@ -16,8 +15,4 @@
   min-height: 30px;
   max-height: 70px;
   max-width: 100px;
-}
-
-.module-icon-image:hover {
-  cursor: grab; 
 }
