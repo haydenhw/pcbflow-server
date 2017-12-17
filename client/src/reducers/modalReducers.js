@@ -31,6 +31,12 @@ export const modal = (state = defaultState, action) => {
         modalType: 'CONFIRM',
         modalProps: action.modalProps,
       };
+    case actions.CONFIRM_ROUTE_LEAVE:
+      return {
+        shouldRenderModal: true,
+        modalType: 'CONFIRM_ROUTE_LEAVE',
+        modalProps: action.modalProps,
+      };
 
     default:
       return state;

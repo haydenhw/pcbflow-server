@@ -21,3 +21,10 @@ export const confirmProjectDelete = modalProps => ({
   modalProps,
   modalType: 'CONFIRM',
 });
+
+export const CONFIRM_ROUTE_LEAVE = 'CONFIRM_ROUTE_LEAVE ';
+export const confirmRouteLeave = modalProps => ({
+  type: 'CONFIRM_ROUTE_LEAVE ',
+  modalProps,
+  modalType: 'CONFIRM_ROUTE_LEAVE',
+});

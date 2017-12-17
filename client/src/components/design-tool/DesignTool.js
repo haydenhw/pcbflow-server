@@ -56,7 +56,7 @@ let DesignTool = class extends Component {
       running: false,
       shouldExportPDF: false,
       shouldHideContextMenu: false,
-      shouldRender: false,
+      shouldPreventRouteChange: true,
       shouldRenderDocumentation: false,
       shouldRenderInfoButton: true,
       shouldRenderModal: true,
@@ -110,14 +110,16 @@ let DesignTool = class extends Component {
   }
 
   setRouteHook() {
-    const { router, route, hasUnsavedChanges } = this.props;
+    const { hasUnsavedChanges, router, route } = this.props;
+    const { shouldPreventRouteChange } = this.state;
 
-    console.log('routing')
     router.setRouteLeaveHook(route, () => {
-      if (hasUnsavedChanges) {
-        return 'Changes you made will not be saved. Are you sure you want to leave?';
+      if (hasUnsavedChanges && shouldPreventRouteChange) {
+        store.dispatch(actions.confirmRouteLeave());
+        return false;
       }
-      return null;
+
+      return true;
     });
   }
 
@@ -145,8 +147,11 @@ let DesignTool = class extends Component {
     this.addHanlders();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.hasUnsavedChanges !== this.props.hasUnsavedChanges) {
+  componentDidUpdate(prevProps, prevState) {
+    if ((prevProps.hasUnsavedChanges !== this.props.hasUnsavedChanges) ||
+      (prevState.shouldPreventRouteChange !== this.state.shouldPreventRouteChange)
+    ) {
+      console.log('settig new hook')
       this.setRouteHook();
     }
   }
@@ -654,6 +659,24 @@ let DesignTool = class extends Component {
               rightButtonText="Exit"
               shouldRenderLeftButton
               text="Are you sure you want to exit the tutorial?"
+            />
+          );
+        case 'CONFIRM_ROUTE_LEAVE':
+          const forceChangeRoutes = () => {
+            this.setState({ shouldPreventRouteChange: !this.state.shouldPreventRouteChange },
+             () =>  setTimeout(routeToProjects, 0));
+          }
+          return (
+            <Modal
+              handleCloseButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
+              handleLeftButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
+              handleRightButtonClick={forceChangeRoutes}
+              leftButtonText="Stay"
+              modalClass="confirm-exit-tutorial"
+              rightButtonText="Leave"
+              shouldRenderLeftButton
+              title="Are you sure you want to leave this page?"
+              text="Changes you made will not be saved."
             />
           );
         default:
