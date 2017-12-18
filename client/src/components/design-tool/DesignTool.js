@@ -34,7 +34,6 @@ import { tutorialSteps } from './DesignToolTutorialSteps';
 
 import './design-tool-styles/_DesignToolDocumentationCard.scss';
 import './design-tool-styles/_DesignToolOnboardModal.scss';
-import './design-tool-styles/_joyride.scss';
 
 import { devMode } from 'config/devMode';
 
@@ -151,7 +150,6 @@ let DesignTool = class extends Component {
     if ((prevProps.hasUnsavedChanges !== this.props.hasUnsavedChanges) ||
       (prevState.shouldPreventRouteChange !== this.state.shouldPreventRouteChange)
     ) {
-      console.log('settig new hook')
       this.setRouteHook();
     }
   }

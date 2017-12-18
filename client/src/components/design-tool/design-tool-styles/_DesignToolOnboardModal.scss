@@ -87,10 +87,11 @@
 }
 
 .completed-htpc-project {
-  width: 65%;  
+  width: 65%;
 }
 
 .com-connector-icon {
+  border: 1px solid rgba(0, 0, 0, 0);
   width: 33%;
 }
 
@@ -116,7 +117,7 @@
   .modal-step-0 .modal-text-child {
     text-align: center;
   }
-  
+
   .red-to-green,
   .real-power {
     width: 90%;

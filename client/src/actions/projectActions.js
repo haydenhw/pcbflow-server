@@ -37,9 +37,9 @@ export function fetchProjects() {
     .then((data) => {
       dispatch(fetchProjectsSuccess(data));
     })
-    .catch((err) => {
-      console.error(err);
-    });
+    // .catch((err) => {
+    //   console.error(err);
+    // });
   };
 }
 
@@ -76,9 +76,9 @@ export function fetchProjectById(projectId, currentRoute) {
         hashHistory.push(designRoute);
       }
     })
-    .catch((err) => {
-      console.error(err);
-    });
+    // .catch((err) => {
+    //   console.error(err);
+    // });
   };
 }
 

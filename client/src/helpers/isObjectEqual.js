@@ -32,7 +32,7 @@ export default function isObjectEqual (obj1, obj2) {
    const objHasSameReference = item2Keys.every(key => {
        const value = obj1[key];
        const nextValue = obj2[key];
-      // console.log(value, nextValue)
+      
        if (value === nextValue) {
            return true;
        }

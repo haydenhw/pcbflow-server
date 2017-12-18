@@ -128,7 +128,7 @@ class DesignToolStage extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state.boardSpecs);
+  
   return ({
   currentProjectName: state.currentProjectInfo.name,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,

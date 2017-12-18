@@ -26,14 +26,6 @@ const getVisibleIcons = (props) => {
 };
 
 const SideBarIconList = class extends Component {
-  // shouldComponentUpdate(prevProps) {
-  //   const arePropsEqual = isObjectEqual(prevProps, this.props);
-  //   // console.table(prevProps)
-  //   console.log(arePropsEqual)
-  //
-  //   return true;
-  // }
-
   renderSideBarIcon(module, index, isDisabled) {
     const { toggleDraggingToBoard, toggleIsClicked, updateClientPosition } = this.props;
 
