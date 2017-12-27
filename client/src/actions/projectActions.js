@@ -1,3 +1,4 @@
+// alphabetize these actions
 import { Route, hashHistory } from 'react-router';
 
 import * as actions from 'actions/indexActions';

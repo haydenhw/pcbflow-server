@@ -1,3 +1,4 @@
+// move the markup for this component to parent and delete
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 

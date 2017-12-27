@@ -1,6 +1,9 @@
 import React from 'react';
 import { routeToProjects } from 'helpers/routeHelpers';
 
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
+
 import LandingPageCard from './LandingPageCard';
 import Logo from 'components/logo/Logo';
 
@@ -20,6 +23,10 @@ export default class App extends React.Component {
 
   handleScroll() {
     this.setState({ scrollY: window.scrollY });
+  }
+
+  handleGetStartedClick() {
+    store.dispatch(actions.createNewProject());
   }
 
   getHeroOpacity() {
