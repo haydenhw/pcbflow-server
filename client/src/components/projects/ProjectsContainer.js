@@ -36,6 +36,7 @@ export class ProjectContainer extends Component {
           leftButtonText="Cancel"
           rightButtonText="Delete"
           shouldRenderLeftButton
+          title="Confirm Delete"
           text={`Are you sure you want to delete project "${projectName}"  ?`}
         />
       );

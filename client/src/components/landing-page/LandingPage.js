@@ -42,33 +42,23 @@ export default class App extends React.Component {
       <div className="landing-container">
         <div className={`header ${scrollY > 0 ? 'header-white' : ''}`} >
           <Logo />
-          {/* <div className="header-logo">
-            <div className="header-logo-alignment-helper"></div>
-            <img className="header-logo-image" src="images/logo-orange-cropped.png" alt="logo"/>
-            <span className="header-logo-text">
-              <span className="header-logo-text-bold">PCB</span>
-              <span className="header-logo-text-light">flow</span>
-            </span>
-          </div> */}
           <div className="header-button-wrapper">
             <button
               className={`${scrollY > 0 ? '' : 'header-button-hidden'} header-button onboard-button`}
               onClick={routeToProjects}
             >
-              <span className="header-button-text">GET STARTED</span>
+              <span className="header-button-text" onClick={this.handleGetStartedClick}>GET STARTED</span>
               <span className="icon-arrow-right" />
             </button>
           </div>
         </div>
-        <section className="hero" /* style={{ opacity: this.getHeroOpacity() }} */>
-          {/* <div className="hero-circle-wrapper"> */}
+        <section className="hero">
           <div className="hero-circle">
             <div className="hero-circle-content">
               <h1 className="hero-title">Design cutting edge electronics in minutes.</h1>
-              <button className="onboard-button hero-button" onClick={routeToProjects}>GET STARTED</button>
+              <button className="onboard-button hero-button" onClick={this.handleGetStartedClick}>GET STARTED</button>
             </div>
           </div>
-          {/* </div> */}
         </section>
         <section className="demo-section">
           {/* Consider removing the wrapper class below if not necessary */}
