@@ -1,4 +1,4 @@
-export const demoProject = {
+const demoProject = {
   "_id": "5911da0c1e57bb5cb71ca95a",
   "name": "Dual Ethernet Board",
   "__v": 0,
@@ -381,3 +381,5 @@ export const demoProject = {
     "width": 864,
   }
 }
+
+module.exports = demoProject;
