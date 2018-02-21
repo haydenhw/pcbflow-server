@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, hashHistory } from 'react-router';
+import { hashHistory, withRouter } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 import Joyride from 'react-joyride';
 
@@ -742,7 +742,6 @@ let DesignTool = class extends Component {
       <div>
         {this.renderJoyride()}
         {this.renderBoardFrame()}
-
         <TopNavbar
           handleExportButtonClick={this.toggleShouldExportPDF.bind(this)}
           handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
