@@ -17,7 +17,6 @@ import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
 
-
 class DesignToolStage extends Component {
   constructor() {
     super();
@@ -105,10 +104,10 @@ class DesignToolStage extends Component {
           <div>
             <Stage
               ref="stage"
-              width={2000}
-              height={1000}
+              width={document.documentElement.clientWidth}
+              height={document.documentElement.clientHeight}
             >
-              <Grid gridWidth={5000} cellWidth={20} />
+              <Grid gridWidth={2000} gridHeight={2000} cellWidth={20} />
               {shouldRenderBoard ? board : <Layer />}
               {isMouseDownOnIcon ? <Layer>{ draggingModule }</Layer> : <Layer /> }
             </Stage>
@@ -128,7 +127,7 @@ class DesignToolStage extends Component {
 }
 
 const mapStateToProps = state => {
-  
+
   return ({
   currentProjectName: state.currentProjectInfo.name,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,

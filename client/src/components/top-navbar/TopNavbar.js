@@ -32,10 +32,10 @@ export default function TopNavbar(props) {
     updateThumbnail,
   } = props;
 
-  const navWidth = isMobile ? '25%' : '100%';
+  const navWidth = false ? '25%' : '100%';
 
   return (
-    <div className="navWide" style={{ width: navWidth}}>
+    <div className="navWide" style={{ width: navWidth }}>
       <div className="iconWrapper" onClick={handleProjectsButtonClick}>
         <FontAwesome
           className="fa-folder-open"
