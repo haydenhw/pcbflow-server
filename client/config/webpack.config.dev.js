@@ -8,7 +8,6 @@ var getClientEnvironment = require('./env');
 var paths = require('./paths');
 var path = require('path');
 
-console.log(path.join(__dirname, 'src', 'styles'));
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 var publicPath = '/';

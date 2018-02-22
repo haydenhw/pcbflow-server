@@ -10,7 +10,7 @@ const demoProject = require('./demoProject');
 
 mongoose.Promise = global.Promise;
 
-//app.set('port', (process.env.PORT || 3001));
+console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }

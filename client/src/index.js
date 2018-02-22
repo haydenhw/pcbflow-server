@@ -14,12 +14,13 @@ import './styles/index.scss';
 import './styles/icons/style.css'
 
 ReactDOM.render(
+  // <div>Hello World</div>,
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={LandingPage} />
-      <Route path="/projects" component={ProjectsContainer} />
       <Route path="/design/:projectId" component={DesignTool} />
+      <Route path="/projects" component={ProjectsContainer} />
     </Router>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
