@@ -51,15 +51,15 @@ export default class SideBar extends Component {
 
     return (
       <div className="sideBar" style={style}>
-        {this.renderDependencyMessage()}
-        <div className="module-container">
-          <SideBarIconList
-            onBoardModulesLength={onBoardModulesLength}
-            toggleDraggingToBoard={toggleDraggingToBoard}
-            toggleIsClicked={toggleIsClicked}
-            updateClientPosition={updateClientPosition}
-          />
-        </div>
+          {this.renderDependencyMessage()}
+          <div className="module-container">
+            <SideBarIconList
+              onBoardModulesLength={onBoardModulesLength}
+              toggleDraggingToBoard={toggleDraggingToBoard}
+              toggleIsClicked={toggleIsClicked}
+              updateClientPosition={updateClientPosition}
+            />
+          </div>
         <DimensionForm />
       </div>
     );

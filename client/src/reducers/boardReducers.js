@@ -9,8 +9,8 @@ const defaultboardSpecs = {
   tempThumbnail: null,
   updateThumbnailTrigger: false,
   width: 600,
-  x: 10,
-  y: 10,
+  x: 100,
+  y: 100,
 };
 
 export const boardSpecs = (state = defaultboardSpecs, action) => {

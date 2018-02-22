@@ -10,8 +10,13 @@ export const tourSteps = [
     title: 'The Module Pallate',
     text: 'Add modules to the board by dragging and dropping from the module pallate.',
     textAlign: 'center',
-    selector: '.sideBar',
+    selector: '.module-container',
     position: 'right',
+    style: {
+      hole: {
+        height: 900
+      },
+    },
   },
 ];
 
@@ -24,4 +29,3 @@ export const dependecyDemo = [
     position: 'right',
   },
 ];
-
