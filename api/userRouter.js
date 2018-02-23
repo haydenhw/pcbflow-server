@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
+const shortid = require('shortid');
 
 const { User } = require('./models');
 
@@ -62,7 +63,7 @@ userRouter.post('/', jsonParser, (req, res) => {
       min: 1
     },
     password: {
-      min: 10,
+      min: 3,
       // bcrypt truncates after 72 characters, so let's not give the illusion
       // of security by storing extra (unused) info
       max: 72
@@ -117,8 +118,11 @@ userRouter.post('/', jsonParser, (req, res) => {
       return User.create({
         username,
         password: hash,
-        firstName,
-        lastName
+        // firstName,
+        // lastName,
+        shortid: shortid.generate(),
+        // shortid: 'hflflf',
+        // shortid:'hello',
       });
     })
     .then(user => {
@@ -130,6 +134,7 @@ userRouter.post('/', jsonParser, (req, res) => {
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
+      console.log(err);
       res.status(500).json({code: 500, message: 'Internal server error'});
     });
 });
@@ -142,6 +147,11 @@ userRouter.get('/', (req, res) => {
   return User.find()
     .then(users => res.json(users.map(user => user.serialize())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
+userRouter.delete('/delete', (req, res) => {
+  console.log('delteing');
+  return User.deleteMany().then(() => res.send('deleted'));
 });
 
 module.exports = userRouter;

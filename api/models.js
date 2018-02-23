@@ -47,7 +47,11 @@ const ProjectSchema = mongoose.Schema({
     height: Number,
     width: Number,
     image: String
-  }]
+  }],
+  ownerId: {
+    type: String,
+    required: true,
+  }
 });
 
 const UserSchema = mongoose.Schema({
@@ -60,15 +64,15 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  firstName: {type: String, default: ''},
-  lastName: {type: String, default: ''}
+  // firstName: {type: String, default: ''},
+  // lastName: {type: String, default: ''},
+  shortid: { type: String, required: true },
 });
 
 UserSchema.methods.serialize = function() {
   return {
     username: this.username || '',
-    firstName: this.firstName || '',
-    lastName: this.lastName || ''
+    shortid: this.shortid || '',
   };
 };
 
