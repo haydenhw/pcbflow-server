@@ -34,7 +34,7 @@ projectRouter.get('/:projectId', (req, res) => {
 });
 
 projectRouter.post('/', (req, res) => {
-  console.log('post req body',req.body)
+  console.log('post req body', req.body)
   Projects
     .create({
       name: req.body.name,
@@ -51,7 +51,7 @@ projectRouter.post('/', (req, res) => {
 
 projectRouter.put('/:projectId', (req, res) => {
   console.log('put req body', req.body)
-  
+
   const toUpdate = {};
   const updateableFields = ['name', 'boardSpecs', 'modules'];
 
@@ -72,7 +72,7 @@ projectRouter.put('/:projectId', (req, res) => {
     .findByIdAndUpdate(req.params.projectId, {$set: toUpdate}, {new: true})
     .exec()
     .then(project => res.status(201).json(project))
-    .catch(err => 
+    .catch(err =>
       res.status(500).json({message: 'Internal server error'})
     );
 });
@@ -120,7 +120,7 @@ module.exports = projectRouter;
      "height": 300,
      "width": 500
    },
-   
+
     "moduleBank": [
     {
        "height": 50,
@@ -137,6 +137,6 @@ module.exports = projectRouter;
        "image": "http://i65.tinypic.com/s4s0ah.png"
      }
    ]
-   
+
 
  }*/

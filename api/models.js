@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 
-const moduleSchema = mongoose.Schema({
+const bcrypt = require('bcryptjs');
+
+const ModuleSchema = mongoose.Schema({
   function: String,
   height: Number,
   width: Number
 });
 
-const projectSchema = mongoose.Schema({
+
+const ProjectSchema = mongoose.Schema({
   name: { type: String, required: true },
   boardSpecs: {
     x: { type: Number, required: true },
@@ -47,14 +50,42 @@ const projectSchema = mongoose.Schema({
   }]
 });
 
-const userSchema = mongoose.Schema({
-  currentProjectId: String
-})
+const UserSchema = mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  firstName: {type: String, default: ''},
+  lastName: {type: String, default: ''}
+});
 
-const Modules = mongoose.model('Modules', moduleSchema);
-const Projects = mongoose.model('Projects', projectSchema);
+UserSchema.methods.serialize = function() {
+  return {
+    username: this.username || '',
+    firstName: this.firstName || '',
+    lastName: this.lastName || ''
+  };
+};
 
-module.exports = { Modules , Projects};
+UserSchema.methods.validatePassword = function(password) {
+  return bcrypt.compare(password, this.password);
+};
+
+UserSchema.statics.hashPassword = function(password) {
+  return bcrypt.hash(password, 10);
+};
+
+const User = mongoose.model('User', UserSchema);
+const Modules = mongoose.model('Modules', ModuleSchema);
+const Projects = mongoose.model('Projects', ProjectSchema);
+
+module.exports = { Modules, Projects, User };
+
 /*
 {
 "name": "Test Project",
