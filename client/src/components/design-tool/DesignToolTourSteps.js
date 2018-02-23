@@ -12,11 +12,6 @@ export const tourSteps = [
     textAlign: 'center',
     selector: '.module-container',
     position: 'right',
-    style: {
-      hole: {
-        height: 900
-      },
-    },
   },
 ];
 
