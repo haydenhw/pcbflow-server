@@ -5,18 +5,22 @@ const bcrypt = require('bcryptjs');
 const ModuleSchema = mongoose.Schema({
   function: String,
   height: Number,
-  width: Number
+  width: Number,
 });
 
 
 const ProjectSchema = mongoose.Schema({
   name: { type: String, required: true },
+  ownerId: {
+    type: String,
+    required: true,
+  },
   boardSpecs: {
     x: { type: Number, required: true },
     y: { type: Number, required: true },
     height: { type: Number, required: true },
     width: { type: Number, required: true },
-    thumbnail: { type: String, required: true },
+    thumbnail: { type: String, required: false },
   },
   modules: [{
     x: { type: Number, required: true },
@@ -40,18 +44,13 @@ const ProjectSchema = mongoose.Schema({
     iconHeight: String,
     price: Number,
     id: String,
-    dependencies: [String]
-
+    dependencies: [String],
   }],
   moduleBank: [{
     height: Number,
     width: Number,
     image: String
   }],
-  ownerId: {
-    type: String,
-    required: true,
-  }
 });
 
 const UserSchema = mongoose.Schema({
@@ -64,8 +63,6 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  // firstName: {type: String, default: ''},
-  // lastName: {type: String, default: ''},
   shortid: { type: String, required: true },
 });
 

@@ -34,13 +34,17 @@ projectRouter.get('/:projectId', (req, res) => {
 });
 
 projectRouter.post('/', (req, res) => {
-  console.log('post req body', req.body)
+  console.log('post endpoint hit')
+  console.log('');
+  console.log('');
+
   Projects
     .create({
-      name: req.body.name,
       boardSpecs: req.body.boardSpecs,
+      name: req.body.name,
       modules: req.body.modules,
-      moduleBank: req.body.moduleBank
+      moduleBank: req.body.moduleBank,
+      ownerId: req.body.ownerId,
     })
   .then(project => res.status(201).json(project))
   .catch(err => {

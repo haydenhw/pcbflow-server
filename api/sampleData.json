@@ -1,0 +1,62 @@
+{
+   "_id":"5911da0c1e57bb5cb71ca95a",
+   "name":"Dual Ethernet Board",
+   "ownerId":"5a91706c85c71b299dd21768",
+   "moduleBank":[
+
+   ],
+   "modules":[
+      {
+         "price":12,
+         "iconHeight":"70px",
+         "iconSrc":"images/usb-ethernet-module-icon.svg",
+         "imageSrc":"images/usb-ethernet-module.svg",
+         "imageHeight":145,
+         "imageWidth":105,
+         "imageY":90,
+         "imageX":35,
+         "textY":32.5,
+         "textX":40,
+         "text":"USB Ethernet Module",
+         "innerGroupY":0,
+         "innerGroupX":0,
+         "boundToSideIndex":0,
+         "rotation":0,
+         "height":225,
+         "width":175,
+         "stroke":"#ffff64",
+         "y":91,
+         "x":604.5,
+         "_id":"5911e0cd1e57bb5cb71ca96a"
+      },
+      {
+         "price":12,
+         "iconHeight":"70px",
+         "iconSrc":"images/usb-ethernet-module-icon.svg",
+         "imageSrc":"images/usb-ethernet-module.svg",
+         "imageHeight":145,
+         "imageWidth":105,
+         "imageY":90,
+         "imageX":35,
+         "textY":32.5,
+         "textX":40,
+         "text":"USB Ethernet Module",
+         "innerGroupY":0,
+         "innerGroupX":0,
+         "boundToSideIndex":0,
+         "rotation":0,
+         "height":225,
+         "width":175,
+         "stroke":"#ffff64",
+         "y":93,
+         "x":425.5,
+         "_id":"5911e0cd1e57bb5cb71ca969"
+      }
+   ],
+   "boardSpecs":{
+      "y":97,
+      "x":348,
+      "height":315,
+      "width":864
+   }
+}
