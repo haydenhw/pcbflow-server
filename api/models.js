@@ -62,14 +62,13 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  },
-  shortid: { type: String, required: true },
+  }
 });
 
 UserSchema.methods.serialize = function() {
   return {
     username: this.username || '',
-    shortid: this.shortid || '',
+    _id: this._id || '',
   };
 };
 
@@ -86,15 +85,3 @@ const Modules = mongoose.model('Modules', ModuleSchema);
 const Projects = mongoose.model('Projects', ProjectSchema);
 
 module.exports = { Modules, Projects, User };
-
-/*
-{
-"name": "Test Project",
-"boardSpecs": {
-  "x": 50,
-  "y": 50,
-  "height": 300,
-  "width": 500
- },
-"moudles": []
-}*/

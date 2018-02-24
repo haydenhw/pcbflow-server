@@ -1,15 +1,36 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+
 const { Projects } = require('./models');
 const projectRouter = express.Router();
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
 projectRouter.use(bodyParser.urlencoded({
   extended: true
 }));
+
 projectRouter.use(bodyParser.json());
 
-projectRouter.get('/', (req, res) => {
-  console.log('get request')
+projectRouter.get('/', jwtAuth, (req, res) => {
+  console.log('get endpoint hit')
+  console.log('')
+  console.log('')
+
+  console.log(req.user._id);
+
+  Projects
+    .find({ ownerId: req.user._id })
+    // .find({ })
+    .exec()
+    .then(projects => res.json(projects))
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal Server Error'});
+      });
+
+  if (true) return;
   Projects
     .find()
     .exec()
