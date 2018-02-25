@@ -18,14 +18,14 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
 }));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
@@ -145,4 +145,4 @@ if (require.main === module) {
   runServer().catch(err => console.error(err));
 };
 
-module.exports = {app, runServer, closeServer};
+module.exports = { app, runServer, closeServer };

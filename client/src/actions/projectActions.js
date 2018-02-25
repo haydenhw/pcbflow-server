@@ -21,6 +21,7 @@ export const updateLastSavedTime = time => ({
 export const createNewProject = () => (dispatch) => {
     const newProject = {
       name: 'Untitled',
+      ownerId: 'xyz',
       boardSpecs: {
         x: 0.5 * (document.documentElement.clientWidth + 200) - 250,
         y: 0.5 * document.documentElement.clientHeight - 150,

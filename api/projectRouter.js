@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 
 const { Projects } = require('./models');
+const { IS_AUTH_ACTIVE } = require('./config');
 const projectRouter = express.Router();
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
@@ -12,16 +13,23 @@ projectRouter.use(bodyParser.urlencoded({
 
 projectRouter.use(bodyParser.json());
 
-projectRouter.get('/', jwtAuth, (req, res) => {
+const testMiddleware = (req, res, next) => {
+  IS_AUTH_ACTIVE
+    ? jwtAuth(req, res, next)
+    : next();
+}
+
+projectRouter.get('/', testMiddleware, (req, res) => {
   console.log('get endpoint hit')
   console.log('')
   console.log('')
 
-  console.log(req.user._id);
+  const query = IS_AUTH_ACTIVE
+    ? { ownerId: req.user._id }
+    : {};
 
   Projects
-    .find({ ownerId: req.user._id })
-    // .find({ })
+    .find(query)
     .exec()
     .then(projects => res.json(projects))
     .catch(
