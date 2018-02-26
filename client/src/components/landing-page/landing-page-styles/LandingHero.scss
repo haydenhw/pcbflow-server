@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .hero {
   // background: url('/images/component-art1440.svg');
   background: url('/images/component-art-compressed.png');
@@ -10,6 +12,18 @@
   top: 0;
   width: 100%;
   z-index: -99;
+
+  @include respond-to(small-screens) {
+    background-size: 100% auto;
+    background-position: top;
+    height: initial;
+  };
+
+  @include respond-to(handhelds) {
+    background-size: 100% auto;
+    background-position: initial;
+    height: initial;
+  };
 }
 
 .hero-arduino-graphic {
@@ -39,14 +53,22 @@
   transform: translateX(-50%);
   width: 475px;
 
-    .hero-circle-content {
-      left: 50%;
-      position: absolute;
-      text-align: center;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 350px;
-    }
+  @include respond-to(small-screens) {
+    margin-top: 120px;
+  };
+
+  @include respond-to(handhelds) {
+    margin-top: 120px;
+  };
+
+  .hero-circle-content {
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+  }
 }
 
 .hero-title {

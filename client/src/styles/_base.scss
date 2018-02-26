@@ -23,6 +23,14 @@ section {
   padding-top: 50px;
   min-height: 80vh;
   text-align: center;
+
+  @include respond-to(small-screens) {
+    min-height: initial;
+  };
+
+  @include respond-to(handhelds) {
+    min-height: initial;
+  };
 };
 
 @media only screen and (min-width : 320px) and (max-width : 480px) {
