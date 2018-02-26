@@ -5,7 +5,7 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import { projectsUrl } from '../config/endpointUrls';
-import { getJWTAuthHeader } from 'helpers/users';
+import { getJWTAuthHeader, getUser } from 'helpers/users';
 
 export const UPDATE_PROJECT_PRICE = 'UPDATE_PROJECT_PRICE';
 export const updateProjectPrice = price => ({
@@ -20,20 +20,30 @@ export const updateLastSavedTime = time => ({
 });
 
 export const createNewProject = () => (dispatch) => {
-    const newProject = {
-      name: 'Untitled',
-      ownerId: 'xyz',
-      boardSpecs: {
-        x: 0.5 * (document.documentElement.clientWidth + 200) - 250,
-        y: 0.5 * document.documentElement.clientHeight - 150,
-        height: 300,
-        width: 500,
-        thumbnail: '{"attrs":{"width":520,"height":320},"className":"Stage","children":[{"attrs":{"name":"boardLayer"},"className":"Layer","children":[{"attrs":{"name":"boardGroup","x":10,"y":10,"width":500,"height":300,"draggable":"true"},"className":"Group","children":[{"attrs":{"name":"board","width":500,"height":300,"fill":"#e3e3e5","opacity":"0.5","stroke":"#ccc"},"className":"Rect"},{"attrs":{"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"topLeft","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{"x":500,"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"topRight","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{"y":300,"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"bottomLeft","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{"x":500,"y":300,"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"bottomRight","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{},"className":"Group","children":[]}]}]}]}',
-      },
-      modules: [],
-    };
+  console.log(getUser()._id);
+  const ownerId = getUser()._id;
+  const height = 300;
+  const width = 500;
+  const offsetX = 200;
 
-    dispatch(postNewProject(newProject));
+  if (!ownerId) {
+    console.warn('OwnerId is undefined');
+  }
+
+  const newProject = {
+    ownerId,
+    name: 'Untitled',
+    boardSpecs: {
+      height,
+      width,
+      x: (0.5 * (document.documentElement.clientWidth + offsetX)) - (width / 2),
+      y: (0.5 * document.documentElement.clientHeight) - (height / 2),
+      thumbnail: '{"attrs":{"width":520,"height":320},"className":"Stage","children":[{"attrs":{"name":"boardLayer"},"className":"Layer","children":[{"attrs":{"name":"boardGroup","x":10,"y":10,"width":500,"height":300,"draggable":"true"},"className":"Group","children":[{"attrs":{"name":"board","width":500,"height":300,"fill":"#e3e3e5","opacity":"0.5","stroke":"#ccc"},"className":"Rect"},{"attrs":{"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"topLeft","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{"x":500,"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"topRight","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{"y":300,"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"bottomLeft","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{"x":500,"y":300,"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"bottomRight","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{},"className":"Group","children":[]}]}]}]}',
+    },
+    modules: [],
+  };
+
+  dispatch(postNewProject(newProject));
 };
 export const FETCH_PROJECTS_REQUEST = 'FETCH_PROJECTS_REQUEST';
 export const fetchProjectsRequest = () => ({

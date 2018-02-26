@@ -1,4 +1,6 @@
-import shortid from 'shortid'
+import shortid from 'shortid';
+import jwtDecode from 'jwt-decode';
+import { fetchProjects } from 'actions/indexActions';
 
 const generateUserData = () => ({
   username: shortid.generate(),
@@ -11,8 +13,6 @@ const saveJWTLocally = jwt => localStorage.setItem('jwt', jwt);
 const getJWTAuthHeader = jwt => ({
   'Authorization': 'Bearer ' + jwt,
 });
-
-const jwtHeader = getJWTAuthHeader(shortid.generate());
 
 const postJSON = (url, data) => {
   return fetch(url, {
@@ -44,8 +44,6 @@ export const handleNewUserVisit = () => (dispatch) => {
   const userUrl =  '/users';
   const authUrl = '/auth/login';
 
-  console.log('action called');
-
   createNewUser(newUser, userUrl)
   .then((user) => {
     saveUserLocally(user);
@@ -53,6 +51,36 @@ export const handleNewUserVisit = () => (dispatch) => {
   })
   .then((jwt) => {
     saveJWTLocally(jwt);
-    console.log(localStorage.getItem('jwt'));
   });
 };
+
+const isJWTExpired = jwt => {
+  const jwtExp = jwtDecode(jwt).exp;
+  const now = new Date() / 1000;
+
+  return now > jwtExp;
+}
+
+const refreshJWT = (jwt, refreshUrl) => {
+  return fetch(refreshUrl, {
+    method: 'POST',
+    headers: {
+      ...getJWTAuthHeader(jwt)
+    }
+  });
+};
+
+export const handleExistingUserVisit = (jwt) => (dispatch) => {
+  const refreshUrl = '/auth/refresh';
+
+  if(isJWTExpired(jwt)) {
+    console.log('expired')
+    return refreshJWT(jwt, refreshUrl)
+    .then(res => res.json())
+    .then((refreshedJWT) => {
+      dispatch(fetchProjects(refreshedJWT));
+    });
+  }
+
+  dispatch(fetchProjects(jwt));
+}

@@ -40,18 +40,18 @@ export default class App extends React.Component {
 
     return (
       <div className="landing-container">
-        <div className={`header ${scrollY > 0 ? 'header-white' : ''}`} >
+        <header className={`header ${scrollY > 0 ? 'header-white' : ''}`} >
           <Logo />
           <div className="header-button-wrapper">
             <button
               className={`${scrollY > 0 ? '' : 'header-button-hidden'} header-button onboard-button`}
-              onClick={routeToProjects}
+              onClick={this.handleGetStartedClick}
             >
               <span className="header-button-text" onClick={this.handleGetStartedClick}>GET STARTED</span>
               <span className="icon-arrow-right" />
             </button>
           </div>
-        </div>
+        </header>
         <section className="hero">
           <div className="hero-circle">
             <div className="hero-circle-content">

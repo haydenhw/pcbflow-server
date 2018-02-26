@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
+import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 
-import { fetchProjects, handleNewUserVisit } from 'actions/indexActions';
 import store from 'reduxFiles/store';
-
-export const getUser = () => localStorage.getItem('user');
-export const clearUser = () => localStorage.removeItem('user');
-export const getJWT = () => localStorage.getItem('jwt');
+import { fetchProjects, handleExistingUserVisit, handleNewUserVisit } from 'actions/indexActions';
+import { getUser, getJWT, clearUser, clearJWT } from 'helpers/users';
 
 // do a check for existing user in highest level component
 // is there a user in local storage ?
@@ -19,9 +17,16 @@ const doesUserExist = () => Boolean(getUser());
 
 export default class App extends Component {
   componentDidMount() {
-    clearUser();
+    // clearJWT();
+    // clearUser();
+    const res = getJWT()
+    console.log(res)
+    if (res) {
+      console.log(jwtDecode(res));
+    }
+
     if (doesUserExist()) {
-      store.dispatch(fetchProjects(getJWT()));
+      store.dispatch(handleExistingUserVisit(getJWT()));
     } else {
       store.dispatch(handleNewUserVisit());
     }
