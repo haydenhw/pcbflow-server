@@ -5,6 +5,7 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import { projectsUrl } from '../config/endpointUrls';
+import { getJWTAuthHeader } from 'helpers/users';
 
 export const UPDATE_PROJECT_PRICE = 'UPDATE_PROJECT_PRICE';
 export const updateProjectPrice = price => ({
@@ -46,19 +47,42 @@ export const fetchProjectsSuccess = projects => ({
   projects,
 });
 
-export function fetchProjects() {
+export function fetchProjects(jwt) {
+  if (!jwt) {
+    console.warn('JWT not provided or undefined');
+  }
+
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
-    return fetch(projectsUrl)
+
+    return fetch(projectsUrl, {
+      method: 'GET',
+      headers: {
+        ...getJWTAuthHeader(jwt),
+      },
+    })
     .then(res => res.json())
     .then((data) => {
       dispatch(fetchProjectsSuccess(data));
-    })
+    });
     // .catch((err) => {
     //   console.error(err);
     // });
   };
 }
+// export function fetchProjects() {
+//   return (dispatch) => {
+//     dispatch(fetchProjectsRequest());
+//     return fetch(projectsUrl)
+//     .then(res => res.json())
+//     .then((data) => {
+//       dispatch(fetchProjectsSuccess(data));
+//     })
+//     // .catch((err) => {
+//     //   console.error(err);
+//     // });
+//   };
+// }
 
 export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
 export const fetchProjectByIdSuccess = project => (dispatch, getState) => {

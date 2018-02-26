@@ -30,10 +30,6 @@ class ProjectsList extends Component {
     projects: [],
   }
 
-  componentDidMount() {
-    store.dispatch(actions.fetchProjects());
-  }
-
   confirmDelete = (projectId, projectName) => () => {
     store.dispatch(actions.confirmProjectDelete({
       projectId,
