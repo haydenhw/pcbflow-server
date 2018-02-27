@@ -1,65 +1,46 @@
 import shortid from 'shortid';
 import jwtDecode from 'jwt-decode';
 import { fetchProjects } from 'actions/indexActions';
+import { isJWTExpired, setJWT, setUser } from 'helpers/users';
 
-const generateUserData = () => ({
-  username: shortid.generate(),
+const createNewUser = (userData, userUrl) => postJSON(userUrl)(userData);
+
+const getNewJWT = (user, loginUrl) => {
+  return fetch(loginUrl, {
+    method: 'POST',
+    body: JSON.stringify(user),
+  });
+};
+
+const getUserCredentials = username => ({
+  username,
   password: 'public_placeholder_pw',
-});
-
-const saveUserLocally = user => localStorage.setItem('user', JSON.stringify(user));
-const saveJWTLocally = jwt => localStorage.setItem('jwt', jwt);
+})
 
 const getJWTAuthHeader = jwt => ({
   'Authorization': 'Bearer ' + jwt,
 });
 
-const postJSON = (url, data) => {
+const fetchJWT = (loginUrl, user) => {
+  const loginUser = postJSON(loginUrl);
+  return loginUser(user).then(jwtObject => jwtObject.authToken);
+};
+
+const generateDemoUser = () => ({
+  username: shortid.generate(),
+  password: 'public_placeholder_pw',
+});
+
+const postJSON = (url) => (data) => {
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json',
     },
-  });
-};
-
-const getJWT = (authUrl, user) => {
-  return postJSON(authUrl, user)
-    .then(res => res.json())
-    .then(jwtObject => jwtObject.authToken)
-};
-
-const testUser = { username: 'SJXmrveuf', password: 'public_placeholder_pw' }
-
-// getJWT(authUrl, testUser);
-
-const createNewUser = (userData, userUrl) => {
-  return postJSON(userUrl, userData)
-  .then(user => user.json())
-};
-
-export const handleNewUserVisit = () => (dispatch) => {
-  const newUser = generateUserData();
-  const userUrl =  '/users';
-  const authUrl = '/auth/login';
-
-  createNewUser(newUser, userUrl)
-  .then((user) => {
-    saveUserLocally(user);
-    return getJWT(authUrl, newUser);
   })
-  .then((jwt) => {
-    saveJWTLocally(jwt);
-  });
+  .then(res => res.json())
 };
-
-const isJWTExpired = jwt => {
-  const jwtExp = jwtDecode(jwt).exp;
-  const now = new Date() / 1000;
-
-  return now > jwtExp;
-}
 
 const refreshJWT = (jwt, refreshUrl) => {
   return fetch(refreshUrl, {
@@ -70,17 +51,35 @@ const refreshJWT = (jwt, refreshUrl) => {
   });
 };
 
-export const handleExistingUserVisit = (jwt) => (dispatch) => {
-  const refreshUrl = '/auth/refresh';
+export const handleNewUserVisit = () => (dispatch) => {
+  const newUser = generateDemoUser();
+  const userUrl =  '/users';
+  const loginUrl = '/auth/login';
+
+  createNewUser(newUser, userUrl)
+  .then((user) => {
+    setUser(user);
+    return fetchJWT(loginUrl, newUser);
+  })
+  .then((jwt) => {
+    setJWT(jwt);
+  });
+};
+
+export const handleExistingUserVisit = (jwt, user) => (dispatch) => {
+  const userCredentials = getUserCredentials(user.username);
+  const loginUrl = '/auth/login';
+  const getNewJWT = postJSON(loginUrl);
 
   if(isJWTExpired(jwt)) {
-    console.log('expired')
-    return refreshJWT(jwt, refreshUrl)
-    .then(res => res.json())
-    .then((refreshedJWT) => {
-      dispatch(fetchProjects(refreshedJWT));
+    console.log('jwt is expired. fetching a new one...')
+    return getNewJWT(userCredentials)
+    .then((newJWTObj) => {
+      const { authToken } = newJWTObj;
+      setJWT(authToken)
+      dispatch(fetchProjects(authToken));
     });
   }
 
   dispatch(fetchProjects(jwt));
-}
+};

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import store from 'reduxFiles/store';
 import { fetchProjects, handleExistingUserVisit, handleNewUserVisit } from 'actions/indexActions';
-import { isJWTExpired, getUser, getJWT, clearUser, clearJWT  } from 'helpers/users';
+import { getUser, getJWT, clearUser, clearJWT } from 'helpers/users';
 
 // do a check for existing user in highest level component
 // is there a user in local storage ?
@@ -24,13 +24,12 @@ export default class App extends Component {
     // if (res) {
     //   console.log(jwtDecode(res));
     // }
-
-    const jwt = getJWT();
-    const user = getUser();
-
-    doesUserExist()
-      ? store.dispatch(handleExistingUserVisit(jwt, user))
-      : store.dispatch(handleNewUserVisit());
+    console.log(getUser());
+    if (doesUserExist()) {
+      store.dispatch(handleExistingUserVisit(getJWT()));
+    } else {
+      store.dispatch(handleNewUserVisit());
+    }
   }
 
   render() {

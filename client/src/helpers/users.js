@@ -1,9 +1,18 @@
 import jwtDecode from 'jwt-decode';
 
-export const getUser = () => JSON.parse(localStorage.getItem('user'));
-export const getJWT= () => localStorage.getItem('jwt');
-export const clearUser = () => localStorage.removeItem('user');
-export const clearJWT = () => localStorage.removeItem('jwt');
+export const getUser = () => JSON.parse(localStorage.getItem('pcbflowDemoUser'));
+export const getJWT= () => localStorage.getItem('pcbflowJWT');
+export const setUser = user => localStorage.setItem('pcbflowDemoUser', JSON.stringify(user));
+export const setJWT = jwt => localStorage.setItem('pcbflowJWT', jwt);
+export const clearUser = () => localStorage.removeItem('pcbflowDemoUser');
+export const clearJWT = () => localStorage.removeItem('pcbflowJWT');
+
+export const isJWTExpired = jwt => {
+  const jwtExp = jwtDecode(jwt).exp;
+  const now = new Date() / 1000;
+
+  return now > jwtExp;
+}
 
 const postJSON = (url, data) => {
   return fetch(url, {

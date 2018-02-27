@@ -27,11 +27,7 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 
 // The user exchanges a valid JWT for a new one with a later expiration
 authRouter.post('/refresh', jwtAuth, (req, res) => {
-// authRouter.post('/refresh', (req, res) => {
   const authToken = createAuthToken(req.user);
-  // console.log(req.headers)
-  // console.log(authToken)
-  console.log(authToken)
   res.json({ authToken });
 });
 

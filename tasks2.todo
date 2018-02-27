@@ -1,0 +1,23 @@
+// user navigates to any route
+// does jwt exist ?
+  // yes -> is jwt valid ?
+      // yes -> use jwt to fetch Projects
+      // no -> log user in to get a new jwt then use it to fetch projects
+  //no create a new user, jwt etc
+
+// App.js component mounts
+  // check if jwt exists and is valid
+      // true: fetch projects
+  // check if jwt exists and is not valid
+    // true: log user in to get new jwt
+  // else create new user
+
+☐ user navigates to any page but their jwt is expired
+  ☐ refactor App.js to handle 3 different cases
+  ☐ refactor refresh function to log user in to get new jwt if current jwt is expired
+    ☐ find out if a function exists to
+
+☐ update user actions to use to postJSON closure
+
+
+☐ bolster jwt and user local storage to avoid conflicts

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { routeToProjects } from 'helpers/routeHelpers';
+import { connect } from 'react-redux';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -9,7 +10,7 @@ import Logo from 'components/logo/Logo';
 
 import './landing-page-styles/LandingStylesIndex.scss';
 
-export default class App extends React.Component {
+class LandingPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -18,6 +19,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    const { projects } = this.props;
     window.addEventListener('scroll', this.handleScroll.bind(this));
   }
 
@@ -25,7 +27,13 @@ export default class App extends React.Component {
     this.setState({ scrollY: window.scrollY });
   }
 
-  handleGetStartedClick() {
+  handleGetStartedClick = () => {
+    const { projects } = this.props;
+
+    if (projects.length) {
+      return routeToProjects();
+    }
+
     store.dispatch(actions.createNewProject());
   }
 
@@ -114,3 +122,11 @@ export default class App extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    projects: state.projects.items
+  };
+};
+
+export default connect(mapStateToProps)(LandingPage);
