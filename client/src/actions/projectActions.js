@@ -1,11 +1,11 @@
 // alphabetize these actions
-import { Route, hashHistory } from 'react-router';
 
+import { hashHistory } from 'react-router';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import { projectsUrl } from '../config/endpointUrls';
-import { getJWTAuthHeader, getUser } from 'helpers/users';
+import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
 
 export const UPDATE_PROJECT_PRICE = 'UPDATE_PROJECT_PRICE';
 export const updateProjectPrice = price => ({
@@ -20,7 +20,6 @@ export const updateLastSavedTime = time => ({
 });
 
 export const createNewProject = () => (dispatch) => {
-  console.log(getUser()._id);
   const ownerId = getUser()._id;
   const height = 300;
   const width = 500;
@@ -133,11 +132,16 @@ export function fetchProjectById(projectId, currentRoute) {
   };
 }
 
-export const POST_NEW_PROJECT_SUCCESS = 'POST_NEW_PROJECT_SUCCESS';
-export const postNewProjectSuccess = modules => ({
-  type: 'POST_NEW_PROJECT_SUCCESS',
-  modules,
-});
+export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS';
+export const postProjectSuccess = project => dispatch => {
+  dispatch({
+    type: 'POST_PROJECT_SUCCESS',
+    project
+  });
+
+  const designRoute = `/design/${project._id}`;
+  hashHistory.push(designRoute);
+};
 
 export function postNewProject(newProject) {
   return (dispatch) => {
@@ -154,8 +158,8 @@ export function postNewProject(newProject) {
       .then(res => res.json())
       .then((data) => {
         const projectId = data._id;
-        console.log('New project saved');
-        dispatch(fetchProjectById(projectId));
+        dispatch(postProjectSuccess(data))
+        // dispatch(fetchProjectById(projectId));
       })
       .catch((err) => {
         console.error(err);
@@ -202,11 +206,10 @@ export function deleteProject(projectId, projects) {
   return (dispatch) => {
     dispatch({
       type: 'DELETE_PROJECT_REQUEST',
+      projectId,
     });
 
-    fetch(
-      url,
-      {
+    fetch(url, {
         method: 'DELETE',
         headers: new Headers({
           Accept: 'application/json',
@@ -214,8 +217,7 @@ export function deleteProject(projectId, projects) {
         }),
       })
       .then((res) => {
-        console.log('delete successful');
-        dispatch(fetchProjects());
+        console.log('project deleted successfully');
       })
       .catch((err) => {
         console.error(err);

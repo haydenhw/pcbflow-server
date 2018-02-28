@@ -1,23 +1,19 @@
-// user navigates to any route
-// does jwt exist ?
-  // yes -> is jwt valid ?
-      // yes -> use jwt to fetch Projects
-      // no -> log user in to get a new jwt then use it to fetch projects
-  //no create a new user, jwt etc
+☐ investigate why project cards do not load from redux
+  ☐ read and understand mechanism for rendering cards
 
-// App.js component mounts
-  // check if jwt exists and is valid
-      // true: fetch projects
-  // check if jwt exists and is not valid
-    // true: log user in to get new jwt
-  // else create new user
+☐ user creates a new project
+  ✔ dispatch POST_PROJECT_SUCCESS @done(2018-02-27 14:50)
+    ✔ update name and id in currentProjectInfo @done(2018-02-27 14:57)
+    ✔ update boardSpecs @done(2018-02-27 14:57)
+  ✔ route to design tool @done(2018-02-27 14:58)
+    ✔ update project items @done(2018-02-27 15:05)
+    ✔ update modules reducer @done(2018-02-27 15:05)
+    ✔ check that thumbnail is listed @done(2018-02-27 15:05)
+☐ when update_board_thumnail action fires, it should update projects.items in state
+  ✔ find find out how thumbnail updates @done(2018-02-27 16:15)
+  ☐ check to see if thumbnail is updating correctly in project
 
-☐ user navigates to any page but their jwt is expired
-  ☐ refactor App.js to handle 3 different cases
-  ☐ refactor refresh function to log user in to get new jwt if current jwt is expired
-    ☐ find out if a function exists to
+☐ why is thumbnail not list?
+  ☐ find out how thumbnail gets added to state
 
-☐ update user actions to use to postJSON closure
-
-
-☐ bolster jwt and user local storage to avoid conflicts
+☐ as a user I can view projects in reverse order

@@ -59,9 +59,10 @@ class DesignToolStage extends Component {
 
   updateThumbnail() {
     // move to action creator
+    const { currentProjectId } = this.props;
     const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
-    store.dispatch(actions.updateBoardThumbnail(thumbnail));
+    store.dispatch(actions.updateBoardThumbnail(thumbnail, currentProjectId));
   }
 
   deleteModule() {
@@ -130,6 +131,7 @@ const mapStateToProps = state => {
 
   return ({
   currentProjectName: state.currentProjectInfo.name,
+  currentProjectId: state.currentProjectInfo.id,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   isMouseDown: state.mouseEvents.isMouseDown,

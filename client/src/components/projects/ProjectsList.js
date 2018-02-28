@@ -65,10 +65,9 @@ class ProjectsList extends Component {
   }
   }
 
-const mapStateToProps = state => ({
-  projects: state.projects.items,
-  thumbnail: state.boardSpecs.thumbnail,
-});
+const mapStateToProps = state => {
+  return { projects: state.projects.items };
+};
 
 export default connect(mapStateToProps)(ProjectsList);
 

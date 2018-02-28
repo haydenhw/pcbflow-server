@@ -56,6 +56,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
       };
     break;
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+    case actions.POST_PROJECT_SUCCESS:
       const boardSpecs = action.project.boardSpecs;
       const { x, y, width, height, thumbnail } = boardSpecs;
 
