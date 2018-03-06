@@ -24,6 +24,10 @@ class Board extends Component {
     this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
+  componentDidMount() {
+    this.board = this.refs.board;
+  }
+
   updateLocalStatePosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
@@ -98,10 +102,12 @@ class Board extends Component {
           <Rect
             ref="board"
             name={'board'}
-            x={topLeft.x}
-            y={topLeft.y}
-            width={topRight.x - topLeft.x || width}
-            height={bottomLeft.y - topLeft.y || height}
+            x={this.board ? this.board.getX() : topLeft.x}
+            y={this.board ? this.board.getY() : topLeft.y}
+            width={width}
+            height={height}
+            // width={topRight.x - topLeft.x || width}
+            // height={bottomLeft.y - topLeft.y || height}
             fill="#e3e3e5"
             opacity="0.5"
             stroke={this.props.stroke}

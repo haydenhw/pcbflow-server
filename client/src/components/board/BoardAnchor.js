@@ -20,6 +20,10 @@ export default class Anchor extends Component {
     this.handleDragEnd = this.handleDragEnd.bind(this);
   }
 
+  componentDidMount() {
+    this.anchor = this.refs.anchor;
+  }
+
   draggableOn() {
     const group = this.refs.anchor.getParent();
     group.setDraggable(true);
@@ -33,7 +37,7 @@ export default class Anchor extends Component {
     this.refs.anchor.moveToTop();
   }
 
-  updatePosition() {
+  updatePosition(callback) {
     const activeAnchor = this.refs.anchor;
     const group = this.refs.anchor.getParent();
     const board = group.get('.board')[0];
@@ -57,7 +61,6 @@ export default class Anchor extends Component {
       case 'bottomRight':
         bottomLeft.setY(anchorY);
         topRight.setX(anchorX);
-        break;
       case 'bottomLeft':
         bottomRight.setY(anchorY);
         topLeft.setX(anchorX);
@@ -71,13 +74,19 @@ export default class Anchor extends Component {
       bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() },
     };
 
-    store.dispatch(actions.updateAnchorPositions(anchorPositions));
+    if (callback) {
+      callback(anchorPositions);
+    }
+    // store.dispatch(actions.updateAnchorPositions(anchorPositions));
     board.position(topLeft.position());
 
     const width = topRight.getX() - topLeft.getX();
     const height = bottomLeft.getY() - topLeft.getY();
+    // console.log('top right', topRight.getX(), 'top left', topLeft.getX());
 
     if (width && height) {
+      // board.width(width);
+      // board.height(height);
       const boardDimensions = {
         width,
         height,
@@ -102,6 +111,8 @@ export default class Anchor extends Component {
   handleDragEnd() {
     this.props.unhideFloatingElements();
     this.draggableOn();
+    const saveAnchorPositions = anchorPositions => store.dispatch(actions.updateAnchorPositions(anchorPositions));
+    this.updatePosition(saveAnchorPositions);
   }
 
   handleMouseOut() {
@@ -113,11 +124,17 @@ export default class Anchor extends Component {
 
   render() {
     const { x, y, name } = this.props;
+
+    if(this.anchor) {
+      // console.log(this.anchor.getX());
+      // console.log(this.anchor.getY());
+    }
+
     return (
       <Circle
         ref="anchor"
-        x={x}
-        y={y}
+        x={this.anchor ? this.anchor.getX() : x}
+        y={this.anchor ? this.anchor.getY() : y}
         stroke="#666"
         fill="#ddd"
         strokeWidth={this.state.strokeWidth}

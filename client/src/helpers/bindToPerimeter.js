@@ -1,32 +1,30 @@
 import getPerimeterSide from 'helpers/getPerimeterSide';
 
-function buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs) {
+function buildCoordinateData(selectedModuleProps, topLeftAnchor, boardSpecs) {
   const {
+    boundToSideIndex,
     x,
     y,
     width,
     height,
   } = selectedModuleProps;
-  const { topLeft } = anchorPositions;
-  const { boundToSideIndex } = selectedModuleProps;
-  if (true/* Number.isInteger(boundToSideIndex)*/) {
-    const coordinateData = {
-      boundToSide: getPerimeterSide(boundToSideIndex),
-      moduleX: x,
-      moduleY: y,
-      moduleWidth: width,
-      moduleHeight: height,
-      topLeftAnchorX: topLeft.x,
-      topLeftAnchorY: topLeft.y,
-      boardWidth: boardSpecs.width,
-      boardHeight: boardSpecs.height,
-    };
-    return coordinateData;
-  }
+
+  return {
+    boundToSide: getPerimeterSide(boundToSideIndex),
+    moduleX: x,
+    moduleY: y,
+    moduleWidth: width,
+    moduleHeight: height,
+    topLeftAnchorX: topLeftAnchor.x,
+    topLeftAnchorY: topLeftAnchor.y,
+    boardWidth: boardSpecs.width,
+    boardHeight: boardSpecs.height,
+  };
 }
 
-export default function bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs) {
-  const cd = buildCoordinateData(selectedModuleProps, anchorPositions, boardSpecs);
+export default function bindToPerimeter(selectedModuleProps, topLeftAnchor, boardSpecs) {
+  const cd = buildCoordinateData(selectedModuleProps, topLeftAnchor, boardSpecs);
+
   switch (cd.boundToSide) {
     case 'bottom':
       return {

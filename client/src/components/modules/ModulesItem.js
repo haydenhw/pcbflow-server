@@ -159,12 +159,14 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleDragMove() {
-    const newPosition = this.getNewPosition();
-    store.dispatch(actions.updateModulePosition(newPosition));
+    // const newPosition = this.getNewPosition();
+    // store.dispatch(actions.updateModulePosition(newPosition));
   }
 
   handleDragEnd() {
     const module = this.refs.moduleGroup;
+    const newPosition = this.getNewPosition();
+    store.dispatch(actions.updateModulePosition(newPosition));
     this.highlightRuleBreakingModules();
   }
 
@@ -195,6 +197,10 @@ export default class ModulesItem extends PureComponent {
     if (this.refs.moduleGroup) {
       isStrokeRed = this.refs.moduleGroup.attrs.isStrokeRed;
       defaultStroke = this.refs.moduleGroup.attrs.defaultStroke;
+    }
+
+    if (this.props.text === 'COM Connector') {
+      console.count();
     }
 
     return (

@@ -7,9 +7,9 @@ const passport = require('passport');
 const { PORT, DATABASE_URL } = require('./api/config');
 const { Modules, Projects } = require('./api/models');
 const { localStrategy, jwtStrategy } = require('./api/strategies');
-const authRouter = require('./api/authRouter');
-const projectRouter = require('./api/projectRouter');
-const userRouter = require('./api/userRouter');
+const projectRouter = require('./api/routes/projectRouter');
+const userRouter = require('./api/routes/userRouter');
+const authRouter = require('./api/routes/authRouter');
 const demoProject = require('./api/demoProject');
 
 const app = express();

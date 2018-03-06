@@ -34,9 +34,6 @@ export const projects = (state = defaultProjectState, action) => {
         items: [...state.items, action.project],
       };
     case actions.UPDATE_BOARD_THUMBNAIL:
-      // console.log(action);
-      const oldThumbail = state.items[0].boardSpecs.thumbnail;
-
       const updatedProjects = state.items.map(project => {
         if (project._id === action.projectId) {
           const updatedBoardSpecs = Object.assign({}, { ...project.boardSpecs }, { thumbnail: action.thumbnail })
@@ -46,7 +43,7 @@ export const projects = (state = defaultProjectState, action) => {
 
         return project;
       });
-      const res = updatedProjects[0].boardSpecs.thumbnail
+
       return {
         ...state,
         items: updatedProjects,

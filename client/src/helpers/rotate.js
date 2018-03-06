@@ -20,7 +20,7 @@ export default function rotate(selectedModuleProps, anchorPositions, boardSpecs)
   let newParentGroupCoordinates;
   let newInnerGroupCoordinates;
 
-  newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, anchorPositions, boardSpecs);
+  newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, topLeft, boardSpecs);
   newInnerGroupCoordinates = (
     rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
   );
@@ -37,4 +37,3 @@ export default function rotate(selectedModuleProps, anchorPositions, boardSpecs)
 
   return rotationData;
 }
-
