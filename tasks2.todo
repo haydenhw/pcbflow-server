@@ -1,3 +1,7 @@
+Debug:
+  ☐ Issue when bottom right anchor is dragged, top right anchor disappears
+  ☐ When bottom right anchor is dragged, x position of the board is flipped
+
 ☐ investigate why project cards do not load from redux
   ☐ read and understand mechanism for rendering cards
 

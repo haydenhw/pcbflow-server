@@ -199,10 +199,6 @@ export default class ModulesItem extends PureComponent {
       defaultStroke = this.refs.moduleGroup.attrs.defaultStroke;
     }
 
-    if (this.props.text === 'COM Connector') {
-      console.count();
-    }
-
     return (
       <Group
         draggable="true"

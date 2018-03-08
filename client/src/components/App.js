@@ -13,6 +13,7 @@ import { isJWTExpired, getUser, getJWT, clearUser, clearJWT  } from 'helpers/use
       // no -> refresh token and ''
   // no -> create a new user, get jwt, save user and jwt to local storage, and create new project
       // under newly created user  id
+
 const doesUserExist = () => Boolean(getUser());
 
 export default class App extends Component {

@@ -49,6 +49,7 @@ export default class Anchor extends Component {
     const anchorX = activeAnchor.getX();
     const anchorY = activeAnchor.getY();
     // update anchor positions
+
     switch (activeAnchor.getName()) {
       case 'topLeft':
         topRight.setY(anchorY);
@@ -61,32 +62,30 @@ export default class Anchor extends Component {
       case 'bottomRight':
         bottomLeft.setY(anchorY);
         topRight.setX(anchorX);
+        break;
       case 'bottomLeft':
         bottomRight.setY(anchorY);
         topLeft.setX(anchorX);
         break;
     }
 
-    const anchorPositions = {
-      topLeft: { x: topLeft.getX(), y: topLeft.getY() },
-      topRight: { x: topRight.getX(), y: topRight.getY() },
-      bottomLeft: { x: bottomLeft.getX(), y: bottomLeft.getY() },
-      bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() },
-    };
-
     if (callback) {
+      const anchorPositions = {
+        topLeft: { x: topLeft.getX(), y: topLeft.getY() },
+        topRight: { x: topRight.getX(), y: topRight.getY() },
+        bottomLeft: { x: bottomLeft.getX(), y: bottomLeft.getY() },
+        bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() },
+      };
+
       callback(anchorPositions);
     }
-    // store.dispatch(actions.updateAnchorPositions(anchorPositions));
+
     board.position(topLeft.position());
 
     const width = topRight.getX() - topLeft.getX();
     const height = bottomLeft.getY() - topLeft.getY();
-    // console.log('top right', topRight.getX(), 'top left', topLeft.getX());
 
     if (width && height) {
-      // board.width(width);
-      // board.height(height);
       const boardDimensions = {
         width,
         height,
@@ -111,8 +110,7 @@ export default class Anchor extends Component {
   handleDragEnd() {
     this.props.unhideFloatingElements();
     this.draggableOn();
-    const saveAnchorPositions = anchorPositions => store.dispatch(actions.updateAnchorPositions(anchorPositions));
-    this.updatePosition(saveAnchorPositions);
+    this.updatePosition(anchorPositions => store.dispatch(actions.updateAnchorPositions(anchorPositions)));
   }
 
   handleMouseOut() {
