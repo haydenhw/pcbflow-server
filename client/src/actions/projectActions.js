@@ -63,7 +63,6 @@ export function fetchProjects(jwt) {
 
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
-
     return fetch(projectsUrl, {
       method: 'GET',
       headers: {

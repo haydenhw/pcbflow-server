@@ -9,6 +9,22 @@ import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail from 'helpers/generateThumbnail';
 import { areDependenciesMet } from 'helpers/dependencies';
+import { compose } from 'helpers/functional';
+
+const getKonvaChildByIndex = index => konvaNode => konvaNode.children[index];
+
+const getKonvaParentByName = (name) => (konvaNode) => {
+  if (konvaNode.getName() === name) {
+    return konvaNode;
+  }
+
+  return getKonvaParentByName(name)(konvaNode.getParent());
+}
+
+const getTopLeftAnchor = compose(
+  getKonvaChildByIndex(1),
+  getKonvaParentByName('boardGroup')
+);
 
 export default class ModulesItem extends PureComponent {
   constructor(props) {
@@ -180,36 +196,39 @@ export default class ModulesItem extends PureComponent {
     this.props.rotate();
   }
 
-  render() {
-    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-    const image = (
+  renderImage() {
+    const { imageX, imageY, imageHeight, imageWidth, imageNode } = this.props;
+    return (
       <Image
-        x={this.props.imageX}
-        y={this.props.imageY}
-        height={this.props.imageHeight}
-        width={this.props.imageWidth}
-        image={this.props.imageNode}
+        x={imageX}
+        y={imageY}
+        height={imageHeight}
+        width={imageWidth}
+        image={imageNode}
       />
     );
-    let isStrokeRed;
-    let defaultStroke;
+  }
 
-    if (this.refs.moduleGroup) {
-      isStrokeRed = this.refs.moduleGroup.attrs.isStrokeRed;
-      defaultStroke = this.refs.moduleGroup.attrs.defaultStroke;
-    }
+  render() {
+    const { anchorPositions, boardSpecs, isDraggingToBoard, selectedModuleProps } = this.props;
+    const { moduleGroup } = this.refs;
+    const defaultStroke = moduleGroup ? moduleGroup.attrs.defaultStroke: null;
+    const isStrokeRed = moduleGroup ? moduleGroup.attrs.isStrokeRed : null;
+    const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
+      ? getTopLeftAnchor(moduleGroup)
+      : null;
 
     return (
       <Group
         draggable="true"
         ref="moduleGroup"
         name="moduleGroup"
-        x={anchorPositions
-          ? bindToPerimeter(this.props, anchorPositions, boardSpecs).x
+        x={topLeftAnchor
+          ? bindToPerimeter(this.props, topLeftAnchor.attrs, boardSpecs).x
           : this.props.x
         }
-        y={anchorPositions
-          ? bindToPerimeter(this.props, anchorPositions, boardSpecs).y
+        y={topLeftAnchor
+          ? bindToPerimeter(this.props, topLeftAnchor.attrs, boardSpecs).y
           : this.props.y
         }
         height={this.props.height}
@@ -256,7 +275,7 @@ export default class ModulesItem extends PureComponent {
             strokeWidth={this.state.strokeWidth}
           />
 
-          {this.props.imageSrc ? image : <Group />}
+          {this.props.imageSrc ? this.renderImage() : <Group />}
         </Group>
       </Group>
     );

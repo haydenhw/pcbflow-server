@@ -478,15 +478,17 @@ let DesignTool = class extends Component {
   }
 
   updateClientPosition(evt) {
-    const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
-    const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
-    const x = Number(evt.clientX) - stageOffsetX;
-    const y = Number(evt.clientY) - stageOffsetY;
+    if (this.stageContainer) {
+      const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
+      const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
+      const x = Number(evt.clientX) - stageOffsetX;
+      const y = Number(evt.clientY) - stageOffsetY;
 
-    this.setState({
-      x,
-      y,
-    });
+      this.setState({
+        x,
+        y,
+      });
+    }
   }
 
   updateState(url) {
@@ -757,7 +759,7 @@ let DesignTool = class extends Component {
 
         />
         <div onMouseMove={this.handleMouseMove}>
-          <div ref={node => (this.stageContainer = node)}>
+          <div ref={node => { this.stageContainer = node }}>
             {this.renderSideBar()}
             <DesignToolStage
               draggingModule={this.renderDraggingModule()}
