@@ -3,6 +3,7 @@ import * as actions from 'actions/indexActions';
 import doesModifyBoard from 'helpers/doesModifyBoard';
 
 const defaultboardSpecs = {
+  checkCollisionTrigger: false,
   height: 300,
   savedThumbnail: null,
   stroke: '#ccc',
@@ -15,6 +16,13 @@ const defaultboardSpecs = {
 
 export const boardSpecs = (state = defaultboardSpecs, action) => {
   switch (action.type) {
+
+    case actions.UPDATE_ANCHOR_POSITIONS:
+      return {
+        ...state,
+        checkCollisionTrigger: !state.checkCollisionTrigger,
+      };
+      break;
     case actions.TRIGGER_THUMBNAIL_UPDATE:
     case actions.UPDATE_MODULE_FILL:
       return {

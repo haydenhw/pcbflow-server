@@ -111,6 +111,10 @@ export default class ModulesItem extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (prevProps.checkCollisionTrigger !== this.props.checkCollisionTrigger) {
+      this.highlightRuleBreakingModules();
+    }
+
     if (prevProps.metDependencies.length !== this.props.metDependencies.length) {
       store.dispatch(actions.updateModuleFill());
     }

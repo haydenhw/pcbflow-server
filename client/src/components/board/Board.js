@@ -81,9 +81,8 @@ class Board extends Component {
       unhideFloatingElements,
       updateAnchorTrigger,
       isDraggingToBoard,
-    }
-    = this.props;
-    console.log(updateAnchorTrigger)
+    } = this.props;
+
     return (
       <Layer
         ref="boardLayer"

@@ -79,6 +79,7 @@ class SideBarDimensionInput extends Component {
 
     store.dispatch(actions.updateBoardDimensions({ width, height }));
     store.dispatch(actions.updateAnchorPositions(anchorPositions));
+    store.dispatch(actions.triggerAnchorUpdate());
   }
 
   render() {

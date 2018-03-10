@@ -26,7 +26,9 @@ export default class Anchor extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.updateAnchorTrigger !== prevProps.updateAnchorTrigger) {
-
+      const { x, y } = this.props;
+      this.anchor.setX(x);
+      this.anchor.setY(y);
     }
   }
 

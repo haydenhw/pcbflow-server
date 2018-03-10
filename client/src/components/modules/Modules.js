@@ -146,6 +146,7 @@ class Modules extends Component {
         id={module.id}
         dependencies={module.dependencies}
         metDependencies={module.metDependencies}
+        checkCollisionTrigger={this.props.checkCollisionTrigger}
         topLeftAnchor={this.props.topLeftAnchor}
         selectedModuleProps={this.props.selectedModuleProps}
         anchorPositions={this.props.anchorPositions}
@@ -167,13 +168,14 @@ class Modules extends Component {
 }
 
 const mapStateToProps = state => ({
-  modules: state.currentProjectModules.present,
-  topLeftAnchor: state.anchorPositions.topLeft,
-  selectedModuleProps: state.selectedModule,
-  boardSpecs: state.boardSpecs,
   anchorPositions: state.anchorPositions,
-  iconVisibityMode: state.iconVisibity.mode,
+  boardSpecs: state.boardSpecs,
+  checkCollisionTrigger: state.boardSpecs.checkCollisionTrigger,
   currentDependencyData: state.iconVisibity,
+  iconVisibityMode: state.iconVisibity.mode,
+  modules: state.currentProjectModules.present,
+  selectedModuleProps: state.selectedModule,
+  topLeftAnchor: state.anchorPositions.topLeft,
   tutorialStep: state.tutorial.step,
 });
 
