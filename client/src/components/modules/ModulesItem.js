@@ -148,11 +148,11 @@ export default class ModulesItem extends PureComponent {
       return 'green';
     }
 
-    if (metDependencies.length === 0) {
+    if (metDependencies.length < dependencies.length) {
       return 'red';
     }
 
-    return null;
+    return 'green';
   }
 
   handleMouseOver() {

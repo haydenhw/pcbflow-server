@@ -24,6 +24,12 @@ export default class Anchor extends Component {
     this.anchor = this.refs.anchor;
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.updateAnchorTrigger !== prevProps.updateAnchorTrigger) {
+
+    }
+  }
+
   draggableOn() {
     const group = this.refs.anchor.getParent();
     group.setDraggable(true);
@@ -150,8 +156,8 @@ export default class Anchor extends Component {
 }
 
 Anchor.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
+  x: PropTypes.number,
+  y: PropTypes.number,
   name: PropTypes.string.isRequired,
   hideFloatingElements: PropTypes.func.isRequired,
   unhideFloatingElements: PropTypes.func.isRequired,

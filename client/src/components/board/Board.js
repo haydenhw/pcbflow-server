@@ -79,10 +79,11 @@ class Board extends Component {
       rotate,
       hideFloatingElements,
       unhideFloatingElements,
+      updateAnchorTrigger,
       isDraggingToBoard,
     }
     = this.props;
-
+    console.log(updateAnchorTrigger)
     return (
       <Layer
         ref="boardLayer"
@@ -117,6 +118,7 @@ class Board extends Component {
             name={'topLeft'}
             hideFloatingElements={hideFloatingElements}
             unhideFloatingElements={unhideFloatingElements}
+            updateAnchorTrigger={updateAnchorTrigger}
           />
           <Anchor
             x={topRight.x || width}
@@ -124,6 +126,7 @@ class Board extends Component {
             name={'topRight'}
             hideFloatingElements={hideFloatingElements}
             unhideFloatingElements={unhideFloatingElements}
+            updateAnchorTrigger={updateAnchorTrigger}
           />
           <Anchor
             x={bottomLeft.x}
@@ -131,6 +134,7 @@ class Board extends Component {
             name={'bottomLeft'}
             hideFloatingElements={hideFloatingElements}
             unhideFloatingElements={unhideFloatingElements}
+            updateAnchorTrigger={updateAnchorTrigger}
           />
           <Anchor
             x={bottomRight.x || width}
@@ -138,8 +142,8 @@ class Board extends Component {
             name={'bottomRight'}
             hideFloatingElements={hideFloatingElements}
             unhideFloatingElements={unhideFloatingElements}
+            updateAnchorTrigger={updateAnchorTrigger}
           />
-
           <Modules
             rotate={rotate}
             isDraggingToBoard={isDraggingToBoard}
@@ -151,6 +155,7 @@ class Board extends Component {
 }
 
 const mapStateToProps = state => ({
+  updateAnchorTrigger:state.anchorPositions.updateAnchorTrigger,
   x: state.boardSpecs.x,
   y: state.boardSpecs.y,
   width: state.boardSpecs.width,

@@ -83,6 +83,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
 };
 
 const defaultAnchorPositions = {
+  updateAnchorTrigger: false,
   topLeft: { x: 0, y: 0 },
   topRight: { x: null, y: 0 },
   bottomLeft: { x: 0, y: null },
@@ -92,9 +93,17 @@ const defaultAnchorPositions = {
 export const anchorPositions = (state = defaultAnchorPositions, action) => {
   switch (action.type) {
     case actions.UPDATE_ANCHOR_POSITIONS:
-      return action.positions;
+      return {
+        ...state,
+        ...action.positions
+      }
       break;
-
+    case actions.TRIGGER_ANCHOR_UPDATE:
+      return {
+        ...state,
+        updateAnchorTrigger: !state.updateAnchorTrigger,
+      };
+      break;
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
       return defaultAnchorPositions;
       break;

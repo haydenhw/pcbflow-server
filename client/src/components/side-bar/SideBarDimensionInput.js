@@ -14,6 +14,7 @@ class SideBarDimensionInput extends Component {
     this.handleWidthChange = this.handleWidthChange.bind(this);
     this.handleHeightChange = this.handleHeightChange.bind(this);
   }
+
   validate(value) {
     if (isNaN(value)) {
       return '';
@@ -27,9 +28,6 @@ class SideBarDimensionInput extends Component {
   }
 
   handleWidthChange(event) {
-    const targetValue = event.target.value;
-    const newBoardWidth = this.validate(targetValue);
-
     const {
       topLeft,
       topRight,
@@ -37,11 +35,12 @@ class SideBarDimensionInput extends Component {
       bottomRight,
       boardHeight,
       boardDimensions,
-     }
-     = this.props;
+    } = this.props;
 
-    const width = newBoardWidth;
+    const targetValue = event.target.value;
+    const newBoardWidth = this.validate(targetValue);
     const height = boardHeight;
+    const width = newBoardWidth;
 
     const anchorPositions = {
       topLeft: { x: topLeft.x, y: topLeft.y },
@@ -52,6 +51,7 @@ class SideBarDimensionInput extends Component {
 
     store.dispatch(actions.updateBoardDimensions({ width, height }));
     store.dispatch(actions.updateAnchorPositions(anchorPositions));
+    store.dispatch(actions.triggerAnchorUpdate());
   }
 
   handleHeightChange(event) {
@@ -83,6 +83,7 @@ class SideBarDimensionInput extends Component {
 
   render() {
     const { boardWidth, boardHeight } = this.props;
+
     return (
       <form className="dimension-input-form">
         <div className="dimension-bar">Dimensions</div>
