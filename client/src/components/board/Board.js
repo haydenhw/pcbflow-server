@@ -103,13 +103,9 @@ class Board extends Component {
             ref="board"
             name={'board'}
             x={this.board ? this.board.getX() : topLeft.x}
-            x={this.board ? this.board.getX() : topLeft.x}
-            // y={topLeft.y}
-            // y={topLeft.y}
+            y={this.board ? this.board.getY() : topLeft.y}
             width={width}
             height={height}
-            // width={topRight.x - topLeft.x || width}
-            // height={bottomLeft.y - topLeft.y || height}
             fill="#e3e3e5"
             opacity="0.5"
             stroke={this.props.stroke}
