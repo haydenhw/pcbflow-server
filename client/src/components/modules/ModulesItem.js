@@ -129,19 +129,6 @@ export default class ModulesItem extends PureComponent {
     }
   }
 
-  getNewPosition() {
-    const { boundToSideIndex } = this.props;
-    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-    const module = this.refs.moduleGroup;
-    const newPosition = {
-      x: module.getPosition().x,
-      y: module.getPosition().y,
-      index: this.props.index,
-    };
-
-    return newPosition;
-  }
-
   getFill() {
     const { metDependencies, dependencies, isDraggingToBoard, id } = this.props;
     if (id === '100') {
@@ -157,6 +144,38 @@ export default class ModulesItem extends PureComponent {
     }
 
     return 'green';
+  }
+
+  getNewPosition(x, y) {
+    const  { moduleGroup } = this.refs;
+    // const newPosition = bindToPerimeter(selectedModuleProps, topLeftAnchor.attrs, boardSpecs)
+    return {
+      x: moduleGroup.getPosition().x,
+      y: moduleGroup.getPosition().y,
+      index: this.props.index,
+    };
+
+  }
+
+  handleDragMove() {
+    const { selectedModuleProps, anchorPositions, boardSpecs, x, y } = this.props;
+    const { moduleGroup } = this.refs;
+    const topLeftAnchor = getTopLeftAnchor(moduleGroup);
+    const newModuleProps = Object.assign({}, selectedModuleProps, {
+      x: moduleGroup.getX(),
+      y: moduleGroup.getY(),
+    });
+    const newPosition = bindToPerimeter(newModuleProps, topLeftAnchor.attrs, boardSpecs)
+
+    moduleGroup.setX(newPosition.x);
+    moduleGroup.setY(newPosition.y);
+  }
+
+  handleDragEnd() {
+    const module = this.refs.moduleGroup;
+    const newPosition = this.getNewPosition();
+    store.dispatch(actions.updateModulePosition(newPosition));
+    this.highlightRuleBreakingModules();
   }
 
   handleMouseOver() {
@@ -176,18 +195,6 @@ export default class ModulesItem extends PureComponent {
 
     document.body.style.cursor = 'default';
     store.dispatch(actions.toggleIsMouseOverModule(false));
-  }
-
-  handleDragMove() {
-    // const newPosition = this.getNewPosition();
-    // store.dispatch(actions.updateModulePosition(newPosition));
-  }
-
-  handleDragEnd() {
-    const module = this.refs.moduleGroup;
-    const newPosition = this.getNewPosition();
-    store.dispatch(actions.updateModulePosition(newPosition));
-    this.highlightRuleBreakingModules();
   }
 
   handleClick(evt) {
