@@ -172,12 +172,43 @@ export const updateProjectSuccess = project => ({
   project,
 });
 
-export function updateProject(data, projectId) {
+  const getOriginAdjustedModules = (modules, originX, originY) => (
+    modules.map((module) => {
+      const x = module.x - originX;
+      const y = module.y - originY;
+      return Object.assign({}, module, { x, y });
+    })
+  );
+
+  const getOriginAdjustedProjectData = ({
+    boardSpecs,
+    currentProjectModules: modules,
+    currentProjectName: projectName,
+    topLeftAnchorX: originX,
+    topLeftAnchorY: originY,
+  }) => {
+    const { width, height, x, y, thumbnail } = boardSpecs;
+    return {
+      projectName,
+      boardSpecs: {
+        width,
+        height,
+        thumbnail,
+        x: x + originX,
+        y: y + originY,
+      },
+      modules: getOriginAdjustedModules(modules, originX, originY),
+    };
+  };
+export function updateProject(projectData) {
+  const { currentProjectId: projectId } = projectData;
+  const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
+
   return (dispatch) => {
     const projectUrl = `${projectsUrl}/${projectId}`;
     fetch(projectUrl, {
       method: 'put',
-      body: JSON.stringify(data),
+      body: JSON.stringify(originAdjustedProjectData),
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -192,6 +223,26 @@ export function updateProject(data, projectId) {
       // });
   };
 }
+// export function updateProject(data, projectId) {
+//   return (dispatch) => {
+//     const projectUrl = `${projectsUrl}/${projectId}`;
+//     fetch(projectUrl, {
+//       method: 'put',
+//       body: JSON.stringify(data),
+//       headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//     })
+//       .then(res => res.json())
+//       .then((data) => {
+//         dispatch(updateProjectSuccess(data));
+//       })
+//       // .catch((err) => {
+//       //   throw new Error(err);
+//       // });
+//   };
+// }
 
 export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS';
 export const deleteProjectSuccess = (projectId, projects) => ({

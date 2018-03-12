@@ -49,11 +49,7 @@ export default function TopNavbar(props) {
       />
 
       <div className="nav-button-group">
-        <TopNavbarSaveButton
-          updateThumbnail={updateThumbnail}
-          updateLastSaved={updateLastSaved}
-          recordSavedChanges={recordSavedChanges}
-        />
+        <span className="nav-save-status">All changes saved</span>
         <TopNavbarButton
           className="nav-button export-button"
           handleClick={handleExportButtonClick}

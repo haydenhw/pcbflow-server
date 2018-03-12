@@ -155,6 +155,7 @@ let DesignTool = class extends Component {
 
     if(prevProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
       console.log('save project')
+      store.dispatch(actions.updateProject(this.props));
     }
   }
 
@@ -806,6 +807,7 @@ const mapStateToProps = state => ({
   isTutorialActive: state.tutorial.isTutorialActive,
   modalType: state.modal.modalType,
   projects: state.projects.items,
+  saveProjectTrigger: state.projects.saveProjectTrigger,
   selectedModuleIndex: state.selectedModule.index,
   selectedModuleProps: state.selectedModule,
   shouldRenderModal: state.modal.shouldRenderModal,
@@ -814,6 +816,8 @@ const mapStateToProps = state => ({
   thumbnail: state.boardSpecs.tempThumbnail,
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
   todoBools: state.tutorial.todoBools,
+  topLeftAnchorX: state.anchorPositions.topLeft.x,
+  topLeftAnchorY: state.anchorPositions.topLeft.y,
   tutorialStep: state.tutorial.step,
 });
 
