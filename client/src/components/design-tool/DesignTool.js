@@ -152,6 +152,10 @@ let DesignTool = class extends Component {
     ) {
       this.setRouteHook();
     }
+
+    if(prevProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
+      console.log('save project')
+    }
   }
 
   componentWillUnmount() {
@@ -801,21 +805,16 @@ const mapStateToProps = state => ({
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   isTutorialActive: state.tutorial.isTutorialActive,
   modalType: state.modal.modalType,
+  projects: state.projects.items,
   selectedModuleIndex: state.selectedModule.index,
   selectedModuleProps: state.selectedModule,
   shouldRenderModal: state.modal.shouldRenderModal,
   shouldRenderSideBar: state.shouldRenderSideBar,
   shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
+  thumbnail: state.boardSpecs.tempThumbnail,
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
   todoBools: state.tutorial.todoBools,
   tutorialStep: state.tutorial.step,
-
-  // modules: state.currentProjectModules.present,
-  // projectName: state.currentProjectInfo.name,
-  // projects: state.projects.items,
-  // thumbnail: state.boardSpecs.tempThumbnail,
-  // topLeftAnchorX: state.anchorPositions.topLeft.x,
-  // topLeftAnchorY: state.anchorPositions.topLeft.y,
 });
 
 DesignTool = withRouter(DesignTool);

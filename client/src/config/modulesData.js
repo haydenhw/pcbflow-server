@@ -310,7 +310,7 @@ export const modulesData = [
     imageY: null,
     imageWidth: null,
     imageHeight: null,
-    imageSrc: null,
+    imageSrc: 'images/transparent-dummy-image.svg',
     iconSrc: 'images/regulator-icon.svg',
     iconHeight: '70px',
     price: 4.25,

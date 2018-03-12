@@ -59,7 +59,7 @@ class Board extends Component {
   }
 
   handleDragMove() {
-    this.updateLocalStatePosition();
+    // this.updateLocalStatePosition();
 
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();

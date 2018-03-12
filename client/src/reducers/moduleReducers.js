@@ -85,8 +85,8 @@ export const currentProjectModules = (state = [], action) => {
           const { x, y, index } = action.modulePosition;
           const updatedModuleProps = {
             ...module,
-            x,
-            y,
+            x  30,
+            y  30,
           };
           return i === index ? updatedModuleProps : module;
         });

@@ -16,6 +16,7 @@ export default class Anchor extends Component {
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.moveToTop = this.moveToTop.bind(this);
+    this.handleDragStart = this.handleDragStart.bind(this);
     this.handleDragMove = this.handleDragMove.bind(this);
     this.handleDragEnd = this.handleDragEnd.bind(this);
   }
@@ -110,9 +111,12 @@ export default class Anchor extends Component {
     });
   }
 
+  handleDragStart() {
+    this.props.hideFloatingElements();
+  }
+
   handleDragMove() {
     this.updatePosition();
-    this.props.hideFloatingElements();
   }
 
   handleDragEnd() {
@@ -151,6 +155,7 @@ export default class Anchor extends Component {
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
         onMouseDown={this.moveToTop}
+        onDragStart={this.handleDragStart}
         onDragMove={this.handleDragMove}
         onDragEnd={this.handleDragEnd}
       />);
