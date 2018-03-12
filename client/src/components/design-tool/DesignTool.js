@@ -190,10 +190,11 @@ let DesignTool = class extends Component {
     this.setState({ isMobile: isMobile() });
   }
 
-  dropDraggingModule() {
+  dropDraggingModule(evt) {
     const { draggingModuleData, boardSpecs } = this.props;
     const { width, height, boundToSideIndex } = draggingModuleData;
-    const { x, y, isDraggingToBoard } = this.state;
+    const { isDraggingToBoard } = this.state;
+    const { clientX: x , clientY: y } = evt;
 
     const coordinateData = {
       width,
@@ -386,7 +387,7 @@ let DesignTool = class extends Component {
 
   handleMouseMove(evt) {
     if (this.state.isDraggingToBoard) {
-      this.updateClientPosition(evt);
+      // this.updateClientPosition(evt);
     }
   }
 
@@ -405,7 +406,7 @@ let DesignTool = class extends Component {
       this.toggleShouldHideContextMenu(false);
     }
 
-    this.dropDraggingModule();
+    this.dropDraggingModule(evt);
     store.dispatch(actions.toggleIsMouseDown(false));
   }
 

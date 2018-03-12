@@ -111,7 +111,7 @@ export const modulesData = [
     imageY: 90,
     imageWidth: 105,
     imageHeight: 145,
-    imageSrc: 'images/usb-ethernet-module.svg',
+    imageSrc: 'images/usb-ethernet-module-2.svg',
     imageNode: null,
     iconSrc: 'images/usb-ethernet-module-icon.svg',
     iconHeight: '70px',

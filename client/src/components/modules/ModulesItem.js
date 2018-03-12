@@ -10,16 +10,8 @@ import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail from 'helpers/generateThumbnail';
 import { areDependenciesMet } from 'helpers/dependencies';
 import { compose } from 'helpers/functional';
+import { getKonvaChildByIndex, getKonvaParentByName} from 'helpers/konvaHelpers';
 
-const getKonvaChildByIndex = index => konvaNode => konvaNode.children[index];
-
-const getKonvaParentByName = (name) => (konvaNode) => {
-  if (konvaNode.getName() === name) {
-    return konvaNode;
-  }
-
-  return getKonvaParentByName(name)(konvaNode.getParent());
-}
 
 const getTopLeftAnchor = compose(
   getKonvaChildByIndex(1),
@@ -159,7 +151,13 @@ export default class ModulesItem extends PureComponent {
 
   handleDragMove() {
     const { selectedModuleProps, anchorPositions, boardSpecs, x, y } = this.props;
+    const { boundToSideIndex } = selectedModuleProps;
     const { moduleGroup } = this.refs;
+
+    if (isNaN(boundToSideIndex)) {
+      return;
+    }
+
     const topLeftAnchor = getTopLeftAnchor(moduleGroup);
     const newModuleProps = Object.assign({}, selectedModuleProps, {
       x: moduleGroup.getX(),

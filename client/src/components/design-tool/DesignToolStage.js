@@ -17,6 +17,44 @@ import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
 
+import { modulesData } from 'config/modulesData';
+
+const getModuleGroup = ({ x, y }) => new Konva.Group({
+  x,
+  y,
+});
+
+const getModuleImage = ({ imageX , imageY, imageWidth, imageHeight, image }) =>  new Konva.Image({
+  image,
+  x: imageX,
+  y: imageY,
+  width: imageWidth,
+  height: imageHeight,
+});
+
+const getModuleOutline = ({ x , y, width, height, stroke }) => new Konva.Image({
+  x,
+  y,
+  width,
+  height,
+  stroke,
+});
+
+const getModule = (getGroup) => (children) => (moduleData) => {
+  const group = getGroup(moduleData);
+  children.forEach(getChild => {
+    group.add(getChild(moduleData));
+  });
+
+  return group;
+}
+
+const toArray = (...args) => args;
+const moduleChildren = toArray(getModuleImage, getModuleOutline);
+const getDragModule = getModule(getModuleGroup)(moduleChildren);
+
+const addPropToData = data => newProp => Object.assign({}, data , newProp);
+
 class DesignToolStage extends Component {
   constructor() {
     super();
@@ -37,10 +75,24 @@ class DesignToolStage extends Component {
     }
   }
 
+  componentDidMount() {
+    // this.renderDragModule();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.isDraggingToBoard && !prevProps.isDraggingToBoard) {
+      this.renderDragModule();
+    }
+
+    if (!this.props.isDraggingToBoard && prevProps.isDraggingToBoard) {
+      this.removeDragModule();
+    }
+  }
+
   downloadPDF() {
     // move to action creator
     const { currentProjectName } = this.props;
-    const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
+    const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const croppedStage = getCroppedStage(boardLayer);
     const imageDataURL = croppedStage.node.toDataURL('image/jpeg', 1.0);
     const footerText = `${currentProjectName} created ${getTimeDateStamp()}`;
@@ -60,7 +112,7 @@ class DesignToolStage extends Component {
   updateThumbnail() {
     // move to action creator
     const { currentProjectId } = this.props;
-    const boardLayer = this.refs.stage.getStage().get('.boardLayer')[0];
+    const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
     store.dispatch(actions.updateBoardThumbnail(thumbnail, currentProjectId));
   }
@@ -68,6 +120,37 @@ class DesignToolStage extends Component {
   deleteModule() {
     const { selectedModuleIndex } = this.props;
     store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
+  }
+
+  renderDragModule() {
+    const { dragModuleData } = this.props;
+    const { width, height } =  dragModuleData;
+    const stage = this.stage.getStage();
+    const layer = new Konva.Layer({
+      name: 'dragModuleLayer'
+    });
+    const imageObj = new Image();
+    imageObj.src = dragModuleData.imageSrc;
+
+    imageObj.onload = function() {
+      const updatedModuleData = addPropToData(dragModuleData)({ image: imageObj });
+      const dragModule = getDragModule(updatedModuleData);
+      layer.add(dragModule);
+      stage.add(layer);
+
+      document.addEventListener('mousemove', (evt) => {
+        const { clientX, clientY } = evt;
+        dragModule.setX(clientX - (width / 2));
+        dragModule.setY(clientY - (height / 2));
+        layer.draw();
+      });
+    }
+  }
+
+  removeDragModule() {
+    const stage = this.stage.getStage();
+    const dragModuleLayer = stage.get('.dragModuleLayer')[0];
+    setTimeout(() => dragModuleLayer.destroy(), 0);
   }
 
   render() {
@@ -104,19 +187,19 @@ class DesignToolStage extends Component {
         >
           <div>
             <Stage
-              ref="stage"
+              ref={node => { this.stage = node }}
+              name="stage"
               width={document.documentElement.clientWidth}
               height={document.documentElement.clientHeight}
             >
-              <Grid gridWidth={2000} gridHeight={2000} cellWidth={20} />
+              <Grid gridRef={node => { this.grid = node }} gridWidth={2000} gridHeight={2000} cellWidth={20} />
               {shouldRenderBoard ? board : <Layer />}
-              {isMouseDownOnIcon ? <Layer>{ draggingModule }</Layer> : <Layer /> }
+              {/* {isMouseDownOnIcon ? <Layer>{ draggingModule }</Layer> : <Layer /> } */}
             </Stage>
           </div>
         </ContextMenuTrigger>
-
         <ContextMenu
-          id={'SIMPLE'}
+          id='SIMPLE'
           className={contextMenuClass}
         >
           <MenuItem onClick={this.deleteModule}>delete</MenuItem>
@@ -132,6 +215,7 @@ const mapStateToProps = state => {
   return ({
   currentProjectName: state.currentProjectInfo.name,
   currentProjectId: state.currentProjectInfo.id,
+  dragModuleData: state.draggingModule,
   isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
   isMouseDown: state.mouseEvents.isMouseDown,
