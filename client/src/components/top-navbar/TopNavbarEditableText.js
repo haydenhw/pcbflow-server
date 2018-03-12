@@ -15,7 +15,8 @@ export default class TopNavbarEditableText extends React.Component {
   }
 
   dataChanged(data) {
-    this.props.handleNameChange(data);
+    console.log(data.message)
+    this.props.handleNameChange(data.message);
     this.setState({ ...data });
   }
 

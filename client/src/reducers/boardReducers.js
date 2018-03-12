@@ -1,6 +1,6 @@
 import * as actions from 'actions/indexActions';
 
-import doesModifyBoard from 'helpers/doesModifyBoard';
+import doesModifyProject from 'helpers/doesModifyProject';
 
 const defaultboardSpecs = {
   checkCollisionTrigger: false,
@@ -80,7 +80,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
       break;
   }
 
-  if (doesModifyBoard(action)) {
+  if (doesModifyProject(action)) {
     return {
       ...state,
       updateThumbnailTrigger: !state.updateThumbnailTrigger,

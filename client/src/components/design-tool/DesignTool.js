@@ -63,7 +63,6 @@ let DesignTool = class extends Component {
       wasDocumentationOpen: false,
     };
     this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleRightButtonClick = this.handleRightButtonClick.bind(this);
     this.hideFloatingElements = this.hideFloatingElements.bind(this);
     this.rotate = this.rotate.bind(this);
@@ -77,7 +76,6 @@ let DesignTool = class extends Component {
 
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
-    this.bound_handleMouseMove = this.handleMouseMove.bind(this);
     this.bound_handleMouseUp = this.handleMouseUp.bind(this);
   }
 
@@ -154,7 +152,6 @@ let DesignTool = class extends Component {
     }
 
     if(prevProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
-      console.log('save project')
       store.dispatch(actions.updateProject(this.props));
     }
   }
@@ -373,12 +370,8 @@ let DesignTool = class extends Component {
     }
   }
 
-  handleNameChange(projectId, newName) {
-    const nameObject = {
-      name: newName.message,
-    };
-
-    store.dispatch(actions.updateProject(nameObject, projectId));
+  handleNameChange(newName) {
+    store.dispatch(actions.updateProjectName(newName));
   }
 
   handleKeyUp(evt) {
@@ -387,12 +380,6 @@ let DesignTool = class extends Component {
 
     if (isMouseOverModule && (evtobj.code === 'Delete')) {
       store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
-    }
-  }
-
-  handleMouseMove(evt) {
-    if (this.state.isDraggingToBoard) {
-      // this.updateClientPosition(evt);
     }
   }
 
@@ -734,7 +721,6 @@ let DesignTool = class extends Component {
 
   render() {
     const { currentProjectName, currentProjectId } = this.props;
-
     const {
       isDraggingToBoard,
       isNavMenuActive,
@@ -752,7 +738,7 @@ let DesignTool = class extends Component {
         {this.renderBoardFrame()}
         <TopNavbar
           handleExportButtonClick={this.toggleShouldExportPDF.bind(this)}
-          handleNameChange={this.handleNameChange.bind(null, currentProjectId)}
+          handleNameChange={this.handleNameChange.bind(this)}
           handleHomeButtonClick={routeToHome}
           handleProjectsButtonClick={routeToProjects}
           handleMenuClick={this.toggleNavMenu}
@@ -764,7 +750,7 @@ let DesignTool = class extends Component {
           updateThumbnail={this.toggleShouldUpadateThumbnail}
 
         />
-        <div onMouseMove={this.handleMouseMove}>
+        <div>
           <div ref={node => { this.stageContainer = node }}>
             {this.renderSideBar()}
             <DesignToolStage

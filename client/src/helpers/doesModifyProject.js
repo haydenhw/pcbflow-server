@@ -1,6 +1,6 @@
 import * as actions from 'actions/indexActions';
 
-export default function doesModifyBoard(action) {
+export default function doesModifyProject(action) {
   switch(action.type) {
     case actions.DELETE_SELECTED_MODULE:
     case actions.PUSH_NEW_MODULE:
@@ -8,6 +8,7 @@ export default function doesModifyBoard(action) {
     case actions.UPDATE_ANCHOR_POSITIONS:
     case actions.UPDATE_BOARD_POSITION:
     case actions.UPDATE_MODULE_POSITION:
+    case actions.UPDATE_PROJECT_NAME:
       return true;
     default:
       return false;

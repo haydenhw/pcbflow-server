@@ -1,5 +1,5 @@
 import * as actions from '../actions/indexActions';
-import doesModifyBoard from 'helpers/doesModifyBoard';
+import doesModifyProject from 'helpers/doesModifyProject';
 
 export const hasUnsavedChanges = (state = false, action) => {
   switch (action.type) {
@@ -7,7 +7,7 @@ export const hasUnsavedChanges = (state = false, action) => {
       return false;
   }
 
-  if (doesModifyBoard(action)) {
+  if (doesModifyProject(action)) {
     return true;
   }
 

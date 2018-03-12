@@ -189,7 +189,7 @@ export const updateProjectSuccess = project => ({
   }) => {
     const { width, height, x, y, thumbnail } = boardSpecs;
     return {
-      projectName,
+      name: projectName,
       boardSpecs: {
         width,
         height,
@@ -243,6 +243,12 @@ export function updateProject(projectData) {
 //       // });
 //   };
 // }
+
+export const UPDATE_PROJECT_NAME = 'UPDATE_PROJECT_NAME';
+export const updateProjectName = (newName) => ({
+  type: 'UPDATE_PROJECT_NAME',
+  newName,
+});
 
 export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS';
 export const deleteProjectSuccess = (projectId, projects) => ({

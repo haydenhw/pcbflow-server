@@ -13,13 +13,13 @@ projectRouter.use(bodyParser.urlencoded({
 
 projectRouter.use(bodyParser.json());
 
-const testMiddleware = (req, res, next) => {
+const activateAuth = (req, res, next) => {
   IS_AUTH_ACTIVE
     ? jwtAuth(req, res, next)
     : next();
 }
 
-projectRouter.get('/', testMiddleware, (req, res) => {
+projectRouter.get('/', activateAuth, (req, res) => {
   console.log('get endpoint hit')
   console.log('')
   console.log('')
