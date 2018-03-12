@@ -20,6 +20,7 @@ class Board extends Component {
       y: null,
     };
 
+    this.handleDragStart = this.handleDragStart.bind(this);
     this.handleDragMove = this.handleDragMove.bind(this);
     this.handleDragEnd = this.handleDragEnd.bind(this);
   }
@@ -53,9 +54,12 @@ class Board extends Component {
     }));
   }
 
+  handleDragStart() {
+    this.props.hideFloatingElements();
+  }
+
   handleDragMove() {
     this.updateLocalStatePosition();
-    this.props.hideFloatingElements();
 
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
@@ -96,6 +100,7 @@ class Board extends Component {
           width={width}
           height={height}
           draggable="true"
+          onDragStart={this.handleDragStart}
           onDragMove={this.handleDragMove}
           onDragEnd={this.handleDragEnd}
         >

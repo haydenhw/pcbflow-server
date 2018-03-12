@@ -809,6 +809,13 @@ const mapStateToProps = state => ({
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
   todoBools: state.tutorial.todoBools,
   tutorialStep: state.tutorial.step,
+
+  // modules: state.currentProjectModules.present,
+  // projectName: state.currentProjectInfo.name,
+  // projects: state.projects.items,
+  // thumbnail: state.boardSpecs.tempThumbnail,
+  // topLeftAnchorX: state.anchorPositions.topLeft.x,
+  // topLeftAnchorY: state.anchorPositions.topLeft.y,
 });
 
 DesignTool = withRouter(DesignTool);

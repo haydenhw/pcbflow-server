@@ -1,8 +1,10 @@
 import * as actions from '../actions/indexActions';
+import doesModifyBoard from 'helpers/doesModifyBoard';
 
 const defaultProjectState = {
   isFetching: false,
   items: [],
+  saveProjectTrigger: false,
 };
 
 export const projects = (state = defaultProjectState, action) => {
@@ -48,9 +50,16 @@ export const projects = (state = defaultProjectState, action) => {
         ...state,
         items: updatedProjects,
       }
-  default:
-    return state;
   }
+
+  if (doesModifyBoard(action)) {
+    return {
+      ...state,
+      saveProjectTrigger: !state.saveProjectTrigger,
+    };
+  }
+
+  return state;
 };
 
 const defaultProjectInfo = {
