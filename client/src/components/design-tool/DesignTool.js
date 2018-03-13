@@ -148,7 +148,7 @@ let DesignTool = class extends Component {
     if ((prevProps.hasUnsavedChanges !== this.props.hasUnsavedChanges) ||
       (prevState.shouldPreventRouteChange !== this.state.shouldPreventRouteChange)
     ) {
-      this.setRouteHook();
+      // this.setRouteHook();
     }
 
     if(prevProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
@@ -720,11 +720,10 @@ let DesignTool = class extends Component {
   }
 
   render() {
-    const { currentProjectName, currentProjectId } = this.props;
+    const { currentProjectName, currentProjectId, isSaving } = this.props;
     const {
       isDraggingToBoard,
       isNavMenuActive,
-      isMobile,
       shouldExportPDF,
       shouldUpdateThumbnail,
       shouldRenderDocumentation,
@@ -743,7 +742,7 @@ let DesignTool = class extends Component {
           handleProjectsButtonClick={routeToProjects}
           handleMenuClick={this.toggleNavMenu}
           isNavMenuActive={isNavMenuActive}
-          isMobile={isMobile}
+          isSaving={isSaving}
           projectName={currentProjectName}
           recordSavedChanges={this.recordSavedChanges}
           updateLastSaved={this.updateLastSaved}
@@ -790,6 +789,7 @@ const mapStateToProps = state => ({
   hasUnsavedChanges: state.hasUnsavedChanges,
   iconVisibityData: state.iconVisibity,
   isMouseOverModule: state.mouseEvents.isMouseOverModule,
+  isSaving: state.projects.isSaving,
   isTutorialActive: state.tutorial.isTutorialActive,
   modalType: state.modal.modalType,
   projects: state.projects.items,
@@ -799,7 +799,6 @@ const mapStateToProps = state => ({
   shouldRenderModal: state.modal.shouldRenderModal,
   shouldRenderSideBar: state.shouldRenderSideBar,
   shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
-  thumbnail: state.boardSpecs.tempThumbnail,
   timeLastSaved: state.currentProjectInfo.timeLastSaved,
   todoBools: state.tutorial.todoBools,
   topLeftAnchorX: state.anchorPositions.topLeft.x,

@@ -3,15 +3,13 @@ import * as actions from 'actions/indexActions';
 import doesModifyProject from 'helpers/doesModifyProject';
 
 const defaultboardSpecs = {
-  checkCollisionTrigger: false,
   height: 300,
-  savedThumbnail: null,
-  stroke: '#ccc',
-  tempThumbnail: null,
-  updateThumbnailTrigger: false,
   width: 600,
   x: 100,
   y: 100,
+  checkCollisionTrigger: false,
+  updateThumbnailTrigger: false,
+  stroke: '#ccc',
 };
 
 export const boardSpecs = (state = defaultboardSpecs, action) => {
@@ -51,12 +49,6 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         stroke: action.boardStroke,
       };
       break;
-    case actions.UPDATE_BOARD_THUMBNAIL:
-      return {
-        ...state,
-        tempThumbnail: action.thumbnail,
-      };
-    break;
     case actions.UPDATE_PROJECT_SUCCESS:
       return {
         ...state,
@@ -74,8 +66,6 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         y,
         width,
         height,
-        tempThumbnail: thumbnail,
-        savedThumbnail: thumbnail,
       };
       break;
   }

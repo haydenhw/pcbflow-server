@@ -11,6 +11,18 @@ import TopNavbarButton from './TopNavbarButton';
 
 import './top-navbar-styles/_TopNavbar.scss';
 
+const getSaveStatusMessage = (isSaving) => {
+  switch (isSaving) {
+    case null:
+      return '';
+    case true:
+      return '...Saving'
+    case false:
+      return 'All changes saved'
+    default:
+      return '';
+  }
+}
 const titleStyle = {
   color: 'white',
   fontSize: '20px',
@@ -24,7 +36,7 @@ export default function TopNavbar(props) {
     handleMenuClick,
     handleNameChange,
     isNavMenuActive,
-    isMobile,
+    isSaving,
     projectName,
     recordSavedChanges,
     routeToProjects,
@@ -32,10 +44,8 @@ export default function TopNavbar(props) {
     updateThumbnail,
   } = props;
 
-  const navWidth = false ? '25%' : '100%';
-
   return (
-    <div className="navWide" style={{ width: navWidth }}>
+    <div className="nav" style={{ width: "100%"}}>
       <div className="iconWrapper" onClick={handleProjectsButtonClick}>
         <FontAwesome
           className="fa-folder-open"
@@ -49,7 +59,7 @@ export default function TopNavbar(props) {
       />
 
       <div className="nav-button-group">
-        <span className="nav-save-status">All changes saved</span>
+        <span className="nav-save-status">{getSaveStatusMessage(isSaving)}</span>
         <TopNavbarButton
           className="nav-button export-button"
           handleClick={handleExportButtonClick}

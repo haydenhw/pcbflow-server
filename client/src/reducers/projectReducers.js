@@ -3,6 +3,7 @@ import doesModifyProject from 'helpers/doesModifyProject';
 
 const defaultProjectState = {
   isFetching: false,
+  isSaving: null,
   items: [],
   saveProjectTrigger: false,
 };
@@ -50,6 +51,16 @@ export const projects = (state = defaultProjectState, action) => {
         ...state,
         items: updatedProjects,
       }
+    case actions.UPDATE_PROJECT_REQUEST:
+      return {
+        ...state,
+        isSaving: true,
+      };
+    case actions.UPDATE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isSaving: false,
+      };
   }
 
   if (doesModifyProject(action)) {

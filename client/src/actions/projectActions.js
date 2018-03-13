@@ -7,6 +7,35 @@ import store from 'reduxFiles/store';
 import { projectsUrl } from '../config/endpointUrls';
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
 
+const getOriginAdjustedModules = (modules, originX, originY) => (
+  modules.map((module) => {
+    const x = module.x - originX;
+    const y = module.y - originY;
+    return Object.assign({}, module, { x, y });
+  })
+);
+
+const getOriginAdjustedProjectData = ({
+  boardSpecs,
+  currentProjectModules: modules,
+  currentProjectName: projectName,
+  topLeftAnchorX: originX,
+  topLeftAnchorY: originY,
+}) => {
+  const { width, height, x, y, thumbnail } = boardSpecs;
+  return {
+    name: projectName,
+    boardSpecs: {
+      width,
+      height,
+      thumbnail,
+      x: x + originX,
+      y: y + originY,
+    },
+    modules: getOriginAdjustedModules(modules, originX, originY),
+  };
+};
+
 export const UPDATE_PROJECT_PRICE = 'UPDATE_PROJECT_PRICE';
 export const updateProjectPrice = price => ({
   type: 'UPDATE_PROJECT_PRICE',
@@ -158,7 +187,6 @@ export function postNewProject(newProject) {
       .then((data) => {
         const projectId = data._id;
         dispatch(postProjectSuccess(data))
-        // dispatch(fetchProjectById(projectId));
       })
       .catch((err) => {
         console.error(err);
@@ -166,46 +194,25 @@ export function postNewProject(newProject) {
   };
 }
 
+export const UPDATE_PROJECT_REQUEST = 'UPDATE_PROJECT_REQUEST';
+export const updateProjectRequest = project => ({
+  type: 'UPDATE_PROJECT_REQUEST',
+  project,
+});
+
 export const UPDATE_PROJECT_SUCCESS = 'UPDATE_PROJECT_SUCCESS';
 export const updateProjectSuccess = project => ({
   type: 'UPDATE_PROJECT_SUCCESS',
   project,
 });
 
-  const getOriginAdjustedModules = (modules, originX, originY) => (
-    modules.map((module) => {
-      const x = module.x - originX;
-      const y = module.y - originY;
-      return Object.assign({}, module, { x, y });
-    })
-  );
-
-  const getOriginAdjustedProjectData = ({
-    boardSpecs,
-    currentProjectModules: modules,
-    currentProjectName: projectName,
-    topLeftAnchorX: originX,
-    topLeftAnchorY: originY,
-  }) => {
-    const { width, height, x, y, thumbnail } = boardSpecs;
-    return {
-      name: projectName,
-      boardSpecs: {
-        width,
-        height,
-        thumbnail,
-        x: x + originX,
-        y: y + originY,
-      },
-      modules: getOriginAdjustedModules(modules, originX, originY),
-    };
-  };
 export function updateProject(projectData) {
-  const { currentProjectId: projectId } = projectData;
-  const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
-
   return (dispatch) => {
+    const { currentProjectId: projectId } = projectData;
+    const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
     const projectUrl = `${projectsUrl}/${projectId}`;
+
+    dispatch(updateProjectRequest());
     fetch(projectUrl, {
       method: 'put',
       body: JSON.stringify(originAdjustedProjectData),
@@ -216,7 +223,7 @@ export function updateProject(projectData) {
     })
       .then(res => res.json())
       .then((data) => {
-        dispatch(updateProjectSuccess(data));
+        setTimeout(() => dispatch(updateProjectSuccess()), 500);
       })
       // .catch((err) => {
       //   throw new Error(err);
