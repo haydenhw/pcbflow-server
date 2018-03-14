@@ -11,6 +11,7 @@ const getOriginAdjustedModules = (modules, originX, originY) => (
   modules.map((module) => {
     const x = module.x - originX;
     const y = module.y - originY;
+
     return Object.assign({}, module, { x, y });
   })
 );
@@ -19,10 +20,12 @@ const getOriginAdjustedProjectData = ({
   boardSpecs,
   currentProjectModules: modules,
   currentProjectName: projectName,
+  currentProjectThumbnail: thumbnail,
   topLeftAnchorX: originX,
   topLeftAnchorY: originY,
 }) => {
-  const { width, height, x, y, thumbnail } = boardSpecs;
+  const { width, height, x, y } = boardSpecs;
+
   return {
     name: projectName,
     boardSpecs: {
@@ -92,6 +95,7 @@ export function fetchProjects(jwt) {
 
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
+
     return fetch(projectsUrl, {
       method: 'GET',
       headers: {
@@ -143,6 +147,7 @@ export const fetchProjectByIdSuccess = project => (dispatch, getState) => {
 
 export function fetchProjectById(projectId, currentRoute) {
   const projectUrl = `${projectsUrl}/${projectId}`;
+
   return (dispatch) => {
     fetch(projectUrl)
     .then(res => res.json())
@@ -209,8 +214,9 @@ export const updateProjectSuccess = project => ({
 export function updateProject(projectData) {
   return (dispatch) => {
     const { currentProjectId: projectId } = projectData;
-    const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
     const projectUrl = `${projectsUrl}/${projectId}`;
+    const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
+    // console.log(originAdjustedProjectData);
 
     dispatch(updateProjectRequest());
     fetch(projectUrl, {
@@ -223,6 +229,7 @@ export function updateProject(projectData) {
     })
       .then(res => res.json())
       .then((data) => {
+        console.log(data);
         setTimeout(() => dispatch(updateProjectSuccess()), 500);
       })
       // .catch((err) => {
@@ -266,6 +273,7 @@ export const deleteProjectSuccess = (projectId, projects) => ({
 export const DELETE_PROJECT_REQUEST = 'DELETE_PROJECT_REQUEST';
 export function deleteProject(projectId, projects) {
   const url = `${projectsUrl}/${projectId}`;
+
   return (dispatch) => {
     dispatch({
       type: 'DELETE_PROJECT_REQUEST',

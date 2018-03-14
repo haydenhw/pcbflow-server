@@ -778,33 +778,46 @@ let DesignTool = class extends Component {
   }
 };
 
-const mapStateToProps = state => ({
-  anchorPositions: state.anchorPositions,
-  boardSpecs: state.boardSpecs,
-  currentProjectId: state.currentProjectInfo.id,
-  currentProjectModules: state.currentProjectModules.present,
-  currentProjectName: state.currentProjectInfo.name,
-  currentProjectPrice: state.currentProjectInfo.price,
-  draggingModuleData: state.draggingModule,
-  hasUnsavedChanges: state.hasUnsavedChanges,
-  iconVisibityData: state.iconVisibity,
-  isMouseOverModule: state.mouseEvents.isMouseOverModule,
-  isSaving: state.projects.isSaving,
-  isTutorialActive: state.tutorial.isTutorialActive,
-  modalType: state.modal.modalType,
-  projects: state.projects.items,
-  saveProjectTrigger: state.projects.saveProjectTrigger,
-  selectedModuleIndex: state.selectedModule.index,
-  selectedModuleProps: state.selectedModule,
-  shouldRenderModal: state.modal.shouldRenderModal,
-  shouldRenderSideBar: state.shouldRenderSideBar,
-  shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
-  timeLastSaved: state.currentProjectInfo.timeLastSaved,
-  todoBools: state.tutorial.todoBools,
-  topLeftAnchorX: state.anchorPositions.topLeft.x,
-  topLeftAnchorY: state.anchorPositions.topLeft.y,
-  tutorialStep: state.tutorial.step,
-});
+const mapStateToProps = (state) => {
+  const currentProjectId = state.currentProjectInfo.id;
+  const projects = state.projects.items;
+  const currentProject = projects.find(project => (
+    project._id === currentProjectId
+  ));
+  const currentProjectThumbnail = currentProject
+    ? currentProject.boardSpecs.thumbnail
+    : null;
+
+  return {
+    currentProjectId,
+    currentProjectThumbnail,
+    anchorPositions: state.anchorPositions,
+    boardSpecs: state.boardSpecs,
+    currentProjectModules: state.currentProjectModules.present,
+    currentProjectName: state.currentProjectInfo.name,
+    currentProjectPrice: state.currentProjectInfo.price,
+    draggingModuleData: state.draggingModule,
+    hasUnsavedChanges: state.hasUnsavedChanges,
+    iconVisibityData: state.iconVisibity,
+    isMouseOverModule: state.mouseEvents.isMouseOverModule,
+    isSaving: state.projects.isSaving,
+    isTutorialActive: state.tutorial.isTutorialActive,
+    modalType: state.modal.modalType,
+    projects: state.projects.items,
+    saveProjectTrigger: state.projects.saveProjectTrigger,
+    selectedModuleIndex: state.selectedModule.index,
+    selectedModuleProps: state.selectedModule,
+    shouldRenderModal: state.modal.shouldRenderModal,
+    shouldRenderSideBar: state.shouldRenderSideBar,
+    shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
+    timeLastSaved: state.currentProjectInfo.timeLastSaved,
+    todoBools: state.tutorial.todoBools,
+    topLeftAnchorX: state.anchorPositions.topLeft.x,
+    topLeftAnchorY: state.anchorPositions.topLeft.y,
+    tutorialStep: state.tutorial.step,
+  };
+}
+;
 
 DesignTool = withRouter(DesignTool);
 export default connect(mapStateToProps)(DesignTool);
