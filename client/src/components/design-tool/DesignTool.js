@@ -55,7 +55,6 @@ let DesignTool = class extends Component {
       running: false,
       shouldExportPDF: false,
       shouldHideContextMenu: false,
-      shouldPreventRouteChange: true,
       shouldRenderDocumentation: false,
       shouldRenderInfoButton: true,
       shouldRenderModal: true,
@@ -95,7 +94,6 @@ let DesignTool = class extends Component {
     document.onkeydown = this.handleKeyPress;
 
     window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
-    window.onbeforeunload = () => (this.props.hasUnsavedChanges && !devMode) ? '' : null;
     window.onresize = this.checkIfMobile.bind(this);
   }
 
@@ -105,20 +103,6 @@ let DesignTool = class extends Component {
     document.body.removeEventListener('mousemove', this.bound_handleMouseMove);
     document.body.removeEventListener('keyup', this.bound_handleKeyUp);
   }
-
-  // setRouteHook() {
-  //   const { hasUnsavedChanges, router, route } = this.props;
-  //   const { shouldPreventRouteChange } = this.state;
-  //
-  //   router.setRouteLeaveHook(route, () => {
-  //     if (hasUnsavedChanges && shouldPreventRouteChange) {
-  //       store.dispatch(actions.confirmRouteLeave());
-  //       return false;
-  //     }
-  //
-  //     return true;
-  //   });
-  // }
 
   componentWillMount() {
     if (!devMode) {
@@ -140,17 +124,10 @@ let DesignTool = class extends Component {
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
 
-    // this.setRouteHook();
     this.addHanlders();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if ((prevProps.hasUnsavedChanges !== this.props.hasUnsavedChanges) ||
-      (prevState.shouldPreventRouteChange !== this.state.shouldPreventRouteChange)
-    ) {
-      // this.setRouteHook();
-    }
-
     if(prevProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
       // *refactor to not depend on setTimeout
       setTimeout(() => store.dispatch(actions.updateProject(this.props)), 0);
@@ -653,24 +630,6 @@ let DesignTool = class extends Component {
               rightButtonText="Exit"
               shouldRenderLeftButton
               text="Are you sure you want to exit the tutorial?"
-            />
-          );
-        case 'CONFIRM_ROUTE_LEAVE':
-          const forceChangeRoutes = () => {
-            this.setState({ shouldPreventRouteChange: !this.state.shouldPreventRouteChange },
-             () =>  setTimeout(routeToProjects, 0));
-          }
-          return (
-            <Modal
-              handleCloseButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
-              handleLeftButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
-              handleRightButtonClick={forceChangeRoutes}
-              leftButtonText="Stay"
-              modalClass="confirm-exit-tutorial"
-              rightButtonText="Leave"
-              shouldRenderLeftButton
-              title="Are you sure you want to leave this page?"
-              text="Changes you made will not be saved."
             />
           );
         default:
