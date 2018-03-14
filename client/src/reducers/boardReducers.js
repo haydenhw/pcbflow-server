@@ -68,16 +68,18 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         height,
       };
       break;
+    default:
+      return state;
   }
 
-  if (doesModifyProject(action)) {
-    return {
-      ...state,
-      updateThumbnailTrigger: !state.updateThumbnailTrigger,
-    };
-  }
-
-  return state;
+  // if (doesModifyProject(action)) {
+  //   return {
+  //     ...state,
+  //     updateThumbnailTrigger: !state.updateThumbnailTrigger,
+  //   };
+  // }
+  //
+  // return state;
 };
 
 const defaultAnchorPositions = {

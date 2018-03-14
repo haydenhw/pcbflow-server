@@ -65,8 +65,9 @@ class DesignToolStage extends Component {
   componentWillReceiveProps(nextProps) {
     const { boardSpecs, toggleShouldExportPDF } = this.props;
 
-    if (nextProps.updateThumbnailTrigger !== this.props.updateThumbnailTrigger) {
+    if (nextProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
       setTimeout(this.updateThumbnail.bind(this), 0);
+      // this.updateThumbnail()
     }
 
     if (nextProps.shouldExportPDF && !this.props.shouldExportPDF) {
@@ -114,6 +115,7 @@ class DesignToolStage extends Component {
     const { currentProjectId } = this.props;
     const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
+    console.log('triggered')
     store.dispatch(actions.updateBoardThumbnail(thumbnail, currentProjectId));
   }
 
@@ -213,19 +215,19 @@ class DesignToolStage extends Component {
 const mapStateToProps = state => {
 
   return ({
-  currentProjectName: state.currentProjectInfo.name,
-  currentProjectId: state.currentProjectInfo.id,
-  dragModuleData: state.draggingModule,
-  isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
-  isMouseOverModule: state.mouseEvents.isMouseOverModule,
-  isMouseDown: state.mouseEvents.isMouseDown,
-  selectedModuleIndex: state.selectedModule.index,
-  selectedModuleProps: state.selectedModule,
-  boardSpecs: state.boardSpecs,
-  updateThumbnailTrigger: state.boardSpecs.updateThumbnailTrigger,
-  anchorPositions: state.anchorPositions,
-  modules: state.currentProjectModules.present,
-})
+    currentProjectName: state.currentProjectInfo.name,
+    currentProjectId: state.currentProjectInfo.id,
+    dragModuleData: state.draggingModule,
+    isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
+    isMouseOverModule: state.mouseEvents.isMouseOverModule,
+    isMouseDown: state.mouseEvents.isMouseDown,
+    selectedModuleIndex: state.selectedModule.index,
+    selectedModuleProps: state.selectedModule,
+    boardSpecs: state.boardSpecs,
+    saveProjectTrigger: state.projects.saveProjectTrigger,
+    anchorPositions: state.anchorPositions,
+    modules: state.currentProjectModules.present,
+  });
 };
 
 export default connect(mapStateToProps)(DesignToolStage);

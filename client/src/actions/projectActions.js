@@ -213,6 +213,7 @@ export const updateProjectSuccess = project => ({
 
 export function updateProject(projectData) {
   return (dispatch) => {
+    console.log('saving project')
     const { currentProjectId: projectId } = projectData;
     const projectUrl = `${projectsUrl}/${projectId}`;
     const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
@@ -229,7 +230,7 @@ export function updateProject(projectData) {
     })
       .then(res => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setTimeout(() => dispatch(updateProjectSuccess()), 500);
       })
       // .catch((err) => {
@@ -237,26 +238,6 @@ export function updateProject(projectData) {
       // });
   };
 }
-// export function updateProject(data, projectId) {
-//   return (dispatch) => {
-//     const projectUrl = `${projectsUrl}/${projectId}`;
-//     fetch(projectUrl, {
-//       method: 'put',
-//       body: JSON.stringify(data),
-//       headers: {
-//         Accept: 'application/json',
-//         'Content-Type': 'application/json',
-//       },
-//     })
-//       .then(res => res.json())
-//       .then((data) => {
-//         dispatch(updateProjectSuccess(data));
-//       })
-//       // .catch((err) => {
-//       //   throw new Error(err);
-//       // });
-//   };
-// }
 
 export const UPDATE_PROJECT_NAME = 'UPDATE_PROJECT_NAME';
 export const updateProjectName = (newName) => ({

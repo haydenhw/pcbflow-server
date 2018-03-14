@@ -106,19 +106,19 @@ let DesignTool = class extends Component {
     document.body.removeEventListener('keyup', this.bound_handleKeyUp);
   }
 
-  setRouteHook() {
-    const { hasUnsavedChanges, router, route } = this.props;
-    const { shouldPreventRouteChange } = this.state;
-
-    router.setRouteLeaveHook(route, () => {
-      if (hasUnsavedChanges && shouldPreventRouteChange) {
-        store.dispatch(actions.confirmRouteLeave());
-        return false;
-      }
-
-      return true;
-    });
-  }
+  // setRouteHook() {
+  //   const { hasUnsavedChanges, router, route } = this.props;
+  //   const { shouldPreventRouteChange } = this.state;
+  //
+  //   router.setRouteLeaveHook(route, () => {
+  //     if (hasUnsavedChanges && shouldPreventRouteChange) {
+  //       store.dispatch(actions.confirmRouteLeave());
+  //       return false;
+  //     }
+  //
+  //     return true;
+  //   });
+  // }
 
   componentWillMount() {
     if (!devMode) {
@@ -140,7 +140,7 @@ let DesignTool = class extends Component {
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
     }
 
-    this.setRouteHook();
+    // this.setRouteHook();
     this.addHanlders();
   }
 
@@ -152,7 +152,8 @@ let DesignTool = class extends Component {
     }
 
     if(prevProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
-      store.dispatch(actions.updateProject(this.props));
+      // *refactor to not depend on setTimeout
+      setTimeout(() => store.dispatch(actions.updateProject(this.props)), 0);
     }
   }
 
