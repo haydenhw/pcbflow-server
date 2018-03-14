@@ -111,11 +111,10 @@ class DesignToolStage extends Component {
   }
 
   updateThumbnail() {
-    // move to action creator
+    // *move to action creator
     const { currentProjectId } = this.props;
     const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
-    console.log('triggered')
     store.dispatch(actions.updateBoardThumbnail(thumbnail, currentProjectId));
   }
 

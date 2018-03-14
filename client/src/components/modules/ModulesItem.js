@@ -140,7 +140,7 @@ export default class ModulesItem extends PureComponent {
 
   getNewPosition(x, y) {
     const  { moduleGroup } = this.refs;
-    // const newPosition = bindToPerimeter(selectedModuleProps, topLeftAnchor.attrs, boardSpecs)
+
     return {
       x: moduleGroup.getPosition().x,
       y: moduleGroup.getPosition().y,
@@ -256,7 +256,6 @@ export default class ModulesItem extends PureComponent {
           fontSize={this.props.fontSize}
           fontFamily={this.props.fontFamily}
         />
-
         <Group
           ref="innerGroup"
           name="innerGroup"
@@ -266,7 +265,6 @@ export default class ModulesItem extends PureComponent {
           onClick={this.handleClick.bind(this)}
           onDblClick={this.handleDoubleClick.bind(this)}
         >
-
           <Rect
             ref="topLayer"
             width={this.props.width}
@@ -274,7 +272,6 @@ export default class ModulesItem extends PureComponent {
             fill={this.getFill()}
             opacity={this.props.opacity}
           />
-
           <Rect
             name="moduleBorder"
             ref="moduleBorder"
@@ -283,7 +280,6 @@ export default class ModulesItem extends PureComponent {
             stroke={isStrokeRed ? 'red' : this.props.stroke}
             strokeWidth={this.state.strokeWidth}
           />
-
           {this.props.imageSrc ? this.renderImage() : <Group />}
         </Group>
       </Group>

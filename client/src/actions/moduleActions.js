@@ -72,10 +72,18 @@ export const updateSelectedModule = moduleData => ({
 });
 
 export const DELETE_SELECTED_MODULE = 'DELETE_SELECTED_MODULE';
-export const deleteSelectedModule = moduleIndex => ({
-  type: 'DELETE_SELECTED_MODULE',
-  moduleIndex,
-});
+export const deleteSelectedModule = (moduleIndex) => (dispatch, getState) => {
+  const currentModulesLength = getState().currentProjectModules.present.length;
+
+  if (currentModulesLength === 1) {
+    dispatch(actions.updateBoardStroke(null));
+  }
+
+  dispatch({
+    type: 'DELETE_SELECTED_MODULE',
+    moduleIndex,
+  });
+}
 
 export const ROTATE_SELECTED_MODULE = 'ROTATE_SELECTED_MODULE';
 export const rotateSelectedModule = rotationData => ({
