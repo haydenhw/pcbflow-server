@@ -160,7 +160,7 @@ class Modules extends Component {
     );
 
     return (
-      <Group>
+      <Group name="moduleGroup">
         {modules}
       </Group>
     );
