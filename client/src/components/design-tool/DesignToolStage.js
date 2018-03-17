@@ -66,19 +66,13 @@ class DesignToolStage extends Component {
     const { boardSpecs, toggleShouldExportPDF } = this.props;
 
     if (nextProps.updateThumbnailTrigger !== this.props.updateThumbnailTrigger) {
-      console.log('hello from stage')
       setTimeout(this.updateThumbnail.bind(this), 0);
-      // this.updateThumbnail()
     }
 
     if (nextProps.shouldExportPDF && !this.props.shouldExportPDF) {
       this.downloadPDF();
       toggleShouldExportPDF();
     }
-  }
-
-  componentDidMount() {
-    // this.renderDragModule();
   }
 
   componentDidUpdate(prevProps) {
@@ -196,7 +190,6 @@ class DesignToolStage extends Component {
             >
               <Grid gridRef={node => { this.grid = node }} gridWidth={2000} gridHeight={2000} cellWidth={20} />
               {shouldRenderBoard ? board : <Layer />}
-              {/* {isMouseDownOnIcon ? <Layer>{ draggingModule }</Layer> : <Layer /> } */}
             </Stage>
           </div>
         </ContextMenuTrigger>
@@ -224,8 +217,7 @@ const mapStateToProps = state => {
     selectedModuleIndex: state.selectedModule.index,
     selectedModuleProps: state.selectedModule,
     boardSpecs: state.boardSpecs,
-    saveProjectTrigger: state.projects.saveProjectTrigger,
-    updateThumbnailTrigger: state.boardSpecs.updateThumbnailTrigger,
+    updateThumbnailTrigger: state.projects.updateThumbnailTrigger,
     anchorPositions: state.anchorPositions,
     modules: state.currentProjectModules.present,
   });

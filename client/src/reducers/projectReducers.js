@@ -7,6 +7,7 @@ const defaultProjectState = {
   isSaving: null,
   items: [],
   saveProjectTrigger: false,
+  updateThumbnailTrigger: false,
 };
 
 export const projects = (state = defaultProjectState, action) => {
@@ -65,10 +66,15 @@ export const projects = (state = defaultProjectState, action) => {
       };
   }
 
-  if (action.type !== actions.UPDATE_MODULE_FILL && doesModifyProject(action)) {
+  if (doesModifyProject(action)) {
+    const updatedSaveProjectTrigger = action.type === actions.UPDATE_MODULE_FILL
+      ? state.saveProjectTrigger
+      : !state.saveProjectTrigger;
+
     return {
       ...state,
-      saveProjectTrigger: !state.saveProjectTrigger,
+      saveProjectTrigger: updatedSaveProjectTrigger,
+      updateThumbnailTrigger: !state.updateThumbnailTrigger,
     };
   }
 
