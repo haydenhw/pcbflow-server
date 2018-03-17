@@ -206,7 +206,7 @@ export default class ModulesItem extends PureComponent {
   }
 
   renderImage() {
-    const { imageX, imageY, imageHeight, imageWidth, imageNode } = this.props;
+    const {  imageX, imageY, imageHeight, imageWidth, imageNode, imageSrc, } = this.props;
     return (
       <Image
         x={imageX}
@@ -214,6 +214,8 @@ export default class ModulesItem extends PureComponent {
         height={imageHeight}
         width={imageWidth}
         image={imageNode}
+        src={imageSrc}
+        name="image"
       />
     );
   }

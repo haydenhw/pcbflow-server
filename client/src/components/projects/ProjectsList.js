@@ -6,24 +6,11 @@ import shortid from 'shortid';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import { createTempContainer } from 'helpers/generateThumbnail';
 
 import ProjectsItemFrame from './ProjectsItemFrame';
 
 import './projects-styles/_floatGrid.scss';
 import './projects-styles/_ProjectsItemFrame.scss';
-
-function convertToUrl(json) {
-  let dataUrl;
-
-  if (json) {
-    const tempContainer = createTempContainer();
-    dataUrl = Konva.Node.create(json, 'container').toDataURL();
-    document.body.removeChild(tempContainer);
-  }
-
-  return dataUrl;
-}
 
 class ProjectsList extends Component {
   static defaultProps = {
@@ -41,13 +28,13 @@ class ProjectsList extends Component {
     const { projects } = this.props;
 
     const projectsList = projects.map((project) => {
-      const thumbnailSrc = convertToUrl(project.boardSpecs.thumbnail);
+      const { thumbnail } = project.boardSpecs;
       return (
         <ProjectsItemFrame
           key={shortid.generate()}
           projectName={project.name}
           projectId={project._id}
-          thumbnailSrc={thumbnailSrc}
+          thumbnailSrc={thumbnail}
           confirmDelete={this.confirmDelete(project._id, project.name)}
         />
       );

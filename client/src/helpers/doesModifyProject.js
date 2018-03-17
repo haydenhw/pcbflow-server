@@ -7,6 +7,7 @@ export default function doesModifyProject(action) {
     case actions.ROTATE_SELECTED_MODULE:
     case actions.UPDATE_ANCHOR_POSITIONS:
     case actions.UPDATE_BOARD_POSITION:
+    case actions.UPDATE_BOARD_STROKE:
     case actions.UPDATE_MODULE_POSITION:
     case actions.UPDATE_PROJECT_NAME:
       return true;
