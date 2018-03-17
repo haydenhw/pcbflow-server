@@ -34,7 +34,7 @@ class ProjectsList extends Component {
           key={shortid.generate()}
           projectName={project.name}
           projectId={project._id}
-          thumbnailSrc={thumbnail}
+          thumbnail={thumbnail}
           confirmDelete={this.confirmDelete(project._id, project.name)}
         />
       );

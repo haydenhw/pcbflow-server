@@ -46,16 +46,16 @@ export default class ProjectsItemFrame extends Component {
   }
 
   componentDidMount() {
-    const { thumbnailSrc } = this.props;
-    const stage = getStageFromJSON(thumbnailSrc);
+    const { thumbnail } = this.props;
+    const stage = getStageFromJSON(thumbnail);
     const stageImages = stage.get('.image');
     const stageImagePaths = stageImages
       .map(image => image.attrs.src);
 
     loadImages(stageImagePaths)
-      .then((images) => {
-        images.forEach((image, i) => {
-          stageImages[i].image(image);
+      .then((imageNodes) => {
+        imageNodes.forEach((imageNode, i) => {
+          stageImages[i].image(imageNode);
         });
         stage.draw();
         this.setState({ thumbnailDataUrl: stage.toDataURL() });
@@ -70,7 +70,7 @@ export default class ProjectsItemFrame extends Component {
             className="thumbnail-image"
             style={{ backgroundImage: `url(${this.state.thumbnailDataUrl || ''})`}}
             onClick={() => fectchProject(this.props.projectId)}
-            role="button"
+            role="buttonplaylistUrl"
           >
           </div>
           <div className="title-bar">
@@ -88,6 +88,6 @@ export default class ProjectsItemFrame extends Component {
 ProjectsItemFrame.propTypes = {
   projectId: PropTypes.string,
   projectName: PropTypes.string.isRequired,
-  thumbnailSrc: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
   confirmDelete: PropTypes.func.isRequired,
 };
