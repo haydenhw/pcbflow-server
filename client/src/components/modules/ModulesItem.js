@@ -119,6 +119,10 @@ export default class ModulesItem extends PureComponent {
       this.highlightRuleBreakingModules();
       this.props.toggleShouldCheckCollission();
     }
+
+    // if (prevProps.metDependencies.length !== this.props.metDependencies.length) {
+    //   store.dispatch(actions.triggerThumbnailUpdate());
+    // }
   }
 
   getFill() {

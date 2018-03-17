@@ -8,6 +8,7 @@ const defaultboardSpecs = {
   x: 100,
   y: 100,
   checkCollisionTrigger: false,
+  // *move this to projects reducer or delete if no longer used
   updateThumbnailTrigger: false,
   stroke: '#ccc',
 };
@@ -33,6 +34,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         ...state,
         width: action.dimensions.width,
         height: action.dimensions.height,
+        updateThumbnailTrigger: !state.updateThumbnailTrigger,
       };
       break;
     case actions.UPDATE_BOARD_POSITION:
@@ -40,13 +42,14 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         ...state,
         x: action.position.x,
         y: action.position.y,
+        updateThumbnailTrigger: !state.updateThumbnailTrigger,
       };
       break;
     case actions.UPDATE_BOARD_STROKE:
       return {
         ...state,
-        updateThumbnailTrigger: !state.updateThumbnailTrigger,
         stroke: action.boardStroke,
+        updateThumbnailTrigger: !state.updateThumbnailTrigger,
       };
       break;
     case actions.UPDATE_PROJECT_SUCCESS:
@@ -72,14 +75,15 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
       return state;
   }
 
-  // if (doesModifyProject(action)) {
-  //   return {
-  //     ...state,
-  //     updateThumbnailTrigger: !state.updateThumbnailTrigger,
-  //   };
-  // }
-  //
-  // return state;
+  if (doesModifyProject(action)) {
+    console.log('triggering')
+    return {
+      ...state,
+      updateThumbnailTrigger: !state.updateThumbnailTrigger,
+    };
+  }
+
+  return state;
 };
 
 const defaultAnchorPositions = {

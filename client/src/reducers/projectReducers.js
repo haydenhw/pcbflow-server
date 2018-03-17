@@ -3,6 +3,7 @@ import doesModifyProject from 'helpers/doesModifyProject';
 
 const defaultProjectState = {
   isFetching: false,
+  isInitialLoad: true,
   isSaving: null,
   items: [],
   saveProjectTrigger: false,
@@ -60,10 +61,11 @@ export const projects = (state = defaultProjectState, action) => {
       return {
         ...state,
         isSaving: false,
+        isInitialLoad: false,
       };
   }
 
-  if (doesModifyProject(action)) {
+  if (action.type !== actions.UPDATE_MODULE_FILL && doesModifyProject(action)) {
     return {
       ...state,
       saveProjectTrigger: !state.saveProjectTrigger,

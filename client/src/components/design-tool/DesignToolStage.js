@@ -65,7 +65,8 @@ class DesignToolStage extends Component {
   componentWillReceiveProps(nextProps) {
     const { boardSpecs, toggleShouldExportPDF } = this.props;
 
-    if (nextProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
+    if (nextProps.updateThumbnailTrigger !== this.props.updateThumbnailTrigger) {
+      console.log('hello from stage')
       setTimeout(this.updateThumbnail.bind(this), 0);
       // this.updateThumbnail()
     }
@@ -224,6 +225,7 @@ const mapStateToProps = state => {
     selectedModuleProps: state.selectedModule,
     boardSpecs: state.boardSpecs,
     saveProjectTrigger: state.projects.saveProjectTrigger,
+    updateThumbnailTrigger: state.boardSpecs.updateThumbnailTrigger,
     anchorPositions: state.anchorPositions,
     modules: state.currentProjectModules.present,
   });

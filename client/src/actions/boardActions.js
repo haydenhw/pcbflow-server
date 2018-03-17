@@ -1,13 +1,11 @@
 export const TRIGGER_THUMBNAIL_UPDATE = 'TRIGGER_THUMBNAIL_UPDATE';
-export const triggerThumbnailUpdate = positions => ({
+export const triggerThumbnailUpdate = () => ({
   type: 'TRIGGER_THUMBNAIL_UPDATE',
-  positions,
 });
 
 export const TRIGGER_ANCHOR_UPDATE = 'TRIGGER_ANCHOR_UPDATE';
-export const triggerAnchorUpdate = positions => ({
+export const triggerAnchorUpdate = () => ({
   type: 'TRIGGER_ANCHOR_UPDATE',
-  positions,
 });
 
 export const UPDATE_ANCHOR_POSITIONS = 'UPDATE_ANCHOR_POSITIONS';
