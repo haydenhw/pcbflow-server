@@ -68,10 +68,25 @@
   outline: 0;
 }
 
+.tutorial-button {
+  position: relative;
+  padding-left: 30px;
+}
+
 .home-button,
-.export-button, {
+.export-button,
+.tutorial-button, {
   @include respond-to(handhelds) {
     @include hide();
+  }
+}
+
+.tutorial-button-icon {
+  &.icon-school {
+    position: absolute;
+    font-size: 17px;
+    right: 66px;
+    top: 9px;
   }
 }
 

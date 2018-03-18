@@ -8,10 +8,9 @@ export default function TopNavbarButton(props) {
 
   return (
     <button className={className} onClick={handleClick}>
-      <div>
+        {/* // *make icon a child instead of a prop */}
         {icon}
         <span>{text}</span>
-      </div>
     </button>
   );
 }

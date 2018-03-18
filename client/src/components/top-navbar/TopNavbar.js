@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
+import * as actions from 'actions/indexActions';
+import store from 'reduxFiles/store';
+
 import PopupMenu from 'components/popup-menu/PopupMenu';
 import PopupMenuTrigger from 'components/popup-menu/PopupMenuTrigger';
 import PopupMenuContent from 'components/popup-menu/PopupMenuContent';
@@ -56,6 +59,12 @@ export default function TopNavbar(props) {
 
       <div className="nav-button-group">
         <span className="nav-save-status">{getSaveStatusMessage(isSaving)}</span>
+        <TopNavbarButton
+          className="nav-button tutorial-button"
+          handleClick={() => store.dispatch(actions.startTutorial())}
+          icon={<span className="tutorial-button-icon icon-school"></span>}
+          text="Tutorial"
+        />
         <TopNavbarButton
           className="nav-button export-button"
           handleClick={handleExportButtonClick}
