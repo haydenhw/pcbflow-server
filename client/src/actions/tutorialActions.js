@@ -74,7 +74,7 @@ export const completeSpecifiedTodo = index => ({
 });
 
 export const completeTutorial = () => (dispatch, getState) => {
-  dispatch(actions.toggleShouldRenderModal());
+  dispatch(actions.toggleModal());
 };
 
 function getIndex(id) {
@@ -97,7 +97,7 @@ export const completeTodo = id => (dispatch, getState) => {
   dispatch(completeSpecifiedTodo(todoIndex));
 
   if (trueCount === 4) {
-    dispatch(actions.toggleShouldRenderModal());
+    dispatch(actions.toggleModal());
   }
 
   return null;

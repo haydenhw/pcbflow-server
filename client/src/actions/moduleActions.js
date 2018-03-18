@@ -16,7 +16,7 @@ export const pushToCurrentProjectModules = module => (dispatch, getState) => {
       case 7:
       case 10:
         dispatch(actions.updateDisabledIconExceptions(null));
-        setTimeout(() => dispatch(actions.toggleShouldRenderModal()), 700);
+        setTimeout(() => dispatch(actions.toggleModal()), 700);
         break;
       case 13:
         dispatch(actions.completeTodo(module.id));

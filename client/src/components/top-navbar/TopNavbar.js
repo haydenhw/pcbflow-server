@@ -1,6 +1,6 @@
 import React from 'react';
-import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 
 import PopupMenu from 'components/popup-menu/PopupMenu';
 import PopupMenuTrigger from 'components/popup-menu/PopupMenuTrigger';
@@ -23,10 +23,6 @@ const getSaveStatusMessage = (isSaving) => {
       return '';
   }
 }
-const titleStyle = {
-  color: 'white',
-  fontSize: '20px',
-};
 
 export default function TopNavbar(props) {
   const {

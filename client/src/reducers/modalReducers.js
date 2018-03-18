@@ -8,7 +8,7 @@ const defaultState = {
 
 export const modal = (state = defaultState, action) => {
   switch (action.type) {
-    case actions.TOGGLE_SHOULD_RENDER_MODAL:
+    case actions.TOGGLE_MODAL:
     case actions.DELETE_PROJECT_REQUEST:
     case actions.EXIT_TUTORIAL:
       return {
@@ -37,7 +37,12 @@ export const modal = (state = defaultState, action) => {
         modalType: 'CONFIRM_ROUTE_LEAVE',
         modalProps: action.modalProps,
       };
-
+    case actions.START_TUTORIAL:
+      return {
+        shouldRenderModal: true,
+        modalType: 'ONBOARD',
+        modalProps: action.modalProps,
+      };
     default:
       return state;
   }

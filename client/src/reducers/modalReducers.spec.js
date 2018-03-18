@@ -23,7 +23,7 @@ describe('modal reducer', () => {
     };
 
     const resultState = modal(deepFreeze(initialState), {
-      type: 'TOGGLE_SHOULD_RENDER_MODAL',
+      type: 'TOGGLE_MODAL',
     });
 
     assert.deepEqual(resultState, expectedState);

@@ -1,6 +1,8 @@
-export const TOGGLE_SHOULD_RENDER_MODAL = 'TOGGLE_SHOULD_RENDER_MODAL';
-export const toggleShouldRenderModal = () => ({
-  type: 'TOGGLE_SHOULD_RENDER_MODAL',
+import { devMode } from 'config/devMode';
+
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+export const toggleModal = () => ({
+  type: 'TOGGLE_MODAL',
 });
 
 export const CHANGE_MODAL_TYPE = 'CHANGE_MODAL_TYPE';
@@ -28,3 +30,17 @@ export const confirmRouteLeave = modalProps => ({
   modalProps,
   modalType: 'CONFIRM_ROUTE_LEAVE',
 });
+
+export const START_TUTORIAL = 'START_TUTORIAL';
+export const startTutorial = () => ({
+  type: 'START_TUTORIAL',
+});
+
+export const startTutorialIfNotOffered = () => (dispatch) => {
+  const wasTutorialOffered = sessionStorage.getItem('wasTutorialOffered');
+
+  if (!wasTutorialOffered && devMode === false) {
+    setTimeout(() => dispatch(startTutorial()), 500);
+    sessionStorage.setItem('wasTutorialOffered', true);
+  }
+}

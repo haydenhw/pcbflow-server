@@ -14,7 +14,7 @@ export class ProjectContainer extends Component {
     const { shouldRenderModal } = this.props;
 
     if (shouldRenderModal) {
-      store.dispatch(actions.toggleShouldRenderModal());
+      store.dispatch(actions.toggleModal());
     }
   }
 
@@ -30,8 +30,8 @@ export class ProjectContainer extends Component {
 
       return (
         <Modal
-          handleCloseButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
-          handleLeftButtonClick={() => store.dispatch(actions.toggleShouldRenderModal())}
+          handleCloseButtonClick={() => store.dispatch(actions.toggleModal())}
+          handleLeftButtonClick={() => store.dispatch(actions.toggleModal())}
           handleRightButtonClick={() => store.dispatch(actions.deleteProject(projectId))}
           leftButtonText="Cancel"
           rightButtonText="Delete"

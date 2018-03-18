@@ -105,18 +105,6 @@ let DesignTool = class extends Component {
     document.body.removeEventListener('keyup', this.bound_handleKeyUp);
   }
 
-  componentWillMount() {
-    if (!devMode) {
-      const { shouldRenderModal } = this.props;
-
-      if (!shouldRenderModal) {
-        store.dispatch(actions.toggleShouldRenderModal());
-      }
-    }
-
-    this.checkIfMobile();
-  }
-
   componentDidMount() {
     if (!this.props.currentProjectName) {
       const projectId = this.props.params.projectId;
@@ -126,6 +114,8 @@ let DesignTool = class extends Component {
     }
 
     this.addHanlders();
+    this.checkIfMobile();
+    store.dispatch(actions.startTutorialIfNotOffered());
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -220,7 +210,7 @@ let DesignTool = class extends Component {
             store.dispatch(actions.toggleTutorialIsActive());
           };
           const stepZeroLeftButtoHandler = function () {
-            store.dispatch(actions.toggleShouldRenderModal());
+            store.dispatch(actions.toggleModal());
             this.toggleDocumentationCard();
           };
           return {
@@ -236,7 +226,7 @@ let DesignTool = class extends Component {
           const stepThreeClickHandler = function () {
             store.dispatch(actions.incrementTutorialStep());
             store.dispatch(actions.updateDisabledIconExceptions([0]));
-            store.dispatch(actions.toggleShouldRenderModal());
+            store.dispatch(actions.toggleModal());
           };
           return {
             handleRightButtonClick: stepThreeClickHandler.bind(this),
@@ -251,7 +241,7 @@ let DesignTool = class extends Component {
         case 6:
           const stepThreeSixClickHandler = function () {
             store.dispatch(actions.incrementTutorialStep());
-            store.dispatch(actions.toggleShouldRenderModal());
+            store.dispatch(actions.toggleModal());
           };
           return {
             handleRightButtonClick: stepThreeSixClickHandler.bind(this),
@@ -261,7 +251,7 @@ let DesignTool = class extends Component {
         case 9:
           const stepNineClickHandler = function () {
             store.dispatch(actions.incrementTutorialStep());
-            store.dispatch(actions.toggleShouldRenderModal());
+            store.dispatch(actions.toggleModal());
           };
           return {
             handleRightButtonClick: stepNineClickHandler.bind(this),
@@ -271,7 +261,7 @@ let DesignTool = class extends Component {
         case 12:
           const stepTwelveClickHandler = function () {
             store.dispatch(actions.incrementTutorialStep());
-            store.dispatch(actions.toggleShouldRenderModal());
+            store.dispatch(actions.toggleModal());
             store.dispatch(actions.updateShouldRenderTodoList(true));
           };
           return {
@@ -317,7 +307,7 @@ let DesignTool = class extends Component {
 
     if (result.type === 'finished') {
       store.dispatch(actions.incrementTutorialStep());
-      store.dispatch(actions.toggleShouldRenderModal());
+      store.dispatch(actions.toggleModal());
       this.setState({
         running: false,
         joyrideStep: 0,
@@ -482,7 +472,7 @@ let DesignTool = class extends Component {
   }
 
   restartTour() {
-    store.dispatch(actions.toggleShouldRenderModal());
+    store.dispatch(actions.toggleModal());
     this.joyride.reset(true);
   }
 
@@ -493,7 +483,7 @@ let DesignTool = class extends Component {
   }
 
   startTour() {
-    store.dispatch(actions.toggleShouldRenderModal());
+    store.dispatch(actions.toggleModal());
     this.setState({
       running: true,
       joyrideStep: 0,
@@ -665,7 +655,7 @@ let DesignTool = class extends Component {
 
     const handleLinkClick = () => {
       store.dispatch(actions.changeModalType('CONFIRM'));
-      store.dispatch(actions.toggleShouldRenderModal());
+      store.dispatch(actions.toggleModal());
     };
 
     if (shouldRenderTodoList) {
