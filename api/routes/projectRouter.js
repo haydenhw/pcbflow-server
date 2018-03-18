@@ -20,10 +20,6 @@ const activateAuth = (req, res, next) => {
 }
 
 projectRouter.get('/', activateAuth, (req, res) => {
-  console.log('get endpoint hit')
-  console.log('')
-  console.log('')
-
   const query = IS_AUTH_ACTIVE
     ? { ownerId: req.user._id }
     : {};

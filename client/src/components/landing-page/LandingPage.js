@@ -37,12 +37,6 @@ class LandingPage extends Component {
     store.dispatch(actions.createNewProject());
   }
 
-  getHeroOpacity() {
-    const { scrollY } = this.state;
-    // return 0;
-    // return (1 - (scrollY / 200));
-  }
-
   render() {
     const { scrollY } = this.state;
 
