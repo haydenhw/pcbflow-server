@@ -8,6 +8,11 @@
   z-index: map-get($z-index, nav);
 }
 
+.nav-save-status {
+  color: $grey-super-light;
+  font-size: 14.5px;
+}
+
 .iconWrapper {
   height: 50px;
   float: left;

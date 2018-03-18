@@ -33,7 +33,7 @@ export const updateBoardStroke = boardStroke => ({
 });
 
 export const UPDATE_BOARD_THUMBNAIL = 'UPDATE_BOARD_THUMBNAIL';
-export const updateBoardThumbnail = (thumbnail, projectId) => ({
+export const updateThumbnail = (thumbnail, projectId) => ({
   type: 'UPDATE_BOARD_THUMBNAIL',
   thumbnail,
   projectId,

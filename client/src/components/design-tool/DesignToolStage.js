@@ -110,7 +110,7 @@ class DesignToolStage extends Component {
     const { currentProjectId } = this.props;
     const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
-    store.dispatch(actions.updateBoardThumbnail(thumbnail, currentProjectId));
+    store.dispatch(actions.updateThumbnail(thumbnail, currentProjectId));
   }
 
   deleteModule() {
@@ -165,15 +165,6 @@ class DesignToolStage extends Component {
 
     const contextMenuClass = shouldHideContextMenu ? 'hideContextMenu' : 'react-contextmenu';
 
-    const board = (
-      <Board
-        rotate={rotate}
-        hideFloatingElements={hideFloatingElements}
-        unhideFloatingElements={unhideFloatingElements}
-        isDraggingToBoard={isDraggingToBoard}
-      />
-    );
-
     return (
       <div>
         <ContextMenuTrigger
@@ -189,7 +180,14 @@ class DesignToolStage extends Component {
               height={document.documentElement.clientHeight}
             >
               <Grid gridRef={node => { this.grid = node }} gridWidth={2000} gridHeight={2000} cellWidth={20} />
-              {shouldRenderBoard ? board : <Layer />}
+              {shouldRenderBoard
+                ? <Board
+                    rotate={rotate}
+                    hideFloatingElements={hideFloatingElements}
+                    unhideFloatingElements={unhideFloatingElements}
+                    isDraggingToBoard={isDraggingToBoard}
+                  />
+                : <Layer />}
             </Stage>
           </div>
         </ContextMenuTrigger>
