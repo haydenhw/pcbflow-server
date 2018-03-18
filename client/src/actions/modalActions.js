@@ -37,10 +37,10 @@ export const startTutorial = () => ({
 });
 
 export const startTutorialIfNotOffered = () => (dispatch) => {
-  const wasTutorialOffered = sessionStorage.getItem('wasTutorialOffered');
+  const wasTutorialOffered = localStorage.getItem('wasTutorialOffered');
 
   if (!wasTutorialOffered && devMode === false) {
     setTimeout(() => dispatch(startTutorial()), 500);
-    sessionStorage.setItem('wasTutorialOffered', true);
+    localStorage.setItem('wasTutorialOffered', true);
   }
 }

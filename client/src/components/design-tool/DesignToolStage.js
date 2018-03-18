@@ -126,16 +126,18 @@ class DesignToolStage extends Component {
       name: 'dragModuleLayer'
     });
     const imageObj = new Image();
-    imageObj.src = dragModuleData.imageSrc;
 
+    imageObj.src = dragModuleData.imageSrc;
     imageObj.onload = function() {
       const updatedModuleData = addPropToData(dragModuleData)({ image: imageObj });
       const dragModule = getDragModule(updatedModuleData);
+
       layer.add(dragModule);
       stage.add(layer);
 
       document.addEventListener('mousemove', (evt) => {
         const { clientX, clientY } = evt;
+
         dragModule.setX(clientX - (width / 2));
         dragModule.setY(clientY - (height / 2));
         layer.draw();
