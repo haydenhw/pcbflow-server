@@ -1,10 +1,11 @@
+// *move dependency logic to actions file
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
-// import Konva from 'konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import generatePriceString from 'helpers/generatePriceString';
 import { getDependencyDiff, updateMetDependencies, getNewDependencyData } from 'helpers/dependencies';
 

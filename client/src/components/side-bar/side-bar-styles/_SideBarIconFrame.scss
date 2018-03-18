@@ -1,3 +1,5 @@
+@import 'variables';
+
 .icon-frame-container {
   position: relative;
   border: 1px solid #cdced1;
@@ -8,17 +10,18 @@
 }
 
 
-.icon-frame-title {
-  width: 120px;
+.module-icon-frame-title {
   background-color: #cdced1;
-  font-size: 15px;
   color: black;
-  text-align: center;
-  height: 20px;
   display: block;
-  white-space: nowrap;
+  font-family: 'Times New Roman', Times, Serif;
+  font-size: 15px;
+  height: 20px;
   overflow: hidden;
+  text-align: center;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 120px;
 }
 
 .icon-frame-title:hover {
@@ -31,7 +34,7 @@
 }
 
 .icon-frame-price {
-  
+
   padding-bottom: 5px;
   text-align: center;
   vertical-align: bottom;

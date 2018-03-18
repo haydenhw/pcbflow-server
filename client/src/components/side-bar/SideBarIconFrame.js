@@ -23,7 +23,7 @@ export default function SideBarIconFrame(props) {
       className={`icon-frame-container ${hasTooltip ? `toolTip-${id}` : ''}`}
       style={props.disabled ? fadeOut : {}}
     >
-      <div className="icon-frame-title">
+      <div className="module-icon-frame-title">
         {props.moduleName}
       </div>
       <div className="icon-frame-body">

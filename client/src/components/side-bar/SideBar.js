@@ -18,14 +18,6 @@ const style = {
 };
 
 export default class SideBar extends Component {
-  shouldComponentUpdate() {
-    // return false;
-    return false;
-  }
-
-  componentDidUpdate() {
-  }
-
   renderDependencyMessage = () => {
     const { showAll, iconVisibityData } = this.props;
     const { mode, moduleName, dependencies } = iconVisibityData;
