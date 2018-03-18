@@ -19,9 +19,9 @@ import Grid from './DesignToolGrid';
 
 import { modulesData } from 'config/modulesData';
 
-const getModuleGroup = ({ x, y }) => new Konva.Group({
-  x,
-  y,
+const getModuleGroup = ({ moduleX, moduleY }) => new Konva.Group({
+  x: moduleX,
+  y: moduleY,
 });
 
 const getModuleImage = ({ imageX , imageY, imageWidth, imageHeight, image }) =>  new Konva.Image({
@@ -33,8 +33,6 @@ const getModuleImage = ({ imageX , imageY, imageWidth, imageHeight, image }) => 
 });
 
 const getModuleOutline = ({ x , y, width, height, stroke }) => new Konva.Image({
-  x,
-  y,
   width,
   height,
   stroke,
@@ -86,7 +84,7 @@ class DesignToolStage extends Component {
   }
 
   downloadPDF() {
-    // move to action creator
+    // *move to action creator
     const { currentProjectName } = this.props;
     const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const croppedStage = getCroppedStage(boardLayer);
@@ -97,8 +95,8 @@ class DesignToolStage extends Component {
     const imageOffsetX = (1125 - croppedStage.width) / 2 * pxPerMillimeter * 1.02525;
     const imageOffsetY = (795 - croppedStage.height) / 2 * pxPerMillimeter * 0.995;
     const textOffsetY = 795 * pxPerMillimeter + 5;
-
     const pdf = new jsPDF('landscape');
+
     pdf.setFontSize(8),
     pdf.text(footerText, 10, textOffsetY);
     pdf.addImage(imageDataURL, 'JPEG', imageOffsetX, imageOffsetY);
@@ -122,9 +120,7 @@ class DesignToolStage extends Component {
     const { dragModuleData } = this.props;
     const { width, height } =  dragModuleData;
     const stage = this.stage.getStage();
-    const layer = new Konva.Layer({
-      name: 'dragModuleLayer'
-    });
+    const layer = new Konva.Layer({ name: 'dragModuleLayer' });
     const imageObj = new Image();
 
     imageObj.src = dragModuleData.imageSrc;
@@ -148,7 +144,10 @@ class DesignToolStage extends Component {
   removeDragModule() {
     const stage = this.stage.getStage();
     const dragModuleLayer = stage.get('.dragModuleLayer')[0];
-    setTimeout(() => dragModuleLayer.destroy(), 0);
+
+    if (dragModuleLayer) {
+      setTimeout(() => dragModuleLayer.destroy(), 0);
+    }
   }
 
   render() {

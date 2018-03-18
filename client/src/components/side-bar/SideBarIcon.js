@@ -15,13 +15,19 @@ export default class SideBarIcon extends Component {
   handleMouseDown(evt) {
     if (evt.nativeEvent.which === 1) {
       const { moduleData } = this.props;
-      const { id } = moduleData;
+      const { id, width, height } = moduleData;
+      const { clientX, clientY } = evt;
+      const updatedModuleData = Object.assign({}, moduleData, {
+        moduleX: clientX - (width / 2),
+        moduleY: clientY - (height /2),
+      });
+
       this.props.updateClientPosition(evt);
       this.props.toggleDraggingToBoard();
 
       store.dispatch(actions.mouseDownOnIcon(true));
       store.dispatch(actions.toggleHasTooltip(id));
-      store.dispatch(actions.changeDraggingModule(moduleData));
+      store.dispatch(actions.changeDraggingModule(updatedModuleData));
     }
   }
 

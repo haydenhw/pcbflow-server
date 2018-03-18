@@ -8,6 +8,7 @@ import SideBarDependencyMessage from './SideBarDependencyMessage';
 
 import './side-bar-styles/_SideBar.scss';
 
+// *move to css file
 const style = {
   height: '100% !important',
   width: '200px',

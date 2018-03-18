@@ -166,6 +166,10 @@ let DesignTool = class extends Component {
     const { width, height, boundToSideIndex } = draggingModuleData;
     const { isDraggingToBoard } = this.state;
     const { clientX: x , clientY: y } = evt;
+    // const updatedModuleData = Object.assign({}, draggingModuleData, {
+      // x: null,
+      // y: null,
+    // });
 
     const coordinateData = {
       width,
@@ -177,18 +181,14 @@ let DesignTool = class extends Component {
       boardY: boardSpecs.y,
       boardHeight: boardSpecs.height,
     };
-
     const testModuleCoordinates = {
       x: x - (width / 2),
       y: y - (height / 2),
     };
-
     const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
-
     const isNewModuleWithinBounds = checkCollision([testModule, boardSpecs]).length > 0;
-
+    console.log(isNewModuleWithinBounds);
     const adjustedModuleCoordinates = this.calculateNewModuleCoordinates(coordinateData);
-
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
 
     if (isNewModuleWithinBounds && isDraggingToBoard) {

@@ -63,7 +63,6 @@ class LandingPage extends Component {
           </div>
         </section>
         <section className="demo-section">
-          {/* Consider removing the wrapper class below if not necessary */}
           <div className="section-heading-wrapper">
             <h2 className="section-heading">Bring your ideas to life</h2>
             <p className="section-sub-heading">Learn to create custom circuit board designs with PCBflow, save work in progress diagrams, and export them when you're ready to build the real thing.</p>
