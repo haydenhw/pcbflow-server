@@ -10,11 +10,11 @@ export default function undoable(reducer, callback) {
   // Return a reducer that handles undo and redo
   return function (state = initialState, action) {
     const { past, present, future } = state;
-
+    // console.log(past.map(el => el ? el[0] : null))
     switch (action.type) {
       case 'UNDO':
-        const shouldSkipElement = callback && callback(past);
-        const element = shouldSkipElement ? 2 : 1;
+        const shouldSkipElement = callback && callback(past, present);
+        const element = shouldSkipElement ? 3 : 1;
         const previous = past[past.length - element];
         const newPast = past.slice(0, past.length - element);
         return {
@@ -25,6 +25,11 @@ export default function undoable(reducer, callback) {
       case 'REDO':
         const next = future[0];
         const newFuture = future.slice(1);
+
+        if (!next) {
+          return state;
+        }
+
         return {
           past: [...past, present],
           present: next,
