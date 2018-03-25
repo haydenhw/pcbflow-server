@@ -2,7 +2,7 @@ const rewind = ({ past, present, future }) => {
   // console.log(past)
   const previous = past[past.length - 1];
   const newPast = past.slice(0, past.length - 1);
-  // console.count();
+  // console.log({ past, present, future })
   return {
     past: newPast,
     present: previous,
@@ -63,13 +63,13 @@ export default function skipIfImageNodeNull(past, present, future) {
   const lastPastArray = past[past.length -1];
   const lastPastModule = lastPastArray && lastPastArray[lastPastArray.length -1];
 
-  if(!shouldSkip(lastPastModule, present, lastPastArray)) {
+  if(true || !shouldSkip(lastPastModule, present, lastPastArray)) {
     // console.log('not skipping');
-      return rewind({ past, present, future });
+      return ({ past, present, future });
   }
-  console.log('skipping');
+
   const { past: newPast, present: newPres, future: newFut } =
-    rewind({ past, present, future });
+    rewindDestructively({ past, present, future });
 
   return skipIfImageNodeNull(newPast, newPres, newFut);
 }

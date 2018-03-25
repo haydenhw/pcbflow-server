@@ -1,5 +1,4 @@
 export default function undoable(reducer, callback) {
-  // Call the reducer with empty action to populate the initial state
 
   const initialState = {
     past: [],
@@ -7,28 +6,23 @@ export default function undoable(reducer, callback) {
     future: [],
   };
 
-  // Return a reducer that handles undo and redo
   return function (state = initialState, action) {
     const { past, present, future } = state;
-    const res = ({
-      past,
-      present,
-      future
-    })
-    console.log(JSON.stringify(res, null, 2));
+
     switch (action.type) {
       case 'UNDO':
-        // const previous = past[past.length - 1];
-        // const newPast = past.slice(0, past.length - 1);
-        // return {
-        //   past: newPast,
-        //   present: previous,
-        //   future: [present, ...future],
-        // };
-        // console.log('past', past);
-        // console.log('present', present)
-        // console.log('result: ', callback(past, present, future));
-        return callback(past, present, future)
+        const previous = past[past.length - 1];
+        const newPast = past.slice(0, past.length - 1);
+
+        if (!previous) {
+          return state;
+        }
+
+        return {
+          past: newPast,
+          present: previous,
+          future: [present, ...future],
+        };
       case 'REDO':
         const next = future[0];
         const newFuture = future.slice(1);
@@ -43,16 +37,15 @@ export default function undoable(reducer, callback) {
           future: newFuture,
         };
       default:
-        // Delegate handling the action to the passed reducer
+        const { skipPrevState } = action;
         const newPresent = reducer(present, action);
 
         if (JSON.stringify(present) === JSON.stringify(newPresent)) {
           return state;
         }
 
-
         return {
-          past: [...past, present],
+          past: !skipPrevState ? [...past, present] : past,
           present: newPresent,
           future: [],
         };
