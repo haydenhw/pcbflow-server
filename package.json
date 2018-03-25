@@ -38,7 +38,7 @@
     "lint": "eslint --ext .js --ext .jsx client/src/ || exit 0",
     "lint:fix": "eslint --fix --ext .js --ext .jsx client/src/ || exit 0",
     "build:client": "cd client && npm run build",
-    "push:git": "git add . && git commit -m \"build\" && git push origin master || exit 0",
+    "push:git": "git add . && git commit -m \"Updates build for deployment\" && git push origin master || exit 0",
     "push:heroku": "git push heroku master",
     "deploy": "npm run build:client && npm run push:git && npm run push:heroku"
   }
