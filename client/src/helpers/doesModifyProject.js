@@ -10,6 +10,8 @@ export default function doesModifyProject(action) {
     case actions.UPDATE_MODULE_POSITION:
     case actions.UPDATE_MODULE_FILL:
     case actions.UPDATE_PROJECT_NAME:
+    case actions.UNDO:
+    case actions.REDO:
       return true;
     default:
       return false;

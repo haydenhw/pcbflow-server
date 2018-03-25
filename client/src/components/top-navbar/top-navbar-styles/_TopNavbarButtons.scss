@@ -90,6 +90,14 @@
   }
 }
 
+@-moz-document url-prefix() {
+  .tutorial-button-icon {
+    &.icon-school {
+      right: 72px;
+    }
+  }
+}
+
 .fa-cloud,
 .fa-file-pdf-o {
   font-size: 15px;

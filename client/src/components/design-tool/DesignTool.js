@@ -121,6 +121,7 @@ let DesignTool = class extends Component {
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
       // *refactor to not depend on setTimeout
+      console.log('saving')
       setTimeout(() => store.dispatch(actions.updateProject(this.props)), 0);
     }
   }
