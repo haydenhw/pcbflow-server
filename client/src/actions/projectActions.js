@@ -237,9 +237,10 @@ export function updateProject(projectData) {
 }
 
 export const UPDATE_PROJECT_NAME = 'UPDATE_PROJECT_NAME';
-export const updateProjectName = (newName) => ({
+export const updateProjectName = (newName, projectId) => ({
   type: 'UPDATE_PROJECT_NAME',
   newName,
+  projectId,
 });
 
 export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS';

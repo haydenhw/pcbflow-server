@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
+
 const { PORT, DATABASE_URL } = require('./api/config');
 const { Modules, Projects } = require('./api/models');
 const { localStrategy, jwtStrategy } = require('./api/strategies');
@@ -93,7 +94,7 @@ function insertDemoProject() {
     })
 }
 
-// insertDemoProject();
+insertDemoProject();
 
 
 function tearDownDb() {

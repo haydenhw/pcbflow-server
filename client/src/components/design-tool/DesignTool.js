@@ -337,7 +337,8 @@ let DesignTool = class extends Component {
   }
 
   handleNameChange(newName) {
-    store.dispatch(actions.updateProjectName(newName));
+    const { currentProjectId } = this.props;
+    store.dispatch(actions.updateProjectName(newName, currentProjectId));
   }
 
   handleKeyUp(evt) {

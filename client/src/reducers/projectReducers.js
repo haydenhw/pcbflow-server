@@ -38,7 +38,7 @@ export const projects = (state = defaultProjectState, action) => {
         ...state,
         items: [...state.items, action.project],
       };
-    case actions.UPDATE_BOARD_THUMBNAIL:
+    case actions.UPDATE_BOARD_THUMBNAIL: {
       const updatedProjects = state.items.map(project => {
         if (project._id === action.projectId) {
           const updatedBoardSpecs = Object.assign({}, { ...project.boardSpecs }, { thumbnail: action.thumbnail })
@@ -53,6 +53,22 @@ export const projects = (state = defaultProjectState, action) => {
         ...state,
         items: updatedProjects,
       }
+    }
+    case actions.UPDATE_PROJECT_NAME: {
+      const updatedProjects = state.items.map(project => {
+        if (project._id === action.projectId) {
+          const updatedProject = Object.assign({}, project, { name: action.newName });
+          return updatedProject;
+        }
+
+        return project;
+      });
+
+      return {
+        ...state,
+        items: updatedProjects,
+      }
+    }
     case actions.UPDATE_PROJECT_REQUEST:
       return {
         ...state,

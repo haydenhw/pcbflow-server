@@ -18,17 +18,9 @@ const doesUserExist = () => Boolean(getUser());
 
 export default class App extends Component {
   componentDidMount() {
-    // clearJWT();
-    // clearUser();
-    // const res = getJWT()
-    // console.log(res)
-    // if (res) {
-    //   console.log(jwtDecode(res));
-    // }
-
     const jwt = getJWT();
     const user = getUser();
-
+    console.log(getUser()._id);
     doesUserExist()
       ? store.dispatch(handleExistingUserVisit(jwt, user))
       : store.dispatch(handleNewUserVisit());

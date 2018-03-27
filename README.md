@@ -1,2 +1,2 @@
 ### PCBflow
-![App screenshot](client/public/images/design-tool-screenshot.png)
+![App screenshot](client/public/images/dual-ethernet-board.png)
