@@ -25,7 +25,16 @@ export default class ModulesItem extends PureComponent {
     this.state = {
       image: null,
       strokeWidth: 1,
+      isDragging: false,
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.isDragging && nextState.isDragging) {
+      return false;
+    }
+
+    return true;
   }
 
   setImage() {
@@ -173,11 +182,16 @@ export default class ModulesItem extends PureComponent {
     moduleGroup.setY(newPosition.y);
   }
 
+  handleDragStart() {
+    this.setState({ isDragging: true });
+  }
+
   handleDragEnd() {
     const module = this.refs.moduleGroup;
     const newPosition = this.getNewPosition();
     store.dispatch(actions.updateModulePosition(newPosition));
     this.highlightRuleBreakingModules();
+    this.setState({ isDragging: false });
   }
 
   handleMouseOver() {
@@ -233,6 +247,10 @@ export default class ModulesItem extends PureComponent {
       ? getTopLeftAnchor(moduleGroup)
       : null;
 
+    if (this.props.id === "107") {
+      // console.log(this.props.text);
+    }
+
     return (
       <Group
         draggable="true"
@@ -248,6 +266,7 @@ export default class ModulesItem extends PureComponent {
         }
         height={this.props.height}
         width={this.props.width}
+        onDragStart={this.handleDragStart.bind(this)}
         onDragEnd={this.handleDragEnd.bind(this)}
         onDragMove={this.handleDragMove.bind(this)}
         onMouseOver={this.handleMouseOver.bind(this)}

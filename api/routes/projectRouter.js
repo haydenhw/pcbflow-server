@@ -33,17 +33,6 @@ projectRouter.get('/', activateAuth, (req, res) => {
         console.error(err);
         res.status(500).json({message: 'Internal Server Error'});
       });
-
-  if (true) return;
-  Projects
-    .find()
-    .exec()
-    .then(projects => res.json(projects))
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal Server Error'});
-      });
 });
 
 projectRouter.get('/:projectId', (req, res) => {
