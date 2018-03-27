@@ -89,12 +89,13 @@ function insertDemoProject() {
     })
     .then((bool) => {
       if (!bool) {
+        console.log('creating')
         Projects.create(demoProject);
       }
     })
 }
 
-insertDemoProject();
+// insertDemoProject();
 
 
 function tearDownDb() {

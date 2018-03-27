@@ -5,15 +5,7 @@ import PropTypes from 'prop-types';
 import store from 'reduxFiles/store';
 import { fetchProjects, handleExistingUserVisit, handleNewUserVisit } from 'actions/indexActions';
 import { isJWTExpired, getUser, getJWT, clearUser, clearJWT  } from 'helpers/users';
-
-// do a check for existing user in highest level component
-// is there a user in local storage ?
-  // yes -> is the jwt current ?
-      // yes -> route to projects page. project page uses user id to fetch projects
-      // no -> refresh token and ''
-  // no -> create a new user, get jwt, save user and jwt to local storage, and create new project
-      // under newly created user  id
-
+// *move this to helpers
 const doesUserExist = () => Boolean(getUser());
 
 export default class App extends Component {

@@ -78,7 +78,6 @@ export const createNewProject = () => (dispatch) => {
 export const FETCH_PROJECTS_REQUEST = 'FETCH_PROJECTS_REQUEST';
 export const fetchProjectsRequest = () => ({
   type: 'FETCH_PROJECTS_REQUEST',
-
 });
 
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
@@ -91,7 +90,7 @@ export function fetchProjects(jwt) {
   if (!jwt) {
     console.warn('JWT not provided or undefined');
   }
-
+  console.log('hello')
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
 
