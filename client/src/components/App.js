@@ -12,7 +12,7 @@ export default class App extends Component {
   componentDidMount() {
     const jwt = getJWT();
     const user = getUser();
-    console.log(getUser()._id);
+
     doesUserExist()
       ? store.dispatch(handleExistingUserVisit(jwt, user))
       : store.dispatch(handleNewUserVisit());
@@ -30,5 +30,4 @@ export default class App extends Component {
 }
 
 App.propTypes = {
-
 };
