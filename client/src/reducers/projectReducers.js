@@ -2,6 +2,7 @@ import * as actions from '../actions/indexActions';
 import doesModifyProject from 'helpers/doesModifyProject';
 
 const defaultProjectState = {
+  activeProjectId: null,
   isFetching: false,
   isInitialLoad: true,
   isSaving: null,
@@ -16,6 +17,11 @@ export const projects = (state = defaultProjectState, action) => {
       return {
         ...state,
         items: state.items.filter(project => project._id !== action.projectId),
+      };
+    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+      return {
+        ...state,
+        activeProjectId: action.project._id,
       };
     case actions.FETCH_PROJECTS_REQUEST:
       return {

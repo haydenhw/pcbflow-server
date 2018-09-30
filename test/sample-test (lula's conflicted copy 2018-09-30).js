@@ -31,7 +31,6 @@ const modules = [
   },
   {
     id: '105',
-    name: 'success',
     price: 48,
     iconHeight: '70px',
     iconSrc: 'images/COM-connector.svg',
@@ -113,23 +112,19 @@ let indexURLs = {
     'jp': 'http://mysite.com/jp'   //Japanese
 }
 
+const MaybeGetUserJob = (MaybeUser) => {
+  // Maybe.fromNull(MaybeUser.val.job)
+}
 
 const getProjectById = (projects) => (id) => projects.find((project) => project._id === id);
 
-
-const maybeGetProjectById = (projects) => (id) => (
+const MaybeGetProjectById = (projects) => (id) => (
   Maybe.fromNull(projects)
     .chain(projects => (
       Maybe.fromNull(getProjectById(projects)(id))
-  ))
-  .val
+    ))
 );
 
-const maybeGetActiveProjectName = (projects) => (activeProjectId) => {
-  return Maybe.fromNull(maybeGetProjectById(projects)(activeProjectId))
-    .map(activeProject => activeProject.name)
-    .orSome('');
-}
 
 // .map(user => Maybe.fromNull(user.job).orSome('default job'))
 // const getProjectById = projects => activeProjectId => (
@@ -145,8 +140,8 @@ const maybeGetActiveProjectName = (projects) => (activeProjectId) => {
 // )
 
 // const actualResult  = MaybeGetProjectById(modules)(null);
-const actualResult  = maybeGetActiveProjectName(modules)('5ab9f30af713b63f297d8800');
-const expectedResult = 'success';
+const actualResult  = MaybeGetProjectById(modules)('5ab9f30af713b63f297d87ff');
+const expectedResult = 'trucker';
 
 console.log(actualResult);
 // describe('test function', function() {

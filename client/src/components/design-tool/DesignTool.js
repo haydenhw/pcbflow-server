@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { hashHistory, withRouter } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 import Joyride from 'react-joyride';
+import { Maybe } from 'monet';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -36,6 +37,22 @@ import './design-tool-styles/_DesignToolDocumentationCard.scss';
 import './design-tool-styles/_DesignToolOnboardModal.scss';
 
 import { devMode } from 'config/devMode';
+
+const getProjectById = (projects) => (id) => projects.find((project) => project._id === id);
+
+const maybeGetProjectById = (projects) => (id) => (
+  Maybe.fromNull(projects)
+    .chain(projects => (
+      Maybe.fromNull(getProjectById(projects)(id))
+  ))
+  .val
+);
+
+const maybeGetActiveProjectName = (projects) => (activeProjectId) => (
+  Maybe.fromNull(maybeGetProjectById(projects)(activeProjectId))
+    .map(activeProject => activeProject.name)
+    .orSome('')
+);
 
 let DesignTool = class extends Component {
   constructor(props) {
@@ -668,7 +685,7 @@ let DesignTool = class extends Component {
   }
 
   render() {
-    const { activeProjectName, activeProjectId, isSaving } = this.props;
+    const { activeProjectId, isSaving, projects } = this.props;
     const {
       isDraggingToBoard,
       isNavMenuActive,
@@ -678,6 +695,8 @@ let DesignTool = class extends Component {
       shouldRenderInfoButton,
       shouldHideContextMenu,
     } = this.state;
+
+    const activeProjectName = maybeGetActiveProjectName(projects)(activeProjectId);
 
     return (
       <div>
@@ -741,6 +760,7 @@ const mapStateToProps = (state) => {
     activeProjectThumbnail,
     anchorPositions: state.anchorPositions,
     boardSpecs: state.boardSpecs,
+    activeProjectId: state.projects.activeProjectId,
     activeProjectModules: state.activeProjectModules.present,
     activeProjectName: state.activeProjectInfo.name,
     activeProjectPrice: state.activeProjectInfo.price,
