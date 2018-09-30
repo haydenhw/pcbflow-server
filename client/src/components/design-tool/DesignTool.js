@@ -21,7 +21,6 @@ import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import SideBar from 'components/side-bar/SideBar';
-import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText';
 import Footer from 'components/footer/Footer';
 import Modal from 'components/modal/Modal';
 import { toolTips } from 'config/toolTips';
@@ -39,6 +38,7 @@ import './design-tool-styles/_DesignToolOnboardModal.scss';
 import { devMode } from 'config/devMode';
 
 const getProjectById = (projects) => (id) => projects.find((project) => project._id === id);
+const getActiveProjectName = (activeProject) => activeProject.name;
 
 const maybeGetProjectById = (projects) => (id) => (
   Maybe.fromNull(projects)
@@ -50,7 +50,7 @@ const maybeGetProjectById = (projects) => (id) => (
 
 const maybeGetActiveProjectName = (projects) => (activeProjectId) => (
   Maybe.fromNull(maybeGetProjectById(projects)(activeProjectId))
-    .map(activeProject => activeProject.name)
+    .map(getActiveProjectName)
     .orSome('')
 );
 
@@ -122,7 +122,7 @@ let DesignTool = class extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.activeProjectName) {
+    if (this.props.projects.length === 0) {
       const projectId = this.props.params.projectId;
       const currentRoute = this.props.location.pathname;
 
@@ -545,13 +545,12 @@ let DesignTool = class extends Component {
   }
 
   renderFooter() {
-    const { activeProjectModules, timeLastSaved } = this.props;
+    const { activeProjectModules } = this.props;
 
     if (this.state.shouldRenderInfoButton) {
       return (
         <Footer
           modules={activeProjectModules}
-          timeLastSaved={timeLastSaved}
         />
       );
     }
@@ -685,7 +684,8 @@ let DesignTool = class extends Component {
   }
 
   render() {
-    const { activeProjectId, isSaving, projects } = this.props;
+    const { activeProjectName, activeProjectId, isSaving, projects } = this.props;
+
     const {
       isDraggingToBoard,
       isNavMenuActive,
@@ -696,7 +696,7 @@ let DesignTool = class extends Component {
       shouldHideContextMenu,
     } = this.state;
 
-    const activeProjectName = maybeGetActiveProjectName(projects)(activeProjectId);
+    // const activeProjectName = maybeGetActiveProjectName(projects)(activeProjectId);
 
     return (
       <div>
@@ -746,24 +746,23 @@ let DesignTool = class extends Component {
 };
 
 const mapStateToProps = (state) => {
-  const activeProjectId = state.activeProjectInfo.id;
+  const activeProjectId = state.projects.activeProjectId;
   const projects = state.projects.items;
-  const activeProject = projects.find(project => (
-    project._id === activeProjectId
-  ));
-  const activeProjectThumbnail = activeProject
+  const activeProject = maybeGetProjectById(projects)(activeProjectId);
+  const activeProjectName = maybeGetActiveProjectName(projects)(activeProjectId);
+  const activeProjectThumbnail = (activeProject
     ? activeProject.boardSpecs.thumbnail
-    : null;
+    : null
+  );
 
   return {
     activeProjectId,
+    activeProjectName,
     activeProjectThumbnail,
     anchorPositions: state.anchorPositions,
     boardSpecs: state.boardSpecs,
     activeProjectId: state.projects.activeProjectId,
     activeProjectModules: state.activeProjectModules.present,
-    activeProjectName: state.activeProjectInfo.name,
-    activeProjectPrice: state.activeProjectInfo.price,
     draggingModuleData: state.draggingModule,
     hasUnsavedChanges: state.hasUnsavedChanges,
     iconVisibityData: state.iconVisibity,
@@ -778,7 +777,6 @@ const mapStateToProps = (state) => {
     shouldRenderModal: state.modal.shouldRenderModal,
     shouldRenderSideBar: state.shouldRenderSideBar,
     shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
-    timeLastSaved: state.activeProjectInfo.timeLastSaved,
     todoBools: state.tutorial.todoBools,
     topLeftAnchorX: state.anchorPositions.topLeft.x,
     topLeftAnchorY: state.anchorPositions.topLeft.y,
@@ -795,8 +793,6 @@ DesignTool.propTypes = {
   boardSpecs: PropTypes.object.isRequired,
   activeProjectId: PropTypes.string,
   activeProjectModules: PropTypes.array.isRequired,
-  activeProjectName: PropTypes.string,
-  activeProjectPrice: PropTypes.string.isRequired,
   draggingModuleData: PropTypes.object.isRequired,
   hasUnsavedChanges: PropTypes.bool.isRequired,
   iconVisibityData: PropTypes.object.isRequired,
@@ -813,7 +809,6 @@ DesignTool.propTypes = {
   shouldRenderModal: PropTypes.bool.isRequired,
   shouldRenderSideBar: PropTypes.bool.isRequired,
   shouldRenderTodoList: PropTypes.bool.isRequired,
-  timeLastSaved: PropTypes.string,
   todoBools: PropTypes.array.isRequired,
   tutorialStep: PropTypes.number.isRequired,
 };

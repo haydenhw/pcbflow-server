@@ -207,8 +207,7 @@ class DesignToolStage extends Component {
 const mapStateToProps = state => {
 
   return ({
-    activeProjectName: state.activeProjectInfo.name,
-    activeProjectId: state.activeProjectInfo.id,
+    activeProjectId: state.projects.activeProjectId,
     dragModuleData: state.draggingModule,
     isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,

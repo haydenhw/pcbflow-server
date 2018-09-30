@@ -93,6 +93,9 @@ export const projects = (state = defaultProjectState, action) => {
       ? state.saveProjectTrigger
       : !state.saveProjectTrigger;
 
+    console.log(action);
+    console.log(doesModifyProject(action));
+
     return {
       ...state,
       saveProjectTrigger: updatedSaveProjectTrigger,

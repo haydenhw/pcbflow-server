@@ -113,42 +113,13 @@ let indexURLs = {
     'jp': 'http://mysite.com/jp'   //Japanese
 }
 
-
-const getProjectById = (projects) => (id) => projects.find((project) => project._id === id);
-
-
-const maybeGetProjectById = (projects) => (id) => (
+const maybeGetProjects = (projects) => (
   Maybe.fromNull(projects)
-    .chain(projects => (
-      Maybe.fromNull(getProjectById(projects)(id))
-  ))
-  .val
 );
 
-const maybeGetActiveProjectName = (projects) => (activeProjectId) => {
-  return Maybe.fromNull(maybeGetProjectById(projects)(activeProjectId))
-    .map(activeProject => activeProject.name)
-    .orSome('');
-}
-
-// .map(user => Maybe.fromNull(user.job).orSome('default job'))
-// const getProjectById = projects => activeProjectId => (
-//   projects && (projects.length > 0) && activeProjectId
-//     ? projects.find((project) => project._id === activeProjectId)
-//     // ? console.log(projects)
-//     : undefined
-// );
-// const chainTest = (user) => (
-//   Maybe.fromNull(user)
-//     .map(user => user.pay)
-//     .orSome('default')
-// )
-
-// const actualResult  = MaybeGetProjectById(modules)(null);
-const actualResult  = maybeGetActiveProjectName(modules)('5ab9f30af713b63f297d8800');
+const actualResult = maybeGetProjects(modules);
 const expectedResult = 'success';
 
-console.log(actualResult);
 // describe('test function', function() {
 //   it('', function() {
 //     assert.equal(actualResult, expectedResult); });
