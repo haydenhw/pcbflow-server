@@ -8,7 +8,6 @@ import Joyride from 'react-joyride';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import { compose } from 'helpers/functional';
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import getTimeStamp from 'helpers/getTimeStamp';
@@ -37,18 +36,6 @@ import './design-tool-styles/_DesignToolDocumentationCard.scss';
 import './design-tool-styles/_DesignToolOnboardModal.scss';
 
 import { devMode } from 'config/devMode';
-
-
-const getProjectPrice = modules => (
-  modules && modules.length > 0
-    ? modules
-      .map((module) => module.price)
-      .reduce((a, b) => a + b)
-    : 0
-);
-
-const getPriceString = int => `$${int.toFixed(2).toString()}`
-const getProjectPriceString = compose(getPriceString, getProjectPrice);
 
 let DesignTool = class extends Component {
   constructor(props) {
@@ -546,7 +533,7 @@ let DesignTool = class extends Component {
     if (this.state.shouldRenderInfoButton) {
       return (
         <Footer
-          price={getProjectPriceString(activeProjectModules)}
+          modules={activeProjectModules}
           timeLastSaved={timeLastSaved}
         />
       );

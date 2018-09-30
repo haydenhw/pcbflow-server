@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 
 import './footer-styles/_Footer.scss';
 
+import { compose } from 'helpers/functional';
+
+const getProjectPrice = modules => (
+  modules && modules.length > 0
+    ? modules
+      .map((module) => module.price)
+      .reduce((a, b) => a + b)
+    : 0
+);
+
+const getPriceString = int => `$${int.toFixed(2).toString()}`;
+const getProjectPriceString = compose(getPriceString, getProjectPrice);
 export default function Footer(props) {
   const timeLastSaved = (
     <div className="time-last-saved footer-wrapper">
@@ -15,7 +27,7 @@ export default function Footer(props) {
     <div className="footer">
       <div className="project-price footer-wrapper">
         <span>Price/Unit: </span>
-        <span>{props.price}</span>
+        <span>{getProjectPriceString(props.modules)}</span>
       </div>
       {props.timeLastSaved && timeLastSaved}
     </div>
@@ -23,6 +35,6 @@ export default function Footer(props) {
 }
 
 Footer.propTypes = {
-  price: PropTypes.string.isRequired,
+  moudles: PropTypes.array,
   timeLastSaved: PropTypes.string,
 };
