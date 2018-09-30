@@ -46,7 +46,7 @@ const store = {
   },
   modules: {
     activeModuleId: 'string',
-    draggingModulId: 'string',
+    draggingModuleId: 'string',
   },
   ui: {
     sidebar: {
@@ -62,6 +62,7 @@ const store = {
   },
   mouse: {
     ...all current props
+    // can some of these props be calculated ?
   },
   tutorial: {
     ... todoProps

@@ -85,11 +85,11 @@ class DesignToolStage extends Component {
 
   downloadPDF() {
     // *move to action creator
-    const { currentProjectName } = this.props;
+    const { activeProjectName } = this.props;
     const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const croppedStage = getCroppedStage(boardLayer);
     const imageDataURL = croppedStage.node.toDataURL('image/jpeg', 1.0);
-    const footerText = `${currentProjectName} created ${getTimeDateStamp()}`;
+    const footerText = `${activeProjectName} created ${getTimeDateStamp()}`;
 
     const pxPerMillimeter = 0.2458333;
     const imageOffsetX = (1125 - croppedStage.width) / 2 * pxPerMillimeter * 1.02525;
@@ -105,10 +105,10 @@ class DesignToolStage extends Component {
 
   updateThumbnail() {
     // *move to action creator
-    const { currentProjectId } = this.props;
+    const { activeProjectId } = this.props;
     const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
-    store.dispatch(actions.updateThumbnail(thumbnail, currentProjectId));
+    store.dispatch(actions.updateThumbnail(thumbnail, activeProjectId));
   }
 
   deleteModule() {
@@ -207,8 +207,8 @@ class DesignToolStage extends Component {
 const mapStateToProps = state => {
 
   return ({
-    currentProjectName: state.currentProjectInfo.name,
-    currentProjectId: state.currentProjectInfo.id,
+    activeProjectName: state.activeProjectInfo.name,
+    activeProjectId: state.activeProjectInfo.id,
     dragModuleData: state.draggingModule,
     isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
@@ -218,14 +218,14 @@ const mapStateToProps = state => {
     boardSpecs: state.boardSpecs,
     updateThumbnailTrigger: state.projects.updateThumbnailTrigger,
     anchorPositions: state.anchorPositions,
-    modules: state.currentProjectModules.present,
+    modules: state.activeProjectModules.present,
   });
 };
 
 export default connect(mapStateToProps)(DesignToolStage);
 
 DesignToolStage.propTypes = {
-  currentProjectName: PropTypes.string,
+  activeProjectName: PropTypes.string,
   shouldRenderBoard: PropTypes.bool.isRequired,
   draggingModule: PropTypes.object.isRequired,
   isMouseDownOnIcon: PropTypes.bool.isRequired,

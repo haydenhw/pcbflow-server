@@ -174,7 +174,7 @@ const mapStateToProps = state => ({
   checkCollisionTrigger: state.boardSpecs.checkCollisionTrigger,
   currentDependencyData: state.iconVisibity,
   iconVisibityMode: state.iconVisibity.mode,
-  modules: state.currentProjectModules.present,
+  modules: state.activeProjectModules.present,
   selectedModuleProps: state.selectedModule,
   topLeftAnchor: state.anchorPositions.topLeft,
   tutorialStep: state.tutorial.step,

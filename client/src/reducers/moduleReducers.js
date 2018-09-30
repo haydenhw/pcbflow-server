@@ -68,7 +68,7 @@ export const selectedModule = (state = {}, action) => {
   }
 };
 
-export const currentProjectModules = (state = [], action) => {
+export const activeProjectModules = (state = [], action) => {
   if (action.type) {
     switch (action.type) {
       case actions.POST_PROJECT_SUCCESS:

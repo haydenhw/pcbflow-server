@@ -5,7 +5,7 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { projects, currentProjectInfo } from './projectReducers';
+import { projects, activeProjectInfo } from './projectReducers';
 
 describe('projects reducer', () => {
     // Fetch Basic Info about User
@@ -30,7 +30,7 @@ describe('projects reducer', () => {
   });
 });
 
-describe('currentProjectInfo redcuers', () => {
+describe('activeProjectInfo redcuers', () => {
   it('It should return info a about the current project', () => {
     const initialState = {
       price: '$15.00',
@@ -42,7 +42,7 @@ describe('currentProjectInfo redcuers', () => {
       id: 1234321,
     };
 
-    const resultState = currentProjectInfo(deepFreeze(initialState), {
+    const resultState = activeProjectInfo(deepFreeze(initialState), {
       type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
       project: {
         price: '$15.00',
@@ -67,7 +67,7 @@ describe('currentProjectInfo redcuers', () => {
       id: 1234321,
     };
 
-    const resultState = currentProjectInfo(deepFreeze(initialState), {
+    const resultState = activeProjectInfo(deepFreeze(initialState), {
       type: 'UPDATE_PROJECT_SUCCESS',
       project: {
         name: 'new name',
@@ -90,7 +90,7 @@ describe('currentProjectInfo redcuers', () => {
       id: 1234321,
     };
 
-    const resultState = currentProjectInfo(deepFreeze(initialState), {
+    const resultState = activeProjectInfo(deepFreeze(initialState), {
       type: 'UPDATE_PROJECT_PRICE',
       price: '$25.00',
     });
@@ -113,7 +113,7 @@ describe('currentProjectInfo redcuers', () => {
       id: 1234321,
     };
 
-    const resultState = currentProjectInfo(deepFreeze(initialState), {
+    const resultState = activeProjectInfo(deepFreeze(initialState), {
       type: 'UPDATE_LAST_SAVED_TIME',
       time: '6pm',
     });

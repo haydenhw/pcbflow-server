@@ -101,7 +101,7 @@ const defaultProjectInfo = {
   price: '$15.00',
 };
 
-export const currentProjectInfo = (state = defaultProjectInfo, action) => {
+export const activeProjectInfo = (state = defaultProjectInfo, action) => {
   switch (action.type) {
     case actions.POST_PROJECT_SUCCESS:
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:

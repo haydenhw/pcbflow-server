@@ -5,7 +5,7 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { selectedModule, draggingModule, currentProjectModules } from './moduleReducers';
+import { selectedModule, draggingModule, activeProjectModules } from './moduleReducers';
 
 describe('draggingModule reducer', () => {
   it('It should return update draggingModule data', () => {
@@ -145,7 +145,7 @@ describe('draggingModule reducer', () => {
   });
 });
 
-describe('currentProjectModules reducer', () => {
+describe('activeProjectModules reducer', () => {
   it('It should return correct module position', () => {
     const initialState = [
       {
@@ -185,7 +185,7 @@ describe('currentProjectModules reducer', () => {
       },
     ];
 
-    const resultState = currentProjectModules(deepFreeze(initialState), {
+    const resultState = activeProjectModules(deepFreeze(initialState), {
       type: 'UPDATE_MODULE_POSITION',
       modulePosition: {
         index: 1,
@@ -228,7 +228,7 @@ describe('currentProjectModules reducer', () => {
       },
     ];
 
-    const resultState = currentProjectModules(deepFreeze(initialState), {
+    const resultState = activeProjectModules(deepFreeze(initialState), {
       type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
       project: {
         modules: [
@@ -286,7 +286,7 @@ describe('currentProjectModules reducer', () => {
       },
     ];
 
-    const resultState = currentProjectModules(deepFreeze(initialState), {
+    const resultState = activeProjectModules(deepFreeze(initialState), {
       type: 'PUSH_NEW_MODULE',
       module: {
         x: 50,
@@ -334,7 +334,7 @@ describe('currentProjectModules reducer', () => {
       },
     ];
 
-    const resultState = currentProjectModules(deepFreeze(initialState), {
+    const resultState = activeProjectModules(deepFreeze(initialState), {
       type: 'ROTATE_SELECTED_MODULE',
       rotationData: {
         index: 0,
@@ -386,7 +386,7 @@ describe('currentProjectModules reducer', () => {
       },
     ];
 
-    const resultState = currentProjectModules(deepFreeze(initialState), {
+    const resultState = activeProjectModules(deepFreeze(initialState), {
       type: 'DELETE_SELECTED_MODULE',
       moduleIndex: 1,
     });

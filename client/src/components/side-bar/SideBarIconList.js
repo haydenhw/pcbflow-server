@@ -78,7 +78,7 @@ const mapStateToProps = state => ({
   disabledIconExceptions: state.tutorial.disabledIconExceptions,
   iconVisibityMode: state.iconVisibity.mode,
   moduleData: state.moduleData,
-  onBoardModules: state.currentProjectModules.present,
+  onBoardModules: state.activeProjectModules.present,
   selectedModuleDependencies: state.iconVisibity.dependencies,
 });
 

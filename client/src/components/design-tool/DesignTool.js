@@ -106,7 +106,7 @@ let DesignTool = class extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.currentProjectName) {
+    if (!this.props.activeProjectName) {
       const projectId = this.props.params.projectId;
       const currentRoute = this.props.location.pathname;
 
@@ -189,7 +189,7 @@ let DesignTool = class extends Component {
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
 
     if (isNewModuleWithinBounds && isDraggingToBoard) {
-      store.dispatch(actions.pushToCurrentProjectModules(newModule));
+      store.dispatch(actions.pushToactiveProjectModules(newModule));
     } else {
       store.dispatch(actions.toggleShouldRenderSideBar(true));
     }
@@ -337,8 +337,8 @@ let DesignTool = class extends Component {
   }
 
   handleNameChange(newName) {
-    const { currentProjectId } = this.props;
-    store.dispatch(actions.updateProjectName(newName, currentProjectId));
+    const { activeProjectId } = this.props;
+    store.dispatch(actions.updateProjectName(newName, activeProjectId));
   }
 
   handleKeyUp(evt) {
@@ -529,12 +529,12 @@ let DesignTool = class extends Component {
   }
 
   renderFooter() {
-    const { currentProjectPrice, timeLastSaved } = this.props;
+    const { activeProjectPrice, timeLastSaved } = this.props;
 
     if (this.state.shouldRenderInfoButton) {
       return (
         <Footer
-          price={currentProjectPrice}
+          price={activeProjectPrice}
           timeLastSaved={timeLastSaved}
         />
       );
@@ -630,14 +630,14 @@ let DesignTool = class extends Component {
   }
 
   renderSideBar() {
-    const { iconVisibityData, currentProjectModules, shouldRenderSideBar } = this.props;
+    const { iconVisibityData, activeProjectModules, shouldRenderSideBar } = this.props;
     const { isDraggingToBoard, disabledIconExceptions } = this.state;
 
     if (shouldRenderSideBar) {
       return (
         <SideBar
           iconVisibityData={iconVisibityData}
-          onBoardModulesLength={currentProjectModules.length}
+          onBoardModulesLength={activeProjectModules.length}
           showAll={this.showAllModuleIcons}
           toggleDraggingToBoard={this.toggleDraggingToBoard}
           updateClientPosition={this.updateClientPosition}
@@ -669,7 +669,7 @@ let DesignTool = class extends Component {
   }
 
   render() {
-    const { currentProjectName, currentProjectId, isSaving } = this.props;
+    const { activeProjectName, activeProjectId, isSaving } = this.props;
     const {
       isDraggingToBoard,
       isNavMenuActive,
@@ -692,7 +692,7 @@ let DesignTool = class extends Component {
           handleMenuClick={this.toggleNavMenu}
           isNavMenuActive={isNavMenuActive}
           isSaving={isSaving}
-          projectName={currentProjectName}
+          projectName={activeProjectName}
           recordSavedChanges={this.recordSavedChanges}
           updateLastSaved={this.updateLastSaved}
           updateThumbnail={this.toggleShouldUpadateThumbnail}
@@ -708,7 +708,7 @@ let DesignTool = class extends Component {
               rotate={this.rotate}
               shouldExportPDF={shouldExportPDF}
               shouldHideContextMenu={shouldHideContextMenu}
-              shouldRenderBoard={Boolean(currentProjectName)}
+              shouldRenderBoard={Boolean(activeProjectName)}
               shouldUpdateThumbnail={shouldUpdateThumbnail}
               toggleShouldExportPDF={this.toggleShouldExportPDF.bind(this)}
               toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail}
@@ -728,23 +728,23 @@ let DesignTool = class extends Component {
 };
 
 const mapStateToProps = (state) => {
-  const currentProjectId = state.currentProjectInfo.id;
+  const activeProjectId = state.activeProjectInfo.id;
   const projects = state.projects.items;
-  const currentProject = projects.find(project => (
-    project._id === currentProjectId
+  const activeProject = projects.find(project => (
+    project._id === activeProjectId
   ));
-  const currentProjectThumbnail = currentProject
-    ? currentProject.boardSpecs.thumbnail
+  const activeProjectThumbnail = activeProject
+    ? activeProject.boardSpecs.thumbnail
     : null;
 
   return {
-    currentProjectId,
-    currentProjectThumbnail,
+    activeProjectId,
+    activeProjectThumbnail,
     anchorPositions: state.anchorPositions,
     boardSpecs: state.boardSpecs,
-    currentProjectModules: state.currentProjectModules.present,
-    currentProjectName: state.currentProjectInfo.name,
-    currentProjectPrice: state.currentProjectInfo.price,
+    activeProjectModules: state.activeProjectModules.present,
+    activeProjectName: state.activeProjectInfo.name,
+    activeProjectPrice: state.activeProjectInfo.price,
     draggingModuleData: state.draggingModule,
     hasUnsavedChanges: state.hasUnsavedChanges,
     iconVisibityData: state.iconVisibity,
@@ -759,7 +759,7 @@ const mapStateToProps = (state) => {
     shouldRenderModal: state.modal.shouldRenderModal,
     shouldRenderSideBar: state.shouldRenderSideBar,
     shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
-    timeLastSaved: state.currentProjectInfo.timeLastSaved,
+    timeLastSaved: state.activeProjectInfo.timeLastSaved,
     todoBools: state.tutorial.todoBools,
     topLeftAnchorX: state.anchorPositions.topLeft.x,
     topLeftAnchorY: state.anchorPositions.topLeft.y,
@@ -774,10 +774,10 @@ export default connect(mapStateToProps)(DesignTool);
 DesignTool.propTypes = {
   anchorPositions: PropTypes.object.isRequired,
   boardSpecs: PropTypes.object.isRequired,
-  currentProjectId: PropTypes.string,
-  currentProjectModules: PropTypes.array.isRequired,
-  currentProjectName: PropTypes.string,
-  currentProjectPrice: PropTypes.string.isRequired,
+  activeProjectId: PropTypes.string,
+  activeProjectModules: PropTypes.array.isRequired,
+  activeProjectName: PropTypes.string,
+  activeProjectPrice: PropTypes.string.isRequired,
   draggingModuleData: PropTypes.object.isRequired,
   hasUnsavedChanges: PropTypes.bool.isRequired,
   iconVisibityData: PropTypes.object.isRequired,

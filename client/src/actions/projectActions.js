@@ -17,9 +17,9 @@ const getOriginAdjustedModules = (modules, originX, originY) => (
 
 const getOriginAdjustedProjectData = ({
   boardSpecs,
-  currentProjectModules: modules,
-  currentProjectName: projectName,
-  currentProjectThumbnail: thumbnail,
+  activeProjectModules: modules,
+  activeProjectName: projectName,
+  activeProjectThumbnail: thumbnail,
   topLeftAnchorX: originX,
   topLeftAnchorY: originY,
 }) => {
@@ -211,7 +211,7 @@ export const updateProjectSuccess = project => ({
 
 export function updateProject(projectData) {
   return (dispatch, getState) => {
-    const { currentProjectId: projectId } = projectData;
+    const { activeProjectId: projectId } = projectData;
     const projectUrl = `${projectsUrl}/${projectId}`;
     const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
 

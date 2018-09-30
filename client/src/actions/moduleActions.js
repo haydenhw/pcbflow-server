@@ -7,7 +7,7 @@ export const pushNewModule = module => ({
   module,
 });
 
-export const pushToCurrentProjectModules = module => (dispatch, getState) => {
+export const pushToactiveProjectModules = module => (dispatch, getState) => {
   const { step, isTutorialActive } = getState().tutorial;
 
   if (isTutorialActive) {
@@ -75,7 +75,7 @@ export const updateSelectedModule = moduleData => ({
 
 export const DELETE_SELECTED_MODULE = 'DELETE_SELECTED_MODULE';
 export const deleteSelectedModule = (moduleIndex) => (dispatch, getState) => {
-  const currentModulesLength = getState().currentProjectModules.present.length;
+  const currentModulesLength = getState().activeProjectModules.present.length;
 
   if (currentModulesLength === 1) {
     dispatch(actions.updateBoardStroke(null));
