@@ -90,7 +90,7 @@ export function fetchProjects(jwt) {
   if (!jwt) {
     console.warn('JWT not provided or undefined');
   }
-  console.log('hello')
+
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
 

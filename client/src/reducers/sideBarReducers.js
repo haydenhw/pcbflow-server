@@ -18,7 +18,7 @@ export const iconVisibity = (state = defaultIconsVibility, action) => {
       return {
         ...state,
         dependencies,
-        index,
+        // index,
         moduleName: text,
       };
     default:
@@ -49,4 +49,3 @@ export const moduleData = (state = modulesData, action) => {
       return state;
   }
 };
-
