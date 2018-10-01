@@ -645,14 +645,16 @@ let DesignTool = class extends Component {
   }
 
   renderSideBar() {
-    const { iconVisibityData, activeProjectModules, shouldRenderSideBar } = this.props;
+    const { iconVisibityData, activeProjectModules, selectedModuleIndex, shouldRenderSideBar } = this.props;
     const { isDraggingToBoard, disabledIconExceptions } = this.state;
 
     if (shouldRenderSideBar) {
       return (
         <SideBar
+          activeProjectModules={activeProjectModules}
           iconVisibityData={iconVisibityData}
           onBoardModulesLength={activeProjectModules.length}
+          selectedModuleIndex={selectedModuleIndex}
           showAll={this.showAllModuleIcons}
           toggleDraggingToBoard={this.toggleDraggingToBoard}
           updateClientPosition={this.updateClientPosition}

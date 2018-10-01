@@ -20,9 +20,9 @@ const style = {
 
 export default class SideBar extends Component {
   renderDependencyMessage = () => {
-    const { showAll, iconVisibityData } = this.props;
+    const { selectedModuleIndex, showAll, iconVisibityData } = this.props;
     const { mode, moduleName, dependencies } = iconVisibityData;
-
+    console.log(selectedModuleIndex);
     if ((mode === 'DEPENDENCY') && (dependencies.length > 0)) {
       return (
         <SideBarDependencyMessage

@@ -18,6 +18,7 @@ export function getUnmetDependencies(moduleList, onBoardModules, selectedModuleD
 export function getDependencyDiff(moduleArray) {
   const filterdArray = moduleArray.map((module, index) => {
     const { id, dependencies, text } = module;
+
     return {
       index,
       id,
@@ -56,6 +57,7 @@ export function findUnmetDependency(dependencyDiffArray) {
 export function getNewDependencyData(modules) {
   const dependencyDiffArray = getDependencyDiff(modules);
   const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
+
   const nullData = {
     dependencies: [],
     index: null,
