@@ -7,8 +7,6 @@ const defaultProjectState = {
   isInitialLoad: true,
   isSaving: null,
   items: [],
-  saveProjectTrigger: false,
-  updateThumbnailTrigger: false,
 };
 
 export const projects = (state = defaultProjectState, action) => {
