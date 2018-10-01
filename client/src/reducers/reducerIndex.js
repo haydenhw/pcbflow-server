@@ -4,7 +4,7 @@ import undoable from 'helpers/undoable';
 import skipIfImageNodeNull from 'helpers/skipIfImageNodeNull';
 
 import { activeProjectModules, moduleBank, draggingModule, selectedModule } from './moduleReducers';
-import { projects, activeProjectInfo } from './projectReducers';
+import { projects } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { hasUnsavedChanges } from './savedStateReducers';
@@ -15,7 +15,6 @@ import { modal } from './modalReducers';
 
 export default combineReducers({
   activeProjectModules: undoable(activeProjectModules, skipIfImageNodeNull),
-  activeProjectInfo,
   anchorPositions,
   boardSpecs,
   draggingModule,
