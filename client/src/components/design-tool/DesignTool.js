@@ -137,6 +137,7 @@ let DesignTool = class extends Component {
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
       // *refactor to not depend on setTimeout
+      console.log('saving')
       setTimeout(() => store.dispatch(actions.updateProject(this.props)), 0);
     }
   }
@@ -696,8 +697,6 @@ let DesignTool = class extends Component {
       shouldHideContextMenu,
     } = this.state;
 
-    // const activeProjectName = maybeGetActiveProjectName(projects)(activeProjectId);
-
     return (
       <div>
         {this.renderJoyride()}
@@ -771,7 +770,7 @@ const mapStateToProps = (state) => {
     isTutorialActive: state.tutorial.isTutorialActive,
     modalType: state.modal.modalType,
     projects: state.projects.items,
-    saveProjectTrigger: state.projects.saveProjectTrigger,
+    saveProjectTrigger: state.triggers.saveProjectTrigger,
     selectedModuleIndex: state.selectedModule.index,
     selectedModuleProps: state.selectedModule,
     shouldRenderModal: state.modal.shouldRenderModal,

@@ -88,21 +88,6 @@ export const projects = (state = defaultProjectState, action) => {
       };
   }
 
-  if (doesModifyProject(action)) {
-    const updatedSaveProjectTrigger = action.type === actions.UPDATE_MODULE_FILL
-      ? state.saveProjectTrigger
-      : !state.saveProjectTrigger;
-
-    console.log(action);
-    console.log(doesModifyProject(action));
-
-    return {
-      ...state,
-      saveProjectTrigger: updatedSaveProjectTrigger,
-      updateThumbnailTrigger: !state.updateThumbnailTrigger,
-    };
-  }
-
   return state;
 };
 
