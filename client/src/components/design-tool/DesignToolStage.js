@@ -215,7 +215,7 @@ const mapStateToProps = state => {
     selectedModuleIndex: state.selectedModule.index,
     selectedModuleProps: state.selectedModule,
     boardSpecs: state.boardSpecs,
-    updateThumbnailTrigger: state.projects.updateThumbnailTrigger,
+    updateThumbnailTrigger: state.triggers.updateThumbnailTrigger,
     anchorPositions: state.anchorPositions,
     modules: state.activeProjectModules.present,
   });
