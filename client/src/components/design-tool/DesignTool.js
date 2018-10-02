@@ -661,6 +661,7 @@ let DesignTool = class extends Component {
           activeProjectModules={activeProjectModules}
           iconVisibityData={iconVisibityData}
           lastClickedModuleIndex={lastClickedModuleIndex}
+          moduleData={moduleData}
           onBoardModulesLength={activeProjectModules.length}
           showAll={this.showAllModuleIcons}
           toggleDraggingToBoard={this.toggleDraggingToBoard}

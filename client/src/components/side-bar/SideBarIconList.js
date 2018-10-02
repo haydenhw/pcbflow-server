@@ -61,7 +61,8 @@ const SideBarIconList = class extends Component {
   }
 
   render() {
-    const visibleIcons = getVisibleIcons(this.props);
+    const visibleIcons = this.props.visibleIcons;
+    console.log(visibleIcons);
     const iconList = visibleIcons.map((module, index) => (
       this.renderSideBarIconFrame(module, index)
     ));

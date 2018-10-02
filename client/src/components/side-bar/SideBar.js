@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Maybe } from 'monet';
 
+import { getUnmetDependencyIds, getUnmetDependencies } from 'helpers/dependencies';
 import { compose } from 'helpers/functional';
 
 import SideBarIconList from './SideBarIconList';
@@ -27,7 +28,6 @@ const getVisibleIcons = (
     onBoardModules,
     hoveredModuleDependencies
   ) => {
-
   switch (iconVisibityMode) {
     case 'ALL':
       return moduleData;
@@ -48,10 +48,19 @@ const getModuleName = (module) => (
       .orSome('default')
 );
 
+const getModuleDependencies= (module) => (
+    module
+      .map(module => module.dependencies)
+      .orSome([])
+);
+
 const getLastClickedModuleName = (modules) => (
   compose(getModuleName, maybeGetLastClickedModule(modules))
 );
 
+const getLastClickedModuleDependencies = (modules) => (
+  compose(getModuleDependencies, maybeGetLastClickedModule(modules))
+);
 
 export default class SideBar extends Component {
   renderDependencyMessage = () => {
@@ -91,7 +100,8 @@ export default class SideBar extends Component {
       updateClientPosition,
     } = this.props;
 
-    // const res = getVisibleIcons(iconVisibityData.mode, moduleData, activeProjectModules)
+    const lastClickedModuleDependencies = getLastClickedModuleDependencies(activeProjectModules)(lastClickedModuleIndex);
+    const visibleIcons = getVisibleIcons(iconVisibityData.mode, moduleData, activeProjectModules, lastClickedModuleDependencies)
 
     return (
       <div className="sideBar" style={style}>
@@ -102,6 +112,7 @@ export default class SideBar extends Component {
               toggleDraggingToBoard={toggleDraggingToBoard}
               toggleIsClicked={toggleIsClicked}
               updateClientPosition={updateClientPosition}
+              visibleIcons={visibleIcons}
             />
           </div>
         <DimensionForm />
