@@ -1,7 +1,7 @@
 // *refactor for readability
 import { compose } from 'helpers/functional';
 
-export function getUnmetDependencyIds(modules = [], hoveredModuleDependencies) {
+export function getUnsatisfiedModuleIds(modules = [], hoveredModuleDependencies) {
   const onBoardIds = modules.map(module => module.id);
   const unmetDependencyIds = hoveredModuleDependencies.filter(id => onBoardIds.indexOf(id) === -1);
 
@@ -9,7 +9,7 @@ export function getUnmetDependencyIds(modules = [], hoveredModuleDependencies) {
 }
 
 export function getUnmetDependencies(moduleList, activeModules, hoveredModuleDependencies) {
-  const unmetDependencyIds = getUnmetDependencyIds(activeModules, hoveredModuleDependencies);
+  const unmetDependencyIds = getUnsatisfiedModuleIds(activeModules, hoveredModuleDependencies);
   const unmetDependencies = (
     moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
   );
@@ -50,17 +50,17 @@ export function areDependenciesMet(dependencies, metDependencies) {
   return dependencies ? (dependencies.length === metDependencies.length) : true;
 }
 
-export function findUnmetDependency(dependencyDiffArray) {
+export function findUnsatisfiedModule(dependencyDiffArray) {
   return dependencyDiffArray.find(element => (
     !areDependenciesMet(element.dependencies, element.metDependencies)
   ));
 }
 
-export const findNextUnmetDepencency = compose(findUnmetDependency, getDependencyDiff);
+export const findNextUnsatisfiedModule = compose(findUnsatisfiedModule, getDependencyDiff);
 
 export function getNewDependencyData(modules) {
   const dependencyDiffArray = getDependencyDiff(modules);
-  const nextParentToDisplay = findUnmetDependency(dependencyDiffArray);
+  const nextParentToDisplay = findUnsatisfiedModule(dependencyDiffArray);
 
   const nullData = {
     dependencies: [],

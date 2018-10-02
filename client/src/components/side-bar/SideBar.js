@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Maybe } from 'monet';
 
-import { findNextUnmetDepencency, getNewDependencyData, getUnmetDependencies, getUnmetDependencyIds } from 'helpers/dependencies';
+import { findNextUnsatisfiedModule, getNewDependencyData, getUnmetDependencies, getUnsatisfiedModuleIds } from 'helpers/dependencies';
 import { compose } from 'helpers/functional';
 
 import SideBarIconList from './SideBarIconList';
@@ -103,16 +103,14 @@ export default class SideBar extends Component {
 
     const getVisibleIcons2 = (clickedModuleIndex, activeModules, moduleData) =>{
       if (!clickedModuleIndex) {
-        const nextUnmetDepencency = findNextUnmetDepencency(activeModules);
-        // console.log(nextUnmetDepencency)
+        const nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
 
-        if (nextUnmetDepencency.metDependencies.length > 0) {
-          return getUnmetDependencies(moduleData, activeModules, nextUnmetDepencency.dependencies);
+        if (nextUnsatisfiedModule.metDependencies.length > 0) {
+          return getUnmetDependencies(moduleData, activeModules, nextUnsatisfiedModule.dependencies);
         }
       }
     }
     const res = getVisibleIcons2(clickedModuleIndex, activeModules, moduleData);
-    console.log(res)
     const clickedModuleDependencies = getClickedModuleDependencies(activeModules)(clickedModuleIndex);
     const dependencyData = getNewDependencyData(activeModules);
     // const visibleIcons = getVisibleIcons(iconVisibityData.mode, moduleData, activeModules, clickedModuleDependencies)

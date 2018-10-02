@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import { getUnmetDependencyIds, getUnmetDependencies } from 'helpers/dependencies';
+import { getUnsatisfiedModuleIds, getUnmetDependencies } from 'helpers/dependencies';
 import isObjectEqual from 'helpers/isObjectEqual'
 
 import SideBarIcon from './SideBarIcon';
