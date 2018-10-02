@@ -210,7 +210,6 @@ export const updateProjectSuccess = project => ({
 });
 
 export function updateProject(projectData) {
-  console.log(projectData)
   return (dispatch, getState) => {
     const { activeProjectId: projectId } = projectData;
     const projectUrl = `${projectsUrl}/${projectId}`;

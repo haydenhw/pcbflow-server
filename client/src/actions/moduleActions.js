@@ -35,6 +35,12 @@ export const changeDraggingModule = moduleData => ({
   moduleData,
 });
 
+export const UPDATE_LAST_CLICKED_MODULE = 'UPDATE_LAST_CLICKED_MODULE';
+export const updateLastClickedModuleIndex = index => ({
+  type: 'UPDATE_LAST_CLICKED_MODULE',
+  index,
+});
+
 export const UPDATE_MODULE_POSITION = 'UPDATE_MODULE_POSITION';
 export const updateModulePosition = modulePosition => ({
   type: 'UPDATE_MODULE_POSITION',
@@ -67,14 +73,14 @@ export const updateMetDependencies = metDependencies => ({
   metDependencies,
 });
 
-export const UPDATE_SELECTED_MODULE = 'UPDATE_SELECTED_MODULE';
-export const updateSelectedModule = moduleData => ({
-  type: 'UPDATE_SELECTED_MODULE',
+export const UPDATE_HOVERED_MODULE = 'UPDATE_HOVERED_MODULE';
+export const updateHoveredModule = moduleData => ({
+  type: 'UPDATE_HOVERED_MODULE',
   moduleData,
 });
 
-export const DELETE_SELECTED_MODULE = 'DELETE_SELECTED_MODULE';
-export const deleteSelectedModule = (moduleIndex) => (dispatch, getState) => {
+export const DELETE_HOVERED_MODULE = 'DELETE_HOVERED_MODULE';
+export const deleteHoveredModule = (moduleIndex) => (dispatch, getState) => {
   const currentModulesLength = getState().activeProjectModules.present.length;
 
   if (currentModulesLength === 1) {
@@ -82,14 +88,14 @@ export const deleteSelectedModule = (moduleIndex) => (dispatch, getState) => {
   }
 
   dispatch({
-    type: 'DELETE_SELECTED_MODULE',
+    type: 'DELETE_HOVERED_MODULE',
     moduleIndex,
   });
 }
 
-export const ROTATE_SELECTED_MODULE = 'ROTATE_SELECTED_MODULE';
-export const rotateSelectedModule = rotationData => ({
-  type: 'ROTATE_SELECTED_MODULE',
+export const ROTATE_HOVERED_MODULE = 'ROTATE_HOVERED_MODULE';
+export const rotateHoveredModule = rotationData => ({
+  type: 'ROTATE_HOVERED_MODULE',
   rotationData,
 });
 

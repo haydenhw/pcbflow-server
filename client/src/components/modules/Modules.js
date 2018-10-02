@@ -74,10 +74,6 @@ class Modules extends Component {
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });
     }
-
-    if ((prevProps.modules.length < this.props.modules.length)) {
-
-    }
   }
 
   componentDidMount() {
@@ -126,7 +122,7 @@ class Modules extends Component {
         metDependencies={module.metDependencies}
         checkCollisionTrigger={this.props.checkCollisionTrigger}
         topLeftAnchor={this.props.topLeftAnchor}
-        selectedModuleProps={this.props.selectedModuleProps}
+        hoveredModuleProps={this.props.hoveredModuleProps}
         anchorPositions={this.props.anchorPositions}
         boardSpecs={this.props.boardSpecs}
         isDraggingToBoard={this.props.isDraggingToBoard}
@@ -152,7 +148,7 @@ const mapStateToProps = state => ({
   currentDependencyData: state.iconVisibity,
   iconVisibityMode: state.iconVisibity.mode,
   modules: state.activeProjectModules.present,
-  selectedModuleProps: state.selectedModule,
+  hoveredModuleProps: state.hoveredModule,
   topLeftAnchor: state.anchorPositions.topLeft,
   tutorialStep: state.tutorial.step,
 });

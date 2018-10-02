@@ -112,8 +112,8 @@ class DesignToolStage extends Component {
   }
 
   deleteModule() {
-    const { selectedModuleIndex } = this.props;
-    store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
+    const { hoveredModuleIndex } = this.props;
+    store.dispatch(actions.deleteHoveredModule(hoveredModuleIndex));
   }
 
   renderDragModule() {
@@ -212,8 +212,8 @@ const mapStateToProps = state => {
     isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
-    selectedModuleIndex: state.selectedModule.index,
-    selectedModuleProps: state.selectedModule,
+    hoveredModuleIndex: state.hoveredModule.index,
+    hoveredModuleProps: state.hoveredModule,
     boardSpecs: state.boardSpecs,
     updateThumbnailTrigger: state.triggers.updateThumbnailTrigger,
     anchorPositions: state.anchorPositions,
@@ -237,7 +237,7 @@ DesignToolStage.propTypes = {
   shouldHideContextMenu: PropTypes.bool.isRequired,
   isDraggingToBoard: PropTypes.bool.isRequired,
   anchorPositions: PropTypes.object.isRequired,
-  selectedModuleIndex: PropTypes.number,
-  selectedModuleProps: PropTypes.object.isRequired,
+  hoveredModuleIndex: PropTypes.number,
+  hoveredModuleProps: PropTypes.object.isRequired,
   boardSpecs: PropTypes.object.isRequired,
 };

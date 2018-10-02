@@ -1,13 +1,13 @@
 // *refactor for readability
-export function getUnmetDependencyIds(modules = [], selectedModuleDependencies) {
+export function getUnmetDependencyIds(modules = [], hoveredModuleDependencies) {
   const onBoardIds = modules.map(module => module.id);
-  const unmetDependencyIds = selectedModuleDependencies.filter(id => onBoardIds.indexOf(id) === -1);
+  const unmetDependencyIds = hoveredModuleDependencies.filter(id => onBoardIds.indexOf(id) === -1);
 
   return unmetDependencyIds;
 }
 
-export function getUnmetDependencies(moduleList, onBoardModules, selectedModuleDependencies) {
-  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, selectedModuleDependencies);
+export function getUnmetDependencies(moduleList, onBoardModules, hoveredModuleDependencies) {
+  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, hoveredModuleDependencies);
   const unmetDependencies = (
     moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
   );

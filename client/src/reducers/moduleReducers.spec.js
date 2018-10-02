@@ -5,7 +5,7 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { selectedModule, draggingModule, activeProjectModules } from './moduleReducers';
+import { hoveredModule, draggingModule, activeProjectModules } from './moduleReducers';
 
 describe('draggingModule reducer', () => {
   it('It should return update draggingModule data', () => {
@@ -80,7 +80,7 @@ describe('draggingModule reducer', () => {
   });
 });
 describe('draggingModule reducer', () => {
-  it('It should update selectedModule data', () => {
+  it('It should update hoveredModule data', () => {
     const initialState = {
       x: 10,
       y: 10,
@@ -99,8 +99,8 @@ describe('draggingModule reducer', () => {
       rotation: 90,
     };
 
-    const resultState = selectedModule(deepFreeze(initialState), {
-      type: 'UPDATE_SELECTED_MODULE',
+    const resultState = hoveredModule(deepFreeze(initialState), {
+      type: 'UPDATE_HOVERED_MODULE',
       moduleData: {
         x: 5,
         y: 5,
@@ -114,7 +114,7 @@ describe('draggingModule reducer', () => {
     assert.deepEqual(resultState, expectedState);
   });
 
-  it('It should update selectedModule position', () => {
+  it('It should update hoveredModule position', () => {
     const initialState = {
       x: 10,
       y: 10,
@@ -133,7 +133,7 @@ describe('draggingModule reducer', () => {
       rotation: 0,
     };
 
-    const resultState = selectedModule(deepFreeze(initialState), {
+    const resultState = hoveredModule(deepFreeze(initialState), {
       type: 'UPDATE_MODULE_POSITION',
       modulePosition: {
         x: 5,
@@ -335,7 +335,7 @@ describe('activeProjectModules reducer', () => {
     ];
 
     const resultState = activeProjectModules(deepFreeze(initialState), {
-      type: 'ROTATE_SELECTED_MODULE',
+      type: 'ROTATE_HOVERED_MODULE',
       rotationData: {
         index: 0,
         x: 10,
@@ -387,7 +387,7 @@ describe('activeProjectModules reducer', () => {
     ];
 
     const resultState = activeProjectModules(deepFreeze(initialState), {
-      type: 'DELETE_SELECTED_MODULE',
+      type: 'DELETE_HOVERED_MODULE',
       moduleIndex: 1,
     });
 

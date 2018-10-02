@@ -1,16 +1,15 @@
 import * as actions from '../actions/indexActions';
 import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
-export const moduleList = (state = [], action) => {
-  if (action.type === actions.FETCH_MODULES_SUCCESS) {
-    return {
-      modules: action.modules,
-    };
-  }
-
-  return state;
-};
-
+// export const moduleList = (state = [], action) => {
+//   if (action.type === actions.FETCH_MODULES_SUCCESS) {
+//     return {
+//       modules: action.modules,
+//     };
+//   }
+//
+//   return state;
+// };
 export const draggingModule = (state = {}, action) => {
   switch (action.type) {
     case actions.CHANGE_DRAGGING_MODULE:
@@ -28,9 +27,9 @@ export const draggingModule = (state = {}, action) => {
   }
 };
 
-export const selectedModule = (state = {}, action) => {
+export const hoveredModule = (state = {}, action) => {
   switch (action.type) {
-    case actions.UPDATE_SELECTED_MODULE:
+    case actions.UPDATE_HOVERED_MODULE:
       return action.moduleData;
       break;
     case actions.UPDATE_MODULE_POSITION:
@@ -41,7 +40,7 @@ export const selectedModule = (state = {}, action) => {
         y,
       };
       break;
-    case actions.ROTATE_SELECTED_MODULE:
+    case actions.ROTATE_HOVERED_MODULE:
       const {
         rotation,
         boundToSideIndex,
@@ -63,6 +62,15 @@ export const selectedModule = (state = {}, action) => {
         x: parentGroupX,
         y: parentGroupY,
       };
+    default:
+      return state;
+  }
+};
+
+export const lastClickedModuleIndex = (state = null, action) => {
+  switch (action.type) {
+    case actions.UPDATE_LAST_CLICKED_MODULE:
+      return action.index;
     default:
       return state;
   }
@@ -126,7 +134,7 @@ export const activeProjectModules = (state = [], action) => {
         });
         break;
 
-      case actions.ROTATE_SELECTED_MODULE:
+      case actions.ROTATE_HOVERED_MODULE:
         const {
           rotation,
           boundToSideIndex,
@@ -153,7 +161,7 @@ export const activeProjectModules = (state = [], action) => {
           return i === index ? updatedModuleProps : module;
         });
 
-      case actions.DELETE_SELECTED_MODULE:
+      case actions.DELETE_HOVERED_MODULE:
         const newState = [
           ...state.slice(0, action.moduleIndex),
           ...state.slice(action.moduleIndex + 1),

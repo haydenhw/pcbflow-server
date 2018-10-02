@@ -1,6 +1,9 @@
 // fix shouldComponentUpdate function
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Maybe } from 'monet';
+
+import { compose } from 'helpers/functional';
 
 import SideBarIconList from './SideBarIconList';
 import DimensionForm from './SideBarDimensionInput';
@@ -18,11 +21,52 @@ const style = {
   verticalAlign: 'top',
 };
 
+const getVisibleIcons = (
+    iconVisibityMode,
+    moduleData,
+    onBoardModules,
+    hoveredModuleDependencies
+  ) => {
+
+  switch (iconVisibityMode) {
+    case 'ALL':
+      return moduleData;
+    case 'DEPENDENCY':
+      return getUnmetDependencies(moduleData, onBoardModules, hoveredModuleDependencies);
+    default:
+      return moduleList;
+  }
+};
+
+const maybeGetLastClickedModule = (activeProjectModules) => (lastClickedModuleIndex) => (
+  Maybe.fromNull(activeProjectModules[lastClickedModuleIndex])
+);
+
+const getModuleName = (module) => (
+    module
+      .map(module => module.text)
+      .orSome('default')
+);
+
+const getLastClickedModuleName = (modules) => (
+  compose(getModuleName, maybeGetLastClickedModule(modules))
+);
+
+
 export default class SideBar extends Component {
   renderDependencyMessage = () => {
-    const { selectedModuleIndex, showAll, iconVisibityData } = this.props;
-    const { mode, moduleName, dependencies } = iconVisibityData;
-    console.log(selectedModuleIndex);
+   const
+   {
+     activeProjectModules,
+     iconVisibityData,
+     lastClickedModuleIndex,
+     moduleData,
+     showAll,
+   } = this.props;
+
+    const { mode, dependencies } = iconVisibityData;
+    const moduleName = getLastClickedModuleName(activeProjectModules)(lastClickedModuleIndex);
+
     if ((mode === 'DEPENDENCY') && (dependencies.length > 0)) {
       return (
         <SideBarDependencyMessage
@@ -31,16 +75,23 @@ export default class SideBar extends Component {
         />
       );
     }
+
     return null;
   };
 
   render() {
     const {
+      iconVisibityData,
+      moduleData,
+      activeProjectModules,
+      lastClickedModuleIndex,
       onBoardModulesLength,
       toggleDraggingToBoard,
       toggleIsClicked,
       updateClientPosition,
     } = this.props;
+
+    // const res = getVisibleIcons(iconVisibityData.mode, moduleData, activeProjectModules)
 
     return (
       <div className="sideBar" style={style}>

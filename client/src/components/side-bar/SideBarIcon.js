@@ -43,7 +43,7 @@ export default class SideBarIcon extends Component {
     return (
       <div
         className="module-icon"
-        ref={(module) => { this.selectedModule = module; }}
+        ref={(module) => { this.hoveredModule = module; }}
         onMouseDown={disabled ? null : this.handleMouseDown}
         onMouseOut={disabled ? null : this.handleMouseOut}
         role="button"

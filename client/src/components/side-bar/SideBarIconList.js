@@ -13,13 +13,13 @@ import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
 
 const getVisibleIcons = (props) => {
-  const { iconVisibityMode, moduleData, onBoardModules, selectedModuleDependencies } = props;
+  const { iconVisibityMode, moduleData, onBoardModules, lastClickedModuleDependencies } = props;
 
   switch (iconVisibityMode) {
     case 'ALL':
       return moduleData;
     case 'DEPENDENCY':
-      return getUnmetDependencies(moduleData, onBoardModules, selectedModuleDependencies);
+      return getUnmetDependencies(moduleData, onBoardModules, lastClickedModuleDependencies);
     default:
       return moduleList;
   }
@@ -79,7 +79,7 @@ const mapStateToProps = state => ({
   iconVisibityMode: state.iconVisibity.mode,
   moduleData: state.moduleData,
   onBoardModules: state.activeProjectModules.present,
-  selectedModuleDependencies: state.iconVisibity.dependencies,
+  lastClickedModuleDependencies: state.iconVisibity.dependencies,
 });
 
 export default connect(mapStateToProps)(SideBarIconList);
@@ -89,7 +89,7 @@ SideBarIconList.propTypes = {
   iconVisibityMode: PropTypes.string.isRequired,
   moduleData: PropTypes.array.isRequired,
   onBoardModules: PropTypes.array.isRequired,
-  selectedModuleDependencies: PropTypes.array.isRequired,
+  lastClickedModuleDependencies: PropTypes.array.isRequired,
   toggleDraggingToBoard: PropTypes.func.isRequired,
   toggleIsClicked: PropTypes.func,
   updateClientPosition: PropTypes.func.isRequired,

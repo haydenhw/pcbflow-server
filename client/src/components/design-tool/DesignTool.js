@@ -359,10 +359,10 @@ let DesignTool = class extends Component {
 
   handleKeyUp(evt) {
     const evtobj = window.event ? event : evt;
-    const { isMouseOverModule, selectedModuleIndex } = this.props;
+    const { isMouseOverModule, hoveredModuleIndex } = this.props;
 
     if (isMouseOverModule && (evtobj.code === 'Delete')) {
-      store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
+      store.dispatch(actions.deleteHoveredModule(hoveredModuleIndex));
     }
   }
 
@@ -491,9 +491,9 @@ let DesignTool = class extends Component {
   }
 
   rotate() {
-    const { selectedModuleProps, anchorPositions, boardSpecs } = this.props;
-    const rotationData = rotate(selectedModuleProps, anchorPositions, boardSpecs);
-    store.dispatch(actions.rotateSelectedModule(rotationData));
+    const { hoveredModuleProps, anchorPositions, boardSpecs } = this.props;
+    const rotationData = rotate(hoveredModuleProps, anchorPositions, boardSpecs);
+    store.dispatch(actions.rotateHoveredModule(rotationData));
   }
 
   startTour() {
@@ -645,7 +645,14 @@ let DesignTool = class extends Component {
   }
 
   renderSideBar() {
-    const { iconVisibityData, activeProjectModules, selectedModuleIndex, shouldRenderSideBar } = this.props;
+   const {
+     activeProjectModules,
+     iconVisibityData,
+     lastClickedModuleIndex,
+     moduleData,
+     shouldRenderSideBar
+   } = this.props;
+
     const { isDraggingToBoard, disabledIconExceptions } = this.state;
 
     if (shouldRenderSideBar) {
@@ -653,8 +660,8 @@ let DesignTool = class extends Component {
         <SideBar
           activeProjectModules={activeProjectModules}
           iconVisibityData={iconVisibityData}
+          lastClickedModuleIndex={lastClickedModuleIndex}
           onBoardModulesLength={activeProjectModules.length}
-          selectedModuleIndex={selectedModuleIndex}
           showAll={this.showAllModuleIcons}
           toggleDraggingToBoard={this.toggleDraggingToBoard}
           updateClientPosition={this.updateClientPosition}
@@ -769,11 +776,13 @@ const mapStateToProps = (state) => {
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isSaving: state.projects.isSaving,
     isTutorialActive: state.tutorial.isTutorialActive,
+    lastClickedModuleIndex: state.lastClickedModuleIndex,
     modalType: state.modal.modalType,
+    moduleData: state.moduleData,
     projects: state.projects.items,
     saveProjectTrigger: state.triggers.saveProjectTrigger,
-    selectedModuleIndex: state.selectedModule.index,
-    selectedModuleProps: state.selectedModule,
+    hoveredModuleIndex: state.hoveredModule.index,
+    hoveredModuleProps: state.hoveredModule,
     shouldRenderModal: state.modal.shouldRenderModal,
     shouldRenderSideBar: state.shouldRenderSideBar,
     shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
@@ -804,8 +813,8 @@ DesignTool.propTypes = {
   params: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
-  selectedModuleIndex: PropTypes.number,
-  selectedModuleProps: PropTypes.object.isRequired,
+  hoveredModuleIndex: PropTypes.number,
+  hoveredModuleProps: PropTypes.object.isRequired,
   shouldRenderModal: PropTypes.bool.isRequired,
   shouldRenderSideBar: PropTypes.bool.isRequired,
   shouldRenderTodoList: PropTypes.bool.isRequired,

@@ -4,7 +4,7 @@ import store from 'reduxFiles/store';
 import rotateAboutCenter from 'helpers/rotateAboutCenter';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 
-export default function rotate(selectedModuleProps, anchorPositions, boardSpecs) {
+export default function rotate(hoveredModuleProps, anchorPositions, boardSpecs) {
   const {
     x,
     y,
@@ -15,12 +15,12 @@ export default function rotate(selectedModuleProps, anchorPositions, boardSpecs)
     width,
     height,
     boundToSideIndex,
-  } = selectedModuleProps;
+  } = hoveredModuleProps;
   const { topLeft } = anchorPositions;
   let newParentGroupCoordinates;
   let newInnerGroupCoordinates;
 
-  newParentGroupCoordinates = bindToPerimeter(selectedModuleProps, topLeft, boardSpecs);
+  newParentGroupCoordinates = bindToPerimeter(hoveredModuleProps, topLeft, boardSpecs);
   newInnerGroupCoordinates = (
     rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
   );

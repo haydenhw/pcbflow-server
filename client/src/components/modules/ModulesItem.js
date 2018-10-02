@@ -88,6 +88,7 @@ export default class ModulesItem extends PureComponent {
 
   showDependencies() {
     const { dependencies, metDependencies, text, index } = this.props;
+    store.dispatch(actions.updateLastClickedModuleIndex(index));
 
     if (!areDependenciesMet(dependencies, metDependencies)) {
       const dependencyData = {
@@ -163,8 +164,8 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleDragMove() {
-    const { selectedModuleProps, anchorPositions, boardSpecs, x, y } = this.props;
-    const { boundToSideIndex } = selectedModuleProps;
+    const { hoveredModuleProps, anchorPositions, boardSpecs, x, y } = this.props;
+    const { boundToSideIndex } = hoveredModuleProps;
     const { moduleGroup } = this.refs;
 
     if (isNaN(boundToSideIndex)) {
@@ -172,7 +173,7 @@ export default class ModulesItem extends PureComponent {
     }
 
     const topLeftAnchor = getTopLeftAnchor(moduleGroup);
-    const newModuleProps = Object.assign({}, selectedModuleProps, {
+    const newModuleProps = Object.assign({}, hoveredModuleProps, {
       x: moduleGroup.getX(),
       y: moduleGroup.getY(),
     });
@@ -200,7 +201,7 @@ export default class ModulesItem extends PureComponent {
     });
     document.body.style.cursor = 'move';
 
-    store.dispatch(actions.updateSelectedModule(this.props));
+    store.dispatch(actions.updateHoveredModule(this.props));
     store.dispatch(actions.toggleIsMouseOverModule(true));
   }
 
@@ -239,7 +240,7 @@ export default class ModulesItem extends PureComponent {
   }
 
   render() {
-    const { anchorPositions, boardSpecs, isDraggingToBoard, selectedModuleProps } = this.props;
+    const { anchorPositions, boardSpecs, isDraggingToBoard, hoveredModuleProps } = this.props;
     const { moduleGroup } = this.refs;
     const defaultStroke = moduleGroup ? moduleGroup.attrs.defaultStroke: null;
     const isStrokeRed = moduleGroup ? moduleGroup.attrs.isStrokeRed : null;
