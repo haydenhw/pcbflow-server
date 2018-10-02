@@ -1,4 +1,6 @@
 // *refactor for readability
+import { compose } from 'helpers/functional';
+
 export function getUnmetDependencyIds(modules = [], hoveredModuleDependencies) {
   const onBoardIds = modules.map(module => module.id);
   const unmetDependencyIds = hoveredModuleDependencies.filter(id => onBoardIds.indexOf(id) === -1);
@@ -53,6 +55,8 @@ export function findUnmetDependency(dependencyDiffArray) {
     !areDependenciesMet(element.dependencies, element.metDependencies)
   ));
 }
+
+export const findNextUnmetDepencency = compose(findUnmetDependency, getDependencyDiff);
 
 export function getNewDependencyData(modules) {
   const dependencyDiffArray = getDependencyDiff(modules);
