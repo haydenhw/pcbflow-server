@@ -1,15 +1,15 @@
 // *refactor for readability
 import { compose } from 'helpers/functional';
 
-export function getUnsatisfiedModuleIds(modules = [], hoveredModuleDependencies) {
-  const onBoardIds = modules.map(module => module.id);
-  const unmetDependencyIds = hoveredModuleDependencies.filter(id => onBoardIds.indexOf(id) === -1);
+export function getUnsatisfiedModuleIds(modules = [], moduleDependencies) {
+  const activeModuleIds = modules.map(module => module.id);
+  const unmetDependencyIds = moduleDependencies.filter(id => activeModuleIds.indexOf(id) === -1);
 
   return unmetDependencyIds;
 }
 
-export function getUnmetDependencies(moduleList, activeModules, hoveredModuleDependencies) {
-  const unmetDependencyIds = getUnsatisfiedModuleIds(activeModules, hoveredModuleDependencies);
+export function getUnmetDependencies(moduleList, activeModules, moduleDependencies) {
+  const unmetDependencyIds = getUnsatisfiedModuleIds(activeModules, moduleDependencies);
   const unmetDependencies = (
     moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
   );

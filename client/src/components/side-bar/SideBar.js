@@ -101,15 +101,31 @@ export default class SideBar extends Component {
       updateClientPosition,
     } = this.props;
 
-    const getVisibleIcons2 = (clickedModuleIndex, activeModules, moduleData) =>{
-      if (!clickedModuleIndex) {
-        const nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
+    const getVisibleIcons2 = (clickedModuleIndex, activeModules, moduleData) => {
+      let nextUnsatisfiedModule;
+      const clickedModule = maybeClickedModule(activeModules)(clickedModuleIndex).val;
 
-        if (nextUnsatisfiedModule.metDependencies.length > 0) {
-          return getUnmetDependencies(moduleData, activeModules, nextUnsatisfiedModule.dependencies);
-        }
+      if (!clickedModule){
+        nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
       }
+
+      if (clickedModule) {
+        const clickedModuleUnmetDependencies = getUnmetDependencies(moduleData, activeModules, clickedModule.dependencies);
+
+        if (clickedModuleUnmetDependencies.length > 0) {
+          return clickedModuleUnmetDependencies;
+        }
+
+        nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
+      }
+
+      if (nextUnsatisfiedModule) {
+        return getUnmetDependencies(moduleData, activeModules, nextUnsatisfiedModule.dependencies)
+      }
+
+      return moduleData;
     }
+
     const res = getVisibleIcons2(clickedModuleIndex, activeModules, moduleData);
     const clickedModuleDependencies = getClickedModuleDependencies(activeModules)(clickedModuleIndex);
     const dependencyData = getNewDependencyData(activeModules);
@@ -124,7 +140,7 @@ export default class SideBar extends Component {
               toggleDraggingToBoard={toggleDraggingToBoard}
               toggleIsClicked={toggleIsClicked}
               updateClientPosition={updateClientPosition}
-              visibleIcons={[]}
+              visibleIcons={res}
             />
           </div>
         <DimensionForm />
