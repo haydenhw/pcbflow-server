@@ -17,7 +17,7 @@ const getOriginAdjustedModules = (modules, originX, originY) => (
 
 const getOriginAdjustedProjectData = ({
   boardSpecs,
-  activeProjectModules: modules,
+  activeModules: modules,
   activeProjectName: projectName,
   activeProjectThumbnail: thumbnail,
   topLeftAnchorX: originX,

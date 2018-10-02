@@ -25,22 +25,22 @@ const style = {
 const getVisibleIcons = (
     iconVisibityMode,
     moduleData,
-    onBoardModules,
+    activeModules,
     hoveredModuleDependencies
   ) => {
     switch (iconVisibityMode) {
       case 'ALL':
         return moduleData;
       case 'DEPENDENCY':
-      const unmentDependencies = getUnmetDependencies(moduleData, onBoardModules, hoveredModuleDependencies);
+      const unmentDependencies = getUnmetDependencies(moduleData, activeModules, hoveredModuleDependencies);
         return unmentDependencies;
       default:
         return moduleList;
     }
 };
 
-const maybeGetLastClickedModule = (activeProjectModules) => (lastClickedModuleIndex) => (
-  Maybe.fromNull(activeProjectModules[lastClickedModuleIndex])
+const maybeClickedModule = (activeModules) => (clickedModuleIndex) => (
+  Maybe.fromNull(activeModules[clickedModuleIndex])
 );
 
 const getModuleName = (module) => (
@@ -55,27 +55,27 @@ const getModuleDependencies= (module) => (
       .orSome([])
 );
 
-const getLastClickedModuleName = (modules) => (
-  compose(getModuleName, maybeGetLastClickedModule(modules))
+const getClickedModuleName = (modules) => (
+  compose(getModuleName, maybeClickedModule(modules))
 );
 
-const getLastClickedModuleDependencies = (modules) => (
-  compose(getModuleDependencies, maybeGetLastClickedModule(modules))
+const getClickedModuleDependencies = (modules) => (
+  compose(getModuleDependencies, maybeClickedModule(modules))
 );
 
 export default class SideBar extends Component {
   renderDependencyMessage = (visibleIcons) => {
    const
    {
-     activeProjectModules,
+     activeModules,
      iconVisibityData,
-     lastClickedModuleIndex,
+     clickedModuleIndex,
      moduleData,
      showAll,
    } = this.props;
 
     const { mode, dependencies } = iconVisibityData;
-    const moduleName = getLastClickedModuleName(activeProjectModules)(lastClickedModuleIndex);
+    const moduleName = getClickedModuleName(activeModules)(clickedModuleIndex);
 
     if ((mode === 'DEPENDENCY') && (visibleIcons.length > 0)) {
       return (
@@ -91,38 +91,38 @@ export default class SideBar extends Component {
 
   render() {
     const {
-      activeProjectModules,
+      activeModules,
       iconVisibityData,
-      lastClickedModuleIndex,
+      clickedModuleIndex,
       moduleData,
-      onBoardModulesLength,
+      activeModulesLength,
       toggleDraggingToBoard,
       toggleIsClicked,
       updateClientPosition,
     } = this.props;
 
-    const getVisibleIcons2 = (lastClickedModuleIndex, activeProjectModules, moduleData) =>{
-      if (!lastClickedModuleIndex) {
-        const nextUnmetDepencency = findNextUnmetDepencency(activeProjectModules);
+    const getVisibleIcons2 = (clickedModuleIndex, activeModules, moduleData) =>{
+      if (!clickedModuleIndex) {
+        const nextUnmetDepencency = findNextUnmetDepencency(activeModules);
         // console.log(nextUnmetDepencency)
 
         if (nextUnmetDepencency.metDependencies.length > 0) {
-          return getUnmetDependencies(moduleData, activeProjectModules, nextUnmetDepencency.dependencies);
+          return getUnmetDependencies(moduleData, activeModules, nextUnmetDepencency.dependencies);
         }
       }
     }
-    const res = getVisibleIcons2(lastClickedModuleIndex, activeProjectModules, moduleData);
+    const res = getVisibleIcons2(clickedModuleIndex, activeModules, moduleData);
     console.log(res)
-    const lastClickedModuleDependencies = getLastClickedModuleDependencies(activeProjectModules)(lastClickedModuleIndex);
-    const dependencyData = getNewDependencyData(activeProjectModules);
-    // const visibleIcons = getVisibleIcons(iconVisibityData.mode, moduleData, activeProjectModules, lastClickedModuleDependencies)
+    const clickedModuleDependencies = getClickedModuleDependencies(activeModules)(clickedModuleIndex);
+    const dependencyData = getNewDependencyData(activeModules);
+    // const visibleIcons = getVisibleIcons(iconVisibityData.mode, moduleData, activeModules, clickedModuleDependencies)
 
     return (
       <div className="sideBar" style={style}>
           {this.renderDependencyMessage([])}
           <div className="module-container">
             <SideBarIconList
-              onBoardModulesLength={onBoardModulesLength}
+              activeModulesLength={activeModulesLength}
               toggleDraggingToBoard={toggleDraggingToBoard}
               toggleIsClicked={toggleIsClicked}
               updateClientPosition={updateClientPosition}
@@ -138,7 +138,7 @@ export default class SideBar extends Component {
 SideBar.propTypes = {
   disabledIconExceptions: PropTypes.func,
   iconVisibityData: PropTypes.object.isRequired,
-  onBoardModulesLength: PropTypes.number,
+  activeModulesLength: PropTypes.number,
   showAll: PropTypes.func.isRequired,
   toggleDraggingToBoard: PropTypes.func.isRequired,
   toggleIsClicked: PropTypes.func,

@@ -205,7 +205,7 @@ let DesignTool = class extends Component {
     const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
 
     if (isNewModuleWithinBounds && isDraggingToBoard) {
-      store.dispatch(actions.pushToactiveProjectModules(newModule));
+      store.dispatch(actions.pushToactiveModules(newModule));
     } else {
       store.dispatch(actions.toggleShouldRenderSideBar(true));
     }
@@ -545,12 +545,12 @@ let DesignTool = class extends Component {
   }
 
   renderFooter() {
-    const { activeProjectModules } = this.props;
+    const { activeModules } = this.props;
 
     if (this.state.shouldRenderInfoButton) {
       return (
         <Footer
-          modules={activeProjectModules}
+          modules={activeModules}
         />
       );
     }
@@ -646,9 +646,9 @@ let DesignTool = class extends Component {
 
   renderSideBar() {
    const {
-     activeProjectModules,
+     activeModules,
      iconVisibityData,
-     lastClickedModuleIndex,
+     clickedModuleIndex,
      moduleData,
      shouldRenderSideBar
    } = this.props;
@@ -658,11 +658,11 @@ let DesignTool = class extends Component {
     if (shouldRenderSideBar) {
       return (
         <SideBar
-          activeProjectModules={activeProjectModules}
+          activeModules={activeModules}
           iconVisibityData={iconVisibityData}
-          lastClickedModuleIndex={lastClickedModuleIndex}
+          clickedModuleIndex={clickedModuleIndex}
           moduleData={moduleData}
-          onBoardModulesLength={activeProjectModules.length}
+          activeModulesLength={activeModules.length}
           showAll={this.showAllModuleIcons}
           toggleDraggingToBoard={this.toggleDraggingToBoard}
           updateClientPosition={this.updateClientPosition}
@@ -770,14 +770,14 @@ const mapStateToProps = (state) => {
     anchorPositions: state.anchorPositions,
     boardSpecs: state.boardSpecs,
     activeProjectId: state.projects.activeProjectId,
-    activeProjectModules: state.activeProjectModules.present,
+    activeModules: state.activeModules.present,
     draggingModuleData: state.draggingModule,
     hasUnsavedChanges: state.hasUnsavedChanges,
     iconVisibityData: state.iconVisibity,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isSaving: state.projects.isSaving,
     isTutorialActive: state.tutorial.isTutorialActive,
-    lastClickedModuleIndex: state.lastClickedModuleIndex,
+    clickedModuleIndex: state.clickedModuleIndex,
     modalType: state.modal.modalType,
     moduleData: state.moduleData,
     projects: state.projects.items,
@@ -802,7 +802,7 @@ DesignTool.propTypes = {
   anchorPositions: PropTypes.object.isRequired,
   boardSpecs: PropTypes.object.isRequired,
   activeProjectId: PropTypes.string,
-  activeProjectModules: PropTypes.array.isRequired,
+  activeModules: PropTypes.array.isRequired,
   draggingModuleData: PropTypes.object.isRequired,
   hasUnsavedChanges: PropTypes.bool.isRequired,
   iconVisibityData: PropTypes.object.isRequired,

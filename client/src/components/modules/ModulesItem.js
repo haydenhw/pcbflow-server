@@ -88,7 +88,7 @@ export default class ModulesItem extends PureComponent {
 
   showDependencies() {
     const { dependencies, metDependencies, text, index } = this.props;
-    store.dispatch(actions.updateLastClickedModuleIndex(index));
+    store.dispatch(actions.updateClickedModuleIndex(index));
 
     if (!areDependenciesMet(dependencies, metDependencies)) {
       const dependencyData = {

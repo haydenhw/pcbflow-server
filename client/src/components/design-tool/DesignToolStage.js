@@ -217,7 +217,7 @@ const mapStateToProps = state => {
     boardSpecs: state.boardSpecs,
     updateThumbnailTrigger: state.triggers.updateThumbnailTrigger,
     anchorPositions: state.anchorPositions,
-    modules: state.activeProjectModules.present,
+    modules: state.activeModules.present,
   });
 };
 

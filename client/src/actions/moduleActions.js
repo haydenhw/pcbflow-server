@@ -7,7 +7,7 @@ export const pushNewModule = module => ({
   module,
 });
 
-export const pushToactiveProjectModules = module => (dispatch, getState) => {
+export const pushToactiveModules = module => (dispatch, getState) => {
   const { step, isTutorialActive } = getState().tutorial;
 
   if (isTutorialActive) {
@@ -36,7 +36,7 @@ export const changeDraggingModule = moduleData => ({
 });
 
 export const UPDATE_LAST_CLICKED_MODULE = 'UPDATE_LAST_CLICKED_MODULE';
-export const updateLastClickedModuleIndex = index => ({
+export const updateClickedModuleIndex = index => ({
   type: 'UPDATE_LAST_CLICKED_MODULE',
   index,
 });
@@ -81,7 +81,7 @@ export const updateHoveredModule = moduleData => ({
 
 export const DELETE_HOVERED_MODULE = 'DELETE_HOVERED_MODULE';
 export const deleteHoveredModule = (moduleIndex) => (dispatch, getState) => {
-  const currentModulesLength = getState().activeProjectModules.present.length;
+  const currentModulesLength = getState().activeModules.present.length;
 
   if (currentModulesLength === 1) {
     dispatch(actions.updateBoardStroke(null));

@@ -67,7 +67,7 @@ export const hoveredModule = (state = {}, action) => {
   }
 };
 
-export const lastClickedModuleIndex = (state = null, action) => {
+export const clickedModuleIndex = (state = null, action) => {
   switch (action.type) {
     case actions.UPDATE_LAST_CLICKED_MODULE:
       return action.index;
@@ -76,7 +76,7 @@ export const lastClickedModuleIndex = (state = null, action) => {
   }
 };
 
-export const activeProjectModules = (state = [], action) => {
+export const activeModules = (state = [], action) => {
   if (action.type) {
     switch (action.type) {
       case actions.POST_PROJECT_SUCCESS:

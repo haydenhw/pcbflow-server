@@ -74,7 +74,7 @@
 //   height: state.boardSpecs.height,
 //   hasUnsavedChanges: state.hasUnsavedChanges,
 //   id: state.projects.activeProjectId,
-//   modules: state.activeProjectModules.present,
+//   modules: state.activeModules.present,
 //   projectName: state.activeProjectInfo.name,
 //   projects: state.projects.items,
 //   thumbnail: state.boardSpecs.tempThumbnail,

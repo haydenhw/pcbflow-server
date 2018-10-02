@@ -8,8 +8,8 @@ export function getUnmetDependencyIds(modules = [], hoveredModuleDependencies) {
   return unmetDependencyIds;
 }
 
-export function getUnmetDependencies(moduleList, onBoardModules, hoveredModuleDependencies) {
-  const unmetDependencyIds = getUnmetDependencyIds(onBoardModules, hoveredModuleDependencies);
+export function getUnmetDependencies(moduleList, activeModules, hoveredModuleDependencies) {
+  const unmetDependencyIds = getUnmetDependencyIds(activeModules, hoveredModuleDependencies);
   const unmetDependencies = (
     moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
   );
