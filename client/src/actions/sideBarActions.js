@@ -1,6 +1,6 @@
-export const UPDATE_ICON_VISBILITY = 'UPDATE_ICON_VISBILITY';
+export const UPDATE_SHOW_ALL_ICONS = 'UPDATE_SHOW_ALL_ICONS';
 export const updateShowAllIcons = bool => ({
-  type: 'UPDATE_ICON_VISBILITY',
+  type: 'UPDATE_SHOW_ALL_ICONS',
   bool,
 });
 

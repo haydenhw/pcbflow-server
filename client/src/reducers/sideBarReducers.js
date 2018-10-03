@@ -4,8 +4,8 @@ import { modulesData } from '../config/modulesData';
 
 export const showAllIcons = (state = false, action) => {
   switch (action.type) {
-    case actions.TOGGLE_SHOW_ALL_ICONS:
-      return bool;
+    case actions.UPDATE_SHOW_ALL_ICONS:
+      return action.bool;
     default:
       return state;
   }
