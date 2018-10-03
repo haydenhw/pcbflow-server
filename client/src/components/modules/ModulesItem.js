@@ -87,7 +87,7 @@ export default class ModulesItem extends PureComponent {
   }
 
   showDependencies() {
-    const { index } = this.props;
+    const {  index } = this.props;
     store.dispatch(actions.updateClickedModuleIndex(index));
 
     // if (!areDependenciesMet(dependencies, metDependencies)) {
@@ -136,19 +136,13 @@ export default class ModulesItem extends PureComponent {
   }
 
   getFill() {
-    const { metDependencies, dependencies, isDraggingToBoard, id } = this.props;
-
-    // getUnmetDependencies(moduleList, activeModules, moduleDependencies);
+    const { unmetDependencies, dependencies, isDraggingToBoard, id } = this.props;
 
     if (id === '100') {
       return null;
     }
 
-    if ((metDependencies.length === dependencies.length) || (id === '110')) {
-      return 'green';
-    }
-
-    if (metDependencies.length < dependencies.length) {
+    if (unmetDependencies.length > 0) {
       return 'red';
     }
 
