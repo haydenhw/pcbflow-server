@@ -54,7 +54,7 @@ const getModuleName = (module) => (
       .map(module => module.text)
 );
 
-const getModuleDependencies= (module) => (
+const getModuleDependencies = (module) => (
     module
       .map(module => module.dependencies)
       .orSome([])

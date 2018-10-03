@@ -6,7 +6,7 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import generatePriceString from 'helpers/generatePriceString';
-import { getDependencyDiff, updateMetDependencies, getNewDependencyData } from 'helpers/dependencies';
+import { getUnmetDependencies, getDependencyDiff, updateMetDependencies, getNewDependencyData } from 'helpers/dependencies';
 
 import ModulesItem from './ModulesItem';
 
@@ -119,6 +119,7 @@ class Modules extends Component {
         id={module.id}
         dependencies={module.dependencies}
         metDependencies={module.metDependencies}
+        unmetDependencies={getUnmetDependencies(this.props.moduleData, this.props.modules, module.dependencies)}
         checkCollisionTrigger={this.props.checkCollisionTrigger}
         topLeftAnchor={this.props.topLeftAnchor}
         hoveredModuleProps={this.props.hoveredModuleProps}
@@ -144,9 +145,9 @@ const mapStateToProps = state => ({
   anchorPositions: state.anchorPositions,
   boardSpecs: state.boardSpecs,
   checkCollisionTrigger: state.boardSpecs.checkCollisionTrigger,
-  currentDependencyData: state.iconVisibity,
   showAllIcons: state.showAllIcons,
   modules: state.activeModules.present,
+  moduleData: state.moduleData,
   hoveredModuleProps: state.hoveredModule,
   topLeftAnchor: state.anchorPositions.topLeft,
   tutorialStep: state.tutorial.step,

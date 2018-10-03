@@ -4,13 +4,13 @@ import { Rect, Group, Image, Text } from 'react-konva';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import enforceRules from 'helpers/enforceRules';
-import getPerimeterSide from 'helpers/getPerimeterSide';
-import bindToPerimeter from 'helpers/bindToPerimeter';
-import generateThumbnail from 'helpers/generateThumbnail';
 import { areDependenciesMet } from 'helpers/dependencies';
 import { compose } from 'helpers/functional';
 import { getKonvaChildByIndex, getKonvaParentByName} from 'helpers/konvaHelpers';
+import bindToPerimeter from 'helpers/bindToPerimeter';
+import enforceRules from 'helpers/enforceRules';
+import generateThumbnail from 'helpers/generateThumbnail';
+import getPerimeterSide from 'helpers/getPerimeterSide';
 
 
 const getTopLeftAnchor = compose(
@@ -87,19 +87,19 @@ export default class ModulesItem extends PureComponent {
   }
 
   showDependencies() {
-    const { dependencies, metDependencies, text, index } = this.props;
+    const { index } = this.props;
     store.dispatch(actions.updateClickedModuleIndex(index));
 
-    if (!areDependenciesMet(dependencies, metDependencies)) {
-      const dependencyData = {
-        dependencies,
-        text,
-        index,
-      };
-
-      store.dispatch(actions.updateShowAllIcons(false));
-      store.dispatch(actions.updateCurrentDependencies(dependencyData));
-    }
+    // if (!areDependenciesMet(dependencies, metDependencies)) {
+    //   const dependencyData = {
+    //     dependencies,
+    //     text,
+    //     index,
+    //   };
+    //
+    //   store.dispatch(actions.updateShowAllIcons(false));
+    //   store.dispatch(actions.updateCurrentDependencies(dependencyData));
+    // }
   }
 
   callWithTimeout() {
@@ -137,6 +137,9 @@ export default class ModulesItem extends PureComponent {
 
   getFill() {
     const { metDependencies, dependencies, isDraggingToBoard, id } = this.props;
+
+    // getUnmetDependencies(moduleList, activeModules, moduleDependencies);
+
     if (id === '100') {
       return null;
     }
