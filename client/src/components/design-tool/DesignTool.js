@@ -647,7 +647,7 @@ let DesignTool = class extends Component {
   renderSideBar() {
    const {
      activeModules,
-     iconVisibityData,
+     showAllIcons,
      clickedModuleIndex,
      moduleData,
      shouldRenderSideBar
@@ -659,7 +659,7 @@ let DesignTool = class extends Component {
       return (
         <SideBar
           activeModules={activeModules}
-          iconVisibityData={iconVisibityData}
+          showAllIcons={showAllIcons}
           clickedModuleIndex={clickedModuleIndex}
           moduleData={moduleData}
           activeModulesLength={activeModules.length}
@@ -773,7 +773,7 @@ const mapStateToProps = (state) => {
     activeModules: state.activeModules.present,
     draggingModuleData: state.draggingModule,
     hasUnsavedChanges: state.hasUnsavedChanges,
-    iconVisibityData: state.iconVisibity,
+    showAllIcons: state.showAllIcons,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isSaving: state.projects.isSaving,
     isTutorialActive: state.tutorial.isTutorialActive,
@@ -805,7 +805,7 @@ DesignTool.propTypes = {
   activeModules: PropTypes.array.isRequired,
   draggingModuleData: PropTypes.object.isRequired,
   hasUnsavedChanges: PropTypes.bool.isRequired,
-  iconVisibityData: PropTypes.object.isRequired,
+  showAllIcons: PropTypes.bool.isRequired,
   isMouseOverModule: PropTypes.bool.isRequired,
   isTutorialActive: PropTypes.bool.isRequired,
   joyride: PropTypes.object,

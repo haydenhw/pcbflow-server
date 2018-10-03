@@ -1,4 +1,3 @@
-// *move dependency logic to actions file
 import React, { Component } from 'react';
 import { Layer, Rect, Stage, Group } from 'react-konva';
 import { connect } from 'react-redux';
@@ -146,7 +145,7 @@ const mapStateToProps = state => ({
   boardSpecs: state.boardSpecs,
   checkCollisionTrigger: state.boardSpecs.checkCollisionTrigger,
   currentDependencyData: state.iconVisibity,
-  iconVisibityMode: state.iconVisibity.mode,
+  showAllIcons: state.showAllIcons,
   modules: state.activeModules.present,
   hoveredModuleProps: state.hoveredModule,
   topLeftAnchor: state.anchorPositions.topLeft,

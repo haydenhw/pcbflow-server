@@ -12,19 +12,6 @@ import isObjectEqual from 'helpers/isObjectEqual'
 import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
 
-const getVisibleIcons = (props) => {
-  const { iconVisibityMode, moduleData, activeModules, clickedModuleDependencies } = props;
-
-  switch (iconVisibityMode) {
-    case 'ALL':
-      return moduleData;
-    case 'DEPENDENCY':
-      return getUnmetDependencies(moduleData, activeModules, clickedModuleDependencies);
-    default:
-      return moduleList;
-  }
-};
-
 const SideBarIconList = class extends Component {
   renderSideBarIcon(module, index, isDisabled) {
     const { toggleDraggingToBoard, toggleIsClicked, updateClientPosition } = this.props;
@@ -77,20 +64,18 @@ const SideBarIconList = class extends Component {
 
 const mapStateToProps = state => ({
   disabledIconExceptions: state.tutorial.disabledIconExceptions,
-  iconVisibityMode: state.iconVisibity.mode,
+  showAllIcons: state.showAllIcons,
   moduleData: state.moduleData,
   activeModules: state.activeModules.present,
-  clickedModuleDependencies: state.iconVisibity.dependencies,
 });
 
 export default connect(mapStateToProps)(SideBarIconList);
 
 SideBarIconList.propTypes = {
   disabledIconExceptions: PropTypes.array,
-  iconVisibityMode: PropTypes.string.isRequired,
+  showAllIcons: PropTypes.bool.isRequired,
   moduleData: PropTypes.array.isRequired,
   activeModules: PropTypes.array.isRequired,
-  clickedModuleDependencies: PropTypes.array.isRequired,
   toggleDraggingToBoard: PropTypes.func.isRequired,
   toggleIsClicked: PropTypes.func,
   updateClientPosition: PropTypes.func.isRequired,

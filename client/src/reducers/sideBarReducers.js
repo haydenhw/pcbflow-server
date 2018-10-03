@@ -1,26 +1,11 @@
 import * as actions from 'actions/indexActions';
 import { modulesData } from '../config/modulesData';
 
-const defaultIconsVibility = {
-  mode: 'ALL',
-  dependencies: [],
-};
 
-export const iconVisibity = (state = defaultIconsVibility, action) => {
+export const showAllIcons = (state = false, action) => {
   switch (action.type) {
-    case actions.UPDATE_ICON_VISBILITY:
-      return {
-        ...state,
-        mode: action.mode,
-      };
-    case actions.UPDATE_CURRENT_DEPENDENCIES:
-      const { dependencies, text, index } = action.dependencyData;
-      return {
-        ...state,
-        dependencies,
-        // index,
-        moduleName: text,
-      };
+    case actions.TOGGLE_SHOW_ALL_ICONS:
+      return !state
     default:
       return state;
   }

@@ -68,16 +68,15 @@ export default class SideBar extends Component {
    const
    {
      activeModules,
-     iconVisibityData,
+     showAllIcons,
      clickedModuleIndex,
      moduleData,
      showAll,
    } = this.props;
 
-    const { mode, dependencies } = iconVisibityData;
     const moduleName = getClickedModuleName(activeModules)(clickedModuleIndex);
 
-    if ((mode === 'DEPENDENCY') && (visibleIcons.length > 0)) {
+    if ((!showAllIcons) && (visibleIcons.length > 0)) {
       return (
         <SideBarDependencyMessage
           moduleName={moduleName}
@@ -92,7 +91,7 @@ export default class SideBar extends Component {
   render() {
     const {
       activeModules,
-      iconVisibityData,
+      showAllIcons,
       clickedModuleIndex,
       moduleData,
       activeModulesLength,
@@ -129,7 +128,6 @@ export default class SideBar extends Component {
     const res = getVisibleIcons2(clickedModuleIndex, activeModules, moduleData);
     const clickedModuleDependencies = getClickedModuleDependencies(activeModules)(clickedModuleIndex);
     const dependencyData = getNewDependencyData(activeModules);
-    // const visibleIcons = getVisibleIcons(iconVisibityData.mode, moduleData, activeModules, clickedModuleDependencies)
 
     return (
       <div className="sideBar" style={style}>
@@ -151,7 +149,7 @@ export default class SideBar extends Component {
 
 SideBar.propTypes = {
   disabledIconExceptions: PropTypes.func,
-  iconVisibityData: PropTypes.object.isRequired,
+  showAllIcons: PropTypes.bool.isRequired,
   activeModulesLength: PropTypes.number,
   showAll: PropTypes.func.isRequired,
   toggleDraggingToBoard: PropTypes.func.isRequired,
