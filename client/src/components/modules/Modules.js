@@ -51,7 +51,7 @@ class Modules extends Component {
 
   dispatchDependencyData({ visibilityMode, dependencyData }) {
     setTimeout(() => {
-      store.dispatch(actions.updateIconVisibity(visibilityMode));
+      store.dispatch(actions.updateShowAllIcons(visibilityMode === 'ALL'));
       store.dispatch(actions.updateCurrentDependencies(dependencyData));
       store.dispatch(actions.toggleShouldRenderSideBar(true));
     }, 5);

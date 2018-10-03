@@ -94,31 +94,13 @@ const modules = [
   },
 ];
 
+const visibilityMode = 'd'
 
-let joeUser = {
-  pay: 100,
-  name: 'joe',
-  email: 'joe@example.com',
-  prefs: {
-    languages: {
-      primary: 'sp',
-      secondary: 'en'
-    }
-  }
-}
+visibilityMode === 'ALL'
 
-let indexURLs = {
-    'en': 'http://mysite.com/en',  //English
-     'sp': 'http://mysite.com/sp', //Spanish
-    'jp': 'http://mysite.com/jp'   //Japanese
-}
 
-const maybeGetProjects = (projects) => (
-  Maybe.fromNull(projects)
-);
-
-const actualResult = maybeGetProjects(modules);
-const expectedResult = 'success';
+const actualResult = visibilityMode;
+const expectedResult = false;
 
 // describe('test function', function() {
 //   it('', function() {

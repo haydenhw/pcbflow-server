@@ -1,7 +1,7 @@
 export const UPDATE_ICON_VISBILITY = 'UPDATE_ICON_VISBILITY';
-export const updateIconVisibity = mode => ({
+export const updateShowAllIcons = bool => ({
   type: 'UPDATE_ICON_VISBILITY',
-  mode,
+  bool,
 });
 
 export const UPDATE_CURRENT_DEPENDENCIES = 'UPDATE_CURRENT_DEPENDENCIES';
@@ -21,4 +21,3 @@ export const toggleHasTooltip = id => ({
   type: 'TOGGLE_HAS_TOOLTIP',
   id,
 });
-

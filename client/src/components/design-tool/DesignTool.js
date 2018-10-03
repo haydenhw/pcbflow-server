@@ -406,7 +406,7 @@ let DesignTool = class extends Component {
   }
 
   showAllModuleIcons() {
-    store.dispatch(actions.updateIconVisibity('ALL'));
+    store.dispatch(actions.updateShowAllIcons(true));
   }
 
   toggleDocumentationCard() {

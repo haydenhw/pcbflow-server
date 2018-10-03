@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Maybe } from 'monet';
 
-import { findNextUnsatisfiedModule, getNewDependencyData, getUnmetDependencies, getUnsatisfiedModuleIds } from 'helpers/dependencies';
+import { findNextUnsatisfiedModule, getUnmetDependencies, getUnsatisfiedModuleIds } from 'helpers/dependencies';
 import { compose } from 'helpers/functional';
 
 import SideBarIconList from './SideBarIconList';
@@ -20,23 +20,58 @@ const style = {
   zIndex: '1',
   left: '0px',
   verticalAlign: 'top',
+}
+
+// getUnsatisfiedModule
+// getUnmetDependencies
+// getUnsatisfiedModuleDependencies
+
+const getVisibileIcons = (clickedModuleIndex, activeModules, moduleData) => {
+  const clickedModule = maybeClickedModule(activeModules)(clickedModuleIndex).val;
+  let nextUnsatisfiedModule;
+
+  if (!clickedModule){
+    nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
+  }
+
+  if (clickedModule) {
+    const clickedModuleUnmetDependencies = getUnmetDependencies(moduleData, activeModules, clickedModule.dependencies);
+
+    if (clickedModuleUnmetDependencies.length > 0) {
+      return clickedModuleUnmetDependencies;
+    }
+
+    nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
+  }
+
+  if (nextUnsatisfiedModule) {
+    return getUnmetDependencies(moduleData, activeModules, nextUnsatisfiedModule.dependencies)
+  }
+
+  return moduleData;
 };
 
-const getVisibleIcons = (
-    iconVisibityMode,
-    moduleData,
-    activeModules,
-    hoveredModuleDependencies
-  ) => {
-    switch (iconVisibityMode) {
-      case 'ALL':
-        return moduleData;
-      case 'DEPENDENCY':
-      const unmentDependencies = getUnmetDependencies(moduleData, activeModules, hoveredModuleDependencies);
-        return unmentDependencies;
-      default:
-        return moduleList;
+const getUnsatisfiedModule = (clickedModuleIndex, activeModules, moduleData) => {
+  const clickedModule = maybeClickedModule(activeModules)(clickedModuleIndex).val;
+  let nextUnsatisfiedModule;
+
+  if (!clickedModule) {
+    nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
+  } else {
+    const clickedModuleUnmetDependencies = getUnmetDependencies(moduleData, activeModules, clickedModule.dependencies);
+
+    if (clickedModuleUnmetDependencies.length > 0) {
+      return clickedModule;
     }
+
+    nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
+  }
+
+  if (nextUnsatisfiedModule) {
+    return nextUnsatisfiedModule;
+  }
+
+  return null;
 };
 
 const maybeClickedModule = (activeModules) => (clickedModuleIndex) => (
@@ -46,7 +81,6 @@ const maybeClickedModule = (activeModules) => (clickedModuleIndex) => (
 const getModuleName = (module) => (
     module
       .map(module => module.text)
-      .orSome('default')
 );
 
 const getModuleDependencies= (module) => (
@@ -74,9 +108,18 @@ export default class SideBar extends Component {
      showAll,
    } = this.props;
 
-    const moduleName = getClickedModuleName(activeModules)(clickedModuleIndex);
+    const clickedModule = maybeClickedModule(activeModules)(clickedModuleIndex).val;
+    const nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
 
-    if ((!showAllIcons) && (visibleIcons.length > 0)) {
+    // const moduleName = clickedModuleName
+    //   ? clickedModuleName
+    //   : nextUnsatisfiedModule
+    //   ? nextUnsatisfiedModule.text
+    //   : null;
+    //
+    const moduleName = 'pickles';
+
+    if (!showAllIcons && moduleName) {
       return (
         <SideBarDependencyMessage
           moduleName={moduleName}
@@ -100,45 +143,26 @@ export default class SideBar extends Component {
       updateClientPosition,
     } = this.props;
 
-    const getVisibleIcons2 = (clickedModuleIndex, activeModules, moduleData) => {
-      let nextUnsatisfiedModule;
-      const clickedModule = maybeClickedModule(activeModules)(clickedModuleIndex).val;
+    const unsatisfiedModule = getUnsatisfiedModule(clickedModuleIndex, activeModules, moduleData)
 
-      if (!clickedModule){
-        nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
-      }
+    const unsatisfiedModuleDependencies = unsatisfiedModule
+      ? getUnmetDependencies(moduleData, activeModules, unsatisfiedModule.dependencies)
+      : null;
 
-      if (clickedModule) {
-        const clickedModuleUnmetDependencies = getUnmetDependencies(moduleData, activeModules, clickedModule.dependencies);
-
-        if (clickedModuleUnmetDependencies.length > 0) {
-          return clickedModuleUnmetDependencies;
-        }
-
-        nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
-      }
-
-      if (nextUnsatisfiedModule) {
-        return getUnmetDependencies(moduleData, activeModules, nextUnsatisfiedModule.dependencies)
-      }
-
-      return moduleData;
-    }
-
-    const res = getVisibleIcons2(clickedModuleIndex, activeModules, moduleData);
-    const clickedModuleDependencies = getClickedModuleDependencies(activeModules)(clickedModuleIndex);
-    const dependencyData = getNewDependencyData(activeModules);
+    const visibleIcons = showAllIcons || !moduleUnmnetDeps
+      ? moduleData
+      : moduleUnmnetDeps;
 
     return (
       <div className="sideBar" style={style}>
-          {this.renderDependencyMessage([])}
+          {this.renderDependencyMessage(visibleIcons)}
           <div className="module-container">
             <SideBarIconList
               activeModulesLength={activeModulesLength}
               toggleDraggingToBoard={toggleDraggingToBoard}
               toggleIsClicked={toggleIsClicked}
               updateClientPosition={updateClientPosition}
-              visibleIcons={res}
+              visibleIcons={visibleIcons}
             />
           </div>
         <DimensionForm />

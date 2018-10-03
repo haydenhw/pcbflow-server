@@ -97,7 +97,7 @@ export default class ModulesItem extends PureComponent {
         index,
       };
 
-      store.dispatch(actions.updateIconVisibity('DEPENDENCY'));
+      store.dispatch(actions.updateShowAllIcons(false));
       store.dispatch(actions.updateCurrentDependencies(dependencyData));
     }
   }
