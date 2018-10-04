@@ -117,10 +117,6 @@ export default class ModulesItem extends PureComponent {
       this.highlightRuleBreakingModules();
     }
 
-    if (prevProps.metDependencies.length !== this.props.metDependencies.length) {
-      store.dispatch(actions.updateModuleFill());
-    }
-
     if (prevProps.rotation !== this.props.rotation) {
       this.highlightRuleBreakingModules();
     }
@@ -130,13 +126,13 @@ export default class ModulesItem extends PureComponent {
       this.props.toggleShouldCheckCollission();
     }
 
-    // if (prevProps.metDependencies.length !== this.props.metDependencies.length) {
-    //   store.dispatch(actions.triggerThumbnailUpdate());
-    // }
+    if (prevProps.unmetDependencies.length !== this.props.unmetDependencies.length) {
+      store.dispatch(actions.triggerThumbnailUpdate());
+    }
   }
 
   getFill() {
-    const { unmetDependencies, dependencies, isDraggingToBoard, id } = this.props;
+    const { id, unmetDependencies } = this.props;
 
     if (id === '100') {
       return null;
@@ -311,5 +307,5 @@ export default class ModulesItem extends PureComponent {
 }
 
 ModulesItem.defaultProps = {
-  metDependencies: [],
+  unmetDependencies: [],
 };

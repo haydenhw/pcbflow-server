@@ -27,56 +27,15 @@ class Modules extends Component {
     };
   }
 
-  updateMetDependencies() {
-    const dependencyDiffArray = getDependencyDiff(this.props.modules);
-    const dispatchMetDependencies = (metDependencyData) => {
-      store.dispatch(actions.updateMetDependencies(metDependencyData));
-    };
-
-    function setDelay(metDependencyData) {
-      setTimeout(() => {
-        dispatchMetDependencies(metDependencyData);
-      }, 1);
-    }
-
-    dependencyDiffArray.forEach((element) => {
-      const { metDependencies, index } = element;
-
-      setDelay({
-        metDependencies,
-        index,
-      });
-    });
-  }
-
-  dispatchDependencyData({ visibilityMode, dependencyData }) {
-    setTimeout(() => {
-      store.dispatch(actions.updateShowAllIcons(visibilityMode === 'ALL'));
-      store.dispatch(actions.updateCurrentDependencies(dependencyData));
-      store.dispatch(actions.toggleShouldRenderSideBar(true));
-    }, 5);
-  }
-
-  updateDisplayedDependencies() {
-    const { modules } = this.props;
-    const newDepenencyData = getNewDependencyData(modules);
-
-    this.updateMetDependencies();
-    this.dispatchDependencyData(newDepenencyData);
-  }
 
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.modules.length !== this.props.modules.length)) {
-      this.updateDisplayedDependencies();
+      store.dispatch(actions.toggleShouldRenderSideBar(true));
 
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });
     }
-  }
-
-  componentDidMount() {
-    this.updateDisplayedDependencies();
   }
 
   toggleShouldCheckCollission() {
@@ -118,7 +77,6 @@ class Modules extends Component {
         iconSrc={module.iconSrc}
         id={module.id}
         dependencies={module.dependencies}
-        metDependencies={module.metDependencies}
         unmetDependencies={getUnmetDependencies(this.props.moduleData, this.props.modules, module.dependencies)}
         checkCollisionTrigger={this.props.checkCollisionTrigger}
         topLeftAnchor={this.props.topLeftAnchor}

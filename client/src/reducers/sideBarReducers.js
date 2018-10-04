@@ -1,7 +1,6 @@
 import * as actions from 'actions/indexActions';
 import { modulesData } from '../config/modulesData';
 
-
 export const showAllIcons = (state = false, action) => {
   switch (action.type) {
     case actions.UPDATE_SHOW_ALL_ICONS:
@@ -11,7 +10,7 @@ export const showAllIcons = (state = false, action) => {
   }
 };
 
-export const shouldRenderSideBar = (state = false, action) => {
+export const shouldRenderSideBar = (state = true, action) => {
   switch (action.type) {
     case actions.TOGGLE_SHOULD_RENDER_SIDEBAR:
       return action.bool;

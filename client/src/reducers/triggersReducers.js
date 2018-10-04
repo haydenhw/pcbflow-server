@@ -12,16 +12,11 @@ export const triggers = (state = false, action) => {
       return false;
   }
 
-  const res = doesModifyProject(action);
 
   if (doesModifyProject(action)) {
-    const updatedSaveProjectTrigger = action.type === actions.UPDATE_MODULE_FILL
-      ? state.saveProjectTrigger
-      : !state.saveProjectTrigger;
-
     return {
       ...state,
-      saveProjectTrigger: updatedSaveProjectTrigger,
+      saveProjectTrigger: !state.saveProjectTrigger,
       updateThumbnailTrigger: !state.updateThumbnailTrigger,
     };
   }
