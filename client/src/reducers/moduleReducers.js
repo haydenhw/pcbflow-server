@@ -1,20 +1,8 @@
 import * as actions from '../actions/indexActions';
 import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
-// export const moduleList = (state = [], action) => {
-//   if (action.type === actions.FETCH_MODULES_SUCCESS) {
-//     return {
-//       modules: action.modules,
-//     };
-//   }
-//
-//   return state;
-// };
-
 const defaultState =  {
-  dragging: {
-    imageNode: {},
-  },
+  dragging: null,
   hovered: null,
   clicked: null,
 }
@@ -29,23 +17,6 @@ export const modules = (state = defaultState, action) => {
   }
 
   return state;
-};
-
-export const draggingModule = (state = {}, action) => {
-  switch (action.type) {
-    case actions.CHANGE_DRAGGING_MODULE:
-      return action.moduleData;
-      break;
-
-    case actions.UPDATE_MODULE_IMAGE:
-      const { imageNode } = action.moduleData;
-      return ({
-        ...state,
-        imageNode,
-      });
-    default:
-      return state;
-  }
 };
 
 export const hoveredModule = (state = {}, action) => {
@@ -184,3 +155,13 @@ export const activeModules = (state = [], action) => {
     }
   }
 };
+
+// export const moduleList = (state = [], action) => {
+//   if (action.type === actions.FETCH_MODULES_SUCCESS) {
+//     return {
+//       modules: action.modules,
+//     };
+//   }
+//
+//   return state;
+// };
