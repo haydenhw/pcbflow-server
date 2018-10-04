@@ -13,16 +13,6 @@ import SideBarDependencyMessage from './SideBarDependencyMessage';
 
 import './side-bar-styles/_SideBar.scss';
 
-// *move to css file
-const style = {
-  height: '100% !important',
-  width: '200px',
-  position: 'fixed',
-  zIndex: '1',
-  left: '0px',
-  verticalAlign: 'top',
-}
-
 export default class SideBar extends Component {
   renderDependencyMessage = (unsatisfiedModule) => {
    const
@@ -70,7 +60,7 @@ export default class SideBar extends Component {
       : unsatisfiedModuleDependencies;
 
     return (
-      <div className="sideBar" style={style}>
+      <div className="sideBar">
           {this.renderDependencyMessage(unsatisfiedModule)}
           <div className="module-container">
             <SideBarIconList
