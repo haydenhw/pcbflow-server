@@ -13,8 +13,8 @@ import TopNavbarButton from './TopNavbarButton';
 
 import './top-navbar-styles/_TopNavbar.scss';
 
-const getSaveStatusMessage = (isSaving) => {
-  switch (isSaving) {
+const getSaveStatusMessage = (showSavingMessage) => {
+  switch (showSavingMessage) {
     case null:
       return '';
     case true:
@@ -34,11 +34,9 @@ export default function TopNavbar(props) {
     handleMenuClick,
     handleNameChange,
     isNavMenuActive,
-    isSaving,
+    showSavingMessage,
     projectName,
-    recordSavedChanges,
     routeToProjects,
-    updateLastSaved,
     updateThumbnail,
   } = props;
 
@@ -57,7 +55,7 @@ export default function TopNavbar(props) {
       />
 
       <div className="nav-button-group">
-        <span className="nav-save-status">{getSaveStatusMessage(isSaving)}</span>
+        <span className="nav-save-status">{getSaveStatusMessage(showSavingMessage)}</span>
         <TopNavbarButton
           className="nav-button tutorial-button"
           handleClick={() => store.dispatch(actions.startTutorial())}
@@ -103,7 +101,5 @@ export default function TopNavbar(props) {
 TopNavbar.propTypes = {
   handleNameChange: PropTypes.func.isRequired,
   projectName: PropTypes.string,
-  recordSavedChanges: PropTypes.func.isRequired,
-  updateLastSaved: PropTypes.func.isRequired,
   updateThumbnail: PropTypes.func.isRequired,
 };

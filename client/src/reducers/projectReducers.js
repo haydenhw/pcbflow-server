@@ -5,7 +5,7 @@ const defaultProjectState = {
   activeProjectId: null,
   isFetching: false,
   isInitialLoad: true,
-  isSaving: null,
+  showSavingMessage: null,
   items: [],
 };
 
@@ -76,12 +76,12 @@ export const projects = (state = defaultProjectState, action) => {
     case actions.UPDATE_PROJECT_REQUEST:
       return {
         ...state,
-        isSaving: true,
+        showSavingMessage: true,
       };
     case actions.UPDATE_PROJECT_SUCCESS:
       return {
         ...state,
-        isSaving: false,
+        showSavingMessage: false,
         isInitialLoad: false,
       };
   }

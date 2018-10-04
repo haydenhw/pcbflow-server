@@ -7,9 +7,15 @@ const defaultState = {
 
 export const nav = (state = defaultState, action) => {
   switch (action.type) {
-    case actions.TOGGLE_SAVING_MESSAGE:
+    case actions.UPDATE_PROJECT_REQUEST:
       return {
-        showSavingMessage: !state.showSavingMessage,
+        ...state,
+        showSavingMessage: true,
+      };
+    case actions.UPDATE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        showSavingMessage: false,
       };
     default:
       return state;

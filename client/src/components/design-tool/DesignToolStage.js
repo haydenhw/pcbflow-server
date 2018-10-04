@@ -11,7 +11,6 @@ import store from 'reduxFiles/store';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail, { getCroppedStage } from 'helpers/generateThumbnail';
-import { getTimeDateStamp } from 'helpers/getTimeStamp';
 
 import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
@@ -89,7 +88,6 @@ class DesignToolStage extends Component {
     const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const croppedStage = getCroppedStage(boardLayer);
     const imageDataURL = croppedStage.node.toDataURL('image/jpeg', 1.0);
-    const footerText = `${activeProjectName} created ${getTimeDateStamp()}`;
 
     const pxPerMillimeter = 0.2458333;
     const imageOffsetX = (1125 - croppedStage.width) / 2 * pxPerMillimeter * 1.02525;

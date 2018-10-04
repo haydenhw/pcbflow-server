@@ -11,7 +11,6 @@ import store from 'reduxFiles/store';
 
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
-import getTimeStamp from 'helpers/getTimeStamp';
 import { routeToHome, routeToProjects } from 'helpers/routeHelpers';
 import { isMobile } from 'helpers/isMobile';
 import rotate from 'helpers/rotate';
@@ -404,10 +403,6 @@ let DesignTool = class extends Component {
     }
   }
 
-  recordSavedChanges() {
-    store.dispatch(actions.toggleHasUnsavedChanges());
-  }
-
   showAllModuleIcons() {
     store.dispatch(actions.updateShowAllIcons(true));
   }
@@ -449,11 +444,6 @@ let DesignTool = class extends Component {
     this.setState({
       shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail,
     });
-  }
-
-  updateLastSaved() {
-    const lastSaved = getTimeStamp();
-    store.dispatch(actions.updateLastSavedTime(lastSaved));
   }
 
   updateClientPosition(evt) {
@@ -674,7 +664,7 @@ let DesignTool = class extends Component {
   }
 
   render() {
-    const { activeProjectName, activeProjectId, isSaving, projects } = this.props;
+    const { activeProjectName, activeProjectId, showSavingMessage, projects } = this.props;
 
     const {
       isDraggingToBoard,
@@ -697,18 +687,15 @@ let DesignTool = class extends Component {
           handleProjectsButtonClick={routeToProjects}
           handleMenuClick={this.toggleNavMenu}
           isNavMenuActive={isNavMenuActive}
-          isSaving={isSaving}
+          showSavingMessage={showSavingMessage}
           projectName={activeProjectName}
-          recordSavedChanges={this.recordSavedChanges}
           updateLastSaved={this.updateLastSaved}
           updateThumbnail={this.toggleShouldUpadateThumbnail}
-
         />
         <div>
           <div ref={node => { this.stageContainer = node }}>
             {this.renderSideBar()}
             <DesignToolStage
-              // draggingModule={this.renderDraggingModule()}
               hideFloatingElements={this.hideFloatingElements}
               isDraggingToBoard={isDraggingToBoard}
               rotate={this.rotate}
@@ -754,7 +741,8 @@ const mapStateToProps = (state) => {
     draggingModuleData: state.modules.dragging,
     showAllIcons: state.showAllIcons,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
-    isSaving: state.projects.isSaving,
+    // showSavingMessage: state.projects.showSavingMessage,
+    showSavingMessage: state.nav.showSavingMessage,
     isTutorialActive: state.tutorial.isTutorialActive,
     clickedModuleIndex: state.clickedModuleIndex,
     modalType: state.modal.modalType,

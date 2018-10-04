@@ -44,12 +44,6 @@ export const updateProjectPrice = price => ({
   price,
 });
 
-export const UPDATE_LAST_SAVED_TIME = 'UPDATE_LAST_SAVED_TIME';
-export const updateLastSavedTime = time => ({
-  type: 'UPDATE_LAST_SAVED_TIME',
-  time,
-});
-
 export const createNewProject = () => (dispatch) => {
   const ownerId = getUser()._id;
   const height = 300;
