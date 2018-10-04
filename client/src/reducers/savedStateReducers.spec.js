@@ -5,16 +5,16 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { hasUnsavedChanges } from './savedStateReducers';
+import { showSavingMessage } from './savedStateReducers';
 
-describe('hasUnsavedChanges reducer', () => {
+describe('showSavingMessage reducer', () => {
     // Fetch Basic Info about User
   it('It should set state to true if a change is made to a project', () => {
     const initialState = false;
 
     const expectedState = true;
 
-    const resultState = hasUnsavedChanges(deepFreeze(initialState), {
+    const resultState = showSavingMessage(deepFreeze(initialState), {
       type: 'UPDATE_MODULE_POSITION',
     });
 
@@ -26,8 +26,8 @@ describe('hasUnsavedChanges reducer', () => {
 
     const expectedState = false;
 
-    const resultState = hasUnsavedChanges(deepFreeze(initialState), {
-      type: 'TOGGLE_HAS_UNSAVED_CHANGES',
+    const resultState = showSavingMessage(deepFreeze(initialState), {
+      type: 'TOGGLE_SAVING_MESSAGE',
     });
 
     assert.deepEqual(resultState, expectedState);

@@ -381,7 +381,10 @@ let DesignTool = class extends Component {
       this.toggleShouldHideContextMenu(false);
     }
 
-    this.dropDraggingModule(evt);
+    if (this.state.isDraggingToBoard) {
+      this.dropDraggingModule(evt);
+    }
+
     store.dispatch(actions.toggleIsMouseDown(false));
   }
 
@@ -749,7 +752,6 @@ const mapStateToProps = (state) => {
     activeProjectId: state.projects.activeProjectId,
     activeModules: state.activeModules.present,
     draggingModuleData: state.modules.dragging,
-    hasUnsavedChanges: state.hasUnsavedChanges,
     showAllIcons: state.showAllIcons,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isSaving: state.projects.isSaving,
@@ -780,7 +782,6 @@ DesignTool.propTypes = {
   activeProjectId: PropTypes.string,
   activeModules: PropTypes.array.isRequired,
   // draggingModuleData: PropTypes.object.isRequired,
-  hasUnsavedChanges: PropTypes.bool.isRequired,
   showAllIcons: PropTypes.bool.isRequired,
   isMouseOverModule: PropTypes.bool.isRequired,
   isTutorialActive: PropTypes.bool.isRequired,

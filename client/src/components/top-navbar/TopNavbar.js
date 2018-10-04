@@ -9,7 +9,6 @@ import PopupMenu from 'components/popup-menu/PopupMenu';
 import PopupMenuTrigger from 'components/popup-menu/PopupMenuTrigger';
 import PopupMenuContent from 'components/popup-menu/PopupMenuContent';
 import TopNavbarEditableText from './TopNavbarEditableText';
-import TopNavbarSaveButton from './TopNavbarSaveButton';
 import TopNavbarButton from './TopNavbarButton';
 
 import './top-navbar-styles/_TopNavbar.scss';

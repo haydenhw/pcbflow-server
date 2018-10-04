@@ -3,11 +3,12 @@ import { combineReducers } from 'redux';
 import undoable from 'helpers/undoable';
 import skipIfImageNodeNull from 'helpers/skipIfImageNodeNull';
 
-import { activeModules, modules, moduleBank, draggingModule, hoveredModule, clickedModuleIndex } from './moduleReducers';
+import { activeModules, modules, moduleBank, hoveredModule, clickedModuleIndex } from './moduleReducers';
 import { projects } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
-import { hasUnsavedChanges } from './savedStateReducers';
+import { nav } from './navReducers';
+import { showSavingMessage } from './savedStateReducers';
 import { showAllIcons, shouldRenderSideBar, moduleData } from './sideBarReducers';
 import { triggers } from './triggersReducers';
 import { tutorial } from './tutorialReducers';
@@ -17,8 +18,7 @@ export default combineReducers({
   activeModules: undoable(activeModules, skipIfImageNodeNull),
   anchorPositions,
   boardSpecs,
-  draggingModule,
-  hasUnsavedChanges,
+  showSavingMessage,
   hoveredModule,
   showAllIcons,
   clickedModuleIndex,
@@ -26,6 +26,7 @@ export default combineReducers({
   modules,
   moduleData,
   mouseEvents,
+  nav,
   projects,
   shouldRenderSideBar,
   triggers,
