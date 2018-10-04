@@ -29,9 +29,9 @@ export const pushToactiveModules = module => (dispatch, getState) => {
   dispatch(actions.pushNewModule(module));
 };
 
-export const CHANGE_DRAGGING_MODULE = 'CHANGE_DRAGGING_MODULE';
-export const changeDraggingModule = moduleData => ({
-  type: 'CHANGE_DRAGGING_MODULE',
+export const UPDATE_DRAGGING_MODULE = 'UPDATE_DRAGGING_MODULE';
+export const updateDraggingModule = moduleData => ({
+  type: 'UPDATE_DRAGGING_MODULE',
   moduleData,
 });
 

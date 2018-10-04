@@ -27,7 +27,7 @@ export default class SideBarIcon extends Component {
 
       store.dispatch(actions.mouseDownOnIcon(true));
       store.dispatch(actions.toggleHasTooltip(id));
-      store.dispatch(actions.changeDraggingModule(updatedModuleData));
+      store.dispatch(actions.updateDraggingModule(updatedModuleData));
     }
   }
 

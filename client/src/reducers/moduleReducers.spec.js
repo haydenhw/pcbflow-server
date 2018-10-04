@@ -5,10 +5,10 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { hoveredModule, draggingModule, activeModules } from './moduleReducers';
+import { modules, activeModules } from './moduleReducers';
 
-describe('draggingModule reducer', () => {
-  it('It should return update draggingModule data', () => {
+describe('modules reducer', () => {
+  it('It should return updated draggingModule data', () => {
     const initialState = {
       x: 10,
       y: 10,
@@ -27,8 +27,8 @@ describe('draggingModule reducer', () => {
       rotation: 90,
     };
 
-    const resultState = draggingModule(deepFreeze(initialState), {
-      type: 'CHANGE_DRAGGING_MODULE',
+    const resultState = modules(deepFreeze(initialState), {
+      type: 'UPDATE_DRAGGING_MODULE',
       moduleData: {
         x: 5,
         y: 5,
@@ -39,7 +39,7 @@ describe('draggingModule reducer', () => {
       },
     });
 
-    assert.deepEqual(resultState, expectedState);
+    assert.deepEqual(resultState.dragging, expectedState);
   });
 
   it('It should return update draggingModule image', () => {
@@ -394,4 +394,3 @@ describe('activeModules reducer', () => {
     assert.deepEqual(resultState, expectedState);
   });
 });
-
