@@ -1,9 +1,10 @@
 // fix shouldComponentUpdate function
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Maybe } from 'monet';
 
-import { areDependenciesMet, findNextUnsatisfiedModule, getUnmetDependencies, getUnsatisfiedModuleIds } from 'helpers/dependencies';
+import { getUnmetDependencies } from 'helpers/dependencies';
+import { getUnsatisfiedModule } from 'helpers/moduleHelpers';
+
 import { compose } from 'helpers/functional';
 
 import SideBarIconList from './SideBarIconList';
@@ -21,52 +22,6 @@ const style = {
   left: '0px',
   verticalAlign: 'top',
 }
-
-const getUnsatisfiedModule = (clickedModuleIndex, activeModules, moduleData) => {
-  const clickedModule = maybeClickedModule(activeModules)(clickedModuleIndex).val;
-  let nextUnsatisfiedModule;
-
-  if (!clickedModule) {
-    nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
-  } else {
-    const clickedModuleUnmetDependencies = getUnmetDependencies(moduleData, activeModules, clickedModule.dependencies);
-
-    if (clickedModuleUnmetDependencies.length > 0) {
-      return clickedModule;
-    }
-
-    nextUnsatisfiedModule = findNextUnsatisfiedModule(activeModules);
-  }
-
-  if (nextUnsatisfiedModule) {
-    return nextUnsatisfiedModule;
-  }
-
-  return null;
-};
-
-const maybeClickedModule = (activeModules) => (clickedModuleIndex) => (
-  Maybe.fromNull(activeModules[clickedModuleIndex])
-);
-
-const getModuleName = (module) => (
-    module
-      .map(module => module.text)
-);
-
-const getModuleDependencies = (module) => (
-    module
-      .map(module => module.dependencies)
-      .orSome([])
-);
-
-const getClickedModuleName = (modules) => (
-  compose(getModuleName, maybeClickedModule(modules))
-);
-
-const getClickedModuleDependencies = (modules) => (
-  compose(getModuleDependencies, maybeClickedModule(modules))
-);
 
 export default class SideBar extends Component {
   renderDependencyMessage = (unsatisfiedModule) => {
@@ -105,7 +60,7 @@ export default class SideBar extends Component {
       updateClientPosition,
     } = this.props;
 
-    const unsatisfiedModule = getUnsatisfiedModule(clickedModuleIndex, activeModules, moduleData)
+    const unsatisfiedModule = getUnsatisfiedModule(clickedModuleIndex, activeModules, moduleData);
 
     const unsatisfiedModuleDependencies = (unsatisfiedModule &&
        getUnmetDependencies(moduleData, activeModules, unsatisfiedModule.dependencies));

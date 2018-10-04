@@ -5,6 +5,8 @@ export const showAllIcons = (state = false, action) => {
   switch (action.type) {
     case actions.UPDATE_SHOW_ALL_ICONS:
       return action.bool;
+    case actions.UPDATE_LAST_CLICKED_MODULE:
+      return false;
     default:
       return state;
   }

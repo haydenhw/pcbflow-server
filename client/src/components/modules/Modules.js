@@ -6,7 +6,7 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import generatePriceString from 'helpers/generatePriceString';
-import { getUnmetDependencies, getDependencyDiff, updateMetDependencies, getNewDependencyData } from 'helpers/dependencies';
+import { getUnmetDependencies, updateMetDependencies } from 'helpers/dependencies';
 
 import ModulesItem from './ModulesItem';
 

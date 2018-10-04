@@ -57,27 +57,3 @@ export function findUnsatisfiedModule(dependencyDiffArray) {
 }
 
 export const findNextUnsatisfiedModule = compose(findUnsatisfiedModule, getDependencyDiff);
-
-export function getNewDependencyData(modules) {
-  const dependencyDiffArray = getDependencyDiff(modules);
-  const nextParentToDisplay = findUnsatisfiedModule(dependencyDiffArray);
-
-  const nullData = {
-    dependencies: [],
-    index: null,
-    text: null,
-    moduleName: null,
-  };
-
-  if (nextParentToDisplay) {
-    return {
-      visibilityMode: 'DEPENDENCY',
-      dependencyData: nextParentToDisplay,
-    };
-  }
-
-  return {
-    visibilityMode: 'ALL',
-    dependencyData: nullData,
-  };
-}
