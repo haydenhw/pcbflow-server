@@ -10,6 +10,7 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
 //
 //   return state;
 // };
+
 export const draggingModule = (state = {}, action) => {
   switch (action.type) {
     case actions.CHANGE_DRAGGING_MODULE:
@@ -106,17 +107,6 @@ export const activeModules = (state = [], action) => {
           const updatedModuleProps = {
             ...module,
             stroke,
-          };
-          return i === index ? updatedModuleProps : module;
-        });
-        break;
-
-      case actions.UPDATE_MET_DEPENDECIES:
-        return state.map((module, i) => {
-          const { metDependencies, index } = action.metDependencies;
-          const updatedModuleProps = {
-            ...module,
-            metDependencies,
           };
           return i === index ? updatedModuleProps : module;
         });

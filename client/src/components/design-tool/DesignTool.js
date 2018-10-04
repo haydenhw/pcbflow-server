@@ -655,7 +655,7 @@ let DesignTool = class extends Component {
 
     const { isDraggingToBoard, disabledIconExceptions } = this.state;
 
-    if (shouldRenderSideBar) {
+    if (!isDraggingToBoard) {
       return (
         <SideBar
           activeModules={activeModules}

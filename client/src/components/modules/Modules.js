@@ -27,11 +27,8 @@ class Modules extends Component {
     };
   }
 
-
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.modules.length !== this.props.modules.length)) {
-      store.dispatch(actions.toggleShouldRenderSideBar(true));
-
       this.setState({
         shouldCheckCollission: !this.state.shouldCheckCollission,
       });

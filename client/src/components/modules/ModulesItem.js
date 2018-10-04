@@ -12,7 +12,6 @@ import enforceRules from 'helpers/enforceRules';
 import generateThumbnail from 'helpers/generateThumbnail';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 
-
 const getTopLeftAnchor = compose(
   getKonvaChildByIndex(1),
   getKonvaParentByName('boardGroup')
@@ -89,17 +88,6 @@ export default class ModulesItem extends PureComponent {
   showDependencies() {
     const {  index } = this.props;
     store.dispatch(actions.updateClickedModuleIndex(index));
-
-    // if (!areDependenciesMet(dependencies, metDependencies)) {
-    //   const dependencyData = {
-    //     dependencies,
-    //     text,
-    //     index,
-    //   };
-    //
-    //   store.dispatch(actions.updateShowAllIcons(false));
-    //   store.dispatch(actions.updateCurrentDependencies(dependencyData));
-    // }
   }
 
   callWithTimeout() {

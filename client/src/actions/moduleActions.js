@@ -66,13 +66,6 @@ export const updateModuleImage = moduleData => ({
   moduleData,
 });
 
-export const UPDATE_MET_DEPENDECIES = 'UPDATE_MET_DEPENDECIES';
-export const updateMetDependencies = metDependencies => ({
-  type: 'UPDATE_MET_DEPENDECIES',
-  skipPrevState: true,
-  metDependencies,
-});
-
 export const UPDATE_HOVERED_MODULE = 'UPDATE_HOVERED_MODULE';
 export const updateHoveredModule = moduleData => ({
   type: 'UPDATE_HOVERED_MODULE',
