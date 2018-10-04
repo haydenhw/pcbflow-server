@@ -521,29 +521,6 @@ let DesignTool = class extends Component {
     return null;
   }
 
-  renderDraggingModule() {
-    const { draggingModuleData } = this.props;
-    const { x, y } = this.state;
-
-    return (
-      <Module
-        x={x - (draggingModuleData.width / 2)}
-        y={y - (draggingModuleData.height / 2)}
-        width={draggingModuleData.width}
-        height={draggingModuleData.height}
-        id={'100'}
-        imageHeight={draggingModuleData.imageHeight}
-        imageNode={draggingModuleData.imageNode}
-        imageSrc={draggingModuleData.imageSrc}
-        imageWidth={draggingModuleData.imageWidth}
-        imageX={draggingModuleData.imageX}
-        imageY={draggingModuleData.imageY}
-        stroke={draggingModuleData.stroke}
-        strokeWidth={draggingModuleData.strokeWidth}
-      />
-    );
-  }
-
   renderFooter() {
     const { activeModules } = this.props;
 
@@ -728,7 +705,7 @@ let DesignTool = class extends Component {
           <div ref={node => { this.stageContainer = node }}>
             {this.renderSideBar()}
             <DesignToolStage
-              draggingModule={this.renderDraggingModule()}
+              // draggingModule={this.renderDraggingModule()}
               hideFloatingElements={this.hideFloatingElements}
               isDraggingToBoard={isDraggingToBoard}
               rotate={this.rotate}
@@ -771,7 +748,7 @@ const mapStateToProps = (state) => {
     boardSpecs: state.boardSpecs,
     activeProjectId: state.projects.activeProjectId,
     activeModules: state.activeModules.present,
-    draggingModuleData: state.draggingModule,
+    draggingModuleData: state.modules.dragging,
     hasUnsavedChanges: state.hasUnsavedChanges,
     showAllIcons: state.showAllIcons,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
@@ -792,8 +769,7 @@ const mapStateToProps = (state) => {
     topLeftAnchorY: state.anchorPositions.topLeft.y,
     tutorialStep: state.tutorial.step,
   };
-}
-;
+};
 
 DesignTool = withRouter(DesignTool);
 export default connect(mapStateToProps)(DesignTool);
@@ -803,7 +779,7 @@ DesignTool.propTypes = {
   boardSpecs: PropTypes.object.isRequired,
   activeProjectId: PropTypes.string,
   activeModules: PropTypes.array.isRequired,
-  draggingModuleData: PropTypes.object.isRequired,
+  // draggingModuleData: PropTypes.object.isRequired,
   hasUnsavedChanges: PropTypes.bool.isRequired,
   showAllIcons: PropTypes.bool.isRequired,
   isMouseOverModule: PropTypes.bool.isRequired,

@@ -14,7 +14,7 @@ import getPerimeterSide from 'helpers/getPerimeterSide';
 
 const getTopLeftAnchor = compose(
   getKonvaChildByIndex(1),
-  getKonvaParentByName('boardGroup')
+  getKonvaParentByName('boardGroup'),
 );
 
 export default class ModulesItem extends PureComponent {
@@ -24,8 +24,7 @@ export default class ModulesItem extends PureComponent {
     this.state = {
       image: null,
       strokeWidth: 1,
-      isDragging: false,
-    };
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -85,11 +84,6 @@ export default class ModulesItem extends PureComponent {
     }
   }
 
-  showDependencies() {
-    const {  index } = this.props;
-    store.dispatch(actions.updateClickedModuleIndex(index));
-  }
-
   callWithTimeout() {
     this.highlightRuleBreakingModules();
   }
@@ -113,18 +107,10 @@ export default class ModulesItem extends PureComponent {
       this.highlightRuleBreakingModules();
       this.props.toggleShouldCheckCollission();
     }
-
-    if (prevProps.unmetDependencies.length !== this.props.unmetDependencies.length) {
-      store.dispatch(actions.triggerThumbnailUpdate());
-    }
   }
 
   getFill() {
-    const { id, unmetDependencies } = this.props;
-
-    if (id === '100') {
-      return null;
-    }
+    const { unmetDependencies } = this.props;
 
     if (unmetDependencies.length > 0) {
       return 'red';
@@ -196,8 +182,9 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleClick(evt) {
+    const { index } = this.props;
     if (evt.evt.which === 1) {
-      this.showDependencies();
+      store.dispatch(actions.updateClickedModuleIndex(index));
     }
   }
 
@@ -228,10 +215,6 @@ export default class ModulesItem extends PureComponent {
     const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
       ? getTopLeftAnchor(moduleGroup)
       : null;
-
-    if (this.props.id === "107") {
-      // console.log(this.props.text);
-    }
 
     return (
       <Group

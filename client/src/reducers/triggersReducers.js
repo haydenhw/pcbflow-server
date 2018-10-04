@@ -7,12 +7,6 @@ const defaultState = {
 }
 
 export const triggers = (state = false, action) => {
-  switch (action.type) {
-    case actions.TOGGLE_HAS_UNSAVED_CHANGES:
-      return false;
-  }
-
-
   if (doesModifyProject(action)) {
     return {
       ...state,

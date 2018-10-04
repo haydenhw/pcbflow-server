@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import undoable from 'helpers/undoable';
 import skipIfImageNodeNull from 'helpers/skipIfImageNodeNull';
 
-import { activeModules, moduleBank, draggingModule, hoveredModule, clickedModuleIndex } from './moduleReducers';
+import { activeModules, modules, moduleBank, draggingModule, hoveredModule, clickedModuleIndex } from './moduleReducers';
 import { projects } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
@@ -23,6 +23,7 @@ export default combineReducers({
   showAllIcons,
   clickedModuleIndex,
   modal,
+  modules,
   moduleData,
   mouseEvents,
   projects,

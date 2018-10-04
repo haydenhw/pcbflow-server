@@ -11,6 +11,26 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
 //   return state;
 // };
 
+const defaultState =  {
+  dragging: {
+    imageNode: {},
+  },
+  hovered: null,
+  clicked: null,
+}
+
+export const modules = (state = defaultState, action) => {
+  switch (action.type) {
+    case actions.CHANGE_DRAGGING_MODULE:
+      return {
+        ...state,
+        dragging: action.moduleData,
+      }
+  }
+
+  return state;
+};
+
 export const draggingModule = (state = {}, action) => {
   switch (action.type) {
     case actions.CHANGE_DRAGGING_MODULE:

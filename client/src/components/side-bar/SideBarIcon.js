@@ -19,7 +19,7 @@ export default class SideBarIcon extends Component {
       const { clientX, clientY } = evt;
       const updatedModuleData = Object.assign({}, moduleData, {
         moduleX: clientX - (width / 2),
-        moduleY: clientY - (height /2),
+        moduleY: clientY - (height / 2),
       });
 
       this.props.updateClientPosition(evt);

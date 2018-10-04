@@ -153,7 +153,6 @@ class DesignToolStage extends Component {
   render() {
     const {
       shouldRenderBoard,
-      draggingModule,
       isMouseDownOnIcon,
       isMouseDown,
       isMouseOverModule,
@@ -208,7 +207,7 @@ const mapStateToProps = state => {
 
   return ({
     activeProjectId: state.projects.activeProjectId,
-    dragModuleData: state.draggingModule,
+    dragModuleData: state.modules.dragging,
     isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
@@ -226,7 +225,6 @@ export default connect(mapStateToProps)(DesignToolStage);
 DesignToolStage.propTypes = {
   activeProjectName: PropTypes.string,
   shouldRenderBoard: PropTypes.bool.isRequired,
-  draggingModule: PropTypes.object.isRequired,
   isMouseDownOnIcon: PropTypes.bool.isRequired,
   isMouseDown: PropTypes.bool.isRequired,
   isMouseOverModule: PropTypes.bool.isRequired,
