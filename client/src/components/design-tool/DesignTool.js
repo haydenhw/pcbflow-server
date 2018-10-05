@@ -209,7 +209,7 @@ let DesignTool = class extends Component {
       store.dispatch(actions.toggleShouldRenderSideBar(true));
     }
 
-    this.timeOut = setTimeout(() => store.dispatch(actions.mouseDownOnIcon(false)), 1);
+    this.timeOut = setTimeout(() => store.dispatch(actions.isMouseDownOnIcon(false)), 1);
     this.setState({ isDraggingToBoard: false });
   }
 
@@ -746,7 +746,7 @@ const mapStateToProps = (state) => {
     isTutorialActive: state.tutorial.isTutorialActive,
     clickedModuleIndex: state.modules.clicked,
     modalType: state.modal.modalType,
-    moduleData: state.moduleData,
+    moduleData: state.modules.dataList,
     projects: state.projects.items,
     saveProjectTrigger: state.triggers.saveProjectTrigger,
     hoveredModuleIndex: state.modules.hovered.index,

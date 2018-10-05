@@ -8,14 +8,14 @@ describe('mouseEvents reducer', () => {
   it('It should return true if mouse is down on an icon', () => {
     const initialState = {
       isMouseOverModule: false,
-      mouseDownOnIcon: false,
+      isMouseDownOnIcon: false,
       isMouseDown: false,
       isContextMenuOpen: false,
     };
 
     const expectedState = {
       isMouseOverModule: false,
-      mouseDownOnIcon: true,
+      isMouseDownOnIcon: true,
       isMouseDown: false,
       isContextMenuOpen: false,
     };
@@ -31,14 +31,14 @@ describe('mouseEvents reducer', () => {
   it('It should return toggle the current state value if mouse is down', () => {
     const initialState = {
       isMouseOverModule: false,
-      mouseDownOnIcon: false,
+      isMouseDownOnIcon: false,
       isMouseDown: false,
       isContextMenuOpen: false,
     };
 
     const expectedState = {
       isMouseOverModule: false,
-      mouseDownOnIcon: false,
+      isMouseDownOnIcon: false,
       isMouseDown: true,
       isContextMenuOpen: false,
     };
@@ -54,14 +54,14 @@ describe('mouseEvents reducer', () => {
   it('It should return toggle the current state value if mouse over a ', () => {
     const initialState = {
       isMouseOverModule: false,
-      mouseDownOnIcon: false,
+      isMouseDownOnIcon: false,
       isMouseDown: false,
       isContextMenuOpen: false,
     };
 
     const expectedState = {
       isMouseOverModule: true,
-      mouseDownOnIcon: false,
+      isMouseDownOnIcon: false,
       isMouseDown: false,
       isContextMenuOpen: false,
     };

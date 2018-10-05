@@ -6,7 +6,7 @@ import {
   strokeWidth,
 } from 'config/moduleConfig';
 
-export const modulesData = [
+export const moduleData = [
   {
     fontSize,
     fontFamily,

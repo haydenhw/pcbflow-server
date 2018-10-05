@@ -1,5 +1,4 @@
 import * as actions from 'actions/indexActions';
-import { modulesData } from '../config/modulesData';
 
 export const showAllIcons = (state = false, action) => {
   switch (action.type) {
@@ -21,7 +20,7 @@ export const shouldRenderSideBar = (state = true, action) => {
   }
 };
 
-export const moduleData = (state = modulesData, action) => {
+export const moduleData = (state = moduleData, action) => {
   switch (action.type) {
     case actions.TOGGLE_HAS_TOOLTIP:
       return state.map((module) => {

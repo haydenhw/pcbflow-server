@@ -25,14 +25,14 @@ export default class SideBarIcon extends Component {
       this.props.updateClientPosition(evt);
       this.props.toggleDraggingToBoard();
 
-      store.dispatch(actions.mouseDownOnIcon(true));
+      store.dispatch(actions.isMouseDownOnIcon(true));
       store.dispatch(actions.toggleHasTooltip(id));
       store.dispatch(actions.updateDraggingModule(updatedModuleData));
     }
   }
 
   handleMouseOut() {
-    store.dispatch(actions.mouseDownOnIcon(false));
+    store.dispatch(actions.isMouseDownOnIcon(false));
   }
 
   render() {

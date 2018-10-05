@@ -1,5 +1,5 @@
 import * as actions from 'actions/indexActions';
-import { modulesData } from '../config/modulesData';
+import { moduleData } from '../config/moduleData';
 
 const defaultState = {
   showSavingMessage: false,

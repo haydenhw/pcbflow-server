@@ -42,7 +42,7 @@ class Modules extends Component {
   }
 
   render() {
-    const modules = this.props.modules/* [modulesData[0]].*/.map((module, index) =>
+    const modules = this.props.modules/* [moduleData[0]].*/.map((module, index) =>
       <ModulesItem
         ref="module"
         key={index}
@@ -102,7 +102,7 @@ const mapStateToProps = state => ({
   checkCollisionTrigger: state.boardSpecs.checkCollisionTrigger,
   showAllIcons: state.showAllIcons,
   modules: state.activeModules.present,
-  moduleData: state.moduleData,
+  moduleData: state.modules.dataList,
   hoveredModuleProps: state.modules.hovered,
   topLeftAnchor: state.anchorPositions.topLeft,
   tutorialStep: state.tutorial.step,

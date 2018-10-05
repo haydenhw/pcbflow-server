@@ -16,7 +16,7 @@ import Board from 'components/board/Board';
 import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
 
-import { modulesData } from 'config/modulesData';
+import { moduleData } from 'config/moduleData';
 
 const getModuleGroup = ({ moduleX, moduleY }) => new Konva.Group({
   x: moduleX,
@@ -206,7 +206,7 @@ const mapStateToProps = state => {
   return ({
     activeProjectId: state.projects.activeProjectId,
     dragModuleData: state.modules.dragging,
-    isMouseDownOnIcon: state.mouseEvents.mouseDownOnIcon,
+    isMouseDownOnIcon: state.mouseEvents.isMouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
     hoveredModuleIndex: state.modules.hovered.index,
