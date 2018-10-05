@@ -7,6 +7,10 @@ const defaultState =  {
   clicked: null,
 }
 
+function updateObject(oldObject, newValues) {
+    return Object.assign({}, oldObject, newValues);
+}
+
 export const modules = (state = defaultState, action) => {
   switch (action.type) {
     case actions.UPDATE_DRAGGING_MODULE:
@@ -14,25 +18,20 @@ export const modules = (state = defaultState, action) => {
         ...state,
         dragging: action.moduleData,
       }
-  }
-
-  return state;
-};
-
-export const hoveredModule = (state = {}, action) => {
-  switch (action.type) {
     case actions.UPDATE_HOVERED_MODULE:
-      return action.moduleData;
-      break;
-    case actions.UPDATE_MODULE_POSITION:
-      const { x, y } = action.modulePosition;
       return {
         ...state,
-        x,
-        y,
+        hovered: action.moduleData,
+      }
+    case actions.UPDATE_MODULE_POSITION:
+      const { x, y } = action.modulePosition;
+      const updatedModule =  updateObject(state.hovered, { x, y });
+
+      return {
+        ...state,
+        hovered: updatedModule,
       };
-      break;
-    case actions.ROTATE_HOVERED_MODULE:
+    case actions.ROTATE_HOVERED_MODULE: {
       const {
         rotation,
         boundToSideIndex,
@@ -45,18 +44,22 @@ export const hoveredModule = (state = {}, action) => {
         index,
       } = action.rotationData;
 
-      return {
-        ...state,
+      const updatedModule = updateObject(state.hovered, {
         boundToSideIndex,
         innerGroupX,
         innerGroupY,
         rotation,
         x: parentGroupX,
         y: parentGroupY,
+      });
+
+      return {
+        ...state,
+        hovered: updatedModule
       };
-    default:
-      return state;
+    }
   }
+  return state;
 };
 
 export const clickedModuleIndex = (state = null, action) => {
