@@ -59,10 +59,7 @@ let DesignTool = class extends Component {
     this.state = {
       tutorialSteps,
       tourSteps,
-      x: 0,
-      y: 0,
       disabledIconExceptions: null,
-      image: null,
       isDraggingToBoard: false,
       isNavMenuActive: false,
       isMobile: false,
@@ -85,8 +82,6 @@ let DesignTool = class extends Component {
     this.toggleNavMenu = this.toggleNavMenu.bind(this);
     this.toggleShouldUpadateThumbnail = this.toggleShouldUpadateThumbnail.bind(this);
     this.unhideFloatingElements = this.unhideFloatingElements.bind(this);
-    this.updateClientPosition = this.updateClientPosition.bind(this);
-    this.updateState = this.updateState.bind(this);
 
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
     this.bound_handleMouseDown = this.handleMouseDown.bind(this);
@@ -310,7 +305,6 @@ let DesignTool = class extends Component {
     const { joyride } = this.props;
 
     if (result.type === 'step:before') {
-      // Keep internal state in sync with joyride
       this.setState({ step: result.index });
     }
 
@@ -440,24 +434,6 @@ let DesignTool = class extends Component {
     this.setState({
       shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail,
     });
-  }
-
-  updateClientPosition(evt) {
-    if (this.stageContainer) {
-      const stageOffsetX = Number(this.stageContainer.getBoundingClientRect().left);
-      const stageOffsetY = Number(this.stageContainer.getBoundingClientRect().top);
-      const x = Number(evt.clientX) - stageOffsetX;
-      const y = Number(evt.clientY) - stageOffsetY;
-
-      this.setState({
-        x,
-        y,
-      });
-    }
-  }
-
-  updateState(url) {
-    this.setState({ image: url });
   }
 
   unhideFloatingElements() {
@@ -618,7 +594,6 @@ let DesignTool = class extends Component {
      moduleData,
    } = this.props;
 
-    console.log(showAllIcons)
     const { isDraggingToBoard, disabledIconExceptions } = this.state;
 
     if (!isDraggingToBoard) {
@@ -631,7 +606,6 @@ let DesignTool = class extends Component {
           activeModulesLength={activeModules.length}
           showAll={this.showAllModuleIcons}
           toggleDraggingToBoard={this.toggleDraggingToBoard}
-          updateClientPosition={this.updateClientPosition}
         />
       );
     }
@@ -702,7 +676,6 @@ let DesignTool = class extends Component {
               toggleShouldExportPDF={this.toggleShouldExportPDF.bind(this)}
               toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail}
               unhideFloatingElements={this.unhideFloatingElements}
-              updateState={this.updateState}
             />
           </div>
         </div>

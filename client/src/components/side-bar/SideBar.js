@@ -47,7 +47,6 @@ export default class SideBar extends Component {
       activeModulesLength,
       toggleDraggingToBoard,
       toggleIsClicked,
-      updateClientPosition,
     } = this.props;
 
     const unsatisfiedModule = getUnsatisfiedModule(clickedModuleIndex, activeModules, moduleData);
@@ -67,7 +66,6 @@ export default class SideBar extends Component {
               activeModulesLength={activeModulesLength}
               toggleDraggingToBoard={toggleDraggingToBoard}
               toggleIsClicked={toggleIsClicked}
-              updateClientPosition={updateClientPosition}
               visibleIcons={visibleIcons}
             />
           </div>
@@ -84,5 +82,4 @@ SideBar.propTypes = {
   showAll: PropTypes.func.isRequired,
   toggleDraggingToBoard: PropTypes.func.isRequired,
   toggleIsClicked: PropTypes.func,
-  updateClientPosition: PropTypes.func.isRequired,
 };

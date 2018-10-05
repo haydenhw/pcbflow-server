@@ -22,7 +22,6 @@ export default class SideBarIcon extends Component {
         moduleY: clientY - (height / 2),
       });
 
-      this.props.updateClientPosition(evt);
       this.props.toggleDraggingToBoard();
 
       store.dispatch(actions.isMouseDownOnIcon(true));

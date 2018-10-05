@@ -1,4 +1,3 @@
-// fix shouldComponentUpdate function
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -7,14 +6,13 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import { getUnsatisfiedModuleIds, getUnmetDependencies } from 'helpers/dependencies';
-import isObjectEqual from 'helpers/isObjectEqual'
 
 import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
 
 const SideBarIconList = class extends Component {
   renderSideBarIcon(module, index, isDisabled) {
-    const { toggleDraggingToBoard, toggleIsClicked, updateClientPosition } = this.props;
+    const { toggleDraggingToBoard, toggleIsClicked } = this.props;
 
     return (
       <SideBarIcon
@@ -22,7 +20,6 @@ const SideBarIconList = class extends Component {
         moduleData={module}
         toggleDraggingToBoard={toggleDraggingToBoard}
         toggleIsClicked={toggleIsClicked}
-        updateClientPosition={updateClientPosition}
       />
     );
   }
@@ -77,5 +74,4 @@ SideBarIconList.propTypes = {
   activeModules: PropTypes.array.isRequired,
   toggleDraggingToBoard: PropTypes.func.isRequired,
   toggleIsClicked: PropTypes.func,
-  updateClientPosition: PropTypes.func.isRequired,
 };
