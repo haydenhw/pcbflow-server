@@ -103,7 +103,7 @@ const mapStateToProps = state => ({
   showAllIcons: state.showAllIcons,
   modules: state.activeModules.present,
   moduleData: state.moduleData,
-  hoveredModuleProps: state.hoveredModule,
+  hoveredModuleProps: state.modules.hovered,
   topLeftAnchor: state.anchorPositions.topLeft,
   tutorialStep: state.tutorial.step,
 });

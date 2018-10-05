@@ -2,8 +2,8 @@ import * as actions from '../actions/indexActions';
 import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
 const defaultState =  {
-  dragging: null,
-  hovered: null,
+  dragging: {},
+  hovered: {},
   clicked: null,
 }
 
@@ -13,11 +13,13 @@ function updateObject(oldObject, newValues) {
 
 export const modules = (state = defaultState, action) => {
   switch (action.type) {
+    // dragging
     case actions.UPDATE_DRAGGING_MODULE:
       return {
         ...state,
         dragging: action.moduleData,
       }
+    // hovered
     case actions.UPDATE_HOVERED_MODULE:
       return {
         ...state,
@@ -58,15 +60,14 @@ export const modules = (state = defaultState, action) => {
         hovered: updatedModule
       };
     }
-  }
-  return state;
-};
 
-export const clickedModuleIndex = (state = null, action) => {
-  switch (action.type) {
+  //clicked
     case actions.UPDATE_LAST_CLICKED_MODULE:
-      return action.index;
-    default:
-      return state;
+      return {
+        ...state,
+        clicked: action.index
+      };
   }
+
+  return state;
 };

@@ -126,6 +126,19 @@ describe('modules reducer', () => {
     assert.deepEqual(resultState.hovered, expectedState);
   });
 /**/////////////////////////////////////
+  it('It should update clicked module index', () => {
+    const initialState = {
+      clicked: 2,
+    };
+    const expectedState = 3;
+
+    const resultState = modules(deepFreeze(initialState), {
+      type: 'UPDATE_LAST_CLICKED_MODULE',
+      index: 3,
+    });
+
+    assert.deepEqual(resultState.clicked, expectedState);
+  });
 });
 
 
