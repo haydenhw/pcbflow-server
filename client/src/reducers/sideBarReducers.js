@@ -19,18 +19,3 @@ export const shouldRenderSideBar = (state = true, action) => {
       return state;
   }
 };
-
-export const moduleData = (state = moduleData, action) => {
-  switch (action.type) {
-    case actions.TOGGLE_HAS_TOOLTIP:
-      return state.map((module) => {
-        const updatedModuleProps = {
-          ...module,
-          hasTooltip: false,
-        };
-        return action.id === module.id ? updatedModuleProps : module;
-      });
-    default:
-      return state;
-  }
-};

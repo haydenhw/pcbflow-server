@@ -34,7 +34,6 @@ export const moduleData = [
     info: null,
     id: '105',
     dependencies: ['109'],
-    hasTooltip: true,
   },
   {
     fontSize,
@@ -289,7 +288,6 @@ export const moduleData = [
     info: null,
     id: '109',
     dependencies: ['110'],
-    hasTooltip: true,
   },
   {
     fontSize,
@@ -345,6 +343,5 @@ export const moduleData = [
     info: null,
     id: '110',
     dependencies: [],
-    hasTooltip: true,
   },
 ];

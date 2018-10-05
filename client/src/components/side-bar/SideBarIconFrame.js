@@ -12,7 +12,6 @@ export default function SideBarIconFrame(props) {
   const {
     children,
     disabled,
-    hasTooltip,
     id,
     moduleName,
     modulePrice,
@@ -20,7 +19,7 @@ export default function SideBarIconFrame(props) {
 
   return (
     <div
-      className={`icon-frame-container ${hasTooltip ? `toolTip-${id}` : ''}`}
+      className={`icon-frame-container`}
       style={props.disabled ? fadeOut : {}}
     >
       <div className="module-icon-frame-title">
@@ -39,7 +38,6 @@ export default function SideBarIconFrame(props) {
 SideBarIconFrame.propTypes = {
   children: PropTypes.object.isRequired,
   disabled: PropTypes.bool.isRequired,
-  hasTooltip: PropTypes.bool,
   id: PropTypes.string.isRequired,
   moduleName: PropTypes.string.isRequired,
   modulePrice: PropTypes.number.isRequired,

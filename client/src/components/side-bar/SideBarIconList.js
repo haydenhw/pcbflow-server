@@ -39,7 +39,6 @@ const SideBarIconList = class extends Component {
         moduleName={module.text}
         modulePrice={module.price}
         id={module.id}
-        hasTooltip={module.hasTooltip}
         disabled={isDisabled}
       >
         {this.renderSideBarIcon(module, index, isDisabled)}
