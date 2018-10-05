@@ -6,7 +6,7 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
 const defaultState =  {
   dragging: {},
   hovered: {},
-  clicked: null,
+  clickedIndex: null,
   dataList: moduleData,
 }
 
@@ -63,10 +63,10 @@ export const modules = (state = defaultState, action) => {
       };
     }
   //clicked
-    case actions.UPDATE_LAST_CLICKED_MODULE:
+    case actions.UPDATE_CLICKED_MODULE:
       return {
         ...state,
-        clicked: action.index
+        clickedIndex: action.index
       };
   }
 

@@ -66,7 +66,6 @@ let DesignTool = class extends Component {
       isDraggingToBoard: false,
       isNavMenuActive: false,
       isMobile: false,
-      isSideBarHidden: false,
       joyrideStep: 0,
       running: false,
       shouldExportPDF: false,
@@ -205,8 +204,6 @@ let DesignTool = class extends Component {
 
     if (isNewModuleWithinBounds && isDraggingToBoard) {
       store.dispatch(actions.pushToactiveModules(newModule));
-    } else {
-      store.dispatch(actions.toggleShouldRenderSideBar(true));
     }
 
     this.timeOut = setTimeout(() => store.dispatch(actions.isMouseDownOnIcon(false)), 1);
@@ -424,7 +421,6 @@ let DesignTool = class extends Component {
 
   toggleDraggingToBoard() {
     this.setState({ isDraggingToBoard: true });
-    store.dispatch(actions.toggleShouldRenderSideBar(false));
   }
 
   toggleShouldExportPDF() {
@@ -620,9 +616,9 @@ let DesignTool = class extends Component {
      showAllIcons,
      clickedModuleIndex,
      moduleData,
-     shouldRenderSideBar
    } = this.props;
 
+    console.log(showAllIcons)
     const { isDraggingToBoard, disabledIconExceptions } = this.state;
 
     if (!isDraggingToBoard) {
@@ -739,12 +735,11 @@ const mapStateToProps = (state) => {
     activeProjectId: state.projects.activeProjectId,
     activeModules: state.activeModules.present,
     draggingModuleData: state.modules.dragging,
-    showAllIcons: state.showAllIcons,
+    showAllIcons: state.sideBar.showAllIcons,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
-    // showSavingMessage: state.projects.showSavingMessage,
     showSavingMessage: state.nav.showSavingMessage,
-    isTutorialActive: state.tutorial.isTutorialActive,
-    clickedModuleIndex: state.modules.clicked,
+    isTutorialActive: state.tutorial.isActive,
+    clickedModuleIndex: state.modules.clickedIndex,
     modalType: state.modal.modalType,
     moduleData: state.modules.dataList,
     projects: state.projects.items,
@@ -752,7 +747,6 @@ const mapStateToProps = (state) => {
     hoveredModuleIndex: state.modules.hovered.index,
     hoveredModuleProps: state.modules.hovered,
     shouldRenderModal: state.modal.shouldRenderModal,
-    shouldRenderSideBar: state.shouldRenderSideBar,
     shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
     todoBools: state.tutorial.todoBools,
     topLeftAnchorX: state.anchorPositions.topLeft.x,
@@ -782,7 +776,6 @@ DesignTool.propTypes = {
   hoveredModuleIndex: PropTypes.number,
   hoveredModuleProps: PropTypes.object.isRequired,
   shouldRenderModal: PropTypes.bool.isRequired,
-  shouldRenderSideBar: PropTypes.bool.isRequired,
   shouldRenderTodoList: PropTypes.bool.isRequired,
   todoBools: PropTypes.array.isRequired,
   tutorialStep: PropTypes.number.isRequired,

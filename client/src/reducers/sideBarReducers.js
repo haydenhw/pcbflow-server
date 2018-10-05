@@ -1,20 +1,27 @@
 import * as actions from 'actions/indexActions';
 
-export const showAllIcons = (state = false, action) => {
+const defaultState = {
+  show: false,
+  showAllIcons: false,
+}
+
+export const sideBar = (state = defaultState, action) => {
   switch (action.type) {
     case actions.UPDATE_SHOW_ALL_ICONS:
-      return action.bool;
-    case actions.UPDATE_LAST_CLICKED_MODULE:
-      return false;
-    default:
-      return state;
-  }
-};
-
-export const shouldRenderSideBar = (state = true, action) => {
-  switch (action.type) {
-    case actions.TOGGLE_SHOULD_RENDER_SIDEBAR:
-      return action.bool;
+      return {
+        ...state,
+        showAllIcons: action.bool,
+      }
+    case actions.UPDATE_CLICKED_MODULE:
+      return {
+        ...state,
+        show: false,
+      }
+    case actions.TOGGLE_SIDEBAR:
+      return {
+        ...state,
+        show: !state.show,
+      }
     default:
       return state;
   }

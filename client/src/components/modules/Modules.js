@@ -100,7 +100,7 @@ const mapStateToProps = state => ({
   anchorPositions: state.anchorPositions,
   boardSpecs: state.boardSpecs,
   checkCollisionTrigger: state.boardSpecs.checkCollisionTrigger,
-  showAllIcons: state.showAllIcons,
+  showAllIcons: state.sideBar.showAllIcons,
   modules: state.activeModules.present,
   moduleData: state.modules.dataList,
   hoveredModuleProps: state.modules.hovered,

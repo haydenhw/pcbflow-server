@@ -16,6 +16,7 @@ export default function rotate(hoveredModuleProps, anchorPositions, boardSpecs) 
     height,
     boundToSideIndex,
   } = hoveredModuleProps;
+
   const { topLeft } = anchorPositions;
   let newParentGroupCoordinates;
   let newInnerGroupCoordinates;
@@ -25,7 +26,7 @@ export default function rotate(hoveredModuleProps, anchorPositions, boardSpecs) 
     rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
   );
 
-  const rotationData = {
+  return {
     index,
     boundToSideIndex: newInnerGroupCoordinates.boundToSideIndex,
     rotation: newInnerGroupCoordinates.rotation,
@@ -35,5 +36,4 @@ export default function rotate(hoveredModuleProps, anchorPositions, boardSpecs) 
     parentGroupY: newParentGroupCoordinates ? newParentGroupCoordinates.y : y,
   };
 
-  return rotationData;
 }

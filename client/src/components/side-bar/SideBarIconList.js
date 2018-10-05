@@ -63,7 +63,7 @@ const SideBarIconList = class extends Component {
 
 const mapStateToProps = state => ({
   disabledIconExceptions: state.tutorial.disabledIconExceptions,
-  showAllIcons: state.showAllIcons,
+  showAllIcons: state.sideBar.showAllIcons,
   moduleData: state.modules.dataList,
   activeModules: state.activeModules.present,
 });

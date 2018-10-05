@@ -1,65 +1,40 @@
+/* eslint-env mocha */
+/* eslint-disable import/no-extraneous-dependencies */
+
 import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { iconVisibity, shouldRenderSideBar, moduleData } from './sideBarReducers';
+import { sideBar } from './sideBarReducers';
 
-describe('iconVisibity reducer', () => {
-  it('It should update visible icons', () => {
+describe('sideBar reducer', () => {
+  it('It should toggle show bool', () => {
     const initialState = {
-      mode: 'ALL',
-      dependencies: [],
+      show: false;
     };
 
     const expectedState = {
-      mode: 'DEPENDECY',
-      dependencies: [],
+      show: true,
     };
 
-    const resultState = iconVisibity(deepFreeze(initialState), {
-      type: 'UPDATE_ICON_VISBILITY',
-      mode: 'DEPENDECY',
+    const resultState = sideBar(deepFreeze(initialState), {
+      type: 'TOGGLE_SIDEBAR',
     });
 
     assert.deepEqual(resultState, expectedState);
   });
 
-  it('It should update dependency array', () => {
+  it('It should toggle showAllIcons bool', () => {
     const initialState = {
-      mode: 'ALL',
-      dependencies: [],
+      showAllIcons: false,
     };
 
     const expectedState = {
-      mode: 'ALL',
-      dependencies: ['101', '102'],
-      index: 3,
-      moduleName: 'COM',
+      showAllIcons: true,
     };
 
-    const resultState = iconVisibity(deepFreeze(initialState), {
-      type: 'UPDATE_CURRENT_DEPENDENCIES',
-      dependencyData: {
-        dependencies: ['101', '102'],
-        index: 3,
-        text: 'COM',
-      },
-
-    });
-
-    assert.deepEqual(resultState, expectedState);
-  });
-});
-
-describe('shouldRenderSideBar reducer', () => {
-  it('It should toggle shouldRenderSideBar boolean ', () => {
-    const initialState = false;
-
-    const expectedState = true;
-
-    const resultState = shouldRenderSideBar(deepFreeze(initialState), {
-      type: 'TOGGLE_SHOULD_RENDER_SIDEBAR',
-      bool: true,
+    const resultState = sideBar(deepFreeze(initialState), {
+      type: 'UPDATE_SHOW_ALL_ICONS',
     });
 
     assert.deepEqual(resultState, expectedState);

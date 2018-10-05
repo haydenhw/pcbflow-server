@@ -19,13 +19,13 @@ function adjustDimesionsForRotation(node) {
 
     return adjustedObj;
   }
+
   return node.attrs;
 }
 
 export default function enforceRules(nodeArray, perimeterNode, ruleBreakingAction, ruleFollowingAction) {
   const collidingNodes = checkCollision(nodeArray, adjustDimesionsForRotation);
   const outOfBoundsNodes = checkExceedsPerimter(nodeArray, perimeterNode, adjustDimesionsForRotation);
-  // console.log(outOfBoundsNodes);
   const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes];
   const ruleFollowingNodes = nodeArray.diff(ruleBreakingNodes);
 

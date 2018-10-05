@@ -3,8 +3,8 @@ import * as actions from 'actions/indexActions';
 const devMode = false;
 
 const devState = {
-  isTutorialActive: true,
-  isTutorialComplete: false,
+  isActive: true,
+  isComplete: false,
   shouldRenderTodoList: false,
   disabledIconExceptions: null,
   step: 5,
@@ -13,12 +13,12 @@ const devState = {
 };
 
 const defaultState = {
-  isTutorialActive: false,
-  isTutorialComplete: false,
-  shouldRenderTodoList: false,
   disabledIconExceptions: null,
-  step: 0,
+  isActive: false,
+  isComplete: false,
   previousStep: null,
+  shouldRenderTodoList: false,
+  step: 0,
   todoBools: [false, false, false, false, false],
 };
 
@@ -27,7 +27,7 @@ export const tutorial = (state = devMode ? devState : defaultState, action) => {
     case actions.TOGGLE_IS_TUTORIAL_ACTIVE:
       return {
         ...state,
-        isTutorialActive: !state.isTutorialActive,
+        isActive: !state.isActive,
       };
     case actions.UPDATE_SHOULD_RENDER_TODO_LIST:
       return {
@@ -37,7 +37,7 @@ export const tutorial = (state = devMode ? devState : defaultState, action) => {
     case actions.EXIT_TUTORIAL:
       return {
         ...state,
-        isTutorialActive: !state.isTutorialActive,
+        isActive: !state.isActive,
         shouldRenderTodoList: action.bool,
       };
     case actions.UPDATE_DISABLED_ICON_EXCEPTIONS:
@@ -50,7 +50,6 @@ export const tutorial = (state = devMode ? devState : defaultState, action) => {
         ...state,
         step: state.step + 1,
         previousStep: state.step,
-
       };
     case actions.DECREMENT_STEP:
       return {
@@ -76,4 +75,3 @@ export const tutorial = (state = devMode ? devState : defaultState, action) => {
       return state;
   }
 };
-

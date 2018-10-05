@@ -35,9 +35,9 @@ export const updateDraggingModule = moduleData => ({
   moduleData,
 });
 
-export const UPDATE_LAST_CLICKED_MODULE = 'UPDATE_LAST_CLICKED_MODULE';
+export const UPDATE_CLICKED_MODULE = 'UPDATE_CLICKED_MODULE';
 export const updateClickedModuleIndex = index => ({
-  type: 'UPDATE_LAST_CLICKED_MODULE',
+  type: 'UPDATE_CLICKED_MODULE',
   index,
 });
 

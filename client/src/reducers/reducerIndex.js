@@ -8,8 +8,7 @@ import { projects } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { nav } from './navReducers';
-import { showSavingMessage } from './savedStateReducers';
-import { showAllIcons, shouldRenderSideBar, moduleData } from './sideBarReducers';
+import { sideBar } from './sideBarReducers';
 import { triggers } from './triggersReducers';
 import { tutorial } from './tutorialReducers';
 import { modal } from './modalReducers';
@@ -19,14 +18,11 @@ export default combineReducers({
   anchorPositions,
   boardSpecs,
   modal,
-  moduleData,
   modules,
   mouseEvents,
   nav,
   projects,
-  shouldRenderSideBar,
-  showAllIcons,
-  showSavingMessage,
+  sideBar,
   triggers,
   tutorial,
 });

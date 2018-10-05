@@ -6,7 +6,7 @@ const defaultState = {
   updateThumbnailTrigger: false,
 }
 
-export const triggers = (state = false, action) => {
+export const triggers = (state = defaultState, action) => {
   if (doesModifyProject(action)) {
     return {
       ...state,
