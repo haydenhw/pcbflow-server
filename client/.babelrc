@@ -1,0 +1,10 @@
+{
+  "presets": ["env", "react-app"],
+  "env": {
+    "test": {
+      "plugins": [
+        [ "babel-plugin-webpack-alias", { "config": "./config/webpack.config.test.js" } ]
+      ]
+    }
+  }
+}

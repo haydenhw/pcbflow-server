@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
-process.env.NODE_ENV = 'test'                                                                                                                                                                         
+process.env.NODE_ENV = 'test'
 
 module.exports = {
   resolve: {
@@ -19,7 +19,7 @@ module.exports = {
     },
     extensions: ['', '.js', '.jsx']
   },
-    
+
   module: {
     loaders: [
       {
@@ -35,7 +35,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]  
+  // plugins: [
+  //   new webpack.HotModuleReplacementPlugin()
+  // ]
 };
