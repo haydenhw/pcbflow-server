@@ -1,3 +1,5 @@
+import { projects } from '../../data/projects';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -120,6 +122,11 @@ let DesignTool = class extends Component {
       const currentRoute = this.props.location.pathname;
 
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
+
+      store.dispatch({
+        type: 'UPDATE_ORM',
+        payload: { projects },
+      });
     }
 
     this.addHanlders();
