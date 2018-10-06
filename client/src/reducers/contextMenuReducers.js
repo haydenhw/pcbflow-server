@@ -2,7 +2,7 @@ import * as actions from 'actions/indexActions';
 import { moduleData } from '../config/moduleData';
 
 const defaultState = {
-  show: false;
+  show: false,
 }
 
 export const contextMenu = (state = defaultState, action) => {

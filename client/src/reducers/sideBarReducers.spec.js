@@ -10,7 +10,7 @@ import { sideBar } from './sideBarReducers';
 describe('sideBar reducer', () => {
   it('It should toggle show bool', () => {
     const initialState = {
-      show: false;
+      show: false,
     };
 
     const expectedState = {

@@ -61,6 +61,7 @@
     "dotenv": "2.0.0",
     "interact.js": "^1.2.8",
     "konva": "^1.7.6",
+    "lodash.merge": "^4.6.1",
     "moment": "^2.20.1",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
