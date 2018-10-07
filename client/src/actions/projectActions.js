@@ -125,8 +125,8 @@ export const fetchProjectByIdSuccess = project => (dispatch, getState) => {
     const todoIds = ['101', '106', '107', '108', '112'];
 
     project.modules.forEach((module) => {
-      if (todoIds.indexOf(module.id) !== -1) {
-        dispatch(actions.completeTodo(module.id));
+      if (todoIds.indexOf(module.dependencyId) !== -1) {
+        dispatch(actions.completeTodo(module.dependencyId));
       }
     });
   }

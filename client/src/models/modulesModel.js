@@ -5,6 +5,7 @@ export default class Module extends Model {
     return {
       boundToSideIndex: attr(),
       dependencies: attr(),
+      dependencyId: attr(),
       height: attr(),
       iconHeight: attr(),
       iconSrc: attr(),

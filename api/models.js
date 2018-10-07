@@ -43,7 +43,7 @@ const ProjectSchema = mongoose.Schema({
     iconSrc: String,
     iconHeight: String,
     price: Number,
-    id: String,
+    dependencyId: String,
     dependencies: [String],
   }],
 });

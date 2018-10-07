@@ -72,7 +72,7 @@ class Modules extends Component {
         imageSrc={module.imageSrc}
         imageNode={module.imageNode}
         iconSrc={module.iconSrc}
-        id={module.id}
+        dependencyId={module.dependencyId}
         dependencies={module.dependencies}
         unmetDependencies={getUnmetDependencies(this.props.moduleData, this.props.modules, module.dependencies)}
         checkCollisionTrigger={this.props.checkCollisionTrigger}
