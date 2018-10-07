@@ -46,11 +46,6 @@ const ProjectSchema = mongoose.Schema({
     id: String,
     dependencies: [String],
   }],
-  moduleBank: [{
-    height: Number,
-    width: Number,
-    image: String
-  }],
 });
 
 const UserSchema = mongoose.Schema({

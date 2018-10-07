@@ -96,6 +96,7 @@ export function fetchProjects(jwt) {
     })
     .then(res => res.json())
     .then((data) => {
+      console.log(data)
       dispatch(fetchProjectsSuccess(data));
     });
     // .catch((err) => {

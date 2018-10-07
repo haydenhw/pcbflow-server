@@ -1,28 +1,24 @@
 import { Model, fk, attr } from "redux-orm";
 
 export default class Project extends Model {
-    static get fields() {
-        return {
-            board: attr(),
-            id: attr(),
-            name: attr(),
-            ownderId: attr(),
-        };
-    }
+  static get fields() {
+    return {
+      _id: attr(),
+      board: attr(),
+      id: attr(),
+      name: attr(),
+      ownderId: attr(),
+    };
+  }
 
-    static parse(projectData) {
+  static generate(newAttributes = {}) {
+    const combinedAttributes = {
+      ...defaultAttributes,
+      ...newAttributes,
+    };
 
-        return this.upsert(projectData);
-    }
-
-    static generate(newAttributes = {}) {
-
-        return this.create(newAttributes);
-    }
-
-    toJSON() {
-        return {...this.ref};
-    }
+    return this.create(combinedAttributes);
+  }
 }
 
 Project.modelName = "Project";

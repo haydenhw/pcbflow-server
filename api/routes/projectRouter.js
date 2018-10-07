@@ -57,7 +57,6 @@ projectRouter.post('/', (req, res) => {
       boardSpecs: req.body.boardSpecs,
       name: req.body.name,
       modules: req.body.modules,
-      moduleBank: req.body.moduleBank,
       ownerId: req.body.ownerId,
     })
   .then(project => res.status(201).json(project))
