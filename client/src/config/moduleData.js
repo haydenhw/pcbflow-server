@@ -32,7 +32,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 48,
     info: null,
-    id: '105',
+    dependencyId: '105',
     dependencies: ['109'],
   },
   {
@@ -60,7 +60,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 3.25,
     info: null,
-    id: '112',
+    dependencyId: '112',
     dependencies: ['105'],
   },
   {
@@ -88,7 +88,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 5,
     info: null,
-    id: '101',
+    dependencyId: '101',
     dependencies: ['105'],
   },
   {
@@ -116,7 +116,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 12,
     info: null,
-    id: '102',
+    dependencyId: '102',
     dependencies: ['103', '105', '111'],
   },
   {
@@ -144,7 +144,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 2.25,
     info: null,
-    id: '103',
+    dependencyId: '103',
     dependencies: ['105', '111'],
   },
   {
@@ -172,7 +172,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 2.25,
     info: null,
-    id: '104',
+    dependencyId: '104',
     dependencies: ['105'],
   },
   {
@@ -200,7 +200,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 13.5,
     info: null,
-    id: '106',
+    dependencyId: '106',
     dependencies: ['109'],
   },
   {
@@ -228,7 +228,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 1.2,
     info: null,
-    id: '107',
+    dependencyId: '107',
     dependencies: ['105'],
 
   },
@@ -257,7 +257,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 9.75,
     info: null,
-    id: '108',
+    dependencyId: '108',
     dependencies: ['105'],
 
   },
@@ -286,7 +286,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 9.75,
     info: null,
-    id: '109',
+    dependencyId: '109',
     dependencies: ['110'],
   },
   {
@@ -313,7 +313,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 4.25,
     info: null,
-    id: '111',
+    dependencyId: '111',
     dependencies: ['110'],
   },
   {
@@ -341,7 +341,7 @@ export const moduleData = [
     iconHeight: '70px',
     price: 5,
     info: null,
-    id: '110',
+    dependencyId: '110',
     dependencies: [],
   },
 ];

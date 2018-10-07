@@ -35,7 +35,7 @@ const SideBarIconList = class extends Component {
         key={index}
         moduleName={module.text}
         modulePrice={module.price}
-        id={module.id}
+        id={module.dependencyId}
         disabled={isDisabled}
       >
         {this.renderSideBarIcon(module, index, isDisabled)}

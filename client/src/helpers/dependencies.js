@@ -2,8 +2,8 @@
 import { compose } from 'helpers/functional';
 
 export function getUnsatisfiedModuleIds(modules = [], moduleDependencies) {
-  const activeModuleIds = modules.map(module => module.id);
-  const unmetDependencyIds = moduleDependencies.filter(id => activeModuleIds.indexOf(id) === -1);
+  const activeModuleIds = modules.map(module => module.dependencyId);
+  const unmetDependencyIds = moduleDependencies.filter(dependencyId => activeModuleIds.indexOf(dependencyId) === -1);
 
   return unmetDependencyIds;
 }
@@ -11,7 +11,7 @@ export function getUnsatisfiedModuleIds(modules = [], moduleDependencies) {
 export function getUnmetDependencies(moduleList, activeModules, moduleDependencies) {
   const unmetDependencyIds = getUnsatisfiedModuleIds(activeModules, moduleDependencies);
   const unmetDependencies = (
-    moduleList.filter(module => unmetDependencyIds.indexOf(module.id) !== -1)
+    moduleList.filter(module => unmetDependencyIds.indexOf(module.dependencyId) !== -1)
   );
 
   return unmetDependencies;
@@ -19,11 +19,11 @@ export function getUnmetDependencies(moduleList, activeModules, moduleDependenci
 
 export function getDependencyDiff(moduleArray) {
   const filterdArray = moduleArray.map((module, index) => {
-    const { id, dependencies, text } = module;
+    const { dependencyId, dependencies, text } = module;
 
     return {
       index,
-      id,
+      dependencyId,
       text,
       dependencies,
       metDependencies: [],
@@ -35,10 +35,10 @@ export function getDependencyDiff(moduleArray) {
 
     filterdArray.forEach((otherModule) => {
       if (
-        (dependencies.indexOf(otherModule.id) !== -1) &&
-        (metDependencies.indexOf(otherModule.id) === -1)
+        (dependencies.indexOf(otherModule.dependencyId) !== -1) &&
+        (metDependencies.indexOf(otherModule.dependencyId) === -1)
       ) {
-        metDependencies.push(otherModule.id);
+        metDependencies.push(otherModule.dependencyId);
       }
     });
   });
