@@ -4,7 +4,7 @@ import undoable from 'helpers/undoable';
 import skipIfImageNodeNull from 'helpers/skipIfImageNodeNull';
 
 import { activeModules, modules } from './moduleReducers';
-import { entities } from './ormReducers';
+import { entities } from './entitiesReducers';
 import { projects } from './projectReducers';
 import { boardSpecs, anchorPositions } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';

@@ -1,7 +1,6 @@
 const demoProject = {
   "name": "Dual Ethernet Board",
   "ownerId": "5a94fddfe718bc62f2608486",
-  "moduleBank": [],
   "modules": [
     {
       "id": "105",
