@@ -71,8 +71,7 @@ module.exports = {
       config: path.join(__dirname, '../src', 'config'),
       helpers: path.join(__dirname, '../src', 'helpers'),
       images: path.join(__dirname, '../src', 'images'),
-      'react': path.resolve(__dirname, '../node_modules', 'react')
-
+      react: path.resolve(__dirname, '../node_modules', 'react'),
     },
     extensions: ['', '.js', '.jsx']
   },

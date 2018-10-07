@@ -3,9 +3,10 @@ import { Model, fk, attr } from "redux-orm";
 export default class Project extends Model {
     static get fields() {
         return {
+            board: attr(),
             id: attr(),
             name: attr(),
-            modules: fk('Module'),
+            ownderId: attr(),
         };
     }
 

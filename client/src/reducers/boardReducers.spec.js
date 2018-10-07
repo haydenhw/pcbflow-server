@@ -11,7 +11,7 @@ describe('boardSpecs reducer', () => {
     // Fetch Basic Info about User
   it('It should return correct height and width', () => {
     const initialState = {
-      x: 10,
+      x: 10 ,
       y: 10,
       width: 600,
       height: 300,

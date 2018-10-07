@@ -7,7 +7,7 @@ export default class Module extends Model {
             txt: attr(),
             // x: attr(),
             // y: attr(),
-            module: fk("Project")
+            project: fk('Project')
         };
     }
 

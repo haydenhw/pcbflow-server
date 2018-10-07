@@ -1,3 +1,4 @@
+import orm from '../../schema/schema';
 import { projects } from '../../data/projects';
 
 import React, { Component } from 'react';
@@ -120,14 +121,25 @@ let DesignTool = class extends Component {
     if (this.props.projects.length === 0) {
       const projectId = this.props.params.projectId;
       const currentRoute = this.props.location.pathname;
-
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
 
-      store.dispatch({
+////////////////////////////////////////////
+
+      setTimeout(() => {
+        store.dispatch({
         type: 'UPDATE_ORM',
         payload: { projects },
-      });
+      }, 0);
+      })
+
+      setTimeout(() => {
+        store.dispatch({
+        type: 'UPDATE_MODULE',
+      }, 2000);
+      })
+
     }
+////////////////////////////////////////////
 
     this.addHanlders();
     this.checkIfMobile();
@@ -705,6 +717,18 @@ const mapStateToProps = (state) => {
     ? activeProject.boardSpecs.thumbnail
     : null
   );
+
+  // const projectModel = orm.session(state.entities).Project
+  const moduleModel = orm.session(state.entities).Module;
+  // const module = moduleModel.all().toRefArray();
+  const module = moduleModel.filter({ project: 1 }).all().toRefArray();
+
+  if (module) {
+    // console.log(moduleModel.withId(1).ref.modules)
+  } else {
+    // console.log(state.entities);
+  }
+
 
   return {
     activeProjectId,

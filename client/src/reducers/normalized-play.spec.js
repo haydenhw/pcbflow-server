@@ -40,8 +40,6 @@ describe('play reducer', () => {
       id: 1,
       exercise: { title: 'exe1' },
     });
-    prettyPrint(resultState)
-    prettyPrint(expectedState)
 
     assert.deepEqual(resultState, expectedState);
   });

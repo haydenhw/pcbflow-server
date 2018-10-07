@@ -4,6 +4,11 @@ var path = require('path');
 process.env.NODE_ENV = 'test'
 
 module.exports = {
+  // entry: [
+  //   'webpack-dev-server/client?http://localhost:3000',
+  //   'webpack/hot/only-dev-server',
+  //   './src/index'
+  // ],
   resolve: {
     root: path.resolve(__dirname, 'src'),
     alias: {
@@ -14,12 +19,11 @@ module.exports = {
       config: path.join(__dirname, '../src', 'config'),
       helpers: path.join(__dirname, '../src', 'helpers'),
       images: path.join(__dirname, '../src', 'images'),
-      'react': path.resolve(__dirname, '../node_modules', 'react'),
+      // 'react': path.resolve(__dirname, '../node_modules', 'react'),
      'react-native': 'react-native-web'
     },
     extensions: ['', '.js', '.jsx']
   },
-
   module: {
     loaders: [
       {
@@ -37,5 +41,8 @@ module.exports = {
   },
   // plugins: [
   //   new webpack.HotModuleReplacementPlugin()
-  // ]
+  // ],
+  // devServer: {
+  //   hot: true,
+  // }
 };

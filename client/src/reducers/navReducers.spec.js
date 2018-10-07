@@ -4,7 +4,7 @@
 import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
-import * as actions from 'actions/indexActions';
+import * as actions from '../actions/indexActions';
 import { nav } from './navReducers';
 
 describe('nav reducer', () => {
