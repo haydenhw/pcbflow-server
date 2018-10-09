@@ -1,3 +1,6 @@
+import  orm from '../schema/schema';
+import factory from './factories';
+
 export function applyActionAndGetNextSession(schema, state, action) {
     const nextState = schema.from(state, action).reduce();
     return schema.from(nextState);
@@ -28,4 +31,15 @@ export class ReduxORMAdapter {
         doc.delete();
         process.nextTick(cb);
     }
+}
+
+export const getSessionWithTestData = () => {
+  const state = orm.getEmptyState();
+  const session = orm.mutableSession(state);
+
+  factory.setAdapter(new ReduxORMAdapter(session));
+
+  return factory.createMany('Project', 2).then(()=> {
+    return session;
+  });
 }
