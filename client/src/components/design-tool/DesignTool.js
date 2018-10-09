@@ -710,7 +710,9 @@ let DesignTool = class extends Component {
 
 const mapStateToProps = (state) => {
   const activeProjectId = state.projects.activeProjectId;
-  const projects = state.projects.items;
+  // const projects = state.projects.items;
+  const getProjects = (state) => orm.session(state.entities).Project.all().toRefArray();
+  const projects = getProjects(state);
   const activeProject = maybeGetProjectById(projects)(activeProjectId);
   const activeProjectName = maybeGetActiveProjectName(projects)(activeProjectId);
   const activeProjectThumbnail = (activeProject

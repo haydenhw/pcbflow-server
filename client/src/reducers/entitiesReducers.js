@@ -23,12 +23,23 @@ export function loadData(state, payload = []) {
     return session.state;
 }
 
+export function createEntity(state, payload) {
+    const {itemType, newItemAttributes} = payload;
+    const session = orm.session(state);
+
+    const ModelClass = session[itemType];
+
+    ModelClass.create(newItemAttributes);
+
+    return session.state;
+}
+
 export const entities = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_PROJECTS_SUCCESS':
-      const res = loadData(state, action.projects);
-
       return loadData(state, action.payload)
+    case 'ENTITY_CREATE':
+      return createEntity(state, action.payload);
     default:
       return state;
   }

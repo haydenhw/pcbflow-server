@@ -13,5 +13,3 @@ const action = {
 }
 
 const res = entities(state, action)
-
-prettyPrint('helloooo');

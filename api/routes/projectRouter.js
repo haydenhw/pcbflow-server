@@ -36,7 +36,6 @@ projectRouter.get('/', activateAuth, (req, res) => {
 });
 
 projectRouter.get('/:projectId', (req, res) => {
-  console.log('get project by id')
   Projects
     .findById(req.params.projectId)
     .exec()
@@ -48,10 +47,6 @@ projectRouter.get('/:projectId', (req, res) => {
 });
 
 projectRouter.post('/', (req, res) => {
-  console.log('post endpoint hit')
-  console.log('');
-  console.log('');
-
   Projects
     .create({
       boardSpecs: req.body.boardSpecs,
@@ -67,14 +62,11 @@ projectRouter.post('/', (req, res) => {
 });
 
 projectRouter.put('/:projectId', (req, res) => {
-  console.log('put req body', req.body)
-
   const toUpdate = {};
   const updateableFields = ['name', 'boardSpecs', 'modules'];
 
    updateableFields.forEach(field => {
      if (field in req.body) {
-       console.log(field)
        toUpdate[field] = req.body[field];
      }
    });
@@ -84,7 +76,6 @@ projectRouter.put('/:projectId', (req, res) => {
     modules: req.body.modules,
     boardModules: req.body.boardModules
   }*/
-  console.log('toUpdate object', toUpdate)
   Projects
     .findByIdAndUpdate(req.params.projectId, {$set: toUpdate}, {new: true})
     .exec()
