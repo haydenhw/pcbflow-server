@@ -26,6 +26,7 @@ describe('entity reducer create', function () {
 
       const newState = entity(session.state, action);
       const updatedSession = orm.session(newState);
+      const initialProjectCount =  session.Project.count();
       const projects = updatedSession.Project;
       const project = updatedSession.Project.last();
 
@@ -33,7 +34,7 @@ describe('entity reducer create', function () {
       const { newItemAttributes } =  payload;
       const { board, id, name, ownerId } = newItemAttributes;
 
-      expect(projects.count()).to.equal(3);
+      expect(projects.count()).to.equal(initialProjectCount + 1);
 
       expect(project.name).to.equal(name);
       expect(project.id).to.equal(id);
@@ -52,6 +53,7 @@ describe('entity reducer create', function () {
 
       const newState = entity(session.state, action);
       const updatedSession = orm.session(newState);
+      const initialModuleCount =  session.Module.count();
       const modules = updatedSession.Module;
       const module = updatedSession.Module.last();
 
@@ -59,7 +61,7 @@ describe('entity reducer create', function () {
       const { newItemAttributes } =  payload;
       const { text, x , y ,id, rotation } = newItemAttributes;
 
-      expect(modules.count()).to.equal(7);
+      expect(modules.count()).to.equal(initialModuleCount + 1);
 
       expect(module.text).to.equal(text);
       expect(module.id).to.equal(id);

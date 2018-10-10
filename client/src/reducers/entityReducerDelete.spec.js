@@ -15,6 +15,7 @@ describe('entity reducer delete', function () {
     });
 
   it('deletes a project', function () {
+      const initialProjectCount =  session.Project.count();
       const project = session.Project.last();
       const projectId = project.id;
 
@@ -24,6 +25,20 @@ describe('entity reducer delete', function () {
       const updatedSession = orm.session(newState);
       const projects = updatedSession.Project;
 
-      expect(projects.count()).to.equal(1);
+      expect(projects.count()).to.equal(initialProjectCount - 1);
+  });
+
+  it('deletes a module', function () {
+      const initialModuleCount =  session.Module.count();
+      const module = session.Module.last();
+      const moduleId = module.id;
+      const action = deleteEntity('Module', moduleId);
+
+      const newState = entity(session.state, action);
+      const updatedSession = orm.session(newState);
+      const modules = updatedSession.Module;
+
+      expect(modules.count()).to.equal(initialModuleCount - 1);
+      expect(modules.filter({ id: moduleId }).first()).to.equal(undefined);
   });
 });
