@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import  orm from '../schema/schema';
 import factory from './factories';
 
@@ -39,7 +40,13 @@ export const getSessionWithTestData = () => {
 
   factory.setAdapter(new ReduxORMAdapter(session));
 
-  return factory.createMany('Project', 2).then(()=> {
-    return session;
+  return factory.createMany('Project', 2).then((projects) => {
+    return Promise.all(projects.map(project => {
+      const projectId = project.id;
+
+      return factory.createMany('Module', { project: projectId }, 3);
+    })).then(() => {
+      return session;
+    })
   });
 }

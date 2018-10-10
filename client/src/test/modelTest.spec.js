@@ -10,6 +10,8 @@ describe('Entity reducer create handler', function () {
     beforeEach(done => {
       getSessionWithTestData().then(sessionWithTestData => {
         session = sessionWithTestData;
+        // const res = session.Project.last().ref;
+        // console.log(res)
         done();
       });
     });
@@ -40,9 +42,9 @@ describe('Entity reducer create handler', function () {
 
       expect(projects.count()).to.equal(3);
 
-      expect(project.board).to.equal(board);
       expect(project.name).to.equal(name);
       expect(project.id).to.equal(id);
       expect(project.ownerId).to.equal(ownerId);
+      expect(project.board).to.deep.equal(board);
   });
 });
