@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { getSessionWithTestData } from '../test/utils';
 import  orm from '../schema/schema';
-import  { createEntity }from '../actions/indexActions';
-import { ENTITY_CREATE } from '../constants/actionTypes';
+import  { createEntity, createEntityRequest }from '../actions/indexActions';
+import { ENTITY_DELETE} from '../constants/actionTypes';
 import { entity } from './entityReducer';
 import { Project } from '../models/projectsModel';
 
@@ -16,7 +16,7 @@ describe('entity reducer create', function () {
     });
 
   it('creates a project', function () {
-      const action = createEntity('Project', {
+      const action = createEntityRequest('Project', {
         _id: '4321',
         board: 3,
         id: 27,
@@ -27,7 +27,7 @@ describe('entity reducer create', function () {
       const newState = entity(session.state, action);
       const updatedSession = orm.session(newState);
       const projects = updatedSession.Project;
-      const module = updatedSession.Project.last();
+      const project = updatedSession.Project.last();
 
       const { payload } = action;
       const { newItemAttributes } =  payload;
@@ -35,10 +35,10 @@ describe('entity reducer create', function () {
 
       expect(projects.count()).to.equal(3);
 
-      expect(module.name).to.equal(name);
-      expect(module.id).to.equal(id);
-      expect(module.ownerId).to.equal(ownerId);
-      expect(module.board).to.deep.equal(board);
+      expect(project.name).to.equal(name);
+      expect(project.id).to.equal(id);
+      expect(project.ownerId).to.equal(ownerId);
+      expect(project.board).to.deep.equal(board);
   });
 
   it('creates a module', function () {
@@ -54,7 +54,6 @@ describe('entity reducer create', function () {
       const updatedSession = orm.session(newState);
       const modules = updatedSession.Module;
       const module = updatedSession.Module.last();
-      console.log(module);
 
       const { payload } = action;
       const { newItemAttributes } =  payload;

@@ -4,15 +4,17 @@ import * as actions from 'actions/indexActions';
 export const activeModules = (state = [], action) => {
   if (action.type) {
     switch (action.type) {
+      // elimate
       case actions.POST_PROJECT_SUCCESS:
       case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
         return action.project.modules;
         break;
-
+        // create entity
       case actions.PUSH_NEW_MODULE:
         return [...state, action.module];
         break;
 
+      // update entity
       case actions.UPDATE_MODULE_POSITION:
         return state.map((module, i) => {
           const { x, y, index } = action.modulePosition;
@@ -25,6 +27,7 @@ export const activeModules = (state = [], action) => {
         });
         break;
 
+      // update entity
       case actions.UPDATE_MODULE_STROKE:
         return state.map((module, i) => {
           const { stroke, index } = action.moduleStroke;
@@ -36,6 +39,7 @@ export const activeModules = (state = [], action) => {
         });
         break;
 
+      // update entity
       case actions.UPDATE_MODULE_IMAGE:
         return state.map((module, i) => {
           const { imageNode, index } = action.moduleData;
@@ -48,6 +52,7 @@ export const activeModules = (state = [], action) => {
         });
         break;
 
+      // update entity
       case actions.ROTATE_HOVERED_MODULE:
         const {
           rotation,
@@ -75,6 +80,7 @@ export const activeModules = (state = [], action) => {
           return i === index ? updatedModuleProps : module;
         });
 
+      // update entity
       case actions.DELETE_HOVERED_MODULE:
         const newState = [
           ...state.slice(0, action.moduleIndex),

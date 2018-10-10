@@ -7,6 +7,7 @@ const defaultState = {
 
 export const nav = (state = defaultState, action) => {
   switch (action.type) {
+    // change to update entity request
     case actions.UPDATE_PROJECT_REQUEST:
       return {
         ...state,

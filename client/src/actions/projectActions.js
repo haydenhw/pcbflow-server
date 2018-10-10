@@ -236,14 +236,8 @@ export const updateProjectName = (newName, projectId) => ({
   projectId,
 });
 
-export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS';
-export const deleteProjectSuccess = (projectId, projects) => ({
-  type: 'DELETE_PROJECT_SUCCESS',
-  projectId,
-});
-
 export const DELETE_PROJECT_REQUEST = 'DELETE_PROJECT_REQUEST';
-export function deleteProject(projectId, projects) {
+export function deleteProject(projectId) {
   const url = `${projectsUrl}/${projectId}`;
 
   return (dispatch) => {

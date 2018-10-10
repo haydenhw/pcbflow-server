@@ -2,6 +2,8 @@ import {
     ENTITY_UPDATE,
     ENTITY_DELETE,
     ENTITY_CREATE,
+    ENTITY_CREATE_SUCCESS,
+    ENTITY_CREATE_REQUEST ,
 } from "../constants/actionTypes";
 
 export function updateEntity(itemType, itemID, newItemAttributes) {
@@ -25,12 +27,16 @@ export function deleteEntity(itemType, itemID) {
     };
 }
 
-export function createEntity(itemType, newItemAttributes) {
-    return {
-        type : ENTITY_CREATE,
-        payload : {
-            itemType,
-            newItemAttributes,
-        },
-    };
+export const getCreateEntityAction = (actionType) => {
+  return (itemType, newItemAttributes) => ({
+    type: actionType,
+    payload: {
+      itemType,
+      newItemAttributes,
+    }
+  });
 }
+
+export const createEntity = getCreateEntityAction(ENTITY_CREATE);
+export const createEntityRequest = getCreateEntityAction(ENTITY_CREATE_REQUEST);
+export const createEntitySuccess = getCreateEntityAction(ENTITY_CREATE_SUCCESS);

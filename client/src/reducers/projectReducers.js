@@ -11,6 +11,7 @@ const defaultProjectState = {
 
 export const projects = (state = defaultProjectState, action) => {
   switch (action.type) {
+    //* replace with delete entity
     case actions.DELETE_PROJECT_REQUEST:
       return {
         ...state,
