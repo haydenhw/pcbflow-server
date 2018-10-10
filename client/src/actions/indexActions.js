@@ -1,4 +1,5 @@
 export * from './boardActions';
+export * from './entityActions';
 export * from './modalActions';
 export * from './moduleActions';
 export * from './mouseEventActions';
