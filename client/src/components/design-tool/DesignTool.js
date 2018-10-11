@@ -653,7 +653,13 @@ let DesignTool = class extends Component {
   }
 
   render() {
-    const { activeProjectName, activeProjectId, showSavingMessage, projects } = this.props;
+   const {
+     activeProjectName,
+     activeProjectId,
+     isFetching,
+     showSavingMessage,
+     projects
+   } = this.props;
 
     const {
       isDraggingToBoard,
@@ -690,7 +696,7 @@ let DesignTool = class extends Component {
               rotate={this.rotate}
               shouldExportPDF={shouldExportPDF}
               shouldHideContextMenu={shouldHideContextMenu}
-              shouldRenderBoard={Boolean(activeProjectName)}
+              shouldRenderBoard={!isFetching}
               shouldUpdateThumbnail={shouldUpdateThumbnail}
               toggleShouldExportPDF={this.toggleShouldExportPDF.bind(this)}
               toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail}
@@ -743,6 +749,7 @@ const mapStateToProps = (state) => {
     draggingModuleData: state.modules.dragging,
     showAllIcons: state.sideBar.showAllIcons,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
+    isFetching: state.projects.isFetching,
     showSavingMessage: state.nav.showSavingMessage,
     isTutorialActive: state.tutorial.isActive,
     clickedModuleIndex: state.modules.clickedIndex,

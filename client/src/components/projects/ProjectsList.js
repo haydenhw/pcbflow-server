@@ -8,6 +8,7 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import ProjectsItemFrame from './ProjectsItemFrame';
+import { defaultThumbnail } from '../../constants/thumbnailConstants';
 
 import './projects-styles/_floatGrid.scss';
 import './projects-styles/_ProjectsItemFrame.scss';
@@ -29,6 +30,7 @@ class ProjectsList extends Component {
 
     const projectsList = projects.map((project) => {
       const { thumbnail } = project.boardSpecs;
+
       return (
         <ProjectsItemFrame
           key={shortid.generate()}

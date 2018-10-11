@@ -6,6 +6,7 @@ import store from 'reduxFiles/store';
 import { createTempContainer } from 'helpers/generateThumbnail';
 
 import DeleteButton from './ProjectsDeleteButton';
+import { defaultThumbnail } from '../../constants/thumbnailConstants';
 
 import './projects-styles/_ProjectsItemFrame.scss';
 import './projects-styles/_floatGrid.scss';
@@ -91,3 +92,7 @@ ProjectsItemFrame.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   confirmDelete: PropTypes.func.isRequired,
 };
+
+ProjectsItemFrame.defaultProps = {
+  thumbnail: defaultThumbnail,
+}

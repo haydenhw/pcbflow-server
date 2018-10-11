@@ -162,7 +162,6 @@ class DesignToolStage extends Component {
      } = this.props;
 
     const contextMenuClass = shouldHideContextMenu ? 'hideContextMenu' : 'react-contextmenu';
-
     return (
       <div>
         <ContextMenuTrigger
