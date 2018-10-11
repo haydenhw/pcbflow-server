@@ -15,7 +15,7 @@ export const sideBar = (state = defaultState, action) => {
     case actions.UPDATE_CLICKED_MODULE:
       return {
         ...state,
-        show: false,
+      showAllIcons: false,
       }
     case actions.TOGGLE_SIDEBAR:
       return {

@@ -41,6 +41,7 @@ export const projects = (state = defaultProjectState, action) => {
     case actions.POST_PROJECT_SUCCESS:
       return {
         ...state,
+        activeProjectId: action.project._id,
         items: [...state.items, action.project],
       };
     case actions.UPDATE_BOARD_THUMBNAIL: {

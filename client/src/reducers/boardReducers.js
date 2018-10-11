@@ -2,16 +2,7 @@ import * as actions from 'actions/indexActions';
 
 import doesModifyProject from 'helpers/doesModifyProject';
 
-const defaultboardSpecs = {
-  height: 300,
-  width: 600,
-  x: 100,
-  y: 100,
-  checkCollisionTrigger: false,
-  stroke: '#ccc',
-};
-
-export const boardSpecs = (state = defaultboardSpecs, action) => {
+export const boardSpecs = (state = {}, action) => {
   switch (action.type) {
 
     case actions.UPDATE_ANCHOR_POSITIONS:
@@ -87,6 +78,7 @@ export const anchorPositions = (state = defaultAnchorPositions, action) => {
       };
       break;
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+    case actions.POST_PROJECT_SUCCESS:
       return defaultAnchorPositions;
       break;
     default:

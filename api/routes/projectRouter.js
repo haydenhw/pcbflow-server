@@ -65,11 +65,13 @@ projectRouter.put('/:projectId', (req, res) => {
   const toUpdate = {};
   const updateableFields = ['name', 'boardSpecs', 'modules'];
 
-   updateableFields.forEach(field => {
-     if (field in req.body) {
-       toUpdate[field] = req.body[field];
-     }
-   });
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
+  });
+  console.log(toUpdate)
+  console.log(req.params.projectId);
   /*const toUpdate = {
     name: req.body.projectName,
     boardSpecs: req.body.boardSpecs,

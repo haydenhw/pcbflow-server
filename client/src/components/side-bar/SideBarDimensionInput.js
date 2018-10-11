@@ -126,8 +126,8 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(SideBarDimensionInput);
 
 SideBarDimensionInput.propTypes = {
-  boardWidth: PropTypes.number.isRequired,
-  boardHeight: PropTypes.number.isRequired,
+  boardWidth: PropTypes.number,
+  boardHeight: PropTypes.number,
   topLeft: PropTypes.object.isRequired,
   topRight: PropTypes.object.isRequired,
   bottomLeft: PropTypes.object.isRequired,

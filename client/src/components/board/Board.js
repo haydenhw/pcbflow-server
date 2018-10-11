@@ -59,8 +59,6 @@ class Board extends Component {
   }
 
   handleDragMove() {
-    // this.updateLocalStatePosition();
-
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
   }
@@ -115,7 +113,6 @@ class Board extends Component {
             opacity="0.5"
             stroke={this.props.stroke}
           />
-
           <Anchor
             x={topLeft.x}
             y={topLeft.y}
@@ -174,10 +171,10 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Board);
 
 Board.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  width: PropTypes.number,
+  height: PropTypes.number,
   topLeft: PropTypes.object.isRequired,
   topRight: PropTypes.object.isRequired,
   bottomLeft: PropTypes.object.isRequired,
