@@ -73,42 +73,62 @@ export default class Anchor extends Component {
     // console.log(anchorX, topRightX - minWidth)
     switch (activeAnchor.getName()) {
       case 'topLeft':
-        console.log('topLeft');
-        if (anchorY >= bottomLeftY - minHeight && (anchorX < topRightX - minWidth)) {
-          // console.log('Y trigger')
+        if (
+          anchorY >= bottomLeftY - minHeight
+          && anchorX >= topRightX - minWidth
+        ) {
+          activeAnchor.setX(topRightX - minWidth);
+          activeAnchor.setY(bottomLeftY - minHeight);
+          topRight.setY(bottomRightY - minHeight);
+          bottomLeft.setX(bottomRightX - minWidth);
+        } else if (anchorY >= bottomLeftY - minHeight) {
           activeAnchor.setY(bottomLeftY - minHeight);
           topRight.setY(bottomRightY - minHeight);
           bottomLeft.setX(anchorX);
-        } else if ((anchorX >= topRightX - minWidth)) {
-          // console.log('hellooo')
+        } else if (anchorX >= topRightX - minWidth) {
           activeAnchor.setX(topRightX - minWidth);
-          bottomLeft.setX(bottomRightX - minWidth);
           topRight.setY(anchorY);
+          bottomLeft.setX(bottomRightX - minWidth);
         } else {
           topRight.setY(anchorY);
           bottomLeft.setX(anchorX);
         }
         break;
       case 'topRight':
-        if (anchorY >= bottomRightY - minHeight) {
+        if (
+          anchorY >= bottomRightY - minHeight
+          && anchorX <= topLeftX + minWidth
+        ) {
+          activeAnchor.setX(topLeftX + minWidth);
+          activeAnchor.setY(bottomRightY - minHeight);
+          topLeft.setY(bottomLeftY - minHeight);
+          bottomRight.setX(bottomLeftX + minWidth);
+        } else if (anchorY >= bottomRightY - minHeight) {
           activeAnchor.setY(bottomRightY - minHeight);
           topLeft.setY(bottomLeftY - minHeight);
           bottomRight.setX(anchorX);
         } else if (anchorX < topLeftX + minWidth) {
           activeAnchor.setX(topLeftX + minWidth);
-          bottomRight.setX(bottomLeftX + minWidth);
           topLeft.setY(anchorY);
+          bottomRight.setX(bottomLeftX + minWidth);
         } else {
           topLeft.setY(anchorY);
           bottomRight.setX(anchorX);
         }
         break;
       case 'bottomRight':
-        if (anchorY <= topRightY + minHeight) {
+        if (anchorY <= topRightY + minHeight
+          && anchorX <= bottomLeftX + minWidth
+        ) {
+          activeAnchor.setX(bottomLeftX + minWidth);
+          activeAnchor.setY(topRightY + minHeight);
+          bottomLeft.setY(topLeftY + minHeight);
+          topRight.setX(topLeftX + minWidth);
+        }else  if (anchorY <= topRightY + minHeight) {
           activeAnchor.setY(topRightY + minHeight);
           bottomLeft.setY(topLeftY + minHeight);
           topRight.setX(anchorX);
-        } else if (anchorX < bottomLeftX + minWidth) {
+        } else if (anchorX <= bottomLeftX + minWidth) {
           activeAnchor.setX(bottomLeftX + minWidth);
           topRight.setX(topLeftX + minWidth);
           bottomLeft.setY(anchorY);
@@ -118,7 +138,15 @@ export default class Anchor extends Component {
         }
         break;
       case 'bottomLeft':
-        if (anchorY <= topLeftY + minHeight) {
+        if (
+          anchorY <= topLeftY + minHeight
+          && anchorX >= bottomRightX - minWidth
+        ) {
+          activeAnchor.setX(bottomRightX - minWidth);
+          activeAnchor.setY(topLeftY + minHeight);
+          topLeft.setX(topRightX - minWidth);
+          bottomRight.setY(topRightY + minHeight);
+        } else if (anchorY <= topLeftY + minHeight) {
           activeAnchor.setY(topLeftY + minHeight);
           bottomRight.setY(topRightY + minHeight);
           topLeft.setX(anchorX);
