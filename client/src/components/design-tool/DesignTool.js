@@ -139,7 +139,6 @@ let DesignTool = class extends Component {
       })
 
     }
-////////////////////////////////////////////
 
     this.addHanlders();
     this.checkIfMobile();
@@ -162,7 +161,7 @@ let DesignTool = class extends Component {
     this.joyride.addTooltip(toolTipData);
   }
 
-  calculateNewModuleCoordinates(coordinateData) {
+  getNewModuleCoordinates(coordinateData) {
     const cd = coordinateData;
     const boundToSide = getPerimeterSide(cd.boundToSideIndex) || null;
 
@@ -213,10 +212,11 @@ let DesignTool = class extends Component {
 
     const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
     const isNewModuleWithinBounds = checkCollision([testModule, boardSpecs]).length > 0;
-    const adjustedModuleCoordinates = this.calculateNewModuleCoordinates(coordinateData);
-    const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
 
     if (isNewModuleWithinBounds && isDraggingToBoard) {
+      const adjustedModuleCoordinates = this.getNewModuleCoordinates(coordinateData);
+      const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
+
       store.dispatch(actions.pushToactiveModules(newModule));
     }
 
