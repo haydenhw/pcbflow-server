@@ -24,7 +24,6 @@ export default function isObjectEqual (obj1, obj2) {
    const item2Keys = Object.keys(obj2).sort();
 
    if (!isArrayEqual(item1Keys, item2Keys)) {
-        console.log('diff keys')
         return false;
    }
 
@@ -32,7 +31,7 @@ export default function isObjectEqual (obj1, obj2) {
    const objHasSameReference = item2Keys.every(key => {
        const value = obj1[key];
        const nextValue = obj2[key];
-      
+
        if (value === nextValue) {
            return true;
        }
@@ -41,8 +40,6 @@ export default function isObjectEqual (obj1, obj2) {
        Array.isArray(nextValue) &&
        isArrayEqual(value, nextValue);
      });
-
-      console.log('does obj has same reference', objHasSameReference)
 
        // special case for arrays - check one level deep
 }

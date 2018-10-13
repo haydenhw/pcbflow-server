@@ -25,8 +25,6 @@ function buildCoordinateData(hoveredModuleProps, topLeftAnchor, boardSpecs) {
 
 export default function bindToPerimeter(hoveredModuleProps, topLeftAnchor, boardSpecs) {
   const cd = buildCoordinateData(hoveredModuleProps, topLeftAnchor, boardSpecs);
-  // console.log(JSON.stringify(cd, null, 2))
-  // console.log( cd.topLeftAnchorY , cd.boardHeight , cd.moduleHeight,)
   switch (cd.boundToSide) {
     case 'bottom':
       return {

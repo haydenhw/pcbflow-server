@@ -70,7 +70,6 @@ export default class Anchor extends Component {
     const minHeight = 40;
     const minWidth = 80;
 
-    // console.log(anchorX, topRightX - minWidth)
     switch (activeAnchor.getName()) {
       case 'topLeft':
         if (
@@ -218,11 +217,6 @@ export default class Anchor extends Component {
 
   render() {
     const { x, y, name } = this.props;
-
-    if(this.anchor) {
-      // console.log(this.anchor.getX());
-      // console.log(this.anchor.getY());
-    }
 
     return (
       <Circle

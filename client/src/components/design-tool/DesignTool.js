@@ -189,8 +189,9 @@ let DesignTool = class extends Component {
   }
 
   dropDraggingModule(evt) {
-    const { draggingModuleData, boardSpecs } = this.props;
+    const { draggingModuleData, boardSpecs, anchorPositions } = this.props;
     const { width, height, boundToSideIndex } = draggingModuleData;
+    const { topLeft } = anchorPositions;
     const { isDraggingToBoard } = this.state;
     const { clientX: x , clientY: y } = evt;
 
@@ -210,12 +211,17 @@ let DesignTool = class extends Component {
       y: y - (height / 2),
     };
 
-    const testModule = Object.assign(testModuleCoordinates, draggingModuleData);
-    const isNewModuleWithinBounds = checkCollision([testModule, boardSpecs]).length > 0;
+    const adjustedBoardSpecs = Object.assign({}, boardSpecs, {
+      x: boardSpecs.x + topLeft.x,
+      y: boardSpecs.y + topLeft.y,
+    });
+
+    const testModule = Object.assign({}, testModuleCoordinates, draggingModuleData);
+    const isNewModuleWithinBounds = checkCollision([testModule, adjustedBoardSpecs]).length > 0;
 
     if (isNewModuleWithinBounds && isDraggingToBoard) {
       const adjustedModuleCoordinates = this.getNewModuleCoordinates(coordinateData);
-      const newModule = Object.assign(adjustedModuleCoordinates, draggingModuleData);
+      const newModule = Object.assign({}, adjustedModuleCoordinates, draggingModuleData);
 
       store.dispatch(actions.pushToactiveModules(newModule));
     }
@@ -730,13 +736,6 @@ const mapStateToProps = (state) => {
   const moduleModel = orm.session(state.entities).Module;
   // const module = moduleModel.all().toRefArray();
   const module = moduleModel.filter({ project: 1 }).all().toRefArray();
-
-  if (module) {
-    // console.log(moduleModel.withId(1).ref.modules)
-  } else {
-    // console.log(state.entities);
-  }
-
 
   return {
     activeProjectId,

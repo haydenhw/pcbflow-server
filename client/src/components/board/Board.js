@@ -1,3 +1,4 @@
+// refactor is that there is no internal state
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Layer, Rect, Group } from 'react-konva';
@@ -31,6 +32,7 @@ class Board extends Component {
 
   updateLocalStatePosition() {
     const boardGroup = this.refs.boardGroup;
+
     const x = boardGroup.getX();
     const y = boardGroup.getY();
 
@@ -45,6 +47,7 @@ class Board extends Component {
 
   updateGlobalStatePosition() {
     const boardGroup = this.refs.boardGroup;
+    const topLeftAnchor = boardGroup.children[0]
     const x = boardGroup.getX();
     const y = boardGroup.getY();
 
