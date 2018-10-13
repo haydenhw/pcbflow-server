@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { minWidth, minHeight } from '../../constants/boardConstants';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -8,14 +9,39 @@ import store from 'reduxFiles/store';
 import './side-bar-styles/_SideBarDimensionInput.scss';
 
 class SideBarDimensionInput extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      widthInputVal: null,
+      heightInputVal: null,
+    }
 
     this.handleWidthChange = this.handleWidthChange.bind(this);
     this.handleHeightChange = this.handleHeightChange.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    const { boardWidth: lastWidth, boardHeight: lastHeight,  } = prevProps;
+    const { boardWidth: nextWidth, boardHeight: nextHeight, } = this.props;
+
+    if (
+      lastWidth !== nextWidth
+      && nextWidth > minWidth
+    ) {
+      this.setState({ widthInputVal: nextWidth})
+    }
+
+    if (
+      lastHeight !== nextHeight
+      && nextHeight > minHeight
+    ) {
+      this.setState({ heightInputVal: nextHeight})
+    }
+  }
+
   validate(value) {
+
     if (isNaN(value)) {
       return '';
     }
@@ -49,24 +75,26 @@ class SideBarDimensionInput extends Component {
       bottomRight: { x: bottomLeft.x + width, y: topRight.y + height },
     };
 
-    store.dispatch(actions.updateBoardDimensions({ width, height }));
-    store.dispatch(actions.updateAnchorPositions(anchorPositions));
-    store.dispatch(actions.triggerAnchorUpdate());
+    this.setState({ widthInputVal: newBoardWidth });
+
+    if (newBoardWidth >= minWidth) {
+      store.dispatch(actions.updateBoardDimensions({ width, height }));
+      store.dispatch(actions.updateAnchorPositions(anchorPositions));
+      store.dispatch(actions.triggerAnchorUpdate());
+    }
   }
 
   handleHeightChange(event) {
-    const targetValue = event.target.value;
-    const newBoardHeight = this.validate(targetValue);
-
     const {
       topLeft,
       topRight,
       bottomLeft,
       bottomRight,
       boardWidth,
-     }
-     = this.props;
+    } = this.props;
 
+    const targetValue = event.target.value;
+    const newBoardHeight = this.validate(targetValue);
     const width = boardWidth;
     const height = newBoardHeight;
 
@@ -77,13 +105,18 @@ class SideBarDimensionInput extends Component {
       bottomRight: { x: bottomLeft.x + width, y: topRight.y + height },
     };
 
-    store.dispatch(actions.updateBoardDimensions({ width, height }));
-    store.dispatch(actions.updateAnchorPositions(anchorPositions));
-    store.dispatch(actions.triggerAnchorUpdate());
+    this.setState({ heightInputVal: newBoardHeight});
+
+    if (newBoardHeight >= minHeight) {
+      store.dispatch(actions.updateBoardDimensions({ width, height }));
+      store.dispatch(actions.updateAnchorPositions(anchorPositions));
+      store.dispatch(actions.triggerAnchorUpdate());
+    }
   }
 
   render() {
     const { boardWidth, boardHeight } = this.props;
+    const { widthInputVal, heightInputVal } = this.state;
 
     return (
       <form className="dimension-input-form">
@@ -93,7 +126,7 @@ class SideBarDimensionInput extends Component {
             <input
               type="text"
               className="width-input dimension-input"
-              value={boardWidth === 0 ? '' : boardWidth}
+              value={widthInputVal === null ? boardWidth : widthInputVal}
               onChange={this.handleWidthChange}
             />
             <label htmlFor="width">Width</label>
@@ -102,7 +135,7 @@ class SideBarDimensionInput extends Component {
             <input
               className="height-input dimension-input"
               type="text"
-              value={boardHeight === 0 ? '' : boardHeight}
+              value={heightInputVal === null ? boardHeight : heightInputVal}
               onChange={this.handleHeightChange}
             />
             <label htmlFor="height">Height</label>

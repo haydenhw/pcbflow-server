@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Circle } from 'react-konva';
 import { connect } from 'react-redux';
+import { minWidth, minHeight } from '../../constants/boardConstants';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 
 export default class Anchor extends Component {
   constructor(props) {
@@ -66,9 +68,6 @@ export default class Anchor extends Component {
     const bottomLeftY  = bottomLeft.getY ();
     const bottomRightY = bottomRight.getY();
     const bottomRightX = bottomRight.getX();
-
-    const minHeight = 40;
-    const minWidth = 80;
 
     switch (activeAnchor.getName()) {
       case 'topLeft':
