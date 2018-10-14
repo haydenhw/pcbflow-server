@@ -1,14 +1,22 @@
-import orm from '../schema/schema';
+import orm from "../schema/schema";
+import * as actions from '../actions/indexActions';
+
+import {
+    ENTITY_UPDATE,
+    ENTITY_DELETE,
+    ENTITY_CREATE,
+    ENTITY_CREATE_SUCCESS,
+    ENTITY_CREATE_REQUEST,
+    FETCH_PROJECTS_SUCCESS,
+} from "../constants/actionTypes";
 
 const initialState = orm.getEmptyState();
 
-export function loadData(state, payload = []) {
+export function loadProjects(state, projects=[]) {
     // Create a Redux-ORM session from our entities "tables"
-    const session = orm.mutableSession(state);
+    const session = orm.session(state);
     // Get a reference to the correct version of model classes for this Session
-    const { Project } = session;
-    const { Module } = session;
-    const projects = payload;
+    const { Module, Project } = session;
 
     projects.forEach((project, i) => {
       const { modules, ...projectProps } = project ;
@@ -23,10 +31,40 @@ export function loadData(state, payload = []) {
     return session.state;
 }
 
-export function createEntity(state, payload) {
-    const {itemType, newItemAttributes} = payload;
-    const session = orm.session(state);
+export function updateEntity(state, payload) {
+    const { itemType, itemID, newItemAttributes } = payload;
 
+    const session = orm.session(state);
+    const ModelClass = session[itemType];
+
+    if (ModelClass.hasId(itemID)) {
+        const modelInstance = ModelClass.withId(itemID);
+
+        modelInstance.update(newItemAttributes);
+    }
+
+    return session.state;
+}
+
+export function deleteEntity(state, payload) {
+  const { itemID, itemType } = payload;
+
+  const session = orm.session(state);
+  const ModelClass = session[itemType];
+
+  if (ModelClass.hasId(itemID)) {
+      const modelInstance = ModelClass.withId(itemID);
+
+      modelInstance.delete();
+  }
+
+  return session.state;
+}
+
+export function createEntity(state, payload) {
+    const { itemType, newItemAttributes } = payload;
+
+    const session = orm.session(state);
     const ModelClass = session[itemType];
 
     ModelClass.create(newItemAttributes);
@@ -34,12 +72,16 @@ export function createEntity(state, payload) {
     return session.state;
 }
 
-export const entities = (state = initialState, action) => {
+export const entities = (state=initialState, action) => {
   switch (action.type) {
-    case 'FETCH_PROJECTS_SUCCESS':
-      return loadData(state, action.payload)
-    case 'ENTITY_CREATE':
+    case FETCH_PROJECTS_SUCCESS:
+      return loadProjects(state, action.projects)
+    case ENTITY_CREATE:
+    case ENTITY_CREATE_REQUEST:
       return createEntity(state, action.payload);
+    case ENTITY_DELETE:
+      return deleteEntity(state, action.payload)
+    case ENTITY_UPDATE:
     default:
       return state;
   }

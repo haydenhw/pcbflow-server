@@ -192,6 +192,17 @@ export function postNewProject(newProject) {
   };
 }
 
+
+export const SET_ACTIVE_PROJECT_ID = 'SET_ACTIVE_PROJECT_ID';
+export const setActiveProjectId = (projects, activeProjectDbId) => (dispatch) => {
+  const activeProject = projects.find(project => project._id === activeProjectDbId);
+
+  dispatch({
+    type: 'SET_ACTIVE_PROJECT_ID',
+    id: activeProject.id,
+  });
+}
+
 export const UPDATE_PROJECT_REQUEST = 'UPDATE_PROJECT_REQUEST';
 export const updateProjectRequest = project => ({
   type: 'UPDATE_PROJECT_REQUEST',
@@ -206,8 +217,8 @@ export const updateProjectSuccess = project => ({
 
 export function updateProject(projectData) {
   return (dispatch, getState) => {
-    const { activeProjectId: projectId } = projectData;
-    const projectUrl = `${projectsUrl}/${projectId}`;
+    const { activeProject } = projectData;
+    const projectUrl = `${projectsUrl}/${activeProject._id}`;
     const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
 
     dispatch(updateProjectRequest());

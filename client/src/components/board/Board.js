@@ -119,7 +119,7 @@ class Board extends Component {
           <Anchor
             x={topLeft.x}
             y={topLeft.y}
-            name={'topLeft'}
+            name='topLeft'
             hideFloatingElements={hideFloatingElements}
             unhideFloatingElements={unhideFloatingElements}
             updateAnchorTrigger={updateAnchorTrigger}
@@ -127,7 +127,7 @@ class Board extends Component {
           <Anchor
             x={topRight.x || width}
             y={topRight.y}
-            name={'topRight'}
+            name='topRight'
             hideFloatingElements={hideFloatingElements}
             unhideFloatingElements={unhideFloatingElements}
             updateAnchorTrigger={updateAnchorTrigger}
@@ -135,7 +135,7 @@ class Board extends Component {
           <Anchor
             x={bottomLeft.x}
             y={bottomLeft.y || height}
-            name={'bottomLeft'}
+            name='bottomLeft'
             hideFloatingElements={hideFloatingElements}
             unhideFloatingElements={unhideFloatingElements}
             updateAnchorTrigger={updateAnchorTrigger}
@@ -143,7 +143,7 @@ class Board extends Component {
           <Anchor
             x={bottomRight.x || width}
             y={bottomRight.y || height}
-            name={'bottomRight'}
+            name='bottomRight'
             hideFloatingElements={hideFloatingElements}
             unhideFloatingElements={unhideFloatingElements}
             updateAnchorTrigger={updateAnchorTrigger}

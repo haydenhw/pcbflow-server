@@ -11,6 +11,7 @@ import { Maybe } from 'monet';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import { getProjects, getActiveProject, getActiveProjectName, getActiveProjectThumbnail } from '../../selectors/projectSelectors';
 
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
@@ -38,23 +39,6 @@ import './design-tool-styles/_DesignToolDocumentationCard.scss';
 import './design-tool-styles/_DesignToolOnboardModal.scss';
 
 import { devMode } from 'config/devMode';
-
-const getProjectById = (projects) => (id) => projects.find((project) => project._id === id);
-const getActiveProjectName = (activeProject) => activeProject.name;
-
-const maybeGetProjectById = (projects) => (id) => (
-  Maybe.fromNull(projects)
-    .chain(projects => (
-      Maybe.fromNull(getProjectById(projects)(id))
-  ))
-  .val
-);
-
-const maybeGetActiveProjectName = (projects) => (activeProjectId) => (
-  Maybe.fromNull(maybeGetProjectById(projects)(activeProjectId))
-    .map(getActiveProjectName)
-    .orSome('')
-);
 
 let DesignTool = class extends Component {
   constructor(props) {
@@ -119,25 +103,10 @@ let DesignTool = class extends Component {
 
   componentDidMount() {
     if (this.props.projects.length === 0) {
+      // consider removing this logic
       const projectId = this.props.params.projectId;
       const currentRoute = this.props.location.pathname;
       store.dispatch(actions.fetchProjectById(projectId, currentRoute));
-
-////////////////////////////////////////////
-
-      setTimeout(() => {
-        store.dispatch({
-        type: 'UPDATE_ORM',
-        payload: { projects },
-      }, 0);
-      })
-
-      setTimeout(() => {
-        store.dispatch({
-        type: 'UPDATE_MODULE',
-      }, 2000);
-      })
-
     }
 
     this.addHanlders();
@@ -146,9 +115,20 @@ let DesignTool = class extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevProps.saveProjectTrigger !== this.props.saveProjectTrigger) {
+    const { activeProjectId, params, projects, saveProjectTrigger } = this.props;
+
+    if (prevProps.saveProjectTrigger !== saveProjectTrigger) {
       // *refactor to not depend on setTimeout
       setTimeout(() => store.dispatch(actions.updateProject(this.props)), 0);
+    }
+
+    if (
+      !activeProjectId
+      && projects
+      && projects.length > 0
+    ) {
+      const projectId = params.projectId;
+      store.dispatch(actions.setActiveProjectId(projects, projectId));
     }
   }
 
@@ -720,52 +700,34 @@ let DesignTool = class extends Component {
   }
 };
 
-const mapStateToProps = (state) => {
-  const activeProjectId = state.projects.activeProjectId;
-  const projects = state.projects.items;
-  // const getProjects = (state) => orm.session(state.entities).Project.all().toRefArray();
-  // const projects = getProjects(state);
-  const activeProject = maybeGetProjectById(projects)(activeProjectId);
-  const activeProjectName = maybeGetActiveProjectName(projects)(activeProjectId);
-  const activeProjectThumbnail = (activeProject
-    ? activeProject.boardSpecs.thumbnail
-    : null
-  );
-
-  // const projectModel = orm.session(state.entities).Project
-  const moduleModel = orm.session(state.entities).Module;
-  // const module = moduleModel.all().toRefArray();
-  const module = moduleModel.filter({ project: 1 }).all().toRefArray();
-
-  return {
-    activeProjectId,
-    activeProjectName,
-    activeProjectThumbnail,
+const mapStateToProps = state => ({
+    activeModules: state.activeModules.present,
+    activeProject: getActiveProject(state),
+    activeProjectId: state.projects.activeProjectId,
+    activeProjectName: getActiveProjectName(state),
+    activeProjectThumbnail: getActiveProjectThumbnail(state),
     anchorPositions: state.anchorPositions,
     boardSpecs: state.boardSpecs,
-    activeProjectId: state.projects.activeProjectId,
-    activeModules: state.activeModules.present,
-    draggingModuleData: state.modules.dragging,
-    showAllIcons: state.sideBar.showAllIcons,
-    isMouseOverModule: state.mouseEvents.isMouseOverModule,
-    isFetching: state.projects.isFetching,
-    showSavingMessage: state.nav.showSavingMessage,
-    isTutorialActive: state.tutorial.isActive,
     clickedModuleIndex: state.modules.clickedIndex,
-    modalType: state.modal.modalType,
-    moduleData: state.modules.dataList,
-    projects: state.projects.items,
-    saveProjectTrigger: state.triggers.saveProjectTrigger,
+    draggingModuleData: state.modules.dragging,
     hoveredModuleIndex: state.modules.hovered.index,
     hoveredModuleProps: state.modules.hovered,
+    isFetching: state.projects.isFetching,
+    isMouseOverModule: state.mouseEvents.isMouseOverModule,
+    isTutorialActive: state.tutorial.isActive,
+    modalType: state.modal.modalType,
+    moduleData: state.modules.dataList,
+    projects: getProjects(state),
+    saveProjectTrigger: state.triggers.saveProjectTrigger,
     shouldRenderModal: state.modal.shouldRenderModal,
     shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
+    showAllIcons: state.sideBar.showAllIcons,
+    showSavingMessage: state.nav.showSavingMessage,
     todoBools: state.tutorial.todoBools,
     topLeftAnchorX: state.anchorPositions.topLeft.x,
     topLeftAnchorY: state.anchorPositions.topLeft.y,
     tutorialStep: state.tutorial.step,
-  };
-};
+});
 
 DesignTool = withRouter(DesignTool);
 export default connect(mapStateToProps)(DesignTool);
@@ -773,9 +735,8 @@ export default connect(mapStateToProps)(DesignTool);
 DesignTool.propTypes = {
   anchorPositions: PropTypes.object.isRequired,
   boardSpecs: PropTypes.object.isRequired,
-  activeProjectId: PropTypes.string,
+  activeProjectId: PropTypes.number,
   activeModules: PropTypes.array.isRequired,
-  // draggingModuleData: PropTypes.object.isRequired,
   showAllIcons: PropTypes.bool.isRequired,
   isMouseOverModule: PropTypes.bool.isRequired,
   isTutorialActive: PropTypes.bool.isRequired,
@@ -792,3 +753,7 @@ DesignTool.propTypes = {
   todoBools: PropTypes.array.isRequired,
   tutorialStep: PropTypes.number.isRequired,
 };
+
+DesignTool.defaultProps = {
+  activeProjectId: null,
+}

@@ -3,9 +3,10 @@ import { getSessionWithTestData } from '../test/utils';
 import  orm from '../schema/schema';
 import  { deleteEntity }from '../actions/indexActions';
 import { ENTITY_CREATE } from '../constants/actionTypes';
-import { entity } from './entityReducer';
+import { entities } from './entitiesReducers';
 
-describe('entity reducer delete', function () {
+
+describe('entities reducer delete', function () {
   let session;
     beforeEach(done => {
       getSessionWithTestData().then(sessionWithTestData => {
@@ -21,7 +22,7 @@ describe('entity reducer delete', function () {
 
       const action = deleteEntity('Project', projectId);
 
-      const newState = entity(session.state, action);
+      const newState = entities(session.state, action);
       const updatedSession = orm.session(newState);
       const projects = updatedSession.Project;
 
@@ -34,7 +35,7 @@ describe('entity reducer delete', function () {
       const moduleId = module.id;
       const action = deleteEntity('Module', moduleId);
 
-      const newState = entity(session.state, action);
+      const newState = entities(session.state, action);
       const updatedSession = orm.session(newState);
       const modules = updatedSession.Module;
 

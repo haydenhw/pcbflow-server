@@ -7,6 +7,7 @@ import store from 'reduxFiles/store';
 
 import generatePriceString from 'helpers/generatePriceString';
 import { getUnmetDependencies, updateMetDependencies } from 'helpers/dependencies';
+import { getActiveModules } from '../../selectors/moduleSelectors';
 
 import ModulesItem from './ModulesItem';
 
@@ -101,7 +102,8 @@ const mapStateToProps = state => ({
   boardSpecs: state.boardSpecs,
   checkCollisionTrigger: state.boardSpecs.checkCollisionTrigger,
   showAllIcons: state.sideBar.showAllIcons,
-  modules: state.activeModules.present,
+  // modules: state.activeModules.present,
+  modules: getActiveModules(state),
   moduleData: state.modules.dataList,
   hoveredModuleProps: state.modules.hovered,
   topLeftAnchor: state.anchorPositions.topLeft,

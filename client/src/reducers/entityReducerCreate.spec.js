@@ -3,10 +3,10 @@ import { getSessionWithTestData } from '../test/utils';
 import  orm from '../schema/schema';
 import  { createEntity, createEntityRequest }from '../actions/indexActions';
 import { ENTITY_DELETE} from '../constants/actionTypes';
-import { entity } from './entityReducer';
+import { entities } from './entitiesReducers';
 import { Project } from '../models/projectsModel';
 
-describe('entity reducer create', function () {
+describe('entities reducer create', function () {
   let session;
     beforeEach(done => {
       getSessionWithTestData().then(sessionWithTestData => {
@@ -24,7 +24,7 @@ describe('entity reducer create', function () {
         ownderId: 'alsdjjkfdls',
       })
 
-      const newState = entity(session.state, action);
+      const newState = entities(session.state, action);
       const updatedSession = orm.session(newState);
       const initialProjectCount =  session.Project.count();
       const projects = updatedSession.Project;
@@ -51,7 +51,7 @@ describe('entity reducer create', function () {
         rotation: 3,
       });
 
-      const newState = entity(session.state, action);
+      const newState = entities(session.state, action);
       const updatedSession = orm.session(newState);
       const initialModuleCount =  session.Module.count();
       const modules = updatedSession.Module;

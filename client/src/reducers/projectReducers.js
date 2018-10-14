@@ -17,33 +17,39 @@ export const projects = (state = defaultProjectState, action) => {
         ...state,
         items: state.items.filter(project => project._id !== action.projectId),
       };
-    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+    // do I need to fetch projects by id ? Dont I have to load all projects anyway?
+    // fetch project ID does stuff with the tutorial. Make sure to move that logic somewhere
+    // else after refactoring
+    case actions.SET_ACTIVE_PROJECT_ID:
       return {
         ...state,
-        activeProjectId: action.project._id,
+        activeProjectId: action.id,
       };
+      //* leave alone
     case actions.FETCH_PROJECTS_REQUEST:
       return {
         ...state,
         isFetching: true,
       };
+      // items part gets replaced with load projects
+      // merge entity and entities
     case actions.FETCH_PROJECTS_SUCCESS:
       return {
         ...state,
         isFetching: false,
         items: action.projects,
       };
-    case actions.FETCH_PROJECTS_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-      };
+    // this is replaced by create entity success. figure out how to
+    //  set active  project id
+    //  >> if itemType === project then set activeId
     case actions.POST_PROJECT_SUCCESS:
       return {
         ...state,
         activeProjectId: action.project._id,
         items: [...state.items, action.project],
       };
+
+    // replace with update entity
     case actions.UPDATE_BOARD_THUMBNAIL: {
       const updatedProjects = state.items.map(project => {
         if (project._id === action.projectId) {
@@ -60,6 +66,7 @@ export const projects = (state = defaultProjectState, action) => {
         items: updatedProjects,
       }
     }
+    // replace with update entity
     case actions.UPDATE_PROJECT_NAME: {
       const updatedProjects = state.items.map(project => {
         if (project._id === action.projectId) {
@@ -75,15 +82,10 @@ export const projects = (state = defaultProjectState, action) => {
         items: updatedProjects,
       }
     }
-    case actions.UPDATE_PROJECT_REQUEST:
-      return {
-        ...state,
-        showSavingMessage: true,
-      };
+    // replace with update entity succ
     case actions.UPDATE_PROJECT_SUCCESS:
       return {
         ...state,
-        showSavingMessage: false,
         isInitialLoad: false,
       };
   }
