@@ -45,12 +45,12 @@ export const projects = (state = defaultProjectState, action) => {
     //  >> if itemType === project then set activeId
     case types.ENTITY_CREATE:
       const { itemType, newItemAttributes } = action.payload;
-      const { id } = newItemAttributes;
+      const { _id } = newItemAttributes;
 
       if (itemType === 'Project') {
         return {
           ...state,
-          activeProjectId: id,
+          activeProjectId: _id,
         };
       }
 

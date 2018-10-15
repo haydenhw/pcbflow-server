@@ -183,8 +183,9 @@ export function postNewProject(newProject) {
       })
       .then(res => res.json())
       .then((data) => {
-        const projectId = data._id;
-        dispatch(postProjectSuccess(data))
+        // dispatch(postProjectSuccess(data))
+        console.log(data);
+        dispatch(actions.createEntity('Project', data))
       })
       .catch((err) => {
         // console.error(err);
@@ -194,12 +195,11 @@ export function postNewProject(newProject) {
 
 
 export const SET_ACTIVE_PROJECT_ID = 'SET_ACTIVE_PROJECT_ID';
-export const setActiveProjectId = (projects, activeProjectDbId) => (dispatch) => {
-  const activeProject = projects.find(project => project._id === activeProjectDbId);
+export const setActiveProjectId = (activeProjectDbId) => (dispatch) => {
 
   dispatch({
     type: 'SET_ACTIVE_PROJECT_ID',
-    id: activeProject.id,
+    id: activeProjectDbId,
   });
 }
 
@@ -252,7 +252,6 @@ export const DELETE_PROJECT_REQUEST = 'DELETE_PROJECT_REQUEST';
 export function deleteProject(project) {
   const { _id: dbID, id } = project;
   const url = `${projectsUrl}/${dbID}`;
-  console.log(dbID, id);
 
   return (dispatch) => {
     dispatch(actions.deleteEntity('Project', id));

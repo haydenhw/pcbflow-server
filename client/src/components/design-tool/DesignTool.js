@@ -134,7 +134,7 @@ let DesignTool = class extends Component {
       && projects.length > 0
     ) {
       const projectId = params.projectId;
-      store.dispatch(actions.setActiveProjectId(projects, projectId));
+      store.dispatch(actions.setActiveProjectId(projectId));
     }
   }
 
@@ -741,7 +741,7 @@ export default connect(mapStateToProps)(DesignTool);
 DesignTool.propTypes = {
   anchorPositions: PropTypes.object.isRequired,
   boardSpecs: PropTypes.object.isRequired,
-  activeProjectId: PropTypes.number,
+  activeProjectId: PropTypes.string,
   activeModules: PropTypes.array.isRequired,
   showAllIcons: PropTypes.bool.isRequired,
   isMouseOverModule: PropTypes.bool.isRequired,

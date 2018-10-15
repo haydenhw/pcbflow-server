@@ -28,7 +28,6 @@ describe('entities reducer create', function () {
       const initialProjectCount =  session.Project.count();
       const projects = updatedSession.Project;
       const project = updatedSession.Project.last();
-
       const { payload } = action;
       const { newItemAttributes } =  payload;
       const { board, id, name, ownerId } = newItemAttributes;
