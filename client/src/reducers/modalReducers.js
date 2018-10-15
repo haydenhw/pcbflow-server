@@ -1,4 +1,5 @@
 import * as actions from 'actions/indexActions';
+import * as types from '../constants/actionTypes';
 
 const defaultState = {
   shouldRenderModal: false,
@@ -43,6 +44,16 @@ export const modal = (state = defaultState, action) => {
         modalType: 'ONBOARD',
         modalProps: action.modalProps,
       };
+    case types.ENTITY_DELETE:
+      const { itemType } = action.payload;
+
+      if (itemType === 'Project') {
+        return {
+          shouldRenderModal: false,
+        };
+      }
+
+      return state;
     default:
       return state;
   }

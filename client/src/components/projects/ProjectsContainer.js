@@ -26,18 +26,17 @@ export class ProjectContainer extends Component {
     const { shouldRenderModal, modalProps } = this.props;
 
     if (shouldRenderModal && modalProps) {
-      const { projectId, projectName } = modalProps;
 
       return (
         <Modal
           handleCloseButtonClick={() => store.dispatch(actions.toggleModal())}
           handleLeftButtonClick={() => store.dispatch(actions.toggleModal())}
-          handleRightButtonClick={() => store.dispatch(actions.deleteProject(projectId))}
+          handleRightButtonClick={() => store.dispatch(actions.deleteProject(modalProps))}
           leftButtonText="Cancel"
           rightButtonText="Delete"
           shouldRenderLeftButton
           title="Confirm Delete"
-          text={`Are you sure you want to delete project "${projectName}"  ?`}
+          text={`Are you sure you want to delete project "${modalProps.name}"  ?`}
         />
       );
     }

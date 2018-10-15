@@ -11,7 +11,13 @@ import { Maybe } from 'monet';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import { getProjects, getActiveProject, getActiveProjectName, getActiveProjectThumbnail } from '../../selectors/projectSelectors';
+
+import {
+  getProjects,
+  getActiveProject,
+  getActiveProjectName,
+  getActiveProjectThumbnail
+} from '../../selectors/projectSelectors';
 
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';

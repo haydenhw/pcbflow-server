@@ -187,7 +187,7 @@ export function postNewProject(newProject) {
         dispatch(postProjectSuccess(data))
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
       });
   };
 }
@@ -249,14 +249,13 @@ export const updateProjectName = (newName, projectId) => ({
 });
 
 export const DELETE_PROJECT_REQUEST = 'DELETE_PROJECT_REQUEST';
-export function deleteProject(projectId) {
-  const url = `${projectsUrl}/${projectId}`;
+export function deleteProject(project) {
+  const { _id: dbID, id } = project;
+  const url = `${projectsUrl}/${dbID}`;
+  console.log(dbID, id);
 
   return (dispatch) => {
-    dispatch({
-      type: 'DELETE_PROJECT_REQUEST',
-      projectId,
-    });
+    dispatch(actions.deleteEntity('Project', id));
 
     fetch(url, {
         method: 'DELETE',

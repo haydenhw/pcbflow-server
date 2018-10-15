@@ -6,6 +6,7 @@ import shortid from 'shortid';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import { getProjects } from '../../selectors/projectSelectors';
 
 import ProjectsItemFrame from './ProjectsItemFrame';
 
@@ -17,11 +18,8 @@ class ProjectsList extends Component {
     projects: [],
   }
 
-  confirmDelete = (projectId, projectName) => () => {
-    store.dispatch(actions.confirmProjectDelete({
-      projectId,
-      projectName,
-    }));
+  confirmDelete = (project) => () => {
+    store.dispatch(actions.confirmProjectDelete(project));
   }
 
   render() {
@@ -36,7 +34,7 @@ class ProjectsList extends Component {
           projectName={project.name}
           projectId={project._id}
           thumbnail={thumbnail}
-          confirmDelete={this.confirmDelete(project._id, project.name)}
+          confirmDelete={this.confirmDelete(project)}
         />
       );
     });
@@ -53,9 +51,9 @@ class ProjectsList extends Component {
   }
   }
 
-const mapStateToProps = state => {
-  return { projects: state.projects.items };
-};
+const mapStateToProps = state => ({
+  projects: getProjects(state)
+});
 
 export default connect(mapStateToProps)(ProjectsList);
 
