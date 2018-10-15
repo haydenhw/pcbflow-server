@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import { getSessionWithTestData } from '../test/utils';
 import  orm from '../schema/schema';
 import  { createEntity, createEntityRequest }from '../actions/indexActions';
-import { ENTITY_DELETE} from '../constants/actionTypes';
 import { entities } from './entitiesReducers';
 import { Project } from '../models/projectsModel';
 

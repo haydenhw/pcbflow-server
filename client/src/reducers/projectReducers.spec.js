@@ -8,7 +8,6 @@ import * as actions from 'actions/indexActions';
 import { projects, activeProjectInfo } from './projectReducers';
 
 describe('projects reducer', () => {
-    // Fetch Basic Info about User
   it('It should return a list of projects', () => {
     const initialState = {
       isFetching: false,
@@ -25,6 +24,25 @@ describe('projects reducer', () => {
       projects: [1, 2, 3],
 
     });
+
+    assert.deepEqual(resultState, expectedState);
+  });
+
+  it('It should set activeProject', () => {
+    const initialState = {
+      activeProjectId: 3,
+    }
+
+    const expectedState = {
+      activeProjectId: 1,
+    }
+
+    const action = actions.createEntity('Project', {
+        name: "new project",
+        id: 1,
+      }
+    );
+    const resultState = projects(deepFreeze(initialState), action);
 
     assert.deepEqual(resultState, expectedState);
   });
