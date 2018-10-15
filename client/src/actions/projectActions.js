@@ -158,16 +158,16 @@ export function fetchProjectById(projectId, currentRoute) {
   };
 }
 
-export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS';
-export const postProjectSuccess = project => dispatch => {
-  dispatch({
-    type: 'POST_PROJECT_SUCCESS',
-    project
-  });
-
-  const designRoute = `/design/${project._id}`;
-  hashHistory.push(designRoute);
-};
+// export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS';
+// export const postProjectSuccess = project => dispatch => {
+//   dispatch({
+//     type: 'POST_PROJECT_SUCCESS',
+//     project
+//   });
+//
+//   const designRoute = `/design/${project._id}`;
+//   hashHistory.push(designRoute);
+// };
 
 export function postNewProject(newProject) {
   return (dispatch) => {
@@ -183,9 +183,10 @@ export function postNewProject(newProject) {
       })
       .then(res => res.json())
       .then((data) => {
-        // dispatch(postProjectSuccess(data))
-        console.log(data);
         dispatch(actions.createEntity('Project', data))
+
+        const designRoute = `/design/${data._id}`;
+        hashHistory.push(designRoute);
       })
       .catch((err) => {
         // console.error(err);

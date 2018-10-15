@@ -9,9 +9,10 @@ const factory = _factory.promisify(bluebird);
 
 factory.define('Project', 'Project', {
     id: factory.sequence(n => n),
+    _id: factory.sequence(n => `string-id-${n}`),
     ownderId: factory.sequence(n => n),
     name: factory.sequence(n => `name-${n}`),
-    board: {
+    boardSpecs: {
       x: Math.floor(Math.random() * 500),
       y: Math.floor(Math.random() * 500),
       anchors: {

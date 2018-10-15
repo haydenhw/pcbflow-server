@@ -17,12 +17,11 @@ export const getActiveProject = createSelector(
   )
 );
 
-export const getActiveProjectName = createSelector(
+const getActiveProjectPropVal = key => createSelector(
   getActiveProject,
-  project => project ? project.name : null
+  project => project ? project[key] : null
 );
 
-export const getActiveProjectThumbnail = createSelector(
-  getActiveProject,
-  project => project ? project.thumbnail: null
-);
+export const getActiveProjectName = getActiveProjectPropVal('name');
+export const getActiveProjectThumbnail = getActiveProjectPropVal('thumbnail');
+export const getActiveProjectBoard = getActiveProjectPropVal('boardSpecs');
