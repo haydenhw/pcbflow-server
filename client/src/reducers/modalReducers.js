@@ -49,6 +49,7 @@ export const modal = (state = defaultState, action) => {
 
       if (itemType === 'Project') {
         return {
+          ...state,
           shouldRenderModal: false,
         };
       }

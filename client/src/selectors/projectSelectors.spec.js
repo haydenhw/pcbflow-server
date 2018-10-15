@@ -27,7 +27,7 @@ describe('project selectors', function () {
 
   it('gets active project', function () {
       const activeProjectId =  session.Project.last()._id;
-      const activeProject = getActiveProject.resultFunc(session, activeProjectId);
+      const activeProject = getActiveProject.resultFunc(session, null);
 
       expect(activeProject._id).to.equal(activeProjectId);
   });

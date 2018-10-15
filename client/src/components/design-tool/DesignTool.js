@@ -130,9 +130,10 @@ let DesignTool = class extends Component {
 
     if (
       !activeProjectId
-      && projects
-      && projects.length > 0
+      // && projects
+      // && projects.length > 0
     ) {
+
       const projectId = params.projectId;
       store.dispatch(actions.setActiveProjectId(projectId));
     }
@@ -688,7 +689,7 @@ let DesignTool = class extends Component {
               rotate={this.rotate}
               shouldExportPDF={shouldExportPDF}
               shouldHideContextMenu={shouldHideContextMenu}
-              shouldRenderBoard={!isFetching}
+              shouldRenderBoard={Boolean(activeProjectId && (projects.length > 0))}
               shouldUpdateThumbnail={shouldUpdateThumbnail}
               toggleShouldExportPDF={this.toggleShouldExportPDF.bind(this)}
               toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail}

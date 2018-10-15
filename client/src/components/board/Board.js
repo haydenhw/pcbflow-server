@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import { getActiveProjectBoard } from '../../selectors/projectSelectors';
 
 import generateThumbnail from 'helpers/generateThumbnail';
 
@@ -158,18 +159,24 @@ class Board extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  updateAnchorTrigger:state.anchorPositions.updateAnchorTrigger,
-  x: state.boardSpecs.x,
-  y: state.boardSpecs.y,
-  width: state.boardSpecs.width,
-  height: state.boardSpecs.height,
-  topLeft: state.anchorPositions.topLeft,
-  topRight: state.anchorPositions.topRight,
-  bottomLeft: state.anchorPositions.bottomLeft,
-  bottomRight: state.anchorPositions.bottomRight,
-  stroke: state.boardSpecs.stroke,
-});
+const mapStateToProps = state => {
+  const { x, y, width, height } = getActiveProjectBoard(state);
+  // const { topLeft, topRight, bottomLeft, bottomRight } = anchorPositions;
+
+  return {
+    updateAnchorTrigger:state.anchorPositions.updateAnchorTrigger,
+    x: state.boardSpecs.x,
+    y: state.boardSpecs.y,
+    width: state.boardSpecs.width,
+    height: state.boardSpecs.height,
+    topLeft: state.anchorPositions.topLeft,
+    topRight: state.anchorPositions.topRight,
+    bottomLeft: state.anchorPositions.bottomLeft,
+    bottomRight: state.anchorPositions.bottomRight,
+    stroke: state.boardSpecs.stroke,
+  };
+}
+
 
 export default connect(mapStateToProps)(Board);
 

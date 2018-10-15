@@ -11,9 +11,11 @@ export const getProjects = createSelector(
 export const getActiveProject = createSelector(
   [getEntitiesSession, getActiveProjectId],
   (session, activeId) => (
-    activeId
-      ? session.Project.get({ _id: activeId }).ref
-      : null
+    !activeId
+      ? null
+      : session.Project.count() === 0
+      ? null
+      : session.Project.get({ _id: activeId }).ref
   )
 );
 
