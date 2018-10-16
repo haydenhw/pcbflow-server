@@ -156,15 +156,16 @@ class DesignToolStage extends Component {
 
   render() {
     const {
-      shouldRenderBoard,
-      isMouseDownOnIcon,
+      hideFloatingElements,
+      isDraggingToBoard,
       isMouseDown,
+      isMouseDownOnIcon,
       isMouseOverModule,
       rotate,
-      hideFloatingElements,
-      unhideFloatingElements,
       shouldHideContextMenu,
-      isDraggingToBoard,
+      shouldRenderBoard,
+      stageRef,
+      unhideFloatingElements,
      } = this.props;
 
     const contextMenuClass = shouldHideContextMenu ? 'hideContextMenu' : 'react-contextmenu';
@@ -177,7 +178,10 @@ class DesignToolStage extends Component {
         >
           <div>
             <Stage
-              ref={node => { this.stage = node }}
+              ref={node => {
+                this.stage = node;
+                stageRef(node);
+              }}
               name="stage"
               width={document.documentElement.clientWidth}
               height={document.documentElement.clientHeight}

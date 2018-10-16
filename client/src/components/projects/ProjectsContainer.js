@@ -25,6 +25,7 @@ export class ProjectContainer extends Component {
   renderModal() {
     const { shouldRenderModal, modalProps } = this.props;
 
+    console.log(this.props)
     if (shouldRenderModal && modalProps) {
 
       return (

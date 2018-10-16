@@ -9,6 +9,10 @@ import { isJWTExpired, getUser, getJWT, clearUser, clearJWT  } from 'helpers/use
 const doesUserExist = () => Boolean(getUser());
 
 export default class App extends Component {
+  constructor() {
+    super();
+    this.stageNode = null;
+  }
   componentDidMount() {
     const jwt = getJWT();
     const user = getUser();
@@ -18,12 +22,24 @@ export default class App extends Component {
       : store.dispatch(handleNewUserVisit());
   }
 
+  componentDidUpdate() {
+  }
+
   render() {
     const { children } = this.props;
+    const res =  React.Children.count(children);
+    // console.log(this.stageNode);
+    const childrenWithProps = React.Children.map(children, child => (
+      React.cloneElement(child, {
+        testProp: 'heyyyy',
+        stageRef: (node) => (this.stageNode = node),
+        stageNode: this.stageNode,
+      })
+    ));
 
     return (
       <div>
-        {children}
+        {childrenWithProps}
       </div>
     );
   }

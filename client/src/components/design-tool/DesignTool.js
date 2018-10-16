@@ -653,6 +653,7 @@ let DesignTool = class extends Component {
      activeProjectId,
      isFetching,
      showSavingMessage,
+     stageRef,
      projects
    } = this.props;
 
@@ -693,6 +694,7 @@ let DesignTool = class extends Component {
               shouldHideContextMenu={shouldHideContextMenu}
               shouldRenderBoard={Boolean(activeProjectId && (projects.length > 0))}
               shouldUpdateThumbnail={shouldUpdateThumbnail}
+              stageRef={stageRef}
               toggleShouldExportPDF={this.toggleShouldExportPDF.bind(this)}
               toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail}
               unhideFloatingElements={this.unhideFloatingElements}
@@ -709,6 +711,7 @@ let DesignTool = class extends Component {
   }
 };
 
+// const mapStateToProps = state => console.log(JSON.stringify(getProjects(state), null, 2)) || ({
 const mapStateToProps = state => ({
     activeModules: state.activeModules.present,
     activeProject: getActiveProject(state),
