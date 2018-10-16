@@ -7,6 +7,7 @@ import { Layer, Stage } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import { getActiveProject } from '../../selectors/projectSelectors';
 
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
@@ -103,10 +104,15 @@ class DesignToolStage extends Component {
 
   updateThumbnail() {
     // *move to action creator
-    const { activeProjectId } = this.props;
+    const { activeProject } = this.props;
     const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
-    store.dispatch(actions.updateThumbnail(thumbnail, activeProjectId));
+
+    store.dispatch(actions.updateEntity(
+      'Project',
+      activeProject.id,
+      { thumbnail }
+    ));
   }
 
   deleteModule() {
@@ -204,6 +210,7 @@ const mapStateToProps = state => {
 
   return ({
     activeProjectId: state.projects.activeProjectId,
+    activeProject: getActiveProject(state),
     dragModuleData: state.modules.dragging,
     isMouseDownOnIcon: state.mouseEvents.isMouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,

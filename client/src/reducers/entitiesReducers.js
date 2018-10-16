@@ -77,11 +77,11 @@ export const entities = (state=initialState, action) => {
     case FETCH_PROJECTS_SUCCESS:
       return loadProjects(state, action.projects)
     case ENTITY_CREATE:
-    case ENTITY_CREATE_REQUEST:
       return createEntity(state, action.payload);
     case ENTITY_DELETE:
       return deleteEntity(state, action.payload)
     case ENTITY_UPDATE:
+      return updateEntity(state, action.payload)
     default:
       return state;
   }

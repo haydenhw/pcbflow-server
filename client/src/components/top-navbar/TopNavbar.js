@@ -37,7 +37,6 @@ export default function TopNavbar(props) {
     showSavingMessage,
     projectName,
     routeToProjects,
-    updateThumbnail,
   } = props;
 
   return (
@@ -101,5 +100,4 @@ export default function TopNavbar(props) {
 TopNavbar.propTypes = {
   handleNameChange: PropTypes.func.isRequired,
   projectName: PropTypes.string,
-  updateThumbnail: PropTypes.func.isRequired,
 };
