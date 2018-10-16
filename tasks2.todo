@@ -8,7 +8,7 @@ Debug:
 ☐ user creates a new project
   ✔ dispatch POST_PROJECT_SUCCESS @done(2018-02-27 14:50)
     ✔ update name and id in currentProjectInfo @done(2018-02-27 14:57)
-    ✔ update boardSpecs @done(2018-02-27 14:57)
+    ✔ update board @done(2018-02-27 14:57)
   ✔ route to design tool @done(2018-02-27 14:58)
     ✔ update project items @done(2018-02-27 15:05)
     ✔ update modules reducer @done(2018-02-27 15:05)

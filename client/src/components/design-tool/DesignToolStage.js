@@ -61,7 +61,7 @@ class DesignToolStage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { boardSpecs, toggleShouldExportPDF } = this.props;
+    const { board, toggleShouldExportPDF } = this.props;
 
     if (nextProps.updateThumbnailTrigger !== this.props.updateThumbnailTrigger) {
       // setTimeout(this.updateThumbnail.bind(this), 0);
@@ -221,7 +221,7 @@ const mapStateToProps = state => {
     isMouseDown: state.mouseEvents.isMouseDown,
     hoveredModuleIndex: state.modules.hovered.index,
     hoveredModuleProps: state.modules.hovered,
-    boardSpecs: state.boardSpecs,
+    board: state.board,
     updateThumbnailTrigger: state.triggers.updateThumbnailTrigger,
     anchorPositions: state.anchorPositions,
     modules: state.activeModules.present,
@@ -245,5 +245,5 @@ DesignToolStage.propTypes = {
   anchorPositions: PropTypes.object.isRequired,
   hoveredModuleIndex: PropTypes.number,
   hoveredModuleProps: PropTypes.object.isRequired,
-  boardSpecs: PropTypes.object.isRequired,
+  board: PropTypes.object.isRequired,
 };

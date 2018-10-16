@@ -48,7 +48,7 @@ export default class ProjectsItemFrame extends Component {
 
   componentDidMount() {
     const { thumbnail } = this.props;
-    const stage = getStageFromJSON(thumbnail);
+    const stage = getStageFromJSON(defaultThumbnail);
     const stageImages = stage.get('.image');
     const stageImagePaths = stageImages
       .map(image => image.attrs.src);

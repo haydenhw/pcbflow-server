@@ -80,7 +80,7 @@ class Modules extends Component {
         topLeftAnchor={this.props.topLeftAnchor}
         hoveredModuleProps={this.props.hoveredModuleProps}
         anchorPositions={this.props.anchorPositions}
-        boardSpecs={this.props.boardSpecs}
+        board={this.props.board}
         isDraggingToBoard={this.props.isDraggingToBoard}
         rotate={this.props.rotate}
         shouldCheckCollission={this.state.shouldCheckCollission}
@@ -99,8 +99,8 @@ class Modules extends Component {
 
 const mapStateToProps = state => ({
   anchorPositions: state.anchorPositions,
-  boardSpecs: state.boardSpecs,
-  checkCollisionTrigger: state.boardSpecs.checkCollisionTrigger,
+  board: state.board,
+  checkCollisionTrigger: state.board.checkCollisionTrigger,
   showAllIcons: state.sideBar.showAllIcons,
   modules: getActiveModules(state),
   moduleData: state.modules.dataList,

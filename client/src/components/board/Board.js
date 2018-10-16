@@ -165,15 +165,15 @@ const mapStateToProps = state => {
 
   return {
     updateAnchorTrigger:state.anchorPositions.updateAnchorTrigger,
-    x: state.boardSpecs.x,
-    y: state.boardSpecs.y,
-    width: state.boardSpecs.width,
-    height: state.boardSpecs.height,
+    x: state.board.x,
+    y: state.board.y,
+    width: state.board.width,
+    height: state.board.height,
     topLeft: state.anchorPositions.topLeft,
     topRight: state.anchorPositions.topRight,
     bottomLeft: state.anchorPositions.bottomLeft,
     bottomRight: state.anchorPositions.bottomRight,
-    stroke: state.boardSpecs.stroke,
+    stroke: state.board.stroke,
   };
 }
 

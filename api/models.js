@@ -15,7 +15,7 @@ const ProjectSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  boardSpecs: {
+  board: {
     x: { type: Number, required: true },
     y: { type: Number, required: true },
     height: { type: Number, required: true },

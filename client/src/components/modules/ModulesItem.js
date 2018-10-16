@@ -131,7 +131,7 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleDragMove() {
-    const { hoveredModuleProps, anchorPositions, boardSpecs, x, y } = this.props;
+    const { hoveredModuleProps, anchorPositions, board, x, y } = this.props;
     const { boundToSideIndex } = hoveredModuleProps;
     const { moduleGroup } = this.refs;
 
@@ -144,7 +144,7 @@ export default class ModulesItem extends PureComponent {
       x: moduleGroup.getX(),
       y: moduleGroup.getY(),
     });
-    const newPosition = bindToPerimeter(newModuleProps, topLeftAnchor.attrs, boardSpecs)
+    const newPosition = bindToPerimeter(newModuleProps, topLeftAnchor.attrs, board)
 
     moduleGroup.setX(newPosition.x);
     moduleGroup.setY(newPosition.y);
@@ -208,7 +208,7 @@ export default class ModulesItem extends PureComponent {
   }
 
   render() {
-    const { anchorPositions, boardSpecs, isDraggingToBoard, hoveredModuleProps } = this.props;
+    const { anchorPositions, board, isDraggingToBoard, hoveredModuleProps } = this.props;
     const { moduleGroup } = this.refs;
     const defaultStroke = moduleGroup ? moduleGroup.attrs.defaultStroke: null;
     const isStrokeRed = moduleGroup ? moduleGroup.attrs.isStrokeRed : null;
@@ -222,11 +222,11 @@ export default class ModulesItem extends PureComponent {
         ref="moduleGroup"
         name="moduleGroup"
         x={topLeftAnchor
-          ? bindToPerimeter(this.props, topLeftAnchor.attrs, boardSpecs).x
+          ? bindToPerimeter(this.props, topLeftAnchor.attrs, board).x
           : this.props.x
         }
         y={topLeftAnchor
-          ? bindToPerimeter(this.props, topLeftAnchor.attrs, boardSpecs).y
+          ? bindToPerimeter(this.props, topLeftAnchor.attrs, board).y
           : this.props.y
         }
         height={this.props.height}

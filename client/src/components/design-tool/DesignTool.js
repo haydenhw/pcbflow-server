@@ -176,7 +176,7 @@ let DesignTool = class extends Component {
   }
 
   dropDraggingModule(evt) {
-    const { draggingModuleData, boardSpecs, anchorPositions } = this.props;
+    const { draggingModuleData, board, anchorPositions } = this.props;
     const { width, height, boundToSideIndex } = draggingModuleData;
     const { topLeft } = anchorPositions;
     const { isDraggingToBoard } = this.state;
@@ -188,9 +188,9 @@ let DesignTool = class extends Component {
       boundToSideIndex,
       moduleX: x,
       moduleY: y,
-      boardX: boardSpecs.x,
-      boardY: boardSpecs.y,
-      boardHeight: boardSpecs.height,
+      boardX: board.x,
+      boardY: board.y,
+      boardHeight: board.height,
     };
 
     const testModuleCoordinates = {
@@ -198,9 +198,9 @@ let DesignTool = class extends Component {
       y: y - (height / 2),
     };
 
-    const adjustedBoardSpecs = Object.assign({}, boardSpecs, {
-      x: boardSpecs.x + topLeft.x,
-      y: boardSpecs.y + topLeft.y,
+    const adjustedBoardSpecs = Object.assign({}, board, {
+      x: board.x + topLeft.x,
+      y: board.y + topLeft.y,
     });
 
     const testModule = Object.assign({}, testModuleCoordinates, draggingModuleData);
@@ -470,8 +470,8 @@ let DesignTool = class extends Component {
   }
 
   rotate() {
-    const { hoveredModuleProps, anchorPositions, boardSpecs } = this.props;
-    const rotationData = rotate(hoveredModuleProps, anchorPositions, boardSpecs);
+    const { hoveredModuleProps, anchorPositions, board } = this.props;
+    const rotationData = rotate(hoveredModuleProps, anchorPositions, board);
     store.dispatch(actions.rotateHoveredModule(rotationData));
   }
 
@@ -484,15 +484,15 @@ let DesignTool = class extends Component {
   }
 
   renderBoardFrame() {
-    const { tutorialStep, boardSpecs } = this.props;
+    const { tutorialStep, board } = this.props;
 
     if (tutorialStep === 2) {
       return (
         <DesignToolBoardFrame
-          width={boardSpecs.width + 27}
-          height={boardSpecs.height + 27}
-          top={boardSpecs.y - 14}
-          left={boardSpecs.x - 14}
+          width={board.width + 27}
+          height={board.height + 27}
+          top={board.y - 14}
+          left={board.x - 14}
         />
       );
     }
@@ -719,7 +719,7 @@ const mapStateToProps = state => ({
     activeProjectName: getActiveProjectName(state),
     activeProjectThumbnail: getActiveProjectThumbnail(state),
     anchorPositions: state.anchorPositions,
-    boardSpecs: state.boardSpecs,
+    board: state.board,
     clickedModuleIndex: state.modules.clickedIndex,
     draggingModuleData: state.modules.dragging,
     hoveredModuleIndex: state.modules.hovered.index,
@@ -746,7 +746,7 @@ export default connect(mapStateToProps)(DesignTool);
 
 DesignTool.propTypes = {
   anchorPositions: PropTypes.object.isRequired,
-  boardSpecs: PropTypes.object.isRequired,
+  board: PropTypes.object.isRequired,
   activeProjectId: PropTypes.string,
   activeModules: PropTypes.array.isRequired,
   showAllIcons: PropTypes.bool.isRequired,

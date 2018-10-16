@@ -49,7 +49,7 @@ projectRouter.get('/:projectId', (req, res) => {
 projectRouter.post('/', (req, res) => {
   Projects
     .create({
-      boardSpecs: req.body.boardSpecs,
+      board: req.body.board,
       name: req.body.name,
       modules: req.body.modules,
       ownerId: req.body.ownerId,
@@ -63,7 +63,7 @@ projectRouter.post('/', (req, res) => {
 
 projectRouter.put('/:projectId', (req, res) => {
   const toUpdate = {};
-  const updateableFields = ['name', 'boardSpecs', 'modules'];
+  const updateableFields = ['name', 'board', 'modules'];
 
   updateableFields.forEach(field => {
     if (field in req.body) {
@@ -74,7 +74,7 @@ projectRouter.put('/:projectId', (req, res) => {
   console.log(req.params.projectId);
   /*const toUpdate = {
     name: req.body.projectName,
-    boardSpecs: req.body.boardSpecs,
+    board: req.body.board,
     modules: req.body.modules,
     boardModules: req.body.boardModules
   }*/
@@ -124,7 +124,7 @@ module.exports = projectRouter;
        "_id": "58c330a771284629ecef4131"
      }
    ],
-   "boardSpecs": {
+   "board": {
      "x": 50,
      "y": 50,
      "height": 300,

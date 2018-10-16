@@ -2,7 +2,7 @@ import * as actions from 'actions/indexActions';
 
 import doesModifyProject from 'helpers/doesModifyProject';
 
-export const boardSpecs = (state = {}, action) => {
+export const board = (state = {}, action) => {
   switch (action.type) {
 
     case actions.UPDATE_ANCHOR_POSITIONS:
@@ -39,8 +39,8 @@ export const boardSpecs = (state = {}, action) => {
     break;
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
     case actions.POST_PROJECT_SUCCESS:
-      const boardSpecs = action.project.boardSpecs;
-      const { x, y, width, height, thumbnail } = boardSpecs;
+      const board = action.project.board;
+      const { x, y, width, height, thumbnail } = board;
 
       return {
         ...state,

@@ -26,4 +26,4 @@ const getActiveProjectPropVal = key => createSelector(
 
 export const getActiveProjectName = getActiveProjectPropVal('name');
 export const getActiveProjectThumbnail = getActiveProjectPropVal('thumbnail');
-export const getActiveProjectBoard = getActiveProjectPropVal('boardSpecs');
+export const getActiveProjectBoard = getActiveProjectPropVal('board');

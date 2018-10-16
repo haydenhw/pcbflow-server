@@ -67,7 +67,7 @@ const generateProject = () => {
   return {
     name: faker.lorem.word(),
     modules: generateDataArray(generateModule, 6),
-    boardSpecs: generateBoardSpecs()
+    board: generateBoardSpecs()
   }
 }
 
@@ -126,14 +126,14 @@ describe('Projects API resource', function() {
 
         res.body.forEach(function(project) {
           project.should.be.a('object');
-          project.should.include.keys('name', 'modules', 'boardSpecs');
+          project.should.include.keys('name', 'modules', 'board');
         });
 
         resProject = res.body[0];
         return Projects.findById(resProject._id).exec();
       }).then(function(project) {
         resProject.name.should.equal(project.name);
-        compareKeys(resProject.boardSpecs, project.boardSpecs)
+        compareKeys(resProject.board, project.board)
 
         for (let i = 0; i < resProject.modules.length - 1; i++) {
           compareKeys(resProject.modules[i], project.modules[i])
@@ -150,7 +150,7 @@ describe('Projects API resource', function() {
         res.should.have.status(201);
         res.should.be.json;
         res.body.should.be.a('object');
-        res.body.should.include.keys('name', 'modules', 'boardSpecs');
+        res.body.should.include.keys('name', 'modules', 'board');
         res.body._id.should.not.be.null;
         res.body.name.should.equal(newProject.name);
         res.body.modules.should.have.length.of(newProject.modules.length);
@@ -158,7 +158,7 @@ describe('Projects API resource', function() {
       }).then(function(project) {
         newProject.name.should.equal(project.name);
 
-        compareKeys(newProject.boardSpecs, project.boardSpecs)
+        compareKeys(newProject.board, project.board)
 
         for (let i = 0; i < newProject.modules.length - 1; i++) {
           compareKeys(newProject.modules[i], project.modules[i])
@@ -223,7 +223,7 @@ describe('Projects API resource', function() {
             "_id": "590cb0f0f5d2602d11144be3"
           }
         ],
-        "boardSpecs": {
+        "board": {
           "y": 173,
           "x": 317,
           "thumbnail": "{\"attrs\":{\"width\":386,\"height\":346},\"className\":\"Stage\",\"children\":[{\"attrs\":{\"name\":\"boardLayer\"},\"className\":\"Layer\",\"children\":[{\"attrs\":{\"name\":\"boardGroup\",\"x\":10,\"y\":10,\"width\":366,\"height\":326,\"draggable\":\"true\"},\"className\":\"Group\",\"children\":[{\"attrs\":{\"name\":\"board\",\"width\":366,\"height\":326,\"fill\":\"#e3e3e5\",\"opacity\":\"0.5\",\"stroke\":\"#ccc\",\"isStrokeRed\":false},\"className\":\"Rect\"},{\"attrs\":{\"stroke\":\"#666\",\"fill\":\"#ddd\",\"radius\":\"8\",\"name\":\"topLeft\",\"draggable\":\"true\",\"dragOnTop\":\"false\"},\"className\":\"Circle\"},{\"attrs\":{\"x\":366,\"stroke\":\"#666\",\"fill\":\"#ddd\",\"radius\":\"8\",\"name\":\"topRight\",\"draggable\":\"true\",\"dragOnTop\":\"false\"},\"className\":\"Circle\"},{\"attrs\":{\"y\":326,\"stroke\":\"#666\",\"fill\":\"#ddd\",\"radius\":\"8\",\"name\":\"bottomLeft\",\"draggable\":\"true\",\"dragOnTop\":\"false\"},\"className\":\"Circle\"},{\"attrs\":{\"x\":366,\"y\":326,\"stroke\":\"#666\",\"fill\":\"#ddd\",\"radius\":\"8\",\"name\":\"bottomRight\",\"draggable\":\"true\",\"dragOnTop\":\"false\"},\"className\":\"Circle\"},{\"attrs\":{},\"className\":\"Group\",\"children\":[{\"attrs\":{\"draggable\":\"true\",\"name\":\"moduleGroup\",\"x\":10,\"y\":69,\"height\":60,\"width\":60,\"defaultStroke\":\"#62a799\",\"isStrokeRed\":true},\"className\":\"Group\",\"children\":[{\"attrs\":{\"fill\":\"black\",\"x\":5,\"y\":12.5,\"width\":60,\"text\":\"USB Hub 4 Port\",\"fontSize\":10,\"fontFamily\":\"sans-serif\"},\"className\":\"Text\"},{\"attrs\":{\"name\":\"innerGroup\"},\"className\":\"Group\",\"children\":[{\"attrs\":{\"width\":60,\"height\":60,\"fill\":\"green\",\"opacity\":0.1},\"className\":\"Rect\"},{\"attrs\":{\"name\":\"moduleBorder\",\"width\":60,\"height\":60,\"stroke\":\"red\",\"strokeWidth\":1},\"className\":\"Rect\"},{\"attrs\":{\"x\":20,\"y\":10},\"className\":\"Image\"}]}]},{\"attrs\":{\"draggable\":\"true\",\"name\":\"moduleGroup\",\"x\":40,\"y\":105,\"height\":60,\"width\":60,\"defaultStroke\":\"#62a799\",\"isStrokeRed\":true},\"className\":\"Group\",\"children\":[{\"attrs\":{\"fill\":\"black\",\"x\":5,\"y\":12.5,\"width\":60,\"text\":\"USB Hub 4 Port\",\"fontSize\":10,\"fontFamily\":\"sans-serif\"},\"className\":\"Text\"},{\"attrs\":{\"name\":\"innerGroup\"},\"className\":\"Group\",\"children\":[{\"attrs\":{\"width\":60,\"height\":60,\"fill\":\"green\",\"opacity\":0.1},\"className\":\"Rect\"},{\"attrs\":{\"name\":\"moduleBorder\",\"width\":60,\"height\":60,\"stroke\":\"red\",\"strokeWidth\":1},\"className\":\"Rect\"},{\"attrs\":{\"x\":20,\"y\":10},\"className\":\"Image\"}]}]}]}]}]}]}",
@@ -243,7 +243,7 @@ describe('Projects API resource', function() {
 
         project.name.should.equal(updateData.name);
 
-        compareKeys(updateData.boardSpecs, project.boardSpecs)
+        compareKeys(updateData.board, project.board)
 
         for (let i = 0; i < updateData.modules.length - 1; i++) {
           compareKeys(updateData.modules[i], project.modules[i])

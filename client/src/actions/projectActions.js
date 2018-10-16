@@ -17,18 +17,18 @@ const getOriginAdjustedModules = (modules, originX, originY) => (
 );
 
 const getOriginAdjustedProjectData = ({
-  boardSpecs,
+  board,
   activeModules: modules,
   activeProjectName: projectName,
   activeProjectThumbnail: thumbnail,
   topLeftAnchorX: originX,
   topLeftAnchorY: originY,
 }) => {
-  const { width, height, x, y } = boardSpecs;
+  const { width, height, x, y } = board;
 
   return {
     name: projectName,
-    boardSpecs: {
+    board: {
       width,
       height,
       thumbnail,
@@ -58,7 +58,7 @@ export const createNewProject = () => (dispatch) => {
   const newProject = {
     ownerId,
     name: 'Untitled',
-    boardSpecs: {
+    board: {
       height,
       width,
       x: (0.5 * (document.documentElement.clientWidth + offsetX)) - (width / 2),

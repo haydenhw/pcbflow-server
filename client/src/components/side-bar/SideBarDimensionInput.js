@@ -148,8 +148,8 @@ class SideBarDimensionInput extends Component {
 }
 
 const mapStateToProps = state => ({
-  boardWidth: state.boardSpecs.width,
-  boardHeight: state.boardSpecs.height,
+  boardWidth: state.board.width,
+  boardHeight: state.board.height,
   topLeft: state.anchorPositions.topLeft,
   topRight: state.anchorPositions.topRight,
   bottomLeft: state.anchorPositions.bottomLeft,

@@ -5,9 +5,9 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { boardSpecs, anchorPositions } from './boardReducers';
+import { board, anchorPositions } from './boardReducers';
 
-describe('boardSpecs reducer', () => {
+describe('board reducer', () => {
     // Fetch Basic Info about User
   it('It should return correct height and width', () => {
     const initialState = {
@@ -24,7 +24,7 @@ describe('boardSpecs reducer', () => {
       height: 34,
     };
 
-    const resultState = boardSpecs(deepFreeze(initialState), {
+    const resultState = board(deepFreeze(initialState), {
       type: 'UPDATE_BOARD_DIMENSIONS',
       dimensions: {
         width: 105,
@@ -50,7 +50,7 @@ describe('boardSpecs reducer', () => {
       height: 300,
     };
 
-    const resultState = boardSpecs(deepFreeze(initialState), {
+    const resultState = board(deepFreeze(initialState), {
       type: 'UPDATE_BOARD_POSITION',
       position: {
         x: 25,
@@ -77,7 +77,7 @@ describe('boardSpecs reducer', () => {
       stroke: 'red',
     };
 
-    const resultState = boardSpecs(deepFreeze(initialState), {
+    const resultState = board(deepFreeze(initialState), {
       type: 'UPDATE_BOARD_STROKE',
       boardStroke: 'red',
     });
@@ -85,7 +85,7 @@ describe('boardSpecs reducer', () => {
     assert.deepEqual(resultState, expectedState);
   });
 
-  it('It should return the correct boardSpecs', () => {
+  it('It should return the correct board', () => {
     const initialState = {
       x: 10,
       y: 10,
@@ -101,10 +101,10 @@ describe('boardSpecs reducer', () => {
 
     };
 
-    const resultState = boardSpecs(deepFreeze(initialState), {
+    const resultState = board(deepFreeze(initialState), {
       type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
       project: {
-        boardSpecs: {
+        board: {
           x: 50,
           y: 50,
           width: 450,
@@ -133,7 +133,7 @@ describe('boardSpecs reducer', () => {
 
     };
 
-    const resultState = boardSpecs(deepFreeze(initialState), {
+    const resultState = board(deepFreeze(initialState), {
       type: 'UPDATE_BOARD_THUMBNAIL',
       thumbnail: 'This is a string',
     });

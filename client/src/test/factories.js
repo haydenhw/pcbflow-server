@@ -12,7 +12,7 @@ factory.define('Project', 'Project', {
     _id: factory.sequence(n => `string-id-${n}`),
     ownderId: factory.sequence(n => n),
     name: factory.sequence(n => `name-${n}`),
-    boardSpecs: {
+    board: {
       x: Math.floor(Math.random() * 500),
       y: Math.floor(Math.random() * 500),
       anchors: {

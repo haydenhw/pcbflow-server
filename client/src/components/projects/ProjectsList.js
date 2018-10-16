@@ -26,7 +26,7 @@ class ProjectsList extends Component {
     const { projects } = this.props;
 
     const projectsList = projects.map((project) => {
-      const { thumbnail } = project.boardSpecs;
+      const { thumbnail } = project.board;
 
       return (
         <ProjectsItemFrame
