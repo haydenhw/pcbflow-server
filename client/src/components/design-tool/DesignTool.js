@@ -355,8 +355,10 @@ let DesignTool = class extends Component {
   }
 
   handleNameChange(newName) {
-    const { activeProjectId } = this.props;
-    store.dispatch(actions.updateProjectName(newName, activeProjectId));
+    const { activeProject } = this.props;
+    store.dispatch(actions.updateEntity('Project', activeProject.id, {
+      name: newName,
+    }));
   }
 
   handleKeyUp(evt) {

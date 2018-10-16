@@ -39,25 +39,6 @@ export const projects = (state = defaultProjectState, action) => {
       }
 
       return state;
-    // get thumbnails to render from  from entities
-
-    case actions.UPDATE_BOARD_THUMBNAIL: {
-      const updatedProjects = state.items.map(project => {
-        if (project._id === action.projectId) {
-          const updatedBoardSpecs = Object.assign({}, { ...project.boardSpecs }, { thumbnail: action.thumbnail })
-          const updatedProject = Object.assign({}, project, { boardSpecs: updatedBoardSpecs });
-
-          return updatedProject;
-        }
-
-        return project;
-      });
-
-      return {
-        ...state,
-        items: updatedProjects,
-      }
-    }
     // replace with update entity
     case actions.UPDATE_PROJECT_NAME: {
       const updatedProjects = state.items.map(project => {

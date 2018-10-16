@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { getEntitiesSession } from './entitySelectors';
-import { getActiveProjectId } from './projectSelectors';
+import { getActiveProject } from './projectSelectors';
 
 export const getModules = createSelector(
   getEntitiesSession,
@@ -8,6 +8,6 @@ export const getModules = createSelector(
 );
 
 export const getActiveModules = createSelector(
-  [getEntitiesSession, getActiveProjectId],
-  (session, projectId) => session.Module.filter({ project: projectId }).toRefArray()
+  [getEntitiesSession, getActiveProject],
+  (session, project ) => session.Module.filter({ project: project.id }).toRefArray()
 );
