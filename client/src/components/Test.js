@@ -1,7 +1,23 @@
 import React from 'react';
 import Konva from 'konva';
-
+import { project } from './Test.data.js';
 import { createTempContainer } from 'helpers/generateThumbnail';
+import { getAnchorPositions } from 'helpers/anchorHelpers';
+import { boardStyles, anchorStyles } from '../constants/styleConstants';
+
+const getKonvaElement = (type) => (varAttrs, styles={}) => (
+  new Konva[type](Object.assign({}, styles, varAttrs))
+);
+
+const getBoardGroup = () => getKonvaElement('Group')({ x: 200, y: 300 });
+
+const getBoard= ({ width, height }, styles) =>  (
+  getKonvaElement('Rect')({ width, height }, styles)
+);
+
+const getAnchor = ({ x , y }, styles) =>  (
+  getKonvaElement('Circle')({ x , y }, styles)
+);
 
 const getStageDataUrl = () => {
   var width = window.innerWidth;
@@ -16,19 +32,22 @@ const getStageDataUrl = () => {
       document.body.removeChild(tempContainer);
 
       var layer = new Konva.Layer();
-      var rect = new Konva.Rect({
-        x: 50,
-        y: 50,
-        width: 100,
-        height: 50,
-        fill: 'green',
-        stroke: 'black',
-        strokeWidth: 4
+
+      const { board: boardAttrs } = project;
+
+      const boardGroup = getBoardGroup(boardAttrs);
+      const board = getBoard(boardAttrs, boardStyles);
+
+      const anchorPositions = getAnchorPositions(boardAttrs)
+
+      boardGroup.add(board);
+
+      Object.keys(anchorPositions).forEach(key => {
+        const anchor = getAnchor(anchorPositions[key], anchorStyles);
+        boardGroup.add(anchor)
       });
 
-      // add the shape to the layer
-      layer.add(rect);
-      // add the layer to the stage
+      layer.add(boardGroup);
       stage.add(layer);
       return stage.toDataURL();
 }

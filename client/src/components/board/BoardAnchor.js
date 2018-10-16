@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Circle } from 'react-konva';
 import { connect } from 'react-redux';
 import { minWidth, minHeight } from '../../constants/boardConstants';
+import { anchorStyles } from '../../constants/styleConstants';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -222,10 +223,7 @@ export default class Anchor extends Component {
         ref="anchor"
         x={this.anchor ? this.anchor.getX() : x}
         y={this.anchor ? this.anchor.getY() : y}
-        stroke="#666"
-        fill="#ddd"
         strokeWidth={this.state.strokeWidth}
-        radius="8"
         name={name}
         draggable="true"
         dragOnTop="false"
@@ -235,6 +233,7 @@ export default class Anchor extends Component {
         onDragStart={this.handleDragStart}
         onDragMove={this.handleDragMove}
         onDragEnd={this.handleDragEnd}
+        {...anchorStyles}
       />);
   }
 }

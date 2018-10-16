@@ -185,7 +185,6 @@ export function postNewProject(newProject) {
       .then(res => res.json())
       .then((project) => {
         const projectWithAnchors = addAnchorsToProject(project);
-        console.log(projectWithAnchors);
         dispatch(actions.createEntity('Project', projectWithAnchors))
 
         const designRoute = `/design/${project._id}`;

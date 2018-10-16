@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import { getActiveProjectBoard } from '../../selectors/projectSelectors';
+import { boardStyles } from '../../constants/styleConstants';
+
 
 import generateThumbnail from 'helpers/generateThumbnail';
 
@@ -113,9 +115,8 @@ class Board extends Component {
             y={this.board ? this.board.getY() : topLeft.y}
             width={width}
             height={height}
-            fill="#e3e3e5"
-            opacity="0.5"
             stroke={this.props.stroke}
+            {...boardStyles}
           />
           <Anchor
             x={topLeft.x}
