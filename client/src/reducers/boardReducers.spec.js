@@ -5,7 +5,7 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { board, anchorPositions } from './boardReducers';
+import { board, anchors } from './boardReducers';
 
 describe('board reducer', () => {
     // Fetch Basic Info about User
@@ -142,7 +142,7 @@ describe('board reducer', () => {
   });
 });
 
-describe('anchorPositions reducer', () => {
+describe('anchors reducer', () => {
     // Fetch Basic Info about User
   it('It should return correct height and width', () => {
     const initialState = {
@@ -159,7 +159,7 @@ describe('anchorPositions reducer', () => {
       bottomRight: { x: 20, y: 20 },
     };
 
-    const resultState = anchorPositions(deepFreeze(initialState), {
+    const resultState = anchors(deepFreeze(initialState), {
       type: 'UPDATE_ANCHOR_POSITIONS',
       positions: {
         topLeft: { x: 0, y: 0 },

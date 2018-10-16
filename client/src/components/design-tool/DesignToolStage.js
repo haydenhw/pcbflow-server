@@ -223,7 +223,7 @@ const mapStateToProps = state => {
     hoveredModuleProps: state.modules.hovered,
     board: state.board,
     updateThumbnailTrigger: state.triggers.updateThumbnailTrigger,
-    anchorPositions: state.anchorPositions,
+    anchors: state.anchors,
     modules: state.activeModules.present,
   });
 };
@@ -242,7 +242,7 @@ DesignToolStage.propTypes = {
   toggleShouldUpadateThumbnail: PropTypes.func.isRequired,
   shouldHideContextMenu: PropTypes.bool.isRequired,
   isDraggingToBoard: PropTypes.bool.isRequired,
-  anchorPositions: PropTypes.object.isRequired,
+  anchors: PropTypes.object.isRequired,
   hoveredModuleIndex: PropTypes.number,
   hoveredModuleProps: PropTypes.object.isRequired,
   board: PropTypes.object.isRequired,

@@ -4,8 +4,8 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import { projectsUrl } from '../config/endpointUrls';
-import { defaultThumbnail } from '../constants/thumbnailConstants';
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
+import { addAnchorsToProject } from 'helpers/anchorHelpers';
 
 const getOriginAdjustedModules = (modules, originX, originY) => (
   modules.map((module) => {
@@ -63,7 +63,6 @@ export const createNewProject = () => (dispatch) => {
       width,
       x: (0.5 * (document.documentElement.clientWidth + offsetX)) - (width / 2),
       y: (0.5 * document.documentElement.clientHeight) - (height / 2),
-      thumbnail: defaultThumbnail,
     },
     modules: [],
   };
@@ -96,8 +95,10 @@ export function fetchProjects(jwt) {
       },
     })
     .then(res => res.json())
-    .then((data) => {
-      dispatch(fetchProjectsSuccess(data));
+    .then((projects) => {
+      const projectsWithAnchors = projects.map(addAnchorsToProject);
+
+      dispatch(fetchProjectsSuccess(projects));
     });
     // .catch((err) => {
     //   console.error(err);
@@ -182,10 +183,12 @@ export function postNewProject(newProject) {
         }),
       })
       .then(res => res.json())
-      .then((data) => {
-        dispatch(actions.createEntity('Project', data))
+      .then((project) => {
+        const projectWithAnchors = addAnchorsToProject(project);
+        console.log(projectWithAnchors);
+        dispatch(actions.createEntity('Project', projectWithAnchors))
 
-        const designRoute = `/design/${data._id}`;
+        const designRoute = `/design/${project._id}`;
         hashHistory.push(designRoute);
       })
       .catch((err) => {

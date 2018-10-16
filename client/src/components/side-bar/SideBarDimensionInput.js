@@ -68,7 +68,7 @@ class SideBarDimensionInput extends Component {
     const height = boardHeight;
     const width = newBoardWidth;
 
-    const anchorPositions = {
+    const anchors = {
       topLeft: { x: topLeft.x, y: topLeft.y },
       topRight: { x: topLeft.x + width, y: topRight.y },
       bottomLeft: { x: bottomLeft.x, y: topLeft.y + height },
@@ -79,7 +79,7 @@ class SideBarDimensionInput extends Component {
 
     if (newBoardWidth >= minWidth) {
       store.dispatch(actions.updateBoardDimensions({ width, height }));
-      store.dispatch(actions.updateAnchorPositions(anchorPositions));
+      store.dispatch(actions.updateAnchorPositions(anchors));
       store.dispatch(actions.triggerAnchorUpdate());
     }
   }
@@ -98,7 +98,7 @@ class SideBarDimensionInput extends Component {
     const width = boardWidth;
     const height = newBoardHeight;
 
-    const anchorPositions = {
+    const anchors = {
       topLeft: { x: topLeft.x, y: topLeft.y },
       topRight: { x: topLeft.x + width, y: topRight.y },
       bottomLeft: { x: bottomLeft.x, y: topLeft.y + height },
@@ -109,7 +109,7 @@ class SideBarDimensionInput extends Component {
 
     if (newBoardHeight >= minHeight) {
       store.dispatch(actions.updateBoardDimensions({ width, height }));
-      store.dispatch(actions.updateAnchorPositions(anchorPositions));
+      store.dispatch(actions.updateAnchorPositions(anchors));
       store.dispatch(actions.triggerAnchorUpdate());
     }
   }
@@ -150,10 +150,10 @@ class SideBarDimensionInput extends Component {
 const mapStateToProps = state => ({
   boardWidth: state.board.width,
   boardHeight: state.board.height,
-  topLeft: state.anchorPositions.topLeft,
-  topRight: state.anchorPositions.topRight,
-  bottomLeft: state.anchorPositions.bottomLeft,
-  bottomRight: state.anchorPositions.bottomRight,
+  topLeft: state.anchors.topLeft,
+  topRight: state.anchors.topRight,
+  bottomLeft: state.anchors.bottomLeft,
+  bottomRight: state.anchors.bottomRight,
 });
 
 export default connect(mapStateToProps)(SideBarDimensionInput);

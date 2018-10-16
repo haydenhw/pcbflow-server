@@ -161,18 +161,18 @@ class Board extends Component {
 
 const mapStateToProps = state => {
   const { x, y, width, height } = getActiveProjectBoard(state);
-  // const { topLeft, topRight, bottomLeft, bottomRight } = anchorPositions;
+  // const { topLeft, topRight, bottomLeft, bottomRight } = anchors;
 
   return {
-    updateAnchorTrigger:state.anchorPositions.updateAnchorTrigger,
+    updateAnchorTrigger:state.anchors.updateAnchorTrigger,
     x: state.board.x,
     y: state.board.y,
     width: state.board.width,
     height: state.board.height,
-    topLeft: state.anchorPositions.topLeft,
-    topRight: state.anchorPositions.topRight,
-    bottomLeft: state.anchorPositions.bottomLeft,
-    bottomRight: state.anchorPositions.bottomRight,
+    topLeft: state.anchors.topLeft,
+    topRight: state.anchors.topRight,
+    bottomLeft: state.anchors.bottomLeft,
+    bottomRight: state.anchors.bottomRight,
     stroke: state.board.stroke,
   };
 }

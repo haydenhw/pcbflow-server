@@ -160,14 +160,14 @@ export default class Anchor extends Component {
     }
 
     if (callback) {
-      const anchorPositions = {
+      const anchors = {
         topLeft: { x: topLeft.getX(), y: topLeft.getY() },
         topRight: { x: topRight.getX(), y: topRight.getY() },
         bottomLeft: { x: bottomLeft.getX(), y: bottomLeft.getY() },
         bottomRight: { x: bottomRight.getX(), y: bottomRight.getY() },
       };
 
-      callback(anchorPositions);
+      callback(anchors);
     }
 
     board.position(topLeft.position());
@@ -204,7 +204,7 @@ export default class Anchor extends Component {
   handleDragEnd() {
     this.props.unhideFloatingElements();
     this.draggableOn();
-    this.updatePosition(anchorPositions => store.dispatch(actions.updateAnchorPositions(anchorPositions)));
+    this.updatePosition(anchors => store.dispatch(actions.updateAnchorPositions(anchors)));
   }
 
   handleMouseOut() {

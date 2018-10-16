@@ -176,9 +176,9 @@ let DesignTool = class extends Component {
   }
 
   dropDraggingModule(evt) {
-    const { draggingModuleData, board, anchorPositions } = this.props;
+    const { draggingModuleData, board, anchors } = this.props;
     const { width, height, boundToSideIndex } = draggingModuleData;
-    const { topLeft } = anchorPositions;
+    const { topLeft } = anchors;
     const { isDraggingToBoard } = this.state;
     const { clientX: x , clientY: y } = evt;
 
@@ -470,8 +470,8 @@ let DesignTool = class extends Component {
   }
 
   rotate() {
-    const { hoveredModuleProps, anchorPositions, board } = this.props;
-    const rotationData = rotate(hoveredModuleProps, anchorPositions, board);
+    const { hoveredModuleProps, anchors, board } = this.props;
+    const rotationData = rotate(hoveredModuleProps, anchors, board);
     store.dispatch(actions.rotateHoveredModule(rotationData));
   }
 
@@ -711,14 +711,14 @@ let DesignTool = class extends Component {
   }
 };
 
-// const mapStateToProps = state => console.log(JSON.stringify(getProjects(state), null, 2)) || ({
-const mapStateToProps = state => ({
+const mapStateToProps = state => console.log(JSON.stringify(getProjects(state), null, 2)) || ({
+// const mapStateToProps = state => ({
     activeModules: state.activeModules.present,
     activeProject: getActiveProject(state),
     activeProjectId: state.projects.activeProjectId,
     activeProjectName: getActiveProjectName(state),
     activeProjectThumbnail: getActiveProjectThumbnail(state),
-    anchorPositions: state.anchorPositions,
+    anchors: state.anchors,
     board: state.board,
     clickedModuleIndex: state.modules.clickedIndex,
     draggingModuleData: state.modules.dragging,
@@ -736,8 +736,8 @@ const mapStateToProps = state => ({
     showAllIcons: state.sideBar.showAllIcons,
     showSavingMessage: state.nav.showSavingMessage,
     todoBools: state.tutorial.todoBools,
-    topLeftAnchorX: state.anchorPositions.topLeft.x,
-    topLeftAnchorY: state.anchorPositions.topLeft.y,
+    topLeftAnchorX: state.anchors.topLeft.x,
+    topLeftAnchorY: state.anchors.topLeft.y,
     tutorialStep: state.tutorial.step,
 });
 
@@ -745,7 +745,7 @@ DesignTool = withRouter(DesignTool);
 export default connect(mapStateToProps)(DesignTool);
 
 DesignTool.propTypes = {
-  anchorPositions: PropTypes.object.isRequired,
+  anchors: PropTypes.object.isRequired,
   board: PropTypes.object.isRequired,
   activeProjectId: PropTypes.string,
   activeModules: PropTypes.array.isRequired,

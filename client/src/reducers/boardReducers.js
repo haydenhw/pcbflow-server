@@ -63,7 +63,7 @@ const defaultAnchorPositions = {
   bottomRight: { x: null, y: null },
 };
 
-export const anchorPositions = (state = defaultAnchorPositions, action) => {
+export const anchors = (state = defaultAnchorPositions, action) => {
   switch (action.type) {
     case actions.UPDATE_ANCHOR_POSITIONS:
       return {

@@ -131,7 +131,7 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleDragMove() {
-    const { hoveredModuleProps, anchorPositions, board, x, y } = this.props;
+    const { hoveredModuleProps, anchors, board, x, y } = this.props;
     const { boundToSideIndex } = hoveredModuleProps;
     const { moduleGroup } = this.refs;
 
@@ -208,7 +208,7 @@ export default class ModulesItem extends PureComponent {
   }
 
   render() {
-    const { anchorPositions, board, isDraggingToBoard, hoveredModuleProps } = this.props;
+    const { anchors, board, isDraggingToBoard, hoveredModuleProps } = this.props;
     const { moduleGroup } = this.refs;
     const defaultStroke = moduleGroup ? moduleGroup.attrs.defaultStroke: null;
     const isStrokeRed = moduleGroup ? moduleGroup.attrs.isStrokeRed : null;
