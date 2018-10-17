@@ -162,14 +162,13 @@ class Board extends Component {
 
 const mapStateToProps = state => {
   const { x, y, width, height } = getActiveProjectBoard(state);
-  // const { topLeft, topRight, bottomLeft, bottomRight } = anchors;
 
   return {
+    x,
+    y,
+    width,
+    height,
     updateAnchorTrigger:state.anchors.updateAnchorTrigger,
-    x: state.board.x,
-    y: state.board.y,
-    width: state.board.width,
-    height: state.board.height,
     topLeft: state.anchors.topLeft,
     topRight: state.anchors.topRight,
     bottomLeft: state.anchors.bottomLeft,

@@ -4,6 +4,7 @@ import * as types from '../constants/actionTypes';
 export default function doesModifyProject(action) {
   switch(action.type) {
     case types.ENTITY_UPDATE:
+    case types.ENTITY_CREATE:
     case actions.DELETE_HOVERED_MODULE:
     case actions.PUSH_NEW_MODULE:
     case actions.ROTATE_HOVERED_MODULE:

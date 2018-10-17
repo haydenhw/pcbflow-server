@@ -1,5 +1,6 @@
 import { projectsUrl } from '../config/endpointUrls';
 import * as actions from 'actions/indexActions';
+import { getActiveProject } from '../selectors/projectSelectors';
 
 export const PUSH_NEW_MODULE = 'PUSH_NEW_MODULE';
 export const pushNewModule = module => ({
@@ -8,7 +9,10 @@ export const pushNewModule = module => ({
 });
 
 export const pushToactiveModules = module => (dispatch, getState) => {
-  const { step, isTutorialActive } = getState().tutorial;
+  const state = getState();
+  const { step, isTutorialActive } = state.tutorial;
+  const activeProjectId = getActiveProject(state).id;
+  console.log(activeProjectId)
 
   if (isTutorialActive) {
     switch (step) {
@@ -26,7 +30,8 @@ export const pushToactiveModules = module => (dispatch, getState) => {
     }
   }
 
-  dispatch(actions.pushNewModule(module));
+  const newModule = Object.assign({}, module, { project: activeProjectId });
+  dispatch(actions.createEntity('Module', newModule));
 };
 
 export const UPDATE_DRAGGING_MODULE = 'UPDATE_DRAGGING_MODULE';

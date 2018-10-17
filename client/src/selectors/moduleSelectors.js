@@ -7,7 +7,16 @@ export const getModules = createSelector(
   session => session.Module.all().toRefArray()
 );
 
+export const getModulesByProject = (projectId) => createSelector(
+  getEntitiesSession,
+  session => session.Module.filter({ project: projectId }).toRefArray(),
+);
+
 export const getActiveModules = createSelector(
   [getEntitiesSession, getActiveProject],
-  (session, project ) => session.Module.filter({ project: project.id }).toRefArray()
+  (session, project) => (
+    session && project
+      ? session.Module.filter({ project: project.id }).toRefArray()
+      : []
+  )
 );

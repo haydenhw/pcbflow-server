@@ -6,6 +6,7 @@ import store from 'reduxFiles/store';
 import { projectsUrl } from '../config/endpointUrls';
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
 import { addAnchorsToProject } from 'helpers/anchorHelpers';
+import { getModulesByProject } from '../selectors/moduleSelectors';
 
 const getOriginAdjustedModules = (modules, originX, originY) => (
   modules.map((module) => {
@@ -256,7 +257,14 @@ export function deleteProject(project) {
   const { _id: dbID, id } = project;
   const url = `${projectsUrl}/${dbID}`;
 
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const projectModules = getModulesByProject(id)(state);
+
+    projectModules.forEach(module => (
+      dispatch(actions.deleteEntity('Module', module.id))
+    ));
+
     dispatch(actions.deleteEntity('Project', id));
 
     fetch(url, {

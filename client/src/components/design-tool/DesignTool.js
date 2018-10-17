@@ -16,8 +16,10 @@ import {
   getProjects,
   getActiveProject,
   getActiveProjectName,
-  getActiveProjectThumbnail
+  getActiveProjectThumbnail,
 } from '../../selectors/projectSelectors';
+
+import { getActiveModules, getModulesByProject } from '../../selectors/moduleSelectors';
 
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
@@ -711,9 +713,9 @@ let DesignTool = class extends Component {
   }
 };
 
-// const mapStateToProps = state => console.log(JSON.stringify(getProjects(state), null, 2)) || ({
+// const mapStateToProps = state => console.log(JSON.stringify(getModulesByProject(0)(state), null, 2)) || ({
 const mapStateToProps = state => ({
-    activeModules: state.activeModules.present,
+    activeModules: getActiveModules(state),
     activeProject: getActiveProject(state),
     activeProjectId: state.projects.activeProjectId,
     activeProjectName: getActiveProjectName(state),
