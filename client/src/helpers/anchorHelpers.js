@@ -1,4 +1,4 @@
-export const getAnchorPositions = ({ x , y, width, height}) => ({
+export const getAnchorPositions = ({ width, height}) => ({
   topLeft: {
     x: 0,
     y: 0,

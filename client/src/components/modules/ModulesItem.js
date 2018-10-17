@@ -215,7 +215,6 @@ export default class ModulesItem extends PureComponent {
     const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
       ? getTopLeftAnchor(moduleGroup)
       : null;
-
     return (
       <Group
         draggable="true"

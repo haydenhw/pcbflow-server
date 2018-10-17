@@ -197,7 +197,6 @@ export function postNewProject(newProject) {
   };
 }
 
-
 export const SET_ACTIVE_PROJECT_ID = 'SET_ACTIVE_PROJECT_ID';
 export const setActiveProjectId = (activeProjectDbId) => (dispatch) => {
 

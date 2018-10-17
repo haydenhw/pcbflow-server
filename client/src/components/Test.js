@@ -19,24 +19,27 @@ const getAnchor = ({ x , y }, styles) =>  (
   getKonvaElement('Circle')({ x , y }, styles)
 );
 
-const getModuleGroup = ({ moduleX, moduleY }) => new Konva.Group({
-  x: moduleX,
-  y: moduleY,
-});
+const getModuleGroup = ({ x, y }) => (
+  getKonvaElement('Group')({ x, y })
+);
 
-const getModuleImage = ({ imageX , imageY, imageWidth, imageHeight, image }) =>  new Konva.Image({
-  image,
-  x: imageX,
-  y: imageY,
-  width: imageWidth,
-  height: imageHeight,
-});
+const getModuleFill =  ({ width, height }, styles) => (
+  getKonvaElement('Rect')({ width, height }, styles)
+);
 
-const getModuleOutline = ({ x , y, width, height, stroke }) => new Konva.Image({
-  width,
-  height,
-  stroke,
-});
+const getModuleImage = ({ imageX , imageY, imageWidth, imageHeight, image }) => (
+  getKonvaElement('Image')({
+    image,
+    x: imageX,
+    y: imageY,
+    width: imageWidth,
+    height: imageHeight,
+  })
+);
+
+const getModuleOutline = ({ width, height, stroke }) => (
+  getKonvaElement('Rect')({ width, height, stroke, })
+);
 
 const getModule = (childrenGetters) => (moduleData) => {
   const group = getModuleGroup(moduleData);
@@ -48,7 +51,7 @@ const getModule = (childrenGetters) => (moduleData) => {
 }
 
 const toArray = (...args) => args;
-const moduleChildrenGetters = toArray(getModuleImage, getModuleOutline);
+const moduleChildrenGetters = toArray(getModuleImage, getModuleOutline, getModuleFill);
 const getDragModule = getModule(moduleChildrenGetters);
 
 const getStageDataUrl = () => {
@@ -75,11 +78,21 @@ const getStageDataUrl = () => {
       const moduleData = modules[1];
 
       imageObj.onload = () => {
-        const moduleImageData = Object.assign({}, moduleData, { image: imageObj })
-        const module = getModule(moduleChildrenGetters)(moduleImageData);
+        const newModuleData = Object.assign({}, moduleData, { image: imageObj })
+        const moduleImage = getModuleImage(newModuleData);
+        const moduleBorder = getModuleOutline(newModuleData);
+        const moduleFill = getModuleFill(newModuleData, { fill: 'green', opacity: 0.1 });
+        const moduleGroup = getModuleGroup(newModuleData);
+        console.log(newModuleData);
+        console.log(moduleGroup);
+
+
+        moduleGroup.add(moduleFill);
+        moduleGroup.add(moduleImage);
+        moduleGroup.add(moduleBorder);
 
         boardGroup.add(board);
-        boardGroup.add(module);
+        boardGroup.add(moduleGroup);
 
         Object.keys(anchorPositions).forEach(key => {
           const anchor = getAnchor(anchorPositions[key], anchorStyles);
