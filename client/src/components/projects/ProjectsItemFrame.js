@@ -4,38 +4,17 @@ import PropTypes from 'prop-types';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import { createTempContainer } from 'helpers/generateThumbnail';
+import { getProjectDataUrl } from 'helpers/thumbnailHelpers';
 
 import DeleteButton from './ProjectsDeleteButton';
 import { defaultThumbnail } from '../../constants/thumbnailConstants';
+import { moduleData } from 'config/moduleData';
 
 import './projects-styles/_ProjectsItemFrame.scss';
 import './projects-styles/_floatGrid.scss';
 
 function fectchProject(projectId) {
   store.dispatch(actions.fetchProjectById(projectId));
-}
-
-const loadImage = imgSrc => (
-  new Promise(resolve => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.src = imgSrc;
-  })
-);
-
-const loadImages = imgSrcs => {
-  return Promise.all(imgSrcs.map(loadImage));
-}
-
-const getStageFromJSON = (json) =>  {
-  const tempContainer = createTempContainer();
-  const stage = json
-    ? Konva.Node.create(json, 'container')
-    : null;
-
-  document.body.removeChild(tempContainer);
-
-  return stage;
 }
 
 export default class ProjectsItemFrame extends Component {
@@ -47,20 +26,11 @@ export default class ProjectsItemFrame extends Component {
   }
 
   componentDidMount() {
-    const { thumbnail } = this.props;
-    const stage = getStageFromJSON(defaultThumbnail);
-    const stageImages = stage.get('.image');
-    const stageImagePaths = stageImages
-      .map(image => image.attrs.src);
+    const { project, modules } = this.props;
 
-    loadImages(stageImagePaths)
-      .then((imageNodes) => {
-        imageNodes.forEach((imageNode, i) => {
-          stageImages[i].image(imageNode);
-        });
-        stage.draw();
-        this.setState({ thumbnailDataUrl: stage.toDataURL() });
-      });
+    getProjectDataUrl(project, modules, moduleData).then((dataUrl) => {
+      this.setState({ thumbnailDataUrl: dataUrl });
+    });
   }
 
   render() {

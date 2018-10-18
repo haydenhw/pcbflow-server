@@ -1,12 +1,9 @@
-import React from 'react';
 import Konva from 'konva';
-import { project, modules } from './Test.data.js';
 import  checkCollision  from 'helpers/checkCollision';
-import { createTempContainer } from 'helpers/generateThumbnail';
+import { createTempContainer, getCroppedStage } from 'helpers/generateThumbnail';
 import { getAnchorPositions } from 'helpers/anchorHelpers';
 import { getUnmetDependencies } from 'helpers/dependencies';
-import { boardStyles, anchorStyles } from '../constants/styleConstants';
-import { moduleData } from 'config/moduleData';
+import { anchorStyles, boardStyles } from '../constants/styleConstants';
 
 const loadImage = imgSrc => (
   new Promise(resolve => {
@@ -26,12 +23,12 @@ const getGroup = ({ x, y }) => (
    getKonvaElement('Group')({ x, y })
 );
 
-const getBoardBase = ({ width, height }, styles) =>  (
-  getKonvaElement('Rect')({ width, height }, styles)
+const getBoardBase = ({ width, height }, name, styles) =>  (
+  getKonvaElement('Rect')({ width, height, name }, styles)
 );
 
-const getAnchor = ({ x, y }, styles) =>  (
-  getKonvaElement('Circle')({ x , y }, styles)
+const getAnchor = ({ x, y }, name, styles) =>  (
+  getKonvaElement('Circle')({ x , y, name }, styles)
 );
 
 const getModuleGroup = ({ x, y }) => (
@@ -70,14 +67,14 @@ const getModuleBorder = ({ width, height }, styles) => (
 );
 
 const getBoard = (attrs, boardStyles, anchorStyles) => {
-  const boardGroup = getGroup({ x: 200, y: 300 });
-  const board = getBoardBase(attrs, boardStyles);
+  const boardGroup = getGroup({ x: 10, y: 10 });
+  const board = getBoardBase(attrs, 'board', boardStyles);
   const anchorPositions = getAnchorPositions(attrs, anchorStyles);
 
   boardGroup.add(board);
 
   Object.keys(anchorPositions).forEach(key => {
-    const anchor = getAnchor(anchorPositions[key], anchorStyles);
+    const anchor = getAnchor(anchorPositions[key], key, anchorStyles);
     boardGroup.add(anchor)
   });
 
@@ -127,7 +124,7 @@ const isColliding = (module, modules) => {
 const getStroke = (module, modules) => (
   isColliding(module, modules)
    ? 'red'
-   : 'green'
+   : module.stroke
 );
 
 const getBorderStyles = (module, modules) => ({
@@ -164,18 +161,15 @@ const getTempStage = (width, height) =>  {
 }
 
 const getProjectCanvas = (project, modules, moduleData) => {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
-  const stage = getTempStage(width, height);
-  const layer = new Konva.Layer();
-  const moduleNodes = getModules(modules, moduleData);
   const board = getBoard(project.board, boardStyles, anchorStyles);
+  const moduleNodes = getModules(modules, moduleData);
   const boardWithModules = addModulesToBoard(moduleNodes, board);
 
+  const layer = new Konva.Layer();
   layer.add(boardWithModules);
-  stage.add(layer);
 
+  const stage = getCroppedStage(layer);
+  stage.add(layer);
   return stage;
 }
 
@@ -201,21 +195,4 @@ export const getProjectDataUrl = (project, modules, moduleData) => {
   return addImagesToStage(stage).then((stageWithImages) => (
     stageWithImages.toDataURL()
   ));
-}
-
-export default class Test extends React.Component {
-
-  componentDidMount() {
-    getProjectDataUrl(project, modules, moduleData).then((dataUrl) => {
-      this.imgRef.src = dataUrl;
-    });
-  }
-
-  render() {
-    return (
-      <div id="">
-        <img ref={node => { this.imgRef = node }} alt=""/>
-      </div>
-    );
-  }
 }

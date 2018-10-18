@@ -713,8 +713,8 @@ let DesignTool = class extends Component {
   }
 };
 
-const mapStateToProps = state => console.log(JSON.stringify(getActiveProject(state), null, 2)) || ({
-// const mapStateToProps = state => ({
+// const mapStateToProps = state => console.log(JSON.stringify(getActiveProject(state), null, 2)) || ({
+const mapStateToProps = state => ({
     activeModules: getActiveModules(state),
     activeProject: getActiveProject(state),
     activeProjectId: state.projects.activeProjectId,

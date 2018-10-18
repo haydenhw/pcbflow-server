@@ -7,6 +7,7 @@ import shortid from 'shortid';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import { getProjects } from '../../selectors/projectSelectors';
+import { getModules } from '../../selectors/moduleSelectors';
 
 import ProjectsItemFrame from './ProjectsItemFrame';
 
@@ -23,14 +24,20 @@ class ProjectsList extends Component {
   }
 
   render() {
-    const { projects } = this.props;
+    const { projects, modules } = this.props;
 
     const projectsList = projects.map((project) => {
       const { thumbnail } = project.board;
 
+      const projectModules = modules.filter((module) => (
+        module.project === project.id
+      ));
+
       return (
         <ProjectsItemFrame
           key={shortid.generate()}
+          modules={projectModules}
+          project={project}
           projectName={project.name}
           projectId={project._id}
           thumbnail={thumbnail}
@@ -52,7 +59,8 @@ class ProjectsList extends Component {
   }
 
 const mapStateToProps = state => ({
-  projects: getProjects(state)
+  projects: getProjects(state),
+  modules: getModules(state),
 });
 
 export default connect(mapStateToProps)(ProjectsList);

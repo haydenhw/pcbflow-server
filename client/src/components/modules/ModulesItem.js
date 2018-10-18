@@ -112,11 +112,11 @@ export default class ModulesItem extends PureComponent {
   getFill() {
     const { unmetDependencies } = this.props;
 
-    if (unmetDependencies.length > 0) {
-      return 'red';
-    }
-
-    return 'green';
+    return (
+      unmetDependencies.length > 0
+       ? 'red'
+       : 'green'
+    );
   }
 
   getNewPosition(x, y) {
