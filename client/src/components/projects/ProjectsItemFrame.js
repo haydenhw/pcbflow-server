@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+
 import { createTempContainer } from 'helpers/generateThumbnail';
 import { getProjectDataUrl } from 'helpers/thumbnailHelpers';
-
-import DeleteButton from './ProjectsDeleteButton';
 import { defaultThumbnail } from '../../constants/thumbnailConstants';
 import { moduleData } from 'config/moduleData';
+
+import DeleteButton from './ProjectsDeleteButton';
 
 import './projects-styles/_ProjectsItemFrame.scss';
 import './projects-styles/_floatGrid.scss';
 
 function fectchProject(projectId) {
-  store.dispatch(actions.fetchProjectById(projectId));
 }
 
 export default class ProjectsItemFrame extends Component {
@@ -28,9 +28,16 @@ export default class ProjectsItemFrame extends Component {
   componentDidMount() {
     const { project, modules } = this.props;
 
-    getProjectDataUrl(project, modules, moduleData).then((dataUrl) => {
-      this.setState({ thumbnailDataUrl: dataUrl });
-    });
+    getProjectDataUrl(project, modules, moduleData)
+      .then((dataUrl) => {
+        this.setState({ thumbnailDataUrl: dataUrl });
+      });
+  }
+
+  handleClick = () => {
+    const { projectId } = this.props;
+
+    store.dispatch(actions.fetchProjectById(projectId));
   }
 
   render() {
@@ -40,7 +47,7 @@ export default class ProjectsItemFrame extends Component {
           <div
             className="thumbnail-image"
             style={{ backgroundImage: `url(${this.state.thumbnailDataUrl || ''})`}}
-            onClick={() => fectchProject(this.props.projectId)}
+            onClick={this.handleClick}
             role="buttonplaylistUrl"
           >
           </div>

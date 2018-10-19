@@ -1,46 +1,40 @@
 import Konva from 'konva';
 import  checkCollision  from 'helpers/checkCollision';
-import { createTempContainer, getCroppedStage } from 'helpers/generateThumbnail';
 import { getAnchorPositions } from 'helpers/anchorHelpers';
+import { loadImages } from 'helpers/imageHelpers';
 import { getUnmetDependencies } from 'helpers/dependencies';
 import { anchorStyles, boardStyles } from '../constants/styleConstants';
 
-const loadImage = imgSrc => (
-  new Promise(resolve => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.src = imgSrc;
-  })
-);
-
-const loadImages = imgSrcs => Promise.all(imgSrcs.map(loadImage));
-
-const getKonvaElement = (type) => (varAttrs, styles={}) => (
+const getKonvaElement = (type, varAttrs, styles={}) => (
   new Konva[type](Object.assign({}, varAttrs, styles))
 );
 
 const getGroup = ({ x, y }) => (
-   getKonvaElement('Group')({ x, y })
+   getKonvaElement('Group', { x, y })
 );
 
 const getBoardBase = ({ width, height }, name, styles) =>  (
-  getKonvaElement('Rect')({ width, height, name }, styles)
+  getKonvaElement('Rect', { width, height, name }, styles)
 );
 
 const getAnchor = ({ x, y }, name, styles) =>  (
-  getKonvaElement('Circle')({ x , y, name }, styles)
+  getKonvaElement('Circle', { x , y, name }, styles)
 );
 
 const getModuleGroup = ({ x, y }) => (
-  getKonvaElement('Group')({ x, y })
+  getKonvaElement('Group', { x, y })
 );
 
 const getModuleFill =  ({ width, height }, styles) => (
-  getKonvaElement('Rect')({ width, height }, styles)
+  getKonvaElement('Rect', { width, height }, styles)
 );
 
 const getModuleText =  ({ textX: x, textY: y, width, text }) => (
-  getKonvaElement('Text')({ x, y, width, text })
+  getKonvaElement('Text', { x, y, width, text })
+);
+
+const getModuleBorder = ({ width, height }, styles) => (
+  getKonvaElement('Rect', { width, height}, styles)
 );
 
 const getModuleImage = ({
@@ -51,7 +45,7 @@ const getModuleImage = ({
   image,
   imageSrc,
 }) => (
-  getKonvaElement('Image')({
+  getKonvaElement('Image', {
     image,
     x: imageX,
     y: imageY,
@@ -60,56 +54,6 @@ const getModuleImage = ({
     name: 'image',
     src: imageSrc,
   })
-);
-
-const getModuleBorder = ({ width, height }, styles) => (
-  getKonvaElement('Rect')({ width, height}, styles)
-);
-
-const getBoard = (attrs, boardStyles, anchorStyles) => {
-  const boardGroup = getGroup({ x: 10, y: 10 });
-  const board = getBoardBase(attrs, 'board', boardStyles);
-  const anchorPositions = getAnchorPositions(attrs, anchorStyles);
-
-  boardGroup.add(board);
-
-  Object.keys(anchorPositions).forEach(key => {
-    const anchor = getAnchor(anchorPositions[key], key, anchorStyles);
-    boardGroup.add(anchor)
-  });
-
-  return boardGroup;
-}
-
-const addModulesToBoard = (modules, board) => {
-  let boardWithModules = board;
-
-  modules.forEach(module => {
-    boardWithModules.add(module);
-  });
-
-  return boardWithModules;
-};
-
-const getModule = (attrs, modules, moduleData) => {
-  const moduleGroup = getGroup(attrs);
-  const fillStyles = getFillStyles(attrs, modules, moduleData,);
-  const borderStyles = getBorderStyles(attrs, modules);
-  const image = getModuleImage(attrs);
-  const border = getModuleBorder(attrs, borderStyles);
-  const fill = getModuleFill(attrs, fillStyles);
-  const text = getModuleText(attrs);
-
-  moduleGroup.add(image);
-  moduleGroup.add(border);
-  moduleGroup.add(fill);
-  moduleGroup.add(text);
-
-  return moduleGroup;
-}
-
-const getModules = (modules, moduleData) => (
-  modules.map(module => getModule(module, modules, moduleData))
 );
 
 const getCollidingIds = (modules) => checkCollision(modules).map(module => module.id);
@@ -146,18 +90,77 @@ const getFillStyles = (module, activeModules, moduleData) => {
   }
 }
 
-const getTempStage = (width, height) =>  {
-  const tempContainer = createTempContainer();
+const getModule = (attrs, modules, moduleData) => {
+  const fillStyles = getFillStyles(attrs, modules, moduleData,);
+  const borderStyles = getBorderStyles(attrs, modules);
+  const image = getModuleImage(attrs);
+  const border = getModuleBorder(attrs, borderStyles);
+  const fill = getModuleFill(attrs, fillStyles);
+  const text = getModuleText(attrs);
+  const moduleGroup = getGroup(attrs);
 
-  const stage = new Konva.Stage({
-    container: 'container',
-    width,
-    height,
+  moduleGroup.add(image);
+  moduleGroup.add(border);
+  moduleGroup.add(fill);
+  moduleGroup.add(text);
+
+  return moduleGroup;
+}
+
+const getModules = (modules, moduleData) => (
+  modules.map(module => getModule(module, modules, moduleData))
+);
+
+const addModulesToBoard = (modules, board) => {
+  let boardWithModules = board;
+
+  modules.forEach(module => {
+    boardWithModules.add(module);
+  });
+
+  return boardWithModules;
+}
+
+const getBoard = (attrs, boardStyles, anchorStyles) => {
+  const boardGroup = getGroup({ x: 10, y: 10 });
+  const board = getBoardBase(attrs, 'board', boardStyles);
+  const anchorPositions = getAnchorPositions(attrs, anchorStyles);
+
+  boardGroup.add(board);
+
+  Object.keys(anchorPositions).forEach(key => {
+    const anchor = getAnchor(anchorPositions[key], key, anchorStyles);
+    boardGroup.add(anchor)
+  });
+
+  return boardGroup;
+};
+
+function createTempElement(elementId) {
+  const tempElement = document.createElement('div');
+  tempElement.id = elementId;
+
+  document.body.appendChild(tempElement);
+
+  return tempElement;
+}
+
+export function getCroppedStage(boardLayer) {
+  const boardClone = boardLayer.clone();
+  const topLeftAnchorX = boardClone.get('.topLeft')[0].attrs.x;
+  const topLeftAnchorY = boardClone.get('.topLeft')[0].attrs.y;
+  const boardCloneAttrs = boardClone.get('.board')[0].attrs;
+  const tempContainer = createTempElement('container');
+
+  const croppedStage = new Konva.Stage({
+    width: boardCloneAttrs.width + 20,
+    height: boardCloneAttrs.height + 20,
+    container: 'container'
   });
 
   document.body.removeChild(tempContainer);
-
-  return stage;
+  croppedStage.add(boardClone);
+  return croppedStage;
 }
 
 const getProjectCanvas = (project, modules, moduleData) => {
@@ -175,18 +178,18 @@ const getProjectCanvas = (project, modules, moduleData) => {
 
 const addImagesToStage = (stage) => {
   const stageImages = stage.get('.image');
-    const stageImagePaths = stageImages
-      .map(image => image.attrs.src);
+  const stageImagePaths = stageImages
+  .map(image => image.attrs.src);
 
-    return loadImages(stageImagePaths)
-      .then((imageNodes) => {
-        imageNodes.forEach((imageNode, i) => {
-          stageImages[i].image(imageNode);
-        });
+  return loadImages(stageImagePaths)
+  .then((imageNodes) => {
+    imageNodes.forEach((imageNode, i) => {
+      stageImages[i].image(imageNode);
+    });
 
-        stage.draw();
-        return stage;
-      });
+    stage.draw();
+    return stage;
+  });
 }
 
 export const getProjectDataUrl = (project, modules, moduleData) => {

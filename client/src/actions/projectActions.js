@@ -106,19 +106,6 @@ export function fetchProjects(jwt) {
     // });
   };
 }
-// export function fetchProjects() {
-//   return (dispatch) => {
-//     dispatch(fetchProjectsRequest());
-//     return fetch(projectsUrl)
-//     .then(res => res.json())
-//     .then((data) => {
-//       dispatch(fetchProjectsSuccess(data));
-//     })
-//     // .catch((err) => {
-//     //   console.error(err);
-//     // });
-//   };
-// }
 
 export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
 export const fetchProjectByIdSuccess = project => (dispatch, getState) => {
@@ -159,17 +146,6 @@ export function fetchProjectById(projectId, currentRoute) {
     // });
   };
 }
-
-// export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS';
-// export const postProjectSuccess = project => dispatch => {
-//   dispatch({
-//     type: 'POST_PROJECT_SUCCESS',
-//     project
-//   });
-//
-//   const designRoute = `/design/${project._id}`;
-//   hashHistory.push(designRoute);
-// };
 
 export function postNewProject(newProject) {
   return (dispatch) => {

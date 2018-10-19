@@ -1,4 +1,4 @@
-import * as actions from '../actions/indexActions';
+mport * as actions from '../actions/indexActions';
 
 const defaultMouseEvents = {
   isMouseOverModule: false,
