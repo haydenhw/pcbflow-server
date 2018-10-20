@@ -1,13 +1,9 @@
-import orm from '../../schema/schema';
-import { projects } from '../../data/projects';
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { hashHistory, withRouter } from 'react-router';
+import { withRouter } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 import Joyride from 'react-joyride';
-import { Maybe } from 'monet';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -17,9 +13,10 @@ import {
   getActiveProject,
   getActiveProjectName,
   getActiveProjectThumbnail,
+  getActiveProjectBoard,
 } from '../../selectors/projectSelectors';
 
-import { getActiveModules, getModulesByProject } from '../../selectors/moduleSelectors';
+import { getActiveModules } from '../../selectors/moduleSelectors';
 
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
@@ -27,9 +24,6 @@ import { routeToHome, routeToProjects } from 'helpers/routeHelpers';
 import { isMobile } from 'helpers/isMobile';
 import rotate from 'helpers/rotate';
 
-import Board from 'components/board/Board';
-import Module from 'components/modules/ModulesItem';
-import ModuleContainer from 'components/modules/Modules';
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import SideBar from 'components/side-bar/SideBar';
 import Footer from 'components/footer/Footer';
@@ -123,7 +117,7 @@ let DesignTool = class extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { activeProjectId, params, projects, saveProjectTrigger } = this.props;
+    const { activeProjectId, params, saveProjectTrigger } = this.props;
 
     if (prevProps.saveProjectTrigger !== saveProjectTrigger) {
       // *refactor to not depend on setTimeout
@@ -208,7 +202,10 @@ let DesignTool = class extends Component {
     const testModule = Object.assign({}, testModuleCoordinates, draggingModuleData);
     const isNewModuleWithinBounds = checkCollision([testModule, adjustedBoardSpecs]).length > 0;
 
+
+    console.log('outter')
     if (isNewModuleWithinBounds && isDraggingToBoard) {
+    console.log('inner')
       const adjustedModuleCoordinates = this.getNewModuleCoordinates(coordinateData);
       const newModule = Object.assign({}, adjustedModuleCoordinates, draggingModuleData);
 
@@ -610,7 +607,7 @@ let DesignTool = class extends Component {
      moduleData,
    } = this.props;
 
-    const { isDraggingToBoard, disabledIconExceptions } = this.state;
+    const { isDraggingToBoard } = this.state;
 
     if (!isDraggingToBoard) {
       return (
@@ -653,7 +650,6 @@ let DesignTool = class extends Component {
    const {
      activeProjectName,
      activeProjectId,
-     isFetching,
      showSavingMessage,
      stageRef,
      projects
@@ -721,7 +717,7 @@ const mapStateToProps = state => ({
     activeProjectName: getActiveProjectName(state),
     activeProjectThumbnail: getActiveProjectThumbnail(state),
     anchors: state.anchors,
-    board: state.board,
+    board: getActiveProjectBoard(state),
     clickedModuleIndex: state.modules.clickedIndex,
     draggingModuleData: state.modules.dragging,
     hoveredModuleIndex: state.modules.hovered.index,
