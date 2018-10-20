@@ -362,10 +362,10 @@ let DesignTool = class extends Component {
 
   handleKeyUp(evt) {
     const evtobj = window.event ? event : evt;
-    const { isMouseOverModule, hoveredModuleIndex } = this.props;
+    const { isMouseOverModule, hoveredModuleId } = this.props;
 
-    if (isMouseOverModule && (evtobj.code === 'Delete')) {
-      store.dispatch(actions.deleteHoveredModule(hoveredModuleIndex));
+    if (isMouseOverModule && (evtobj.code === 'Delete' || 'Backspace')) {
+      store.dispatch(actions.deleteEntity('Module', hoveredModuleId));
     }
   }
 
@@ -709,7 +709,6 @@ let DesignTool = class extends Component {
   }
 };
 
-// const mapStateToProps = state => console.log(JSON.stringify(getActiveProject(state), null, 2)) || ({
 const mapStateToProps = state => ({
     activeModules: getActiveModules(state),
     activeProject: getActiveProject(state),
@@ -720,7 +719,7 @@ const mapStateToProps = state => ({
     board: getActiveProjectBoard(state),
     clickedModuleIndex: state.modules.clickedIndex,
     draggingModuleData: state.modules.dragging,
-    hoveredModuleIndex: state.modules.hovered.index,
+    hoveredModuleId: state.modules.hovered.id,
     hoveredModuleProps: state.modules.hovered,
     isFetching: state.projects.isFetching,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
@@ -744,7 +743,7 @@ export default connect(mapStateToProps)(DesignTool);
 
 DesignTool.propTypes = {
   anchors: PropTypes.object.isRequired,
-  board: PropTypes.object.isRequired,
+  board: PropTypes.object,
   activeProjectId: PropTypes.string,
   activeModules: PropTypes.array.isRequired,
   showAllIcons: PropTypes.bool.isRequired,
@@ -756,7 +755,7 @@ DesignTool.propTypes = {
   params: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
-  hoveredModuleIndex: PropTypes.number,
+  hoveredModuleId: PropTypes.number,
   hoveredModuleProps: PropTypes.object.isRequired,
   shouldRenderModal: PropTypes.bool.isRequired,
   shouldRenderTodoList: PropTypes.bool.isRequired,
@@ -766,4 +765,5 @@ DesignTool.propTypes = {
 
 DesignTool.defaultProps = {
   activeProjectId: null,
+  board: null,
 }

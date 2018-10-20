@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Konva from 'konva';
 import { connect } from 'react-redux';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { Layer, Stage } from 'react-konva';
@@ -9,15 +10,11 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import { getActiveProject } from '../../selectors/projectSelectors';
 
-import getPerimeterSide from 'helpers/getPerimeterSide';
-import bindToPerimeter from 'helpers/bindToPerimeter';
 import generateThumbnail, { getCroppedStage } from 'helpers/generateThumbnail';
 
 import Board from 'components/board/Board';
-import ModuleContainer from 'components/modules/Modules';
 import Grid from './DesignToolGrid';
 
-import { moduleData } from 'config/moduleData';
 
 const getModuleGroup = ({ moduleX, moduleY }) => new Konva.Group({
   x: moduleX,
@@ -116,8 +113,8 @@ class DesignToolStage extends Component {
   }
 
   deleteModule() {
-    const { hoveredModuleIndex } = this.props;
-    store.dispatch(actions.deleteHoveredModule(hoveredModuleIndex));
+    const { hoveredModuleId } = this.props;
+    store.dispatch(actions.deleteEntity('Module', hoveredModuleId));
   }
 
   renderDragModule() {
@@ -219,7 +216,7 @@ const mapStateToProps = state => {
     isMouseDownOnIcon: state.mouseEvents.isMouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
-    hoveredModuleIndex: state.modules.hovered.index,
+    hoveredModuleId: state.modules.hovered.id,
     hoveredModuleProps: state.modules.hovered,
     board: state.board,
     updateThumbnailTrigger: state.triggers.updateThumbnailTrigger,
@@ -243,7 +240,7 @@ DesignToolStage.propTypes = {
   shouldHideContextMenu: PropTypes.bool.isRequired,
   isDraggingToBoard: PropTypes.bool.isRequired,
   anchors: PropTypes.object.isRequired,
-  hoveredModuleIndex: PropTypes.number,
+  hoveredModuleId: PropTypes.number,
   hoveredModuleProps: PropTypes.object.isRequired,
   board: PropTypes.object.isRequired,
 };
