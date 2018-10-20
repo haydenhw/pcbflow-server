@@ -12,7 +12,6 @@ export const pushToactiveModules = module => (dispatch, getState) => {
   const state = getState();
   const { step, isTutorialActive } = state.tutorial;
   const activeProjectId = getActiveProject(state).id;
-  console.log(activeProjectId)
 
   if (isTutorialActive) {
     switch (step) {

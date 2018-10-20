@@ -14,9 +14,6 @@ import DeleteButton from './ProjectsDeleteButton';
 import './projects-styles/_ProjectsItemFrame.scss';
 import './projects-styles/_floatGrid.scss';
 
-function fectchProject(projectId) {
-}
-
 export default class ProjectsItemFrame extends Component {
   constructor() {
     super();

@@ -4,14 +4,9 @@ import PropTypes from 'prop-types';
 
 import store from 'reduxFiles/store';
 import { handleExistingUserVisit, handleNewUserVisit } from 'actions/indexActions';
-import {
-  clearJWT,
-  clearUser,
-  doesUserExist,
-  getJWT,
-  getUser,
-  isJWTExpired,
-} from 'helpers/users';
+import { isJWTExpired, getUser, getJWT, clearUser, clearJWT  } from 'helpers/users';
+// *move this to helpers
+const doesUserExist = () => Boolean(getUser());
 
 export default class App extends Component {
   constructor() {
@@ -33,6 +28,7 @@ export default class App extends Component {
   render() {
     const { children } = this.props;
     const res =  React.Children.count(children);
+    // console.log(this.stageNode);
     const childrenWithProps = React.Children.map(children, child => (
       React.cloneElement(child, {
         testProp: 'heyyyy',

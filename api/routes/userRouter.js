@@ -9,10 +9,11 @@ const userRouter = express.Router();
 
 const jsonParser = bodyParser.json();
 
+// Post to register a new user
 userRouter.post('/', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
-
+  console.log(req.body)
   if (missingField) {
     return res.status(422).json({
       code: 422,
@@ -36,6 +37,13 @@ userRouter.post('/', jsonParser, (req, res) => {
     });
   }
 
+  // If the username and password aren't trimmed we give an error.  Users might
+  // expect that these will work without trimming (i.e. they want the password
+  // "foobar ", including the space at the end).  We need to reject such values
+  // explicitly so the users know what's happening, rather than silently
+  // trimming them and expecting the user to understand.
+  // We'll silently trim the other fields, because they aren't credentials used
+  // to log in, so it's less of a problem.
   const explicityTrimmedFields = ['username', 'password'];
   const nonTrimmedField = explicityTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
@@ -56,6 +64,8 @@ userRouter.post('/', jsonParser, (req, res) => {
     },
     password: {
       min: 3,
+      // bcrypt truncates after 72 characters, so let's not give the illusion
+      // of security by storing extra (unused) info
       max: 72
     }
   };
@@ -84,7 +94,8 @@ userRouter.post('/', jsonParser, (req, res) => {
   }
 
   let {username, password, firstName = '', lastName = ''} = req.body;
-
+  // Username and password come in pre-trimmed, otherwise we throw an error
+  // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
 
@@ -92,7 +103,7 @@ userRouter.post('/', jsonParser, (req, res) => {
     .count()
     .then(count => {
       if (count > 0) {
-
+        // There is an existing user with the same username
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',
@@ -100,20 +111,26 @@ userRouter.post('/', jsonParser, (req, res) => {
           location: 'username'
         });
       }
-
+      // If there is no existing user, hash the password
       return User.hashPassword(password);
     })
     .then(hash => {
       return User.create({
         username,
         password: hash,
+        // firstName,
+        // lastName,
         shortid: shortid.generate(),
+        // shortid: 'hflflf',
+        // shortid:'hello',
       });
     })
     .then(user => {
       return res.status(201).json(user.serialize());
     })
     .catch(err => {
+      // Forward validation errors on to the client, otherwise give a 500
+      // error because something unexpected has happened
       if (err.reason === 'ValidationError') {
         return res.status(err.code).json(err);
       }
@@ -122,8 +139,19 @@ userRouter.post('/', jsonParser, (req, res) => {
     });
 });
 
+// Never expose all your users like below in a prod application
+// we're just doing this so we have a quick way to see
+// if we're creating users. keep in mind, you can also
+// verify this in the Mongo shell.
+userRouter.get('/', (req, res) => {
+  return User.find()
+    // .then(users => res.json(users.map(user => user.serialize())))
+    .then(users => res.send(JSON.stringify(users, null, 2)))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
 userRouter.delete('/delete', (req, res) => {
-  console.log('deleting');
+  console.log('delteing');
   return User.deleteMany().then(() => res.send('deleted'));
 });
 

@@ -11,6 +11,9 @@ import { getActiveModules } from '../../selectors/moduleSelectors';
 
 import ModulesItem from './ModulesItem';
 
+// put all this in an object called moduleStyles and save it under constants folder
+// then pass props as {...moduleStyles}
+
 import {
   fontSize,
   fontFamily,
@@ -45,46 +48,18 @@ class Modules extends Component {
   render() {
     const modules = this.props.modules/* [moduleData[0]].*/.map((module, index) =>
       <ModulesItem
+        {...module}
+        {...this.props}
         ref="module"
         key={index}
         index={index}
-        x={module.x}
-        y={module.y}
-        width={module.width}
-        height={module.height}
-        name={module.name}
-        boundToSideIndex={module.boundToSideIndex}
-        innerGroupX={module.innerGroupX}
-        innerGroupY={module.innerGroupY}
-        rotation={module.rotation}
-        text={module.text}
-        textX={module.textX}
-        textY={module.textY}
         fontSize={fontSize}
         fontFamily={fontFamily}
         fill={fill}
         opacity={opacity}
-        stroke={module.stroke}
         strokeWidth={strokeWidth}
-        imageX={module.imageX}
-        imageY={module.imageY}
-        imageWidth={module.imageWidth}
-        imageHeight={module.imageHeight}
-        imageSrc={module.imageSrc}
-        imageNode={module.imageNode}
-        iconSrc={module.iconSrc}
-        dependencyId={module.dependencyId}
-        dependencies={module.dependencies}
         unmetDependencies={getUnmetDependencies(this.props.moduleData, this.props.modules, module.dependencies)}
-        checkCollisionTrigger={this.props.checkCollisionTrigger}
-        topLeftAnchor={this.props.topLeftAnchor}
-        hoveredModuleProps={this.props.hoveredModuleProps}
-        anchors={this.props.anchors}
-        board={this.props.board}
-        isDraggingToBoard={this.props.isDraggingToBoard}
-        rotate={this.props.rotate}
         shouldCheckCollission={this.state.shouldCheckCollission}
-        iconVisibityMode={this.props.iconVisibityMode}
         toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
       />,
     );

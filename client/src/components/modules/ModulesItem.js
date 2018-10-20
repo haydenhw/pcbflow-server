@@ -155,9 +155,10 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleDragEnd() {
-    const module = this.refs.moduleGroup;
+    const { id } = this.props;
     const newPosition = this.getNewPosition();
-    store.dispatch(actions.updateModulePosition(newPosition));
+
+    store.dispatch(actions.updateEntity('Module', id, newPosition));
     this.highlightRuleBreakingModules();
     this.setState({ isDragging: false });
   }

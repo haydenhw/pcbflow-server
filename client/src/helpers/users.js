@@ -7,8 +7,6 @@ export const setJWT = jwt => localStorage.setItem('pcbflowJWT', jwt);
 export const clearUser = () => localStorage.removeItem('pcbflowDemoUser');
 export const clearJWT = () => localStorage.removeItem('pcbflowJWT');
 
-export const doesUserExist = () => Boolean(getUser());
-
 export const isJWTExpired = jwt => {
   const jwtExp = jwtDecode(jwt).exp;
   const now = new Date() / 1000;
@@ -25,6 +23,10 @@ const postJSON = (url, data) => {
     },
   });
 };
+
+const refreshJWT = (refreshURL) => {
+
+}
 
 export const getJWTAuthHeader = jwt => ({
   'Authorization': 'Bearer ' + jwt,

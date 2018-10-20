@@ -63,6 +63,10 @@ class DesignToolStage extends Component {
   componentWillReceiveProps(nextProps) {
     const { board, toggleShouldExportPDF } = this.props;
 
+    if (nextProps.updateThumbnailTrigger !== this.props.updateThumbnailTrigger) {
+      // setTimeout(this.updateThumbnail.bind(this), 0);
+    }
+
     if (nextProps.shouldExportPDF && !this.props.shouldExportPDF) {
       this.downloadPDF();
       toggleShouldExportPDF();
