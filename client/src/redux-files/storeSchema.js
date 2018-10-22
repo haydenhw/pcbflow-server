@@ -4,7 +4,6 @@ const store = {
       'id-string' : {
         name: 'string',
         ownerId: 'string',
-        thumnail: 'string'
         board: {
           height: 'number',
           width : 'number',
@@ -38,7 +37,6 @@ const store = {
   triggers: {
     saveProject: 'bool',
     // should this be built in to project save?
-    updateThumbnail: 'bool',
   },
   projects: {
     isFetching: 'bool',

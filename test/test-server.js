@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 
 const compareKeys = (obj1, obj2) => {
   Object.keys(obj1).forEach((key) => {
-    if (obj1[key] && key !== '_id') 
+    if (obj1[key] && key !== '_id')
       obj1[key].should.equal(obj2[key])
   });
 }
@@ -38,7 +38,6 @@ generateModule = () => {
     rotation: Math.floor(Math.random() * 200),
     boundToSideIndex: Math.floor(Math.random() * 200),
     innerGroupX: Math.floor(Math.random() * 200),
-    innerGroupY: Math.floor(Math.random() * 200),
     text: faker.lorem.word(),
     textX: Math.floor(Math.random() * 200),
     textY: Math.floor(Math.random() * 200),
@@ -57,7 +56,6 @@ generateBoardSpecs = () => {
   return {
     x: Math.floor(Math.random() * 200),
     y: Math.floor(Math.random() * 200),
-    thumbnail: faker.lorem.word(),
     height: Math.floor(Math.random() * 200),
     width: Math.floor(Math.random() * 200)
   }
@@ -226,9 +224,8 @@ describe('Projects API resource', function() {
         "board": {
           "y": 173,
           "x": 317,
-          "thumbnail": "{\"attrs\":{\"width\":386,\"height\":346},\"className\":\"Stage\",\"children\":[{\"attrs\":{\"name\":\"boardLayer\"},\"className\":\"Layer\",\"children\":[{\"attrs\":{\"name\":\"boardGroup\",\"x\":10,\"y\":10,\"width\":366,\"height\":326,\"draggable\":\"true\"},\"className\":\"Group\",\"children\":[{\"attrs\":{\"name\":\"board\",\"width\":366,\"height\":326,\"fill\":\"#e3e3e5\",\"opacity\":\"0.5\",\"stroke\":\"#ccc\",\"isStrokeRed\":false},\"className\":\"Rect\"},{\"attrs\":{\"stroke\":\"#666\",\"fill\":\"#ddd\",\"radius\":\"8\",\"name\":\"topLeft\",\"draggable\":\"true\",\"dragOnTop\":\"false\"},\"className\":\"Circle\"},{\"attrs\":{\"x\":366,\"stroke\":\"#666\",\"fill\":\"#ddd\",\"radius\":\"8\",\"name\":\"topRight\",\"draggable\":\"true\",\"dragOnTop\":\"false\"},\"className\":\"Circle\"},{\"attrs\":{\"y\":326,\"stroke\":\"#666\",\"fill\":\"#ddd\",\"radius\":\"8\",\"name\":\"bottomLeft\",\"draggable\":\"true\",\"dragOnTop\":\"false\"},\"className\":\"Circle\"},{\"attrs\":{\"x\":366,\"y\":326,\"stroke\":\"#666\",\"fill\":\"#ddd\",\"radius\":\"8\",\"name\":\"bottomRight\",\"draggable\":\"true\",\"dragOnTop\":\"false\"},\"className\":\"Circle\"},{\"attrs\":{},\"className\":\"Group\",\"children\":[{\"attrs\":{\"draggable\":\"true\",\"name\":\"moduleGroup\",\"x\":10,\"y\":69,\"height\":60,\"width\":60,\"defaultStroke\":\"#62a799\",\"isStrokeRed\":true},\"className\":\"Group\",\"children\":[{\"attrs\":{\"fill\":\"black\",\"x\":5,\"y\":12.5,\"width\":60,\"text\":\"USB Hub 4 Port\",\"fontSize\":10,\"fontFamily\":\"sans-serif\"},\"className\":\"Text\"},{\"attrs\":{\"name\":\"innerGroup\"},\"className\":\"Group\",\"children\":[{\"attrs\":{\"width\":60,\"height\":60,\"fill\":\"green\",\"opacity\":0.1},\"className\":\"Rect\"},{\"attrs\":{\"name\":\"moduleBorder\",\"width\":60,\"height\":60,\"stroke\":\"red\",\"strokeWidth\":1},\"className\":\"Rect\"},{\"attrs\":{\"x\":20,\"y\":10},\"className\":\"Image\"}]}]},{\"attrs\":{\"draggable\":\"true\",\"name\":\"moduleGroup\",\"x\":40,\"y\":105,\"height\":60,\"width\":60,\"defaultStroke\":\"#62a799\",\"isStrokeRed\":true},\"className\":\"Group\",\"children\":[{\"attrs\":{\"fill\":\"black\",\"x\":5,\"y\":12.5,\"width\":60,\"text\":\"USB Hub 4 Port\",\"fontSize\":10,\"fontFamily\":\"sans-serif\"},\"className\":\"Text\"},{\"attrs\":{\"name\":\"innerGroup\"},\"className\":\"Group\",\"children\":[{\"attrs\":{\"width\":60,\"height\":60,\"fill\":\"green\",\"opacity\":0.1},\"className\":\"Rect\"},{\"attrs\":{\"name\":\"moduleBorder\",\"width\":60,\"height\":60,\"stroke\":\"red\",\"strokeWidth\":1},\"className\":\"Rect\"},{\"attrs\":{\"x\":20,\"y\":10},\"className\":\"Image\"}]}]}]}]}]}]}",
           "height": 326,
-          "width": 366
+          "width": 366,
         }
       }
 

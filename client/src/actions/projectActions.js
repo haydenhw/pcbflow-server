@@ -1,10 +1,11 @@
 // *alphabetize these actions
 import { hashHistory } from 'react-router';
+
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import { projectsUrl } from '../config/endpointUrls';
-import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
+import { getJWTAuthHeader, getUser } from 'helpers/users';
 import { addAnchorsToProject } from 'helpers/anchorHelpers';
 import { getModulesByProject } from '../selectors/moduleSelectors';
 
@@ -21,7 +22,6 @@ const getOriginAdjustedProjectData = ({
   board,
   activeModules: modules,
   activeProjectName: projectName,
-  activeProjectThumbnail: thumbnail,
   topLeftAnchorX: originX,
   topLeftAnchorY: originY,
 }) => {
@@ -32,7 +32,6 @@ const getOriginAdjustedProjectData = ({
     board: {
       width,
       height,
-      thumbnail,
       x: x + originX,
       y: y + originY,
     },

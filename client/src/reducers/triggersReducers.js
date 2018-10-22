@@ -3,7 +3,6 @@ import doesModifyProject from 'helpers/doesModifyProject';
 
 const defaultState = {
   saveProjectTrigger: false,
-  updateThumbnailTrigger: false,
 }
 
 export const triggers = (state = defaultState, action) => {
@@ -11,7 +10,6 @@ export const triggers = (state = defaultState, action) => {
     return {
       ...state,
       saveProjectTrigger: !state.saveProjectTrigger,
-      updateThumbnailTrigger: !state.updateThumbnailTrigger,
     };
   }
 

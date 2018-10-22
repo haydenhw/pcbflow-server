@@ -12,7 +12,6 @@ import {
   getProjects,
   getActiveProject,
   getActiveProjectName,
-  getActiveProjectThumbnail,
   getActiveProjectBoard,
 } from '../../selectors/projectSelectors';
 
@@ -59,7 +58,6 @@ let DesignTool = class extends Component {
       shouldRenderDocumentation: false,
       shouldRenderInfoButton: true,
       shouldRenderModal: true,
-      shouldUpdateThumbnail: false,
       wasDocumentationOpen: false,
     };
     this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
@@ -69,7 +67,6 @@ let DesignTool = class extends Component {
     this.toggleDocumentationCard = this.toggleDocumentationCard.bind(this);
     this.toggleDraggingToBoard = this.toggleDraggingToBoard.bind(this);
     this.toggleNavMenu = this.toggleNavMenu.bind(this);
-    this.toggleShouldUpadateThumbnail = this.toggleShouldUpadateThumbnail.bind(this);
     this.unhideFloatingElements = this.unhideFloatingElements.bind(this);
 
     this.bound_handleKeyUp = this.handleKeyUp.bind(this);
@@ -92,7 +89,6 @@ let DesignTool = class extends Component {
     document.body.addEventListener('keyup', this.bound_handleKeyUp);
     document.onkeydown = this.handleKeyPress;
 
-    window.onpopstate = this.toggleShouldUpadateThumbnail.bind(this);
     window.onresize = this.checkIfMobile.bind(this);
   }
 
@@ -202,10 +198,7 @@ let DesignTool = class extends Component {
     const testModule = Object.assign({}, testModuleCoordinates, draggingModuleData);
     const isNewModuleWithinBounds = checkCollision([testModule, adjustedBoardSpecs]).length > 0;
 
-
-    console.log('outter')
     if (isNewModuleWithinBounds && isDraggingToBoard) {
-    console.log('inner')
       const adjustedModuleCoordinates = this.getNewModuleCoordinates(coordinateData);
       const newModule = Object.assign({}, adjustedModuleCoordinates, draggingModuleData);
 
@@ -443,12 +436,6 @@ let DesignTool = class extends Component {
     });
   }
 
-  toggleShouldUpadateThumbnail() {
-    this.setState({
-      shouldUpdateThumbnail: !this.state.shouldUpdateThumbnail,
-    });
-  }
-
   unhideFloatingElements() {
     const { wasDocumentationOpen } = this.state;
     const { isTutorialActive, tutorialStep } = this.props;
@@ -659,7 +646,6 @@ let DesignTool = class extends Component {
       isDraggingToBoard,
       isNavMenuActive,
       shouldExportPDF,
-      shouldUpdateThumbnail,
       shouldRenderDocumentation,
       shouldRenderInfoButton,
       shouldHideContextMenu,
@@ -679,7 +665,6 @@ let DesignTool = class extends Component {
           showSavingMessage={showSavingMessage}
           projectName={activeProjectName}
           updateLastSaved={this.updateLastSaved}
-          updateThumbnail={this.toggleShouldUpadateThumbnail}
         />
         <div>
           <div ref={node => { this.stageContainer = node }}>
@@ -691,10 +676,8 @@ let DesignTool = class extends Component {
               shouldExportPDF={shouldExportPDF}
               shouldHideContextMenu={shouldHideContextMenu}
               shouldRenderBoard={Boolean(activeProjectId && (projects.length > 0))}
-              shouldUpdateThumbnail={shouldUpdateThumbnail}
               stageRef={stageRef}
               toggleShouldExportPDF={this.toggleShouldExportPDF.bind(this)}
-              toggleShouldUpadateThumbnail={this.toggleShouldUpadateThumbnail}
               unhideFloatingElements={this.unhideFloatingElements}
             />
           </div>
@@ -714,7 +697,6 @@ const mapStateToProps = state => ({
     activeProject: getActiveProject(state),
     activeProjectId: state.projects.activeProjectId,
     activeProjectName: getActiveProjectName(state),
-    activeProjectThumbnail: getActiveProjectThumbnail(state),
     anchors: state.anchors,
     board: getActiveProjectBoard(state),
     clickedModuleIndex: state.modules.clickedIndex,

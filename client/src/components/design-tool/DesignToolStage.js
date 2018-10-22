@@ -10,7 +10,7 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 import { getActiveProject } from '../../selectors/projectSelectors';
 
-import generateThumbnail, { getCroppedStage } from 'helpers/generateThumbnail';
+import { getCroppedStage } from 'helpers/generateThumbnail';
 
 import Board from 'components/board/Board';
 import Grid from './DesignToolGrid';
@@ -58,11 +58,7 @@ class DesignToolStage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { board, toggleShouldExportPDF } = this.props;
-
-    if (nextProps.updateThumbnailTrigger !== this.props.updateThumbnailTrigger) {
-      // setTimeout(this.updateThumbnail.bind(this), 0);
-    }
+    const { toggleShouldExportPDF } = this.props;
 
     if (nextProps.shouldExportPDF && !this.props.shouldExportPDF) {
       this.downloadPDF();
@@ -82,7 +78,6 @@ class DesignToolStage extends Component {
 
   downloadPDF() {
     // *move to action creator
-    const { activeProjectName } = this.props;
     const boardLayer = this.stage.getStage().get('.boardLayer')[0];
     const croppedStage = getCroppedStage(boardLayer);
     const imageDataURL = croppedStage.node.toDataURL('image/jpeg', 1.0);
@@ -97,19 +92,6 @@ class DesignToolStage extends Component {
     pdf.text(footerText, 10, textOffsetY);
     pdf.addImage(imageDataURL, 'JPEG', imageOffsetX, imageOffsetY);
     pdf.save('test.pdf');
-  }
-
-  updateThumbnail() {
-    // *move to action creator
-    const { activeProject } = this.props;
-    const boardLayer = this.stage.getStage().get('.boardLayer')[0];
-    const thumbnail = generateThumbnail(boardLayer);
-
-    store.dispatch(actions.updateEntity(
-      'Project',
-      activeProject.id,
-      { thumbnail }
-    ));
   }
 
   deleteModule() {
@@ -156,7 +138,6 @@ class DesignToolStage extends Component {
       hideFloatingElements,
       isDraggingToBoard,
       isMouseDown,
-      isMouseDownOnIcon,
       isMouseOverModule,
       rotate,
       shouldHideContextMenu,
@@ -219,7 +200,6 @@ const mapStateToProps = state => {
     hoveredModuleId: state.modules.hovered.id,
     hoveredModuleProps: state.modules.hovered,
     board: state.board,
-    updateThumbnailTrigger: state.triggers.updateThumbnailTrigger,
     anchors: state.anchors,
     modules: state.activeModules.present,
   });
@@ -236,7 +216,6 @@ DesignToolStage.propTypes = {
   rotate: PropTypes.func.isRequired,
   hideFloatingElements: PropTypes.func.isRequired,
   unhideFloatingElements: PropTypes.func.isRequired,
-  toggleShouldUpadateThumbnail: PropTypes.func.isRequired,
   shouldHideContextMenu: PropTypes.bool.isRequired,
   isDraggingToBoard: PropTypes.bool.isRequired,
   anchors: PropTypes.object.isRequired,

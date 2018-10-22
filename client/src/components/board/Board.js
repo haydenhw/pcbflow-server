@@ -9,11 +9,7 @@ import store from 'reduxFiles/store';
 import { getActiveProjectBoard } from '../../selectors/projectSelectors';
 import { boardStyles } from '../../constants/styleConstants';
 
-
-import generateThumbnail from 'helpers/generateThumbnail';
-
 import Modules from 'components/modules/Modules';
-import ModulesItem from 'components/modules/ModulesItem';
 import Anchor from './BoardAnchor';
 
 class Board extends Component {

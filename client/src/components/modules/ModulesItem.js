@@ -4,13 +4,10 @@ import { Rect, Group, Image, Text } from 'react-konva';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import { areDependenciesMet } from 'helpers/dependencies';
 import { compose } from 'helpers/functional';
 import { getKonvaChildByIndex, getKonvaParentByName} from 'helpers/konvaHelpers';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import enforceRules from 'helpers/enforceRules';
-import generateThumbnail from 'helpers/generateThumbnail';
-import getPerimeterSide from 'helpers/getPerimeterSide';
 
 const getTopLeftAnchor = compose(
   getKonvaChildByIndex(1),

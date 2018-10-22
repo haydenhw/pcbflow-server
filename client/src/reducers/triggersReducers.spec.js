@@ -4,7 +4,6 @@
 import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
-import * as actions from 'actions/indexActions';
 import { triggers } from './triggersReducers';
 
 describe('triggers reducer', () => {
@@ -16,7 +15,6 @@ describe('triggers reducer', () => {
 
     const expectedState = {
       saveProjectTrigger: true,
-      updateThumbnailTrigger: true,
     };
 
     const resultState = triggers(deepFreeze(initialState), {

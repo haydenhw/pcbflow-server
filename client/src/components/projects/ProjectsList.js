@@ -27,8 +27,6 @@ class ProjectsList extends Component {
     const { projects, modules } = this.props;
 
     const projectsList = projects.map((project) => {
-      const { thumbnail } = project.board;
-
       const projectModules = modules.filter((module) => (
         module.project === project.id
       ));
@@ -40,7 +38,6 @@ class ProjectsList extends Component {
           project={project}
           projectName={project.name}
           projectId={project._id}
-          thumbnail={thumbnail}
           confirmDelete={this.confirmDelete(project)}
         />
       );

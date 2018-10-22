@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import { createTempContainer } from 'helpers/generateThumbnail';
 import { getProjectDataUrl } from 'helpers/thumbnailHelpers';
 import { defaultThumbnail } from '../../constants/thumbnailConstants';
 import { moduleData } from 'config/moduleData';

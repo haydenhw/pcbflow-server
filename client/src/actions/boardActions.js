@@ -1,8 +1,3 @@
-export const TRIGGER_THUMBNAIL_UPDATE = 'TRIGGER_THUMBNAIL_UPDATE';
-export const triggerThumbnailUpdate = () => ({
-  type: 'TRIGGER_THUMBNAIL_UPDATE',
-});
-
 export const TRIGGER_ANCHOR_UPDATE = 'TRIGGER_ANCHOR_UPDATE';
 export const triggerAnchorUpdate = () => ({
   type: 'TRIGGER_ANCHOR_UPDATE',
@@ -30,11 +25,4 @@ export const UPDATE_BOARD_STROKE = 'UPDATE_BOARD_STROKE';
 export const updateBoardStroke = boardStroke => ({
   type: 'UPDATE_BOARD_STROKE',
   boardStroke,
-});
-
-export const UPDATE_BOARD_THUMBNAIL = 'UPDATE_BOARD_THUMBNAIL';
-export const updateThumbnail = (thumbnail, projectId) => ({
-  type: 'UPDATE_BOARD_THUMBNAIL',
-  thumbnail,
-  projectId,
 });

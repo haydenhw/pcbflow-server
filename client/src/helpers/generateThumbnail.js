@@ -30,8 +30,3 @@ export function getCroppedStage(boardLayer) {
   croppedStage.add(boardClone);
   return croppedStage;
 }
-
-export default function generateThumbnail(boardLayer) {
-  const croppedStage = getCroppedStage(boardLayer);
-  return croppedStage.node.toJSON();
-}

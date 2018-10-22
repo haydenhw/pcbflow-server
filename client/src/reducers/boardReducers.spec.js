@@ -115,31 +115,6 @@ describe('board reducer', () => {
 
     assert.deepEqual(resultState, expectedState);
   });
-
-  it('It should return the correct thumbnail', () => {
-    const initialState = {
-      x: 10,
-      y: 10,
-      width: 600,
-      height: 300,
-    };
-
-    const expectedState = {
-      x: 10,
-      y: 10,
-      width: 600,
-      height: 300,
-      thumbnail: 'This is a string',
-
-    };
-
-    const resultState = board(deepFreeze(initialState), {
-      type: 'UPDATE_BOARD_THUMBNAIL',
-      thumbnail: 'This is a string',
-    });
-
-    assert.deepEqual(resultState, expectedState);
-  });
 });
 
 describe('anchors reducer', () => {
