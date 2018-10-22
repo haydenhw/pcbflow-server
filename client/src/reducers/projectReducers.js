@@ -1,13 +1,9 @@
 import * as actions from '../actions/indexActions';
 import * as types from '../constants/actionTypes';
-import doesModifyProject from 'helpers/doesModifyProject';
 
 const defaultProjectState = {
   activeProjectId: null,
   isFetching: false,
-  isInitialLoad: true,
-  showSavingMessage: null,
-  items: [],
 };
 
 export const projects = (state = defaultProjectState, action) => {
@@ -39,29 +35,6 @@ export const projects = (state = defaultProjectState, action) => {
       }
 
       return state;
-    // replace with update entity
-    case actions.UPDATE_PROJECT_NAME: {
-      const updatedProjects = state.items.map(project => {
-        if (project._id === action.projectId) {
-          const updatedProject = Object.assign({}, project, { name: action.newName });
-          return updatedProject;
-        }
-
-        return project;
-      });
-
-      return {
-        ...state,
-        items: updatedProjects,
-      }
-    }
-    // replace with update entity succ
-    case actions.UPDATE_PROJECT_SUCCESS:
-      return {
-        ...state,
-        isInitialLoad: false,
-      };
+    default: return state;
   }
-
-  return state;
 };
