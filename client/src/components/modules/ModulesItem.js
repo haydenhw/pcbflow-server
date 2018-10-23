@@ -33,11 +33,12 @@ export default class ModulesItem extends PureComponent {
   }
 
   setImage() {
-    if (this.props.imageSrc) {
+    const { imageSrc, id } = this.props;
+    if (imageSrc) {
       const image = new window.Image();
-      image.src = this.props.imageSrc;
+      image.src = imageSrc;
       image.onload = () =>
-      store.dispatch(actions.updateModuleImage({
+      store.dispatch(actions.updateEntity('Module', id, {
         index: this.props.index,
         imageNode: image,
       }));
