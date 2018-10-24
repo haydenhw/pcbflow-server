@@ -1,21 +1,8 @@
 import * as actions from 'actions/indexActions';
 
-
 export const activeModules = (state = [], action) => {
   if (action.type) {
     switch (action.type) {
-      // update entity
-      case actions.UPDATE_MODULE_IMAGE:
-        return state.map((module, i) => {
-          const { imageNode, index } = action.moduleData;
-          const updatedModuleProps = {
-            ...module,
-            imageNode,
-          };
-
-          return i === index ? updatedModuleProps : module;
-        });
-
       // update entity
       case actions.ROTATE_HOVERED_MODULE:
         const {

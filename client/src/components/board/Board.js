@@ -46,14 +46,9 @@ class Board extends Component {
 
   updateGlobalStatePosition() {
     const boardGroup = this.refs.boardGroup;
-    const topLeftAnchor = boardGroup.children[0]
     const x = boardGroup.getX();
     const y = boardGroup.getY();
-
-    store.dispatch(actions.updateBoardPosition({
-      x,
-      y,
-    }));
+    store.dispatch(actions.updateBoardPosition({x, y}));
   }
 
   handleDragStart() {

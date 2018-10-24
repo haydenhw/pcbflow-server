@@ -135,6 +135,7 @@ class DesignToolStage extends Component {
 
   render() {
     const {
+      activeProject,
       hideFloatingElements,
       isDraggingToBoard,
       isMouseDown,
@@ -167,6 +168,7 @@ class DesignToolStage extends Component {
               <Grid gridRef={node => { this.grid = node }} gridWidth={2000} gridHeight={2000} cellWidth={20} />
               {shouldRenderBoard
                 ? <Board
+                    activeProject={activeProject}
                     rotate={rotate}
                     hideFloatingElements={hideFloatingElements}
                     unhideFloatingElements={unhideFloatingElements}

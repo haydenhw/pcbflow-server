@@ -207,9 +207,8 @@ export default class ModulesItem extends PureComponent {
   }
 
   render() {
-    const { anchors, board, isDraggingToBoard, hoveredModuleProps } = this.props;
+    const { board, isDraggingToBoard } = this.props;
     const { moduleGroup } = this.refs;
-    const defaultStroke = moduleGroup ? moduleGroup.attrs.defaultStroke: null;
     const isStrokeRed = moduleGroup ? moduleGroup.attrs.isStrokeRed : null;
     const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
       ? getTopLeftAnchor(moduleGroup)
