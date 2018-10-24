@@ -5,7 +5,7 @@ import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
 const defaultState =  {
   dragging: {},
-  hovered: {},
+  hovered: null,
   clickedIndex: null,
   dataList: moduleData,
 }

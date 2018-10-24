@@ -199,8 +199,7 @@ const mapStateToProps = state => {
     isMouseDownOnIcon: state.mouseEvents.isMouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
-    hoveredModuleId: state.modules.hovered.id,
-    hoveredModuleProps: state.modules.hovered,
+    hoveredModuleId: state.modules.hovered,
     board: state.board,
     anchors: state.anchors,
     modules: state.activeModules.present,
@@ -222,6 +221,9 @@ DesignToolStage.propTypes = {
   isDraggingToBoard: PropTypes.bool.isRequired,
   anchors: PropTypes.object.isRequired,
   hoveredModuleId: PropTypes.number,
-  hoveredModuleProps: PropTypes.object.isRequired,
   board: PropTypes.object.isRequired,
 };
+
+DesignToolStage.defaultProps = {
+  hoveredModuleId: null,
+}

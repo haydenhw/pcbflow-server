@@ -4,8 +4,11 @@ export default function rotateAboutCenter(boundToSideIndex, rotation, x, y, widt
       ? 0
       : boundToSideIndex + 1;
   }
+  console.log(rotation )
+  rotation = rotation === 360
+    ? 0
+    : rotation;
 
-  rotation = rotation === 360 ? 0 : rotation;
   switch (rotation) {
     case 0:
       x += 0.5 * (width + height);
@@ -26,6 +29,6 @@ export default function rotateAboutCenter(boundToSideIndex, rotation, x, y, widt
   }
 
   rotation += 90;
-
+  console.log(rotation)
   return { boundToSideIndex, rotation, x, y };
 }

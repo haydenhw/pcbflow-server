@@ -162,12 +162,13 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleMouseOver() {
+    const { id } = this.props;
     this.setState({
       strokeWidth: 1.5,
     });
     document.body.style.cursor = 'move';
 
-    store.dispatch(actions.updateHoveredModule(this.props));
+    store.dispatch(actions.updateHoveredModule(id));
     store.dispatch(actions.toggleIsMouseOverModule(true));
   }
 
