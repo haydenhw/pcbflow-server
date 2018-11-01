@@ -6,7 +6,7 @@ import store from 'reduxFiles/store';
 
 import { getProjectDataUrl } from 'helpers/thumbnailHelpers';
 import { defaultThumbnail } from '../../constants/thumbnailConstants';
-import { moduleData } from 'config/moduleData';
+import { moduleDataList } from 'config/moduleDataList';
 
 import DeleteButton from './ProjectsDeleteButton';
 
@@ -24,7 +24,7 @@ export default class ProjectsItemFrame extends Component {
   componentDidMount() {
     const { project, modules } = this.props;
 
-    getProjectDataUrl(project, modules, moduleData)
+    getProjectDataUrl(project, modules, moduleDataList)
       .then((dataUrl) => {
         this.setState({ thumbnailDataUrl: dataUrl });
       });

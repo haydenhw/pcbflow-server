@@ -1,16 +1,10 @@
 import * as actions from '../actions/indexActions';
 import * as types from '../constants/actionTypes';
-import { moduleData } from '../config/moduleData';
 
 const defaultState =  {
   dragging: {},
   hovered: null,
   clickedIndex: null,
-  dataList: moduleData,
-}
-
-function updateObject(oldObject, newValues) {
-    return Object.assign({}, oldObject, newValues);
 }
 
 export const modules = (state = defaultState, action) => {
@@ -20,67 +14,28 @@ export const modules = (state = defaultState, action) => {
         ...state,
         dragging: action.moduleData,
       }
-    // hovered
     case actions.UPDATE_HOVERED_MODULE:
       return {
         ...state,
         hovered: action.moduleData,
       }
-    case actions.UPDATE_MODULE_POSITION:
-      const { x, y } = action.modulePosition;
-      const updatedModule = updateObject(state.hovered, { x, y });
-
-      return {
-        ...state,
-        hovered: updatedModule,
-      };
-    case actions.ROTATE_HOVERED_MODULE: {
-      const {
-        rotation,
-        boundToSideIndex,
-        parentGroupX,
-        parentGroupY,
-        innerGroupX,
-        innerGroupY,
-        width,
-        height,
-        index,
-      } = action.rotationData;
-
-      const updatedModule = updateObject(state.hovered, {
-        boundToSideIndex,
-        innerGroupX,
-        innerGroupY,
-        rotation,
-        x: parentGroupX,
-        y: parentGroupY,
-      });
-
-      return {
-        ...state,
-        hovered: updatedModule
-      };
-    }
-  //clicked
     case actions.UPDATE_CLICKED_MODULE:
       return {
         ...state,
         clickedIndex: action.index
       };
+    case types.ENTITY_DELETE:
+      const { itemType } = action.payload;
 
-  case types.ENTITY_DELETE:
-    const { itemType } = action.payload;
+      if (itemType === 'Module') {
+        return {
+          ...state,
+          hovered: null,
+        };
+      }
 
-    if (itemType === 'Module') {
-      return {
-        ...state,
-        hovered: null,
-      };
-    }
-
-    return state;
-
-  default:
-    return state;
+      return state;
+    default:
+      return state;
   }
 };

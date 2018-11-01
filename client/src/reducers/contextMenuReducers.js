@@ -1,5 +1,4 @@
 import * as actions from 'actions/indexActions';
-import { moduleData } from '../config/moduleData';
 
 const defaultState = {
   show: false,

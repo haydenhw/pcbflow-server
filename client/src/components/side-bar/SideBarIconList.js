@@ -39,7 +39,7 @@ const SideBarIconList = class extends Component {
   }
 
   render() {
-    const visibleIcons = this.props.visibleIcons;
+    const { visibleIcons } = this.props;
 
     const iconList = visibleIcons.map((module, index) => (
       this.renderSideBarIconFrame(module, index)
@@ -56,7 +56,6 @@ const SideBarIconList = class extends Component {
 const mapStateToProps = state => ({
   disabledIconExceptions: state.tutorial.disabledIconExceptions,
   showAllIcons: state.sideBar.showAllIcons,
-  moduleData: state.modules.dataList,
 });
 
 export default connect(mapStateToProps)(SideBarIconList);
@@ -64,7 +63,6 @@ export default connect(mapStateToProps)(SideBarIconList);
 SideBarIconList.propTypes = {
   disabledIconExceptions: PropTypes.array,
   showAllIcons: PropTypes.bool.isRequired,
-  moduleData: PropTypes.array.isRequired,
   toggleDraggingToBoard: PropTypes.func.isRequired,
   toggleIsClicked: PropTypes.func,
 };

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { getUnmetDependencies } from 'helpers/dependencies';
 import { getUnsatisfiedModule } from 'helpers/moduleHelpers';
 
-import { compose } from 'helpers/functional';
+import { moduleDataList } from 'config/moduleDataList';
 
 import SideBarIconList from './SideBarIconList';
 import DimensionForm from './SideBarDimensionInput';
@@ -17,10 +17,7 @@ export default class SideBar extends Component {
   renderDependencyMessage = (unsatisfiedModule) => {
    const
    {
-     activeModules,
      showAllIcons,
-     clickedModuleIndex,
-     moduleData,
      showAll,
    } = this.props;
 
@@ -43,19 +40,18 @@ export default class SideBar extends Component {
       activeModules,
       showAllIcons,
       clickedModuleIndex,
-      moduleData,
       activeModulesLength,
       toggleDraggingToBoard,
       toggleIsClicked,
     } = this.props;
 
-    const unsatisfiedModule = getUnsatisfiedModule(clickedModuleIndex, activeModules, moduleData);
+    const unsatisfiedModule = getUnsatisfiedModule(clickedModuleIndex, activeModules, moduleDataList);
 
     const unsatisfiedModuleDependencies = (unsatisfiedModule &&
-       getUnmetDependencies(moduleData, activeModules, unsatisfiedModule.dependencies));
+       getUnmetDependencies(moduleDataList, activeModules, unsatisfiedModule.dependencies));
 
     const visibleIcons = !unsatisfiedModuleDependencies || showAllIcons
-      ? moduleData
+      ? moduleDataList
       : unsatisfiedModuleDependencies;
 
     return (

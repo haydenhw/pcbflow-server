@@ -594,7 +594,6 @@ let DesignTool = class extends Component {
      activeModules,
      showAllIcons,
      clickedModuleIndex,
-     moduleData,
    } = this.props;
 
     const { isDraggingToBoard } = this.state;
@@ -605,7 +604,6 @@ let DesignTool = class extends Component {
           activeModules={activeModules}
           showAllIcons={showAllIcons}
           clickedModuleIndex={clickedModuleIndex}
-          moduleData={moduleData}
           activeModulesLength={activeModules.length}
           showAll={this.showAllModuleIcons}
           toggleDraggingToBoard={this.toggleDraggingToBoard}
@@ -710,7 +708,6 @@ const mapStateToProps = state => ({
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isTutorialActive: state.tutorial.isActive,
     modalType: state.modal.modalType,
-    moduleData: state.modules.dataList,
     projects: getProjects(state),
     saveProjectTrigger: state.triggers.saveProjectTrigger,
     shouldRenderModal: state.modal.shouldRenderModal,

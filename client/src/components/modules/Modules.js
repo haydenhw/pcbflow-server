@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { Layer, Rect, Stage, Group } from 'react-konva';
+import { Group } from 'react-konva';
 import { connect } from 'react-redux';
 
-import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
-
-import generatePriceString from 'helpers/generatePriceString';
-import { getUnmetDependencies, updateMetDependencies } from 'helpers/dependencies';
+import { getUnmetDependencies } from 'helpers/dependencies';
+import { moduleDataList } from 'config/moduleDataList';
 import { getActiveModules } from '../../selectors/moduleSelectors';
 
 import ModulesItem from './ModulesItem';
@@ -19,7 +16,6 @@ import {
   fontFamily,
   fill,
   opacity,
-  stroke,
   strokeWidth,
 } from 'config/moduleConfig';
 
@@ -58,7 +54,7 @@ class Modules extends Component {
         fill={fill}
         opacity={opacity}
         strokeWidth={strokeWidth}
-        unmetDependencies={getUnmetDependencies(this.props.moduleData, this.props.modules, module.dependencies)}
+        unmetDependencies={getUnmetDependencies(moduleDataList, this.props.modules, module.dependencies)}
         shouldCheckCollission={this.state.shouldCheckCollission}
         toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
       />,
@@ -78,7 +74,6 @@ const mapStateToProps = state => ({
   checkCollisionTrigger: state.board.checkCollisionTrigger,
   showAllIcons: state.sideBar.showAllIcons,
   modules: getActiveModules(state),
-  moduleData: state.modules.dataList,
   hoveredModuleProps: state.modules.hovered,
   topLeftAnchor: state.anchors.topLeft,
   tutorialStep: state.tutorial.step,
