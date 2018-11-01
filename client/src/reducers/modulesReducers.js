@@ -1,11 +1,10 @@
 import * as actions from '../actions/indexActions';
+import * as types from '../constants/actionTypes';
 import { moduleData } from '../config/moduleData';
-
-import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
 const defaultState =  {
   dragging: {},
-  hovered: {},
+  hovered: null,
   clickedIndex: null,
   dataList: moduleData,
 }
@@ -68,7 +67,20 @@ export const modules = (state = defaultState, action) => {
         ...state,
         clickedIndex: action.index
       };
-  }
 
-  return state;
+  case types.ENTITY_DELETE:
+    const { itemType } = action.payload;
+
+    if (itemType === 'Module') {
+      return {
+        ...state,
+        hovered: null,
+      };
+    }
+
+    return state;
+
+  default:
+    return state;
+  }
 };

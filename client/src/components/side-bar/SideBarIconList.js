@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
-
-import { getUnsatisfiedModuleIds, getUnmetDependencies } from 'helpers/dependencies';
-
 import SideBarIcon from './SideBarIcon';
 import SideBarIconFrame from './SideBarIconFrame';
 
@@ -62,7 +57,6 @@ const mapStateToProps = state => ({
   disabledIconExceptions: state.tutorial.disabledIconExceptions,
   showAllIcons: state.sideBar.showAllIcons,
   moduleData: state.modules.dataList,
-  activeModules: state.activeModules.present,
 });
 
 export default connect(mapStateToProps)(SideBarIconList);
@@ -71,7 +65,6 @@ SideBarIconList.propTypes = {
   disabledIconExceptions: PropTypes.array,
   showAllIcons: PropTypes.bool.isRequired,
   moduleData: PropTypes.array.isRequired,
-  activeModules: PropTypes.array.isRequired,
   toggleDraggingToBoard: PropTypes.func.isRequired,
   toggleIsClicked: PropTypes.func,
 };

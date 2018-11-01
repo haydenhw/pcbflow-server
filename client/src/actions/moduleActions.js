@@ -2,12 +2,6 @@ import { projectsUrl } from '../config/endpointUrls';
 import * as actions from 'actions/indexActions';
 import { getActiveProject } from '../selectors/projectSelectors';
 
-export const PUSH_NEW_MODULE = 'PUSH_NEW_MODULE';
-export const pushNewModule = module => ({
-  type: 'PUSH_NEW_MODULE',
-  module,
-});
-
 export const pushToactiveModules = module => (dispatch, getState) => {
   const state = getState();
   const { step, isTutorialActive } = state.tutorial;
@@ -61,13 +55,6 @@ export const UPDATE_MODULE_STROKE = 'UPDATE_MODULE_STROKE';
 export const updateModuleStroke = moduleStroke => ({
   type: 'UPDATE_MODULE_STROKE',
   moduleStroke,
-});
-
-export const UPDATE_MODULE_IMAGE = 'UPDATE_MODULE_IMAGE';
-export const updateModuleImage = moduleData => ({
-  type: 'UPDATE_MODULE_IMAGE',
-  skipPrevState: true,
-  moduleData,
 });
 
 export const UPDATE_HOVERED_MODULE = 'UPDATE_HOVERED_MODULE';

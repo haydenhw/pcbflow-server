@@ -15,7 +15,7 @@ import {
   getActiveProjectBoard,
 } from '../../selectors/projectSelectors';
 
-import { getActiveModules } from '../../selectors/moduleSelectors';
+import { getActiveModules, getHoveredModule } from '../../selectors/moduleSelectors';
 
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
@@ -456,9 +456,12 @@ let DesignTool = class extends Component {
   }
 
   rotate() {
-    const { hoveredModuleProps, anchors, board } = this.props;
-    const rotationData = rotate(hoveredModuleProps, anchors, board);
-    store.dispatch(actions.rotateHoveredModule(rotationData));
+    const { hoveredModule, anchors, board } = this.props;
+    const { id } = hoveredModule;
+    const rotationData = rotate(hoveredModule, anchors, board);
+
+    // console.log(rotationData);
+    store.dispatch(actions.updateEntity('Module', id, rotationData));
   }
 
   startTour() {
@@ -701,8 +704,8 @@ const mapStateToProps = state => ({
     board: getActiveProjectBoard(state),
     clickedModuleIndex: state.modules.clickedIndex,
     draggingModuleData: state.modules.dragging,
-    hoveredModuleId: state.modules.hovered.id,
-    hoveredModuleProps: state.modules.hovered,
+    hoveredModuleId: state.modules.hovered,
+    hoveredModule: getHoveredModule(state),
     isFetching: state.projects.isFetching,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isTutorialActive: state.tutorial.isActive,
@@ -738,7 +741,7 @@ DesignTool.propTypes = {
   route: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   hoveredModuleId: PropTypes.number,
-  hoveredModuleProps: PropTypes.object.isRequired,
+  hoveredModule: PropTypes.object,
   shouldRenderModal: PropTypes.bool.isRequired,
   shouldRenderTodoList: PropTypes.bool.isRequired,
   todoBools: PropTypes.array.isRequired,
@@ -748,4 +751,5 @@ DesignTool.propTypes = {
 DesignTool.defaultProps = {
   activeProjectId: null,
   board: null,
+  hoveredModule: null,
 }

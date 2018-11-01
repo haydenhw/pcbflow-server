@@ -53,6 +53,10 @@ const addPropToData = data => newProp => Object.assign({}, data , newProp);
 class DesignToolStage extends Component {
   constructor() {
     super();
+    this.state = {
+      width: document.documentElement.clientWidth,
+      height: document.documentElement.clientHeight * 0.98,
+    }
 
     this.deleteModule = this.deleteModule.bind(this);
   }
@@ -135,6 +139,7 @@ class DesignToolStage extends Component {
 
   render() {
     const {
+      activeProject,
       hideFloatingElements,
       isDraggingToBoard,
       isMouseDown,
@@ -147,12 +152,14 @@ class DesignToolStage extends Component {
      } = this.props;
 
     const contextMenuClass = shouldHideContextMenu ? 'hideContextMenu' : 'react-contextmenu';
+    console.log(document.documentElement.clientHeight);
     return (
       <div>
         <ContextMenuTrigger
           id={'SIMPLE'}
           name={'rect'}
-          disable={isMouseDown || !isMouseOverModule}
+          disable
+          // disable={isMouseDown || !isMouseOverModule}
         >
           <div>
             <Stage
@@ -161,12 +168,17 @@ class DesignToolStage extends Component {
                 stageRef(node);
               }}
               name="stage"
+              // width={this.state.width}
+              // height={this.state.height}
               width={document.documentElement.clientWidth}
               height={document.documentElement.clientHeight}
+              // width={document.documentElement.width}
+              // height={document.documentElement.height}
             >
               <Grid gridRef={node => { this.grid = node }} gridWidth={2000} gridHeight={2000} cellWidth={20} />
               {shouldRenderBoard
                 ? <Board
+                    activeProject={activeProject}
                     rotate={rotate}
                     hideFloatingElements={hideFloatingElements}
                     unhideFloatingElements={unhideFloatingElements}
@@ -189,7 +201,6 @@ class DesignToolStage extends Component {
 }
 
 const mapStateToProps = state => {
-
   return ({
     activeProjectId: state.projects.activeProjectId,
     activeProject: getActiveProject(state),
@@ -197,11 +208,9 @@ const mapStateToProps = state => {
     isMouseDownOnIcon: state.mouseEvents.isMouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
-    hoveredModuleId: state.modules.hovered.id,
-    hoveredModuleProps: state.modules.hovered,
+    hoveredModuleId: state.modules.hovered,
     board: state.board,
     anchors: state.anchors,
-    modules: state.activeModules.present,
   });
 };
 
@@ -220,6 +229,9 @@ DesignToolStage.propTypes = {
   isDraggingToBoard: PropTypes.bool.isRequired,
   anchors: PropTypes.object.isRequired,
   hoveredModuleId: PropTypes.number,
-  hoveredModuleProps: PropTypes.object.isRequired,
   board: PropTypes.object.isRequired,
 };
+
+DesignToolStage.defaultProps = {
+  hoveredModuleId: null,
+}

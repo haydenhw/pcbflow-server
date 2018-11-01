@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import { getProjects } from '../../selectors/projectSelectors';
 
 import LandingPageCard from './LandingPageCard';
 import Logo from 'components/logo/Logo';
@@ -19,7 +20,6 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    const { projects } = this.props;
     window.addEventListener('scroll', this.handleScroll.bind(this));
   }
 
@@ -118,7 +118,7 @@ class LandingPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    projects: state.projects.items
+    projects: getProjects(state),
   };
 };
 

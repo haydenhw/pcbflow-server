@@ -1,3 +1,6 @@
+import { getActiveProject } from '../selectors/projectSelectors';
+import * as actions from '../actions/indexActions';
+
 export const TRIGGER_ANCHOR_UPDATE = 'TRIGGER_ANCHOR_UPDATE';
 export const triggerAnchorUpdate = () => ({
   type: 'TRIGGER_ANCHOR_UPDATE',
@@ -10,10 +13,14 @@ export const updateAnchorPositions = positions => ({
 });
 
 export const UPDATE_BOARD_POSITION = 'UPDATE_BOARD_POSITION';
-export const updateBoardPosition = position => ({
-  type: 'UPDATE_BOARD_POSITION',
-  position,
-});
+export const updateBoardPosition = (newPosition) => (dispatch, getState) => {
+  const state = getState();
+  const activeProject = getActiveProject(state);
+  const { board: prevBoard, id } = activeProject;
+  const newBoard = Object.assign({}, prevBoard, newPosition);
+
+  dispatch(actions.updateEntity('Project', id, { board: newBoard } ));
+}
 
 export const UPDATE_BOARD_DIMENSIONS = 'UPDATE_BOARD_DIMENSIONS';
 export const updateBoardDimensions = dimensions => ({
