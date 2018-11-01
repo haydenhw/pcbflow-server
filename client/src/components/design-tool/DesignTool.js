@@ -39,8 +39,6 @@ import { tutorialSteps } from './DesignToolTutorialSteps';
 import './design-tool-styles/_DesignToolDocumentationCard.scss';
 import './design-tool-styles/_DesignToolOnboardModal.scss';
 
-import { devMode } from 'config/devMode';
-
 let DesignTool = class extends Component {
   constructor(props) {
     super(props);

@@ -15,7 +15,6 @@ import { getCroppedStage } from 'helpers/generateThumbnail';
 import Board from 'components/board/Board';
 import Grid from './DesignToolGrid';
 
-
 const getModuleGroup = ({ moduleX, moduleY }) => new Konva.Group({
   x: moduleX,
   y: moduleY,
@@ -50,15 +49,23 @@ const getDragModule = getModule(getModuleGroup)(moduleChildren);
 
 const addPropToData = data => newProp => Object.assign({}, data , newProp);
 
+const getWindowDimensions = () => ({
+  width: document.documentElement.clientWidth,
+  height: document.documentElement.clientHeight,
+});
+
 class DesignToolStage extends Component {
   constructor() {
     super();
-    this.state = {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight * 0.98,
-    }
+    this.state = getWindowDimensions();
 
     this.deleteModule = this.deleteModule.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', () => {
+      this.setState(getWindowDimensions());
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -78,6 +85,10 @@ class DesignToolStage extends Component {
     if (!this.props.isDraggingToBoard && prevProps.isDraggingToBoard) {
       this.removeDragModule();
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize');
   }
 
   downloadPDF() {
@@ -152,14 +163,13 @@ class DesignToolStage extends Component {
      } = this.props;
 
     const contextMenuClass = shouldHideContextMenu ? 'hideContextMenu' : 'react-contextmenu';
-    console.log(document.documentElement.clientHeight);
+
     return (
       <div>
         <ContextMenuTrigger
           id={'SIMPLE'}
           name={'rect'}
-          disable
-          // disable={isMouseDown || !isMouseOverModule}
+          disable={isMouseDown || !isMouseOverModule}
         >
           <div>
             <Stage
@@ -168,12 +178,8 @@ class DesignToolStage extends Component {
                 stageRef(node);
               }}
               name="stage"
-              // width={this.state.width}
-              // height={this.state.height}
-              width={document.documentElement.clientWidth}
-              height={document.documentElement.clientHeight}
-              // width={document.documentElement.width}
-              // height={document.documentElement.height}
+              width={this.state.width}
+              height={this.state.height}
             >
               <Grid gridRef={node => { this.grid = node }} gridWidth={2000} gridHeight={2000} cellWidth={20} />
               {shouldRenderBoard
