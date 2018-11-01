@@ -30,10 +30,9 @@ export default function rotateAboutCenter(prevBoundToSideIndex, prevRotation, x,
       y -= 0.5 * (width + height);
       break;
     default:
-      console.error('Rotation should be an integer equal to 0, 90, 180, 270, or 360, but instead was ', rotation);
+      console.error('rotation should be an integer equal to 0, 90, 180, 270, or 360, but instead was ', rotation);
   }
 
   rotation += 90;
-
   return { boundToSideIndex, rotation, x, y };
 }
