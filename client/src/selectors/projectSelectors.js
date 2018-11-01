@@ -1,7 +1,17 @@
 import { createSelector } from 'reselect'
 import { getEntitiesSession } from './entitySelectors';
 
+export const hello = 'hello';
+
 export const getActiveProjectId = state => state.projects.activeProjectId;
+
+const getProjectWithModules = (session, activeId) => {
+  const activeProject = session.Project.get({ _id: activeId }).ref;
+  const activeProjectId =  activeProject.id;
+  const modules = session.Module.filter({ project: activeProjectId }).toRefArray();
+
+  return Object.assign({}, activeProject, { activeModules: modules });
+}
 
 export const getProjects = createSelector(
   getEntitiesSession,
@@ -10,12 +20,12 @@ export const getProjects = createSelector(
 
 export const getActiveProject = createSelector(
   [getEntitiesSession, getActiveProjectId],
-  (session, activeId) => (
+  (session, activeId, modules) => (
     !activeId
       ? null
       : session.Project.count() === 0
       ? null
-      : session.Project.get({ _id: activeId }).ref
+      : getProjectWithModules(session, activeId)
   )
 );
 

@@ -28,15 +28,6 @@ export const activeModules = (state = [], action) => {
 
           return i === index ? updatedModuleProps : module;
         });
-
-      // update entity
-      case actions.DELETE_HOVERED_MODULE:
-        const newState = [
-          ...state.slice(0, action.moduleIndex),
-          ...state.slice(action.moduleIndex + 1),
-        ];
-        return newState;
-
       default:
         return state;
     }

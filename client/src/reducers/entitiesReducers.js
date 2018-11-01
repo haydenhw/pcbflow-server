@@ -5,8 +5,6 @@ import {
     ENTITY_UPDATE,
     ENTITY_DELETE,
     ENTITY_CREATE,
-    ENTITY_CREATE_SUCCESS,
-    ENTITY_CREATE_REQUEST,
     FETCH_PROJECTS_SUCCESS,
 } from "../constants/actionTypes";
 

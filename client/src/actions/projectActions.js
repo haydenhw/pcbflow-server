@@ -2,12 +2,12 @@
 import { hashHistory } from 'react-router';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
 
 import { projectsUrl } from '../config/endpointUrls';
 import { getJWTAuthHeader, getUser } from 'helpers/users';
 import { addAnchorsToProject } from 'helpers/anchorHelpers';
 import { getModulesByProject } from '../selectors/moduleSelectors';
+import { getActiveProject } from '../selectors/projectSelectors';
 
 const getOriginAdjustedModules = (modules, originX, originY) => (
   modules.map((module) => {
@@ -217,11 +217,12 @@ export const updateProjectSuccess = project => ({
   project,
 });
 
-export function updateProject(projectData) {
+export function updateProject() {
   return (dispatch, getState) => {
-    const { activeProject } = projectData;
+    const state = getState();
+    const activeProject = getActiveProject(state);;
     const projectUrl = `${projectsUrl}/${activeProject._id}`;
-    const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
+    const originAdjustedProjectData = getOriginAdjustedProjectData(activeProject);
 
     dispatch(updateProjectRequest());
 

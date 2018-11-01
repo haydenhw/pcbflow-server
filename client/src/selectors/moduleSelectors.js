@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { getEntitiesSession } from './entitySelectors';
-import { getActiveProject } from './projectSelectors';
+import {  getActiveProject } from './projectSelectors';
 
 export const getHoveredModuleId = state => state.modules.hovered;
 

@@ -1,6 +1,8 @@
-import { projectsUrl } from '../config/endpointUrls';
+import store from '../redux-files/store';
 import * as actions from 'actions/indexActions';
+import { deleteEntity } from 'reducers/entitiesReducers';
 import { getActiveProject } from '../selectors/projectSelectors';
+import { getActiveModules } from '../selectors/moduleSelectors';
 
 export const pushToactiveModules = module => (dispatch, getState) => {
   const state = getState();
@@ -62,20 +64,6 @@ export const updateHoveredModule = moduleData => ({
   type: 'UPDATE_HOVERED_MODULE',
   moduleData,
 });
-
-export const DELETE_HOVERED_MODULE = 'DELETE_HOVERED_MODULE';
-export const deleteHoveredModule = (moduleIndex) => (dispatch, getState) => {
-  const currentModulesLength = getState().activeModules.present.length;
-
-  if (currentModulesLength === 1) {
-    dispatch(actions.updateBoardStroke(null));
-  }
-
-  dispatch({
-    type: 'DELETE_HOVERED_MODULE',
-    moduleIndex,
-  });
-}
 
 export const ROTATE_HOVERED_MODULE = 'ROTATE_HOVERED_MODULE';
 export const rotateHoveredModule = rotationData => ({

@@ -62,10 +62,12 @@ class DesignToolStage extends Component {
     this.deleteModule = this.deleteModule.bind(this);
   }
 
+  setWindowDimensions = () => {
+    this.setState(getWindowDimensions());
+  }
+
   componentDidMount() {
-    window.addEventListener('resize', () => {
-      this.setState(getWindowDimensions());
-    });
+    window.addEventListener('resize', this.setWindowDimensions);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -88,7 +90,7 @@ class DesignToolStage extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize');
+    window.removeEventListener('resize', this.setWindowDimensions);
   }
 
   downloadPDF() {
@@ -111,6 +113,7 @@ class DesignToolStage extends Component {
 
   deleteModule() {
     const { hoveredModuleId } = this.props;
+
     store.dispatch(actions.deleteEntity('Module', hoveredModuleId));
   }
 
@@ -149,6 +152,7 @@ class DesignToolStage extends Component {
   }
 
   render() {
+
     const {
       activeProject,
       hideFloatingElements,
@@ -167,8 +171,8 @@ class DesignToolStage extends Component {
     return (
       <div>
         <ContextMenuTrigger
-          id={'SIMPLE'}
-          name={'rect'}
+          id='SIMPLE'
+          name='rect'
           disable={isMouseDown || !isMouseOverModule}
         >
           <div>

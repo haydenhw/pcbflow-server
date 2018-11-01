@@ -1,6 +1,5 @@
 /* eslint-env mocha */
 /* eslint-disable import/no-extraneous-dependencies */
-
 import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
@@ -412,46 +411,6 @@ describe('activeModules reducer', () => {
         stroke: 'black',
         rotation: 0,
       },
-    });
-
-    assert.deepEqual(resultState, expectedState);
-  });
-
-
-  it('It should delete specified module', () => {
-    const initialState = [
-      {
-        x: 10,
-        y: 10,
-        width: 50,
-        height: 50,
-        stroke: 'black',
-        rotation: 0,
-      },
-      {
-        x: 50,
-        y: 50,
-        width: 100,
-        height: 100,
-        stroke: 'black',
-        rotation: 0,
-      },
-    ];
-
-    const expectedState = [
-      {
-        x: 10,
-        y: 10,
-        width: 50,
-        height: 50,
-        stroke: 'black',
-        rotation: 0,
-      },
-    ];
-
-    const resultState = activeModules(deepFreeze(initialState), {
-      type: 'DELETE_HOVERED_MODULE',
-      moduleIndex: 1,
     });
 
     assert.deepEqual(resultState, expectedState);
