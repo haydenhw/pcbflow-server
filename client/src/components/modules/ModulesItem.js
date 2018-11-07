@@ -193,7 +193,15 @@ export default class ModulesItem extends PureComponent {
   }
 
   renderImage() {
-    const {  imageX, imageY, imageHeight, imageWidth, imageNode, imageSrc, } = this.props;
+   const {
+     imageX,
+     imageY,
+     imageHeight,
+     imageWidth,
+     imageNode,
+     imageSrc,
+   } = this.props;
+
     return (
       <Image
         x={imageX}

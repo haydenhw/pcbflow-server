@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getUnmetDependencies } from 'helpers/dependencies';
 import { moduleDataList } from 'config/moduleDataList';
 import { getActiveModules } from '../../selectors/moduleSelectors';
+import { getActiveProjectBoard } from '../../selectors/projectSelectors';
 
 import ModulesItem from './ModulesItem';
 
@@ -42,7 +43,7 @@ class Modules extends Component {
   }
 
   render() {
-    const modules = this.props.modules/* [moduleData[0]].*/.map((module, index) =>
+    const modules = this.props.modules.map((module, index) =>
       <ModulesItem
         {...module}
         {...this.props}
@@ -70,7 +71,7 @@ class Modules extends Component {
 
 const mapStateToProps = state => ({
   anchors: state.anchors,
-  board: state.board,
+  board: getActiveProjectBoard(state),
   checkCollisionTrigger: state.board.checkCollisionTrigger,
   showAllIcons: state.sideBar.showAllIcons,
   modules: getActiveModules(state),

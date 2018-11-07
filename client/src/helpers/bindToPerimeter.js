@@ -1,14 +1,14 @@
 // refactor bindToPerimeter with compose
 import getPerimeterSide from 'helpers/getPerimeterSide';
 
-function buildCoordinateData(hoveredModuleProps, topLeftAnchor, board) {
+function buildCoordinateData(module, topLeftAnchor, board) {
   const {
     boundToSideIndex,
     x,
     y,
     width,
     height,
-  } = hoveredModuleProps;
+  } = module;
 
   return {
     boundToSide: getPerimeterSide(boundToSideIndex),
@@ -23,33 +23,29 @@ function buildCoordinateData(hoveredModuleProps, topLeftAnchor, board) {
   };
 }
 
-export default function bindToPerimeter(hoveredModuleProps, topLeftAnchor, board) {
-  const cd = buildCoordinateData(hoveredModuleProps, topLeftAnchor, board);
+export default function bindToPerimeter(module, topLeftAnchor, board) {
+  const cd = buildCoordinateData(module, topLeftAnchor, board);
   switch (cd.boundToSide) {
     case 'bottom':
       return {
         x: cd.moduleX,
         y: cd.topLeftAnchorY + cd.boardHeight - cd.moduleHeight,
       };
-      break;
     case 'left':
       return {
         x: cd.topLeftAnchorX + 0.5 * (cd.moduleHeight - cd.moduleWidth),
         y: cd.moduleY,
       };
-      break;
     case 'top':
       return {
         x: cd.moduleX,
         y: cd.topLeftAnchorY,
       };
-      break;
     case 'right':
       return {
         x: cd.topLeftAnchorX + cd.boardWidth - 0.5 * (cd.moduleHeight + cd.moduleWidth),
         y: cd.moduleY,
       };
-      break;
     default:
       return {
         x: cd.moduleX,
