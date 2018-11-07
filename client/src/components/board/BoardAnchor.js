@@ -1,7 +1,8 @@
+// refactor to pull out update anchor logic from component
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Circle } from 'react-konva';
-import { connect } from 'react-redux';
 import { minWidth, minHeight } from '../../constants/boardConstants';
 import { anchorStyles } from '../../constants/styleConstants';
 
@@ -53,7 +54,6 @@ export default class Anchor extends Component {
     const activeAnchor = this.refs.anchor;
     const group = this.refs.anchor.getParent();
     const board = group.get('.board')[0];
-    const layer = group.getLayer();
     const topLeft = group.get('.topLeft')[0];
     const topRight = group.get('.topRight')[0];
     const bottomRight = group.get('.bottomRight')[0];
@@ -171,18 +171,14 @@ export default class Anchor extends Component {
       callback(anchors);
     }
 
-    board.position(topLeft.position());
 
     const width = topRight.getX() - topLeft.getX();
     const height = bottomLeft.getY() - topLeft.getY();
 
-    if (width && height) {
-      const boardDimensions = {
-        width,
-        height,
-      };
+    board.position(topLeft.position());
 
-      store.dispatch(actions.updateBoardDimensions(boardDimensions));
+    if (width && height) {
+      store.dispatch(actions.updateBoard({ width, height }));
     }
   }
 

@@ -11,22 +11,16 @@ export const updateAnchorPositions = positions => ({
   type: 'UPDATE_ANCHOR_POSITIONS',
   positions,
 });
-
+// update updateBoardPositionFunction
 export const UPDATE_BOARD_POSITION = 'UPDATE_BOARD_POSITION';
-export const updateBoardPosition = (newPosition) => (dispatch, getState) => {
+export const updateBoard = (newAttrs) => (dispatch, getState) => {
   const state = getState();
   const activeProject = getActiveProject(state);
   const { board: prevBoard, id } = activeProject;
-  const newBoard = Object.assign({}, prevBoard, newPosition);
+  const newBoard = Object.assign({}, prevBoard, newAttrs);
 
   dispatch(actions.updateEntity('Project', id, { board: newBoard } ));
 }
-
-export const UPDATE_BOARD_DIMENSIONS = 'UPDATE_BOARD_DIMENSIONS';
-export const updateBoardDimensions = dimensions => ({
-  type: 'UPDATE_BOARD_DIMENSIONS',
-  dimensions,
-});
 
 export const UPDATE_BOARD_STROKE = 'UPDATE_BOARD_STROKE';
 export const updateBoardStroke = boardStroke => ({

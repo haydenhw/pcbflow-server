@@ -48,7 +48,7 @@ class Board extends Component {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
-    store.dispatch(actions.updateBoardPosition({x, y}));
+    store.dispatch(actions.updateBoard({ x, y }));
   }
 
   handleDragStart() {
@@ -154,7 +154,7 @@ class Board extends Component {
 
 const mapStateToProps = state => {
   const { x, y, width, height } = getActiveProjectBoard(state);
-
+  console.log(width, height)
   return {
     x,
     y,
