@@ -18,14 +18,16 @@ const getOriginAdjustedModules = (modules, originX, originY) => (
   })
 );
 
-const getOriginAdjustedProjectData = ({
-  board,
-  activeModules: modules,
-  activeProjectName: projectName,
-  topLeftAnchorX: originX,
-  topLeftAnchorY: originY,
-}) => {
+const getOriginAdjustedProjectData = (activeProject, anchors) => {
+  const {
+    board,
+    activeModules: modules,
+    activeProjectName: projectName,
+  } = activeProject;
+
   const { width, height, x, y } = board;
+  const { topLeft } = anchors;
+  const { x: originX, y: originY } = topLeft;
 
   return {
     name: projectName,
@@ -221,8 +223,9 @@ export function updateProject() {
   return (dispatch, getState) => {
     const state = getState();
     const activeProject = getActiveProject(state);;
+    const anchors = state.anchors;
     const projectUrl = `${projectsUrl}/${activeProject._id}`;
-    const originAdjustedProjectData = getOriginAdjustedProjectData(activeProject);
+    const originAdjustedProjectData = getOriginAdjustedProjectData(activeProject, anchors);
 
     dispatch(updateProjectRequest());
 
