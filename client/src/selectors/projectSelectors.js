@@ -29,10 +29,18 @@ export const getActiveProject = createSelector(
   )
 );
 
+export const getActiveProjectBoard = createSelector(
+  getActiveProject,
+  project => (
+    project && project.board
+      ? project.board
+      : { width: undefined, height: undefined, }
+  )
+);
+
 const getActiveProjectPropVal = key => createSelector(
   getActiveProject,
   project => project ? project[key] : null
 );
 
 export const getActiveProjectName = getActiveProjectPropVal('name');
-export const getActiveProjectBoard = getActiveProjectPropVal('board');

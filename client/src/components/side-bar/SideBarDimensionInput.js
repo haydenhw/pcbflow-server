@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { minWidth, minHeight } from '../../constants/boardConstants';
 
+import { getActiveProjectBoard } from '../../selectors/projectSelectors';
+
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
@@ -89,7 +91,6 @@ class SideBarDimensionInput extends Component {
       topLeft,
       topRight,
       bottomLeft,
-      bottomRight,
       boardWidth,
     } = this.props;
 
@@ -148,8 +149,8 @@ class SideBarDimensionInput extends Component {
 }
 
 const mapStateToProps = state => ({
-  boardWidth: state.board.width,
-  boardHeight: state.board.height,
+  boardWidth: getActiveProjectBoard(state).width,
+  boardHeight: getActiveProjectBoard(state).height,
   topLeft: state.anchors.topLeft,
   topRight: state.anchors.topRight,
   bottomLeft: state.anchors.bottomLeft,

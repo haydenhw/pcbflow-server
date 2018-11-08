@@ -129,7 +129,7 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleDragMove() {
-    const { hoveredModuleProps, anchors, board, x, y } = this.props;
+    const { hoveredModuleProps, board } = this.props;
     const { boundToSideIndex } = hoveredModuleProps;
     const { moduleGroup } = this.refs;
 

@@ -152,7 +152,6 @@ class DesignToolStage extends Component {
   }
 
   render() {
-
     const {
       activeProject,
       hideFloatingElements,
@@ -219,7 +218,6 @@ const mapStateToProps = state => {
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
     hoveredModuleId: state.modules.hovered,
-    board: state.board,
     anchors: state.anchors,
   });
 };
@@ -239,7 +237,6 @@ DesignToolStage.propTypes = {
   isDraggingToBoard: PropTypes.bool.isRequired,
   anchors: PropTypes.object.isRequired,
   hoveredModuleId: PropTypes.number,
-  board: PropTypes.object.isRequired,
 };
 
 DesignToolStage.defaultProps = {

@@ -154,7 +154,7 @@ class Board extends Component {
 
 const mapStateToProps = state => {
   const { x, y, width, height } = getActiveProjectBoard(state);
-  console.log(width, height)
+
   return {
     x,
     y,
@@ -168,7 +168,6 @@ const mapStateToProps = state => {
     stroke: state.board.stroke,
   };
 }
-
 
 export default connect(mapStateToProps)(Board);
 
