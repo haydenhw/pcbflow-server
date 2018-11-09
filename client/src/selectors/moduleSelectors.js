@@ -3,6 +3,7 @@ import { getEntitiesSession } from './entitySelectors';
 import {  getActiveProject } from './projectSelectors';
 
 export const getHoveredModuleId = state => state.modules.hovered;
+export const getDraggingModuleId = state => state.modules.dragging;
 
 export const getModules = createSelector(
   getEntitiesSession,
@@ -23,11 +24,14 @@ export const getActiveModules = createSelector(
   )
 );
 
-export const getHoveredModule = createSelector(
-  [getEntitiesSession, getHoveredModuleId],
+export const getModuleById = (idGetter) => createSelector(
+  [getEntitiesSession, idGetter],
   (session, id) => (
     session && Number.isInteger(id)
       ? session.Module.withId(id).ref
       : null
   )
 );
+
+export const getHoveredModule = getModuleById(getHoveredModuleId);
+export const getDraggingModule = getModuleById(getDraggingModuleId);

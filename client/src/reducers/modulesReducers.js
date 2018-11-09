@@ -2,7 +2,7 @@ import * as actions from '../actions/indexActions';
 import * as types from '../constants/actionTypes';
 
 const defaultState =  {
-  dragging: {},
+  draggingModule: {},
   hovered: null,
   clickedIndex: null,
 }
@@ -12,7 +12,7 @@ export const modules = (state = defaultState, action) => {
     case actions.UPDATE_DRAGGING_MODULE:
       return {
         ...state,
-        dragging: action.moduleData,
+        draggingModule: action.dragginModule,
       }
     case actions.UPDATE_HOVERED_MODULE:
       return {

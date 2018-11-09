@@ -15,7 +15,11 @@ import {
   getActiveProjectBoard,
 } from '../../selectors/projectSelectors';
 
-import { getActiveModules, getHoveredModule } from '../../selectors/moduleSelectors';
+import {
+  getActiveModules,
+  getHoveredModule,
+  getDraggingModule
+} from '../../selectors/moduleSelectors';
 
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
@@ -166,8 +170,9 @@ let DesignTool = class extends Component {
   }
 
   dropDraggingModule(evt) {
-    const { draggingModuleData, board, anchors } = this.props;
-    const { width, height, boundToSideIndex } = draggingModuleData;
+    const { draggingModule, board, anchors } = this.props;
+    console.log(draggingModule);
+    const { width, height, boundToSideIndex } = draggingModule;
     const { topLeft } = anchors;
     const { isDraggingToBoard } = this.state;
     const { clientX: x , clientY: y } = evt;
@@ -193,12 +198,12 @@ let DesignTool = class extends Component {
       y: board.y + topLeft.y,
     });
 
-    const testModule = Object.assign({}, testModuleCoordinates, draggingModuleData);
+    const testModule = Object.assign({}, testModuleCoordinates, draggingModule);
     const isNewModuleWithinBounds = checkCollision([testModule, adjustedBoardSpecs]).length > 0;
 
     if (isNewModuleWithinBounds && isDraggingToBoard) {
       const adjustedModuleCoordinates = this.getNewModuleCoordinates(coordinateData);
-      const newModule = Object.assign({}, adjustedModuleCoordinates, draggingModuleData);
+      const newModule = Object.assign({}, adjustedModuleCoordinates, draggingModule);
 
       store.dispatch(actions.pushToactiveModules(newModule));
     }
@@ -458,7 +463,6 @@ let DesignTool = class extends Component {
     const { id } = hoveredModule;
     const rotationData = rotate(hoveredModule, anchors, board);
 
-    // console.log(rotationData);
     store.dispatch(actions.updateEntity('Module', id, rotationData));
   }
 
@@ -691,7 +695,7 @@ let DesignTool = class extends Component {
   }
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => console.log(getDraggingModule(state)) || ({
     activeModules: getActiveModules(state),
     activeProject: getActiveProject(state),
     activeProjectId: state.projects.activeProjectId,
@@ -699,7 +703,7 @@ const mapStateToProps = state => ({
     anchors: state.anchors,
     board: getActiveProjectBoard(state),
     clickedModuleIndex: state.modules.clickedIndex,
-    draggingModuleData: state.modules.dragging,
+    draggingModule: state.modules.draggingModule,
     hoveredModuleId: state.modules.hovered,
     hoveredModule: getHoveredModule(state),
     isFetching: state.projects.isFetching,

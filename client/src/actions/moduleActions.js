@@ -1,8 +1,6 @@
 import store from '../redux-files/store';
 import * as actions from 'actions/indexActions';
-import { deleteEntity } from 'reducers/entitiesReducers';
 import { getActiveProject } from '../selectors/projectSelectors';
-import { getActiveModules } from '../selectors/moduleSelectors';
 
 export const pushToactiveModules = module => (dispatch, getState) => {
   const state = getState();
@@ -30,10 +28,20 @@ export const pushToactiveModules = module => (dispatch, getState) => {
 };
 
 export const UPDATE_DRAGGING_MODULE = 'UPDATE_DRAGGING_MODULE';
-export const updateDraggingModule = moduleData => ({
-  type: 'UPDATE_DRAGGING_MODULE',
-  moduleData,
-});
+export const updateDraggingModule = (
+  (draggingModule, clientX, clientY) => (dispatch) => {
+    const { width, height } = draggingModule;
+    const adjustedDraggingModule = Object.assign({}, draggingModule, {
+      moduleX: clientX - (width / 2),
+      moduleY: clientY - (height / 2),
+    });
+
+    dispatch({
+      type: 'UPDATE_DRAGGING_MODULE',
+      dragginModule: adjustedDraggingModule,
+    });
+  }
+);
 
 export const UPDATE_CLICKED_MODULE = 'UPDATE_CLICKED_MODULE';
 export const updateClickedModuleIndex = index => ({

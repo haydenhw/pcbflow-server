@@ -118,15 +118,15 @@ class DesignToolStage extends Component {
   }
 
   renderDragModule() {
-    const { dragModuleData } = this.props;
-    const { width, height } =  dragModuleData;
+    const { draggingModule } = this.props;
+    const { width, height } =  draggingModule;
     const stage = this.stage.getStage();
     const layer = new Konva.Layer({ name: 'dragModuleLayer' });
     const imageObj = new Image();
 
-    imageObj.src = dragModuleData.imageSrc;
+    imageObj.src = draggingModule.imageSrc;
     imageObj.onload = function() {
-      const updatedModuleData = addPropToData(dragModuleData)({ image: imageObj });
+      const updatedModuleData = addPropToData(draggingModule)({ image: imageObj });
       const dragModule = getDragModule(updatedModuleData);
 
       layer.add(dragModule);
@@ -213,7 +213,7 @@ const mapStateToProps = state => {
   return ({
     activeProjectId: state.projects.activeProjectId,
     activeProject: getActiveProject(state),
-    dragModuleData: state.modules.dragging,
+    draggingModule: state.modules.draggingModule,
     isMouseDownOnIcon: state.mouseEvents.isMouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
