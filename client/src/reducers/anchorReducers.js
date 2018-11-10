@@ -15,11 +15,6 @@ export const anchors = (state = defaultAnchorPositions, action) => {
         ...state,
         ...action.positions
       }
-    case actions.TRIGGER_ANCHOR_UPDATE:
-      return {
-        ...state,
-        updateAnchorTrigger: !state.updateAnchorTrigger,
-      };
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
     case actions.POST_PROJECT_SUCCESS:
       return defaultAnchorPositions;

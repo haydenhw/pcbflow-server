@@ -51,7 +51,7 @@ describe('board reducer', () => {
     };
 
     const resultState = board(deepFreeze(initialState), {
-      type: 'UPDATE_BOARD_POSITION',
+      type: 'UPDATE_BOARD',
       position: {
         x: 25,
         y: 25,

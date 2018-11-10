@@ -1,3 +1,4 @@
+export * from './anchorActions';
 export * from './boardActions';
 export * from './entityActions';
 export * from './modalActions';

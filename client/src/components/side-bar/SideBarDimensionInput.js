@@ -60,9 +60,7 @@ class SideBarDimensionInput extends Component {
       topLeft,
       topRight,
       bottomLeft,
-      bottomRight,
       boardHeight,
-      boardDimensions,
     } = this.props;
 
     const targetValue = event.target.value;
@@ -80,7 +78,7 @@ class SideBarDimensionInput extends Component {
     this.setState({ widthInputVal: newBoardWidth });
 
     if (newBoardWidth >= minWidth) {
-      store.dispatch(actions.updateBoardDimensions({ width, height }));
+      store.dispatch(actions.updateBoard({ width, height }));
       store.dispatch(actions.updateAnchorPositions(anchors));
       store.dispatch(actions.triggerAnchorUpdate());
     }

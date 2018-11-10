@@ -160,7 +160,7 @@ const mapStateToProps = state => {
     y,
     width,
     height,
-    updateAnchorTrigger:state.anchors.updateAnchorTrigger,
+    updateAnchorTrigger: state.triggers.updateAnchorTrigger,
     topLeft: state.anchors.topLeft,
     topRight: state.anchors.topRight,
     bottomLeft: state.anchors.bottomLeft,
