@@ -1,55 +1,42 @@
 import * as actions from 'actions/indexActions';
 import { tutorialSteps } from 'components/design-tool/DesignToolTutorialSteps';
 
-export const TOGGLE_IS_TUTORIAL_ACTIVE = 'TOGGLE_IS_TUTORIAL_ACTIVE';
-export const toggleTutorialIsActive = () => ({
-  type: 'TOGGLE_IS_TUTORIAL_ACTIVE',
+
+const getIndex = (id) => {
+  // *move to constants
+  const idIndexMap = {
+    106: 0,
+    101: 1,
+    112: 2,
+    107: 3,
+    108: 4,
+  };
+
+  return idIndexMap[id];
+}
+
+export const COMPLETE_TODO = 'COMPLETE_TODO';
+export const completeSpecifiedTodo = index => ({
+  type: 'COMPLETE_TODO',
+  index,
 });
 
-export const EXIT_TUTORIAL = 'EXIT_TUTORIAL';
-export const exitTutorial = () => ({
-  type: 'EXIT_TUTORIAL',
-  bool: false,
-});
+export const completeTodo = id => (dispatch, getState) => {
+  const todoBools = getState().tutorial.todoBools;
+  const trueCount = todoBools.filter(bool => bool === true).length;
+  const todoIndex = getIndex(id);
 
-export const UPDATE_DISABLED_ICON_EXCEPTIONS = 'UPDATE_DISABLED_ICON_EXCEPTIONS';
-export const updateDisabledIconExceptions = exceptions => ({
-  type: 'UPDATE_DISABLED_ICON_EXCEPTIONS',
-  exceptions,
-});
+  dispatch(completeSpecifiedTodo(todoIndex));
 
-export const UPDATE_SHOULD_RENDER_TODO_LIST = 'UPDATE_SHOULD_RENDER_TODO_LIST';
-export const updateShouldRenderTodoList = bool => ({
-  type: 'UPDATE_SHOULD_RENDER_TODO_LIST',
-  bool,
-});
-
-export const SHOW_TUTORIAL_EXIT_SCREEN = 'SHOW_TUTORIAL_EXIT_SCREEN';
-export const showTutorialExitScreen = () => ({
-  type: 'SHOW_TUTORIAL_EXIT_SCREEN',
-});
-
-export const RESUME_TUTORIAL = 'RESUME_TUTORIAL';
-export const resumeTutorial = () => (dispatch, getState) => {
-  dispatch(actions.changeModalType('ONBOARD'));
-  dispatch({
-    type: 'RESUME_TUTORIAL',
-  });
-};
-
-export const INCREMENT_STEP = 'INCREMENT_STEP';
-export const incrementStep = () => ({
-  type: 'INCREMENT_STEP',
-});
-
-export const incrementTutorialStep = () => (dispatch, getState) => {
-  const currentStep = getState().tutorial.step;
-
-  if (currentStep < tutorialSteps.length - 1) {
-    return dispatch(incrementStep());
+  if (trueCount === 4) {
+    dispatch(actions.toggleModal());
   }
 
   return null;
+};
+
+export const completeTutorial = () => (dispatch, getState) => {
+  dispatch(actions.toggleModal());
 };
 
 export const DECREMENT_STEP = 'DECREMENT_STEP';
@@ -67,37 +54,52 @@ export const decrementTutorialStep = () => (dispatch, getState) => {
   return null;
 };
 
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const completeSpecifiedTodo = index => ({
-  type: 'COMPLETE_TODO',
-  index,
+export const EXIT_TUTORIAL = 'EXIT_TUTORIAL';
+export const exitTutorial = () => ({
+  type: 'EXIT_TUTORIAL',
+  bool: false,
 });
 
-export const completeTutorial = () => (dispatch, getState) => {
-  dispatch(actions.toggleModal());
+export const TOGGLE_IS_TUTORIAL_ACTIVE = 'TOGGLE_IS_TUTORIAL_ACTIVE';
+export const toggleTutorialIsActive = () => ({
+  type: 'TOGGLE_IS_TUTORIAL_ACTIVE',
+});
+
+export const UPDATE_DISABLED_ICON_EXCEPTIONS = 'UPDATE_DISABLED_ICON_EXCEPTIONS';
+export const updateDisabledIconExceptions = exceptions => ({
+  type: 'UPDATE_DISABLED_ICON_EXCEPTIONS',
+  exceptions,
+});
+
+export const UPDATE_SHOULD_RENDER_TODO_LIST = 'UPDATE_SHOULD_RENDER_TODO_LIST';
+export const updateShouldRenderTodoList = bool => ({
+  type: 'UPDATE_SHOULD_RENDER_TODO_LIST',
+  bool,
+});
+
+export const RESUME_TUTORIAL = 'RESUME_TUTORIAL';
+export const resumeTutorial = () => (dispatch, getState) => {
+  dispatch(actions.changeModalType('ONBOARD'));
+  dispatch({
+    type: 'RESUME_TUTORIAL',
+  });
 };
 
-function getIndex(id) {
-  const idIndexMap = {
-    106: 0,
-    101: 1,
-    112: 2,
-    107: 3,
-    108: 4,
-  };
+export const SHOW_TUTORIAL_EXIT_SCREEN = 'SHOW_TUTORIAL_EXIT_SCREEN';
+export const showTutorialExitScreen = () => ({
+  type: 'SHOW_TUTORIAL_EXIT_SCREEN',
+});
 
-  return idIndexMap[id];
-}
+export const INCREMENT_STEP = 'INCREMENT_STEP';
+export const incrementStep = () => ({
+  type: 'INCREMENT_STEP',
+});
 
-export const completeTodo = id => (dispatch, getState) => {
-  const todoBools = getState().tutorial.todoBools;
-  const trueCount = todoBools.filter(bool => bool === true).length;
-  const todoIndex = getIndex(id);
+export const incrementTutorialStep = () => (dispatch, getState) => {
+  const currentStep = getState().tutorial.step;
 
-  dispatch(completeSpecifiedTodo(todoIndex));
-
-  if (trueCount === 4) {
-    dispatch(actions.toggleModal());
+  if (currentStep < tutorialSteps.length - 1) {
+    return dispatch(incrementStep());
   }
 
   return null;

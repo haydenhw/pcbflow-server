@@ -206,7 +206,7 @@ let DesignTool = class extends Component {
       store.dispatch(actions.pushToactiveModules(newModule));
     }
 
-    this.timeOut = setTimeout(() => store.dispatch(actions.isMouseDownOnIcon(false)), 1);
+    this.timeOut = setTimeout(() => store.dispatch(actions.toggleIsMouseDownOnIcon(false)), 1);
     this.setState({ isDraggingToBoard: false });
   }
 
@@ -349,6 +349,7 @@ let DesignTool = class extends Component {
 
   handleNameChange(newName) {
     const { activeProject } = this.props;
+
     store.dispatch(actions.updateEntity('Project', activeProject.id, {
       name: newName,
     }));

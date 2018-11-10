@@ -5,7 +5,6 @@ export * from './modalActions';
 export * from './moduleActions';
 export * from './mouseEventActions';
 export * from './projectActions';
-export * from './savedStateActions';
 export * from './sideBarActions';
 export * from './tutorialActions';
 export * from './undoRedoActions';

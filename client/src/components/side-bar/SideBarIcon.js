@@ -18,13 +18,13 @@ export default class SideBarIcon extends Component {
       const { clientX, clientY } = evt;
 
       this.props.toggleDraggingToBoard();
-      store.dispatch(actions.isMouseDownOnIcon(true));
+      store.dispatch(actions.toggleIsMouseDownOnIcon(true));
       store.dispatch(actions.updateDraggingModule(moduleData, clientX, clientY));
     }
   }
 
   handleMouseOut() {
-    store.dispatch(actions.isMouseDownOnIcon(false));
+    store.dispatch(actions.toggleIsMouseDownOnIcon(false));
   }
 
   render() {
@@ -45,7 +45,7 @@ export default class SideBarIcon extends Component {
           style={disabled ? cursorDefault : {}}
           draggable={false}
           src={moduleData.iconSrc}
-          alt="module icon image"
+          alt="module icon"
         />
       </div>
     );

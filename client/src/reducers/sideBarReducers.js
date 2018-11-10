@@ -1,7 +1,6 @@
 import * as actions from 'actions/indexActions';
 
 const defaultState = {
-  show: false,
   showAllIcons: false,
 }
 
@@ -16,11 +15,6 @@ export const sideBar = (state = defaultState, action) => {
       return {
         ...state,
       showAllIcons: false,
-      }
-    case actions.TOGGLE_SIDEBAR:
-      return {
-        ...state,
-        show: !state.show,
       }
     default:
       return state;

@@ -6,46 +6,9 @@ import * as actions from 'actions/indexActions';
 import { projectsUrl } from '../config/endpointUrls';
 import { getJWTAuthHeader, getUser } from 'helpers/users';
 import { addAnchorsToProject } from 'helpers/anchorHelpers';
+import { getOriginAdjustedProjectData } from 'helpers/projectHelpers';
 import { getModulesByProject } from '../selectors/moduleSelectors';
 import { getActiveProject } from '../selectors/projectSelectors';
-
-const getOriginAdjustedModules = (modules, originX, originY) => (
-  modules.map((module) => {
-    const x = module.x - originX;
-    const y = module.y - originY;
-
-    return Object.assign({}, module, { x, y });
-  })
-);
-
-const getOriginAdjustedProjectData = (activeProject, anchors) => {
-  const {
-    board,
-    activeModules: modules,
-    activeProjectName: projectName,
-  } = activeProject;
-
-  const { width, height, x, y } = board;
-  const { topLeft } = anchors;
-  const { x: originX, y: originY } = topLeft;
-
-  return {
-    name: projectName,
-    board: {
-      width,
-      height,
-      x: x + originX,
-      y: y + originY,
-    },
-    modules: getOriginAdjustedModules(modules, originX, originY),
-  };
-};
-
-export const UPDATE_PROJECT_PRICE = 'UPDATE_PROJECT_PRICE';
-export const updateProjectPrice = price => ({
-  type: 'UPDATE_PROJECT_PRICE',
-  price,
-});
 
 export const createNewProject = () => (dispatch) => {
   const ownerId = getUser()._id;
@@ -69,8 +32,9 @@ export const createNewProject = () => (dispatch) => {
     modules: [],
   };
 
-  dispatch(postNewProject(newProject));
+  dispatch(postProject(newProject));
 };
+
 export const FETCH_PROJECTS_REQUEST = 'FETCH_PROJECTS_REQUEST';
 export const fetchProjectsRequest = () => ({
   type: 'FETCH_PROJECTS_REQUEST',
@@ -107,19 +71,6 @@ export function fetchProjects(jwt) {
     // });
   };
 }
-// export function fetchProjects() {
-//   return (dispatch) => {
-//     dispatch(fetchProjectsRequest());
-//     return fetch(projectsUrl)
-//     .then(res => res.json())
-//     .then((data) => {
-//       dispatch(fetchProjectsSuccess(data));
-//     })
-//     // .catch((err) => {
-//     //   console.error(err);
-//     // });
-//   };
-// }
 
 export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
 export const fetchProjectByIdSuccess = project => (dispatch, getState) => {
@@ -161,18 +112,7 @@ export function fetchProjectById(projectId, currentRoute) {
   };
 }
 
-// export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS';
-// export const postProjectSuccess = project => dispatch => {
-//   dispatch({
-//     type: 'POST_PROJECT_SUCCESS',
-//     project
-//   });
-//
-//   const designRoute = `/design/${project._id}`;
-//   hashHistory.push(designRoute);
-// };
-
-export function postNewProject(newProject) {
+export function postProject(newProject) {
   return (dispatch) => {
     fetch(
       projectsUrl,
@@ -246,13 +186,6 @@ export function updateProject() {
       // });
   };
 }
-
-export const UPDATE_PROJECT_NAME = 'UPDATE_PROJECT_NAME';
-export const updateProjectName = (newName, projectId) => ({
-  type: 'UPDATE_PROJECT_NAME',
-  newName,
-  projectId,
-});
 
 export const DELETE_PROJECT_REQUEST = 'DELETE_PROJECT_REQUEST';
 export function deleteProject(project) {

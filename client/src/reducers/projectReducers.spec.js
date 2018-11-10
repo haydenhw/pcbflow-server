@@ -95,27 +95,6 @@ describe('activeProjectInfo redcuers', () => {
     assert.deepEqual(resultState, expectedState);
   });
 
-  it('It should update the price of the current project', () => {
-    const initialState = {
-      price: '$15.00',
-      name: 'hola',
-      id: 1234321,
-    };
-
-    const expectedState = {
-      price: '$25.00',
-      name: 'hola',
-      id: 1234321,
-    };
-
-    const resultState = activeProjectInfo(deepFreeze(initialState), {
-      type: 'UPDATE_PROJECT_PRICE',
-      price: '$25.00',
-    });
-
-    assert.deepEqual(resultState, expectedState);
-  });
-
   it('It should update the time project was last saved', () => {
     const initialState = {
       price: '$15.00',
