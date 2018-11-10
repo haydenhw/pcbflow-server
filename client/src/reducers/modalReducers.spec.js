@@ -11,13 +11,13 @@ describe('modal reducer', () => {
     // Fetch Basic Info about User
   it('It should return the correct boolean', () => {
     const initialState = {
-      shouldRenderModal: false,
+      showModal: false,
       modalType: 'ONBOARD',
       modalProps: null,
     };
 
     const expectedState = {
-      shouldRenderModal: true,
+      showModal: true,
       modalType: 'ONBOARD',
       modalProps: null,
     };
@@ -31,13 +31,13 @@ describe('modal reducer', () => {
 
   it('It should return updated modalProps', () => {
     const initialState = {
-      shouldRenderModal: false,
+      showModal: false,
       modalType: 'ONBOARD',
       modalProps: null,
     };
 
     const expectedState = {
-      shouldRenderModal: false,
+      showModal: false,
       modalType: 'ONBOARD',
       modalProps: {
         color: 'red',
@@ -58,13 +58,13 @@ describe('modal reducer', () => {
 
   it('It should update state for project delete confirmation', () => {
     const initialState = {
-      shouldRenderModal: false,
+      showModal: false,
       modalType: 'ONBOARD',
       modalProps: null,
     };
 
     const expectedState = {
-      shouldRenderModal: true,
+      showModal: true,
       modalType: 'CONFIRM',
       modalProps: {
         color: 'red',
@@ -85,13 +85,13 @@ describe('modal reducer', () => {
 
   it('It should update update the modal type', () => {
     const initialState = {
-      shouldRenderModal: false,
+      showModal: false,
       modalType: 'ONBOARD',
       modalProps: null,
     };
 
     const expectedState = {
-      shouldRenderModal: false,
+      showModal: false,
       modalType: 'CONFIRM',
       modalProps: null,
     };

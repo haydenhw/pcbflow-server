@@ -13,14 +13,11 @@ export const mouseEvents = (state = defaultMouseEvents, action) => {
         ...state,
         isMouseDownOnIcon: action.isDown,
       };
-      break;
-
     case actions.TOGGLE_IS_MOUSE_DOWN:
       return {
         ...state,
         isMouseDown: action.isDown,
       };
-      break;
 
     case actions.TOGGLE_IS_MOUSE_OVER_MODULE:
       return {

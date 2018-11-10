@@ -11,9 +11,9 @@ import Projects from './Projects';
 
 export class ProjectContainer extends Component {
   componentWillMount() {
-    const { shouldRenderModal } = this.props;
+    const { showModal } = this.props;
 
-    if (shouldRenderModal) {
+    if (showModal) {
       store.dispatch(actions.toggleModal());
     }
   }
@@ -23,9 +23,9 @@ export class ProjectContainer extends Component {
   }
 
   renderModal() {
-    const { shouldRenderModal, modalProps } = this.props;
+    const { showModal, modalProps } = this.props;
 
-    if (shouldRenderModal && modalProps) {
+    if (showModal && modalProps) {
 
       return (
         <Modal
@@ -56,12 +56,12 @@ export class ProjectContainer extends Component {
 
 const mapStateToProps = state => ({
   modalProps: state.modal.modalProps,
-  shouldRenderModal: state.modal.shouldRenderModal,
+  showModal: state.modal.showModal,
 });
 
 export default connect(mapStateToProps)(ProjectContainer);
 
 ProjectContainer.propTypes = {
-  shouldRenderModal: PropTypes.bool.isRequired,
+  showModal: PropTypes.bool.isRequired,
   modalProps: PropTypes.object,
 };

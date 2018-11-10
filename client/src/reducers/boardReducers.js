@@ -12,18 +12,6 @@ export const board = (state = {}, action) => {
         ...state,
         stroke: action.boardStroke,
       };
-    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
-    case actions.POST_PROJECT_SUCCESS:
-      const board = action.project.board;
-      const { x, y, width, height } = board;
-
-      return {
-        ...state,
-        x,
-        y,
-        width,
-        height,
-      };
     default:
       return state;
   }

@@ -1,8 +1,5 @@
 import { combineReducers } from 'redux';
 
-import undoable from 'helpers/undoable';
-import skipIfImageNodeNull from 'helpers/skipIfImageNodeNull';
-
 import { anchors } from './anchorReducers';
 import { modules } from './modulesReducers';
 import { entities } from './entitiesReducers';

@@ -1,5 +1,4 @@
 import orm from "../schema/schema";
-import * as actions from '../actions/indexActions';
 
 import {
     ENTITY_UPDATE,
@@ -11,9 +10,7 @@ import {
 const initialState = orm.getEmptyState();
 
 export function loadProjects(state, projects=[]) {
-    // Create a Redux-ORM session from our entities "tables"
     const session = orm.session(state);
-    // Get a reference to the correct version of model classes for this Session
     const { Module, Project } = session;
 
     projects.forEach((project, i) => {

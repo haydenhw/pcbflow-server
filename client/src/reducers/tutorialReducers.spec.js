@@ -24,13 +24,13 @@ describe('tutorial reducer', () => {
     assert.deepEqual(resultState, expectedState);
   });
 
-  it('It should toggle shouldRenderTodoList', () => {
+  it('It should toggle showTodoList', () => {
     const initialState = {
-      shouldRenderTodoList: false,
+      showTodoList: false,
     };
 
     const expectedState = {
-      shouldRenderTodoList: true,
+      showTodoList: true,
     };
 
     const resultState = tutorial(deepFreeze(initialState), {
@@ -41,11 +41,11 @@ describe('tutorial reducer', () => {
     assert.deepEqual(resultState, expectedState);
   });
 
-  it('It should toggle shouldRenderTodoList', () => {
+  it('It should toggle showTodoList', () => {
     const initialState = {
       isActive: false,
       isComplete: false,
-      shouldRenderTodoList: false,
+      showTodoList: false,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,
@@ -55,7 +55,7 @@ describe('tutorial reducer', () => {
     const expectedState = {
       isActive: true,
       isComplete: false,
-      shouldRenderTodoList: true,
+      showTodoList: true,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,
@@ -74,7 +74,7 @@ describe('tutorial reducer', () => {
     const initialState = {
       isActive: false,
       isComplete: false,
-      shouldRenderTodoList: false,
+      showTodoList: false,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,
@@ -84,7 +84,7 @@ describe('tutorial reducer', () => {
     const expectedState = {
       isActive: false,
       isComplete: false,
-      shouldRenderTodoList: false,
+      showTodoList: false,
       disabledIconExceptions: ['101', '102'],
       step: 0,
       previousStep: null,
@@ -102,7 +102,7 @@ describe('tutorial reducer', () => {
     const initialState = {
       isActive: false,
       isComplete: false,
-      shouldRenderTodoList: false,
+      showTodoList: false,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,
@@ -112,7 +112,7 @@ describe('tutorial reducer', () => {
     const expectedState = {
       isActive: false,
       isComplete: false,
-      shouldRenderTodoList: false,
+      showTodoList: false,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,

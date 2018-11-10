@@ -18,7 +18,6 @@ import {
 import {
   getActiveModules,
   getHoveredModule,
-  getDraggingModule
 } from '../../selectors/moduleSelectors';
 
 import checkCollision from 'helpers/checkCollision';
@@ -59,7 +58,7 @@ let DesignTool = class extends Component {
       shouldHideContextMenu: false,
       shouldRenderDocumentation: false,
       shouldRenderInfoButton: true,
-      shouldRenderModal: true,
+      showModal: true,
       wasDocumentationOpen: false,
     };
     this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
@@ -171,7 +170,6 @@ let DesignTool = class extends Component {
 
   dropDraggingModule(evt) {
     const { draggingModule, board, anchors } = this.props;
-    console.log(draggingModule);
     const { width, height, boundToSideIndex } = draggingModule;
     const { topLeft } = anchors;
     const { isDraggingToBoard } = this.state;
@@ -551,10 +549,10 @@ let DesignTool = class extends Component {
   }
 
   renderModal() {
-    const { tutorialStep, shouldRenderModal, modalType } = this.props;
+    const { tutorialStep, showModal, modalType } = this.props;
     const { tutorialSteps } = this.state;
 
-    if (shouldRenderModal) {
+    if (showModal) {
       switch (modalType) {
         case 'ONBOARD':
           const onboardModalMethods = this.getOnboardModalHandlers(tutorialStep);
@@ -617,14 +615,14 @@ let DesignTool = class extends Component {
   }
 
   renderTodo() {
-    const { shouldRenderTodoList, todoBools } = this.props;
+    const { showTodoList, todoBools } = this.props;
 
     const handleLinkClick = () => {
       store.dispatch(actions.changeModalType('CONFIRM'));
       store.dispatch(actions.toggleModal());
     };
 
-    if (shouldRenderTodoList) {
+    if (showTodoList) {
       return (
         <DesignToolTodo
           handleLinkClick={handleLinkClick}
@@ -712,8 +710,8 @@ const mapStateToProps = state => ({
     modalType: state.modal.modalType,
     projects: getProjects(state),
     saveProjectTrigger: state.triggers.saveProjectTrigger,
-    shouldRenderModal: state.modal.shouldRenderModal,
-    shouldRenderTodoList: state.tutorial.shouldRenderTodoList,
+    showModal: state.modal.showModal,
+    showTodoList: state.tutorial.showTodoList,
     showAllIcons: state.sideBar.showAllIcons,
     showSavingMessage: state.nav.showSavingMessage,
     todoBools: state.tutorial.todoBools,
@@ -741,8 +739,8 @@ DesignTool.propTypes = {
   router: PropTypes.object.isRequired,
   hoveredModuleId: PropTypes.number,
   hoveredModule: PropTypes.object,
-  shouldRenderModal: PropTypes.bool.isRequired,
-  shouldRenderTodoList: PropTypes.bool.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  showTodoList: PropTypes.bool.isRequired,
   todoBools: PropTypes.array.isRequired,
   tutorialStep: PropTypes.number.isRequired,
 };

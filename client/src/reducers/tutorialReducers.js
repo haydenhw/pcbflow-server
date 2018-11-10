@@ -3,12 +3,12 @@ import * as actions from 'actions/indexActions';
 const devMode = false;
 
 const devState = {
+  disabledIconExceptions: null,
   isActive: true,
   isComplete: false,
-  shouldRenderTodoList: false,
-  disabledIconExceptions: null,
-  step: 5,
   previousStep: null,
+  showTodoList: false,
+  step: 5,
   todoBools: [false, false, false, false, false],
 };
 
@@ -17,7 +17,7 @@ const defaultState = {
   isActive: false,
   isComplete: false,
   previousStep: null,
-  shouldRenderTodoList: false,
+  showTodoList: false,
   step: 0,
   todoBools: [false, false, false, false, false],
 };
@@ -32,13 +32,13 @@ export const tutorial = (state = devMode ? devState : defaultState, action) => {
     case actions.UPDATE_SHOULD_RENDER_TODO_LIST:
       return {
         ...state,
-        shouldRenderTodoList: action.bool,
+        showTodoList: action.bool,
       };
     case actions.EXIT_TUTORIAL:
       return {
         ...state,
         isActive: !state.isActive,
-        shouldRenderTodoList: action.bool,
+        showTodoList: action.bool,
       };
     case actions.UPDATE_DISABLED_ICON_EXCEPTIONS:
       return {
