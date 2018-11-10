@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import { getEntitiesSession } from './entitySelectors';
 import {  getActiveProject } from './projectSelectors';
 
-export const getHoveredModuleId = state => state.modules.hovered;
+export const getHoveredModuleId = state => state.modules.hoveredId;
 export const getDraggingModuleId = state => state.modules.dragging;
 
 export const getModules = createSelector(

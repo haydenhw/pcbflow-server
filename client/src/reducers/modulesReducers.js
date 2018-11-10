@@ -3,7 +3,7 @@ import * as types from '../constants/actionTypes';
 
 const defaultState =  {
   draggingModule: {},
-  hovered: null,
+  hoveredId: null,
   clickedIndex: null,
 }
 
@@ -17,7 +17,7 @@ export const modules = (state = defaultState, action) => {
     case actions.UPDATE_HOVERED_MODULE:
       return {
         ...state,
-        hovered: action.moduleData,
+        hoveredId: action.moduleData,
       }
     case actions.UPDATE_CLICKED_MODULE:
       return {
@@ -30,7 +30,7 @@ export const modules = (state = defaultState, action) => {
       if (itemType === 'Module') {
         return {
           ...state,
-          hovered: null,
+          hoveredId: null,
         };
       }
 

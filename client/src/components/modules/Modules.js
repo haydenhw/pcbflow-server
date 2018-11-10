@@ -75,7 +75,7 @@ const mapStateToProps = state => ({
   checkCollisionTrigger: state.board.checkCollisionTrigger,
   showAllIcons: state.sideBar.showAllIcons,
   modules: getActiveModules(state),
-  hoveredModuleProps: state.modules.hovered,
+  hoveredModuleProps: state.modules.hoveredId,
   topLeftAnchor: state.anchors.topLeft,
   tutorialStep: state.tutorial.step,
 });

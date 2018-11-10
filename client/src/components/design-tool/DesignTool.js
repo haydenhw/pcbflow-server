@@ -695,7 +695,7 @@ let DesignTool = class extends Component {
   }
 };
 
-const mapStateToProps = state => console.log(getDraggingModule(state)) || ({
+const mapStateToProps = state => ({
     activeModules: getActiveModules(state),
     activeProject: getActiveProject(state),
     activeProjectId: state.projects.activeProjectId,
@@ -704,7 +704,7 @@ const mapStateToProps = state => console.log(getDraggingModule(state)) || ({
     board: getActiveProjectBoard(state),
     clickedModuleIndex: state.modules.clickedIndex,
     draggingModule: state.modules.draggingModule,
-    hoveredModuleId: state.modules.hovered,
+    hoveredModuleId: state.modules.hoveredId,
     hoveredModule: getHoveredModule(state),
     isFetching: state.projects.isFetching,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,

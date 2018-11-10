@@ -217,7 +217,7 @@ const mapStateToProps = state => {
     isMouseDownOnIcon: state.mouseEvents.isMouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
-    hoveredModuleId: state.modules.hovered,
+    hoveredModuleId: state.modules.hoveredId,
     anchors: state.anchors,
   });
 };

@@ -3,10 +3,11 @@ import { combineReducers } from 'redux';
 import undoable from 'helpers/undoable';
 import skipIfImageNodeNull from 'helpers/skipIfImageNodeNull';
 
+import { anchors } from './anchorReducers';
 import { modules } from './modulesReducers';
 import { entities } from './entitiesReducers';
 import { projects } from './projectReducers';
-import { board, anchors } from './boardReducers';
+import { board } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { nav } from './navReducers';
 import { sideBar } from './sideBarReducers';
