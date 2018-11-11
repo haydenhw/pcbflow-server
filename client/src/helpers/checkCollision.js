@@ -3,7 +3,8 @@ export default function checkCollision(nodeArray, callback) {
 
   nodeArray.forEach((node) => {
     let nodeBox = node.attrs ? node.attrs : node;
-    nodeBox = callback ? callback(node) : nodeBox;
+    // nodeBox = callback ? callback(node) : nodeBox;
+    nodeBox = false ? callback(node) : nodeBox;
     const { x, y, width, height } = nodeBox;
     const nodeLeft = x;
     const nodeRight = x + width;
@@ -12,7 +13,8 @@ export default function checkCollision(nodeArray, callback) {
 
     nodeArray.forEach((otherNode) => {
       let otherBox = otherNode.attrs ? otherNode.attrs : otherNode;
-      otherBox = callback ? callback(otherNode) : otherBox;
+      // otherBox = callback ? callback(otherNode) : otherBox;
+      otherBox = false ? callback(otherNode) : otherBox;
 
       if (JSON.stringify(nodeBox) !== JSON.stringify(otherBox)) {
         const { x, y, width, height } = otherBox;

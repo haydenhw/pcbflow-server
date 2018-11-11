@@ -25,17 +25,18 @@ import getPerimeterSide from 'helpers/getPerimeterSide';
 import { routeToHome, routeToProjects } from 'helpers/routeHelpers';
 import { isMobile } from 'helpers/isMobile';
 import rotate from 'helpers/rotate';
+import { toolTips } from 'config/toolTips';
 
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import SideBar from 'components/side-bar/SideBar';
 import Footer from 'components/footer/Footer';
 import Modal from 'components/modal/Modal';
-import { toolTips } from 'config/toolTips';
 import DesignToolStage from './DesignToolStage';
 import DesignToolInfoButton from './DesignToolInfoButton';
 import DocumentationCard from './DesignToolDocumentationCard';
 import DesignToolBoardFrame from './DesignToolBoardFrame';
 import DesignToolTodo from './DesignToolTodo';
+
 import { tourSteps, dependecyDemo } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
 
@@ -61,6 +62,7 @@ let DesignTool = class extends Component {
       showModal: true,
       wasDocumentationOpen: false,
     };
+
     this.handleJoyrideCallback = this.handleJoyrideCallback.bind(this);
     this.handleRightButtonClick = this.handleRightButtonClick.bind(this);
     this.hideFloatingElements = this.hideFloatingElements.bind(this);

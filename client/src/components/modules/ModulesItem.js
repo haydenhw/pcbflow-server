@@ -78,7 +78,7 @@ export default class ModulesItem extends PureComponent {
     };
 
     if (!isDraggingToBoard && isDraggingToBoard !== undefined) {
-      enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
+      // enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
   }
 

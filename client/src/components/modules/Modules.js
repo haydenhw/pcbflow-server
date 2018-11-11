@@ -3,6 +3,7 @@ import { Group } from 'react-konva';
 import { connect } from 'react-redux';
 
 import { getUnmetDependencies } from 'helpers/dependencies';
+import enforceRules from 'helpers/enforceRules';
 import { moduleDataList } from 'config/moduleDataList';
 import { getActiveModules } from '../../selectors/moduleSelectors';
 import { getActiveProjectBoard } from '../../selectors/projectSelectors';
@@ -43,6 +44,8 @@ class Modules extends Component {
   }
 
   render() {
+    const res = enforceRules(this.props.modules, this.props.board);
+
     const modules = this.props.modules.map((module, index) =>
       <ModulesItem
         {...module}

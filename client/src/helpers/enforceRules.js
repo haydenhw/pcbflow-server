@@ -6,30 +6,38 @@ Array.prototype.diff = function (a) {
 };
 
 function adjustDimesionsForRotation(node) {
-  const rotation = node.get('.innerGroup')[0].attrs.rotation;
+  // const rotation = node.get('.innerGroup')[0].attrs.rotation;
   const adjustedObj = {};
+  const { rotation } = node;
 
   if (rotation === 90 || rotation === 270) {
-    const { x, y, width, height } = node.attrs;
+    // const { x, y, width, height } = node.attrs;
+    const { x, y, width, height } = node;
     const halfDiff = (height - width) / 2;
     adjustedObj.x = x - halfDiff;
     adjustedObj.y = y + halfDiff;
     adjustedObj.width = height;
     adjustedObj.height = width;
-
-    return adjustedObj;
   }
 
-  return node.attrs;
+  return Object.assign({}, node, adjustedObj);
 }
 
 export default function enforceRules(nodeArray, perimeterNode, ruleBreakingAction, ruleFollowingAction) {
-  const collidingNodes = checkCollision(nodeArray, adjustDimesionsForRotation);
+  const adjustedNodes = nodeArray.map(adjustDimesionsForRotation);
+
+  const collidingNodes = checkCollision(adjustedNodes, adjustDimesionsForRotation);
   const outOfBoundsNodes = checkExceedsPerimter(nodeArray, perimeterNode, adjustDimesionsForRotation);
   const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes];
   const ruleFollowingNodes = nodeArray.diff(ruleBreakingNodes);
 
-  ruleFollowingAction(perimeterNode);
-  ruleBreakingNodes.forEach(node => ruleBreakingAction(node));
-  ruleFollowingNodes.forEach(node => ruleFollowingAction(node));
+  console.log(outOfBoundsNodes);
+
+  // // ruleFollowingAction(perimeterNode);
+  // // ruleBreakingNodes.forEach(node => ruleBreakingAction(node));
+  // // ruleFollowingNodes.forEach(node => ruleFollowingAction(node));
+  return {
+    breaking: ruleBreakingNodes,
+    following: ruleFollowingNodes,
+  }
 }
