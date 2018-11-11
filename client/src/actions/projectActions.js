@@ -62,8 +62,6 @@ export function fetchProjects(jwt) {
     })
     .then(res => res.json())
     .then((projects) => {
-      const projectsWithAnchors = projects.map(addAnchorsToProject);
-
       dispatch(fetchProjectsSuccess(projects));
     });
     // .catch((err) => {

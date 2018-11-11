@@ -359,7 +359,7 @@ let DesignTool = class extends Component {
     const evtobj = window.event ? event : evt;
     const { isMouseOverModule, hoveredModuleId } = this.props;
 
-    if (isMouseOverModule && (evtobj.code === 'Delete' || 'Backspace')) {
+    if (isMouseOverModule && (evtobj.code === 'Delete' || evtobj.code === 'Backspace')) {
       store.dispatch(actions.deleteEntity('Module', hoveredModuleId));
     }
   }
