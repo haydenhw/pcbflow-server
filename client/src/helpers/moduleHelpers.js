@@ -8,6 +8,12 @@ export const getStroke = (id, modules, board, defaultStroke) =>  {
   return isBreakingRule ? 'red' : defaultStroke;
 }
 
+export const getFill = (unmetDependencies) => (
+  unmetDependencies.length > 0
+  ? 'red'
+  : 'green'
+);
+
 export const getUnsatisfiedModule = (clickedModuleIndex, activeModules, moduleData) => {
   const clickedModule = activeModules[clickedModuleIndex]
   let nextUnsatisfiedModule;

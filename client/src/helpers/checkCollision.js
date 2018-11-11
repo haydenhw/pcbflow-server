@@ -2,22 +2,23 @@ export default function checkCollision(nodeArray, callback) {
   const collidingNodes = [];
 
   nodeArray.forEach((node) => {
-    let nodeBox = node.attrs ? node.attrs : node;
-    // nodeBox = callback ? callback(node) : nodeBox;
-    nodeBox = false ? callback(node) : nodeBox;
-    const { x, y, width, height } = nodeBox;
+    const { x, y, width, height } = node;
+    // console.log(node.text, {
+    //   x,
+    //   y,
+    //   width,
+    //   height,
+    // });
+
     const nodeLeft = x;
     const nodeRight = x + width;
     const nodeTop = y;
     const nodeBottom = y + height;
 
     nodeArray.forEach((otherNode) => {
-      let otherBox = otherNode.attrs ? otherNode.attrs : otherNode;
-      // otherBox = callback ? callback(otherNode) : otherBox;
-      otherBox = false ? callback(otherNode) : otherBox;
 
-      if (JSON.stringify(nodeBox) !== JSON.stringify(otherBox)) {
-        const { x, y, width, height } = otherBox;
+      if (JSON.stringify(node) !== JSON.stringify(otherNode)) {
+        const { x, y, width, height } = otherNode;
         const otherLeft = x;
         const otherRight = x + width;
         const otherTop = y;

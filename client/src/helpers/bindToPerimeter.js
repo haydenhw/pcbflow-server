@@ -24,32 +24,43 @@ function buildCoordinateData(module, topLeftAnchor, board) {
 }
 
 export default function bindToPerimeter(module, topLeftAnchor, board) {
-  const cd = buildCoordinateData(module, topLeftAnchor, board);
-  switch (cd.boundToSide) {
+  const {
+    boundToSide,
+    boardHeight,
+    boardWidth,
+    moduleX,
+    moduleY,
+    moduleHeight,
+    moduleWidth,
+    topLeftAnchorX,
+    topLeftAnchorY,
+  } = buildCoordinateData(module, topLeftAnchor, board);
+
+  switch (boundToSide) {
     case 'bottom':
       return {
-        x: cd.moduleX,
-        y: cd.topLeftAnchorY + cd.boardHeight - cd.moduleHeight,
+        x: moduleX,
+        y: topLeftAnchorY + boardHeight - moduleHeight,
       };
     case 'left':
       return {
-        x: cd.topLeftAnchorX + 0.5 * (cd.moduleHeight - cd.moduleWidth),
-        y: cd.moduleY,
+        x: topLeftAnchorX + 0.5 * (moduleHeight - moduleWidth),
+        y: moduleY,
       };
     case 'top':
       return {
-        x: cd.moduleX,
-        y: cd.topLeftAnchorY,
+        x: moduleX,
+        y: topLeftAnchorY,
       };
     case 'right':
       return {
-        x: cd.topLeftAnchorX + cd.boardWidth - 0.5 * (cd.moduleHeight + cd.moduleWidth),
-        y: cd.moduleY,
+        x: topLeftAnchorX + boardWidth - 0.5 * (moduleHeight + moduleWidth),
+        y: moduleY,
       };
     default:
       return {
-        x: cd.moduleX,
-        y: cd.moduleY,
+        x: moduleX,
+        y: moduleY,
       };
   }
 }

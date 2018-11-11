@@ -34,5 +34,11 @@ export default function rotateAboutCenter(prevBoundToSideIndex, prevRotation, x,
   }
 
   rotation += 90;
-  return { boundToSideIndex, rotation, x, y };
+
+  return {
+    boundToSideIndex,
+    rotation,
+    x,
+    y,
+  };
 }

@@ -6,6 +6,7 @@ import store from 'reduxFiles/store';
 
 import { compose } from 'helpers/functional';
 import { getKonvaChildByIndex, getKonvaParentByName} from 'helpers/konvaHelpers';
+import { getFill } from 'helpers/moduleHelpers';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 
 const getTopLeftAnchor = compose(
@@ -33,6 +34,7 @@ export default class ModulesItem extends PureComponent {
 
   setImage() {
     const { imageSrc, id } = this.props;
+
     if (imageSrc) {
       const image = new window.Image();
       image.src = imageSrc;
@@ -44,105 +46,38 @@ export default class ModulesItem extends PureComponent {
     }
   }
 
-  setDefaultStroke() {
-    const module = this.refs.moduleGroup;
-    module.attrs.defaultStroke = this.props.stroke;
-    module.attrs.isStrokeRed = false;
-  }
-
-  highlightRuleBreakingModules(module, index) {
-    const { isDraggingToBoard } = this.props;
-    const draggingModuleNode = module || this.refs.moduleGroup;
-    const boardGroup = draggingModuleNode.getParent();
-    const moduleNodeArray = boardGroup.get('.moduleGroup');
-    const boardNode = boardGroup.getParent().get('.board')[0];
-
-    if (index) {
-      moduleNodeArray.splice(index, 1);
-    }
-
-    const addRedStroke = (node) => {
-      node.attrs.isStrokeRed = true;
-      node.attrs.name === 'board'
-        ? store.dispatch(actions.updateBoardStroke('red'))
-        : node.attrs.isStrokeRed = true;
-    };
-
-    const removeRedStroke = (node) => {
-      node.attrs.isStrokeRed = false;
-
-      node.attrs.name === 'board'
-        ? store.dispatch(actions.updateBoardStroke(null))
-        : node.attrs.isStrokeRed = false;
-    };
-
-    if (!isDraggingToBoard && isDraggingToBoard !== undefined) {
-      // getRuleBreakingModules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
-    }
-  }
-
-  callWithTimeout() {
-    this.highlightRuleBreakingModules();
-  }
-
   componentDidMount() {
     this.setImage();
-    this.setDefaultStroke();
-    setTimeout(this.callWithTimeout.bind(this), 5);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.checkCollisionTrigger !== this.props.checkCollisionTrigger) {
-      this.highlightRuleBreakingModules();
-    }
-
-    if (prevProps.rotation !== this.props.rotation) {
-      this.highlightRuleBreakingModules();
-    }
-
-    if (this.props.shouldCheckCollission) {
-      this.highlightRuleBreakingModules();
-      this.props.toggleShouldCheckCollission();
-    }
-  }
-
-  getFill() {
-    const { unmetDependencies } = this.props;
-
-    return (
-      unmetDependencies.length > 0
-       ? 'red'
-       : 'green'
-    );
-  }
-
-  getNewPosition(x, y) {
+  getNewPosition() {
+    const { hoveredModule, board } = this.props;
     const  { moduleGroup } = this.refs;
+    const topLeftAnchor = getTopLeftAnchor(moduleGroup);
 
-    return {
-      x: moduleGroup.getPosition().x,
-      y: moduleGroup.getPosition().y,
-      index: this.props.index,
-    };
+    const updatedModule = Object.assign({}, hoveredModule, {
+      x: moduleGroup.getX(),
+      y: moduleGroup.getY(),
+    });
 
+    const newPosition = bindToPerimeter(updatedModule, topLeftAnchor.attrs, board)
+
+    // console.log(newPosition);
+    return newPosition;
   }
 
   handleDragMove() {
-    const { hoveredModuleProps, board } = this.props;
-    const { boundToSideIndex } = hoveredModuleProps;
+    const { hoveredModule } = this.props;
+    const { boundToSideIndex } = hoveredModule;
     const { moduleGroup } = this.refs;
 
     if (isNaN(boundToSideIndex)) {
       return;
     }
 
-    const topLeftAnchor = getTopLeftAnchor(moduleGroup);
-    const newModuleProps = Object.assign({}, hoveredModuleProps, {
-      x: moduleGroup.getX(),
-      y: moduleGroup.getY(),
-    });
-    const newPosition = bindToPerimeter(newModuleProps, topLeftAnchor.attrs, board)
+    const newPosition = this.getNewPosition();
 
+    // console.log(newPosition);
     moduleGroup.setX(newPosition.x);
     moduleGroup.setY(newPosition.y);
   }
@@ -153,10 +88,10 @@ export default class ModulesItem extends PureComponent {
 
   handleDragEnd() {
     const { id } = this.props;
+
     const newPosition = this.getNewPosition();
 
     store.dispatch(actions.updateEntity('Module', id, newPosition));
-    this.highlightRuleBreakingModules();
     this.setState({ isDragging: false });
   }
 
@@ -165,7 +100,6 @@ export default class ModulesItem extends PureComponent {
     this.setState({
       strokeWidth: 1.5,
     });
-    // document.body.style.cursor = 'move';
 
     store.dispatch(actions.updateHoveredModule(id));
     store.dispatch(actions.toggleIsMouseOverModule(true));
@@ -215,9 +149,8 @@ export default class ModulesItem extends PureComponent {
   }
 
   render() {
-    const { board, isDraggingToBoard } = this.props;
+    const { board, isDraggingToBoard, unmetDependencies} = this.props;
     const { moduleGroup } = this.refs;
-    const isStrokeRed = moduleGroup ? moduleGroup.attrs.isStrokeRed : null;
     const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
       ? getTopLeftAnchor(moduleGroup)
       : null;
@@ -264,7 +197,7 @@ export default class ModulesItem extends PureComponent {
             ref="topLayer"
             width={this.props.width}
             height={this.props.height}
-            fill={this.getFill()}
+            fill={getFill(unmetDependencies)}
             opacity={this.props.opacity}
           />
           <Rect

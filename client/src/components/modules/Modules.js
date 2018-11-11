@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { getUnmetDependencies } from 'helpers/dependencies';
 import { getStroke } from 'helpers/moduleHelpers';
 import { moduleDataList } from 'config/moduleDataList';
-import { getActiveModules } from '../../selectors/moduleSelectors';
+import { getActiveModules, getHoveredModule } from '../../selectors/moduleSelectors';
 import { getActiveProjectBoard } from '../../selectors/projectSelectors';
 
 import ModulesItem from './ModulesItem';
@@ -55,7 +55,7 @@ const mapStateToProps = state => ({
   checkCollisionTrigger: state.board.checkCollisionTrigger,
   showAllIcons: state.sideBar.showAllIcons,
   modules: getActiveModules(state),
-  hoveredModuleProps: state.modules.hoveredId,
+  hoveredModule: getHoveredModule(state),
   topLeftAnchor: state.anchors.topLeft,
   tutorialStep: state.tutorial.step,
 });
