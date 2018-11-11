@@ -164,7 +164,6 @@ const mapStateToProps = state => {
     topRight: state.anchors.topRight,
     bottomLeft: state.anchors.bottomLeft,
     bottomRight: state.anchors.bottomRight,
-    stroke: state.board.stroke,
   };
 }
 

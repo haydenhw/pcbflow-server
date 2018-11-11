@@ -1,18 +1,18 @@
+// *Refactor to functional component
 import React, { Component } from 'react';
 import { Group } from 'react-konva';
 import { connect } from 'react-redux';
 
 import { getUnmetDependencies } from 'helpers/dependencies';
-import { getRuleBreakingModuleIds } from 'helpers/getRuleBreakingModules';
+import { getStroke } from 'helpers/moduleHelpers';
 import { moduleDataList } from 'config/moduleDataList';
 import { getActiveModules } from '../../selectors/moduleSelectors';
 import { getActiveProjectBoard } from '../../selectors/projectSelectors';
 
 import ModulesItem from './ModulesItem';
 
-// put all this in an object called moduleStyles and save it under constants folder
+// *put all this in an object called moduleStyles and save it under constants folder
 // then pass props as {...moduleStyles}
-
 import {
   fontSize,
   fontFamily,
@@ -22,37 +22,9 @@ import {
 } from 'config/moduleConfig';
 
 class Modules extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      shouldCheckCollission: false,
-    };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if ((prevProps.modules.length !== this.props.modules.length)) {
-      this.setState({
-        shouldCheckCollission: !this.state.shouldCheckCollission,
-      });
-    }
-  }
-
-  toggleShouldCheckCollission() {
-    this.setState({
-      shouldCheckCollission: !this.state.shouldCheckCollission,
-    });
-  }
-
-  getStroke = (id, modules, board, defaultStroke) =>  {
-    const ruleBreakingModuleIds = getRuleBreakingModuleIds(modules, board);
-    const isBreakingRule = ruleBreakingModuleIds.includes(id);
-    return isBreakingRule ? 'red' : defaultStroke;
-  }
-
   render() {
     const { modules, board } = this.props;
     const moduleList = modules.map((module, index) =>
-      console.log(module) ||
       <ModulesItem
         {...module}
         {...this.props}
@@ -64,10 +36,8 @@ class Modules extends Component {
         fill={fill}
         opacity={opacity}
         strokeWidth={strokeWidth}
-        stroke={this.getStroke(module.id, modules, board, module.defaultStroke)}
+        stroke={getStroke(module.id, modules, board, module.defaultStroke)}
         unmetDependencies={getUnmetDependencies(moduleDataList, this.props.modules, module.dependencies)}
-        shouldCheckCollission={this.state.shouldCheckCollission}
-        toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
       />
     );
 

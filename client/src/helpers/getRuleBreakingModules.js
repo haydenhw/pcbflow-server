@@ -28,6 +28,17 @@ export function getRuleBreakingModules(nodeArray, perimeterNode) {
   return  ruleBreakingNodes;
 }
 
-export function getRuleBreakingModuleIds (nodeArray, perimeterNode) {
+export function getRuleBreakingModuleIds(nodeArray, perimeterNode) {
   return getRuleBreakingModules(nodeArray, perimeterNode).map(module => module.id);
+}
+
+export function getOutOfBoundModules(nodeArray, perimeterNode) {
+  const rotationAdjustedNodes = nodeArray.map(adjustDimesionsForRotation);
+  const outOfBoundsNodes = checkExceedsPerimter(
+    rotationAdjustedNodes,
+    perimeterNode,
+    adjustDimesionsForRotation
+  );
+
+  return outOfBoundsNodes;
 }

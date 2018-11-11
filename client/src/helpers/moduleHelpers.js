@@ -1,6 +1,12 @@
-import { compose } from 'helpers/functional';
+import { getRuleBreakingModuleIds } from 'helpers/getRuleBreakingModules';
 
 import { findNextUnsatisfiedModule, getUnmetDependencies } from 'helpers/dependencies';
+
+export const getStroke = (id, modules, board, defaultStroke) =>  {
+  const ruleBreakingModuleIds = getRuleBreakingModuleIds(modules, board);
+  const isBreakingRule = ruleBreakingModuleIds.includes(id);
+  return isBreakingRule ? 'red' : defaultStroke;
+}
 
 export const getUnsatisfiedModule = (clickedModuleIndex, activeModules, moduleData) => {
   const clickedModule = activeModules[clickedModuleIndex]

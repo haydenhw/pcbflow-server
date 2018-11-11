@@ -8,8 +8,11 @@ import { Layer, Stage } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
-import { getActiveProject } from '../../selectors/projectSelectors';
 
+import { getActiveProject, getActiveProjectBoard } from '../../selectors/projectSelectors';
+import { getActiveModules } from '../../selectors/moduleSelectors';
+
+import { getStroke } from 'helpers/boardHelpers';
 import { getCroppedStage } from 'helpers/generateThumbnail';
 
 import Board from 'components/board/Board';
@@ -151,13 +154,17 @@ class DesignToolStage extends Component {
     }
   }
 
+
+
   render() {
     const {
       activeProject,
+      board,
       hideFloatingElements,
       isDraggingToBoard,
       isMouseDown,
       isMouseOverModule,
+      modules,
       rotate,
       shouldHideContextMenu,
       shouldRenderBoard,
@@ -192,6 +199,7 @@ class DesignToolStage extends Component {
                     hideFloatingElements={hideFloatingElements}
                     unhideFloatingElements={unhideFloatingElements}
                     isDraggingToBoard={isDraggingToBoard}
+                    stroke={getStroke(modules, board)}
                   />
                 : <Layer />}
             </Stage>
@@ -213,10 +221,12 @@ const mapStateToProps = state => {
   return ({
     activeProjectId: state.projects.activeProjectId,
     activeProject: getActiveProject(state),
+    board: getActiveProjectBoard(state),
     draggingModule: state.modules.draggingModule,
     isMouseDownOnIcon: state.mouseEvents.isMouseDownOnIcon,
     isMouseOverModule: state.mouseEvents.isMouseOverModule,
     isMouseDown: state.mouseEvents.isMouseDown,
+    modules: getActiveModules(state),
     hoveredModuleId: state.modules.hoveredId,
     anchors: state.anchors,
   });
