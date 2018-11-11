@@ -7,7 +7,6 @@ import store from 'reduxFiles/store';
 import { compose } from 'helpers/functional';
 import { getKonvaChildByIndex, getKonvaParentByName} from 'helpers/konvaHelpers';
 import bindToPerimeter from 'helpers/bindToPerimeter';
-import enforceRules from 'helpers/enforceRules';
 
 const getTopLeftAnchor = compose(
   getKonvaChildByIndex(1),
@@ -78,7 +77,7 @@ export default class ModulesItem extends PureComponent {
     };
 
     if (!isDraggingToBoard && isDraggingToBoard !== undefined) {
-      // enforceRules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
+      // getRuleBreakingModules(moduleNodeArray, boardNode, addRedStroke, removeRedStroke);
     }
   }
 
@@ -273,7 +272,7 @@ export default class ModulesItem extends PureComponent {
             ref="moduleBorder"
             width={this.props.width}
             height={this.props.height}
-            stroke={isStrokeRed ? 'red' : this.props.stroke}
+            stroke={this.props.stroke}
             strokeWidth={this.state.strokeWidth}
           />
           {this.props.imageSrc ? this.renderImage() : <Group />}

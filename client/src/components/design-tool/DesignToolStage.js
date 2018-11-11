@@ -28,10 +28,10 @@ const getModuleImage = ({ imageX , imageY, imageWidth, imageHeight, image }) => 
   height: imageHeight,
 });
 
-const getModuleOutline = ({ x , y, width, height, stroke }) => new Konva.Image({
+const getModuleOutline = ({ x , y, width, height, defaultStroke }) => new Konva.Image({
   width,
   height,
-  stroke,
+  stroke: defaultStroke,
 });
 
 const getModule = (getGroup) => (children) => (moduleData) => {

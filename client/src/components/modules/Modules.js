@@ -3,7 +3,7 @@ import { Group } from 'react-konva';
 import { connect } from 'react-redux';
 
 import { getUnmetDependencies } from 'helpers/dependencies';
-import enforceRules from 'helpers/enforceRules';
+import { getRuleBreakingModuleIds } from 'helpers/getRuleBreakingModules';
 import { moduleDataList } from 'config/moduleDataList';
 import { getActiveModules } from '../../selectors/moduleSelectors';
 import { getActiveProjectBoard } from '../../selectors/projectSelectors';
@@ -43,10 +43,16 @@ class Modules extends Component {
     });
   }
 
-  render() {
-    const res = enforceRules(this.props.modules, this.props.board);
+  getStroke = (id, modules, board, defaultStroke) =>  {
+    const ruleBreakingModuleIds = getRuleBreakingModuleIds(modules, board);
+    const isBreakingRule = ruleBreakingModuleIds.includes(id);
+    return isBreakingRule ? 'red' : defaultStroke;
+  }
 
-    const modules = this.props.modules.map((module, index) =>
+  render() {
+    const { modules, board } = this.props;
+    const moduleList = modules.map((module, index) =>
+      console.log(module) ||
       <ModulesItem
         {...module}
         {...this.props}
@@ -58,15 +64,16 @@ class Modules extends Component {
         fill={fill}
         opacity={opacity}
         strokeWidth={strokeWidth}
+        stroke={this.getStroke(module.id, modules, board, module.defaultStroke)}
         unmetDependencies={getUnmetDependencies(moduleDataList, this.props.modules, module.dependencies)}
         shouldCheckCollission={this.state.shouldCheckCollission}
         toggleShouldCheckCollission={this.toggleShouldCheckCollission.bind(this)}
-      />,
+      />
     );
 
     return (
       <Group name="moduleGroup">
-        {modules}
+        {moduleList}
       </Group>
     );
   }

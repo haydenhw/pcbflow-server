@@ -82,7 +82,6 @@ class Board extends Component {
       isDraggingToBoard,
     } = this.props;
 
-
     return (
       <Layer
         ref="boardLayer"
