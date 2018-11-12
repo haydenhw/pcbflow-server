@@ -24,7 +24,6 @@ import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import { routeToHome, routeToProjects } from 'helpers/routeHelpers';
 import { isMobile } from 'helpers/isMobile';
-import rotate from 'helpers/rotate';
 import { toolTips } from 'config/toolTips';
 
 import TopNavbar from 'components/top-navbar/TopNavbar';
@@ -460,11 +459,10 @@ let DesignTool = class extends Component {
   }
 
   rotate() {
-    // const { hoveredModule, anchors, board } = this.props;
-    // const { id } = hoveredModule;
-    // const rotatedModule = rotate(hoveredModule, anchors, board);
-    //
-    // store.dispatch(actions.updateEntity('Module', id, rotatedModule));
+    const { hoveredModule, board, anchors } = this.props;
+    const { topLeft } = anchors;
+
+    store.dispatch(actions.rotateModule(hoveredModule, board, topLeft));
   }
 
   startTour() {

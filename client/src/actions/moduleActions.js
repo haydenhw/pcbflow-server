@@ -1,4 +1,5 @@
 import * as actions from 'actions/indexActions';
+import rotate from 'helpers/rotate';
 import { getActiveProject } from '../selectors/projectSelectors';
 
 export const pushToactiveModules = module => (dispatch, getState) => {
@@ -24,6 +25,13 @@ export const pushToactiveModules = module => (dispatch, getState) => {
 
   const newModule = Object.assign({}, module, { project: activeProjectId });
   dispatch(actions.createEntity('Module', newModule));
+};
+
+export const rotateModule = (module, board, topLeftAnchor) => (dispatch) => {
+  const { id } = module;
+  const rotatedModule = rotate(module, topLeftAnchor, board);
+
+  dispatch(actions.updateEntity('Module', id, rotatedModule));
 };
 
 export const UPDATE_DRAGGING_MODULE = 'UPDATE_DRAGGING_MODULE';

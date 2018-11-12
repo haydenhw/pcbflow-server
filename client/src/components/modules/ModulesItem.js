@@ -8,8 +8,6 @@ import { compose } from 'helpers/functional';
 import { getKonvaChildByIndex, getKonvaParentByName} from 'helpers/konvaHelpers';
 import { getFill, getX, getY } from 'helpers/moduleHelpers';
 import bindToPerimeter from 'helpers/bindToPerimeter';
-import rotate from 'helpers/rotate';
-
 const getTopLeftAnchor = compose(
   getKonvaChildByIndex(1),
   getKonvaParentByName('boardGroup'),
@@ -121,10 +119,9 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleDoubleClick() {
-    const { topLeftAnchor, board, id } = this.props;
-    const rotatedModule = rotate(this.props, topLeftAnchor, board);
+    const { topLeftAnchor, board } = this.props;
 
-    store.dispatch(actions.updateEntity('Module', id, rotatedModule));
+    store.dispatch(actions.rotateModule(this.props, board, topLeftAnchor));
   }
 
   renderImage() {
