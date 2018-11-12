@@ -1,13 +1,14 @@
 import getPerimeterSide from 'helpers/getPerimeterSide';
+import bindToPerimeter from 'helpers/bindToPerimeter';
 import checkExceedsPerimter from './checkExceedsPerimeter';
 import checkCollision from './checkCollision';
 
-function adjustNormal(node) {
+function adjustForRotation(module) {
   const adjustedAttrs = {};
-  const { rotation } = node;
+  const { rotation } = module;
 
   if (rotation === 90 || rotation === 270) {
-    const { x, y, width, height } = node;
+    const { x, y, width, height } = module;
     const halfDiff = (height - width) / 2;
     adjustedAttrs.x = x - halfDiff;
     adjustedAttrs.y = y + halfDiff;
@@ -17,81 +18,36 @@ function adjustNormal(node) {
     return adjustedAttrs;
   }
 
-  return node;
+  return module;
 }
 
-function adjustSideBound(node, board) {
- const {
-    boundToSideIndex,
-    height: nodeHeight,
-    width: nodeWidth,
-    x,
-    y,
-  } = node;
+export function adjustDimesionsForRotation(module, board, topLeftAnchor) {
+  const boundModuleCoordinates = bindToPerimeter(module, topLeftAnchor, board);
+  const boundMoudle = Object.assign({}, module, boundModuleCoordinates);
+  const rotatedModule = adjustForRotation(boundMoudle);
 
-  const boundToSide = getPerimeterSide(boundToSideIndex);
-  const halfDiff = (nodeHeight - nodeWidth) / 2;
-
-  switch (boundToSide) {
-    case 'bottom':
-      return {
-        x: halfDiff,
-        y: topLeftAnchorY + boardHeight - moduleHeight,
-      };
-    case 'left':
-      return {
-        x: topLeftAnchorX + 0.5 * (moduleHeight - moduleWidth),
-        y: moduleY,
-      };
-    case 'top':
-      return {
-        x: moduleX,
-        y: topLeftAnchorY,
-      };
-    case 'right':
-      return {
-        x: topLeftAnchorX + boardWidth - 0.5 * (moduleHeight + moduleWidth),
-        y: moduleY,
-      };
-    default:
-      return {
-        x: moduleX,
-        y: moduleY,
-      };
-  }
+  return Object.assign({}, module, rotatedModule);
 }
 
-export function adjustDimesionsForRotation(node) {
-  const { boundToSideIndex } = node;
-  const isBoundToSide = Number.isInteger(boundToSideIndex);
-  const adjustedAttrs = isBoundToSide
-      ? {}
-      : adjustNormal(node);
-
-  // console.log('node', {
-  //   x: node.x,
-  //   y: node.y,
-  // });
-  // console.log('adjusted', adjustedAttrs);
-
-  return Object.assign({}, node, adjustedAttrs);
-}
-
-export function getRuleBreakingModules(nodeArray, perimeterNode) {
-  const rotationAdjustedNodes = nodeArray.map(adjustDimesionsForRotation);
-  const collidingNodes = checkCollision(rotationAdjustedNodes, adjustDimesionsForRotation);
-  const outOfBoundsNodes = checkExceedsPerimter(rotationAdjustedNodes, perimeterNode, adjustDimesionsForRotation);
+export function getRuleBreakingModules(moduleArray, perimeterNode, topLeftAnchor) {
+  const rotationAdjustedNodes = moduleArray.map(module => adjustDimesionsForRotation(module, perimeterNode, topLeftAnchor));
+  const collidingNodes = checkCollision(rotationAdjustedNodes);
+  const outOfBoundsNodes = checkExceedsPerimter(rotationAdjustedNodes, perimeterNode);
   const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes];
 
   return  ruleBreakingNodes;
 }
 
-export function getRuleBreakingModuleIds(nodeArray, perimeterNode) {
-  return getRuleBreakingModules(nodeArray, perimeterNode).map(module => module.id);
+export function getRuleBreakingModuleIds(moduleArray, perimeterNode, topLeftAnchor) {
+  return (
+    getRuleBreakingModules(moduleArray, perimeterNode, topLeftAnchor)
+      .map(module => module.id)
+  );
 }
 
-export function getOutOfBoundModules(nodeArray, perimeterNode) {
-  const rotationAdjustedNodes = nodeArray.map(adjustDimesionsForRotation);
+export function getOutOfBoundModules(moduleArray, perimeterNode, topLeftAnchor) {
+  const rotationAdjustedNodes = moduleArray.map(module => adjustDimesionsForRotation(module, perimeterNode, topLeftAnchor));
+
   const outOfBoundsNodes = checkExceedsPerimter(
     rotationAdjustedNodes,
     perimeterNode,

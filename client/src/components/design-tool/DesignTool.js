@@ -460,11 +460,11 @@ let DesignTool = class extends Component {
   }
 
   rotate() {
-    const { hoveredModule, anchors, board } = this.props;
-    const { id } = hoveredModule;
-    const rotatedModule = rotate(hoveredModule, anchors, board);
-
-    store.dispatch(actions.updateEntity('Module', id, rotatedModule));
+    // const { hoveredModule, anchors, board } = this.props;
+    // const { id } = hoveredModule;
+    // const rotatedModule = rotate(hoveredModule, anchors, board);
+    //
+    // store.dispatch(actions.updateEntity('Module', id, rotatedModule));
   }
 
   startTour() {

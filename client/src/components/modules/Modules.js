@@ -23,7 +23,7 @@ import {
 
 class Modules extends Component {
   render() {
-    const { modules, board } = this.props;
+    const { modules, board, topLeftAnchor } = this.props;
     const moduleList = modules.map((module, index) =>
       <ModulesItem
         {...module}
@@ -36,8 +36,8 @@ class Modules extends Component {
         fill={fill}
         opacity={opacity}
         strokeWidth={strokeWidth}
-        stroke={getStroke(module.id, modules, board, module.defaultStroke)}
-        unmetDependencies={getUnmetDependencies(moduleDataList, this.props.modules, module.dependencies)}
+        stroke={getStroke(module.id, module.defaultStroke, modules, board, topLeftAnchor)}
+        unmetDependencies={getUnmetDependencies(moduleDataList, modules, module.dependencies)}
       />
     );
 

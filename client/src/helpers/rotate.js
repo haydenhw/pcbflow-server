@@ -1,13 +1,8 @@
-import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
-
-import rotateAboutCenter from 'helpers/rotateAboutCenter';
 import bindToPerimeter from 'helpers/bindToPerimeter';
+import rotateAboutCenter from 'helpers/rotateAboutCenter';
 
-export default function rotate(module, anchors, board) {
+export default function rotate(module, topLeftAnchor, board) {
   const {
-    x,
-    y,
     index,
     innerGroupX,
     innerGroupY,
@@ -15,11 +10,12 @@ export default function rotate(module, anchors, board) {
     width,
     height,
     boundToSideIndex,
+    x,
+    y,
   } = module;
 
-  const { topLeft } = anchors;
-  const newParentGroupCoordinates = bindToPerimeter(module, topLeft, board);
-  console.log(newParentGroupCoordinates);
+  const newParentGroupCoordinates = bindToPerimeter(module, topLeftAnchor, board);
+  // console.log(newParentGroupCoordinates);
   const newInnerGroupCoordinates = (
     rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
   );
@@ -30,8 +26,8 @@ export default function rotate(module, anchors, board) {
     rotation: newInnerGroupCoordinates.rotation,
     innerGroupX: newInnerGroupCoordinates.x,
     innerGroupY: newInnerGroupCoordinates.y,
-    parentGroupX: newParentGroupCoordinates ? newParentGroupCoordinates.x : x,
-    parentGroupY: newParentGroupCoordinates ? newParentGroupCoordinates.y : y,
+    x: newParentGroupCoordinates ? newParentGroupCoordinates.x : x,
+    y: newParentGroupCoordinates ? newParentGroupCoordinates.y : y,
   };
 
 }

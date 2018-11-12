@@ -27,19 +27,9 @@ export default class App extends Component {
 
   render() {
     const { children } = this.props;
-    const res =  React.Children.count(children);
-    // console.log(this.stageNode);
-    const childrenWithProps = React.Children.map(children, child => (
-      React.cloneElement(child, {
-        testProp: 'heyyyy',
-        stageRef: (node) => (this.stageNode = node),
-        stageNode: this.stageNode,
-      })
-    ));
-
     return (
       <div>
-        {childrenWithProps}
+        {children}
       </div>
     );
   }

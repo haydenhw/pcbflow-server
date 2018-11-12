@@ -52,6 +52,7 @@ const getDragModule = getModule(getModuleGroup)(moduleChildren);
 
 const addPropToData = data => newProp => Object.assign({}, data , newProp);
 
+// *move to helpers file
 const getWindowDimensions = () => ({
   width: document.documentElement.clientWidth,
   height: document.documentElement.clientHeight,
@@ -159,6 +160,7 @@ class DesignToolStage extends Component {
   render() {
     const {
       activeProject,
+      anchors,
       board,
       hideFloatingElements,
       isDraggingToBoard,
@@ -168,7 +170,6 @@ class DesignToolStage extends Component {
       rotate,
       shouldHideContextMenu,
       shouldRenderBoard,
-      stageRef,
       unhideFloatingElements,
      } = this.props;
 
@@ -183,10 +184,7 @@ class DesignToolStage extends Component {
         >
           <div>
             <Stage
-              ref={node => {
-                this.stage = node;
-                stageRef(node);
-              }}
+              ref={node => { this.stage = node; }}
               name="stage"
               width={this.state.width}
               height={this.state.height}
@@ -199,7 +197,7 @@ class DesignToolStage extends Component {
                     hideFloatingElements={hideFloatingElements}
                     unhideFloatingElements={unhideFloatingElements}
                     isDraggingToBoard={isDraggingToBoard}
-                    stroke={getStroke(modules, board)}
+                    stroke={getStroke(modules, board, anchors.topLeft)}
                   />
                 : <Layer />}
             </Stage>

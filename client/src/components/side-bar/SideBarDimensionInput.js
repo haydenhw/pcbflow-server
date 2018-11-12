@@ -107,7 +107,7 @@ class SideBarDimensionInput extends Component {
     this.setState({ heightInputVal: newBoardHeight});
 
     if (newBoardHeight >= minHeight) {
-      store.dispatch(actions.updateBoardDimensions({ width, height }));
+      store.dispatch(actions.updateBoard({ width, height }));
       store.dispatch(actions.updateAnchorPositions(anchors));
       store.dispatch(actions.triggerAnchorUpdate());
     }

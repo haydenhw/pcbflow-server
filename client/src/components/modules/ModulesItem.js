@@ -6,8 +6,9 @@ import store from 'reduxFiles/store';
 
 import { compose } from 'helpers/functional';
 import { getKonvaChildByIndex, getKonvaParentByName} from 'helpers/konvaHelpers';
-import { getFill } from 'helpers/moduleHelpers';
+import { getFill, getX, getY } from 'helpers/moduleHelpers';
 import bindToPerimeter from 'helpers/bindToPerimeter';
+import rotate from 'helpers/rotate';
 
 const getTopLeftAnchor = compose(
   getKonvaChildByIndex(1),
@@ -62,7 +63,6 @@ export default class ModulesItem extends PureComponent {
 
     const newPosition = bindToPerimeter(updatedModule, topLeftAnchor.attrs, board)
 
-    // console.log(newPosition);
     return newPosition;
   }
 
@@ -77,7 +77,6 @@ export default class ModulesItem extends PureComponent {
 
     const newPosition = this.getNewPosition();
 
-    // console.log(newPosition);
     moduleGroup.setX(newPosition.x);
     moduleGroup.setY(newPosition.y);
   }
@@ -122,7 +121,10 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleDoubleClick() {
-    this.props.rotate();
+    const { topLeftAnchor, board, id } = this.props;
+    const rotatedModule = rotate(this.props, topLeftAnchor, board);
+
+    store.dispatch(actions.updateEntity('Module', id, rotatedModule));
   }
 
   renderImage() {
@@ -148,25 +150,21 @@ export default class ModulesItem extends PureComponent {
     );
   }
 
+
   render() {
-    const { board, isDraggingToBoard, unmetDependencies} = this.props;
+    const { isDraggingToBoard, unmetDependencies } = this.props;
     const { moduleGroup } = this.refs;
     const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
       ? getTopLeftAnchor(moduleGroup)
       : null;
+
     return (
       <Group
         draggable="true"
         ref="moduleGroup"
         name="moduleGroup"
-        x={topLeftAnchor
-          ? bindToPerimeter(this.props, topLeftAnchor.attrs, board).x
-          : this.props.x
-        }
-        y={topLeftAnchor
-          ? bindToPerimeter(this.props, topLeftAnchor.attrs, board).y
-          : this.props.y
-        }
+        x={getX(this.props, topLeftAnchor)}
+        y={getY(this.props, topLeftAnchor)}
         height={this.props.height}
         width={this.props.width}
         onDragStart={this.handleDragStart.bind(this)}

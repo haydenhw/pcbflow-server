@@ -1,38 +1,31 @@
-export default function checkCollision(nodeArray, callback) {
-  const collidingNodes = [];
+export default function checkCollision(itemArray, callback) {
+  const collidingItems = [];
 
-  nodeArray.forEach((node) => {
-    const { x, y, width, height } = node;
-    // console.log(node.text, {
-    //   x,
-    //   y,
-    //   width,
-    //   height,
-    // });
+  itemArray.forEach((item) => {
+    const { x, y, width, height } = item;
+    const itemLeft = x;
+    const itemRight = x + width;
+    const itemTop = y;
+    const itemBottom = y + height;
 
-    const nodeLeft = x;
-    const nodeRight = x + width;
-    const nodeTop = y;
-    const nodeBottom = y + height;
+    itemArray.forEach((otherItem) => {
 
-    nodeArray.forEach((otherNode) => {
-
-      if (JSON.stringify(node) !== JSON.stringify(otherNode)) {
-        const { x, y, width, height } = otherNode;
+      if (JSON.stringify(item) !== JSON.stringify(otherItem)) {
+        const { x, y, width, height } = otherItem;
         const otherLeft = x;
         const otherRight = x + width;
         const otherTop = y;
         const otherBottom = y + height;
 
-        const collideHoriz = nodeLeft < otherRight && nodeRight > otherLeft;
-        const collideVert = nodeTop < otherBottom && nodeBottom > otherTop;
+        const collideHoriz = itemLeft < otherRight && itemRight > otherLeft;
+        const collideVert = itemTop < otherBottom && itemBottom > otherTop;
 
         if (collideHoriz && collideVert) {
-          collidingNodes.push(otherNode);
+          collidingItems.push(otherItem);
         }
       }
     });
   });
 
-  return collidingNodes.length > 1 ? collidingNodes : [];
+  return collidingItems.length > 1 ? collidingItems : [];
 }

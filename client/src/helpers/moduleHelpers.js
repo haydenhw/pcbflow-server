@@ -1,9 +1,28 @@
 import { getRuleBreakingModuleIds } from 'helpers/getRuleBreakingModules';
-
+import bindToPerimeter from 'helpers/bindToPerimeter';
 import { findNextUnsatisfiedModule, getUnmetDependencies } from 'helpers/dependencies';
 
-export const getStroke = (id, modules, board, defaultStroke) =>  {
-  const ruleBreakingModuleIds = getRuleBreakingModuleIds(modules, board);
+export const getX = (props, topLeftAnchor) => {
+  const { board, x } = props;
+  return (
+    topLeftAnchor
+      ? bindToPerimeter(props, topLeftAnchor.attrs, board).x
+      // ? 0
+      : x
+  );
+}
+
+export const getY = (props, topLeftAnchor) => {
+  const { board, y } = props;
+  return (
+    topLeftAnchor
+      ? bindToPerimeter(props, topLeftAnchor.attrs, board).y
+      : y
+  );
+}
+
+export const getStroke = (id, defaultStroke, modules, board, topLeftAnchor, ) =>  {
+  const ruleBreakingModuleIds = getRuleBreakingModuleIds(modules, board, topLeftAnchor);
   const isBreakingRule = ruleBreakingModuleIds.includes(id);
   return isBreakingRule ? 'red' : defaultStroke;
 }
