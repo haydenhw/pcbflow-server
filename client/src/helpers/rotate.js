@@ -1,6 +1,6 @@
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import rotateAboutCenter from 'helpers/rotateAboutCenter';
-
+// *refactor so that rotateAboutCenter just takes whole module object as arg
 export default function rotate(module, topLeftAnchor, board) {
   const {
     index,
@@ -10,12 +10,8 @@ export default function rotate(module, topLeftAnchor, board) {
     width,
     height,
     boundToSideIndex,
-    x,
-    y,
   } = module;
 
-  const newParentGroupCoordinates = bindToPerimeter(module, topLeftAnchor, board);
-  // console.log(newParentGroupCoordinates);
   const newInnerGroupCoordinates = (
     rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
   );
@@ -26,8 +22,6 @@ export default function rotate(module, topLeftAnchor, board) {
     rotation: newInnerGroupCoordinates.rotation,
     innerGroupX: newInnerGroupCoordinates.x,
     innerGroupY: newInnerGroupCoordinates.y,
-    x: newParentGroupCoordinates ? newParentGroupCoordinates.x : x,
-    y: newParentGroupCoordinates ? newParentGroupCoordinates.y : y,
   };
 
 }

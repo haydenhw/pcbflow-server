@@ -1,6 +1,6 @@
 // refactor bindToPerimeter with compose
 import getPerimeterSide from 'helpers/getPerimeterSide';
-
+// *refactor to not use buildCoordinateData
 function buildCoordinateData(module, topLeftAnchor, board) {
   const {
     boundToSideIndex,
