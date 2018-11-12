@@ -18,11 +18,9 @@ export default function rotate(module, anchors, board) {
   } = module;
 
   const { topLeft } = anchors;
-  let newParentGroupCoordinates;
-  let newInnerGroupCoordinates;
-
-  newParentGroupCoordinates = bindToPerimeter(module, topLeft, board);
-  newInnerGroupCoordinates = (
+  const newParentGroupCoordinates = bindToPerimeter(module, topLeft, board);
+  console.log(newParentGroupCoordinates);
+  const newInnerGroupCoordinates = (
     rotateAboutCenter(boundToSideIndex, rotation, innerGroupX, innerGroupY, width, height)
   );
 

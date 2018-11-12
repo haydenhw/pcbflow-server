@@ -36,6 +36,7 @@ export default function bindToPerimeter(module, topLeftAnchor, board) {
     topLeftAnchorY,
   } = buildCoordinateData(module, topLeftAnchor, board);
 
+  console.log(boundToSide);
   switch (boundToSide) {
     case 'bottom':
       return {
