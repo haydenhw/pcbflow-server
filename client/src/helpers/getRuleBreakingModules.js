@@ -1,4 +1,3 @@
-import getPerimeterSide from 'helpers/getPerimeterSide';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import checkExceedsPerimter from './checkExceedsPerimeter';
 import checkCollision from './checkCollision';
@@ -30,7 +29,9 @@ export function adjustDimesionsForRotation(module, board, topLeftAnchor) {
 }
 
 export function getRuleBreakingModules(moduleArray, perimeterNode, topLeftAnchor) {
-  const rotationAdjustedNodes = moduleArray.map(module => adjustDimesionsForRotation(module, perimeterNode, topLeftAnchor));
+  const rotationAdjustedNodes = moduleArray.map(module => (
+     adjustDimesionsForRotation(module, perimeterNode, topLeftAnchor)
+  ));
   const collidingNodes = checkCollision(rotationAdjustedNodes);
   const outOfBoundsNodes = checkExceedsPerimter(rotationAdjustedNodes, perimeterNode);
   const ruleBreakingNodes = [...collidingNodes, ...outOfBoundsNodes];

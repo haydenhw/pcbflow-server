@@ -7,7 +7,6 @@ export const getX = (props, topLeftAnchor) => {
   return (
     topLeftAnchor
       ? bindToPerimeter(props, topLeftAnchor.attrs, board).x
-      // ? 0
       : x
   );
 }

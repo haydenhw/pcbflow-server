@@ -149,11 +149,17 @@ export default class ModulesItem extends PureComponent {
 
 
   render() {
-    const { isDraggingToBoard, unmetDependencies } = this.props;
+    const { unmetDependencies } = this.props;
     const { moduleGroup } = this.refs;
-    const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
+
+    // *removing the (isDraggingToBoard === false) part of the fixed a bug where sidebound modules jumped while a module was being dragged from sidebar
+    // const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
+    const topLeftAnchor = moduleGroup
       ? getTopLeftAnchor(moduleGroup)
       : null;
+
+    // console.log('item', getY(this.props, topLeftAnchor));
+    // console.log('item', this.props.x);
 
     return (
       <Group
