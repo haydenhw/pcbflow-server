@@ -34,7 +34,7 @@ export class ProjectContainer extends Component {
           handleRightButtonClick={() => store.dispatch(actions.deleteProject(modalProps))}
           leftButtonText="Cancel"
           rightButtonText="Delete"
-          shouldRenderLeftButton
+          showLeftButton
           title="Confirm Delete"
           text={`Are you sure you want to delete project "${modalProps.name}"  ?`}
         />

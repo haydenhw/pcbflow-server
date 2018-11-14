@@ -24,9 +24,9 @@ export default class Modal extends Component {
   }
 
   renderLeftButton() {
-    const { leftButtonText, handleLeftButtonClick, shouldRenderLeftButton } = this.props;
+    const { leftButtonText, handleLeftButtonClick, showLeftButton } = this.props;
 
-    if (shouldRenderLeftButton) {
+    if (showLeftButton) {
       return (
         <button
           className="modal-button-left modal-button"
@@ -139,7 +139,7 @@ Modal.propTypes = {
   modalClass: PropTypes.string,
   rightButtonClass: PropTypes.string,
   rightButtonText: PropTypes.string.isRequired,
-  shouldRenderLeftButton: PropTypes.bool.isRequired,
+  showLeftButton: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
   title: PropTypes.string,
 };

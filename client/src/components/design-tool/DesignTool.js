@@ -56,8 +56,8 @@ let DesignTool = class extends Component {
       running: false,
       shouldExportPDF: false,
       shouldHideContextMenu: false,
-      shouldRenderDocumentation: false,
-      shouldRenderInfoButton: true,
+      showDocumentation: false,
+      showInfoButton: true,
       showModal: true,
       wasDocumentationOpen: false,
     };
@@ -397,8 +397,8 @@ let DesignTool = class extends Component {
     if (!this.props.isMouseOverModule) {
       store.dispatch(actions.updateShouldRenderTodoList(false));
       this.setState({
-        shouldRenderDocumentation: false,
-        shouldRenderInfoButton: false,
+        showDocumentation: false,
+        showInfoButton: false,
       });
     }
   }
@@ -408,9 +408,9 @@ let DesignTool = class extends Component {
   }
 
   toggleDocumentationCard() {
-    const { shouldRenderDocumentation, wasDocumentationOpen } = this.state;
+    const { showDocumentation, wasDocumentationOpen } = this.state;
     this.setState({
-      shouldRenderDocumentation: !shouldRenderDocumentation,
+      showDocumentation: !showDocumentation,
       wasDocumentationOpen: !wasDocumentationOpen,
       tooltipHook: null,
     });
@@ -448,8 +448,8 @@ let DesignTool = class extends Component {
     }
 
     this.setState({
-      shouldRenderDocumentation: wasDocumentationOpen,
-      shouldRenderInfoButton: true,
+      showDocumentation: wasDocumentationOpen,
+      showInfoButton: true,
     });
   }
 
@@ -493,7 +493,7 @@ let DesignTool = class extends Component {
   renderFooter() {
     const { activeModules } = this.props;
 
-    if (this.state.shouldRenderInfoButton) {
+    if (this.state.showInfoButton) {
       return (
         <Footer
           modules={activeModules}
@@ -505,8 +505,8 @@ let DesignTool = class extends Component {
   }
 
   renderInfoButton() {
-    const { shouldRenderDocumentation } = this.state;
-    const infoButtonIconClass = shouldRenderDocumentation ? 'fa-close' : 'fa-question';
+    const { showDocumentation } = this.state;
+    const infoButtonIconClass = showDocumentation ? 'fa-close' : 'fa-question';
 
     const infoButtonIcon = (
       <FontAwesome
@@ -578,7 +578,7 @@ let DesignTool = class extends Component {
               leftButtonText="Go Back"
               modalClass="confirm-exit-tutorial"
               rightButtonText="Exit"
-              shouldRenderLeftButton
+              showLeftButton
               text="Are you sure you want to exit the tutorial?"
             />
           );
@@ -648,8 +648,8 @@ let DesignTool = class extends Component {
       isDraggingToBoard,
       isNavMenuActive,
       shouldExportPDF,
-      shouldRenderDocumentation,
-      shouldRenderInfoButton,
+      showDocumentation,
+      showInfoButton,
       shouldHideContextMenu,
     } = this.state;
 
@@ -677,7 +677,7 @@ let DesignTool = class extends Component {
               rotate={this.rotate}
               shouldExportPDF={shouldExportPDF}
               shouldHideContextMenu={shouldHideContextMenu}
-              shouldRenderBoard={Boolean(activeProjectId && (projects.length > 0))}
+              showBoard={Boolean(activeProjectId && (projects.length > 0))}
               stageRef={stageRef}
               toggleShouldExportPDF={this.toggleShouldExportPDF.bind(this)}
               unhideFloatingElements={this.unhideFloatingElements}
@@ -685,8 +685,8 @@ let DesignTool = class extends Component {
           </div>
         </div>
         {this.renderFooter()}
-        {shouldRenderDocumentation && <DocumentationCard />}
-        {shouldRenderInfoButton && this.renderInfoButton()}
+        {showDocumentation && <DocumentationCard />}
+        {showInfoButton && this.renderInfoButton()}
         {this.renderModal()}
         {this.renderTodo()}
       </div>

@@ -169,7 +169,7 @@ class DesignToolStage extends Component {
       modules,
       rotate,
       shouldHideContextMenu,
-      shouldRenderBoard,
+      showBoard,
       unhideFloatingElements,
      } = this.props;
 
@@ -190,7 +190,7 @@ class DesignToolStage extends Component {
               height={this.state.height}
             >
               <Grid gridRef={node => { this.grid = node }} gridWidth={2000} gridHeight={2000} cellWidth={20} />
-              {shouldRenderBoard
+              {showBoard
                 ? <Board
                     activeProject={activeProject}
                     rotate={rotate}
@@ -234,7 +234,7 @@ export default connect(mapStateToProps)(DesignToolStage);
 
 DesignToolStage.propTypes = {
   activeProjectName: PropTypes.string,
-  shouldRenderBoard: PropTypes.bool.isRequired,
+  showBoard: PropTypes.bool.isRequired,
   isMouseDownOnIcon: PropTypes.bool.isRequired,
   isMouseDown: PropTypes.bool.isRequired,
   isMouseOverModule: PropTypes.bool.isRequired,

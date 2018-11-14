@@ -5,14 +5,14 @@ export const tutorialSteps = [
     title: 'Welcome to PCBflow!',
     text: 'Would you like to take a quick tutorial?',
     rightButtonText: 'Start',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'No Thanks',
   },
   {
     title: 'Let\'s build an HTPC...',
     text: 'In this tutorial we\'ll build a Home Theatre PC device that can be conntected to a tv or monitor to play media from a mass storage device using a smart phone as a remote control. ',
     rightButtonText: 'Next',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
     image: {
       src: 'images/htpc.png',
@@ -23,7 +23,7 @@ export const tutorialSteps = [
   {
     text: 'First, let\'s take a short tour...',
     rightButtonText: 'Okay',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
   },
   {
@@ -31,7 +31,7 @@ export const tutorialSteps = [
     text: 'First, drag and drop the COM connector module anywhere onto the board.',
     rightButtonText: 'Okay',
     rightButtonClass: 'com-connector-tooltip',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
     image: {
       src: 'images/COM-connector.svg',
@@ -45,7 +45,7 @@ export const tutorialSteps = [
     list1: ['WiFi', 'HDMI', 'USB'],
     list2: ['Audio', 'Ethernet', 'RGB'],
     rightButtonText: 'Next',
-    shouldRenderLeftButton: false,
+    showLeftButton: false,
     leftButtonText: 'Back',
     image: {
       src: 'images/real-com.jpg',
@@ -57,7 +57,7 @@ export const tutorialSteps = [
     title: 'Which module should we add next?',
     text: 'Let\'s take a look at the module pallate for some insight...',
     rightButtonText: 'Okay',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
   },
   {
@@ -65,7 +65,7 @@ export const tutorialSteps = [
     text: 'Go ahead and drag and drop the 5V/5A Regulator onto the board.',
     rightButtonText: 'Okay',
     rightButtonClass: 'regulator-tooltip',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
     image: {
       src: 'images/regulator-5V5A-icon.svg',
@@ -77,7 +77,7 @@ export const tutorialSteps = [
     title: 'Great!',
     text: 'You may have noticed that the COM Connector module turned green after you added the 5V/5A Regulator. \n Modules will dispaly red if they have unmet dependencies and green if all dependencies are satisfied.',
     rightButtonText: 'Next',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
     image: {
       src: 'images/red-to-green.svg',
@@ -89,7 +89,7 @@ export const tutorialSteps = [
     title: 'The role of the regulator module:',
     text: 'So why exactly does the COM need a 5V/5A Regulator to function?\n This is becasue the COM is designed to operate at a voltage in the range of 3.5V-6V, but as we\'ll see in the next step, our board will be running off of a 20V power supply. The 5V/5A Regulator will act as a voltage throttle, taking in 20 Volts and delivering 5 Volts to the COM.',
     rightButtonText: 'Next',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
     image: {
       src: 'images/real-regulator.jpg',
@@ -102,7 +102,7 @@ export const tutorialSteps = [
     text: 'Let\'s add the DC Barrel Jack to give our HTPC some life...',
     rightButtonText: 'Next',
     rightButtonClass: 'barrel-connector-tooltip',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
     image: {
       src: 'images/barrel-connector-icon.svg',
@@ -114,7 +114,7 @@ export const tutorialSteps = [
     title: 'Making progress!',
     text: 'Now we\'ll be able to plug our HTCP into the wall with a standard 2.1mm x 5.5mm DC power supply.',
     rightButtonText: 'Next',
-    shouldRenderLeftButton: false,
+    showLeftButton: false,
     leftButtonText: 'Back',
     image: {
       src: 'images/real-power.svg',
@@ -134,21 +134,21 @@ export const tutorialSteps = [
 
     ],
     rightButtonText: 'Next',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
   },
   {
     title: 'Good luck!',
     text: 'We\'re going to set you free to finish the design on your own now. \n In the next step you\'ll be provided with a to-do list containing the names of the remaining modules that were listed on the previous screen.',
     rightButtonText: 'Next',
-    shouldRenderLeftButton: true,
+    showLeftButton: true,
     leftButtonText: 'Back',
   },
   {
     title: 'Success!',
     text: 'Nice job. You\'ve completed the HTPC design tutorial. Feel free to contiue customizing your HTCP or start a new project by clicking on folder icon on the top left corner of the page. ',
     rightButtonText: 'Finish',
-    shouldRenderLeftButton: false,
+    showLeftButton: false,
     leftButtonText: 'Back',
   },
 ];
