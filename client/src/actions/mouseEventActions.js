@@ -1,6 +1,6 @@
-export const MOUSE_DOWN_ON_ICON = 'MOUSE_DOWN_ON_ICON';
+export const TOGGLE_MOUSE_DOWN_ON_ICON = 'TOGGLE_MOUSE_DOWN_ON_ICON';
 export const toggleIsMouseDownOnIcon = bool => ({
-  type: 'MOUSE_DOWN_ON_ICON',
+  type: 'TOGGLE_MOUSE_DOWN_ON_ICON',
   isDown: bool,
 });
 

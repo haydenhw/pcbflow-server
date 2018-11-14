@@ -21,7 +21,7 @@ describe('mouseEvents reducer', () => {
     };
 
     const resultState = mouseEvents(deepFreeze(initialState), {
-      type: 'MOUSE_DOWN_ON_ICON',
+      type: 'TOGGLE_MOUSE_DOWN_ON_ICON',
       isDown: true,
     });
 

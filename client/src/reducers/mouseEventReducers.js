@@ -8,7 +8,7 @@ const defaultMouseEvents = {
 
 export const mouseEvents = (state = defaultMouseEvents, action) => {
   switch (action.type) {
-    case actions.MOUSE_DOWN_ON_ICON:
+    case actions.TOGGLE_MOUSE_DOWN_ON_ICON:
       return {
         ...state,
         isMouseDownOnIcon: action.isDown,
