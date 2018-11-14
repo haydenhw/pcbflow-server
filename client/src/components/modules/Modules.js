@@ -31,9 +31,9 @@ class Modules extends Component {
     const moduleList = modules.map((module, index) =>
       <ModulesItem
         {...module}
-        {...this.props}
         ref="module"
         key={index}
+        board={board}
         index={index}
         fontSize={fontSize}
         fontFamily={fontFamily}
@@ -41,6 +41,7 @@ class Modules extends Component {
         opacity={opacity}
         strokeWidth={strokeWidth}
         stroke={getStroke(module.id, module.defaultStroke, modules, board, topLeftAnchor)}
+        topLeftAnchor={topLeftAnchor}
         unmetDependencies={getUnmetDependencies(moduleDataList, modules, module.dependencies)}
       />
     );
@@ -54,14 +55,9 @@ class Modules extends Component {
 }
 
 const mapStateToProps = state => ({
-  anchors: state.anchors,
   board: getActiveProjectBoard(state),
-  checkCollisionTrigger: state.board.checkCollisionTrigger,
-  showAllIcons: state.sideBar.showAllIcons,
   modules: getActiveModules(state),
-  hoveredModule: getHoveredModule(state),
   topLeftAnchor: state.anchors.topLeft,
-  tutorialStep: state.tutorial.step,
 });
 
 export default connect(mapStateToProps)(Modules);
