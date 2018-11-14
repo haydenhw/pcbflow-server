@@ -156,6 +156,7 @@ export default class ModulesItem extends PureComponent {
 
     // *removing the (isDraggingToBoard === false) part of the fixed a bug where sidebound modules jumped while a module was being dragged from sidebar
     // const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
+    // Note: isDraggingToBoard was removed from props
 
     const topLeftAnchor = moduleGroup
       ? getTopLeftAnchor(moduleGroup)
@@ -238,8 +239,6 @@ ModulesItem.propTypes = {
   index: PropTypes.number.isRequired,
   innerGroupX: PropTypes.number.isRequired,
   innerGroupY: PropTypes.number.isRequired,
-  isDraggingToBoard: PropTypes.bool.isRequired,
-  modules: PropTypes.array.isRequired,
   opacity: PropTypes.number.isRequired,
   rotation: PropTypes.number.isRequired,
   stroke: PropTypes.string.isRequired,

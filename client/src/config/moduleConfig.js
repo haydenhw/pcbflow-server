@@ -1,6 +1,8 @@
-export const fontSize = 10;
-export const fontFamily = 'sans-serif';
-export const fill = 'red';
-export const opacity = 0.1;
-export const stroke = 'black';
-export const strokeWidth = 0.6;
+export const moduleStyles = {
+  fontSize: 10,
+  fontFamily: 'sans-serif',
+  fill: 'red',
+  opacity: 0.1,
+  stroke: 'black',
+  strokeWidth: 0.6,
+}
