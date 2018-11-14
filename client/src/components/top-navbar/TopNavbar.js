@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 
 import PopupMenu from 'components/popup-menu/PopupMenu';
 import PopupMenuTrigger from 'components/popup-menu/PopupMenuTrigger';

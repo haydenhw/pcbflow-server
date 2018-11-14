@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Rect, Group, Image, Text } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 
 import { compose } from 'helpers/functional';
 import { getKonvaChildByIndex, getKonvaParentByName} from 'helpers/konvaHelpers';

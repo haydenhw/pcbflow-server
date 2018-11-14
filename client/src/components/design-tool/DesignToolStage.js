@@ -7,7 +7,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import { Layer, Stage } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 
 import { getActiveProject, getActiveProjectBoard } from '../../selectors/projectSelectors';
 import { getActiveModules } from '../../selectors/moduleSelectors';

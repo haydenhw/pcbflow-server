@@ -5,7 +5,7 @@ import Konva from 'konva';
 import shortid from 'shortid';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 import { getProjects } from '../../selectors/projectSelectors';
 import { getModules } from '../../selectors/moduleSelectors';
 

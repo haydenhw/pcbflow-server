@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 
 import Modal from 'components/modal/Modal';
 import Projects from './Projects';

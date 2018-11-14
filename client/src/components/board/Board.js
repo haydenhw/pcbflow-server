@@ -5,7 +5,7 @@ import { Layer, Rect, Group } from 'react-konva';
 import { connect } from 'react-redux';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 import { getActiveProjectBoard } from '../../selectors/projectSelectors';
 import { boardStyles } from '../../constants/styleConstants';
 

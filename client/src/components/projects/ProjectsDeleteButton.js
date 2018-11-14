@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 import FontAwesome from 'react-fontawesome';
 
 export default function ProjectsDeleteButton(props) {

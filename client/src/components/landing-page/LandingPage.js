@@ -3,7 +3,7 @@ import { routeToProjects } from 'helpers/routeHelpers';
 import { connect } from 'react-redux';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 import { getProjects } from '../../selectors/projectSelectors';
 
 import LandingPageCard from './LandingPageCard';

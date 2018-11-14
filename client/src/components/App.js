@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
 
-import store from 'reduxFiles/store';
+import store from 'store/store';
 import { handleExistingUserVisit, handleNewUserVisit } from 'actions/indexActions';
 import { isJWTExpired, getUser, getJWT, clearUser, clearJWT  } from 'helpers/users';
 // *move this to helpers

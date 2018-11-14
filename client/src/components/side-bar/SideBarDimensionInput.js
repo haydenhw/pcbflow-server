@@ -6,7 +6,7 @@ import { minWidth, minHeight } from '../../constants/boardConstants';
 import { getActiveProjectBoard } from '../../selectors/projectSelectors';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 
 import './side-bar-styles/_SideBarDimensionInput.scss';
 

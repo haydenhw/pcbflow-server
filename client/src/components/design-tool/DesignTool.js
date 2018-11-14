@@ -6,7 +6,7 @@ import FontAwesome from 'react-fontawesome';
 import Joyride from 'react-joyride';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 
 import {
   getProjects,

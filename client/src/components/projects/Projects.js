@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'react-router';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 
 import Logo from 'components/logo/Logo';
 import TopNavbarButton from 'components/top-navbar/TopNavbarButton';

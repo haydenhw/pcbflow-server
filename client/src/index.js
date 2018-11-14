@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 
-import store from 'reduxFiles/store';
+import store from 'store/store';
 
-import App from 'components/App.js'
+import App from 'components/App'
 import DesignTool from 'components/design-tool/DesignTool';
 import ProjectsContainer from 'components/projects/ProjectsContainer';
 import LandingPage from 'components/landing-page/LandingPage';

@@ -7,7 +7,7 @@ import { minWidth, minHeight } from '../../constants/boardConstants';
 import { anchorStyles } from '../../constants/styleConstants';
 
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
+import store from 'store/store';
 
 
 export default class Anchor extends Component {
