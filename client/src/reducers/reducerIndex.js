@@ -1,3 +1,5 @@
+import undoable from 'redux-undo';
+
 import { combineReducers } from 'redux';
 
 import { anchors } from './anchorReducers';
@@ -8,12 +10,13 @@ import { board } from './boardReducers';
 import { mouseEvents } from './mouseEventReducers';
 import { nav } from './navReducers';
 import { sideBar } from './sideBarReducers';
+import { skipIfImageNodeNull } from './sideBarReducers';
 import { triggers } from './triggersReducers';
 import { tutorial } from './tutorialReducers';
 import { modal } from './modalReducers';
 
 export default combineReducers({
-  // activeModules: undoable(activeModules, skipIfImageNodeNull),
+  activeModules: undoable(entities, skipIfImageNodeNull),
   anchors,
   board,
   entities,

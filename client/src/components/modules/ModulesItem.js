@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Rect, Group, Image, Text } from 'react-konva';
+import PropTypes from 'prop-types';
 
 import * as actions from 'actions/indexActions';
 import store from 'store/store';
@@ -8,6 +9,7 @@ import { compose } from 'helpers/functional';
 import { getKonvaChildByIndex, getKonvaParentByName} from 'helpers/konvaHelpers';
 import { getFill, getX, getY } from 'helpers/moduleHelpers';
 import bindToPerimeter from 'helpers/bindToPerimeter';
+
 const getTopLeftAnchor = compose(
   getKonvaChildByIndex(1),
   getKonvaParentByName('boardGroup'),
@@ -32,16 +34,17 @@ export default class ModulesItem extends PureComponent {
   }
 
   setImage() {
-    const { imageSrc, id } = this.props;
+    const { imageSrc, id, index } = this.props;
 
     if (imageSrc) {
       const image = new window.Image();
       image.src = imageSrc;
-      image.onload = () =>
-      store.dispatch(actions.updateEntity('Module', id, {
-        index: this.props.index,
-        imageNode: image,
-      }));
+      image.onload = () => {
+        store.dispatch(actions.updateEntity('Module', id, {
+          index,
+          imageNode: image,
+        }));
+      };
     }
   }
 
@@ -50,11 +53,11 @@ export default class ModulesItem extends PureComponent {
   }
 
   getNewPosition() {
-    const { hoveredModule, board } = this.props;
+    const { board } = this.props;
     const  { moduleGroup } = this.refs;
     const topLeftAnchor = getTopLeftAnchor(moduleGroup);
 
-    const updatedModule = Object.assign({}, hoveredModule, {
+    const updatedModule = Object.assign({}, this.props, {
       x: moduleGroup.getX(),
       y: moduleGroup.getY(),
     });
@@ -65,8 +68,7 @@ export default class ModulesItem extends PureComponent {
   }
 
   handleDragMove() {
-    const { hoveredModule } = this.props;
-    const { boundToSideIndex } = hoveredModule;
+    const { boundToSideIndex } = this.props;
     const { moduleGroup } = this.refs;
 
     if (isNaN(boundToSideIndex)) {
@@ -154,12 +156,10 @@ export default class ModulesItem extends PureComponent {
 
     // *removing the (isDraggingToBoard === false) part of the fixed a bug where sidebound modules jumped while a module was being dragged from sidebar
     // const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
+
     const topLeftAnchor = moduleGroup
       ? getTopLeftAnchor(moduleGroup)
       : null;
-
-    // console.log('item', getY(this.props, topLeftAnchor));
-    // console.log('item', this.props.x);
 
     return (
       <Group
@@ -219,3 +219,43 @@ export default class ModulesItem extends PureComponent {
 ModulesItem.defaultProps = {
   unmetDependencies: [],
 };
+
+ModulesItem.propTypes = {
+  _id: PropTypes.string.isRequired,
+  board: PropTypes.object.isRequired,
+  boundToSideIndex: PropTypes.number,
+  fill: PropTypes.string.isRequired,
+  fontFamily: PropTypes.string.isRequired,
+  fontSize: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  imageHeight: PropTypes.number.isRequired,
+  imageNode: PropTypes.object,
+  imageSrc: PropTypes.string.isRequired,
+  imageWidth: PropTypes.number.isRequired,
+  imageX: PropTypes.number.isRequired,
+  imageY: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
+  innerGroupX: PropTypes.number.isRequired,
+  innerGroupY: PropTypes.number.isRequired,
+  isDraggingToBoard: PropTypes.bool.isRequired,
+  modules: PropTypes.array.isRequired,
+  opacity: PropTypes.number.isRequired,
+  rotation: PropTypes.number.isRequired,
+  stroke: PropTypes.string.isRequired,
+  strokeWidth: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  textX: PropTypes.number.isRequired,
+  textY: PropTypes.number.isRequired,
+  topLeftAnchor: PropTypes.object.isRequired,
+  unmetDependencies: PropTypes.array.isRequired,
+  width: PropTypes.number.isRequired,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+}
+
+ModulesItem.defaultProps = {
+  boundToSideIndex: null,
+  id: null,
+  imageNode: null,
+}
