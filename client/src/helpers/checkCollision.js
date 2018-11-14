@@ -1,4 +1,4 @@
-export default function checkCollision(itemArray, callback) {
+export default function checkCollision(itemArray) {
   const collidingItems = [];
 
   itemArray.forEach((item) => {
@@ -9,7 +9,6 @@ export default function checkCollision(itemArray, callback) {
     const itemBottom = y + height;
 
     itemArray.forEach((otherItem) => {
-
       if (JSON.stringify(item) !== JSON.stringify(otherItem)) {
         const { x, y, width, height } = otherItem;
         const otherLeft = x;

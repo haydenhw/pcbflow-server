@@ -15,9 +15,5 @@ export default function checkExceedsPerimeter(itemArray, perimeter) {
     }
   });
 
-  if (outOfBoundsItems.length > 0) {
-    outOfBoundsItems.push(perimeter);
-  }
-
   return outOfBoundsItems;
 }
