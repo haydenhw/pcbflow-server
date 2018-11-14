@@ -2,6 +2,28 @@ import { getRuleBreakingModuleIds } from 'helpers/getRuleBreakingModules';
 import bindToPerimeter from 'helpers/bindToPerimeter';
 import { findNextUnsatisfiedModule, getUnmetDependencies } from 'helpers/dependencies';
 
+const getCenterCoordinate = (moduleDimension, boardDimension) => (
+   0.5 * (boardDimension - moduleDimension)
+);
+
+export const centerBoundModule = (rotated, module, board) =>  {
+  const { boundToSideIndex } = rotated
+  const { height: moduleHeight, width: moduleWidth } = module;
+  const { height: boardHeight, width: boardWidth } = board;
+  const notBound = boundToSideIndex === null;
+  const isLeftRight = boundToSideIndex % 2 === 0;
+
+  if (notBound) {
+    return rotated;
+  }
+
+  const newCoordinates = isLeftRight
+    ? { x: getCenterCoordinate(moduleWidth, boardWidth) }
+    : { y: getCenterCoordinate(moduleHeight, boardHeight) };
+
+  return Object.assign({}, rotated , newCoordinates);
+}
+
 export const getX = (props, topLeftAnchor) => {
   const { board, x } = props;
   return (
