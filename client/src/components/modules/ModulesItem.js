@@ -222,7 +222,6 @@ ModulesItem.defaultProps = {
 };
 
 ModulesItem.propTypes = {
-  _id: PropTypes.string.isRequired,
   board: PropTypes.object.isRequired,
   boundToSideIndex: PropTypes.number,
   fill: PropTypes.string.isRequired,

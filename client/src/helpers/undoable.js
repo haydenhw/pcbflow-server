@@ -1,12 +1,34 @@
-export default function undoable(reducer, callback) {
+export const undoable = (reducer) => {
+  return (state, action) => {
 
+    const initialState = {
+      past: [],
+      present: reducer(undefined, {}),
+      future: [],
+    };
+
+    const obj = {
+      foo: "bar",
+    }
+
+    const reducerResult = reducer(state, action);
+    // const reducerResult = reducer(state=initialState, action);
+    // console.log(res);
+    const res =  Object.assign({}, reducerResult, obj);
+
+    return res;
+  }
+}
+
+export function undoable2(reducer, callback) {
   const initialState = {
     past: [],
     present: reducer(undefined, {}),
     future: [],
   };
 
-  return function (state = initialState, action) {
+  return function (state, action) {
+  // return function (state = initialState, action) {
     const { past, present, future } = state;
 
     switch (action.type) {
@@ -39,6 +61,8 @@ export default function undoable(reducer, callback) {
       default:
         const { skipPrevState } = action;
         const newPresent = reducer(present, action);
+
+        return newPresent;
 
         if (JSON.stringify(present) === JSON.stringify(newPresent)) {
           return state;

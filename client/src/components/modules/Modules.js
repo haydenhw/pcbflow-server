@@ -20,9 +20,6 @@ class Modules extends Component {
   render() {
     const { modules, board, topLeftAnchor } = this.props;
 
-    // const res = modules[0].x;
-    // console.log('modules', res);
-
     const moduleList = modules.map((module, index) =>
       <ModulesItem
         {...module}
