@@ -71,6 +71,9 @@ export const selectedModule = (state = {}, action) => {
 export const currentProjectModules = (state = [], action) => {
   if (action.type) {
     switch (action.type) {
+
+      case actions.START_TUTORIAL:
+       return [];
       case actions.POST_PROJECT_SUCCESS:
       case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
         return action.project.modules;
