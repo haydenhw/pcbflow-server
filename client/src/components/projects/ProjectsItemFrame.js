@@ -10,8 +10,8 @@ import DeleteButton from './ProjectsDeleteButton';
 import './projects-styles/_ProjectsItemFrame.scss';
 import './projects-styles/_floatGrid.scss';
 
-function fectchProject(projectId) {
-  store.dispatch(actions.fetchProjectById(projectId));
+function fectchProject(projects, projectId) {
+  store.dispatch(actions.setActiveProject(projects, projectId, true));
 }
 
 const loadImage = imgSrc => (
@@ -69,7 +69,7 @@ export default class ProjectsItemFrame extends Component {
           <div
             className="thumbnail-image"
             style={{ backgroundImage: `url(${this.state.thumbnailDataUrl || ''})`}}
-            onClick={() => fectchProject(this.props.projectId)}
+            onClick={() => fectchProject(this.props.projects, this.props.projectId)}
             role="buttonplaylistUrl"
           >
           </div>

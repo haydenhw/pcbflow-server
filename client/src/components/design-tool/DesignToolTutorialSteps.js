@@ -41,7 +41,7 @@ export const tutorialSteps = [
   },
   {
     title: 'Nice!',
-    text: 'The COM or \'computer on module\' component will act as the control center for our HTPC. It is quite literally a computer which runs a linux or android operating system.\n The COM has a wide range of multimedia interfacing capabilities including: ',
+    text: 'The COM or \'computer on module\' component will act as the control center for our HTPC. It is micro-sized computer which runs a linux or android operating system.\n The COM has a wide range of multimedia interfacing capabilities including: ',
     list1: ['WiFi', 'HDMI', 'USB'],
     list2: ['Audio', 'Ethernet', 'RGB'],
     rightButtonText: 'Next',

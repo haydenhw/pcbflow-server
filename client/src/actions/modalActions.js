@@ -1,4 +1,7 @@
+import store from 'reduxFiles/store';
+import * as actions from 'actions/indexActions';
 import { devMode } from 'config/devMode';
+import { getTutorialProject } from 'helpers/tutorialHelpers';
 
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const toggleModal = () => ({
@@ -32,15 +35,32 @@ export const confirmRouteLeave = modalProps => ({
 });
 
 export const START_TUTORIAL = 'START_TUTORIAL';
-export const startTutorial = () => ({
-  type: 'START_TUTORIAL',
+export const startTutorial = () => (dispatch, getState) => {
+  const state = getState();
+  const projects = state.projects.items;
+  const tutorialProject = getTutorialProject(state);
+
+  if (tutorialProject) {
+    dispatch(actions.setActiveProject(projects, tutorialProject._id, true))
+  } else {
+    dispatch(actions.createNewProject('Tutorial', { isTutorialProject: true }));
+  }
+
+  dispatch({
+    type: 'START_TUTORIAL',
+  });
+};
+
+export const OFFER_TUTORIAL = 'OFFER_TUTORIAL';
+export const offerTutorial = () => ({
+  type: 'OFFER_TUTORIAL',
 });
 
-export const startTutorialIfNotOffered = () => (dispatch) => {
-  const wasTutorialOffered = localStorage.getItem('wasTutorialOffered');
+export const offerTutorialIfInitialVisit = () => (dispatch) => {
+  const isFirstUserVisit = localStorage.getItem('isFirstUserVisit');
 
-  if (!wasTutorialOffered && devMode === false) {
-    setTimeout(() => dispatch(startTutorial()), 500);
-    localStorage.setItem('wasTutorialOffered', true);
+  if (isFirstUserVisit && devMode === false) {
+    setTimeout(() => dispatch(offerTutorial()), 500);
+    localStorage.setItem('isFirstUserVisit', false);
   }
 }

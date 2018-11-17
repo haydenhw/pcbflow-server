@@ -58,7 +58,7 @@ export const updateLastSavedTime = time => ({
   time,
 });
 
-export const createNewProject = () => (dispatch) => {
+export const createNewProject = (name='Untitled', extraProps) => (dispatch) => {
   const ownerId = getUser()._id;
   const height = 300;
   const width = 500;
@@ -70,7 +70,7 @@ export const createNewProject = () => (dispatch) => {
   // *move to constants folder
   const newProject = {
     ownerId,
-    name: 'Untitled',
+    name,
     boardSpecs: {
       height,
       width,
@@ -79,6 +79,7 @@ export const createNewProject = () => (dispatch) => {
       thumbnail: '{"attrs":{"width":520,"height":320},"className":"Stage","children":[{"attrs":{"name":"boardLayer"},"className":"Layer","children":[{"attrs":{"name":"boardGroup","x":10,"y":10,"width":500,"height":300,"draggable":"true"},"className":"Group","children":[{"attrs":{"name":"board","width":500,"height":300,"fill":"#e3e3e5","opacity":"0.5","stroke":"#ccc"},"className":"Rect"},{"attrs":{"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"topLeft","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{"x":500,"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"topRight","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{"y":300,"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"bottomLeft","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{"x":500,"y":300,"stroke":"#666","fill":"#ddd","strokeWidth":"2","radius":"8","name":"bottomRight","draggable":"true","dragOnTop":"false"},"className":"Circle"},{"attrs":{},"className":"Group","children":[]}]}]}]}',
     },
     modules: [],
+    ...extraProps
   };
 
   dispatch(postNewProject(newProject));
@@ -212,13 +213,18 @@ export function postNewProject(newProject) {
 }
 
 export const SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT';
-export const setActiveProject =(projects, projectId) => (dispatch, getState) => {
+export const setActiveProject =(projects, projectId, shouldRoute) => (dispatch, getState) => {
   const activeProject = getProjectById(projects, projectId);
 
   dispatch({
     type: 'SET_ACTIVE_PROJECT',
     project: activeProject,
   })
+
+  if (shouldRoute) {
+    const newRoute = `/design/${projectId}`;
+    hashHistory.push(newRoute)
+  }
 };
 
 export const UPDATE_PROJECT_REQUEST = 'UPDATE_PROJECT_REQUEST';

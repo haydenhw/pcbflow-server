@@ -108,7 +108,7 @@ let DesignTool = class extends Component {
   componentDidMount() {
     this.addHanlders();
     this.checkIfMobile();
-    store.dispatch(actions.startTutorialIfNotOffered());
+    store.dispatch(actions.offerTutorialIfInitialVisit());
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -338,7 +338,7 @@ let DesignTool = class extends Component {
     const evtobj = window.event ? event : evt;
     const { isMouseOverModule, selectedModuleIndex } = this.props;
 
-    if (isMouseOverModule && (evtobj.code === 'Delete')) {
+    if (isMouseOverModule && (evtobj.code === 'Delete' || evtobj.code === 'Backspace')) {
       store.dispatch(actions.deleteSelectedModule(selectedModuleIndex));
     }
   }

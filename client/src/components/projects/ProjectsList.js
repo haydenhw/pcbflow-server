@@ -31,6 +31,7 @@ class ProjectsList extends Component {
       return (
         <ProjectsItemFrame
           key={shortid.generate()}
+          projects={projects}
           projectName={project.name}
           projectId={project._id}
           thumbnail={thumbnail}

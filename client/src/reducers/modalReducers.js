@@ -37,7 +37,7 @@ export const modal = (state = defaultState, action) => {
         modalType: 'CONFIRM_ROUTE_LEAVE',
         modalProps: action.modalProps,
       };
-    case actions.START_TUTORIAL:
+    case actions.OFFER_TUTORIAL:
       return {
         shouldRenderModal: true,
         modalType: 'ONBOARD',
