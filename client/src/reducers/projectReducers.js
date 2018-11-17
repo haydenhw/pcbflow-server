@@ -105,6 +105,7 @@ export const currentProjectInfo = (state = defaultProjectInfo, action) => {
   switch (action.type) {
     case actions.POST_PROJECT_SUCCESS:
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+    case actions.SET_ACTIVE_PROJECT:
       return {
         ...state,
         name: action.project.name,
@@ -114,7 +115,7 @@ export const currentProjectInfo = (state = defaultProjectInfo, action) => {
     case actions.UPDATE_PROJECT_NAME:
       return {
         ...state,
-        name: action.newName,
+        name: action.name,
       };
       break;
     case actions.UPDATE_PROJECT_PRICE:

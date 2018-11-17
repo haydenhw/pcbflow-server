@@ -46,7 +46,7 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
         savedThumbnail: state.tempThumbnail,
       };
     break;
-    case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+    case actions.SET_ACTIVE_PROJECT:
     case actions.POST_PROJECT_SUCCESS:
       const boardSpecs = action.project.boardSpecs;
       const { x, y, width, height, thumbnail } = boardSpecs;

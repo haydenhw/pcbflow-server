@@ -6,7 +6,13 @@ import store from 'reduxFiles/store';
 import { projectsUrl } from '../config/endpointUrls';
 import { sampleProject } from '../config/sampleProject'
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
-import { addSampleProject, getProjectById } from 'helpers/projectHelpers';
+
+import {
+  addSampleProject,
+  getProjectById,
+  getIdFromUrl,
+  isDesignRoute
+} from 'helpers/projectHelpers';
 
 const getOriginAdjustedModules = (modules, originX, originY) => (
   modules.map((module) => {
@@ -82,11 +88,22 @@ export const fetchProjectsRequest = () => ({
   type: 'FETCH_PROJECTS_REQUEST',
 });
 
+
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
-export const fetchProjectsSuccess = projects => ({
-  type: 'FETCH_PROJECTS_SUCCESS',
-  projects,
-});
+export const fetchProjectsSuccess = projects => (dispatch, getState) => {
+  const currentUrl = window.location.href;
+  const isOnDesignPage = isDesignRoute(currentUrl);
+
+  if (isOnDesignPage) {
+    const projectId = getIdFromUrl(currentUrl);
+    dispatch(setActiveProject(projects, projectId));
+  }
+
+  dispatch({
+    type: 'FETCH_PROJECTS_SUCCESS',
+    projects,
+  });
+};
 
 export function fetchProjects(jwt) {
   if (!jwt) {
@@ -194,6 +211,16 @@ export function postNewProject(newProject) {
   };
 }
 
+export const SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT';
+export const setActiveProject =(projects, projectId) => (dispatch, getState) => {
+  const activeProject = getProjectById(projects, projectId);
+
+  dispatch({
+    type: 'SET_ACTIVE_PROJECT',
+    project: activeProject,
+  })
+};
+
 export const UPDATE_PROJECT_REQUEST = 'UPDATE_PROJECT_REQUEST';
 export const updateProjectRequest = project => ({
   type: 'UPDATE_PROJECT_REQUEST',
@@ -233,9 +260,9 @@ export function updateProject(projectData) {
 }
 
 export const UPDATE_PROJECT_NAME = 'UPDATE_PROJECT_NAME';
-export const updateProjectName = (newName, projectId) => ({
+export const updateProjectName = (name, projectId) => ({
   type: 'UPDATE_PROJECT_NAME',
-  newName,
+  name,
   projectId,
 });
 

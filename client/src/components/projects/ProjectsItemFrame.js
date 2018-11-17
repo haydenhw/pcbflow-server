@@ -69,7 +69,7 @@ export default class ProjectsItemFrame extends Component {
           <div
             className="thumbnail-image"
             style={{ backgroundImage: `url(${this.state.thumbnailDataUrl || ''})`}}
-            onClick={() => console.log(this.props.projectId) || fectchProject(this.props.projectId)}
+            onClick={() => fectchProject(this.props.projectId)}
             role="buttonplaylistUrl"
           >
           </div>

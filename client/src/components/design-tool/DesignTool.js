@@ -106,13 +106,6 @@ let DesignTool = class extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.currentProjectName) {
-      const projectId = this.props.params.projectId;
-      const currentRoute = this.props.location.pathname;
-
-      store.dispatch(actions.fetchProjectById(projectId, currentRoute));
-    }
-
     this.addHanlders();
     this.checkIfMobile();
     store.dispatch(actions.startTutorialIfNotOffered());
