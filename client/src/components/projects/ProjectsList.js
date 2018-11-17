@@ -26,7 +26,6 @@ class ProjectsList extends Component {
 
   render() {
     const { projects } = this.props;
-
     const projectsList = projects.map((project) => {
       const { thumbnail } = project.boardSpecs;
       return (

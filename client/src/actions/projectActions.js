@@ -4,7 +4,9 @@ import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
 import { projectsUrl } from '../config/endpointUrls';
+import { sampleProject } from '../config/sampleProject'
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
+import { addSampleProject, getProjectById } from 'helpers/projectHelpers';
 
 const getOriginAdjustedModules = (modules, originX, originY) => (
   modules.map((module) => {
@@ -101,8 +103,9 @@ export function fetchProjects(jwt) {
       },
     })
     .then(res => res.json())
-    .then((data) => {
-      dispatch(fetchProjectsSuccess(data));
+    .then((projects) => {
+      const withSampleProject = addSampleProject(projects, sampleProject);
+      dispatch(fetchProjectsSuccess(withSampleProject));
     });
     // .catch((err) => {
     //   console.error(err);
@@ -143,24 +146,18 @@ export const fetchProjectByIdSuccess = project => (dispatch, getState) => {
   });
 };
 
-export function fetchProjectById(projectId, currentRoute) {
+export const fetchProjectById = (projectId, currentRoute) => (dispatch, getState) => {
+  const state = getState();
+  const { projects } = state;
+  const project = getProjectById(projects.items, projectId);
   const projectUrl = `${projectsUrl}/${projectId}`;
+  const designRoute = `/design/${projectId}`;
 
-  return (dispatch) => {
-    fetch(projectUrl)
-    .then(res => res.json())
-    .then((data) => {
-      dispatch(fetchProjectByIdSuccess(data));
-      const designRoute = `/design/${projectId}`;
+  dispatch(fetchProjectByIdSuccess(project));
 
-      if (currentRoute !== designRoute) {
-        hashHistory.push(designRoute);
-      }
-    })
-    // .catch((err) => {
-    //   console.error(err);
-    // });
-  };
+  if (currentRoute !== designRoute) {
+      hashHistory.push(designRoute);
+  }
 }
 
 export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS';

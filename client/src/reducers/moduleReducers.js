@@ -76,6 +76,7 @@ export const currentProjectModules = (state = [], action) => {
        return [];
       case actions.POST_PROJECT_SUCCESS:
       case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
+        console.log(action)
         return action.project.modules;
         break;
 
