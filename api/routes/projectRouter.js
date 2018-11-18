@@ -59,6 +59,7 @@ projectRouter.post('/', (req, res) => {
       modules: req.body.modules,
       ownerId: req.body.ownerId,
       isTutorialProject: req.body.isTutorialProject,
+      isSampleProject: req.body.isSampleProject,
     })
   .then(project => res.status(201).json(project))
   .catch(err => {

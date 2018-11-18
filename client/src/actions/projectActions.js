@@ -8,7 +8,7 @@ import { sampleProject } from '../config/sampleProject'
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
 
 import {
-  addSampleProject,
+  hasSampleProject,
   getProjectById,
   getIdFromUrl,
   isDesignRoute
@@ -82,7 +82,7 @@ export const createNewProject = (name='Untitled', extraProps) => (dispatch) => {
     ...extraProps
   };
 
-  dispatch(postNewProject(newProject));
+  return dispatch(postNewProject(newProject, true));
 };
 export const FETCH_PROJECTS_REQUEST = 'FETCH_PROJECTS_REQUEST';
 export const fetchProjectsRequest = () => ({
@@ -91,7 +91,7 @@ export const fetchProjectsRequest = () => ({
 
 
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
-export const fetchProjectsSuccess = projects => (dispatch, getState) => {
+export const fetchProjectsSuccess = (projects) => (dispatch, getState) => {
   const currentUrl = window.location.href;
   const isOnDesignPage = isDesignRoute(currentUrl);
 
@@ -122,8 +122,16 @@ export function fetchProjects(jwt) {
     })
     .then(res => res.json())
     .then((projects) => {
-      const withSampleProject = addSampleProject(projects, sampleProject);
-      dispatch(fetchProjectsSuccess(withSampleProject));
+      const containsSampleProject = hasSampleProject(projects);
+
+      if (!containsSampleProject) {
+        dispatch(postNewProject(sampleProject))
+          .then((sampleProject) => {
+            dispatch(fetchProjectsSuccess([sampleProject, ...projects]))
+          })
+      } else {
+        dispatch(fetchProjectsSuccess([...projects].reverse()))
+      }
     });
     // .catch((err) => {
     //   console.error(err);
@@ -179,19 +187,21 @@ export const fetchProjectById = (projectId, currentRoute) => (dispatch, getState
 }
 
 export const POST_PROJECT_SUCCESS = 'POST_PROJECT_SUCCESS';
-export const postProjectSuccess = project => dispatch => {
+export const postProjectSuccess = (project, shouldRoute) => dispatch => {
   dispatch({
     type: 'POST_PROJECT_SUCCESS',
     project
   });
 
-  const designRoute = `/design/${project._id}`;
-  hashHistory.push(designRoute);
+  if (shouldRoute) {
+    const designRoute = `/design/${project._id}`;
+    hashHistory.push(designRoute);
+  }
 };
 
-export function postNewProject(newProject) {
+export function postNewProject(newProject, shouldRoute) {
   return (dispatch) => {
-    fetch(
+    return fetch(
       projectsUrl,
       {
         method: 'POST',
@@ -202,9 +212,10 @@ export function postNewProject(newProject) {
         }),
       })
       .then(res => res.json())
-      .then((data) => {
-        const projectId = data._id;
-        dispatch(postProjectSuccess(data))
+      .then((project) => {
+        const projectId = project._id;
+        dispatch(postProjectSuccess(project, shouldRoute))
+        return project;
       })
       .catch((err) => {
         console.error(err);

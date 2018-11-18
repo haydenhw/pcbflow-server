@@ -1,4 +1,3 @@
-
 export const hasSampleProject = projects => (
   Boolean(
     projects.find((project) => project.isSampleProject)

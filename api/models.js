@@ -47,6 +47,7 @@ const ProjectSchema = mongoose.Schema({
     dependencies: [String],
   }],
   isTutorialProject: Boolean,
+  isSampleProject: Boolean,
 });
 
 const UserSchema = mongoose.Schema({
