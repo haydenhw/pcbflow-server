@@ -27,6 +27,7 @@ class Board extends Component {
 
   componentDidMount() {
     this.board = this.refs.board;
+    store.dispatch(actions.offerTutorialIfInitialVisit());
   }
 
   updateLocalStatePosition() {

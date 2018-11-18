@@ -15,7 +15,6 @@ export const draggingModule = (state = {}, action) => {
   switch (action.type) {
     case actions.CHANGE_DRAGGING_MODULE:
       return action.moduleData;
-      break;
 
     case actions.UPDATE_MODULE_IMAGE:
       const { imageNode } = action.moduleData;
@@ -32,7 +31,6 @@ export const selectedModule = (state = {}, action) => {
   switch (action.type) {
     case actions.UPDATE_SELECTED_MODULE:
       return action.moduleData;
-      break;
     case actions.UPDATE_MODULE_POSITION:
       const { x, y } = action.modulePosition;
       return {
@@ -40,7 +38,6 @@ export const selectedModule = (state = {}, action) => {
         x,
         y,
       };
-      break;
     case actions.ROTATE_SELECTED_MODULE:
       const {
         rotation,
@@ -71,17 +68,14 @@ export const selectedModule = (state = {}, action) => {
 export const currentProjectModules = (state = [], action) => {
   if (action.type) {
     switch (action.type) {
-
       case actions.START_TUTORIAL:
        return [];
       case actions.POST_PROJECT_SUCCESS:
       case actions.SET_ACTIVE_PROJECT:
         return action.project.modules;
-        break;
 
       case actions.PUSH_NEW_MODULE:
         return [...state, action.module];
-        break;
 
       case actions.UPDATE_MODULE_POSITION:
         return state.map((module, i) => {
@@ -93,7 +87,6 @@ export const currentProjectModules = (state = [], action) => {
           };
           return i === index ? updatedModuleProps : module;
         });
-        break;
 
       case actions.UPDATE_MODULE_STROKE:
         return state.map((module, i) => {
@@ -104,7 +97,6 @@ export const currentProjectModules = (state = [], action) => {
           };
           return i === index ? updatedModuleProps : module;
         });
-        break;
 
       case actions.UPDATE_MET_DEPENDECIES:
         return state.map((module, i) => {
@@ -115,7 +107,6 @@ export const currentProjectModules = (state = [], action) => {
           };
           return i === index ? updatedModuleProps : module;
         });
-        break;
 
       case actions.UPDATE_MODULE_IMAGE:
         return state.map((module, i) => {
@@ -127,7 +118,6 @@ export const currentProjectModules = (state = [], action) => {
 
           return i === index ? updatedModuleProps : module;
         });
-        break;
 
       case actions.ROTATE_SELECTED_MODULE:
         const {
@@ -162,7 +152,6 @@ export const currentProjectModules = (state = [], action) => {
           ...state.slice(action.moduleIndex + 1),
         ];
         return newState;
-        break;
 
       default:
         return state;

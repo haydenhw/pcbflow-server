@@ -46,9 +46,10 @@ export const startTutorial = () => (dispatch, getState) => {
     dispatch(actions.createNewProject('Tutorial', { isTutorialProject: true }));
   }
 
+  dispatch(actions.triggerAnchorUpdate());
   dispatch({
     type: 'START_TUTORIAL',
-  });
+  })
 };
 
 export const OFFER_TUTORIAL = 'OFFER_TUTORIAL';
@@ -59,7 +60,7 @@ export const offerTutorial = () => ({
 export const offerTutorialIfInitialVisit = () => (dispatch) => {
   const isFirstUserVisit = localStorage.getItem('isFirstUserVisit');
 
-  if (isFirstUserVisit && devMode === false) {
+  if ((isFirstUserVisit === null) && (devMode === false)) {
     setTimeout(() => dispatch(offerTutorial()), 500);
     localStorage.setItem('isFirstUserVisit', false);
   }

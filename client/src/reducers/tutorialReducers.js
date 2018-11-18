@@ -37,8 +37,15 @@ export const tutorial = (state = devMode ? devState : defaultState, action) => {
     case actions.EXIT_TUTORIAL:
       return {
         ...state,
+        step: 1,
         isTutorialActive: !state.isTutorialActive,
         shouldRenderTodoList: action.bool,
+      };
+    case actions.START_TUTORIAL:
+      return {
+        ...state,
+        step: 1,
+        isTutorialActive: !state.isTutorialActive,
       };
     case actions.UPDATE_DISABLED_ICON_EXCEPTIONS:
       return {
@@ -76,4 +83,3 @@ export const tutorial = (state = devMode ? devState : defaultState, action) => {
       return state;
   }
 };
-

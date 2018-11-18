@@ -61,7 +61,7 @@ export default function TopNavbar(props) {
         <span className="nav-save-status">{getSaveStatusMessage(isSaving)}</span>
         <TopNavbarButton
           className="nav-button tutorial-button"
-          handleClick={() => store.dispatch(actions.offerTutorial())}
+          handleClick={() => store.dispatch(actions.startTutorial())}
           icon={<span className="tutorial-button-icon icon-school"></span>}
           text="Tutorial"
         />

@@ -180,7 +180,13 @@ class DesignToolStage extends Component {
               width={document.documentElement.clientWidth}
               height={document.documentElement.clientHeight}
             >
-              <Grid gridRef={node => { this.grid = node }} gridWidth={2000} gridHeight={2000} cellWidth={20} />
+
+             <Grid
+                gridRef={node => { this.grid = node }}
+                gridWidth={2000}
+                gridHeight={2000}
+                cellWidth={20}
+               />
               {shouldRenderBoard
                 ? <Board
                     rotate={rotate}

@@ -108,7 +108,6 @@ let DesignTool = class extends Component {
   componentDidMount() {
     this.addHanlders();
     this.checkIfMobile();
-    store.dispatch(actions.offerTutorialIfInitialVisit());
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -196,7 +195,7 @@ let DesignTool = class extends Component {
       switch (tutorialStep) {
         case 0:
           const stepZeroRightButtonHandler = function () {
-            store.dispatch(actions.incrementTutorialStep());
+            store.dispatch(actions.startTutorial());
             store.dispatch(actions.toggleTutorialIsActive());
           };
           const stepZeroLeftButtoHandler = function () {

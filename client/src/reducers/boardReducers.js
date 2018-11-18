@@ -86,6 +86,7 @@ export const anchorPositions = (state = defaultAnchorPositions, action) => {
         updateAnchorTrigger: !state.updateAnchorTrigger,
       };
       break;
+    case actions.SET_ACTIVE_PROJECT:
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
       return defaultAnchorPositions;
       break;

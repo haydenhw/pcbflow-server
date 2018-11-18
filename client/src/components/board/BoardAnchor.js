@@ -135,11 +135,6 @@ export default class Anchor extends Component {
   render() {
     const { x, y, name } = this.props;
 
-    if(this.anchor) {
-      // console.log(this.anchor.getX());
-      // console.log(this.anchor.getY());
-    }
-
     return (
       <Circle
         ref="anchor"
