@@ -1,5 +1,4 @@
 import * as actions from 'actions/indexActions';
-
 import doesModifyProject from 'helpers/doesModifyProject';
 
 const defaultboardSpecs = {
@@ -9,6 +8,7 @@ const defaultboardSpecs = {
   y: 100,
   checkCollisionTrigger: false,
   stroke: '#ccc',
+  updateBoardTrigger: false,
 };
 
 export const boardSpecs = (state = defaultboardSpecs, action) => {
@@ -44,6 +44,21 @@ export const boardSpecs = (state = defaultboardSpecs, action) => {
       return {
         ...state,
         savedThumbnail: state.tempThumbnail,
+      };
+    break;
+    case actions.TRIGGER_BOARD_UPDATE:
+      return {
+        ...state,
+        updateBoardTrigger: !state.updateBoardTrigger,
+      };
+    case actions.START_TUTORIAL:
+      return {
+        ...state,
+        stroke: null,
+        x: (0.5 * (document.documentElement.clientWidth + 200)) - (500 / 2),
+        y: (0.5 * document.documentElement.clientHeight) - (300 / 2),
+        height: 300,
+        width: 500,
       };
     break;
     case actions.SET_ACTIVE_PROJECT:
@@ -88,7 +103,10 @@ export const anchorPositions = (state = defaultAnchorPositions, action) => {
       break;
     case actions.SET_ACTIVE_PROJECT:
     case actions.FECTCH_PROJECT_BY_ID_SUCCESS:
-      return defaultAnchorPositions;
+      return {
+        ...defaultAnchorPositions,
+        updateAnchorTrigger: state.updateAnchorTrigger,
+      };
       break;
     default:
       return state;

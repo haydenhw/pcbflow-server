@@ -67,6 +67,7 @@ export const projects = (state = defaultProjectState, action) => {
       return {
         ...state,
         items: updatedProjects,
+        saveProjectTrigger: !state.saveProjectTrigger,
       }
     }
     case actions.UPDATE_PROJECT_REQUEST:

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Konva from 'konva';
 import shortid from 'shortid';
 
+import { getJWT } from 'helpers/users';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
@@ -22,6 +23,11 @@ class ProjectsList extends Component {
       projectId,
       projectName,
     }));
+  }
+
+  componentDidMount() {
+    const jwt = getJWT();
+    store.dispatch(actions.fetchProjects(jwt));
   }
 
   render() {

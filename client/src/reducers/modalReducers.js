@@ -40,7 +40,7 @@ export const modal = (state = defaultState, action) => {
     case actions.OFFER_TUTORIAL:
     case actions.START_TUTORIAL:
       return {
-        shouldRenderModal: true,
+        shouldRenderModal: false,
         modalType: 'ONBOARD',
         modalProps: action.modalProps,
       };

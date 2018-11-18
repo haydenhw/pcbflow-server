@@ -47,9 +47,8 @@ export const startTutorial = () => (dispatch, getState) => {
   }
 
   dispatch(actions.triggerAnchorUpdate());
-  dispatch({
-    type: 'START_TUTORIAL',
-  })
+  dispatch(actions.triggerBoardUpdate());
+  dispatch({ type: 'START_TUTORIAL' });
 };
 
 export const OFFER_TUTORIAL = 'OFFER_TUTORIAL';

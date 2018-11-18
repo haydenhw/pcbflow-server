@@ -30,6 +30,14 @@ class Board extends Component {
     store.dispatch(actions.offerTutorialIfInitialVisit());
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.updateBoardTrigger !== prevProps.updateBoardTrigger) {
+      const { topLeft } = this.props;
+      this.board.setX(topLeft.x);
+      this.board.setY(topLeft.y);
+    }
+  }
+
   updateLocalStatePosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
@@ -60,8 +68,6 @@ class Board extends Component {
   }
 
   handleDragMove() {
-    // this.updateLocalStatePosition();
-
     const layer = this.refs.boardGroup.getLayer();
     layer.draw();
   }
@@ -87,6 +93,8 @@ class Board extends Component {
       updateAnchorTrigger,
       isDraggingToBoard,
     } = this.props;
+
+    const refPosition = this.board ? this.board.getPosition() : null;
 
     return (
       <Layer
@@ -160,7 +168,6 @@ class Board extends Component {
 }
 
 const mapStateToProps = state => ({
-  updateAnchorTrigger:state.anchorPositions.updateAnchorTrigger,
   x: state.boardSpecs.x,
   y: state.boardSpecs.y,
   width: state.boardSpecs.width,
@@ -170,15 +177,17 @@ const mapStateToProps = state => ({
   bottomLeft: state.anchorPositions.bottomLeft,
   bottomRight: state.anchorPositions.bottomRight,
   stroke: state.boardSpecs.stroke,
+  updateBoardTrigger: state.boardSpecs.updateBoardTrigger,
+  updateAnchorTrigger: state.anchorPositions.updateAnchorTrigger,
 });
 
 export default connect(mapStateToProps)(Board);
 
 Board.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  width: PropTypes.number,
+  height: PropTypes.number,
   topLeft: PropTypes.object.isRequired,
   topRight: PropTypes.object.isRequired,
   bottomLeft: PropTypes.object.isRequired,
