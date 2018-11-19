@@ -5,13 +5,13 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { board, anchors } from './boardReducers';
+import { boardSpecs, anchorPositions } from './boardReducer';
 
-describe('board reducer', () => {
+describe('boardSpecs reducer', () => {
     // Fetch Basic Info about User
   it('It should return correct height and width', () => {
     const initialState = {
-      x: 10 ,
+      x: 10,
       y: 10,
       width: 600,
       height: 300,
@@ -24,7 +24,7 @@ describe('board reducer', () => {
       height: 34,
     };
 
-    const resultState = board(deepFreeze(initialState), {
+    const resultState = boardSpecs(deepFreeze(initialState), {
       type: 'UPDATE_BOARD_DIMENSIONS',
       dimensions: {
         width: 105,
@@ -50,8 +50,8 @@ describe('board reducer', () => {
       height: 300,
     };
 
-    const resultState = board(deepFreeze(initialState), {
-      type: 'UPDATE_BOARD',
+    const resultState = boardSpecs(deepFreeze(initialState), {
+      type: 'UPDATE_BOARD_POSITION',
       position: {
         x: 25,
         y: 25,
@@ -77,7 +77,7 @@ describe('board reducer', () => {
       stroke: 'red',
     };
 
-    const resultState = board(deepFreeze(initialState), {
+    const resultState = boardSpecs(deepFreeze(initialState), {
       type: 'UPDATE_BOARD_STROKE',
       boardStroke: 'red',
     });
@@ -85,7 +85,7 @@ describe('board reducer', () => {
     assert.deepEqual(resultState, expectedState);
   });
 
-  it('It should return the correct board', () => {
+  it('It should return the correct boardSpecs', () => {
     const initialState = {
       x: 10,
       y: 10,
@@ -101,10 +101,10 @@ describe('board reducer', () => {
 
     };
 
-    const resultState = board(deepFreeze(initialState), {
+    const resultState = boardSpecs(deepFreeze(initialState), {
       type: 'FECTCH_PROJECT_BY_ID_SUCCESS',
       project: {
-        board: {
+        boardSpecs: {
           x: 50,
           y: 50,
           width: 450,
@@ -115,9 +115,34 @@ describe('board reducer', () => {
 
     assert.deepEqual(resultState, expectedState);
   });
+
+  it('It should return the correct thumbnail', () => {
+    const initialState = {
+      x: 10,
+      y: 10,
+      width: 600,
+      height: 300,
+    };
+
+    const expectedState = {
+      x: 10,
+      y: 10,
+      width: 600,
+      height: 300,
+      thumbnail: 'This is a string',
+
+    };
+
+    const resultState = boardSpecs(deepFreeze(initialState), {
+      type: 'UPDATE_BOARD_THUMBNAIL',
+      thumbnail: 'This is a string',
+    });
+
+    assert.deepEqual(resultState, expectedState);
+  });
 });
 
-describe('anchors reducer', () => {
+describe('anchorPositions reducer', () => {
     // Fetch Basic Info about User
   it('It should return correct height and width', () => {
     const initialState = {
@@ -134,7 +159,7 @@ describe('anchors reducer', () => {
       bottomRight: { x: 20, y: 20 },
     };
 
-    const resultState = anchors(deepFreeze(initialState), {
+    const resultState = anchorPositions(deepFreeze(initialState), {
       type: 'UPDATE_ANCHOR_POSITIONS',
       positions: {
         topLeft: { x: 0, y: 0 },

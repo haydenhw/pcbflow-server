@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { getSessionWithTestData } from '../test/utils';
 import  orm from '../schema/schema';
 import  { createEntity, createEntityRequest }from '../actions/indexActions';
-import { entities } from './entitiesReducers';
+import { entities } from './entityReducer';
 import { Project } from '../models/projectsModel';
 
 describe('entities reducer create', function () {

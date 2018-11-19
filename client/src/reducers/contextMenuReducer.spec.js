@@ -5,7 +5,7 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { contextMenu } from './contextMenuReducers';
+import { contextMenu } from './contextMenuReducer';
 
 describe('contextMenu reducer', () => {
   it('It should toggle show boolean', () => {

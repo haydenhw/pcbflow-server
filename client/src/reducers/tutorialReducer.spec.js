@@ -5,16 +5,17 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { tutorial } from './tutorialReducers';
+import { tutorial } from './tutorialReducer';
 
 describe('tutorial reducer', () => {
-  it('It should toggle isActive', () => {
+    // Fetch Basic Info about User
+  it('It should toggle isTutorialActive', () => {
     const initialState = {
-      isActive: false,
+      isTutorialActive: false,
     };
 
     const expectedState = {
-      isActive: true,
+      isTutorialActive: true,
     };
 
     const resultState = tutorial(deepFreeze(initialState), {
@@ -24,13 +25,13 @@ describe('tutorial reducer', () => {
     assert.deepEqual(resultState, expectedState);
   });
 
-  it('It should toggle showTodoList', () => {
+  it('It should toggle shouldRenderTodoList', () => {
     const initialState = {
-      showTodoList: false,
+      shouldRenderTodoList: false,
     };
 
     const expectedState = {
-      showTodoList: true,
+      shouldRenderTodoList: true,
     };
 
     const resultState = tutorial(deepFreeze(initialState), {
@@ -41,11 +42,11 @@ describe('tutorial reducer', () => {
     assert.deepEqual(resultState, expectedState);
   });
 
-  it('It should toggle showTodoList', () => {
+  it('It should toggle shouldRenderTodoList', () => {
     const initialState = {
-      isActive: false,
-      isComplete: false,
-      showTodoList: false,
+      isTutorialActive: false,
+      isTutorialComplete: false,
+      shouldRenderTodoList: false,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,
@@ -53,9 +54,9 @@ describe('tutorial reducer', () => {
     };
 
     const expectedState = {
-      isActive: true,
-      isComplete: false,
-      showTodoList: true,
+      isTutorialActive: true,
+      isTutorialComplete: false,
+      shouldRenderTodoList: true,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,
@@ -72,9 +73,9 @@ describe('tutorial reducer', () => {
 
   it('It should toggle update disabledIconExceptions', () => {
     const initialState = {
-      isActive: false,
-      isComplete: false,
-      showTodoList: false,
+      isTutorialActive: false,
+      isTutorialComplete: false,
+      shouldRenderTodoList: false,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,
@@ -82,9 +83,9 @@ describe('tutorial reducer', () => {
     };
 
     const expectedState = {
-      isActive: false,
-      isComplete: false,
-      showTodoList: false,
+      isTutorialActive: false,
+      isTutorialComplete: false,
+      shouldRenderTodoList: false,
       disabledIconExceptions: ['101', '102'],
       step: 0,
       previousStep: null,
@@ -100,9 +101,9 @@ describe('tutorial reducer', () => {
 
   it('It should toggle update update todoBools array', () => {
     const initialState = {
-      isActive: false,
-      isComplete: false,
-      showTodoList: false,
+      isTutorialActive: false,
+      isTutorialComplete: false,
+      shouldRenderTodoList: false,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,
@@ -110,9 +111,9 @@ describe('tutorial reducer', () => {
     };
 
     const expectedState = {
-      isActive: false,
-      isComplete: false,
-      showTodoList: false,
+      isTutorialActive: false,
+      isTutorialComplete: false,
+      shouldRenderTodoList: false,
       disabledIconExceptions: null,
       step: 0,
       previousStep: null,

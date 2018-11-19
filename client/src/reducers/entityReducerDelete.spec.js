@@ -3,7 +3,7 @@ import { getSessionWithTestData } from '../test/utils';
 import  orm from '../schema/schema';
 import  { deleteEntity }from '../actions/indexActions';
 import { ENTITY_CREATE } from '../constants/actionTypes';
-import { entities } from './entitiesReducers';
+import { entities } from './entityReducer';
 
 
 describe('entities reducer delete', function () {

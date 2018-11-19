@@ -2,26 +2,26 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { mouseEvents } from './mouseEventReducers';
+import { mouseEvents } from './mouseEventReducer';
 
 describe('mouseEvents reducer', () => {
   it('It should return true if mouse is down on an icon', () => {
     const initialState = {
       isMouseOverModule: false,
-      isMouseDownOnIcon: false,
+      mouseDownOnIcon: false,
       isMouseDown: false,
       isContextMenuOpen: false,
     };
 
     const expectedState = {
       isMouseOverModule: false,
-      isMouseDownOnIcon: true,
+      mouseDownOnIcon: true,
       isMouseDown: false,
       isContextMenuOpen: false,
     };
 
     const resultState = mouseEvents(deepFreeze(initialState), {
-      type: 'TOGGLE_MOUSE_DOWN_ON_ICON',
+      type: 'MOUSE_DOWN_ON_ICON',
       isDown: true,
     });
 
@@ -31,14 +31,14 @@ describe('mouseEvents reducer', () => {
   it('It should return toggle the current state value if mouse is down', () => {
     const initialState = {
       isMouseOverModule: false,
-      isMouseDownOnIcon: false,
+      mouseDownOnIcon: false,
       isMouseDown: false,
       isContextMenuOpen: false,
     };
 
     const expectedState = {
       isMouseOverModule: false,
-      isMouseDownOnIcon: false,
+      mouseDownOnIcon: false,
       isMouseDown: true,
       isContextMenuOpen: false,
     };
@@ -54,14 +54,14 @@ describe('mouseEvents reducer', () => {
   it('It should return toggle the current state value if mouse over a ', () => {
     const initialState = {
       isMouseOverModule: false,
-      isMouseDownOnIcon: false,
+      mouseDownOnIcon: false,
       isMouseDown: false,
       isContextMenuOpen: false,
     };
 
     const expectedState = {
       isMouseOverModule: true,
-      isMouseDownOnIcon: false,
+      mouseDownOnIcon: false,
       isMouseDown: false,
       isContextMenuOpen: false,
     };

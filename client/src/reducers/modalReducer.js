@@ -1,20 +1,19 @@
 import * as actions from 'actions/indexActions';
-import * as types from '../constants/actionTypes';
 
 const defaultState = {
-  showModal: false,
+  shouldRenderModal: false,
   modalType: 'ONBOARD',
   modalProps: null,
 };
 
 export const modal = (state = defaultState, action) => {
   switch (action.type) {
-    case actions.DELETE_PROJECT_REQUEST:
     case actions.TOGGLE_MODAL:
+    case actions.DELETE_PROJECT_REQUEST:
     case actions.EXIT_TUTORIAL:
       return {
         ...state,
-        showModal: !state.showModal,
+        shouldRenderModal: !state.shouldRenderModal,
       };
     case actions.CHANGE_MODAL_TYPE:
       return {
@@ -28,33 +27,23 @@ export const modal = (state = defaultState, action) => {
       };
     case actions.CONFIRM_PROJECT_DELETE:
       return {
-        showModal: true,
+        shouldRenderModal: true,
         modalType: 'CONFIRM',
         modalProps: action.modalProps,
       };
     case actions.CONFIRM_ROUTE_LEAVE:
       return {
-        showModal: true,
+        shouldRenderModal: true,
         modalType: 'CONFIRM_ROUTE_LEAVE',
         modalProps: action.modalProps,
       };
+    case actions.OFFER_TUTORIAL:
     case actions.START_TUTORIAL:
       return {
-        showModal: true,
+        shouldRenderModal: true,
         modalType: 'ONBOARD',
         modalProps: action.modalProps,
       };
-    case types.ENTITY_DELETE:
-      const { itemType } = action.payload;
-
-      if (itemType === 'Project') {
-        return {
-          ...state,
-          showModal: false,
-        };
-      }
-
-      return state;
     default:
       return state;
   }

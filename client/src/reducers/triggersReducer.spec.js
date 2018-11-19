@@ -4,7 +4,7 @@
 import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
-import { triggers } from './triggersReducers';
+import { triggers } from './triggersReducer';
 
 describe('triggers reducer', () => {
     // Fetch Basic Info about User

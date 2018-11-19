@@ -5,19 +5,19 @@ import assert from 'assert';
 import deepFreeze from 'deep-freeze';
 
 import * as actions from 'actions/indexActions';
-import { modal } from './modalReducers';
+import { modal } from './modalReducer';
 
 describe('modal reducer', () => {
     // Fetch Basic Info about User
   it('It should return the correct boolean', () => {
     const initialState = {
-      showModal: false,
+      shouldRenderModal: false,
       modalType: 'ONBOARD',
       modalProps: null,
     };
 
     const expectedState = {
-      showModal: true,
+      shouldRenderModal: true,
       modalType: 'ONBOARD',
       modalProps: null,
     };
@@ -31,13 +31,13 @@ describe('modal reducer', () => {
 
   it('It should return updated modalProps', () => {
     const initialState = {
-      showModal: false,
+      shouldRenderModal: false,
       modalType: 'ONBOARD',
       modalProps: null,
     };
 
     const expectedState = {
-      showModal: false,
+      shouldRenderModal: false,
       modalType: 'ONBOARD',
       modalProps: {
         color: 'red',
@@ -58,13 +58,13 @@ describe('modal reducer', () => {
 
   it('It should update state for project delete confirmation', () => {
     const initialState = {
-      showModal: false,
+      shouldRenderModal: false,
       modalType: 'ONBOARD',
       modalProps: null,
     };
 
     const expectedState = {
-      showModal: true,
+      shouldRenderModal: true,
       modalType: 'CONFIRM',
       modalProps: {
         color: 'red',
@@ -85,13 +85,13 @@ describe('modal reducer', () => {
 
   it('It should update update the modal type', () => {
     const initialState = {
-      showModal: false,
+      shouldRenderModal: false,
       modalType: 'ONBOARD',
       modalProps: null,
     };
 
     const expectedState = {
-      showModal: false,
+      shouldRenderModal: false,
       modalType: 'CONFIRM',
       modalProps: null,
     };
