@@ -14,8 +14,34 @@ import './projects-styles/_floatGrid.scss';
 import './projects-styles/_ProjectsItemFrame.scss';
 
 class ProjectsList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      hasFetched: false,
+      projects: [],
+    }
+  }
+
   static defaultProps = {
     projects: [],
+  }
+
+
+  componentDidMount() {
+    const jwt = getJWT();
+    store.dispatch(actions.fetchProjects(jwt))
+      .then((projects) => {
+        this.setState({ projects });
+      });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { projects } = this.props;
+    console.log(projects);
+    if (projects !== prevProps.projects) {
+      console.log('inner');
+      this.setState({ projects });
+    }
   }
 
   confirmDelete = (projectId, projectName) => () => {
@@ -25,14 +51,10 @@ class ProjectsList extends Component {
     }));
   }
 
-  componentDidMount() {
-    const jwt = getJWT();
-    store.dispatch(actions.fetchProjects(jwt));
-  }
-
   render() {
-    const { projects } = this.props;
-    const projectsList = projects.map((project) => {
+    const { projects } = this.state;
+
+    const projectsList = [...projects].map((project) => {
       const { thumbnail } = project.boardSpecs;
       return (
         <ProjectsItemFrame
@@ -46,6 +68,10 @@ class ProjectsList extends Component {
       );
     });
 
+    if (projects.length === 0){
+      return null;
+    }
+
     return (
       <div className="thumbnail-row">
         <div className="row-project">
@@ -56,14 +82,13 @@ class ProjectsList extends Component {
       </div>
     );
   }
-  }
+}
 
-const mapStateToProps = state => {
-  return { projects: state.projects.items };
-};
+const mapStateToProps = (state) => ({
+  projects: state.projects.items,
+});
 
 export default connect(mapStateToProps)(ProjectsList);
-
 ProjectsList.propTypes = {
   projects: PropTypes.array,
 };

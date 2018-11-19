@@ -7,7 +7,7 @@ import { projectsUrl } from '../config/endpointUrls';
 import { sampleProject } from '../config/sampleProject'
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
 import { getSampleProjectWithId } from 'helpers/projectHelpers';
-console.log(getSampleProjectWithId);
+
 import {
   hasSampleProject,
   getProjectById,
@@ -105,6 +105,8 @@ export const fetchProjectsSuccess = (projects) => (dispatch, getState) => {
     type: 'FETCH_PROJECTS_SUCCESS',
     projects,
   });
+
+  return projects;
 };
 
 export function fetchProjects(jwt) {
@@ -124,19 +126,18 @@ export function fetchProjects(jwt) {
     .then(res => res.json())
     .then((projects) => {
       const containsSampleProject = hasSampleProject(projects);
-      console.log(projects);
-      console.log(containsSampleProject);
 
       if (!containsSampleProject) {
+        console.log('creating new sample project');
         const userId = getUser()._id;
         const sampleProjectWithId = getSampleProjectWithId(sampleProject, userId);
 
-        dispatch(postNewProject(sampleProjectWithId))
+        return dispatch(postNewProject(sampleProjectWithId))
           .then((sampleProject) => {
             dispatch(fetchProjectsSuccess([sampleProject, ...projects]))
           })
       } else {
-        dispatch(fetchProjectsSuccess([...projects].reverse()))
+        return dispatch(fetchProjectsSuccess([...projects].reverse()))
       }
     });
     // .catch((err) => {

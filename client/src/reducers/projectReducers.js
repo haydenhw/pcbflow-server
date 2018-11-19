@@ -3,6 +3,7 @@ import doesModifyProject from 'helpers/doesModifyProject';
 
 const defaultProjectState = {
   isFetching: false,
+  hasFetched: false,
   isInitialLoad: true,
   isSaving: null,
   items: [],
