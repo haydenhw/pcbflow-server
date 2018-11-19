@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Konva from 'konva';
 import shortid from 'shortid';
 
+import { moveSampleProjectFront } from 'helpers/projectHelpers';
 import { getJWT } from 'helpers/users';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -37,9 +38,8 @@ class ProjectsList extends Component {
 
   componentDidUpdate(prevProps) {
     const { projects } = this.props;
-    console.log(projects);
+
     if (projects !== prevProps.projects) {
-      console.log('inner');
       this.setState({ projects });
     }
   }
@@ -53,9 +53,10 @@ class ProjectsList extends Component {
 
   render() {
     const { projects } = this.state;
+    const { thumbnail } = project.boardSpecs;
+    const orderedProjects = moveSampleProjectFront(projects);
+    const projectsList = orderedProjects.map((project) => {
 
-    const projectsList = [...projects].map((project) => {
-      const { thumbnail } = project.boardSpecs;
       return (
         <ProjectsItemFrame
           key={shortid.generate()}

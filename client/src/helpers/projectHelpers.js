@@ -30,3 +30,27 @@ export const getIdFromUrl = (url) => {
 export const isDesignRoute = (url) => {
   return RegExp('design').test(url);
 };
+
+const getSampleProjectIndex = projects => (
+  projects.findIndex((project) => (
+    project.isSampleProject
+  ))
+);
+
+const removeSampleProject = projects => (
+  projects.filter((project) => (
+    !project.isSampleProject
+  ))
+);
+
+
+export const moveSampleProjectFront = projects => {
+  const sampleProjectIndex = getSampleProjectIndex(projects);
+  const withoutSampleProject = removeSampleProject(projects);
+
+  if (projects.length === 0) {
+    return [];
+  }
+
+  return [projects[sampleProjectIndex], ...withoutSampleProject ];
+}
