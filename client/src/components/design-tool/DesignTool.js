@@ -8,29 +8,30 @@ import Joyride from 'react-joyride';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
+import { getJWT } from 'helpers/users';
+import { isMobile } from 'helpers/isMobile';
+import { routeToHome, routeToProjects } from 'helpers/routeHelpers';
 import checkCollision from 'helpers/checkCollision';
 import getPerimeterSide from 'helpers/getPerimeterSide';
 import getTimeStamp from 'helpers/getTimeStamp';
-import { routeToHome, routeToProjects } from 'helpers/routeHelpers';
-import { isMobile } from 'helpers/isMobile';
 import rotate from 'helpers/rotate';
 
-import Board from 'components/board/Board';
-import Module from 'components/modules/ModulesItem';
-import ModuleContainer from 'components/modules/Modules';
-import TopNavbar from 'components/top-navbar/TopNavbar';
-import SideBar from 'components/side-bar/SideBar';
-import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText';
-import Footer from 'components/footer/Footer';
-import Modal from 'components/modal/Modal';
 import { toolTips } from 'config/toolTips';
-import DesignToolStage from './DesignToolStage';
-import DesignToolInfoButton from './DesignToolInfoButton';
-import DocumentationCard from './DesignToolDocumentationCard';
-import DesignToolBoardFrame from './DesignToolBoardFrame';
-import DesignToolTodo from './DesignToolTodo';
 import { tourSteps, dependecyDemo } from './DesignToolTourSteps';
 import { tutorialSteps } from './DesignToolTutorialSteps';
+import Board from 'components/board/Board';
+import DesignToolBoardFrame from './DesignToolBoardFrame';
+import DesignToolInfoButton from './DesignToolInfoButton';
+import DesignToolStage from './DesignToolStage';
+import DesignToolTodo from './DesignToolTodo';
+import DocumentationCard from './DesignToolDocumentationCard';
+import Footer from 'components/footer/Footer';
+import Modal from 'components/modal/Modal';
+import Module from 'components/modules/ModulesItem';
+import ModuleContainer from 'components/modules/Modules';
+import SideBar from 'components/side-bar/SideBar';
+import TopNavbar from 'components/top-navbar/TopNavbar';
+import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText';
 
 import './design-tool-styles/_DesignToolDocumentationCard.scss';
 import './design-tool-styles/_DesignToolOnboardModal.scss';
@@ -106,6 +107,13 @@ let DesignTool = class extends Component {
   }
 
   componentDidMount() {
+    const { projects } = this.props;
+
+    if (projects.length === 0) {
+      const jwt = getJWT();
+      store.dispatch(actions.fetchProjects(jwt))
+    }
+
     this.addHanlders();
     this.checkIfMobile();
   }

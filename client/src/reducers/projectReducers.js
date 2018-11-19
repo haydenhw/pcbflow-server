@@ -100,6 +100,8 @@ export const projects = (state = defaultProjectState, action) => {
 };
 
 const defaultProjectInfo = {
+  id: null,
+  name: '',
   price: '$15.00',
 };
 
@@ -110,8 +112,8 @@ export const currentProjectInfo = (state = defaultProjectInfo, action) => {
     case actions.SET_ACTIVE_PROJECT:
       return {
         ...state,
-        name: action.project.name,
         id: action.project._id,
+        name: action.project.name,
       };
       break;
     case actions.UPDATE_PROJECT_NAME:
