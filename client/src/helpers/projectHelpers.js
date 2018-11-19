@@ -17,6 +17,7 @@ export const getSampleProjectWithId = (sampleProject, id) => (
 );
 
 export const getProjectById = (projects, projectId) => (
+  console.log(projects, projectId) ||
   projects.find(project => projectId === project._id)
 );
 

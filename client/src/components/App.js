@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import store from 'reduxFiles/store';
 import { fetchProjects, handleExistingUserVisit, handleNewUserVisit } from 'actions/indexActions';
 import { isJWTExpired, getUser, getJWT, clearUser, clearJWT  } from 'helpers/users';
+
 // *move this to helpers
 const doesUserExist = () => Boolean(getUser());
 

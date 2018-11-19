@@ -5,7 +5,8 @@ import Konva from 'konva';
 import shortid from 'shortid';
 
 import { moveSampleProjectFront } from 'helpers/projectHelpers';
-// import { getJWT } from 'helpers/users';
+import { getJWT } from 'helpers/users';
+
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
@@ -28,7 +29,7 @@ class ProjectsList extends Component {
   }
 
   componentDidMount() {
-    const { jwt } = this.props;
+    const jwt = getJWT();
 
     if (jwt) {
     store.dispatch(actions.fetchProjects(jwt))

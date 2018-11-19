@@ -230,17 +230,21 @@ export function postNewProject(newProject, shouldRoute) {
 }
 
 export const SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT';
-export const setActiveProject =(projects, projectId, shouldRoute) => (dispatch, getState) => {
-  const activeProject = getProjectById(projects, projectId);
+export const setActiveProject =(projects, activeId, shouldRoute) => (dispatch, getState) => {
+  const activeProject = getProjectById(projects, activeId);
 
-  dispatch({
-    type: 'SET_ACTIVE_PROJECT',
-    project: activeProject,
-  })
+  if (activeProject) {
+    dispatch({
+      type: 'SET_ACTIVE_PROJECT',
+      project: activeProject,
+    })
 
-  if (shouldRoute) {
-    const newRoute = `/design/${projectId}`;
-    hashHistory.push(newRoute)
+    if (shouldRoute) {
+      const newRoute = `/design/${activeId}`;
+      hashHistory.push(newRoute)
+    }
+  } else {
+    hashHistory.push('projects');
   }
 };
 

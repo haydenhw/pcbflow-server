@@ -72,11 +72,10 @@ export const currentProjectModules = (state = [], action) => {
        return [];
       case actions.POST_PROJECT_SUCCESS:
       case actions.SET_ACTIVE_PROJECT:
+        console.log(action)
         return action.project.modules;
-
       case actions.PUSH_NEW_MODULE:
         return [...state, action.module];
-
       case actions.UPDATE_MODULE_POSITION:
         return state.map((module, i) => {
           const { x, y, index } = action.modulePosition;

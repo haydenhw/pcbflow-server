@@ -108,9 +108,10 @@ let DesignTool = class extends Component {
 
   componentDidMount() {
     const { projects } = this.props;
+    const jwt = getJWT();
 
-    if (projects.length === 0) {
-      const jwt = getJWT();
+    if (projects.length === 0 && jwt) {
+      console.log('from dt')
       store.dispatch(actions.fetchProjects(jwt))
     }
 
