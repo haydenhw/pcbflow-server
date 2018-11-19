@@ -128,10 +128,6 @@ export default class ModulesItem extends PureComponent {
       this.highlightRuleBreakingModules();
       this.props.toggleShouldCheckCollission();
     }
-
-    // if (prevProps.metDependencies.length !== this.props.metDependencies.length) {
-    //   store.dispatch(actions.triggerThumbnailUpdate());
-    // }
   }
 
   getFill() {
@@ -243,13 +239,9 @@ export default class ModulesItem extends PureComponent {
     const { moduleGroup } = this.refs;
     const defaultStroke = moduleGroup ? moduleGroup.attrs.defaultStroke: null;
     const isStrokeRed = moduleGroup ? moduleGroup.attrs.isStrokeRed : null;
-    const topLeftAnchor = moduleGroup && (isDraggingToBoard === false)
+    const topLeftAnchor = moduleGroup
       ? getTopLeftAnchor(moduleGroup)
       : null;
-
-    if (this.props.id === "107") {
-      // console.log(this.props.text);
-    }
 
     return (
       <Group

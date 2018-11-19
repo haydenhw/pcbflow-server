@@ -111,7 +111,6 @@ let DesignTool = class extends Component {
     const jwt = getJWT();
 
     if (projects.length === 0 && jwt) {
-      console.log('from dt')
       store.dispatch(actions.fetchProjects(jwt))
     }
 

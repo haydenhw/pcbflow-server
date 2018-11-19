@@ -19,6 +19,10 @@ import Grid from './DesignToolGrid';
 
 import { modulesData } from 'config/modulesData';
 
+const replaceSpaceWithDash = (str) => (
+  str.replace(/\s/g, "-")
+);
+
 const getModuleGroup = ({ moduleX, moduleY }) => new Konva.Group({
   x: moduleX,
   y: moduleY,
@@ -92,15 +96,16 @@ class DesignToolStage extends Component {
     const footerText = `${currentProjectName} created ${getTimeDateStamp()}`;
 
     const pxPerMillimeter = 0.2458333;
-    const imageOffsetX = (1125 - croppedStage.width) / 2 * pxPerMillimeter * 1.02525;
+    const imageOffsetX = (1100 - croppedStage.width) / 2 * pxPerMillimeter * 1.02525;
     const imageOffsetY = (795 - croppedStage.height) / 2 * pxPerMillimeter * 0.995;
     const textOffsetY = 795 * pxPerMillimeter + 5;
     const pdf = new jsPDF('landscape');
+    const fileTitle = replaceSpaceWithDash(currentProjectName) + '.pdf';
 
     pdf.setFontSize(8),
     pdf.text(footerText, 10, textOffsetY);
     pdf.addImage(imageDataURL, 'JPEG', imageOffsetX, imageOffsetY);
-    pdf.save('test.pdf');
+    pdf.save(fileTitle);
   }
 
   updateThumbnail() {
