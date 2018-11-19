@@ -27,16 +27,6 @@ class LandingPage extends Component {
     this.setState({ scrollY: window.scrollY });
   }
 
-  handleGetStartedClick = () => {
-    const { projects } = this.props;
-
-    if (projects.length) {
-      return routeToProjects();
-    }
-
-    store.dispatch(actions.createNewProject());
-  }
-
   render() {
     const { scrollY } = this.state;
 
@@ -47,9 +37,9 @@ class LandingPage extends Component {
           <div className="header-button-wrapper">
             <button
               className={`${scrollY > 0 ? '' : 'header-button-hidden'} header-button onboard-button`}
-              onClick={this.handleGetStartedClick}
+              onClick={routeToProjects}
             >
-              <span className="header-button-text" onClick={this.handleGetStartedClick}>GET STARTED</span>
+              <span className="header-button-text" onClick={routeToProjects}>GET STARTED</span>
               <span className="icon-arrow-right" />
             </button>
           </div>
@@ -58,7 +48,7 @@ class LandingPage extends Component {
           <div className="hero-circle">
             <div className="hero-circle-content">
               <h1 className="hero-title">Design cutting edge electronics in minutes.</h1>
-              <button className="onboard-button hero-button" onClick={this.handleGetStartedClick}>GET STARTED</button>
+              <button className="onboard-button hero-button" onClick={routeToProjects}>GET STARTED</button>
             </div>
           </div>
         </section>
