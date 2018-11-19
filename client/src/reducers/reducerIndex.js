@@ -1,4 +1,4 @@
-import undoable from 'redux-undo';
+import { undoable } from 'helpers/undoable';
 
 import { combineReducer } from 'redux';
 
@@ -15,11 +15,13 @@ import { triggers } from './triggersReducer';
 import { tutorial } from './tutorialReducer';
 import { modal } from './modalReducer';
 
-export default combineReducer({
-  activeModules: undoable(entities, skipIfImageNodeNull),
+export default combineReducers({
+  // add back skipIfImageNodeNull
+  // entities: undoable(entities, skipIfImageNodeNull),
+
+  entities: undoable(entities),
+  // entities,
   anchors,
-  board,
-  entities,
   modal,
   modules,
   mouseEvents,

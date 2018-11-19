@@ -38,16 +38,14 @@ class Board extends Component {
     this.setState({
       x,
       y,
-    });
-
-    const layer = this.refs.boardGroup.getLayer();
-    layer.draw();
+    }, () => {console.log(this.state)});
   }
 
   updateGlobalStatePosition() {
     const boardGroup = this.refs.boardGroup;
     const x = boardGroup.getX();
     const y = boardGroup.getY();
+
     store.dispatch(actions.updateBoard({ x, y }));
   }
 
@@ -56,8 +54,11 @@ class Board extends Component {
   }
 
   handleDragMove() {
-    const layer = this.refs.boardGroup.getLayer();
+    const boardGroup = this.refs.boardGroup;
+    const layer = boardGroup.getLayer();
+
     layer.draw();
+    this.updateLocalStatePosition();
   }
 
   handleDragEnd() {
