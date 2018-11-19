@@ -1,10 +1,7 @@
 export const sampleProject = {
-  _id: '5bee8f8767d5ee043bf4f1df',
   isSampleProject: true,
   name: 'Sample Project',
-  ownerId: '5bee8ec967d5ee043bf4f1d4',
   __v: 0,
-  moduleBank: [],
   modules: [
     {
       _id: '5bee9b576472530cf4f5d181',

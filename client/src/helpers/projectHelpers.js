@@ -12,6 +12,10 @@ export const addSampleProject = (projects, sampleProject) => {
   return [sampleProject, ...projects];
 }
 
+export const getSampleProjectWithId = (sampleProject, id) => (
+  Object.assign({}, sampleProject, { ownerId: id })
+);
+
 export const getProjectById = (projects, projectId) => (
   projects.find(project => projectId === project._id)
 );

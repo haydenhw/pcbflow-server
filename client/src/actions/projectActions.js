@@ -6,7 +6,8 @@ import store from 'reduxFiles/store';
 import { projectsUrl } from '../config/endpointUrls';
 import { sampleProject } from '../config/sampleProject'
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
-
+import { getSampleProjectWithId } from 'helpers/projectHelpers';
+console.log(getSampleProjectWithId);
 import {
   hasSampleProject,
   getProjectById,
@@ -123,9 +124,14 @@ export function fetchProjects(jwt) {
     .then(res => res.json())
     .then((projects) => {
       const containsSampleProject = hasSampleProject(projects);
+      console.log(projects);
+      console.log(containsSampleProject);
 
       if (!containsSampleProject) {
-        dispatch(postNewProject(sampleProject))
+        const userId = getUser()._id;
+        const sampleProjectWithId = getSampleProjectWithId(sampleProject, userId);
+
+        dispatch(postNewProject(sampleProjectWithId))
           .then((sampleProject) => {
             dispatch(fetchProjectsSuccess([sampleProject, ...projects]))
           })

@@ -13,6 +13,7 @@ export default class App extends Component {
     const jwt = getJWT();
     const user = getUser();
 
+    console.log(user)
     doesUserExist()
       ? store.dispatch(handleExistingUserVisit(jwt, user))
       : store.dispatch(handleNewUserVisit());

@@ -67,6 +67,7 @@ export const handleNewUserVisit = () => (dispatch) => {
 };
 
 export const handleExistingUserVisit = (jwt, user) => (dispatch) => {
+  console.log('existing user')
   const userCredentials = getUserCredentials(user.username);
   const loginUrl = '/auth/login';
   const getNewJWT = postJSON(loginUrl);
