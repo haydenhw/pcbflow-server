@@ -5,7 +5,7 @@ import Konva from 'konva';
 import shortid from 'shortid';
 
 import { moveSampleProjectFront } from 'helpers/projectHelpers';
-import { getJWT } from 'helpers/users';
+// import { getJWT } from 'helpers/users';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
@@ -28,20 +28,27 @@ class ProjectsList extends Component {
   }
 
   componentDidMount() {
-    const jwt = getJWT();
+    const { jwt } = this.props;
+
+    if (jwt) {
     store.dispatch(actions.fetchProjects(jwt))
       .then((projects) => {
         if (projects) {
           this.setState({ projects });
         }
       });
+    }
   }
 
   componentDidUpdate(prevProps) {
-    const { projects } = this.props;
+    const { projects, jwt } = this.props;
 
     if (projects !== prevProps.projects) {
       this.setState({ projects });
+    }
+
+    if (jwt !== prevProps.jwt) {
+      console.log('hello')
     }
   }
 

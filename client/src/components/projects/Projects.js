@@ -4,6 +4,7 @@ import Link from 'react-router';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
+import { getJWT } from 'helpers/users';
 
 import Logo from 'components/logo/Logo';
 import TopNavbarButton from 'components/top-navbar/TopNavbarButton';
@@ -37,7 +38,7 @@ export default function Projects({ handleHomeButtonClick }) {
           </div>
         </div>
       </nav>
-      <ProjectsList />
+      <ProjectsList jwt={getJWT()} />
     </div>
   );
 }

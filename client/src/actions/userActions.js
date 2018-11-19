@@ -63,6 +63,7 @@ export const handleNewUserVisit = () => (dispatch) => {
   })
   .then((jwt) => {
     setJWT(jwt);
+    dispatch(fetchProjects(jwt));
   });
 };
 

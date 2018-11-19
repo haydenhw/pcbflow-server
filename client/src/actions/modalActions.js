@@ -43,7 +43,7 @@ export const startTutorial = () => (dispatch, getState) => {
   if (tutorialProject) {
     dispatch(actions.setActiveProject(projects, tutorialProject._id, true))
   } else {
-    dispatch(actions.createNewProject('Tutorial', { isTutorialProject: true }));
+    dispatch(actions.createNewProject('Tutorial Project', { isTutorialProject: true }));
   }
 
   dispatch(actions.triggerAnchorUpdate());

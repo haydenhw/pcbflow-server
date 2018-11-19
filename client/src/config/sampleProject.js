@@ -1,6 +1,6 @@
 export const sampleProject = {
   isSampleProject: true,
-  name: 'Sample Project',
+  name: 'Example Project',
   __v: 0,
   modules: [
     {
