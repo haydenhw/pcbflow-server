@@ -32,9 +32,7 @@ export const isDesignRoute = (url) => {
 };
 
 const getSampleProjectIndex = projects => (
-  projects.findIndex((project) => (
-    project.isSampleProject
-  ))
+    projects.findIndex((project) => project.isSampleProject)
 );
 
 const removeSampleProject = projects => (
@@ -43,10 +41,13 @@ const removeSampleProject = projects => (
   ))
 );
 
-
-export const moveSampleProjectFront = projects => {
+export const moveSampleProjectFront = (projects=[]) => {
   const sampleProjectIndex = getSampleProjectIndex(projects);
   const withoutSampleProject = removeSampleProject(projects);
+
+  if (sampleProjectIndex < 0) {
+    return projects;
+  }
 
   if (projects.length === 0) {
     return [];

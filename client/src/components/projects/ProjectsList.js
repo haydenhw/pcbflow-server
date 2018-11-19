@@ -32,7 +32,9 @@ class ProjectsList extends Component {
     const jwt = getJWT();
     store.dispatch(actions.fetchProjects(jwt))
       .then((projects) => {
-        this.setState({ projects });
+        if (projects) {
+          this.setState({ projects });
+        }
       });
   }
 
@@ -53,10 +55,10 @@ class ProjectsList extends Component {
 
   render() {
     const { projects } = this.state;
-    const { thumbnail } = project.boardSpecs;
     const orderedProjects = moveSampleProjectFront(projects);
-    const projectsList = orderedProjects.map((project) => {
 
+    const projectsList = orderedProjects.map((project) => {
+      const { thumbnail } = project.boardSpecs;
       return (
         <ProjectsItemFrame
           key={shortid.generate()}
@@ -68,10 +70,6 @@ class ProjectsList extends Component {
         />
       );
     });
-
-    if (projects.length === 0){
-      return null;
-    }
 
     return (
       <div className="thumbnail-row">

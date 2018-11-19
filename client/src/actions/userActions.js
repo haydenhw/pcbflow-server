@@ -77,9 +77,9 @@ export const handleExistingUserVisit = (jwt, user) => (dispatch) => {
     .then((newJWTObj) => {
       const { authToken } = newJWTObj;
       setJWT(authToken)
-      dispatch(fetchProjects(authToken));
+      // dispatch(fetchProjects(authToken));
     });
   }
 
-  dispatch(fetchProjects(jwt));
+  // dispatch(fetchProjects(jwt));
 };
