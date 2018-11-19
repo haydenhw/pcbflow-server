@@ -27,7 +27,6 @@ class ProjectsList extends Component {
     projects: [],
   }
 
-
   componentDidMount() {
     const jwt = getJWT();
     store.dispatch(actions.fetchProjects(jwt))
