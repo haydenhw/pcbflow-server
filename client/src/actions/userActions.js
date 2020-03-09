@@ -1,37 +1,20 @@
 import shortid from 'shortid';
-import jwtDecode from 'jwt-decode';
 import { fetchProjects } from 'actions/indexActions';
 import { isJWTExpired, setJWT, setUser } from 'helpers/users';
-
-const createNewUser = (userData, userUrl) => postJSON(userUrl)(userData);
-
-const getNewJWT = (user, loginUrl) => {
-  return fetch(loginUrl, {
-    method: 'POST',
-    body: JSON.stringify(user),
-  });
-};
-
-const getUserCredentials = username => ({
-  username,
-  password: 'public_placeholder_pw',
-})
-
-const getJWTAuthHeader = jwt => ({
-  'Authorization': 'Bearer ' + jwt,
-});
-
-const fetchJWT = (loginUrl, user) => {
-  const loginUser = postJSON(loginUrl);
-  return loginUser(user).then(jwtObject => jwtObject.authToken);
-};
+import { loginUrl, userUrl } from 'config/endpointUrls.js';
 
 const generateDemoUser = () => ({
   username: shortid.generate(),
   password: 'public_placeholder_pw',
 });
 
+const getUserCredentials = username => ({
+  username,
+  password: 'public_placeholder_pw',
+});
+
 const postJSON = (url) => (data) => {
+  console.log(url)
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(data),
@@ -42,19 +25,15 @@ const postJSON = (url) => (data) => {
   .then(res => res.json())
 };
 
-const refreshJWT = (jwt, refreshUrl) => {
-  return fetch(refreshUrl, {
-    method: 'POST',
-    headers: {
-      ...getJWTAuthHeader(jwt)
-    }
-  });
+const createNewUser = (userData, userUrl) => postJSON(userUrl)(userData);
+
+const fetchJWT = (loginUrl, user) => {
+  const loginUser = postJSON(loginUrl);
+  return loginUser(user).then(jwtObject => jwtObject.authToken);
 };
 
 export const handleNewUserVisit = () => (dispatch) => {
   const newUser = generateDemoUser();
-  const userUrl =  '/users';
-  const loginUrl = '/auth/login';
 
   createNewUser(newUser, userUrl)
   .then((user) => {
@@ -63,13 +42,11 @@ export const handleNewUserVisit = () => (dispatch) => {
   })
   .then((jwt) => {
     setJWT(jwt);
-    dispatch(fetchProjects(jwt));
   });
 };
 
 export const handleExistingUserVisit = (jwt, user) => (dispatch) => {
   const userCredentials = getUserCredentials(user.username);
-  const loginUrl = '/auth/login';
   const getNewJWT = postJSON(loginUrl);
 
   if(isJWTExpired(jwt)) {
@@ -78,9 +55,9 @@ export const handleExistingUserVisit = (jwt, user) => (dispatch) => {
     .then((newJWTObj) => {
       const { authToken } = newJWTObj;
       setJWT(authToken)
-      // dispatch(fetchProjects(authToken));
+      dispatch(fetchProjects(authToken));
     });
   }
 
-  // dispatch(fetchProjects(jwt));
+  dispatch(fetchProjects(jwt));
 };
