@@ -7,8 +7,11 @@ if [[ -z $1 ]]; then
   exit 1
 fi
 
-git add . &&
-git commit -m "$1" &&
+if [[ "$1" == "--skip-commit" ]]; then
+    git add . &&
+    git commit -m "$1"
+fi
+
 git push origin $CURRENT_BRANCH
 
 ssh -A -i ~/.ssh/MyKeyPair.pem ubuntu@$ec2ip4 /bin/bash <<EOF
