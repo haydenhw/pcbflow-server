@@ -2,12 +2,12 @@
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-if [[ -z $1 ]]; then
+if [[ -z "$1" ]]; then
   echo "Please enter a commit message"
   exit 1
 fi
 
-if [[ "$1" == "--skip-commit" ]]; then
+if [[ "$1" != "--skip-commit" ]]; then
     git add . &&
     git commit -m "$1"
 fi
