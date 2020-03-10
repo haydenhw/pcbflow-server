@@ -1,24 +1,23 @@
 #!/usr/bin/env bash
 
-deploy() {
-    cd /home/ubuntu/portfolio/PCBflow &&
-    git pull origin $1 &&
-    yarn &&
-    pm2 stop ecosystem.config.js --env production
-    pm2 start ecosystem.config.js --env production
-    pm2 save
-}
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
 if [[ -z $1 ]]; then
   echo "Please enter a commit message"
   exit 1
 fi
 
-#git add . &&
-#git commit -m "$1" &&
-git push origin $(git rev-parse --abbrev-ref HEAD)
+git add . &&
+git commit -m "$1" &&
+git push origin CURRENT_BRANCH
 
-# TODO the -A option is not secure. Refacor using a heredoc
-# try this https://itnext.io/how-to-auto-deploy-your-app-with-one-command-12f9ac00d34a
-ssh -A -i ~/.ssh/MyKeyPair.pem ubuntu@$ec2ip4 "$(typeset -f deploy); deploy $(git rev-parse --abbrev-ref HEAD)"
-
+ssh -A -i ~/.ssh/MyKeyPair.pem ubuntu@$ec2ip4 /bin/bash <<EOF
+    cd /home/ubuntu/portfolio/PCBflow &&
+    git fetch origin $CURRENT_BRANCH
+    git checkout $CURRENT_BRANCH
+    git pull origin $CURRENT_BRANCH &&
+    yarn &&
+    pm2 stop ecosystem.config.js --env production
+    pm2 start ecosystem.config.js --env production
+    pm2 save
+EOF
