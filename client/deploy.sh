@@ -3,7 +3,8 @@ bucket_name=pcbflow.haydenhw.com
 distribution_id=E3KM5KBTBIZ9RK
 
 if [[ "$1" != --no-build ]]; then
-    nvm use 8.16.2
+    . $(brew --prefix nvm)/nvm.sh &&
+    nvm use 8.16.2 || exit 1
     npm run build
 fi
 

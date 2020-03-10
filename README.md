@@ -2,7 +2,7 @@
 ![App screenshot](client/public/images/dual-ethernet-board.png)
 
 ## Live App
-http://pcb-flow.herokuapp.com/
+https://pcbflow.haydenhw.com/
 
 ## Summary
 A drag and drop tool for designing electronic devices. Tailored specifically
