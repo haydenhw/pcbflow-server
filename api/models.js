@@ -40,11 +40,19 @@ const ProjectSchema = mongoose.Schema({
     text: String,
     textX: Number,
     textY: Number,
-    width: { type: Number, required: true },
-    height: { type: Number, required: true },
-    x: { type: Number, required: true },
-    y: { type: Number, required: true },
+    imageSrc: String,
+    imageX: Number,
+    imageY: Number,
+    imageWidth: Number,
+    imageHeight: Number,
+    iconSrc: String,
+    iconHeight: String,
+    price: Number,
+    id: String,
+    dependencies: [String],
   }],
+  isTutorialProject: Boolean,
+  isSampleProject: Boolean,
 });
 
 const UserSchema = mongoose.Schema({

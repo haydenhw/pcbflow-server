@@ -1,6 +1,7 @@
 import shortid from 'shortid';
 import { fetchProjects } from 'actions/indexActions';
 import { isJWTExpired, setJWT, setUser } from 'helpers/users';
+import { loginUrl, userUrl } from 'config/endpointUrls.js';
 
 const generateDemoUser = () => ({
   username: shortid.generate(),
@@ -10,7 +11,7 @@ const generateDemoUser = () => ({
 const getUserCredentials = username => ({
   username,
   password: 'public_placeholder_pw',
-})
+});
 
 const postJSON = (url) => (data) => {
   return fetch(url, {
@@ -28,12 +29,10 @@ const createNewUser = (userData, userUrl) => postJSON(userUrl)(userData);
 const fetchJWT = (loginUrl, user) => {
   const loginUser = postJSON(loginUrl);
   return loginUser(user).then(jwtObject => jwtObject.authToken);
-};;
+};
 
 export const handleNewUserVisit = () => (dispatch) => {
   const newUser = generateDemoUser();
-  const userUrl =  '/users';
-  const loginUrl = '/auth/login';
 
   createNewUser(newUser, userUrl)
   .then((user) => {
@@ -47,7 +46,6 @@ export const handleNewUserVisit = () => (dispatch) => {
 
 export const handleExistingUserVisit = (jwt, user) => (dispatch) => {
   const userCredentials = getUserCredentials(user.username);
-  const loginUrl = '/auth/login';
   const getNewJWT = postJSON(loginUrl);
 
   if(isJWTExpired(jwt)) {

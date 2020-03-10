@@ -20,6 +20,7 @@ const activateAuth = (req, res, next) => {
 }
 
 projectRouter.get('/', activateAuth, (req, res) => {
+  console.log(req.user);
   const query = IS_AUTH_ACTIVE
     ? { ownerId: req.user._id }
     : {};
@@ -53,6 +54,8 @@ projectRouter.post('/', (req, res) => {
       name: req.body.name,
       modules: req.body.modules,
       ownerId: req.body.ownerId,
+      isTutorialProject: req.body.isTutorialProject,
+      isSampleProject: req.body.isSampleProject,
     })
   .then(project => res.status(201).json(project))
   .catch(err => {

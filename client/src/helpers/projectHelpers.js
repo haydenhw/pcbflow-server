@@ -1,31 +1,57 @@
-const getOriginAdjustedModules = (modules, originX, originY) => (
-  modules.map((module) => {
-    const x = module.x - originX;
-    const y = module.y - originY;
-
-    return Object.assign({}, module, { x, y });
-  })
+export const hasSampleProject = projects => (
+  Boolean(
+    projects.find((project) => project.isSampleProject)
+  )
 );
 
-export const getOriginAdjustedProjectData = (activeProject, anchors) => {
-  const {
-    board,
-    name,
-    activeModules,
-  } = activeProject;
+export const addSampleProject = (projects, sampleProject) => {
+  if (hasSampleProject(projects)) {
+    return projects;
+  }
 
-  const { width, height, x, y } = board;
-  const { topLeft } = anchors;
-  const { x: originX, y: originY } = topLeft;
+  return [sampleProject, ...projects];
+}
 
-  return {
-    name,
-    board: {
-      width,
-      height,
-      x: x + originX,
-      y: y + originY,
-    },
-    modules: getOriginAdjustedModules(activeModules, originX, originY),
-  };
+export const getSampleProjectWithId = (sampleProject, id) => (
+  Object.assign({}, sampleProject, { ownerId: id })
+);
+
+export const getProjectById = (projects, projectId) => (
+  projects.find(project => projectId === project._id)
+);
+
+export const getIdFromUrl = (url) => {
+  const splitUrl = url.split('/');
+  const id = splitUrl[splitUrl.length -1];
+
+  return id;
 };
+
+export const isDesignRoute = (url) => {
+  return RegExp('design').test(url);
+};
+
+const getSampleProjectIndex = projects => (
+    projects.findIndex((project) => project.isSampleProject)
+);
+
+const removeSampleProject = projects => (
+  projects.filter((project) => (
+    !project.isSampleProject
+  ))
+);
+
+export const moveSampleProjectFront = (projects=[]) => {
+  const sampleProjectIndex = getSampleProjectIndex(projects);
+  const withoutSampleProject = removeSampleProject(projects);
+
+  if (sampleProjectIndex < 0) {
+    return projects;
+  }
+
+  if (projects.length === 0) {
+    return [];
+  }
+
+  return [projects[sampleProjectIndex], ...withoutSampleProject ];
+}

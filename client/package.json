@@ -67,6 +67,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "dotenv": "2.0.0",
     "interact.js": "^1.2.8",
     "konva": "^1.7.6",
