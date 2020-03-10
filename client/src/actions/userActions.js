@@ -14,7 +14,6 @@ const getUserCredentials = username => ({
 });
 
 const postJSON = (url) => (data) => {
-  console.log(url)
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify(data),
