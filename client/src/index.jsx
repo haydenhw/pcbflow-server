@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TagManager from 'react-gtm-module'
+import ReactGA from 'react-ga';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 
@@ -13,6 +15,13 @@ import LandingPage from 'components/landing-page/LandingPage';
 import './styles/_reset.scss';
 import './styles/index.scss';
 import './styles/icons/style.css'
+
+if (process.env.NODE_ENV === 'production') {
+  TagManager.initialize({
+    gtmId: 'GTM-KJWS7WT'
+  });
+  ReactGA.initialize('UA-160393427-2');
+}
 
 ReactDOM.render(
   <Provider store={store}>

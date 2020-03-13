@@ -29,7 +29,7 @@ import Footer from 'components/footer/Footer';
 import Modal from 'components/modal/Modal';
 import Module from 'components/modules/ModulesItem';
 import ModuleContainer from 'components/modules/Modules';
-import SideBar from 'components/side-bar/SideBar';
+import SideBar from 'components/sidebar/SideBar';
 import TopNavbar from 'components/top-navbar/TopNavbar';
 import TopNavbarEditableText from 'components/top-navbar/TopNavbarEditableText';
 
