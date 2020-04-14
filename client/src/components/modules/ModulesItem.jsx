@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Rect, Group, Image, Text } from 'react-konva';
 
 import * as actions from 'actions/indexActions';
@@ -18,7 +18,7 @@ const getTopLeftAnchor = compose(
   getKonvaParentByName('boardGroup')
 );
 
-export default class ModulesItem extends PureComponent {
+export default class ModulesItem extends Component {
   constructor(props) {
     super(props);
 
@@ -59,8 +59,8 @@ export default class ModulesItem extends PureComponent {
     const { isDraggingToBoard } = this.props;
     const draggingModuleNode = module || this.refs.moduleGroup;
     const boardGroup = draggingModuleNode.getParent();
-    const moduleNodeArray = boardGroup.get('.moduleGroup');
-    const boardNode = boardGroup.getParent().get('.board')[0];
+    const moduleNodeArray = boardGroup.find('.moduleGroup');
+    const boardNode = boardGroup.getParent().find('.board')[0];
 
     if (index) {
       moduleNodeArray.splice(index, 1);

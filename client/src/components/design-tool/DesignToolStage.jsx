@@ -90,7 +90,7 @@ class DesignToolStage extends Component {
   downloadPDF() {
     // *move to action creator
     const { currentProjectName } = this.props;
-    const boardLayer = this.stage.getStage().get('.boardLayer')[0];
+    const boardLayer = this.stage.getStage().find('.boardLayer')[0];
     const croppedStage = getCroppedStage(boardLayer);
     const imageDataURL = croppedStage.node.toDataURL('image/jpeg', 1.0);
     const footerText = `${currentProjectName} created ${getTimeDateStamp()}`;
@@ -111,7 +111,7 @@ class DesignToolStage extends Component {
   updateThumbnail() {
     // *move to action creator
     const { currentProjectId } = this.props;
-    const boardLayer = this.stage.getStage().get('.boardLayer')[0];
+    const boardLayer = this.stage.getStage().find('.boardLayer')[0];
     const thumbnail = generateThumbnail(boardLayer);
     store.dispatch(actions.updateThumbnail(thumbnail, currentProjectId));
   }
@@ -148,7 +148,7 @@ class DesignToolStage extends Component {
 
   removeDragModule() {
     const stage = this.stage.getStage();
-    const dragModuleLayer = stage.get('.dragModuleLayer')[0];
+    const dragModuleLayer = stage.find('.dragModuleLayer')[0];
 
     if (dragModuleLayer) {
       setTimeout(() => dragModuleLayer.destroy(), 0);

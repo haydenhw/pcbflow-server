@@ -6,7 +6,7 @@ Array.prototype.diff = function (a) {
 };
 
 function adjustDimesionsForRotation(node) {
-  const rotation = node.get('.innerGroup')[0].attrs.rotation;
+  const rotation = node.find('.innerGroup')[0].attrs.rotation;
   const adjustedObj = {};
 
   if (rotation === 90 || rotation === 270) {

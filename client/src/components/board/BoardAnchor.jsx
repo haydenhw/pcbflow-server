@@ -49,12 +49,12 @@ export default class Anchor extends Component {
   updatePosition(callback) {
     const activeAnchor = this.refs.anchor;
     const group = this.refs.anchor.getParent();
-    const board = group.get('.board')[0];
+    const board = group.find('.board')[0];
     const layer = group.getLayer();
-    const topLeft = group.get('.topLeft')[0];
-    const topRight = group.get('.topRight')[0];
-    const bottomRight = group.get('.bottomRight')[0];
-    const bottomLeft = group.get('.bottomLeft')[0];
+    const topLeft = group.find('.topLeft')[0];
+    const topRight = group.find('.topRight')[0];
+    const bottomRight = group.find('.bottomRight')[0];
+    const bottomLeft = group.find('.bottomLeft')[0];
     const anchorX = activeAnchor.getX();
     const anchorY = activeAnchor.getY();
     // update anchor positions

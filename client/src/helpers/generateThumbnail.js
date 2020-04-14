@@ -15,9 +15,9 @@ export const createTempContainer = createTempElement('container');
 
 export function getCroppedStage(boardLayer) {
   const boardClone = boardLayer.clone();
-  const topLeftAnchorX = boardClone.get('.topLeft')[0].attrs.x;
-  const topLeftAnchorY = boardClone.get('.topLeft')[0].attrs.y;
-  const boardCloneAttrs = boardClone.get('.boardGroup')[0].attrs;
+  const topLeftAnchorX = boardClone.find('.topLeft')[0].attrs.x;
+  const topLeftAnchorY = boardClone.find('.topLeft')[0].attrs.y;
+  const boardCloneAttrs = boardClone.find('.boardGroup')[0].attrs;
   const tempContainer = createTempContainer();
   const croppedStage = new Konva.Stage({
     width: boardCloneAttrs.width + 20,
