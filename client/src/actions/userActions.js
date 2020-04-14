@@ -49,7 +49,9 @@ export const handleExistingUserVisit = (jwt, user) => (dispatch) => {
   const getNewJWT = postJSON(loginUrl);
 
   if(isJWTExpired(jwt)) {
-    console.log('jwt is expired. fetching a new one...')
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('jwt is expired. fetching a new one...')
+    }
     return getNewJWT(userCredentials)
     .then((newJWTObj) => {
       const { authToken } = newJWTObj;
