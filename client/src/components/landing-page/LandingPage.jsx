@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { routeToProjects } from 'helpers/routeHelpers';
 import { connect } from 'react-redux';
 
-import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
-
 import LandingPageCard from './LandingPageCard';
 import Logo from 'components/logo/Logo';
 
@@ -105,6 +102,7 @@ class LandingPage extends Component {
   }
 }
 
+// TODO investigate to see if this can be deleted
 const mapStateToProps = state => {
   return {
     projects: state.projects.items
