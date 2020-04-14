@@ -5,8 +5,8 @@ CREATE TABLE projects(
   is_sample_project Boolean DEFAULT false,
   board_height integer NOT NULL,
   board_width integer NOT NULL,
-  board_x integer NOT NULL,
-  board_y integer NOT NULL,
+  board_x decimal NOT NULL,
+  board_y decimal NOT NULL,
   board_thumbnail text
 );
 
@@ -21,19 +21,19 @@ CREATE TABLE modules (
   image_src varchar(100) NOT NULL,
   image_height integer NOT NULL,
   image_width integer NOT NULL,
-  image_y integer NOT NULL,
-  image_x integer NOT NULL,
-  text_y integer NOT NULL,
+  image_y decimal NOT NULL,
+  image_x decimal NOT NULL,
+  text_y decimal NOT NULL,
   text_x decimal NOT NULL,
   text varchar(50)NOT NULL,
-  inner_group_y integer NOT NULL,
-  inner_group_x integer NOT NULL,
-  bound_to_side_index integer NOT NULL,
+  inner_group_y decimal NOT NULL,
+  inner_group_x decimal NOT NULL,
+  bound_to_side_index integer,
   rotation integer NOT NULL,
   height integer NOT NULL,
   width integer NOT NULL,
   stroke varchar(50)NOT NULL,
-  y integer NOT NULL,
-  x integer NOT NULL,
+  y decimal NOT NULL,
+  x decimal NULL,
   dependencies varchar(100) NOT NULL
 );

@@ -1,6 +1,6 @@
 const knex = require('knex')
 const app = require('../src/app')
-const { makeArticlesArray, makeMaliciousArticle } = require('./articles.fixtures')
+const { makeProjects, makeMaliciousArticle } = require('./projects.fixtures')
 
 describe('Articles Endpoints', function() {
   let db
@@ -29,7 +29,7 @@ describe('Articles Endpoints', function() {
     })
 
     context('Given there are articles in the database', () => {
-      const testArticles = makeArticlesArray()
+      const testArticles = makeProjects()
 
       beforeEach('insert articles', () => {
         return db
@@ -76,7 +76,7 @@ describe('Articles Endpoints', function() {
     })
 
     context('Given there are articles in the database', () => {
-      const testArticles = makeArticlesArray()
+      const testArticles = makeProjects()
 
       beforeEach('insert articles', () => {
         return db
@@ -187,7 +187,7 @@ describe('Articles Endpoints', function() {
     })
 
     context('Given there are articles in the database', () => {
-      const testArticles = makeArticlesArray()
+      const testArticles = makeProjects()
 
       beforeEach('insert articles', () => {
         return db
@@ -221,7 +221,7 @@ describe('Articles Endpoints', function() {
     })
 
     context('Given there are articles in the database', () => {
-      const testArticles = makeArticlesArray()
+      const testArticles = makeProjects()
 
       beforeEach('insert articles', () => {
         return db
