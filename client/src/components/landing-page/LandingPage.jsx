@@ -19,7 +19,6 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    const { projects } = this.props;
     window.addEventListener('scroll', this.handleScroll.bind(this));
   }
 
