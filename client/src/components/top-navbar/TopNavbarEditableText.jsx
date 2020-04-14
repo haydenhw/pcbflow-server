@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InlineEdit from 'react-edit-inline';
+import InlineEdit from '../InlineEdit.jsx';
 
 import './top-navbar-styles/_TopNavbarEditableText.scss';
 

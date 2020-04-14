@@ -23,7 +23,7 @@ import Board from 'components/board/Board';
 import DesignToolBoardFrame from './DesignToolBoardFrame';
 import DesignToolInfoButton from './DesignToolInfoButton';
 import DesignToolStage from './DesignToolStage';
-import DesignToolTodo from './DesignToolTodo';
+// import DesignToolTodo from './DesignToolTodo';
 import DocumentationCard from './DesignToolDocumentationCard';
 import Footer from 'components/footer/Footer';
 import Modal from 'components/modal/Modal';
@@ -657,12 +657,13 @@ let DesignTool = class extends Component {
     };
 
     if (shouldRenderTodoList) {
-      return (
-        <DesignToolTodo
-          handleLinkClick={handleLinkClick}
-          todoBools={todoBools}
-        />
-      );
+      return null;
+      // return (
+      //   <DesignToolTodo
+      //     handleLinkClick={handleLinkClick}
+      //     todoBools={todoBools}
+      //   />
+      // );
     }
 
     return null;
