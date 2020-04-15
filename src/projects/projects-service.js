@@ -23,6 +23,8 @@ const ProjectsService = {
     return knex('projects')
       .where({ id })
       .update(newProjectFields)
+      .returning('*')
+      .then(rows => rows) // TODO is htis line necessary?
   },
 }
 

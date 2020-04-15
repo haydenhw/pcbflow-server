@@ -7,7 +7,7 @@ CREATE TABLE projects(
   board_width integer NOT NULL,
   board_x decimal NOT NULL,
   board_y decimal NOT NULL,
-  board_thumbnail text NOT NULL,
+  board_thumbnail text NOT NULL
 );
 
 CREATE TABLE modules (

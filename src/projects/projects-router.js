@@ -11,6 +11,94 @@ const serializeProject = project => ({
   // TODO set this up (dont forget xss)
 })
 
+const destructureProject = (project) => {
+  const {
+    name,
+    owner_id,
+    board_height,
+    board_width,
+    board_x,
+    board_y,
+    board_thumbnail,
+  } = project;
+
+  return {
+    name,
+    owner_id,
+    board_height,
+    board_width,
+    board_x,
+    board_y,
+    board_thumbnail,
+  }
+}
+const destructureModule = (module) => {
+  const {
+    id,
+    project_id,
+    module_id,
+    price,
+    icon_height,
+    icon_src,
+    image_src,
+    image_height,
+    image_width,
+    image_y,
+    image_x,
+    text_y,
+    text_x,
+    text,
+    inner_group_y,
+    inner_group_x,
+    bound_to_side_index,
+    rotation,
+    height,
+    width,
+    stroke,
+    y,
+    x,
+    dependencies,
+  } = module;
+
+  return {
+    id,
+    project_id,
+    module_id,
+    price,
+    icon_height,
+    icon_src,
+    image_src,
+    image_height,
+    image_width,
+    image_y,
+    image_x,
+    text_y,
+    text_x,
+    text,
+    inner_group_y,
+    inner_group_x,
+    bound_to_side_index,
+    rotation,
+    height,
+    width,
+    stroke,
+    y,
+    x,
+    dependencies,
+  };
+}
+
+const flattenBoard = (req, res, next) => {
+  const {board_specs} = req.body
+  req.body.board_x = board_specs.x;
+  req.body.board_y = board_specs.y;
+  req.body.board_width = board_specs.width;
+  req.body.board_height = board_specs.height;
+  req.body.board_thumbnail = board_specs.thumbnail;
+
+  next();
+}
+
 projectsRouter
   .route('/')
   .get(async (req, res, next) => {
@@ -101,27 +189,19 @@ projectsRouter
       })
       .catch(next)
   })
-  .patch(jsonParser, (req, res, next) => {
-    const { title, content, style } = req.body
-    const projectToUpdate = { title, content, style }
+  .patch(jsonParser, flattenBoard, async (req, res, next) => {
+    const knexInstance = req.app.get('db')
+    const { project_id } = req.params
+    // TODO add some validation
+    const projectToUpdate = destructureProject(req.body)
+    await ProjectsService.updateProject(knexInstance, project_id, projectToUpdate)
 
-    const numberOfValues = Object.values(projectToUpdate).filter(Boolean).length
-    if (numberOfValues === 0)
-      return res.status(400).json({
-        error: {
-          message: `Request body must content either 'title', 'style' or 'content'`
-        }
-      })
+    let { modules: modulesToUpdate }  = req.body
+    modulesToUpdate = modulesToUpdate.map(destructureModule);
+    await ModulesService.deleteByProjectId(knexInstance, project_id)
+    await ModulesService.insertModules(knexInstance, modulesToUpdate );
 
-    ProjectsService.updateProject(
-      req.app.get('db'),
-      req.params.project_id,
-      projectToUpdate
-    )
-      .then(numRowsAffected => {
-        res.status(204).end()
-      })
-      .catch(next)
+    res.status(204).end()
   })
 
 module.exports = projectsRouter
