@@ -125,6 +125,7 @@ export function fetchProjects(jwt) {
     })
     .then(res => res.json())
     .then((projects) => {
+      console.log(JSON.stringify(projects[0], null, 2))
       const containsSampleProject = hasSampleProject(projects);
 
       if (!containsSampleProject) {
@@ -219,7 +220,6 @@ export function postNewProject(newProject, shouldRoute) {
       })
       .then(res => res.json())
       .then((project) => {
-        const projectId = project._id;
         dispatch(postProjectSuccess(project, shouldRoute))
         return project;
       })
@@ -269,7 +269,7 @@ export function updateProject(projectData) {
     dispatch(updateProjectRequest());
 
     fetch(projectUrl, {
-      method: 'put',
+      method: 'PUT',
       body: JSON.stringify(originAdjustedProjectData),
       headers: {
         Accept: 'application/json',
@@ -277,12 +277,9 @@ export function updateProject(projectData) {
       },
     })
       .then(res => res.json())
-      .then((data) => {
+      .then(() => {
         setTimeout(() => dispatch(updateProjectSuccess()), 500);
       })
-      // .catch((err) => {
-      //   throw new Error(err);
-      // });
   };
 }
 

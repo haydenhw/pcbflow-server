@@ -55,7 +55,8 @@ projectRouter.post('/', (req, res) => {
 
   Projects
     .create({
-      boardSpecs: req.body.boardSpecs,
+
+      boardSpecs: req.body.boardSpecs, // this will get saved separately to board table --> alternatively board_height board_x is saved to project table
       name: req.body.name,
       modules: req.body.modules,
       ownerId: req.body.ownerId,
