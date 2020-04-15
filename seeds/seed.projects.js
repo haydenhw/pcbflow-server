@@ -2,7 +2,6 @@ require('dotenv').config()
 const knex = require('knex')
 
 const { makeProjects, makeProjectsWithModules } = require('../test/projects.fixtures')
-console.log(process.env.DB_URL)
 
 const db = knex({
   client: 'pg',
