@@ -5,17 +5,18 @@ const ModulesService = {
       .from('modules')
       .then(modules => {
         return modules.map(m => {
-          return {...m, dependencies: m.dependencies.split(', ') }
+          return {...m, dependencies: m.dependencies.split(',') }
         })
       })
   },
-  insertModule(knex, newModule) {
+  insertModules(knex, newModule) {
+    newModule.dependencies = newModule.dependencies.join();
     return knex
       .insert(newModule)
       .into('modules')
       .returning('*')
       .then(rows => {
-        return rows[0]
+        return rows
       })
   },
   getById(knex, id) {

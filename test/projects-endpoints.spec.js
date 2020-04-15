@@ -1,6 +1,6 @@
 const knex = require('knex')
 const app = require('../src/app')
-const { makeProjects, makeMaliciousProject } = require('./projects.fixtures')
+const { makeProjects, makeModules, makeProjectsWithModules, makeMaliciousProject } = require('./projects.fixtures')
 
 describe('Projects Endpoints', function() {
   let db
@@ -15,9 +15,13 @@ describe('Projects Endpoints', function() {
 
   after('disconnect from db', () => db.destroy())
 
-  before('clean the table', () => db('projects').truncate())
+  before('clean the table', () => {
+    return db.raw('TRUNCATE TABLE projects CASCADE')
+  })
 
-  afterEach('cleanup',() => db('projects').truncate())
+  afterEach('clean the table', () => {
+    return db.raw('TRUNCATE TABLE projects CASCADE')
+  })
 
   describe(`GET /api/projects`, () => {
     context(`Given no projects`, () => {
@@ -29,12 +33,11 @@ describe('Projects Endpoints', function() {
     })
 
     context('Given there are projects in the database', () => {
-      const testProjects = makeProjects()
+      let testProjects = makeProjectsWithModules()
 
-      beforeEach('insert projects', () => {
-        return db
-          .into('projects')
-          .insert(testProjects)
+      beforeEach('insert projects', async () => {
+        await db.into('projects').insert(makeProjects())
+        await db.into('modules').insert(makeModules())
       })
 
       it('responds with 200 and all of the projects', () => {

@@ -2,27 +2,50 @@ const path = require('path')
 const express = require('express')
 const xss = require('xss')
 const ProjectsService = require('./projects-service')
+const ModulesService = require('./modules-service')
 
 const projectsRouter = express.Router()
 const jsonParser = express.json()
 
 const serializeProject = project => ({
-  id: project.id,
-  style: project.style,
-  title: xss(project.title),
-  content: xss(project.content),
-  date_published: project.date_published,
+  // TODO set this up (dont forget xss)
 })
 
 projectsRouter
   .route('/')
-  .get((req, res, next) => {
+  .get(async (req, res, next) => {
     const knexInstance = req.app.get('db')
-    ProjectsService.getAllProjects(knexInstance)
-      .then(projects => {
-        res.json(projects.map(serializeProject))
+    try {
+      const modules = await ModulesService.getAllModules(knexInstance)
+      let projects = await ProjectsService.getAllProjects(knexInstance)
+      projects = projects.map(project => {
+        const {
+          board_height: height,
+          board_width: width,
+          board_x: x,
+          board_y: y,
+          board_thumbnail: thumbnail,
+        } = project;
+
+        delete project.board_height;
+        delete project.board_width;
+        delete project.board_x;
+        delete project.board_y;
+        delete project.board_thumbnail;
+
+        const board = { height, width, x, y, thumbnail }
+        const childModules = modules.filter(m => m.project_id === project.id)
+        return {
+          ...project,
+          board,
+          modules: childModules
+        }
       })
-      .catch(next)
+
+      res.json(projects)
+    } catch(err) {
+      next(err)
+    }
   })
   .post(jsonParser, (req, res, next) => {
     const { title, content, style } = req.body

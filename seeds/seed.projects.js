@@ -1,7 +1,7 @@
 require('dotenv').config()
 const knex = require('knex')
 
-const { makeProjects, makeProjectsWithModules } = require('../test/projects.fixtures')
+const {makeProjects, makeProjectsWithModules} = require('../test/projects.fixtures')
 
 const db = knex({
   client: 'pg',
@@ -11,13 +11,14 @@ const db = knex({
 db('projects').truncate()
 db.into('projects')
   .insert(makeProjects())
-  .then(res=> {
+  .then(res => {
     console.log(`Inserted ${res.rowCount} new rows into the projects table`);
 
     db('modules').truncate()
     db.into('modules')
       .insert(makeProjectsWithModules()[0].modules)
-      .then(res=> {
+      .then(res => {
         console.log(`Inserted ${res.rowCount} new rows into the modules table`);
       })
   })
+

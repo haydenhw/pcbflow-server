@@ -14,15 +14,15 @@ const modules = [{
   module_id: '105',
   price: 48,
   icon_height: '70px',
-  icon_src: 'images/COM-connector.svg',
-  image_src: 'images/COM-connector.svg',
+  icon_src: 'images/com-connector.svg',
+  image_src: 'images/com-connector.svg',
   image_height: 125,
   image_width: 250,
   image_y: 4,
   image_x: 2,
   text_y: 32,
   text_x: 76,
-  text: 'COM Connector',
+  text: 'com connector',
   inner_group_y: -60.5,
   inner_group_x: 193.5,
   bound_to_side_index: null,
@@ -69,18 +69,22 @@ function makeProjects() {
   return [project];
 }
 
+function makeModules() {
+  return modules;
+}
+
 function makeMaliciousProject() {
   const maliciousProject = {
     id: 911,
     style: 'How-to',
     date_published: new Date().toISOString(),
-    title: 'Naughty naughty very naughty <script>alert("xss");</script>',
-    content: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`
+    name: 'Naughty naughty very naughty <script>alert("xss");</script>',
+    board_thumbnail: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`
   }
   const expectedProject = {
     ...maliciousProject,
-    title: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
-    content: `Bad image <img src="https://url.to.file.which/does-not.exist">. But not <strong>all</strong> bad.`
+    name: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
+    board_thumbnail: `Bad image <img src="https://url.to.file.which/does-not.exist">. But not <strong>all</strong> bad.`
   }
   return {
     maliciousProject,
@@ -90,6 +94,7 @@ function makeMaliciousProject() {
 
 module.exports = {
   makeProjects,
+  makeModules,
   makeProjectsWithModules,
   makeMaliciousProject,
 }

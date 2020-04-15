@@ -1,3 +1,5 @@
+const pg = require('pg');
+pg.types.setTypeParser(1700, parseFloat);
 const knex = require('knex')
 const app = require('./app')
 const { PORT, DB_URL } = require('./config')
