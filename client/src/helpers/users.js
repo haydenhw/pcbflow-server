@@ -15,6 +15,7 @@ export const isJWTExpired = jwt => {
   return now > jwtExp;
 }
 
+// TODO check to see if this can be removed
 const postJSON = (url, data) => {
   return fetch(url, {
     method: 'POST',

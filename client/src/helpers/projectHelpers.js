@@ -105,7 +105,7 @@ export const snakecaseRequestKeys = (project) => {
 
 const underscoreProjectIds = transformProjectKeys(underscoreIdKey);
 const snakecaseKeys = transformKeys(camelToSnake);
-const camelizeObject = transformKeys(camelCase);
+export const camelizeObject = transformKeys(camelCase);
 export const camelizeProjectKeys = transformProjectKeys(camelizeObject);
 
 const removeKey = (obj, propToDelete) => {

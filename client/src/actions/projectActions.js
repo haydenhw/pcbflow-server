@@ -124,7 +124,6 @@ export function fetchProjects(jwt) {
       projects = projects.map(ProjectUtils.boardToBoardSpecs)
 
       const containsSampleProject = ProjectUtils.hasSampleProject(projects);
-
       if (false && !containsSampleProject) {
         const userId = getUser()._id;
         const sampleProjectWithId = ProjectUtils.getSampleProjectWithId(sampleProject, userId);
@@ -188,9 +187,10 @@ export const postProjectSuccess = (project, shouldRoute) => dispatch => {
 };
 
 export function postNewProject(newProject, shouldRoute) {
+  newProject = ProjectUtils.snakecaseRequestKeys(newProject);
   return (dispatch) => {
     return fetch(
-      projectsUrl,
+      projectUrl2,
       {
         method: 'POST',
         body: JSON.stringify(newProject),
@@ -201,8 +201,12 @@ export function postNewProject(newProject, shouldRoute) {
       })
       .then(res => res.json())
       .then((project) => {
+        project = ProjectUtils.camelizeObject(project);
+        project = ProjectUtils.underscoreIdKey(project);
+        project = ProjectUtils.boardToBoardSpecs(project);
+        project.modules = [];
         dispatch(postProjectSuccess(project, shouldRoute))
-        return project;
+        return project; // TODO check if this needs to returned here?
       })
       .catch((err) => {
         console.error(err);
@@ -284,16 +288,14 @@ export const deleteProjectSuccess = (projectId, projects) => ({
 });
 
 export const DELETE_PROJECT_REQUEST = 'DELETE_PROJECT_REQUEST';
-export function deleteProject(projectId, projects) {
-  const url = `${projectsUrl}/${projectId}`;
-
+export function deleteProject(projectId) {
   return (dispatch) => {
     dispatch({
       type: 'DELETE_PROJECT_REQUEST',
       projectId,
     });
 
-    fetch(url, {
+    fetch(`${projectUrl2}/${projectId}`, {
         method: 'DELETE',
         headers: new Headers({
           Accept: 'application/json',
