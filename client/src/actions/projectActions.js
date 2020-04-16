@@ -165,7 +165,6 @@ export const fetchProjectById = (projectId, currentRoute) => (dispatch, getState
   const state = getState();
   const { projects } = state;
   const project = ProjectUtils.getProjectById(projects.items, projectId);
-  const projectUrl = `${projectsUrl}/${projectId}`;
   const designRoute = `/design/${projectId}`;
 
   dispatch(fetchProjectByIdSuccess(project));
@@ -212,9 +211,8 @@ export function postNewProject(newProject, shouldRoute) {
 }
 
 export const SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT';
-export const setActiveProject =(projects, activeId, shouldRoute) => (dispatch, getState) => {
+export const setActiveProject = (projects, activeId, shouldRoute) => (dispatch, getState) => {
   const activeProject = ProjectUtils.getProjectById(projects, activeId);
-
   if (activeProject) {
     dispatch({
       type: 'SET_ACTIVE_PROJECT',
@@ -245,20 +243,27 @@ export const updateProjectSuccess = project => ({
 export function updateProject(projectData) {
   return (dispatch, getState) => {
     const { currentProjectId: projectId } = projectData;
-    const projectUrl = `${projectsUrl}/${projectId}`;
-    const originAdjustedProjectData = getOriginAdjustedProjectData(projectData);
+
+    let updatedProject = getOriginAdjustedProjectData(projectData);
+    updatedProject = ProjectUtils.snakecaseRequestKeys(updatedProject)
+    updatedProject.id = projectId
+    updatedProject.owner_id = getUser()._id
+    updatedProject.modules.forEach(m => {
+      m.module_id = m.id
+      m.id = m._id
+      m.project_id = projectId
+    })
 
     dispatch(updateProjectRequest());
 
-    fetch(projectUrl, {
-      method: 'PUT',
-      body: JSON.stringify(originAdjustedProjectData),
+    fetch(`${projectUrl2}/${projectId}`, {
+      method: 'PATCH',
+      body: JSON.stringify(updatedProject),
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     })
-      .then(res => res.json())
       .then(() => {
         setTimeout(() => dispatch(updateProjectSuccess()), 500);
       })

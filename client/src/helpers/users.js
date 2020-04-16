@@ -1,6 +1,7 @@
 import jwtDecode from 'jwt-decode';
 
-export const getUser = () => JSON.parse(localStorage.getItem('pcbflowDemoUser'));
+export const getUser = () => ({ username: 'chief', _id: 1 }); // TODO unmock this
+// export const getUser = () => JSON.parse(localStorage.getItem('pcbflowDemoUser'));
 export const getJWT= () => localStorage.getItem('pcbflowJWT');
 export const setUser = user => localStorage.setItem('pcbflowDemoUser', JSON.stringify(user));
 export const setJWT = jwt => localStorage.setItem('pcbflowJWT', jwt);

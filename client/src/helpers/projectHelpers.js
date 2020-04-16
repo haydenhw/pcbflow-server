@@ -24,9 +24,7 @@ export const getProjectById = (projects, projectId) => (
 
 export const getIdFromUrl = (url) => {
   const splitUrl = url.split('/');
-  const id = splitUrl[splitUrl.length -1];
-
-  return id;
+  return splitUrl[splitUrl.length -1];
 };
 
 export const isDesignRoute = (url) => {
@@ -64,7 +62,7 @@ const transformKeys = (transformer) => (obj) =>
   Object.keys(obj).reduce((c, key) => (c[transformer(key)] = obj[key], c), {});
 
 export const underscoreIdKey = (obj) => {
-  obj._id = obj.id;
+  obj._id = String(obj.id);
   delete obj.id;
   return obj;
 }
@@ -95,6 +93,14 @@ const camelToSnake = (string) => {
   return string.replace(/[\w]([A-Z])/g, function (m) {
     return m[0] + "_" + m[1];
   }).toLowerCase();
+}
+
+export const snakecaseRequestKeys = (project) => {
+  let p = project;
+  p.boardSpecs = snakecaseKeys(p.boardSpecs)
+  p.modules = p.modules.map(snakecaseKeys);
+  p = snakecaseKeys(p);
+  return p;
 }
 
 const underscoreProjectIds = transformProjectKeys(underscoreIdKey);
