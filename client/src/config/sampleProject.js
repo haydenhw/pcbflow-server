@@ -3,7 +3,6 @@ export const sampleProject = {
     isSampleProject: true,
     modules: [
       {
-        _id: '5bf2ab352cf1072e2bd2de2c',
         x: 124.5,
         y: 110.5,
         stroke: '#01579b',
@@ -30,7 +29,6 @@ export const sampleProject = {
         ]
       },
       {
-        _id: '5bf2ab352cf1072e2bd2de2b',
         x: 23,
         y: 93,
         stroke: '#7e57c2',
@@ -57,7 +55,6 @@ export const sampleProject = {
         ]
       },
       {
-        _id: '5bf2ab352cf1072e2bd2de2a',
         x: 9,
         y: 0,
         stroke: '#00796b',
@@ -82,7 +79,6 @@ export const sampleProject = {
         dependencies: []
       },
       {
-        _id: '5bf2ab352cf1072e2bd2de29',
         x: 24,
         y: 156,
         stroke: '#009688',
@@ -109,7 +105,6 @@ export const sampleProject = {
         ]
       },
       {
-        _id: '5bf2ab352cf1072e2bd2de28',
         x: 438.5,
         y: 207,
         stroke: '#7e57c2',
@@ -157,7 +152,6 @@ export const sampleProject = {
         stroke: '#0288d1',
         y: 64,
         x: 417,
-        _id: '5bf2abb42cf1072e2bd2dea7',
         dependencies: [
           '105'
         ]
@@ -184,7 +178,6 @@ export const sampleProject = {
         stroke: '#0288d1',
         y: 12,
         x: 342.5,
-        _id: '5bf2abb42cf1072e2bd2dea6',
         dependencies: [
           '105'
         ]
@@ -211,7 +204,6 @@ export const sampleProject = {
         stroke: '#01579b',
         y: 9.5,
         x: 394,
-        _id: '5bf2abb42cf1072e2bd2dea5',
         dependencies: [
           '105'
         ]

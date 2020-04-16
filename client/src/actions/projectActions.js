@@ -124,11 +124,9 @@ export function fetchProjects(jwt) {
       projects = projects.map(ProjectUtils.boardToBoardSpecs)
 
       const containsSampleProject = ProjectUtils.hasSampleProject(projects);
-      if (false && !containsSampleProject) {
-        const userId = getUser()._id;
-        const sampleProjectWithId = ProjectUtils.getSampleProjectWithId(sampleProject, userId);
-
-        return dispatch(postNewProject(sampleProjectWithId))
+      if (!containsSampleProject) {
+        sampleProject.owner_id = getUser()._id;
+        return dispatch(postNewProject(sampleProject))
           .then((sampleProject) => {
             dispatch(fetchProjectsSuccess([sampleProject, ...projects]))
           })
@@ -187,6 +185,15 @@ export const postProjectSuccess = (project, shouldRoute) => dispatch => {
 };
 
 export function postNewProject(newProject, shouldRoute) {
+  const { modules } = newProject
+  if (modules.length > 0) {
+    newProject.modules = modules.map(m => {
+      m = {...m, module_id: m.id };
+      delete m.id;
+      return m;
+    });
+  }
+
   newProject = ProjectUtils.snakecaseRequestKeys(newProject);
   return (dispatch) => {
     return fetch(
