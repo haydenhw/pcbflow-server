@@ -20,6 +20,7 @@ const destructureProject = (project) => {
     board_x,
     board_y,
     board_thumbnail,
+    is_sample_project,
   } = project;
 
   return {
@@ -30,6 +31,7 @@ const destructureProject = (project) => {
     board_x,
     board_y,
     board_thumbnail,
+    is_sample_project,
   }
 }
 const destructureModule = (module) => {
@@ -99,6 +101,25 @@ const flattenBoard = (req, res, next) => {
   next();
 }
 
+const nestBoardProps = (project) => {
+  const {
+    board_height: height,
+    board_width: width,
+    board_x: x,
+    board_y: y,
+    board_thumbnail: thumbnail,
+  } = project;
+
+  const board = {height, width, x, y, thumbnail}
+  project.board = board;
+
+  delete project.board_height;
+  delete project.board_width;
+  delete project.board_x;
+  delete project.board_y;
+  delete project.board_thumbnail;
+}
+
 projectsRouter
   .route('/')
   .get(async (req, res, next) => {
@@ -107,57 +128,44 @@ projectsRouter
       const modules = await ModulesService.getAllModules(knexInstance)
       let projects = await ProjectsService.getAllProjects(knexInstance)
       projects = projects.map(project => {
-        const {
-          board_height: height,
-          board_width: width,
-          board_x: x,
-          board_y: y,
-          board_thumbnail: thumbnail,
-        } = project;
-
-        delete project.board_height;
-        delete project.board_width;
-        delete project.board_x;
-        delete project.board_y;
-        delete project.board_thumbnail;
-
-        const board = { height, width, x, y, thumbnail }
+        nestBoardProps(project)
         const childModules = modules.filter(m => m.project_id === project.id)
         return {
           ...project,
-          board,
           modules: childModules
         }
       })
 
       res.json(projects)
-    } catch(err) {
+    } catch (err) {
       next(err)
     }
   })
-  .post(jsonParser, (req, res, next) => {
-    const { title, content, style } = req.body
-    const newProject = { title, content, style }
+  .post(jsonParser, flattenBoard, async (req, res, next) => {
+    const newProject = destructureProject(req.body)
+    const knexInstance = req.app.get('db')
+    // TODO validate new project
+    const savedProject = await ProjectsService.insertProject(knexInstance, newProject)
+    nestBoardProps(savedProject)
 
-    for (const [key, value] of Object.entries(newProject))
-      if (value == null)
-        return res.status(400).json({
-          error: { message: `Missing '${key}' in request body` }
-        })
-
-    ProjectsService.insertProject(
-      req.app.get('db'),
-      newProject
-    )
-      .then(project => {
-        res
-          .status(201)
-          .location(path.posix.join(req.originalUrl, `/${project.id}`))
-          .json(serializeProject(project))
+    let { modules } = req.body
+    if (modules) {
+      const newModules = modules.map(m => {
+        m = destructureModule(m)
+        m.project_id = savedProject.id
+        console.log(require('util').inspect(m, false, null, true))
+        console.log({id: m.module_id})
+        return m
       })
-      .catch(next)
-  })
+      const savedModules = await ModulesService.insertModules(knexInstance, newModules)
+      savedProject.modules = savedModules
+    }
 
+    res
+      .status(201)
+      .location(path.posix.join(req.originalUrl, `/${savedProject.id}`))
+      .json(savedProject) // TODO serialize project
+  })
 projectsRouter
   .route('/:project_id')
   .all((req, res, next) => {
@@ -168,7 +176,7 @@ projectsRouter
       .then(project => {
         if (!project) {
           return res.status(404).json({
-            error: { message: `Project doesn't exist` }
+            error: {message: `Project doesn't exist`}
           })
         }
         res.project = project
@@ -191,17 +199,21 @@ projectsRouter
   })
   .patch(jsonParser, flattenBoard, async (req, res, next) => {
     const knexInstance = req.app.get('db')
-    const { project_id } = req.params
+    const {project_id} = req.params
     // TODO add some validation
-    const projectToUpdate = destructureProject(req.body)
-    await ProjectsService.updateProject(knexInstance, project_id, projectToUpdate)
+    try {
+      const projectToUpdate = destructureProject(req.body)
+      await ProjectsService.updateProject(knexInstance, project_id, projectToUpdate)
 
-    let { modules: modulesToUpdate }  = req.body
-    modulesToUpdate = modulesToUpdate.map(destructureModule);
-    await ModulesService.deleteByProjectId(knexInstance, project_id)
-    await ModulesService.insertModules(knexInstance, modulesToUpdate );
+      let {modules: modulesToUpdate} = req.body
+      modulesToUpdate = modulesToUpdate.map(destructureModule);
+      await ModulesService.deleteByProjectId(knexInstance, project_id)
+      await ModulesService.insertModules(knexInstance, modulesToUpdate);
 
-    res.status(204).end()
+      res.status(204).end()
+    } catch (err) {
+      next(err)
+    }
   })
 
 module.exports = projectsRouter
