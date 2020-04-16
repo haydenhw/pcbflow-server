@@ -3,14 +3,15 @@ const ModulesService = {
     return knex
       .select('*')
       .from('modules')
-      .then(modules => {
-        return modules.map(m => {
-          return {...m, dependencies: m.dependencies.split(',') }
-        })
-      })
+      .then((modules) =>
+        modules.map((m) => ({
+          ...m,
+          dependencies: m.dependencies.split(",").filter(Boolean),
+        }))
+      )
   },
   insertModules(knex, newModules) {
-    newModules.forEach(m => { m.dependencies = m.dependencies.join(); })
+    newModules.forEach(m => { m.dependencies = m.dependencies.join() })
     return knex
       .insert(newModules)
       .into('modules')
