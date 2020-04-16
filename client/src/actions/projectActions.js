@@ -3,17 +3,10 @@ import { hashHistory } from 'react-router';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import { projectsUrl } from '../config/endpointUrls';
+import { projectsUrl, projectUrl2 } from '../config/endpointUrls';
 import { sampleProject } from '../config/sampleProject'
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
-import { getSampleProjectWithId } from 'helpers/projectHelpers';
-
-import {
-  hasSampleProject,
-  getProjectById,
-  getIdFromUrl,
-  isDesignRoute
-} from 'helpers/projectHelpers';
+import * as ProjectUtils from 'helpers/projectHelpers';
 
 const getOriginAdjustedModules = (modules, originX, originY) => (
   modules.map((module) => {
@@ -94,10 +87,10 @@ export const fetchProjectsRequest = () => ({
 export const FETCH_PROJECTS_SUCCESS = 'FETCH_PROJECTS_SUCCESS';
 export const fetchProjectsSuccess = (projects) => (dispatch, getState) => {
   const currentUrl = window.location.href;
-  const isOnDesignPage = isDesignRoute(currentUrl);
+  const isOnDesignPage = ProjectUtils.isDesignRoute(currentUrl);
 
   if (isOnDesignPage) {
-    const projectId = getIdFromUrl(currentUrl);
+    const projectId = ProjectUtils.getIdFromUrl(currentUrl);
     dispatch(setActiveProject(projects, projectId));
   }
 
@@ -117,7 +110,7 @@ export function fetchProjects(jwt) {
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
 
-    return fetch(projectsUrl, {
+    return fetch(projectUrl2, {
       method: 'GET',
       headers: {
         ...getJWTAuthHeader(jwt),
@@ -125,12 +118,16 @@ export function fetchProjects(jwt) {
     })
     .then(res => res.json())
     .then((projects) => {
-      console.log(JSON.stringify(projects[0], null, 2))
-      const containsSampleProject = hasSampleProject(projects);
+      // TODO refactor/rename camelizeProjectKeys. It does more than just camel case
+      projects = ProjectUtils.camelizeProjectKeys(projects)
+      projects = projects.map(ProjectUtils.underscoreIdKey)
+      projects = projects.map(ProjectUtils.boardToBoardSpecs)
 
-      if (!containsSampleProject) {
+      const containsSampleProject = ProjectUtils.hasSampleProject(projects);
+
+      if (false && !containsSampleProject) {
         const userId = getUser()._id;
-        const sampleProjectWithId = getSampleProjectWithId(sampleProject, userId);
+        const sampleProjectWithId = ProjectUtils.getSampleProjectWithId(sampleProject, userId);
 
         return dispatch(postNewProject(sampleProjectWithId))
           .then((sampleProject) => {
@@ -140,24 +137,9 @@ export function fetchProjects(jwt) {
         return dispatch(fetchProjectsSuccess([...projects].reverse()))
       }
     });
-    // .catch((err) => {
-    //   console.error(err);
-    // });
+    // TODO add error handling
   };
 }
-// export function fetchProjects() {
-//   return (dispatch) => {
-//     dispatch(fetchProjectsRequest());
-//     return fetch(projectsUrl)
-//     .then(res => res.json())
-//     .then((data) => {
-//       dispatch(fetchProjectsSuccess(data));
-//     })
-//     // .catch((err) => {
-//     //   console.error(err);
-//     // });
-//   };
-// }
 
 export const FECTCH_PROJECT_BY_ID_SUCCESS = 'FECTCH_PROJECT_BY_ID_SUCCESS';
 export const fetchProjectByIdSuccess = project => (dispatch, getState) => {
@@ -182,7 +164,7 @@ export const fetchProjectByIdSuccess = project => (dispatch, getState) => {
 export const fetchProjectById = (projectId, currentRoute) => (dispatch, getState) => {
   const state = getState();
   const { projects } = state;
-  const project = getProjectById(projects.items, projectId);
+  const project = ProjectUtils.getProjectById(projects.items, projectId);
   const projectUrl = `${projectsUrl}/${projectId}`;
   const designRoute = `/design/${projectId}`;
 
@@ -231,7 +213,7 @@ export function postNewProject(newProject, shouldRoute) {
 
 export const SET_ACTIVE_PROJECT = 'SET_ACTIVE_PROJECT';
 export const setActiveProject =(projects, activeId, shouldRoute) => (dispatch, getState) => {
-  const activeProject = getProjectById(projects, activeId);
+  const activeProject = ProjectUtils.getProjectById(projects, activeId);
 
   if (activeProject) {
     dispatch({

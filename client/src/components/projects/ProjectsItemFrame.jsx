@@ -86,7 +86,7 @@ export default class ProjectsItemFrame extends Component {
 }
 
 ProjectsItemFrame.propTypes = {
-  projectId: PropTypes.string,
+  projectId: PropTypes.number,
   projectName: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
   confirmDelete: PropTypes.func.isRequired,

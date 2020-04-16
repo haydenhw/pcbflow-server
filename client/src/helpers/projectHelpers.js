@@ -1,3 +1,5 @@
+import camelCase from 'camel-case';
+
 export const hasSampleProject = projects => (
   Boolean(
     projects.find((project) => project.isSampleProject)
@@ -55,3 +57,54 @@ export const moveSampleProjectFront = (projects=[]) => {
 
   return [projects[sampleProjectIndex], ...withoutSampleProject ];
 }
+
+
+// key transformations
+const transformKeys = (transformer) => (obj) =>
+  Object.keys(obj).reduce((c, key) => (c[transformer(key)] = obj[key], c), {});
+
+export const underscoreIdKey = (obj) => {
+  obj._id = obj.id;
+  delete obj.id;
+  return obj;
+}
+
+export const boardToBoardSpecs = (obj) => {
+  obj.boardSpecs = obj.board;
+  delete obj.board;
+  return obj;
+}
+
+const moduleIdToModule = (obj) => {
+  obj._id = obj.id;
+  obj.id = obj.moduleId
+  delete obj.moduleId;
+  return obj;
+}
+
+const transformProjectKeys = (transformer) => (projects) => {
+  return projects.map(p => {
+    p = transformer(p);
+    p.modules = p.modules.map(transformer);
+    p.modules = p.modules.map(moduleIdToModule)
+    return p;
+  });
+}
+
+const camelToSnake = (string) => {
+  return string.replace(/[\w]([A-Z])/g, function (m) {
+    return m[0] + "_" + m[1];
+  }).toLowerCase();
+}
+
+const underscoreProjectIds = transformProjectKeys(underscoreIdKey);
+const snakecaseKeys = transformKeys(camelToSnake);
+const camelizeObject = transformKeys(camelCase);
+export const camelizeProjectKeys = transformProjectKeys(camelizeObject);
+
+const removeKey = (obj, propToDelete) => {
+  const {[propToDelete]: deleted, ...objectWithoutDeletedProp} = obj;
+  return objectWithoutDeletedProp;
+};
+
+

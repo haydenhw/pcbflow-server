@@ -4,3 +4,5 @@ const baseUrl = process.env.NODE_ENV === 'production' ? cloudServer : localServe
 export const projectsUrl = `${baseUrl}/projects`;
 export const loginUrl = `${baseUrl}/auth/login`;
 export const userUrl = `${baseUrl}/users`;
+
+export const projectUrl2 = 'http://localhost:8000/api/projects';
