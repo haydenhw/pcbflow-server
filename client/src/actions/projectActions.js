@@ -1,9 +1,8 @@
 // *alphabetize these actions
 import { hashHistory } from 'react-router';
 import * as actions from 'actions/indexActions';
-import store from 'reduxFiles/store';
 
-import { projectsUrl, projectUrl2 } from '../config/endpointUrls';
+import { projectsUrl } from '../config/endpointUrls';
 import { sampleProject } from '../config/sampleProject'
 import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
 import * as ProjectUtils from 'helpers/projectHelpers';
@@ -110,7 +109,7 @@ export function fetchProjects(jwt) {
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
 
-    return fetch(projectUrl2, {
+    return fetch(projectsUrl, {
       method: 'GET',
       headers: {
         ...getJWTAuthHeader(jwt),
@@ -197,7 +196,7 @@ export function postNewProject(newProject, shouldRoute) {
   newProject = ProjectUtils.snakecaseRequestKeys(newProject);
   return (dispatch) => {
     return fetch(
-      projectUrl2,
+      projectsUrl,
       {
         method: 'POST',
         body: JSON.stringify(newProject),
@@ -267,7 +266,7 @@ export function updateProject(projectData) {
 
     dispatch(updateProjectRequest());
 
-    fetch(`${projectUrl2}/${projectId}`, {
+    fetch(`${projectsUrl}/${projectId}`, {
       method: 'PATCH',
       body: JSON.stringify(updatedProject),
       headers: {
@@ -302,7 +301,7 @@ export function deleteProject(projectId) {
       projectId,
     });
 
-    fetch(`${projectUrl2}/${projectId}`, {
+    fetch(`${projectsUrl}/${projectId}`, {
         method: 'DELETE',
         headers: new Headers({
           Accept: 'application/json',
