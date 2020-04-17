@@ -36,7 +36,6 @@ const destructureProject = (project) => {
 }
 const destructureModule = (module) => {
   const {
-    id,
     project_id,
     module_id,
     price,
@@ -63,7 +62,6 @@ const destructureModule = (module) => {
   } = module;
 
   return {
-    id,
     project_id,
     module_id,
     price,
@@ -120,6 +118,7 @@ const nestBoardProps = (project) => {
   delete project.board_thumbnail;
 }
 
+let lockPatchHandler = false;
 projectsRouter
   .route('/')
   .get(async (req, res, next) => {
@@ -148,13 +147,11 @@ projectsRouter
     const savedProject = await ProjectsService.insertProject(knexInstance, newProject)
     nestBoardProps(savedProject)
 
-    let { modules } = req.body
+    let {modules} = req.body
     if (modules) {
       const newModules = modules.map(m => {
         m = destructureModule(m)
         m.project_id = savedProject.id
-        console.log(require('util').inspect(m, false, null, true))
-        console.log({id: m.module_id})
         return m
       })
       const savedModules = await ModulesService.insertModules(knexInstance, newModules)
@@ -199,9 +196,15 @@ projectsRouter
   })
   .patch(jsonParser, flattenBoard, async (req, res, next) => {
     const knexInstance = req.app.get('db')
-    const {project_id} = req.params
+    const project_id = parseInt(req.params.project_id)
     // TODO add some validation
+    if (lockPatchHandler) {
+      console.log('patch pending... ignoring request')
+      return res.status(204).end();
+    }
+
     try {
+      lockPatchHandler = true
       const projectToUpdate = destructureProject(req.body)
       await ProjectsService.updateProject(knexInstance, project_id, projectToUpdate)
 
@@ -209,9 +212,11 @@ projectsRouter
       modulesToUpdate = modulesToUpdate.map(destructureModule);
       await ModulesService.deleteByProjectId(knexInstance, project_id)
       await ModulesService.insertModules(knexInstance, modulesToUpdate);
+      lockPatchHandler = false
 
       res.status(204).end()
     } catch (err) {
+      lockPatchHandler = false
       next(err)
     }
   })
