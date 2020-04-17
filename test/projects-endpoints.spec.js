@@ -56,13 +56,13 @@ describe('Projects Endpoints', function() {
           .insert([ maliciousProject ])
       })
 
-      it('removes XSS attack content', () => {
+      it('removes XSS attack', () => {
         return supertest(app)
           .get(`/api/projects`)
           .expect(200)
           .expect(res => {
-            expect(res.body[0].title).to.eql(expectedProject.title)
-            expect(res.body[0].content).to.eql(expectedProject.content)
+            expect(res.body[0].name).to.eql(expectedProject.name)
+            expect(res.body[0].board_thumbnail).to.eql(expectedProject.board_thumbnail)
           })
       })
     })
@@ -105,13 +105,13 @@ describe('Projects Endpoints', function() {
           .insert([ maliciousProject ])
       })
 
-      it('removes XSS attack content', () => {
+      it('removes XSS attack board_thumbnail', () => {
         return supertest(app)
           .get(`/api/projects/${maliciousProject.id}`)
           .expect(200)
           .expect(res => {
-            expect(res.body.title).to.eql(expectedProject.title)
-            expect(res.body.content).to.eql(expectedProject.content)
+            expect(res.body.name).to.eql(expectedProject.name)
+            expect(res.body.board_thumbnail).to.eql(expectedProject.board_thumbnail)
           })
       })
     })
@@ -120,18 +120,18 @@ describe('Projects Endpoints', function() {
   describe(`POST /api/projects`, () => {
     it(`creates an project, responding with 201 and the new project`, () => {
       const newProject = {
-        title: 'Test new project',
-        style: 'Listicle',
-        content: 'Test new project content...'
+        name: 'Test new project',
+        board_height: 100,
+        board_thumbnail: 'JSON string'
       }
       return supertest(app)
         .post('/api/projects')
         .send(newProject)
         .expect(201)
         .expect(res => {
-          expect(res.body.title).to.eql(newProject.title)
-          expect(res.body.style).to.eql(newProject.style)
-          expect(res.body.content).to.eql(newProject.content)
+          expect(res.body.name).to.eql(newProject.name)
+          expect(res.body.board_height).to.eql(newProject.board_height)
+          expect(res.body.board_width).to.eql(newProject.board_width)
           expect(res.body).to.have.property('id')
           expect(res.headers.location).to.eql(`/api/projects/${res.body.id}`)
           const expected = new Date().toLocaleString()
@@ -145,13 +145,13 @@ describe('Projects Endpoints', function() {
         )
     })
 
-    const requiredFields = ['title', 'style', 'content']
+    const requiredFields = ['name', 'board_height', 'board_thumbnail']
 
     requiredFields.forEach(field => {
       const newProject = {
-        title: 'Test new project',
-        style: 'Listicle',
-        content: 'Test new project content...'
+        name: 'Test new project',
+        board_height: 100,
+        board_thumbnail: 'Test new project board_thumbnail...'
       }
 
       it(`responds with 400 and an error message when the '${field}' is missing`, () => {
@@ -166,15 +166,15 @@ describe('Projects Endpoints', function() {
       })
     })
 
-    it('removes XSS attack content from response', () => {
+    it('removes XSS attack from response', () => {
       const { maliciousProject, expectedProject } = makeMaliciousProject()
       return supertest(app)
         .post(`/api/projects`)
         .send(maliciousProject)
         .expect(201)
         .expect(res => {
-          expect(res.body.title).to.eql(expectedProject.title)
-          expect(res.body.content).to.eql(expectedProject.content)
+          expect(res.body.name).to.eql(expectedProject.name)
+          expect(res.body.board_thumbnail).to.eql(expectedProject.board_thumbnail)
         })
     })
   })
@@ -235,9 +235,9 @@ describe('Projects Endpoints', function() {
       it('responds with 204 and updates the project', () => {
         const idToUpdate = 2
         const updateProject = {
-          title: 'updated project title',
-          style: 'Interview',
-          content: 'updated project content',
+          name: 'updated project name',
+          board_height: 100,
+          board_thumbnail: 'updated project board_thumbnail',
         }
         const expectedProject = {
           ...testProjects[idToUpdate - 1],
@@ -261,7 +261,7 @@ describe('Projects Endpoints', function() {
           .send({ irrelevantField: 'foo' })
           .expect(400, {
             error: {
-              message: `Request body must content either 'title', 'style' or 'content'`
+              message: `Request body must either 'name', 'board_height' or 'board_thumbnail'`
             }
           })
       })
@@ -269,7 +269,7 @@ describe('Projects Endpoints', function() {
       it(`responds with 204 when updating only a subset of fields`, () => {
         const idToUpdate = 2
         const updateProject = {
-          title: 'updated project title',
+          name: 'updated project name',
         }
         const expectedProject = {
           ...testProjects[idToUpdate - 1],

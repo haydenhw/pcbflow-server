@@ -76,11 +76,9 @@ function makeModules() {
 
 function makeMaliciousProject() {
   const maliciousProject = {
-    id: 911,
-    style: 'How-to',
-    date_published: new Date().toISOString(),
+    ...project,
     name: 'Naughty naughty very naughty <script>alert("xss");</script>',
-    board_thumbnail: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`
+    board_thumbnail: `Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
   }
   const expectedProject = {
     ...maliciousProject,
