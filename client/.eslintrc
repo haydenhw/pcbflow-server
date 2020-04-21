@@ -1,4 +1,4 @@
-{
+e
   "extends": "airbnb",
   "ecmaFeatures": {
     "jsx": true,
@@ -10,21 +10,27 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "quotes": [2, "single"],
-    "strict": [2, "never"],
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2,
-    "no-multiple-empty-lines":  ["error",  "max": 1 ],
-    "class-methods-use-this": "off",
-    "react/forbid-prop-types": "off",
-    "react/jsx-filename-extension": "off",
-    "no-case-declarations": "off",
-    "react/require-default-props": "off",
-    "func-names": "off"
-    
+     "indent": ["error", 2, {
+            "SwitchCase": 1
+        }],
+        "max-len": "off",
+        "react/jsx-indent": [2, 2],
+        "react/jsx-no-bind": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "react/no-unused-prop-types": ["error", { "customValidators": [], "skipShapeProps": true }],
+        "arrow-body-style": ["error", "always"],
+        "import/prefer-default-export": "off",
+        "class-methods-use-this": "off",
+        "react/forbid-prop-types": "off",
+        "react/jsx-filename-extension": "off",
+        "no-case-declarations": "off",
+        "react/require-default-props": "off",
+        "func-names": "off"
   },
   "plugins": [
     "react"
-  ]
+  ],
+  #  "settings": {
+  #       "import/resolver": "webpack"
+  #   }
 }
