@@ -124,7 +124,7 @@ export function fetchProjects(jwt) {
 
       const containsSampleProject = ProjectUtils.hasSampleProject(projects);
       if (!containsSampleProject) {
-        sampleProject.owner_id = getUser()._id;
+        sampleProject.user_id = getUser()._id;
         return dispatch(postNewProject(sampleProject))
           .then((sampleProject) => {
             dispatch(fetchProjectsSuccess([sampleProject, ...projects]))
@@ -257,7 +257,7 @@ export function updateProject(projectData) {
     let updatedProject = getOriginAdjustedProjectData(projectData);
     updatedProject = ProjectUtils.snakecaseRequestKeys(updatedProject)
     updatedProject.id = projectId
-    updatedProject.owner_id = getUser()._id
+    updatedProject.user_id = getUser()._id
     updatedProject.modules.forEach(m => {
       m.module_id = m.id
       m.id = m._id

@@ -14,7 +14,7 @@ const serializeProject = project => ({
 const destructureProject = (project) => {
   const {
     name,
-    owner_id,
+    user_id,
     board_height,
     board_width,
     board_x,
@@ -25,7 +25,7 @@ const destructureProject = (project) => {
 
   return {
     name,
-    owner_id,
+    user_id,
     board_height,
     board_width,
     board_x,
@@ -125,6 +125,7 @@ projectsRouter
     const knexInstance = req.app.get('db')
     try {
       const modules = await ModulesService.getAllModules(knexInstance)
+      // neeed to get by user_id
       let projects = await ProjectsService.getAllProjects(knexInstance)
       projects = projects.map(project => {
         nestBoardProps(project)
