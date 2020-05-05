@@ -1,6 +1,6 @@
 const project = {
   name: 'New Project',
-  owner_id: 1,
+  user_id: 1,
   board_height: 300,
   board_width: 500,
   board_x: -3.5,

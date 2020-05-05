@@ -16,6 +16,7 @@ app.use(helmet())
 
 app.use('/api/projects', projectsRouter)
 
+// TODO get rid of this
 app.get('/', (req, res) => {
   res.send('Hello, world!')
 })

@@ -14,7 +14,7 @@ const serializeProject = project => ({
 const destructureProject = (project) => {
   const {
     name,
-    owner_id,
+    user_id,
     board_height,
     board_width,
     board_x,
@@ -25,7 +25,7 @@ const destructureProject = (project) => {
 
   return {
     name,
-    owner_id,
+    user_id,
     board_height,
     board_width,
     board_x,
@@ -34,6 +34,7 @@ const destructureProject = (project) => {
     is_sample_project,
   }
 }
+
 const destructureModule = (module) => {
   const {
     project_id,
@@ -107,6 +108,7 @@ const nestBoardProps = (project) => {
     board_y: y,
     board_thumbnail: thumbnail,
   } = project;
+
 
   const board = {height, width, x, y, thumbnail}
   project.board = board;
