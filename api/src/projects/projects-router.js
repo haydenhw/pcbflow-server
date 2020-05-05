@@ -123,10 +123,11 @@ projectsRouter
   .route('/')
   .get(async (req, res, next) => {
     const knexInstance = req.app.get('db')
+    const user_id = req.query.userid
+
     try {
       const modules = await ModulesService.getAllModules(knexInstance)
-      // neeed to get by user_id
-      let projects = await ProjectsService.getAllProjects(knexInstance)
+      let projects = await ProjectsService.getProjectsByUserId(knexInstance, user_id)
       projects = projects.map(project => {
         nestBoardProps(project)
         const childModules = modules.filter(m => m.project_id === project.id)

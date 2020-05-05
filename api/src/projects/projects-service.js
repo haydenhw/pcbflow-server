@@ -2,6 +2,9 @@ const ProjectsService = {
   getAllProjects(knex) {
     return knex.select('*').from('projects')
   },
+  getProjectsByUserId(knex, user_id) {
+    return knex.select('*').from('projects').where({ user_id })
+  },
   insertProject(knex, newProject) {
     return knex
       .insert(newProject)
