@@ -149,7 +149,7 @@ Successful response
 ## Create project 
 <strong>POST /api/projects</strong>
 
-Example request
+Example request body
 ```json 
 {
   "user_id": "SJ9M3oy9U",
@@ -167,7 +167,7 @@ Example request
 ## Update project 
 <strong>PATCH /api/projects/:projectId</strong>
 
-Example request
+Example request body
 ```json
 { 
     "name": "Updated Project Name"
@@ -182,7 +182,7 @@ Modules
 ## Create module 
 <strong>POST /api/modules</strong>
 
-Example request
+Example request body
 ```json 
 {
     "id": 58,
@@ -217,7 +217,7 @@ Example request
 ## Update module 
 <strong>PATCH /api/modules/:moduleId</strong>
 
-Example request
+Example request body
 ```json
 { 
     "y": 34.5,
