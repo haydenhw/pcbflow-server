@@ -1,4 +1,4 @@
-Projects
+API Docs
 =================
 
 ## Get projects 
