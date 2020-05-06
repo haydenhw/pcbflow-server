@@ -159,7 +159,7 @@ Example request
     "width": 500,
     "x": 162,
     "y": 220
-  }
+  },
   "modules": []
 }
 ```
