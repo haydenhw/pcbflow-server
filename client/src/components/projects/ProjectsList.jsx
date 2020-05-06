@@ -5,7 +5,7 @@ import Konva from 'konva';
 import shortid from 'shortid';
 
 import { moveSampleProjectFront } from 'helpers/projectHelpers';
-import { getJWT } from 'helpers/users';
+import { getJWT, getUserId } from 'helpers/users';
 
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
@@ -30,9 +30,10 @@ class ProjectsList extends Component {
 
   componentDidMount() {
     const jwt = getJWT();
+    let userId = getUserId();
 
-    if (jwt) {
-    store.dispatch(actions.fetchProjects(jwt))
+    if (true || jwt) {
+    store.dispatch(actions.fetchProjects(userId, jwt))
       .then((projects) => {
         if (projects) {
           this.setState({ projects });
@@ -48,6 +49,7 @@ class ProjectsList extends Component {
       this.setState({ projects });
     }
 
+    // TODO remove this
     if (jwt !== prevProps.jwt) {
       console.log('hello')
     }

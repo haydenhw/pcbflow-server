@@ -8,7 +8,7 @@ import Joyride from 'react-joyride';
 import * as actions from 'actions/indexActions';
 import store from 'reduxFiles/store';
 
-import { getJWT } from 'helpers/users';
+import { getJWT, getUserId } from 'helpers/users';
 import { isMobile } from 'helpers/isMobile';
 import { routeToHome, routeToProjects } from 'helpers/routeHelpers';
 import checkCollision from 'helpers/checkCollision';
@@ -109,9 +109,9 @@ let DesignTool = class extends Component {
   componentDidMount() {
     const { projects } = this.props;
     const jwt = getJWT();
-
-    if (projects.length === 0 && jwt) {
-      store.dispatch(actions.fetchProjects(jwt))
+    const userId = getUserId();
+    if (projects.length === 0 && true || jwt) {
+      store.dispatch(actions.fetchProjects(userId, jwt))
     }
 
     this.addHanlders();

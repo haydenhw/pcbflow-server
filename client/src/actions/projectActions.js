@@ -4,7 +4,7 @@ import * as actions from 'actions/indexActions';
 
 import { projectsUrl } from '../config/endpointUrls';
 import { sampleProject } from '../config/sampleProject'
-import { getJWTAuthHeader, getUser, getJWT } from 'helpers/users';
+import { getJWTAuthHeader, getUser, getJWT, getUserId } from 'helpers/users';
 import * as ProjectUtils from 'helpers/projectHelpers';
 
 const getOriginAdjustedModules = (modules, originX, originY) => (
@@ -62,7 +62,7 @@ export const createNewProject = (name='Untitled', extraProps) => (dispatch) => {
   }
   // *move to constants folder
   const newProject = {
-    ownerId,
+    userId: getUserId(),
     name,
     boardSpecs: {
       height,
@@ -101,15 +101,14 @@ export const fetchProjectsSuccess = (projects) => (dispatch, getState) => {
   return projects;
 };
 
-export function fetchProjects(jwt) {
+export function fetchProjects(userId, jwt) {
   if (!jwt) {
     console.warn('JWT not provided or undefined');
   }
 
   return (dispatch) => {
     dispatch(fetchProjectsRequest());
-
-    return fetch(projectsUrl, {
+    return fetch(projectsUrl + '?userid=' + userId, {
       method: 'GET',
       headers: {
         ...getJWTAuthHeader(jwt),
@@ -124,7 +123,7 @@ export function fetchProjects(jwt) {
 
       const containsSampleProject = ProjectUtils.hasSampleProject(projects);
       if (!containsSampleProject) {
-        sampleProject.user_id = getUser()._id;
+        sampleProject.user_id = getUserId();
         return dispatch(postNewProject(sampleProject))
           .then((sampleProject) => {
             dispatch(fetchProjectsSuccess([sampleProject, ...projects]))
@@ -257,7 +256,7 @@ export function updateProject(projectData) {
     let updatedProject = getOriginAdjustedProjectData(projectData);
     updatedProject = ProjectUtils.snakecaseRequestKeys(updatedProject)
     updatedProject.id = projectId
-    updatedProject.user_id = getUser()._id
+    updatedProject.user_id = getUserId()
     updatedProject.modules.forEach(m => {
       m.module_id = m.id
       m.id = m._id

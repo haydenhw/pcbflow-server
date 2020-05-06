@@ -1,4 +1,5 @@
 import jwtDecode from 'jwt-decode';
+import shortid from 'shortid';
 
 export const getUser = () => ({ username: 'chief', _id: 1 }); // TODO unmock this
 // export const getUser = () => JSON.parse(localStorage.getItem('pcbflowDemoUser'));
@@ -15,6 +16,15 @@ export const isJWTExpired = jwt => {
   return now > jwtExp;
 }
 
+export const createNewUser = () => {
+  const id = shortid.generate();
+  localStorage.setItem('userId', id);
+  return id;
+}
+
+export const getUserId = () => {
+  return localStorage.getItem('userId')
+}
 // TODO check to see if this can be removed
 const postJSON = (url, data) => {
   return fetch(url, {
