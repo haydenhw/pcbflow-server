@@ -17,7 +17,6 @@ git push origin $CURRENT_BRANCH
 
 ssh -A -i ~/.ssh/MyKeyPair.pem ubuntu@$EC2IP4 /bin/bash <<EOF
     cd $REMOTE_APP_PATH &&
-    git fetch origin $CURRENT_BRANCH
     git checkout $CURRENT_BRANCH
     git pull origin $CURRENT_BRANCH &&
     yarn &&
