@@ -1,3 +1,26 @@
+PCB Flow
+=================
+![App screenshot](client/public/images/dual-ethernet-board.png)
+
+## Live App
+https://pcbflow.haydenhw.com/
+
+## Summary
+A drag and drop tool for designing electronic devices. Tailored specifically
+to make electronics design accessible and approachable for non-engineers.
+
+## Technologies
+* React
+* Redux
+* React-Konva
+* SCSS
+* Node
+* Express
+* Knex
+* PostgreSQL
+* Mocha
+* Heroku
+
 API Docs
 =================
 
