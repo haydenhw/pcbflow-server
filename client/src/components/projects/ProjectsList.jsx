@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Konva from 'konva';
 import shortid from 'shortid';
+import LoadingOverlay from 'react-loading-overlay';
 
 import { moveSampleProjectFront } from 'helpers/projectHelpers';
 import { getJWT, getUserId } from 'helpers/users';
@@ -36,7 +36,7 @@ class ProjectsList extends Component {
     store.dispatch(actions.fetchProjects(userId, jwt))
       .then((projects) => {
         if (projects) {
-          this.setState({ projects });
+          this.setState({ projects, hasFetched: true });
         }
       });
     }
@@ -46,7 +46,7 @@ class ProjectsList extends Component {
     const { projects, jwt } = this.props;
 
     if (projects !== prevProps.projects) {
-      this.setState({ projects });
+      this.setState({ projects, hasFetched: true });
     }
 
     // TODO remove this
@@ -64,8 +64,18 @@ class ProjectsList extends Component {
 
   render() {
     const { projects } = this.state;
-    const orderedProjects = moveSampleProjectFront(projects);
 
+    if(!this.state.hasFetched) {
+      return <LoadingOverlay
+        active={true}
+        spinner
+        text='Setting up...'
+      >
+        <div className="overlay"/>
+      </LoadingOverlay>
+    }
+
+    const orderedProjects = moveSampleProjectFront(projects);
     const projectsList = orderedProjects.map((project) => {
       const { thumbnail } = project.boardSpecs;
       return (

@@ -17,27 +17,27 @@ import './projects-styles/_Projects.scss';
 export default function Projects({ handleHomeButtonClick }) {
   return (
     <div>
-      <nav>
-        <div className="project-nav-top">
-          <Logo className="project-nav-logo" />
-          <TopNavbarButton
-            className="nav-button home-button"
-            handleClick={handleHomeButtonClick}
-            icon={<span className="icon-home" />}
-            text=""
-          />
-        </div>
-        <div className="project-nav-bottom">
-          <div className="row-project">
-            <div className="col-wrapper">
-              <div>
-                <ProjectsAddButton />
+        <nav>
+          <div className="project-nav-top">
+            <Logo className="project-nav-logo" />
+            <TopNavbarButton
+              className="nav-button home-button"
+              handleClick={handleHomeButtonClick}
+              icon={<span className="icon-home" />}
+              text=""
+            />
+          </div>
+          <div className="project-nav-bottom">
+            <div className="row-project">
+              <div className="col-wrapper">
+                <div>
+                  <ProjectsAddButton />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </nav>
-      <ProjectsList />
+        </nav>
+        <ProjectsList />
     </div>
   );
 }

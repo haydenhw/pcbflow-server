@@ -1,5 +1,5 @@
 import Konva from 'konva';
-
+// Just move this logic into  getStageFromJSON  in ProjectsItemFrame
 function createTempElement(elementId) {
   return () => {
     const tempElement = document.createElement('div');
@@ -11,6 +11,7 @@ function createTempElement(elementId) {
   };
 }
 
+// TODO no need for this to be created with an HOC
 export const createTempContainer = createTempElement('container');
 
 export function getCroppedStage(boardLayer) {

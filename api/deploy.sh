@@ -2,6 +2,11 @@
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 REMOTE_APP_PATH=/home/ubuntu/portfolio/postgres-pcbflow/api
+#if output=$(git status --porcelain) && [ -z "$output" ]; then
+#  # Working directory clean
+#else
+#  # Uncommitted changes
+#fi
 
 if [[ -z "$1" ]]; then
   echo "Please enter a commit message"
