@@ -16,9 +16,10 @@ app.use(helmet())
 
 app.use('/api/projects', projectsRouter)
 
-// TODO get rid of this
-app.get('/', (req, res) => {
-  res.send('Hello, world!')
+app.get('/ping', (req, res) => {
+  res.send({
+    message: 'pong!'
+  })
 })
 
 app.use(function errorHandler(error, req, res, next) {
