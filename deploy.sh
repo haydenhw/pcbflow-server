@@ -12,4 +12,4 @@ rsync -av -progress -e "ssh -i ~/.ssh/MyKeyPair.pem" --exclude='/.git' --filter=
  ${SRC} ubuntu@$EC2IP4:${DEST}
 
 # cd into project dir
-$SSH "cd ${DEST} && /bin/bash /bin/bash run.sh"
+$SSH "cd ${DEST} && /bin/bash run.sh"
